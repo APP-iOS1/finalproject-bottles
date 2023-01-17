@@ -1,0 +1,4 @@
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  email: String
+}
