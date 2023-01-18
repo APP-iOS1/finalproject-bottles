@@ -14,6 +14,13 @@
 		0427F576297677E90023E745 /* Bottles_V2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F575297677E90023E745 /* Bottles_V2Tests.swift */; };
 		0427F580297677E90023E745 /* Bottles_V2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F57F297677E90023E745 /* Bottles_V2UITests.swift */; };
 		0427F582297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */; };
+		27281CE32977854D003BE8B4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE22977854D003BE8B4 /* MapView.swift */; };
+		27281CE62977856A003BE8B4 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE52977856A003BE8B4 /* CartView.swift */; };
+		27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CEA297785AA003BE8B4 /* BottleShopView.swift */; };
+		27281CED297785B2003BE8B4 /* BottleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CEC297785B2003BE8B4 /* BottleView.swift */; };
+		27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CEF297785DC003BE8B4 /* BookMarkView.swift */; };
+		27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CF42977860B003BE8B4 /* NotificationView.swift */; };
+		27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CF72977862F003BE8B4 /* MyPageView.swift */; };
 		92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB226594BFE981A9A631ED /* AmplifyModels.swift */; };
 		9FA507820644AAAE35CB724F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F831F6E9B47A7334BFA205 /* User.swift */; };
 		ACA0514E444730D90B95F051 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */; };
@@ -53,6 +60,13 @@
 		0427F57B297677E90023E745 /* Bottles_V2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bottles_V2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0427F57F297677E90023E745 /* Bottles_V2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2UITests.swift; sourceTree = "<group>"; };
 		0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		27281CE22977854D003BE8B4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		27281CE52977856A003BE8B4 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		27281CEA297785AA003BE8B4 /* BottleShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView.swift; sourceTree = "<group>"; };
+		27281CEC297785B2003BE8B4 /* BottleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView.swift; sourceTree = "<group>"; };
+		27281CEF297785DC003BE8B4 /* BookMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkView.swift; sourceTree = "<group>"; };
+		27281CF42977860B003BE8B4 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		27281CF72977862F003BE8B4 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		2788548CAED4926294E44B24 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
 		A7F831F6E9B47A7334BFA205 /* User.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = User.swift; path = amplify/generated/models/User.swift; sourceTree = "<group>"; };
@@ -114,9 +128,9 @@
 		0427F563297677E60023E745 /* Bottles_V2 */ = {
 			isa = PBXGroup;
 			children = (
+				27281CE0297784ED003BE8B4 /* View */,
 				D70CE4F82976823500DFC8CE /* ViewModel */,
 				0427F564297677E60023E745 /* Bottles_V2App.swift */,
-				0427F566297677E60023E745 /* ContentView.swift */,
 				0427F568297677E80023E745 /* Assets.xcassets */,
 				0427F56A297677E80023E745 /* Preview Content */,
 			);
@@ -146,6 +160,77 @@
 				0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */,
 			);
 			path = Bottles_V2UITests;
+			sourceTree = "<group>";
+		};
+		27281CE0297784ED003BE8B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0427F566297677E60023E745 /* ContentView.swift */,
+				27281CF629778621003BE8B4 /* MyPage */,
+				27281CF3297785FE003BE8B4 /* Notification */,
+				27281CEE297785BC003BE8B4 /* BookMark */,
+				27281CE829778583003BE8B4 /* Bottle */,
+				27281CE72977856C003BE8B4 /* BottleShop */,
+				27281CE429778551003BE8B4 /* Cart */,
+				27281CE1297784F6003BE8B4 /* Map */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		27281CE1297784F6003BE8B4 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				27281CE22977854D003BE8B4 /* MapView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		27281CE429778551003BE8B4 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				27281CE52977856A003BE8B4 /* CartView.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		27281CE72977856C003BE8B4 /* BottleShop */ = {
+			isa = PBXGroup;
+			children = (
+				27281CEA297785AA003BE8B4 /* BottleShopView.swift */,
+			);
+			path = BottleShop;
+			sourceTree = "<group>";
+		};
+		27281CE829778583003BE8B4 /* Bottle */ = {
+			isa = PBXGroup;
+			children = (
+				27281CEC297785B2003BE8B4 /* BottleView.swift */,
+			);
+			path = Bottle;
+			sourceTree = "<group>";
+		};
+		27281CEE297785BC003BE8B4 /* BookMark */ = {
+			isa = PBXGroup;
+			children = (
+				27281CEF297785DC003BE8B4 /* BookMarkView.swift */,
+			);
+			path = BookMark;
+			sourceTree = "<group>";
+		};
+		27281CF3297785FE003BE8B4 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				27281CF42977860B003BE8B4 /* NotificationView.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		27281CF629778621003BE8B4 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				27281CF72977862F003BE8B4 /* MyPageView.swift */,
+			);
+			path = MyPage;
 			sourceTree = "<group>";
 		};
 		374221B839BD3A0EC49DB004 /* AmplifyConfig */ = {
@@ -315,12 +400,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27281CED297785B2003BE8B4 /* BottleView.swift in Sources */,
+				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
+				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
 				0427F567297677E60023E745 /* ContentView.swift in Sources */,
 				D70CE4F72976821F00DFC8CE /* DataStore.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */,
 				CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */,
+				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
+				27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */,
+				27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */,
 				9FA507820644AAAE35CB724F /* User.swift in Sources */,
+				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
