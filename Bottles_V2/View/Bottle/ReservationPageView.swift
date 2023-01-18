@@ -88,7 +88,7 @@ struct ReservationPageView: View {
                 VStack(alignment: .leading, spacing: 7) {
                     HStack {
                         Text("이름")
-                        Text("김민지")
+                        Text("안은노")
                     }
                     HStack {
                         Text("전화번호")
