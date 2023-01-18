@@ -1,37 +1,44 @@
 //
-//  BookMarkView.swift
+//  SearchView.swift
 //  Bottles_V2
 //
-//  Created by 강창현 on 2023/01/18.
+//  Created by 서찬호 on 2023/01/18.
 //
 
 import SwiftUI
 
-enum tapInfo : String, CaseIterable {
-    case bottle = "저장한 상품"
-    case shop = "저장한 바틀샵"
+enum searchTapInfo : String, CaseIterable {
+    case bottle = "상품 검색"
+    case shop = "바틀샵 검색"
 }
 
-struct BookMarkView: View {
+struct SearchView: View {
     // tap picker
-    @State private var selectedPicker: tapInfo = .bottle
+    @State private var selectedPicker: searchTapInfo = .bottle
     @Namespace private var animation
     
+    //searchBar
+    @State var searchBarText: String = ""
+    
     var body: some View {
-        NavigationStack {
-            VStack {
+        VStack {
+            animate()
+                .padding(.top, 10)
+            SearchTapView(searchTap: selectedPicker)
+        }
+        .toolbar {
+            ToolbarItem {
                 HStack {
-                    NavigationLink {
-                        SearchView()
-                    } label: {
-                        SearchViewNavigationLabel()
-                    }
+                    SearchViewSearchBar(searchBarText: $searchBarText)
                     CartViewNavigationLink()
                         .padding(.leading, 5)
                 }
-                animate()
-                BookMarkTapView(bookMarkTap: selectedPicker)
             }
+            
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                CartViewNavigationLink()
+//                    .padding(.leading, 5)
+//            }
         }
     }
     
@@ -40,7 +47,7 @@ struct BookMarkView: View {
     private func animate() -> some View {
         VStack {
             HStack {
-                ForEach(tapInfo.allCases, id: \.self) { item in
+                ForEach(searchTapInfo.allCases, id: \.self) { item in
                     VStack {
                         Text(item.rawValue)
                             .kerning(-1)
@@ -72,23 +79,25 @@ struct BookMarkView: View {
     }
 }
 
-
-struct BookMarkTapView: View {
-    var bookMarkTap: tapInfo
+struct SearchTapView: View {
+    var searchTap: searchTapInfo
     var body: some View {
         VStack {
-            switch bookMarkTap {
+            switch searchTap {
             case .bottle:
-                BookMarkBottleList()
+                SearchBottleList()
             case .shop:
-                BookMarkShopList()
+                SearchShopList()
             }
         }
     }
 }
 
-struct BookMarkView_Previews: PreviewProvider {
+
+struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        BookMarkView()
+        NavigationStack {
+            SearchView()
+        }
     }
 }
