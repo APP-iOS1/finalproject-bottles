@@ -48,7 +48,7 @@ struct MapView: View {
                 .zIndex(1)
                 
                 UIMapView(coord)
-                    .edgesIgnoringSafeArea(.vertical)
+                    .edgesIgnoringSafeArea(.top)
             }
 //            .sheet(isPresented: $isShowingSheet) {
 //                NearBySheetView()
