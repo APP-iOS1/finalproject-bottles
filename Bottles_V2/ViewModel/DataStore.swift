@@ -9,16 +9,69 @@ import Foundation
 import Amplify
 import AWSDataStorePlugin
 import SwiftUI
+import Combine
 
 class DataStore : ObservableObject {
+    @Published var user: [User]?
+    @State var subscription: AnyCancellable?
+    
+//    func subscribeTodos() {
+//       self.subscription
+//           = Amplify.DataStore.publisher(for: User.self)
+//               .sink(receiveCompletion: { completion in
+//                   print("Subscription has been completed: \(completion)")
+//               }, receiveValue: { mutationEvent in
+//                   print("Subscription got this value: \(mutationEvent)")
+//               })
+//    }
+    
+//    func queryTodo() {
+//
+//            Amplify.DataStore.query(User.self, completion: { result in
+//                switch(result) {
+//                case .success(let users):
+//                    for user in users {
+//                        print("==== email ====")
+//                        print("email: \(user.email)")
+//                        if let email = user.email {
+//                            print("Priority: \(email)")
+//                        }
+//
+//                    }
+//                case .failure(let error):
+//                    print("Could not query DataStore: \(error)")
+//                }
+//            })
+//        }
+    
+//    func observe(email: String) {
+//            self.subscription = Amplify.Publisher.create(
+//                Amplify.DataStore.observeQuery(
+//                    for: User.self,
+//                    where: User.keys.email == email
+//                )
+//            )
+//            .sink { completion in
+//                print("Completion event: \(completion)")
+//            } receiveValue: { snapshot in
+//                guard let user = snapshot.items.first else {
+//                    return
+//                }
+//                print("user \(user)")
+//                DispatchQueue.main.async {
+//                    self.user = user
+//                    print(user)
+//                }
+//            }
+//        }
     
     func getDate() async {
         do {
-            let posts = try await Amplify.DataStore.query(User.self)
-            print("Posts retrieved successfully: \(posts)")
-            let result1 = posts.description
-            
+            let users = try await Amplify.DataStore.query(User.self)
+            print("Posts retrieved successfully: \(users)")
+            let result1 = users.description
             print("결과1 \(result1)")
+            self.user = users
         } catch let error as DataStoreError {
             print("Error retrieving posts \(error)")
         } catch {
@@ -39,7 +92,7 @@ class DataStore : ObservableObject {
     }
     
     func putData() async {
-        let post = User(id: "hihi", email: "hihi@naver.com")
+        let post = User(id: "testMizy", email: "testMizy@naver.com")
         do {
             try await Amplify.DataStore.save(post)
             print("Post saved successfully!")
@@ -49,7 +102,6 @@ class DataStore : ObservableObject {
             print("Unexpected error \(error)")
         }
     }
-    
 }
 
 /*
