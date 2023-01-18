@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReservedView: View {
+    @State private var isShowing: Bool = true
     var body: some View {
         VStack(spacing: 20) {
             // 예약 상품 이미지
@@ -35,6 +36,10 @@ struct ReservedView: View {
             Spacer()
         }
         .offset(y: 100)
+        .sheet(isPresented: $isShowing) {
+            BottleShopBookMarkView()
+                .presentationDetents([.height(250)])
+        }
     }
 }
 
