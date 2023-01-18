@@ -45,12 +45,20 @@ struct BookMarkShopList: View {
             }
             ScrollView {
                 NavigationLink {
-                    
+                    BottleShopView()
                 } label: {
                     BookMarkShopListCell()
                 }
-                BookMarkShopListCell()
-                BookMarkShopListCell()
+                NavigationLink {
+                    BottleShopView()
+                } label: {
+                    BookMarkShopListCell()
+                }
+                NavigationLink {
+                    BottleShopView()
+                } label: {
+                    BookMarkShopListCell()
+                }
             }
         }
     }
