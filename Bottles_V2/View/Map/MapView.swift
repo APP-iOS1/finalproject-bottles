@@ -26,7 +26,7 @@ struct MapView: View {
                         MapViewSearchBar(mapSearchBarText: $mapSearchBarText)
                             
                         NavigationLink {
-                            //
+                            CartView()
                         } label: {
                             Image(systemName: "cart")
                                 .foregroundColor(.accentColor)

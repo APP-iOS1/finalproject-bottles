@@ -84,7 +84,7 @@ struct PickUpDetailView: View {
                 }
                 .padding(.top)
                 .padding(.bottom, 50)
-                NavigationLink(destination: Text("바틀샵 디테일 뷰")){
+                NavigationLink(destination: BottleShopView()){
                     Text("이 바틀샵의 다른 상품 보러가기")
                         .bold()
                         .foregroundColor(.white)

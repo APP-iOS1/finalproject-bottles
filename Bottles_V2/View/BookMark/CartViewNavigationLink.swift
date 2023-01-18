@@ -10,7 +10,7 @@ import SwiftUI
 struct CartViewNavigationLink: View {
     var body: some View {
         NavigationLink {
-            
+            CartView()
         } label: {
             Image(systemName: "cart.fill")
                 .frame(width: 42, height: 42)

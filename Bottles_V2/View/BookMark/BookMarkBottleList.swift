@@ -71,7 +71,7 @@ struct BookMarkBottleListCell: View {
                     .font(.title3)
                 Text("350,000원")
                 NavigationLink {
-                    
+                    BottleShopView()
                 } label: {
                     HStack {
                         Image("MapMarker")
