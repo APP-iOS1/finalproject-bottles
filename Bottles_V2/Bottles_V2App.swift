@@ -33,6 +33,7 @@ struct Bottles_V2App: App {
         WindowGroup {
             //            ContentView().environmentObject(DataStore())
             ContentView()
+                .accentColor(Color("AccentColor"))
         }
     }
     
