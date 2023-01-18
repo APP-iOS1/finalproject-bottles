@@ -35,7 +35,7 @@ struct PickUpListCell: View {
                 VStack(alignment:.leading){
                     Text("은노샵")
                         .padding(.bottom, -3)
-                    Text("디 오리니널 골드바 위스키")
+                    Text("디 오리지널 골드바 위스키")
                 }
                 Spacer()
             }

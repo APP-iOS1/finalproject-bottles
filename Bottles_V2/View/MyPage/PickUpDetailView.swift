@@ -63,7 +63,7 @@ struct PickUpDetailView: View {
                                 .frame(width: 130, height: 130)
                         }
                         VStack(alignment: .leading){
-                            Text("디 오리니널 골드바 위스키")
+                            Text("디 오리지널 골드바 위스키")
                             Text("10,9000원")
                                 .padding(.vertical, 1)
                                 .bold()
