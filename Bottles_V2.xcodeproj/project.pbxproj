@@ -21,6 +21,11 @@
 		27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CEF297785DC003BE8B4 /* BookMarkView.swift */; };
 		27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CF42977860B003BE8B4 /* NotificationView.swift */; };
 		27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CF72977862F003BE8B4 /* MyPageView.swift */; };
+		9216C1B52977A92200217C7F /* OtherBottleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1B42977A92200217C7F /* OtherBottleView.swift */; };
+		9216C1B92977AF1D00217C7F /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1B82977AF1D00217C7F /* ReservationView.swift */; };
+		9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */; };
+		9216C1BD2977B4BF00217C7F /* ReservedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BC2977B4BF00217C7F /* ReservedView.swift */; };
+		9216C1BF2977B5E100217C7F /* BottleShopBookMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BE2977B5E100217C7F /* BottleShopBookMarkView.swift */; };
 		92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB226594BFE981A9A631ED /* AmplifyModels.swift */; };
 		9FA507820644AAAE35CB724F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F831F6E9B47A7334BFA205 /* User.swift */; };
 		ACA0514E444730D90B95F051 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */; };
@@ -69,6 +74,11 @@
 		27281CF72977862F003BE8B4 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		2788548CAED4926294E44B24 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
+		9216C1B42977A92200217C7F /* OtherBottleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherBottleView.swift; sourceTree = "<group>"; };
+		9216C1B82977AF1D00217C7F /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
+		9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView.swift; sourceTree = "<group>"; };
+		9216C1BC2977B4BF00217C7F /* ReservedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView.swift; sourceTree = "<group>"; };
+		9216C1BE2977B5E100217C7F /* BottleShopBookMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopBookMarkView.swift; sourceTree = "<group>"; };
 		A7F831F6E9B47A7334BFA205 /* User.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = User.swift; path = amplify/generated/models/User.swift; sourceTree = "<group>"; };
 		B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		D70CE4F62976821F00DFC8CE /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -205,6 +215,11 @@
 			isa = PBXGroup;
 			children = (
 				27281CEC297785B2003BE8B4 /* BottleView.swift */,
+				9216C1B42977A92200217C7F /* OtherBottleView.swift */,
+				9216C1B82977AF1D00217C7F /* ReservationView.swift */,
+				9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */,
+				9216C1BC2977B4BF00217C7F /* ReservedView.swift */,
+				9216C1BE2977B5E100217C7F /* BottleShopBookMarkView.swift */,
 			);
 			path = Bottle;
 			sourceTree = "<group>";
@@ -405,13 +420,18 @@
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
 				0427F567297677E60023E745 /* ContentView.swift in Sources */,
 				D70CE4F72976821F00DFC8CE /* DataStore.swift in Sources */,
+				9216C1B52977A92200217C7F /* OtherBottleView.swift in Sources */,
+				9216C1BF2977B5E100217C7F /* BottleShopBookMarkView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
+				9216C1B92977AF1D00217C7F /* ReservationView.swift in Sources */,
 				92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */,
 				CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */,
+				9216C1BD2977B4BF00217C7F /* ReservedView.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
 				27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */,
 				27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */,
 				9FA507820644AAAE35CB724F /* User.swift in Sources */,
+				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,7 +591,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Bottles_V2/Preview Content\"";
-				DEVELOPMENT_TEAM = CGUAL476T6;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -601,7 +621,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Bottles_V2/Preview Content\"";
-				DEVELOPMENT_TEAM = CGUAL476T6;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
