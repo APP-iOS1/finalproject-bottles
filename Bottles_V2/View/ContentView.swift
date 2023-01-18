@@ -11,6 +11,7 @@ struct ContentView: View {
     @EnvironmentObject var dataStore : DataStore
     
     var body: some View {
+        /*
         VStack {
             Button {
                 Task{
@@ -30,6 +31,8 @@ struct ContentView: View {
 
         }
         .padding()
+         */
+        MyPageView()
     }
 }
 
