@@ -16,7 +16,7 @@ struct BottleShopView_Search: View {
     
     @Binding var text: String
     @State private var isEditing = false
-    @State private var selectedFlavor = Sort.automatic
+    @State private var selectedSort = Sort.automatic
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -24,7 +24,7 @@ struct BottleShopView_Search: View {
         VStack(alignment: .leading){
             
             VStack(alignment: .leading){
-                NavigationLink(destination: BottleShopDetailView()){
+                NavigationLink(destination: BottleShopCurationView()){
                     HStack{
                         Text("연말 파티에 어울리는 스파클링 와인들")
                         Image(systemName: "chevron.right")
@@ -92,7 +92,7 @@ struct BottleShopView_Search: View {
                 }
             }
             
-                Picker("Sort", selection: $selectedFlavor) {
+                Picker("Sort", selection: $selectedSort) {
                     Text("기본순").tag(Sort.automatic)
                     Text("인기순").tag(Sort.popularity)
                     Text("가격내림차순").tag(Sort.priceDown)
