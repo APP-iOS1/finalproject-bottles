@@ -12,7 +12,9 @@ struct CartCell: View {
     @State private var isSelected: Bool = false
     @State private var amount : Int = 1
     @Binding var isAllSelected : Bool
-   // var isAllSelected : Bool = false
+    @Binding var allSelectButtonCheck : Bool
+    
+    // var isAllSelected : Bool = false
     
     var body: some View {
         VStack {
@@ -51,8 +53,8 @@ struct CartCell: View {
         }
         .padding(.bottom)
         .onChange(of: isAllSelected) { value in
-            if value {
-                isSelected = true
+            if (allSelectButtonCheck) {
+                isSelected = value
             }
         }
     }
@@ -60,15 +62,15 @@ struct CartCell: View {
     // MARK: -View : 선택 버튼
     private var selectButton : some View {
         Button {
-            if (isAllSelected) {
+            //디폴트
+            allSelectButtonCheck = false
+            if isSelected {
                 isAllSelected.toggle()
-                isSelected.toggle()
-            } else {
-                isSelected.toggle()
             }
+            isSelected.toggle()
             
         } label : {
-            Image(systemName: (isSelected || isAllSelected) ? "checkmark.circle.fill" : "circle")
+            Image(systemName: (isSelected) ? "checkmark.circle.fill" : "circle")
         }
         .padding([.leading, .top, .bottom])
     }
@@ -118,6 +120,6 @@ struct CartCell: View {
 struct CartCell_Previews: PreviewProvider {
     @State var test = false
     static var previews: some View {
-        CartCell(isAllSelected: .constant(false))
+        CartCell(isAllSelected: .constant(false), allSelectButtonCheck: .constant(false))
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CartView: View {
     @State var isAllSelected: Bool = false
+    @State var allSelectButtonCheck : Bool = false
     
     var body: some View {
         VStack {
@@ -27,7 +28,7 @@ struct CartView: View {
             //MARK: - 셀
             ScrollView {
                 ForEach (0..<5) { cnt in
-                    CartCell(isAllSelected: $isAllSelected)
+                    CartCell(isAllSelected: $isAllSelected, allSelectButtonCheck: $allSelectButtonCheck)
                     if cnt < 4 {
                         Divider()
                             .background(.black)
@@ -43,7 +44,7 @@ struct CartView: View {
                     Text("총 금액")
                         .padding(.leading)
                     Spacer()
-                    Text("804,000원")
+                    Text("1,750,000원")
                         .padding(.trailing)
                 }
                 .padding([.leading, .trailing, .top])
@@ -70,6 +71,7 @@ struct CartView: View {
     // MARK: - 전체 선택
     private var AllSelectButton : some View {
         Button {
+            allSelectButtonCheck = true
             isAllSelected.toggle()
         } label : {
             Image(systemName: isAllSelected ? "checkmark.circle.fill" : "circle")

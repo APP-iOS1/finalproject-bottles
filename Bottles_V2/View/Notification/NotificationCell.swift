@@ -46,7 +46,7 @@ struct NotificationCell: View {
             }
            
         }
-        .frame(height:UIScreen.main.bounds.size.width/4)
+        .frame(height:UIScreen.main.bounds.size.width/4.5)
 
     }
 }
