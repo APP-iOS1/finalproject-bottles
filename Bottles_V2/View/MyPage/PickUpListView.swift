@@ -9,7 +9,20 @@ import SwiftUI
 
 struct PickUpListView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            ScrollView{
+                ForEach(1..<4, id:\.self){ _ in
+                    NavigationLink(destination: PickUpDetailView()){
+                        PickUpListCell()
+                    }
+                    Rectangle()
+                        .frame(height: 7)
+                        .foregroundColor(.gray)
+                        .padding(.bottom, -6)
+                }
+            }
+        }
+        .navigationTitle("예약 내역")
     }
 }
 

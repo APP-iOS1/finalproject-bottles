@@ -21,6 +21,10 @@
 		27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CEF297785DC003BE8B4 /* BookMarkView.swift */; };
 		27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CF42977860B003BE8B4 /* NotificationView.swift */; };
 		27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CF72977862F003BE8B4 /* MyPageView.swift */; };
+		7F2142BC2977956D0046D420 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BB2977956D0046D420 /* SettingView.swift */; };
+		7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BD2977AF290046D420 /* PickUpListView.swift */; };
+		7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */; };
+		7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142C12977B43B0046D420 /* PickUpDetailView.swift */; };
 		92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB226594BFE981A9A631ED /* AmplifyModels.swift */; };
 		9FA507820644AAAE35CB724F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F831F6E9B47A7334BFA205 /* User.swift */; };
 		ACA0514E444730D90B95F051 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */; };
@@ -69,6 +73,10 @@
 		27281CF72977862F003BE8B4 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		2788548CAED4926294E44B24 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
+		7F2142BB2977956D0046D420 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		7F2142BD2977AF290046D420 /* PickUpListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListView.swift; sourceTree = "<group>"; };
+		7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListCell.swift; sourceTree = "<group>"; };
+		7F2142C12977B43B0046D420 /* PickUpDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpDetailView.swift; sourceTree = "<group>"; };
 		A7F831F6E9B47A7334BFA205 /* User.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = User.swift; path = amplify/generated/models/User.swift; sourceTree = "<group>"; };
 		B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		D70CE4F62976821F00DFC8CE /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -229,6 +237,10 @@
 			isa = PBXGroup;
 			children = (
 				27281CF72977862F003BE8B4 /* MyPageView.swift */,
+				7F2142BB2977956D0046D420 /* SettingView.swift */,
+				7F2142BD2977AF290046D420 /* PickUpListView.swift */,
+				7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */,
+				7F2142C12977B43B0046D420 /* PickUpDetailView.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -402,15 +414,19 @@
 			files = (
 				27281CED297785B2003BE8B4 /* BottleView.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
+				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
+				7F2142BC2977956D0046D420 /* SettingView.swift in Sources */,
 				0427F567297677E60023E745 /* ContentView.swift in Sources */,
 				D70CE4F72976821F00DFC8CE /* DataStore.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
+				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,
 				92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */,
 				CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
 				27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */,
 				27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */,
+				7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */,
 				9FA507820644AAAE35CB724F /* User.swift in Sources */,
 				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
 			);
