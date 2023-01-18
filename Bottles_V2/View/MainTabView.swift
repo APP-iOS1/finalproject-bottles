@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainTapView: View {
+struct MainTabView: View {
     @State private var selection: Int = 1
     var body: some View {
         TabView(selection: $selection) {
@@ -22,14 +22,14 @@ struct MainTapView: View {
             }.tag(3)
             MyPageView().tabItem {
                 Image(systemName: "person.fill")
-            }.tag(3)
-            
+            }.tag(4)
         }
+//        .toolbarBackground(Color.white, for: .tabBar)
     }
 }
 
-struct MainTapView_Previews: PreviewProvider {
+struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
-        MainTapView()
+        MainTabView()
     }
 }
