@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BottleShopBookMarkView: View {
+    @State private var checkBookmark: Bool = false
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("픽업 바틀샵 저장하기")
@@ -34,10 +36,14 @@ struct BottleShopBookMarkView: View {
                     
                     Spacer()
                     
-                    Image(systemName: "bookmark")
-                        .resizable()
-                        .frame(width: 15, height: 19)
-                        .padding(.horizontal, 10)
+                    Button(action: {
+                        checkBookmark.toggle()
+                    }) {
+                        Image(systemName: checkBookmark ? "bookmark.fill" : "bookmark")
+                            .resizable()
+                            .frame(width: 15, height: 19)
+                            .padding(.horizontal, 10)
+                    }
                 }
             }
         }

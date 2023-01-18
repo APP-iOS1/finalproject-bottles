@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReservationPageView: View {
+    @State private var check: Bool = false
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 15) {
@@ -104,11 +105,12 @@ struct ReservationPageView: View {
             }
             .padding()
                 
-            Button(action: {}) {
+            Button(action: {
+                check.toggle()
+            }) {
                 HStack {
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(.black, lineWidth: 1)
-                        .opacity(0.5)
+                    Image(systemName: check ? "checkmark.square" : "square")
+                        .resizable()
                         .frame(width: 25, height: 25)
                     Text("예약 확정 후 3일 이내 미방문시 예약이 취소됩니다.")
                         .font(.subheadline)

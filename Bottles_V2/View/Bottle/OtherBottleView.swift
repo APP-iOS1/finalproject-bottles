@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct OtherBottleView: View {
+    @State private var checkBookmark: Bool = false
+    var tagList: [String] = ["위스키", "한정판", "스모키"]
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 15) {
-                Text("이 바틀샵의 다른 상품")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-
                 HStack(alignment: .top) {
                     Image("kilchoman")
                         .resizable()
@@ -32,13 +31,13 @@ struct OtherBottleView: View {
                                 .fontWeight(.bold)
                             
                             HStack {
-                                ForEach(0..<3, id: \.self) { _ in
+                                ForEach(tagList, id: \.self) { tag in
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 10)
                                             .stroke(.black, lineWidth: 1)
                                             .opacity(0.4)
                                             .frame(width: 54, height: 21)
-                                        Text("위스키")
+                                        Text(tag)
                                             .font(.caption)
                                             .opacity(0.4)
                                     }
@@ -46,16 +45,20 @@ struct OtherBottleView: View {
                             }
                             .frame(height: 30)
                         }
-                        Image(systemName: "bookmark")
-                            .resizable()
-                            .frame(width: 15, height: 19)
+                        Button(action: {
+                            checkBookmark.toggle()
+                        }) {
+                            Image(systemName: checkBookmark ? "bookmark.fill" : "bookmark")
+                                .resizable()
+                                .frame(width: 15, height: 19)
+                        }
+                        
                     }
                     .padding(10)
                 }
 
             }
         }
-        .padding()
     }
 }
 
