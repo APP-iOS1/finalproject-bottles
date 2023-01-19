@@ -21,7 +21,7 @@ struct SearchViewNavigationLabel: View {
                     .padding(.trailing, 5)
             }
             .padding(10)
-            .frame(width: 300, alignment: .leading)
+            .frame(width: 300, height: 50, alignment: .leading)
             .background{
                 Color.white
             }

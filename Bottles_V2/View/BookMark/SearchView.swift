@@ -22,9 +22,13 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            animate()
-                .padding(.top, 10)
-            SearchTapView(searchTap: selectedPicker)
+            if searchBarText == "" {
+                RecentlyItemList()
+            } else {
+                animate()
+                    .padding(.top, 10)
+                SearchTapView(searchTap: selectedPicker)
+            }
         }
         .toolbar {
             ToolbarItem {

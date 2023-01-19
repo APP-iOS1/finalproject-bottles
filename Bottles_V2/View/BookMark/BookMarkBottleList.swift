@@ -8,39 +8,25 @@
 import SwiftUI
 
 struct BookMarkBottleList: View {
-    // filter
-    @State private var filterType: String = "최신 순"
+    // ActionSheet (iOS 14 이하 - ActionSheet, iOS 15 이상 - confirmationDialog 사용해야함)
+    @State private var showingActionSheet: Bool = false
+    @State private var selection = "기본순"
     
     var body: some View {
         VStack {
-            // MARK: - 정렬 Menu
             HStack {
-                Menu {
-                    Button("최신 순", action: {
-                        filterType = "최신 순"
-                    })
-                    Button("낮은 가격 순", action: {
-                        filterType = "낮은 가격 순"
-                    })
-                    Button("높은 가격 순", action: {
-                        filterType = "높은 가격 순"
-                    })
+                Button {
+                    showingActionSheet = true
                 } label: {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.accentColor)
-                        .frame(width: 140, height: 35)
-                        .overlay {
-                            HStack {
-                                Text(filterType)
-                                    .frame(width: 90)
-                                    .bold()
-                                Image(systemName: "chevron.down")
-                                    .foregroundColor(.accentColor)
-                            }
-                        }
+                    HStack {
+                        Text("\(selection)")
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 12))
+                    }
+                    .foregroundColor(.black)
                 }
-                .padding(.horizontal)
-                .padding(.top, 10)
+                .padding(.leading, 20)
+                
                 Spacer()
             }
             ScrollView {
@@ -49,22 +35,44 @@ struct BookMarkBottleList: View {
                 BookMarkBottleListCell()
             }
         }
+        // MARK: - 정렬 ActionSheet
+        .confirmationDialog("select a sort", isPresented: $showingActionSheet) {
+            Button {
+                selection = "기본순"
+            } label: {
+                Text("기본순")
+            }
+
+            Button("신상품순") {
+                selection = "신상품순"
+            }
+            
+            Button("낮은 가격순") {
+                selection = "낮은 가격순"
+            }
+            
+            Button("높은 가격순") {
+                selection = "높은 가격순"
+            }
+        }
     }
 }
 
 struct BookMarkBottleListCell: View {
     var body: some View {
         HStack(alignment: .top) {
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(.black)
-                .frame(width: 150, height: 150)
-                .overlay {
+//            RoundedRectangle(cornerRadius: 5)
+//                .stroke(.black)
+//                .frame(width: 150, height: 150)
+//                .overlay {
                     Image("whisky_Image1")
                          .resizable()
                          .aspectRatio(contentMode: .fit)
-                         .frame(width: 140, height: 140)
-                }
-                .padding()
+                         .cornerRadius(10)
+                         .frame(width: 120, height: 120)
+                         .padding(.horizontal)
+//                }
+//                .padding()
     
             VStack(alignment: .leading, spacing: 10) {
                 Text("킬호만 샤닉")
@@ -102,6 +110,8 @@ struct BookMarkBottleListCell: View {
             .font(.title2)
             .padding()
         }
+        .frame(height: 130)
+        .padding(.vertical, 5)
     }
 }
 

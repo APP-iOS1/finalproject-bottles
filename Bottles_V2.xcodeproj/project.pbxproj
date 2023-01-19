@@ -53,6 +53,7 @@
 		AE1070092977D8AC00AF9D1B /* SearchShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070082977D8AC00AF9D1B /* SearchShopList.swift */; };
 		AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */; };
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
+		AEE99FB429799B59001A155E /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE99FB329799B59001A155E /* RecentlyItemList.swift */; };
 		CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
@@ -137,6 +138,7 @@
 		AE1070082977D8AC00AF9D1B /* SearchShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchShopList.swift; sourceTree = "<group>"; };
 		AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewNavigationLink.swift; sourceTree = "<group>"; };
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		AEE99FB329799B59001A155E /* RecentlyItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
 		B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				AE1070022977CC9F00AF9D1B /* SearchView.swift */,
 				AE1070062977D64100AF9D1B /* SearchBottleList.swift */,
 				AE1070082977D8AC00AF9D1B /* SearchShopList.swift */,
+				AEE99FB329799B59001A155E /* RecentlyItemList.swift */,
 				AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */,
 				AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */,
 			);
@@ -651,6 +654,7 @@
 				9216C1BF2977B5E100217C7F /* BottleShopBookMarkView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				9216C1B92977AF1D00217C7F /* ReservationView.swift in Sources */,
+				AEE99FB429799B59001A155E /* RecentlyItemList.swift in Sources */,
 				AE1070032977CC9F00AF9D1B /* SearchView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,

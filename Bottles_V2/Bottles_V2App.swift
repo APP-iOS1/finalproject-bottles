@@ -29,6 +29,11 @@ import UIKit
 struct Bottles_V2App: App {
     //    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    // Alert 에서 글씨 색상을 AccentColor로 바꾸기 위한 코드
+    init() {
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = UIColor(named: "AccentColor")
+    }
+    
     var body: some Scene {
         WindowGroup {
             //            ContentView().environmentObject(DataStore())

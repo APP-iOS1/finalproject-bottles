@@ -13,7 +13,7 @@ struct CartViewNavigationLink: View {
             CartView()
         } label: {
             Image(systemName: "cart.fill")
-                .frame(width: 42, height: 42)
+                .frame(width: 50, height: 50)
                 .background{
                     Color.white
                 }
