@@ -5,16 +5,18 @@
 //  Created by 강창현 on 2023/01/20.
 //
 
-import SwiftUI
+import UIKit
 
-struct UISheetPresentationController_Detent_Identifier_Init: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+@available(iOS 16.0, *)
+public extension UISheetPresentationController.Detent.Identifier {
+
+    /// A fraction-specific detent identifier.
+    static func fraction(_ value: CGFloat) -> Self {
+        .init("Fraction:\(String(format: "%.1f", value))")
     }
-}
 
-struct UISheetPresentationController_Detent_Identifier_Init_Previews: PreviewProvider {
-    static var previews: some View {
-        UISheetPresentationController_Detent_Identifier_Init()
+    /// A height-specific detent identifier.
+    static func height(_ value: CGFloat) -> Self {
+        .init("Height:\(value)")
     }
 }

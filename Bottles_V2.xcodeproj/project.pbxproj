@@ -31,6 +31,12 @@
 		27D82C39297A5AC1004F3D94 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C34297A5AC0004F3D94 /* SpoqaHanSansNeo-Medium.otf */; };
 		27D82C3A297A5AC1004F3D94 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */; };
 		27D82C3D297A6481004F3D94 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C3C297A6481004F3D94 /* SwiftUIView.swift */; };
+		27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C3E297A6F29004F3D94 /* MapViewModel.swift */; };
+		27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C40297A6FD3004F3D94 /* NaverMap.swift */; };
+		27D82C43297A7BD8004F3D94 /* UndimmedPresentationDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C42297A7BD8004F3D94 /* UndimmedPresentationDetent.swift */; };
+		27D82C45297A7BFC004F3D94 /* UndimmedPresentationDetentsViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C44297A7BFC004F3D94 /* UndimmedPresentationDetentsViewModifier.swift */; };
+		27D82C47297A7C34004F3D94 /* UISheetPresentationController.Detent.Identifier+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C46297A7C34004F3D94 /* UISheetPresentationController.Detent.Identifier+Init.swift */; };
+		27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C4B297A875F004F3D94 /* BottomSheet.swift */; };
 		3AA43A5529778EE400EB8551 /* BottleShopView_Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5429778EE400EB8551 /* BottleShopView_Search.swift */; };
 		3AA43A5729778EFB00EB8551 /* BottleShopView_Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5629778EFB00EB8551 /* BottleShopView_Notice.swift */; };
 		3AA43A5929778F2D00EB8551 /* BottleShopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5829778F2C00EB8551 /* BottleShopDetailView.swift */; };
@@ -121,6 +127,12 @@
 		27D82C34297A5AC0004F3D94 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		27D82C3C297A6481004F3D94 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		27D82C3E297A6F29004F3D94 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		27D82C40297A6FD3004F3D94 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
+		27D82C42297A7BD8004F3D94 /* UndimmedPresentationDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndimmedPresentationDetent.swift; sourceTree = "<group>"; };
+		27D82C44297A7BFC004F3D94 /* UndimmedPresentationDetentsViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndimmedPresentationDetentsViewModifier.swift; sourceTree = "<group>"; };
+		27D82C46297A7C34004F3D94 /* UISheetPresentationController.Detent.Identifier+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISheetPresentationController.Detent.Identifier+Init.swift"; sourceTree = "<group>"; };
+		27D82C4B297A875F004F3D94 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2_Bottles_V2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA43A5429778EE400EB8551 /* BottleShopView_Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_Search.swift; sourceTree = "<group>"; };
@@ -287,10 +299,16 @@
 			isa = PBXGroup;
 			children = (
 				27281CE22977854D003BE8B4 /* MapView.swift */,
+				27D82C4B297A875F004F3D94 /* BottomSheet.swift */,
+				27D82C42297A7BD8004F3D94 /* UndimmedPresentationDetent.swift */,
+				27D82C46297A7C34004F3D94 /* UISheetPresentationController.Detent.Identifier+Init.swift */,
+				27D82C44297A7BFC004F3D94 /* UndimmedPresentationDetentsViewModifier.swift */,
 				27D82C3C297A6481004F3D94 /* SwiftUIView.swift */,
 				27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */,
 				27281CFC2977B851003BE8B4 /* NearBySheetView.swift */,
 				27281CFE2977B8C8003BE8B4 /* NearBySheetCell.swift */,
+				27D82C3E297A6F29004F3D94 /* MapViewModel.swift */,
+				27D82C40297A6FD3004F3D94 /* NaverMap.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -692,7 +710,9 @@
 			files = (
 				AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */,
 				27281CED297785B2003BE8B4 /* BottleView.swift in Sources */,
+				27D82C45297A7BFC004F3D94 /* UndimmedPresentationDetentsViewModifier.swift in Sources */,
 				D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */,
+				27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
 				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
 				AE1070092977D8AC00AF9D1B /* SearchShopList.swift in Sources */,
@@ -728,13 +748,17 @@
 				27281CFF2977B8C8003BE8B4 /* NearBySheetCell.swift in Sources */,
 				27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */,
 				27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */,
+				27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */,
 				27281CFB2977AD3C003BE8B4 /* MapViewSearchBar.swift in Sources */,
+				27D82C43297A7BD8004F3D94 /* UndimmedPresentationDetent.swift in Sources */,
 				7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */,
 				9FA507820644AAAE35CB724F /* User.swift in Sources */,
 				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
 				AE106FFD2977925D00AF9D1B /* SearchViewSearchBar.swift in Sources */,
 				D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */,
+				27D82C47297A7C34004F3D94 /* UISheetPresentationController.Detent.Identifier+Init.swift in Sources */,
+				27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */,
 				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
