@@ -10,8 +10,22 @@ import SwiftUI
 struct RecentlyItemList: View {
     var recentSearches: [String] = ["와인", "와인앤모어", "위스키", "선물", "킬호만"]
     
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
-        VStack {
+        VStack(alignment: .leading, spacing: 10) {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.backward")
+            }
+
+            
+            
+            Text("최근 검색어")
+                .font(.bottles18)
+                .bold()
+                .padding(.leading, 15)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(recentSearches, id: \.self) { search in
@@ -21,13 +35,74 @@ struct RecentlyItemList: View {
                             Text(search)
                                 .padding(12)
                                 .background(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
-                                .padding()
+                                .padding(.vertical)
+                                .padding(.leading, 5)
                         }     
                     }
                 }
             }
-//            .scrollIndicators(.hidden)
+            .padding(.leading, 10)
+            Text("최근 본 상품")
+                .font(.bottles18)
+                .bold()
+                .padding(.leading, 15)
+            ScrollView {
+                RecentlyItemListCell()
+                RecentlyItemListCell()
+                RecentlyItemListCell()
+            }
         }
+    }
+}
+
+struct RecentlyItemListCell: View {
+    var body: some View {
+        HStack(alignment: .top) {
+                    Image("whisky_Image1")
+                         .resizable()
+                         .aspectRatio(contentMode: .fit)
+                         .cornerRadius(10)
+                         .frame(width: 120, height: 120)
+                         .padding(.horizontal)
+    
+            VStack(alignment: .leading, spacing: 10) {
+                Text("킬호만 샤닉")
+                    .font(.title3)
+                Text("350,000원")
+                NavigationLink {
+                    BottleShopView()
+                } label: {
+                    HStack {
+                        Image("MapMarker")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 20)
+                        Text("와인앤모어")
+                    }
+                }
+            }
+            .bold()
+            .padding(.vertical)
+            
+            Spacer()
+            VStack {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "bookmark.fill")
+                }
+                Spacer()
+                Button {
+                    
+                } label: {
+                    Image(systemName: "cart.badge.plus")
+                }
+            }
+            .font(.title2)
+            .padding()
+        }
+        .frame(height: 130)
+        .padding(.vertical, 5)
     }
 }
 

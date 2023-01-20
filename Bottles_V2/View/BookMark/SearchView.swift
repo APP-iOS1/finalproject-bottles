@@ -19,6 +19,7 @@ struct SearchView: View {
     
     //searchBar
     @State var searchBarText: String = ""
+    @State var isShowingSearchResult: Bool = false
     
     var body: some View {
         VStack {
@@ -30,20 +31,16 @@ struct SearchView: View {
                 SearchTapView(searchTap: selectedPicker)
             }
         }
-        .toolbar {
-            ToolbarItem {
-                HStack {
-                    SearchViewSearchBar(searchBarText: $searchBarText)
-                    CartViewNavigationLink()
-                        .padding(.leading, 5)
-                }
-            }
-            
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                CartViewNavigationLink()
-//                    .padding(.leading, 5)
+        .navigationBarHidden(true)
+//        .toolbar {
+//            ToolbarItem {
+//                HStack {
+//                    SearchViewSearchBar(searchBarText: $searchBarText)
+//                    CartViewNavigationLink()
+//                        .padding(.leading, 5)
+//                }
 //            }
-        }
+//        }
     }
     
     // MARK: - Picker Animation 함수
