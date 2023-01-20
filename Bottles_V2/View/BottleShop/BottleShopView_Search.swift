@@ -8,8 +8,8 @@
 import SwiftUI
 
 enum Sort: String, CaseIterable, Identifiable {
-  case automatic, priceDown, priceUp, popularity
-  var id: Self { self }
+    case automatic, priceDown, priceUp, popularity
+    var id: Self { self }
 }
 
 struct BottleShopView_Search: View {
@@ -17,43 +17,19 @@ struct BottleShopView_Search: View {
     @Binding var text: String
     @State private var isEditing = false
     @State private var selectedSort = Sort.automatic
+    @State private var showingActionSheet: Bool = false
+    @State private var selection = "기본순"
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         VStack(alignment: .leading){
-            
-            VStack(alignment: .leading){
-                NavigationLink(destination: BottleShopCurationView()){
-                    HStack{
-                        Text("연말 파티에 어울리는 스파클링 와인들")
-                        Image(systemName: "chevron.right")
-                            .padding(.leading, -5)
-                        Spacer()
-                    }
-                    .fontWeight(.bold)
-//                    .padding(.horizontal)
-                }
-                Text("다가오는 연말, 친구 / 연인 / 가족과 함께 \n부담없이 마시기 좋은 스파클링 와인을 추천합니다. \n어떤 음식과 페어링해도 평타 이상일 거예요!")
-                    .padding(.top, 1)
-            }
-            .font(.system(size: 15))
-            .foregroundColor(.black)
-            .padding()
-            .frame(height: 150)
-            .background(Color(.systemGray6))
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 0.7)
-            )
-            .padding(.bottom)
-            
             HStack {
                 TextField("이 바틀샵의 상품을 검색해보세요", text: $text)
-                    .font(.system(size: 15))
+                    .font(.bottles16)
                     .padding(7)
                     .padding(.horizontal, 25)
-                    .background(Color(.systemGray6))
+                    .background{Color.gray_f7}
                     .cornerRadius(8)
                     .overlay(
                         HStack {
@@ -73,7 +49,7 @@ struct BottleShopView_Search: View {
                             }
                         }
                     )
-//                    .padding(.horizontal, 10)
+                //                    .padding(.horizontal, 10)
                     .onTapGesture {
                         self.isEditing = true
                     }
@@ -91,14 +67,45 @@ struct BottleShopView_Search: View {
                     .animation(.default)
                 }
             }
+            .padding(.bottom, 10)
             
-                Picker("Sort", selection: $selectedSort) {
-                    Text("기본순").tag(Sort.automatic)
-                    Text("인기순").tag(Sort.popularity)
-                    Text("가격내림차순").tag(Sort.priceDown)
-                    Text("가격오름차순").tag(Sort.priceUp)
+            HStack {
+                Spacer()
+                
+                Button {
+                    showingActionSheet = true
+                } label: {
+                    HStack {
+                        Text("\(selection)")
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 12))
+                    }
+                    .font(.bottles14)
+                    .foregroundColor(.black)
                 }
-                .pickerStyle(.automatic)
+                .padding(.leading, 20)
+                .padding(.bottom, -10)
+            }
+            // MARK: - 정렬 ActionSheet
+            .confirmationDialog("select a sort", isPresented: $showingActionSheet) {
+                Button {
+                    selection = "기본순"
+                } label: {
+                    Text("기본순")
+                }
+                
+                Button("신상품순") {
+                    selection = "신상품순"
+                }
+                
+                Button("낮은 가격순") {
+                    selection = "낮은 가격순"
+                }
+                
+                Button("높은 가격순") {
+                    selection = "높은 가격순"
+                }
+            }
             
             ForEach(bottleItems, id: \.self) { item in
                 NavigationLink(destination: BottleView(), label:{
