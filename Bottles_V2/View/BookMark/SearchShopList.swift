@@ -13,36 +13,6 @@ struct SearchShopList: View {
     
     var body: some View {
         VStack {
-            // MARK: - 정렬 Menu
-            HStack {
-                Menu {
-                    Button("최신 순", action: {
-                        filterType = "최신 순"
-                    })
-                    Button("낮은 가격 순", action: {
-                        filterType = "낮은 가격 순"
-                    })
-                    Button("높은 가격 순", action: {
-                        filterType = "높은 가격 순"
-                    })
-                } label: {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.accentColor)
-                        .frame(width: 140, height: 35)
-                        .overlay {
-                            HStack {
-                                Text(filterType)
-                                    .frame(width: 90)
-                                    .bold()
-                                Image(systemName: "chevron.down")
-                                    .foregroundColor(.accentColor)
-                            }
-                        }
-                }
-                .padding(.horizontal)
-                .padding(.top, 10)
-                Spacer()
-            }
             ScrollView {
                 NavigationLink {
                     

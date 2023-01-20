@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct BookMarkShopList: View {
+    // ActionSheet
     @State private var showingActionSheet: Bool = false
     @State private var selection = "기본순"
     
     var body: some View {
         VStack {
             HStack {
+                Spacer()
                 Button {
                     showingActionSheet = true
                 } label: {
@@ -24,8 +26,7 @@ struct BookMarkShopList: View {
                     }
                     .foregroundColor(.black)
                 }
-                .padding(.leading, 20)
-                Spacer()
+                .padding(.trailing, 20)
             }
             ScrollView {
                 NavigationLink {
@@ -45,6 +46,7 @@ struct BookMarkShopList: View {
                 }
             }
         }
+        // MARK: - 정렬 ActionSheet
         .confirmationDialog("select a sort", isPresented: $showingActionSheet) {
             Button("기본순") {
                 selection = "기본순"
@@ -68,18 +70,12 @@ struct BookMarkShopList: View {
 struct BookMarkShopListCell: View {
     var body: some View {
         HStack {
-//            RoundedRectangle(cornerRadius: 5)
-//                .stroke(.black)
-//                .frame(width: 150, height: 150)
-//                .overlay {
                     Image("bottleShop")
                          .resizable()
                          .aspectRatio(contentMode: .fit)
                          .cornerRadius(10)
                          .frame(width: 120, height: 120)
                          .padding(.horizontal)
-//                }
-//                .padding()
     
             VStack(alignment: .leading, spacing: 10) {
                 Text("와인앤모어")
