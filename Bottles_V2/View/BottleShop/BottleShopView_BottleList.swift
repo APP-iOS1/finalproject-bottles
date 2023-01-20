@@ -18,20 +18,48 @@ struct BottleShopView_BottleList: View {
                 Image("whisky_Image1")
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 90)
+                    .padding(5)
+                    .background{Color.gray_f7}
+                    .cornerRadius(12)
+                    .frame(height: 128)
+                
+                Spacer()
+                    .frame(width: 16)
                 
                 VStack(alignment: .leading){
-                    Text(selectedItem.name)
-                        .font(.system(size: 15))
-                        .fontWeight(.bold)
-                        .padding(.bottom, -10)
                     
-                    Spacer()
-                        .frame(height: 10)
+                    HStack{
+                        Text(selectedItem.name)
+                            .font(.bottles14)
+                            .fontWeight(.semibold)
+                            .multilineTextAlignment(.leading)
+                            .padding(.bottom, -7)
+                        
+                        Spacer()
+                        
+                        VStack{
+                            Spacer()
+                                .frame(height: 10)
+                            
+                            Button(action: {
+                                withAnimation(.easeOut(duration: 0.5)) {
+                                    bookmarkToggle.toggle()
+                                }
+                            }) {
+                                Image(bookmarkToggle ? "BookMark.fill" : "BookMark")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15)
+                            }
+                        }
+                    }
                     
+//                    Spacer()
+//                        .frame(height: 10)
+//                    
                     Text(selectedItem.price)
-                        .font(.system(size: 15))
-                        .fontWeight(.bold)
+                        .font(.bottles18)
+                        .fontWeight(.heavy)
                     
                     HStack{
                         Text(selectedItem.category ?? "")
@@ -60,26 +88,17 @@ struct BottleShopView_BottleList: View {
                                     .stroke(Color.gray, lineWidth: 0.7)
                             )
                     }
-                    .font(.system(size: 10))
+                    .font(.bottles12)
                     .foregroundColor(.gray)
                     .padding(.top, -5)
                     
+                    Spacer()
+                        .frame(height: 30)
                 }
                 
                 .frame(alignment: .leading)
 
                 Spacer()
-                
-                Button(action: {
-                    withAnimation(.easeOut(duration: 0.5)) {
-                        bookmarkToggle.toggle()
-                    }
-                }) {
-                    Image(systemName: bookmarkToggle ? "bookmark.fill" : "bookmark")
-                        .font(.system(size: 15))
-                        .foregroundColor(.black)
-                        .padding(.trailing)
-                }
             }
             .padding(.vertical)
             Divider()
