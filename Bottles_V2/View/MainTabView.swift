@@ -12,21 +12,34 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selection) {
             MapView().tabItem {
-                Image(systemName: "map")
+                Image(selection == 1 ? "Map_tab_fill" : "Map_tab")
+                Text("주변")
             }.tag(1)
             BookMarkView().tabItem {
-                Image(systemName: "bookmark.fill")
+                Image(selection == 2 ? "BookMark_tab_fill" : "BookMark_tab")
+                Text("저장")
             }.tag(2)
             NotificationView().tabItem {
-                Image(systemName: "bell.fill")
+                Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
+                Text("알림")
             }.tag(3)
             MyPageView().tabItem {
-                Image(systemName: "person.fill")
+                Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
+                Text("MY")
             }.tag(4)
         }
-//        .toolbarBackground(Color.white, for: .tabBar)
+        //        .toolbarBackground(Color.white, for: .tabBar)
     }
 }
+
+//struct TabButtonModifier: ViewModifier {
+//    func body(image: Image) -> some View {
+//        image
+//            .resizable()
+//            .aspectRatio(contentMode: .fit)
+//            .frame(width: 20)
+//    }
+//}
 
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
