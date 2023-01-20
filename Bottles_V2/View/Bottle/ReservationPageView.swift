@@ -8,8 +8,28 @@
 import SwiftUI
 
 struct ReservationPageView: View {
+    @State private var check: Bool = false
+    @State private var isShowing: Bool = false
+    @Binding var dismiss: Bool
+    
     var body: some View {
         NavigationStack {
+            HStack {
+                Button(action: {
+                    dismiss.toggle()
+                }) {
+                    Image(systemName: "chevron.backward")
+                        .foregroundColor(.black)
+                }
+                
+                Spacer()
+                
+                Text("예약하기")
+                    .font(.system(size: 20, weight: .medium))
+                Spacer()
+            }
+            .padding()
+            
             VStack(alignment: .leading, spacing: 15) {
                 // 예약 상품
                 HStack {
@@ -104,11 +124,12 @@ struct ReservationPageView: View {
             }
             .padding()
                 
-            Button(action: {}) {
+            Button(action: {
+                check.toggle()
+            }) {
                 HStack {
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(.black, lineWidth: 1)
-                        .opacity(0.5)
+                    Image(systemName: check ? "checkmark.square.fill" : "square")
+                        .resizable()
                         .frame(width: 25, height: 25)
                     Text("예약 확정 후 3일 이내 미방문시 예약이 취소됩니다.")
                         .font(.subheadline)
@@ -121,11 +142,15 @@ struct ReservationPageView: View {
             
             Spacer()
             
-            Text("이용정책 및 개언정보 제공에 동의합니다.")
+            Text("이용정책 및 개인정보 제공에 동의합니다.")
                 .font(.footnote)
                 .fontWeight(.medium)
             
-            NavigationLink(destination: ReservedView()) {
+            Button(action: {
+                if check {
+                    isShowing.toggle()
+                }
+            }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.gray)
@@ -135,17 +160,16 @@ struct ReservationPageView: View {
                 }
             }
             .padding()
-            
-            .navigationTitle("예약하기")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(isPresented: $isShowing) {
+                ReservedView()
+            }
         }
-        
         
     }
 }
 
-struct ReservationPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReservationPageView()
-    }
-}
+//struct ReservationPageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReservationPageView(isShowing: <#Binding<Bool>#>)
+//    }
+//}
