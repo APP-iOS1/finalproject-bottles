@@ -14,34 +14,34 @@
   },
   "api": {
     "Bottles": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "output": {
         "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 30,
               "description": "api key description"
             }
-          },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ]
+          }
         },
         "GraphQLAPIIdOutput": "vam5iuf5qzahzghe3yv36thwn4",
         "GraphQLAPIEndpointOutput": "https://aeqkdggsm5atniksc4vaa2ztrq.appsync-api.ap-northeast-2.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-lplioqbh7vaa5bm2ci23ty7mja"
       },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2023-01-19T05:39:05.830Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiBottles"
       },
-      "lastPushTimeStamp": "2023-01-17T02:31:18.228Z",
-      "lastPushDirHash": "WuIccg79ydrZeoh6gUBMPHgs5G8="
+      "lastPushDirHash": "2CPZSjef4qa9qWVVqtQMOLVKnqg="
     }
   }
 }

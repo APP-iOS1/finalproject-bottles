@@ -1,4 +1,68 @@
+type Curation {
+  shopCurationTitle: String
+  shopCurationBody: String
+  shopCurationImage: String
+  shopCurationBottleID: [ID]
+}
+
+type ShopNotice @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  body: String
+  Image: String
+  date: AWSDateTime
+  shopID: ID! @index(name: "byShop")
+}
+
+type Bottle @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  shopID: ID! @index(name: "byShop")
+  itemName: String
+  itemImage: String
+  itemPrice: Int
+  itemML: Float
+  itemNation: String
+  itemProducer: String
+  itemLocal: [String]
+  itemVarities: [String]
+  itemType: String
+  itemAdv: Float
+  itemDegree: Float
+  itemTag: [String]
+  itemAroma: [String]
+  itemTaste: [String]
+  itemFinish: [String]
+  itemPairing: String
+}
+
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   email: String
+  followShopList: [String]
+  recentlyItem: [String]
+  followItemList: [String]
+  pickupItemList: [String]
+  userPhoneNumber: [AWSPhone]
+  recentlySearch: String
 }
+
+type Shop @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  shopName: String
+  shopAddress: String
+  longitude: Float
+  latitude: Float
+  shopPhoneNumber: AWSPhone
+  shopIntroduction: String
+  registration: Boolean
+  Bottles: [Bottle] @hasMany(indexName: "byShop", fields: ["id"])
+  followerUserList: [String]
+  shopGrade: Float
+  ShopNotices: [ShopNotice] @hasMany(indexName: "byShop", fields: ["id"])
+  shopOpenCloseTime: [String]
+  shopImage: [String]
+  shopSNS: String
+  shopTitleImage: String
+  shopCuration: Curation
+}
+ 

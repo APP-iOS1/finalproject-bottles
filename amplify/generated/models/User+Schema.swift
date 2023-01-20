@@ -7,6 +7,12 @@ extension User {
    public enum CodingKeys: String, ModelKey {
     case id
     case email
+    case followShopList
+    case recentlyItem
+    case followItemList
+    case pickupItemList
+    case userPhoneNumber
+    case recentlySearch
     case createdAt
     case updatedAt
   }
@@ -30,6 +36,12 @@ extension User {
     model.fields(
       .field(user.id, is: .required, ofType: .string),
       .field(user.email, is: .optional, ofType: .string),
+      .field(user.followShopList, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.recentlyItem, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.followItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.pickupItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.userPhoneNumber, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.recentlySearch, is: .optional, ofType: .string),
       .field(user.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(user.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )
