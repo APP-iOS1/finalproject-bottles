@@ -16,31 +16,34 @@ struct NotificationCell: View {
     var body: some View {
         HStack {
             Spacer()
-            // 이미지 자리
+            // MARK: - 이미지
             Circle()
                 .frame(width: UIScreen.main.bounds.size.width/7, height: UIScreen.main.bounds.size.width/7)
                 .padding([.leading, .trailing])
             
+            // MARK: - 가운데 텍스트(공지타이틀, 서브 타이틀, 바틀샵 이름)
             VStack(alignment: .leading, spacing: 7) {
                 HStack {
                     Text(title)
-                        .font(.subheadline)
+                        .font(.bottles15)
+                        .foregroundColor(.black)
                         .bold()
                     Spacer()
                     Text(time)
-                        .font(.caption)
+                        .font(.bottles13)
                         .foregroundColor(.gray)
                         .padding(.trailing)
                 }
-                
                 Text(subTitle)
-                    .font(.footnote)
+                    .font(.bottles13)
+                    .foregroundColor(.black)
                 HStack {
                     Image("MapMarker")
                         .resizable()
                         .frame(width: 12, height: 17)
                     Text("바틀샵 이름")
-                        .font(.subheadline)
+                        .foregroundColor(.black)
+                        .font(.bottles15)
                 }
 
             }

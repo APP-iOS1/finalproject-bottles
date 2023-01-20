@@ -11,24 +11,26 @@ struct BottleShopDetailView: View {
     @State private var showingSheet = true
         
     var body: some View {
-        Button{
-            showingSheet.toggle()
-        }label: {
-            VStack{
-                Spacer()
-                    .frame(height: 200)
-                Image(systemName: "mappin")
-                Text("지도 위 바틀샵 위치 보여줌")
-                Spacer()
+        VStack{
+            Button{
+                showingSheet.toggle()
+            }label: {
+                VStack{
+                    Spacer()
+                        .frame(height: 200)
+                    Image(systemName: "mappin")
+                    Text("지도 위 바틀샵 위치 보여줌")
+                    Spacer()
+                }
             }
         }
+        .navigationBarTitle("바틀샵 이름")
         .sheet(isPresented: $showingSheet) {
             VStack(alignment: .leading, spacing: 20){
                 HStack{
                     Image(systemName: "mappin")
                     Text("서울 광진구 면목로7길 8 1층")
                 }
-                .fontWeight(.medium)
                 
                 HStack{
                     Image(systemName: "house.fill")
@@ -39,7 +41,6 @@ struct BottleShopDetailView: View {
                     Image(systemName: "phone.fill")
                     Text("0507-1347-830")
                 }
-                .fontWeight(.medium)
                 
                 HStack{
                     Image(systemName: "clock.fill")
@@ -54,8 +55,8 @@ struct BottleShopDetailView: View {
                         Text("일 12:00 - 22:00")
                     }
                 }
-                .fontWeight(.medium)
             }
+            .font(.bottles15)
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.hidden)
                 .padding(.horizontal, 5)

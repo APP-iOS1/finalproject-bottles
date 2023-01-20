@@ -15,22 +15,23 @@ struct BottleShopView_NoticeCell: View {
         VStack(alignment: .leading){
             
             HStack{
-                VStack{
+                VStack(alignment: .leading){
                     HStack{
                         Text(selectedItem.category)
-                            .fontWeight(.bold)
+                            .fontWeight(.semibold)
                         Spacer()
                         
-                        Text(selectedItem.time)
-                            .foregroundColor(.gray)
+//                        Text(selectedItem.time)
+//                            .foregroundColor(.gray)
                     }
                     .padding(.bottom, 1)
                     Text(selectedItem.contents)
-                        .fontWeight(.medium)
+//                        .fontWeight(.medium)
                         .frame(alignment: .center)
                     
                 }
             }
+            .font(.bottles14)
             .padding()
             Divider()
             

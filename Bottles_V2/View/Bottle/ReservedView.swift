@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ReservedView: View {
     @State private var isShowing: Bool = true
+    
     var body: some View {
         VStack(spacing: 20) {
             // 예약 상품 이미지
@@ -32,10 +33,34 @@ struct ReservedView: View {
                     .font(.title3)
                     .fontWeight(.bold)
             }
+            .padding()
             
-            Spacer()
+            HStack {
+                NavigationLink(destination: BottleShopView()) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.gray)
+                            .frame(width: 171, height: 51)
+                            
+                        Text("다른 상품 보러가기")
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                }
+                
+                NavigationLink(destination: PickUpDetailView()) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.gray)
+                            .frame(width: 171, height: 51)
+                        Text("예약 확인하기")
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                }
+            }
+            
         }
-        .offset(y: 100)
+        .offset(y: -55)
+        
         .sheet(isPresented: $isShowing) {
             BottleShopBookMarkView()
                 .presentationDetents([.height(250)])

@@ -15,6 +15,7 @@ struct BookMarkBottleList: View {
     var body: some View {
         VStack {
             HStack {
+                Spacer()
                 Button {
                     showingActionSheet = true
                 } label: {
@@ -25,9 +26,7 @@ struct BookMarkBottleList: View {
                     }
                     .foregroundColor(.black)
                 }
-                .padding(.leading, 20)
-                
-                Spacer()
+                .padding(.trailing, 20)
             }
             ScrollView {
                 BookMarkBottleListCell()
@@ -61,18 +60,12 @@ struct BookMarkBottleList: View {
 struct BookMarkBottleListCell: View {
     var body: some View {
         HStack(alignment: .top) {
-//            RoundedRectangle(cornerRadius: 5)
-//                .stroke(.black)
-//                .frame(width: 150, height: 150)
-//                .overlay {
                     Image("whisky_Image1")
                          .resizable()
                          .aspectRatio(contentMode: .fit)
                          .cornerRadius(10)
                          .frame(width: 120, height: 120)
                          .padding(.horizontal)
-//                }
-//                .padding()
     
             VStack(alignment: .leading, spacing: 10) {
                 Text("킬호만 샤닉")
