@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ReservationView: View {
     @State private var count: Int = 1
+    @State private var isShowingCart: Bool = false
+    @State private var isShowingReservationPage: Bool = false
+    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 25) {
@@ -78,7 +81,10 @@ struct ReservationView: View {
                 }
                 // 장바구니 담기 및 예약 버튼
                 HStack {
-                    NavigationLink(destination: CartView() ) {
+                    Button(action: {
+                        isShowingCart.toggle()
+                        
+                    }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(.gray)
@@ -88,8 +94,13 @@ struct ReservationView: View {
                                 .font(.system(size: 18, weight: .bold))
                         }
                     }
-                    
-                    NavigationLink(destination: ReservationPageView()) {
+                    .fullScreenCover(isPresented: $isShowingCart) {
+                        CartView()
+                    }
+    
+                    Button(action: {
+                        isShowingReservationPage.toggle()
+                    }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(.gray)
@@ -98,6 +109,9 @@ struct ReservationView: View {
                                 .font(.system(size: 18, weight: .bold))
                         }
                     }
+                    .fullScreenCover(isPresented: $isShowingReservationPage) {
+                        ReservationPageView(dismiss: $isShowingReservationPage)
+                    }
                 }
             }
         }
@@ -105,8 +119,8 @@ struct ReservationView: View {
     }
 }
 
-struct ReservationView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReservationView()
-    }
-}
+//struct ReservationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReservationView(isShowingReservationView: <#Binding<Bool>#>)
+//    }
+//}

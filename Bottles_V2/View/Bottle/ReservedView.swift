@@ -33,13 +33,37 @@ struct ReservedView: View {
                     .font(.title3)
                     .fontWeight(.bold)
             }
+            .padding()
             
-            Spacer()
+            HStack {
+                NavigationLink(destination: CartView() ) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.gray)
+                            .frame(width: 171, height: 51)
+                            
+                        Text("다른 상품 둘러보기")
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                }
+                
+                NavigationLink(destination: ReservationPageView(dismiss: $isShowing)) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.gray)
+                            .frame(width: 171, height: 51)
+                        Text("예약 확인하기")
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                }
+            }
+            
         }
-        .offset(y: 100)
+        .offset(y: -55)
+        
         .sheet(isPresented: $isShowing) {
             BottleShopBookMarkView()
-                .presentationDetents([.height(220)])
+                .presentationDetents([.height(250)])
         }
     }
 }

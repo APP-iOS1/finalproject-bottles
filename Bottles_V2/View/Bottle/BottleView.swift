@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BottleView: View {
     @State private var checkBookmark: Bool = true
-    @State private var isShowing: Bool = false
+    @State private var isShowingReservation: Bool = false
     var tagList: [String] = ["위스키", "한정판", "스모키"]
     
     var body: some View {
@@ -26,11 +26,13 @@ struct BottleView: View {
                                 .font(.system(size: 18, weight: .medium))
                             Spacer()
                             HStack(spacing: 25) {
-                                Button(action: {}) {
+                              
+                                ShareLink(item: "") {
                                     Image(systemName: "square.and.arrow.up")
                                         .resizable()
                                         .frame(width: 17, height: 23)
                                 }
+
                                 Button(action: {
                                     checkBookmark.toggle()
                                 }) {
@@ -84,6 +86,7 @@ struct BottleView: View {
                             Text("Tasting Notes")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
+                                .padding(.vertical, 3)
                             Group {
                                 HStack {
                                     Text("Aroma")
@@ -106,6 +109,7 @@ struct BottleView: View {
                             Text("Information")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
+                                .padding(.vertical, 3)
                             Group {
                                 HStack {
                                     Text("종류")
@@ -140,6 +144,7 @@ struct BottleView: View {
                             Text("Pairing")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
+                                .padding(.vertical, 3)
                             Text("회, 생선, 랍스타 등의 해산물")
                                 .font(.footnote)
                         }
@@ -158,12 +163,14 @@ struct BottleView: View {
                         .fontWeight(.bold)
                         
                     ForEach(0..<3, id: \.self) {_ in
-                        OtherBottleView()
+                        BottleShopCell()
                     }
                 }
                 .padding()
                 
-                NavigationLink(destination: ReservationView()) {
+                Button(action: {
+                    isShowingReservation.toggle()
+                }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.gray)
@@ -175,12 +182,11 @@ struct BottleView: View {
                 .padding()
             }
         }
-     
-//        .sheet(isPresented: $isShowing) {
-//            ReservationView()
-//
-//        }
-       
+        .sheet(isPresented: $isShowingReservation) {
+            ReservationView()
+                .presentationDetents([.medium])
+        }
+        
     }
 }
 
