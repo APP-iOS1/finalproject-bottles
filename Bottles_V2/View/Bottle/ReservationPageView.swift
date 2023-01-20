@@ -12,7 +12,6 @@ struct ReservationPageView: View {
     @State private var isShowing: Bool = false
     @Binding var dismiss: Bool
     
-    
     var body: some View {
         NavigationStack {
             HStack {

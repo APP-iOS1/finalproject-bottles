@@ -36,18 +36,18 @@ struct ReservedView: View {
             .padding()
             
             HStack {
-                NavigationLink(destination: CartView() ) {
+                NavigationLink(destination: BottleShopView()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.gray)
                             .frame(width: 171, height: 51)
                             
-                        Text("다른 상품 둘러보기")
+                        Text("다른 상품 보러가기")
                             .font(.system(size: 18, weight: .bold))
                     }
                 }
                 
-                NavigationLink(destination: ReservationPageView(dismiss: $isShowing)) {
+                NavigationLink(destination: PickUpDetailView()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(.gray)

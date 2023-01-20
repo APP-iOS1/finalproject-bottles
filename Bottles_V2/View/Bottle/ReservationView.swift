@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ReservationView: View {
     @State private var count: Int = 1
+    @State private var isShowingAlert: Bool = false
     @State private var isShowingCart: Bool = false
     @State private var isShowingReservationPage: Bool = false
     
@@ -82,8 +83,7 @@ struct ReservationView: View {
                 // 장바구니 담기 및 예약 버튼
                 HStack {
                     Button(action: {
-                        isShowingCart.toggle()
-                        
+                        isShowingAlert.toggle()
                     }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
@@ -94,9 +94,14 @@ struct ReservationView: View {
                                 .font(.system(size: 18, weight: .bold))
                         }
                     }
+                    .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
+                        Button("OK", role: .destructive) { isShowingCart.toggle() }
+                        Button("cancel", role: .cancel) { print("tap cancel") }
+                    }
                     .fullScreenCover(isPresented: $isShowingCart) {
                         CartView()
                     }
+                 
     
                     Button(action: {
                         isShowingReservationPage.toggle()
