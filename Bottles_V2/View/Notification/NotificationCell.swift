@@ -26,7 +26,7 @@ struct NotificationCell: View {
                 HStack {
                     Text(title)
                         .font(.bottles15)
-                        .bold()
+                        .foregroundColor(.black)
                         .bold()
                     Spacer()
                     Text(time)
@@ -36,11 +36,13 @@ struct NotificationCell: View {
                 }
                 Text(subTitle)
                     .font(.bottles13)
+                    .foregroundColor(.black)
                 HStack {
                     Image("MapMarker")
                         .resizable()
                         .frame(width: 12, height: 17)
                     Text("바틀샵 이름")
+                        .foregroundColor(.black)
                         .font(.bottles15)
                 }
 

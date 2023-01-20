@@ -27,12 +27,18 @@ struct NotificationView: View {
                 // TODO: 네비게이션 링크 연결
                 /// 예약내역, 새로운 소식,
                 ScrollView {
-                    NotificationCell(title: "예약이 확정되었습니다.",
-                    subTitle: "칼호만 샤닉", time: "2시간 전")
+                    NavigationLink(destination: PickUpListView()){
+                        NotificationCell(title: "예약이 확정되었습니다.",
+                        subTitle: "칼호만 샤닉", time: "2시간 전")
+                    }
                     Divider()
                         .background(.black)
-                    NotificationCell(title: "저장한 바틀샵의 새로운 소식",
-                    subTitle: "새로운 큐레이션 타이틀", time: "4시간 전")
+                    NavigationLink(destination: BottleShopCurationView()){
+                        NotificationCell(title: "저장한 바틀샵의 새로운 소식",
+                        subTitle: "새로운 큐레이션 타이틀", time: "4시간 전")
+                    }
+
+                    
                     Divider()
                         .background(.black)
                 }
