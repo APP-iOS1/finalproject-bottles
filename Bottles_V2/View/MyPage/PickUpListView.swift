@@ -17,7 +17,7 @@ struct PickUpListView: View {
                     }
                     Rectangle()
                         .frame(height: 7)
-                        .foregroundColor(.gray)
+                        .foregroundColor(Color("lightGray"))
                         .padding(.bottom, -6)
                 }
             }

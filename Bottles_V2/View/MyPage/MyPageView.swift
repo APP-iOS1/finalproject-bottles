@@ -14,23 +14,27 @@ struct MyPageView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                //MARK: - 프로필 HStack
                 HStack {
                     Circle()
                         .frame(width: 65, height: 65)
                     Text("밤삭님")
                         .font(.bottles18)
-//                        .bold()
+                        .bold()
                     Spacer()
                     NavigationLink(destination: SettingView()){
                         Image(systemName: "gearshape.fill")
+//                            .foregroundColor(.accentColor)
                             .font(.title2)
                     }
                 }
                 .padding()
+                
+                //MARK: - 예약 내역
                 List{
                     NavigationLink(destination: PickUpListView()){
                         Text("예약 내역")
-                            .bold()
+                            .font(.bottles15)
                     }
                 }
                 .listStyle(.plain)
@@ -39,13 +43,15 @@ struct MyPageView: View {
                 
                 Rectangle()
                     .frame(height: 7)
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color("lightGray"))
+                
+                // MARK: - 두번째 리스트
                 List {
                     ForEach(myPageList, id: \.self) { item in
                         NavigationLink(destination: Text("\(item)")){
                             Text("\(item)")
-                                .font(.bottles18)
-                                .bold()
+                                .font(.bottles15)
+                                
                         }
                         .listRowSeparator(.hidden)
                     }

@@ -10,22 +10,26 @@ import SwiftUI
 struct PickUpListCell: View {
     var body: some View {
         VStack{
+            // MARK: - 예약 일자, 예약 상태 HStack
             HStack {
                 Text("2023.01.18")
-                    .font(.headline)
+                    .font(.bottles15)
+                    .bold()
                 Spacer()
                 
                 Text("예약 확정")
-                    .font(.caption)
+                    .font(.bottles12)
                     .overlay{
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 15)
                             .stroke()
-                            .frame(width: 60, height: 20)
+                            .frame(width: 80, height: 30)
                     }
                     .foregroundColor(.gray)
                     .padding(.trailing, 10)
             }
             .padding(.vertical)
+            
+            // MARK: - 픽업 매장, 상품명 HStack
             HStack{
                 VStack(alignment:.leading){
                     Text("픽업 매장")
@@ -39,6 +43,7 @@ struct PickUpListCell: View {
                 }
                 Spacer()
             }
+            .font(.bottles13)
         }
         .foregroundColor(.black)
         .padding(.horizontal)
