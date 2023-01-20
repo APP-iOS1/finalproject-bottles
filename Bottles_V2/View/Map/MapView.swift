@@ -110,9 +110,9 @@ struct UIMapView: UIViewRepresentable {
             return true
           }
         // MARK: - 마커 이미지 변경
-//        marker.iconImage = NMFOverlayImage(name: "whisky_Image1")
-//        marker.width = 40
-//        marker.height = 50
+        marker.iconImage = NMFOverlayImage(name: "MapMarker")
+        marker.width = 40
+        marker.height = 50
     }
     
     class Coordinator: NSObject, CLLocationManagerDelegate, NMFMapViewCameraDelegate {

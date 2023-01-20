@@ -68,7 +68,7 @@ struct SettingView: View {
         }
         .navigationTitle("설정")
     }
-
+    
 }
 
 struct SettingView_Previews: PreviewProvider {

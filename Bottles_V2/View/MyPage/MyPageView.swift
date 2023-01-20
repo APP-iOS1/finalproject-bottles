@@ -18,6 +18,8 @@ struct MyPageView: View {
                     Circle()
                         .frame(width: 65, height: 65)
                     Text("밤삭님")
+                        .font(.bottles18)
+//                        .bold()
                     Spacer()
                     NavigationLink(destination: SettingView()){
                         Image(systemName: "gearshape.fill")
@@ -42,6 +44,7 @@ struct MyPageView: View {
                     ForEach(myPageList, id: \.self) { item in
                         NavigationLink(destination: Text("\(item)")){
                             Text("\(item)")
+                                .font(.bottles18)
                                 .bold()
                         }
                         .listRowSeparator(.hidden)
