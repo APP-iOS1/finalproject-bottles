@@ -14,14 +14,14 @@ struct CartCell: View {
     @Binding var isAllSelected : Bool
     @Binding var allSelectButtonCheck : Bool
     
-    // var isAllSelected : Bool = false
-    
     var body: some View {
         VStack {
             // MARK: - 선택, 바틀샵 이름, 삭제
             HStack {
                 selectButton
                 Text("바틀샵 이름")
+                    .font(.bottles13)
+                    .bold()
                 Spacer()
                 deleteButton
             }
@@ -31,17 +31,18 @@ struct CartCell: View {
             // MARK: - 사진, 상품명, 가격, 개수
             HStack {
                 // 이미지 자리
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke()
+                Image("whisky_Image1")
+                    .resizable()
                     .frame(width: UIScreen.main.bounds.size.width/4, height: UIScreen.main.bounds.size.width/4)
                     .padding(.trailing, 15)
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("디 오리지널 골드바 위스키")
-                        .font(.subheadline)
+                        .font(.bottles13)
                         .padding(.bottom,3)
                     Text("350,000원")
-                        .font(.headline)
+                        .font(.bottles15)
+                        .bold()
                     Spacer()
                     increaseButtonView
                         .padding(.bottom, 2)
@@ -62,7 +63,6 @@ struct CartCell: View {
     // MARK: -View : 선택 버튼
     private var selectButton : some View {
         Button {
-            //디폴트
             allSelectButtonCheck = false
             if isSelected {
                 isAllSelected.toggle()
@@ -98,9 +98,11 @@ struct CartCell: View {
             .padding([.leading, .trailing])
             .padding([.top, .bottom], 15)
             Text("\(amount)")
+                .font(.bottles15)
+                .bold()
                 .frame(width: 22)
             
-            //TODO: - 최대 개수 제약
+            //TODO: - 최대 개수 제약하기
             Button {
                 amount += 1
             } label : {

@@ -18,14 +18,16 @@ struct CartView: View {
             HStack {
                 AllSelectButton
                 Text("전체 선택")
-                    .font(.headline)
+                    .font(.bottles16)
+                    .bold()
                 Spacer()
                 Text("선택 삭제")
+                    .font(.bottles13)
                     .padding(.trailing)
             }
             Divider()
                 .background(.black)
-            //MARK: - 셀
+            //MARK: - 장바구니 품목 셀
             ScrollView {
                 ForEach (0..<5) { cnt in
                     CartCell(isAllSelected: $isAllSelected, allSelectButtonCheck: $allSelectButtonCheck)
@@ -42,14 +44,18 @@ struct CartView: View {
             VStack {
                 HStack {
                     Text("총 금액")
+                        .font(.bottles16)
+                        .bold()
                         .padding(.leading)
                     Spacer()
                     Text("1,750,000원")
+                        .font(.bottles16)
+                        .bold()
                         .padding(.trailing)
                 }
                 .padding([.leading, .trailing, .top])
                 Text("결제는 각 매장에서 진행됩니다.")
-                    .font(.caption)
+                    .font(.bottles13)
                     .padding(.top)
                 Button {
                     //예약하기 액션
@@ -58,7 +64,7 @@ struct CartView: View {
                         .frame(width : UIScreen.main.bounds.size.width-50, height: (UIScreen.main.bounds.size.width-50)/7)
                         .overlay(Text("예약하기")
                             .foregroundColor(.white)
-                            .font(.title3))
+                            .font(.bottles18))
                             .bold()
                 }
                 .padding(.bottom, 20)
