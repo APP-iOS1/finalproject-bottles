@@ -16,7 +16,6 @@ struct ReservationPageView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
-                    // 예약 상품
                     HStack {
                         Text("예약 상품")
                             .font(.bottles16)
@@ -36,8 +35,10 @@ struct ReservationPageView: View {
                         }
                     }
                     
+                    // MARK: 예약 상품 리스트
                     ForEach(0..<2, id: \.self) { _ in
                         HStack {
+                            // 상품 이미지
                             Image("kilchoman")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -46,12 +47,15 @@ struct ReservationPageView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                             
                             VStack(alignment: .leading, spacing: 5) {
+                                // 상품 이름
                                 Text("킬호만 샤닉")
                                     .font(.bottles15)
                                     .fontWeight(.bold)
+                                // 상품 가격
                                 Text("350,000원")
                                     .font(.bottles15)
                                     .fontWeight(.bold)
+                                // 상품 개수
                                 Text("1개")
                                     .font(.bottles15)
                                     .fontWeight(.medium)
@@ -63,6 +67,7 @@ struct ReservationPageView: View {
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 11, height: 16)
+                                    // 바틀샵 이름
                                     Text("바틀샵 이름")
                                         .font(.bottles15)
                                         .fontWeight(.medium)
@@ -77,7 +82,7 @@ struct ReservationPageView: View {
                 
                 VStack(alignment: .leading, spacing: 15) {
                     
-                    // 예약자 정보
+                    // MARK: 예약자 정보 - 이름, 전화번호, 생년월일
                     HStack {
                         Text("예약자 정보")
                             .font(.bottles16)
@@ -131,6 +136,7 @@ struct ReservationPageView: View {
                     .font(.bottles13)
                     .fontWeight(.medium)
                 
+                // 예약하기 버튼
                 Button(action: {
                     if check {
                         isShowing.toggle()

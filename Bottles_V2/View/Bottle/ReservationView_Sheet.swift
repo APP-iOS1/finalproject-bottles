@@ -16,17 +16,18 @@ struct ReservationView_Sheet: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 25) {
-                // 픽업 매장
+                // MARK: 픽업 매장
                 VStack(alignment: .leading, spacing: 7) {
                     Text("픽업 매장")
                         .font(.bottles15)
                         .fontWeight(.bold)
+                    // 바틀샵 이름
                     Text("바틀샵 이름")
                         .font(.bottles13)
                         .fontWeight(.medium)
                 }
        
-                // 픽업 안내
+                // MARK: 픽업 안내
                 VStack(alignment: .leading, spacing: 7) {
                     Text("픽업 안내")
                         .font(.bottles15)
@@ -35,9 +36,10 @@ struct ReservationView_Sheet: View {
                     Text("예약 후 예약 확정 알림이 올 때까지 기다려주세요.\n예약 확정 알림을 받은 뒤 3일 이내에 픽업해주세요.")
                         .font(.bottles13)
                         .fontWeight(.medium)
+                        .frame(height: 45)
                 }
                 
-                // 수량
+                // MARK: 수량
                 HStack {
                     Text("수량")
                         .font(.bottles15)
@@ -46,7 +48,6 @@ struct ReservationView_Sheet: View {
                     Spacer()
                     
                     // 수량 제한 버튼
-                    
                     ZStack {
                         RoundedRectangle(cornerRadius: 200)
                             .stroke(.black, lineWidth: 1)
@@ -79,8 +80,9 @@ struct ReservationView_Sheet: View {
                         .frame(width: 110, height: 30)
                     }
                 }
-                // 장바구니 담기 및 예약 버튼
+                // MARK: 장바구니 담기 버튼 및 바로 예약하기 버튼
                 HStack {
+                    // 장바구니 담기 버튼
                     Button(action: {
                         isShowingAlert.toggle()
                     }) {
@@ -101,6 +103,7 @@ struct ReservationView_Sheet: View {
                         CartView()
                     }
                  
+                    // 예약하기 버튼
                     NavigationLink(destination: ReservationPageView()) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)

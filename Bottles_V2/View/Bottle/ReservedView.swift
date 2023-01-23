@@ -12,12 +12,13 @@ struct ReservedView: View {
     @State private var isShowing: Bool = true
     
     var body: some View {
+        // MARK: 예약 완료
         NavigationStack {
-            // 예약 상품 이미지
             ZStack {
                Circle()
                     .fill(Color(UIColor(red: 246/255, green: 243/255, blue: 238/255, alpha: 1.0)))
                     .frame(width: 221, height: 221)
+                // 예약 상품 이미지
                 Image("kilchoman")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -37,6 +38,7 @@ struct ReservedView: View {
             .padding()
             
             HStack {
+                // 다른 상품 보러가기
                 NavigationLink(destination: BottleShopView()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -48,6 +50,7 @@ struct ReservedView: View {
                     }
                 }
                 
+                // 예약 확인
                 NavigationLink(destination: PickUpDetailView()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)

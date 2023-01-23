@@ -15,7 +15,10 @@ struct BottleView: View {
         NavigationStack {
             ZStack {
                 ScrollView {
+                    // 바틀 정보
                     BottleView_Info()
+                    
+                    // 바틀샵 리스트
                     VStack(alignment: .leading) {
                         Text("이 상품의 다른 바틀샵")
                             .font(.bottles15)
@@ -27,6 +30,7 @@ struct BottleView: View {
                     }
                     .padding()
                     
+                    // 예약하기 버튼
                     Button(action: {
                         isShowingSheet.toggle()
                     }) {

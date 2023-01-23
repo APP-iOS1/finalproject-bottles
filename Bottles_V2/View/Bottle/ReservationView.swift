@@ -80,7 +80,7 @@ struct ReservationView: View {
                 hide()
             }
         }
-        .frame(height: 290)
+        .frame(height: 320)
     }
     
     
