@@ -13,7 +13,7 @@ struct ReservedView_BottleShop: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("픽업 바틀샵 저장하기")
-                .font(.callout)
+                .font(.bottles16)
                 .fontWeight(.bold)
             
             BottleView_ShopCell()

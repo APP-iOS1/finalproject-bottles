@@ -19,28 +19,28 @@ struct ReservationView_Sheet: View {
                 // 픽업 매장
                 VStack(alignment: .leading, spacing: 7) {
                     Text("픽업 매장")
-                        .font(.subheadline)
+                        .font(.bottles15)
                         .fontWeight(.bold)
                     Text("바틀샵 이름")
-                        .font(.footnote)
+                        .font(.bottles13)
                         .fontWeight(.medium)
                 }
        
                 // 픽업 안내
                 VStack(alignment: .leading, spacing: 7) {
                     Text("픽업 안내")
-                        .font(.subheadline)
+                        .font(.bottles15)
                         .fontWeight(.bold)
                         
                     Text("예약 후 예약 확정 알림이 올 때까지 기다려주세요.\n예약 확정 알림을 받은 뒤 3일 이내에 픽업해주세요.")
-                        .font(.footnote)
+                        .font(.bottles13)
                         .fontWeight(.medium)
                 }
                 
                 // 수량
                 HStack {
                     Text("수량")
-                        .font(.subheadline)
+                        .font(.bottles15)
                         .fontWeight(.bold)
                     
                     Spacer()
@@ -64,7 +64,7 @@ struct ReservationView_Sheet: View {
                             }
                             Spacer()
                             Text("\(count)")
-                                .font(.subheadline)
+                                .font(.bottles15)
                                 .fontWeight(.medium)
                             Spacer()
                             Button(action: {
@@ -89,7 +89,8 @@ struct ReservationView_Sheet: View {
                                 .frame(width: UIScreen.main.bounds.width/2-20, height: 51)
                             Text("장바구니 담기")
                                 .foregroundColor(.white)
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.bottles18)
+                                .fontWeight(.bold)
                         }
                     }
                     .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
@@ -106,7 +107,8 @@ struct ReservationView_Sheet: View {
                                 .frame(width: UIScreen.main.bounds.width/2-20, height: 51)
                             Text("바로 예약하기")
                                 .foregroundColor(.white)
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.bottles18)
+                                .fontWeight(.bold)
                         }
                     }
                 }

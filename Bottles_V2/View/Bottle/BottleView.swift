@@ -17,8 +17,8 @@ struct BottleView: View {
                 ScrollView {
                     BottleView_Info()
                     VStack(alignment: .leading) {
-                        Text("이 바틀샵의 다른 상품")
-                            .font(.subheadline)
+                        Text("이 상품의 다른 바틀샵")
+                            .font(.bottles15)
                             .fontWeight(.bold)
                             
                         ForEach(0..<3, id: \.self) {_ in
@@ -35,7 +35,8 @@ struct BottleView: View {
                                 .frame(width: 358, height: 51)
                             Text("예약하기")
                                 .foregroundColor(.white)
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.bottles18)
+                                .fontWeight(.bold)
                         }
                     }
                     .padding()

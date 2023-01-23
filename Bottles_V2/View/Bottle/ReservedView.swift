@@ -28,10 +28,10 @@ struct ReservedView: View {
             
             VStack {
                 Text("예약이 완료되었습니다.")
-                    .font(.title3)
+                    .font(.bottles20)
                     .fontWeight(.bold)
                 Text("곧 예약 확정 알림을 보내드릴게요!")
-                    .font(.title3)
+                    .font(.bottles20)
                     .fontWeight(.bold)
             }
             .padding()
@@ -43,7 +43,8 @@ struct ReservedView: View {
                             .frame(width: 171, height: 51)
                         Text("다른 상품 보러가기")
                             .foregroundColor(.white)
-                            .font(.system(size: 18, weight: .bold))
+                            .font(.bottles18)
+                            .fontWeight(.bold)
                     }
                 }
                 
@@ -53,13 +54,14 @@ struct ReservedView: View {
                             .frame(width: 171, height: 51)
                         Text("예약 확인하기")
                             .foregroundColor(.white)
-                            .font(.system(size: 18, weight: .bold))
+                            .font(.bottles18)
+                            .fontWeight(.bold)
                     }
                 }
             }
             
         }
-        .offset(y: -55)
+        .offset(y: -110)
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop()
                 .presentationDetents([.height(210)])

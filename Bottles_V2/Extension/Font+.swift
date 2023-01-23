@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Font {
+    static let bottles24: Font = .custom("SpoqaHanSansNeo-Regular", size: 24)
     static let bottles20: Font = .custom("SpoqaHanSansNeo-Regular", size: 20)
     static let bottles19: Font = .custom("SpoqaHanSansNeo-Regular", size: 19)
     static let bottles18: Font = .custom("SpoqaHanSansNeo-Regular", size: 18)
