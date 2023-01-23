@@ -8,16 +8,12 @@
 import SwiftUI
 
 struct ReservationPageView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
-    @Binding var dismiss: Bool
     
     var body: some View {
         NavigationStack {
-            Text("예약하기")
-                .font(.system(size: 20, weight: .medium))
-                .padding()
-            
             VStack(alignment: .leading, spacing: 15) {
                 // 예약 상품
                 HStack {
@@ -62,7 +58,7 @@ struct ReservationPageView: View {
                             Spacer()
                             
                             HStack {
-                                Image("location")
+                                Image("Map_Tab_fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 11, height: 16)
@@ -104,7 +100,7 @@ struct ReservationPageView: View {
                     }
                     HStack {
                         Text("생년월일")
-                        Text("1994-00-00")
+                        Text("1998-00-00")
                     }
                 }
                 .font(.subheadline)
@@ -141,18 +137,29 @@ struct ReservationPageView: View {
             }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(.gray)
+                        .opacity(check ? 1 : 0.5)
                         .frame(width: 358, height: 51)
                     Text("예약하기")
+                        .foregroundColor(.white)
                         .font(.system(size: 18, weight: .bold))
                 }
             }
             .padding()
-            .navigationDestination(isPresented: $isShowing) {
+            .fullScreenCover(isPresented: $isShowing) {
                 ReservedView()
+                    .accentColor(Color("AccentColor"))
             }
+            .navigationTitle("예약하기")
+            .navigationBarBackButtonHidden(true)
+            .toolbar(content: {
+                ToolbarItem (placement: .navigationBarLeading)  {
+                    Image("back")
+                        .onTapGesture {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                }
+            })
         }
-        
     }
 }
 

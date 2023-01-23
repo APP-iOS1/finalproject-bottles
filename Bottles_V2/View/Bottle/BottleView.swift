@@ -32,9 +32,9 @@ struct BottleView: View {
                     }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(.gray)
                                 .frame(width: 358, height: 51)
                             Text("예약하기")
+                                .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .bold))
                         }
                     }

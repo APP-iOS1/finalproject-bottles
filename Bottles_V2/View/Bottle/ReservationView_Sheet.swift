@@ -77,7 +77,6 @@ struct ReservationView_Sheet: View {
                             }
                         }
                         .frame(width: 110, height: 30)
-                       
                     }
                 }
                 // 장바구니 담기 및 예약 버튼
@@ -87,40 +86,35 @@ struct ReservationView_Sheet: View {
                     }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(.gray)
-                                .frame(width: 171, height: 51)
-                                
+                                .frame(width: UIScreen.main.bounds.width/2-20, height: 51)
                             Text("장바구니 담기")
+                                .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .bold))
                         }
                     }
                     .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
                         Button("OK", role: .destructive) { isShowingCart.toggle() }
-                        Button("cancel", role: .cancel) { print("tap cancel") }
+                        Button("cancel", role: .cancel) { }
                     }
-                    .fullScreenCover(isPresented: $isShowingCart) {
+                    .navigationDestination(isPresented: $isShowingCart) {
                         CartView()
                     }
                  
-    
-                    Button(action: {
-                        isShowingReservationPage.toggle()
-                    }) {
+                    NavigationLink(destination: ReservationPageView()) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(.gray)
-                                .frame(width: 171, height: 51)
+                                .frame(width: UIScreen.main.bounds.width/2-20, height: 51)
                             Text("바로 예약하기")
+                                .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .bold))
                         }
                     }
-                    .fullScreenCover(isPresented: $isShowingReservationPage) {
-                        ReservationPageView(dismiss: $isShowingReservationPage)
-                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
             }
         }
         .padding()
+        
     }
 }
 

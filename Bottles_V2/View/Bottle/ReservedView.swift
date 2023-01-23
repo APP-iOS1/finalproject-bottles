@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ReservedView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowing: Bool = true
     
     var body: some View {
-        VStack(spacing: 20) {
+        NavigationStack {
             // 예약 상품 이미지
             ZStack {
                Circle()
@@ -39,10 +40,9 @@ struct ReservedView: View {
                 NavigationLink(destination: BottleShopView()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(.gray)
                             .frame(width: 171, height: 51)
-                            
                         Text("다른 상품 보러가기")
+                            .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     }
                 }
@@ -50,9 +50,9 @@ struct ReservedView: View {
                 NavigationLink(destination: PickUpDetailView()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(.gray)
                             .frame(width: 171, height: 51)
                         Text("예약 확인하기")
+                            .foregroundColor(.white)
                             .font(.system(size: 18, weight: .bold))
                     }
                 }
@@ -60,10 +60,9 @@ struct ReservedView: View {
             
         }
         .offset(y: -55)
-        
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop()
-                .presentationDetents([.height(250)])
+                .presentationDetents([.height(210)])
         }
     }
 }
