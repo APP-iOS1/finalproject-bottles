@@ -15,10 +15,13 @@ struct BottleView: View {
         NavigationStack {
             ZStack {
                 ScrollView {
+                    // 바틀 정보
                     BottleView_Info()
+                    
+                    // 바틀샵 리스트
                     VStack(alignment: .leading) {
-                        Text("이 바틀샵의 다른 상품")
-                            .font(.subheadline)
+                        Text("이 상품의 다른 바틀샵")
+                            .font(.bottles15)
                             .fontWeight(.bold)
                             
                         ForEach(0..<3, id: \.self) {_ in
@@ -27,15 +30,17 @@ struct BottleView: View {
                     }
                     .padding()
                     
+                    // 예약하기 버튼
                     Button(action: {
                         isShowingSheet.toggle()
                     }) {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(.gray)
                                 .frame(width: 358, height: 51)
                             Text("예약하기")
-                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.white)
+                                .font(.bottles18)
+                                .fontWeight(.bold)
                         }
                     }
                     .padding()

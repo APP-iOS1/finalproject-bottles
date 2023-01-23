@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct BottleView_Info: View {
-    @State private var checkBookmark: Bool = true
-    
     var tagList: [String] = ["위스키", "한정판", "스모키"]
     
+    @State private var checkBookmark: Bool = true
+    
     var body: some View {
+        // MARK: - 바틀 이미지, 이름, 가격, 바틀샵 이름
         VStack(alignment: .leading) {
+            // 바틀 이미지
             Image("promesa")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -21,17 +23,20 @@ struct BottleView_Info: View {
            
             VStack(alignment: .leading) {
                 HStack {
+                    // 바틀 이름
                     Text("프로메샤 모스카토")
-                        .font(.system(size: 18, weight: .medium))
+                        .font(.bottles18)
+                        .fontWeight(.medium)
                     Spacer()
                     HStack(spacing: 25) {
-                      
+                        // Share 버튼
                         ShareLink(item: "") {
                             Image(systemName: "square.and.arrow.up")
                                 .resizable()
                                 .frame(width: 17, height: 23)
                         }
 
+                        // 북마크 버튼
                         Button(action: {
                             checkBookmark.toggle()
                         }) {
@@ -42,22 +47,28 @@ struct BottleView_Info: View {
                         
                     }
                 }
+                // 가격
                 Text("10,100원")
-                    .font(.system(size: 24, weight: .bold))
+                    .font(.bottles24)
+                    .fontWeight(.bold)
+                
+                // 바틀샵 이름
                 HStack {
                     Image("Map_Tab_fill")
                         .resizable()
                         .frame(width: 11, height: 16)
                     Text("바틀샵 이름")
-                        .font(.subheadline)
+                        .font(.bottles15)
                         .fontWeight(.medium)
                 }
             }
             .padding()
                
+            // MARK: 바틀 소개
             VStack(alignment: .leading) {
                 Text("술 소개. 친구 연인 가족과 함께 부담없이 마시기 좋은 스파클링 와인을 추천합니다.\n 어떤 음식과 페어링해도 평타 이상일거에요!")
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.bottles14)
+                    .fontWeight(.medium)
                     .lineSpacing(3)
                 
                 HStack {
@@ -68,7 +79,8 @@ struct BottleView_Info: View {
                                 .opacity(0.4)
                                 .frame(width: 54, height: 21)
                             Text(tag)
-                                .font(.caption)
+                                .font(.bottles12)
+                                .fontWeight(.medium)
                                 .opacity(0.4)
                         }
                     }
@@ -80,10 +92,11 @@ struct BottleView_Info: View {
             .cornerRadius(10)
             .padding(.horizontal)
             
+            // MARK: Tasting Notes, Information, Paring
             VStack(alignment: .leading, spacing: 15) {
                 VStack(alignment: .leading) {
                     Text("Tasting Notes")
-                        .font(.subheadline)
+                        .font(.bottles15)
                         .fontWeight(.bold)
                         .padding(.vertical, 3)
                     Group {
@@ -100,13 +113,13 @@ struct BottleView_Info: View {
                             Text("꽃, 구아바, 체리, 달콤한")
                         }
                     }
-                    
-                    .font(.footnote)
+                    .font(.bottles13)
+                    .fontWeight(.medium)
                 }
                 
                 VStack(alignment: .leading) {
                     Text("Information")
-                        .font(.subheadline)
+                        .font(.bottles15)
                         .fontWeight(.bold)
                         .padding(.vertical, 3)
                     Group {
@@ -135,19 +148,19 @@ struct BottleView_Info: View {
                             Text("모스카토")
                         }
                     }
-                    .font(.footnote)
-                    
+                    .font(.bottles13)
+                    .fontWeight(.medium)
                 }
                 
                 VStack(alignment: .leading) {
                     Text("Pairing")
-                        .font(.subheadline)
+                        .font(.bottles15)
                         .fontWeight(.bold)
                         .padding(.vertical, 3)
                     Text("회, 생선, 랍스타 등의 해산물")
-                        .font(.footnote)
+                        .font(.bottles13)
+                        .fontWeight(.medium)
                 }
-                
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
