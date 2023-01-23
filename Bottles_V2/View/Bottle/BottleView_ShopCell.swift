@@ -9,7 +9,9 @@ import SwiftUI
 
 struct BottleView_ShopCell: View {
     @State private var checkBookmark: Bool = false
+    
     var body: some View {
+        // MARK: 바틀샵 셀
         HStack(alignment: .top, spacing: 15) {
             // 바틀샵 이미지
             Image("bottleShop")
