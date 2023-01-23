@@ -62,7 +62,7 @@ struct ReservedView: View {
         .offset(y: -55)
         
         .sheet(isPresented: $isShowing) {
-            BottleShopBookMarkView()
+            ReservedView_BottleShop()
                 .presentationDetents([.height(250)])
         }
     }

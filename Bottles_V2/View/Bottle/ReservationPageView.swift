@@ -14,21 +14,9 @@ struct ReservationPageView: View {
     
     var body: some View {
         NavigationStack {
-            HStack {
-                Button(action: {
-                    dismiss.toggle()
-                }) {
-                    Image(systemName: "chevron.backward")
-                        .foregroundColor(.black)
-                }
-                
-                Spacer()
-                
-                Text("예약하기")
-                    .font(.system(size: 20, weight: .medium))
-                Spacer()
-            }
-            .padding()
+            Text("예약하기")
+                .font(.system(size: 20, weight: .medium))
+                .padding()
             
             VStack(alignment: .leading, spacing: 15) {
                 // 예약 상품
