@@ -2,130 +2,105 @@
 //  ReservationView.swift
 //  Bottles_V2
 //
-//  Created by hyemi on 2023/01/18.
+//  Created by hyemi on 2023/01/23.
 //
 
 import SwiftUI
+import Combine
 
 struct ReservationView: View {
-    @State private var count: Int = 1
-    @State private var isShowingAlert: Bool = false
-    @State private var isShowingCart: Bool = false
-    @State private var isShowingReservationPage: Bool = false
+    @State var offset = UIScreen.main.bounds.height
+    @Binding var isShowing: Bool
+    @State var isDragging = false
+    
+    let heightToDisappear = UIScreen.main.bounds.height
+    let minimumDragDistanceToHide: CGFloat = 150
     
     var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading, spacing: 25) {
-                // 픽업 매장
-                VStack(alignment: .leading, spacing: 7) {
-                    Text("픽업 매장")
-                        .font(.subheadline)
-                        .fontWeight(.bold)
-                    Text("바틀샵 이름")
-                        .font(.footnote)
-                        .fontWeight(.medium)
-                }
-       
-                // 픽업 안내
-                VStack(alignment: .leading, spacing: 7) {
-                    Text("픽업 안내")
-                        .font(.subheadline)
-                        .fontWeight(.bold)
-                        
-                    Text("예약 후 예약 확정 알림이 올 때까지 기다려주세요.\n예약 확정 알림을 받은 뒤 3일 이내에 픽업해주세요.")
-                        .font(.footnote)
-                        .fontWeight(.medium)
-                }
-                
-                // 수량
-                HStack {
-                    Text("수량")
-                        .font(.subheadline)
-                        .fontWeight(.bold)
-                    
-                    Spacer()
-                    
-                    // 수량 제한 버튼
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 200)
-                            .stroke(.black, lineWidth: 1)
-                            .frame(width: 140, height: 37)
-                        HStack {
-                            Button(action: {
-                                if count > 1 {
-                                    count -= 1
-                                }
-                            }) {
-                                Image(systemName: "minus")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 13, height: 13)
-                            }
-                            Spacer()
-                            Text("\(count)")
-                                .font(.subheadline)
-                                .fontWeight(.medium)
-                            Spacer()
-                            Button(action: {
-                                count += 1
-                            }) {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 13, height: 13)
-                            }
-                        }
-                        .frame(width: 110, height: 30)
-                       
-                    }
-                }
-                // 장바구니 담기 및 예약 버튼
-                HStack {
-                    Button(action: {
-                        isShowingAlert.toggle()
-                    }) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.gray)
-                                .frame(width: 171, height: 51)
-                                
-                            Text("장바구니 담기")
-                                .font(.system(size: 18, weight: .bold))
-                        }
-                    }
-                    .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
-                        Button("OK", role: .destructive) { isShowingCart.toggle() }
-                        Button("cancel", role: .cancel) { print("tap cancel") }
-                    }
-                    .fullScreenCover(isPresented: $isShowingCart) {
-                        CartView()
-                    }
-                 
-    
-                    Button(action: {
-                        isShowingReservationPage.toggle()
-                    }) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.gray)
-                                .frame(width: 171, height: 51)
-                            Text("바로 예약하기")
-                                .font(.system(size: 18, weight: .bold))
-                        }
-                    }
-                    .fullScreenCover(isPresented: $isShowingReservationPage) {
-                        ReservationPageView(dismiss: $isShowingReservationPage)
-                    }
-                }
+        Group {
+            if isShowing {
+                sheetView
             }
         }
-        .padding()
+        //.animation(.default)
+        .onReceive(Just(isShowing), perform: { isShowing in
+            onUpdateIsShowing(isShowing)
+        })
     }
+    
+    func hide() {
+        offset = heightToDisappear
+        isDragging = false
+        isShowing = false
+    }
+    
+    var topHalfMiddleBar: some View {
+        Capsule()
+            .frame(width: 36, height: 5)
+            .foregroundColor(Color.black)
+            .padding(.vertical, 5.5)
+            .opacity(0.2)
+    }
+    
+    func dragGestureOnChange(_ value: DragGesture.Value) {
+        isDragging = true
+        if value.translation.height > 0 {
+            offset = value.location.y
+            let diff = abs(value.location.y - value.startLocation.y)
+            
+            let conditionOne = diff > minimumDragDistanceToHide
+            let conditionTwo = value.location.y >= 200
+            
+            
+            if conditionOne || conditionTwo {
+                hide()
+            }
+        }
+    }
+        
+    var interactiveGesture: some Gesture {
+        DragGesture()
+            .onChanged({ (value) in
+                dragGestureOnChange(value)
+            })
+            .onEnded({ (value) in
+                isDragging = false
+            })
+    }
+    
+    var sheetView: some View {
+        VStack {
+            Spacer()
+            
+            VStack {
+                topHalfMiddleBar
+                ReservationView_Sheet()
+                Text("").frame(height: 20) // empty space
+            }
+            .cornerRadius(15)
+            .offset(y: offset)
+            .gesture(interactiveGesture)
+            .onTapGesture {
+                hide()
+            }
+        }
+    }
+    
+    
+    func onUpdateIsShowing(_ isShowing: Bool) {
+        if isShowing && isDragging {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            offset = isShowing ? 0 : heightToDisappear
+        }
+    }
+  
 }
 
 //struct ReservationView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ReservationView(isShowingReservationView: <#Binding<Bool>#>)
+//        ReservationView()
 //    }
 //}
