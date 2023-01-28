@@ -56,18 +56,18 @@ struct MapView: View {
             }
             
         }
-//        .bottomSheet(isPresented: $isShowingSheet) {
-//            NearBySheetView()
-////                    .ignoresSafeArea()
-//                .presentationDetents(
-//                    undimmed: [
-//                        .fraction(0.3),
-//                        .fraction(0.5),
-//                        .height(50)
-//                    ],
-//                    largestUndimmed: .fraction(0.5)
-//                )
-//        }
+        .bottomSheet(isPresented: $isShowingSheet) {
+            NearBySheetView()
+//                    .ignoresSafeArea()
+                .presentationDetents(
+                    undimmed: [
+                        .fraction(0.3),
+                        .fraction(0.5),
+                        .height(50)
+                    ],
+                    largestUndimmed: .fraction(0.5)
+                )
+        }
     }
 }
 
