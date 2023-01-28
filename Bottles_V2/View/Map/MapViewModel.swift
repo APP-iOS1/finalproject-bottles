@@ -13,16 +13,24 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     @Published var coord = (0.0, 0.0)
 //    @Published var foodCarts = foodCartDummy
     
-    func checkIfLocationServicesIsEnabled() {
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager = CLLocationManager()
-            locationManager!.delegate = self
-            checkLocationAuthorization()
-        } else {
-            print("Show an alert letting them know this is off and to go turn i on.")
-        }
-    }
-    
+//    func checkIfLocationServicesIsEnabled() async {
+//
+//        if await CLLocationManager.locationServicesEnabled() {
+//            locationManager = CLLocationManager()
+//            locationManager!.delegate = self
+//            checkLocationAuthorization()
+//        } else {
+//            print("Show an alert letting them know this is off and to go turn i on.")
+//        }
+//    }
+    /*
+     Task { [weak self] in
+
+         if await self?.locationServicesEnabled() {
+             // Do something
+         }
+     }
+    */
     func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
         
@@ -45,4 +53,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkLocationAuthorization()
      }
+    
+    func locationServicesEnabled() async -> Bool {
+        CLLocationManager.locationServicesEnabled()
+    }
 }
