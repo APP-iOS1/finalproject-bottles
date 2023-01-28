@@ -11,13 +11,13 @@ import CoreLocation
 
 struct MapView: View {
     @StateObject var mapViewModel: MapViewModel = MapViewModel()
-
-//    @State var coord: (Double, Double) = (126.9784147, 37.5666805)
-//    @State var locationManager: CLLocationManager!
+    
+    //    @State var coord: (Double, Double) = (126.9784147, 37.5666805)
+    //    @State var locationManager: CLLocationManager!
     @State var mapSearchBarText: String = ""
     @State var isShowingSheet: Bool = true
     
-//    let heights = stride(from: 0.1, through: 1.0, by: 0.1).map { PresentationDetent.fraction($0) }
+    //    let heights = stride(from: 0.1, through: 1.0, by: 0.1).map { PresentationDetent.fraction($0) }
     
     var body: some View {
         NavigationStack {
@@ -25,7 +25,7 @@ struct MapView: View {
                 VStack {
                     HStack {
                         MapViewSearchBar(mapSearchBarText: $mapSearchBarText)
-                            
+                        
                         NavigationLink {
                             CartView()
                         } label: {
@@ -34,7 +34,7 @@ struct MapView: View {
                                 .bold()
                                 .padding(10)
                                 .frame(width: 40)
-                                
+                            
                                 .background{
                                     Color.white
                                 }
@@ -48,17 +48,27 @@ struct MapView: View {
                 }
                 .zIndex(1)
                 NaverMap((mapViewModel.coord.0, mapViewModel.coord.1))
-                                .ignoresSafeArea(.all, edges: .top)
+                    .ignoresSafeArea(.all, edges: .top)
                 
             }
-            .onAppear {
-                mapViewModel.checkIfLocationServicesIsEnabled()
+            .task {
+                if await mapViewModel.locationServicesEnabled() {
+                    // Do something
+                    let locationManager = CLLocationManager()
+                    locationManager.delegate = mapViewModel
+                    mapViewModel.checkLocationAuthorization()
+                }
+                
+                
             }
+//            .onAppear {
+//                mapViewModel.checkIfLocationServicesIsEnabled()
+//            }
             
         }
         .bottomSheet(isPresented: $isShowingSheet) {
             NearBySheetView()
-//                    .ignoresSafeArea()
+            //                    .ignoresSafeArea()
                 .presentationDetents(
                     undimmed: [
                         .fraction(0.3),
