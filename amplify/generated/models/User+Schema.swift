@@ -8,12 +8,6 @@ extension User {
     case id
     case email
     case followShopList
-    case recentlyItem
-    case followItemList
-    case pickupItemList
-    case userPhoneNumber
-    case recentlySearch
-
     case followItemList
     case pickupList
     case userPhoneNumber
@@ -43,12 +37,6 @@ extension User {
       .field(user.id, is: .required, ofType: .string),
       .field(user.email, is: .optional, ofType: .string),
       .field(user.followShopList, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(user.recentlyItem, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(user.followItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(user.pickupItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(user.userPhoneNumber, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(user.recentlySearch, is: .optional, ofType: .string),
-
       .field(user.followItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(user.pickupList, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(user.userPhoneNumber, is: .optional, ofType: .embeddedCollection(of: String.self)),

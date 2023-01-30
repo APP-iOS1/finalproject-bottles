@@ -23,12 +23,6 @@
             }
           ],
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            }
-
             "apiKeyConfig": {
               "apiKeyExpirationDays": 30,
               "description": "api key description"
@@ -42,8 +36,6 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-01-19T05:39:05.830Z",
-
       "lastPushTimeStamp": "2023-01-22T11:59:20.837Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/api/cloudformation-template.json",
@@ -89,7 +81,6 @@
         "IdentityPoolName": "bottles0863d2bd_identitypool_0863d2bd__staging",
         "UserPoolName": "bottles0863d2bd_userpool_0863d2bd"
       },
-      "lastPushDirHash": "2CPZSjef4qa9qWVVqtQMOLVKnqg="
       "lastPushDirHash": "DKfs+c0/U/si0csNwZzYgLO7jpc="
     }
   }
