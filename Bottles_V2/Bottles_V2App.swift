@@ -31,7 +31,7 @@ struct Bottles_V2App: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(ShopStore())
+            ContentView().environmentObject(DataStore())
         }
     }
     

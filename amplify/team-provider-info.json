@@ -10,12 +10,6 @@
       "StackName": "amplify-bottles-staging-11959",
       "StackId": "arn:aws:cloudformation:ap-northeast-2:130413045315:stack/amplify-bottles-staging-11959/0fa4e0e0-9605-11ed-8a4f-0635b7de89c2",
       "AmplifyAppId": "dmtiy8jm1bua6"
-    },
-    "categories": {
-      "auth": {
-        "Bottles": {},
-        "bottles0863d2bd": {}
-      }
     }
   }
 }

@@ -8,11 +8,11 @@ extension User {
     case id
     case email
     case followShopList
+    case recentlyItem
     case followItemList
-    case pickupList
+    case pickupItemList
     case userPhoneNumber
-    case recentlyBottles
-    case nickname
+    case recentlySearch
     case createdAt
     case updatedAt
   }
@@ -37,11 +37,11 @@ extension User {
       .field(user.id, is: .required, ofType: .string),
       .field(user.email, is: .optional, ofType: .string),
       .field(user.followShopList, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.recentlyItem, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(user.followItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(user.pickupList, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.pickupItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(user.userPhoneNumber, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(user.recentlyBottles, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(user.nickname, is: .optional, ofType: .string),
+      .field(user.recentlySearch, is: .optional, ofType: .string),
       .field(user.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(user.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )

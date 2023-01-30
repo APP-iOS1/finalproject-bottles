@@ -23,11 +23,11 @@
             }
           ],
           "defaultAuthentication": {
+            "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 30,
               "description": "api key description"
-            },
-            "authenticationType": "API_KEY"
+            }
           }
         },
         "GraphQLAPIIdOutput": "vam5iuf5qzahzghe3yv36thwn4",
@@ -36,52 +36,12 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-01-30T02:07:17.993Z",
+      "lastPushTimeStamp": "2023-01-19T05:50:55.560Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiBottles"
-      }
-    }
-  },
-  "auth": {
-    "bottles0863d2bd": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false,
-      "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": []
-        },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
       },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/auth/bottles0863d2bd-cloudformation-template.json",
-        "logicalId": "authbottles0863d2bd"
-      },
-      "lastPushTimeStamp": "2023-01-30T02:07:18.010Z",
-      "output": {
-        "UserPoolId": "ap-northeast-2_pJB3omuSt",
-        "AppClientIDWeb": "3cma1mbc5ini2ir4e9t6ispo1e",
-        "AppClientID": "tmkobq60657c95v8nghjnbrk6",
-        "IdentityPoolId": "ap-northeast-2:a4ce5edd-4983-411b-af91-bf5861b44a34",
-        "UserPoolArn": "arn:aws:cognito-idp:ap-northeast-2:130413045315:userpool/ap-northeast-2_pJB3omuSt",
-        "IdentityPoolName": "bottles0863d2bd_identitypool_0863d2bd__staging",
-        "UserPoolName": "bottles0863d2bd_userpool_0863d2bd"
-      },
-      "lastPushDirHash": "DKfs+c0/U/si0csNwZzYgLO7jpc="
+      "lastPushDirHash": "2CPZSjef4qa9qWVVqtQMOLVKnqg="
     }
   }
 }

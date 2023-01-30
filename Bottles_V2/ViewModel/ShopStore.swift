@@ -11,35 +11,40 @@ import AWSDataStorePlugin
 import SwiftUI
 import Combine
 
-class ShopStore : ObservableObject {
-    @Published var shop: [Shop]?
-    @State var subscription: AnyCancellable?
-    
-    func getData() async {
-        do {
-            let shops = try await Amplify.DataStore.query(Shop.self)
-            print("Posts retrieved successfully: \(shops)")
-            let result1 = shops.description
-            print("결과1 \(result1)")
-            self.shop = shops
-        } catch let error as DataStoreError {
-            print("Error retrieving posts \(error)")
-        } catch {
-            print("Unexpected error \(error)")
-        }
-    }
+do {
+    let item = Shop(
+        shopName: "Lorem ipsum dolor sit amet",
+        shopAddress: "Lorem ipsum dolor sit amet",
+        longitude: 123.45F,
+        latitude: 123.45F,
+        shopPhoneNumber: "(555) 123-6789",
+        shopIntroduction: "Lorem ipsum dolor sit amet",
+        registration: true,
+        Bottles: [],
+        followerUserList: [],
+        shopGrade: 123.45F,
+        ShopNotices: [],
+        shopOpenCloseTime: [],
+        shopImage: [],
+        shopSNS: "Lorem ipsum dolor sit amet",
+        shopTitleImage: "Lorem ipsum dolor sit amet",
+        shopCuration: /* Provide a Curation instance here */)
+    let savedItem = try await Amplify.DataStore.save(item)
+    print("Saved item: \(savedItem)")
+} catch let error as DataStoreError {
+    print("Error creating item: \(error)")
+} catch {
+    print("Unexpected error: \(error)")
+}
 
-    // Query
-    func queryShop() async {
-        do {
-            let items = try await Amplify.DataStore.query(Shop.self)
-            for item in items {
-                print("Shop ID: \(item.id)")
-            }
-        } catch let error as DataStoreError {
-            print("Error querying items: \(error)")
-        } catch {
-            print("Unexpected error: \(error)")
-        }
+struct ShopStore: View {
+    var body: some View {
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    }
+}
+
+struct ShopStore_Previews: PreviewProvider {
+    static var previews: some View {
+        ShopStore()
     }
 }
