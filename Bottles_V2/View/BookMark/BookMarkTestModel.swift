@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct BookMarkBottle {
+struct BookMarkBottle : Hashable {
     let BottleName: String
     let ShopName: String
 }
 
-struct BookMarkShop {
+struct BookMarkShop : Hashable {
     let ShopName: String
 }
 
-class BookMarkTestStore: Identifiable {
+class BookMarkTestStore: Identifiable, ObservableObject {
     @Published var BookMarkBottles: [BookMarkBottle] = [
         BookMarkBottle(BottleName: "글렌모렌지 넥타도르", ShopName: "와인앤모어 광화문점"),
         BookMarkBottle(BottleName: "글렌모렌지 스피오스", ShopName: "와인앤모어 광화문점"),

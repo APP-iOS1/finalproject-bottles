@@ -75,6 +75,7 @@
 		CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
+		D5FCB5C62987874E004BC279 /* SearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FCB5C52987874E004BC279 /* SearchResultList.swift */; };
 		D70CE4F129767EE900DFC8CE /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */; };
 		D70CE4F329767EE900DFC8CE /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F229767EE900DFC8CE /* AWSDataStorePlugin */; };
 		D70CE4F529767EE900DFC8CE /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F429767EE900DFC8CE /* Amplify */; };
@@ -178,6 +179,7 @@
 		B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		D5FCB5C52987874E004BC279 /* SearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
 		D70CE4F62976821F00DFC8CE /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		DAA16DBB1B2143E762C79565 /* Pods-Bottles_V2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.release.xcconfig"; sourceTree = "<group>"; };
 		DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,6 +376,7 @@
 				AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */,
 				AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */,
 				AE6E0AC0298110960002183B /* BookMarkTestModel.swift */,
+				D5FCB5C52987874E004BC279 /* SearchResultList.swift */,
 			);
 			path = BookMark;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				7F76AAF429876D0E00AAEBCA /* EmailRegisterView.swift in Sources */,
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
 				7F2142BC2977956D0046D420 /* SettingView.swift in Sources */,
+				D5FCB5C62987874E004BC279 /* SearchResultList.swift in Sources */,
 				0427F567297677E60023E745 /* ContentView.swift in Sources */,
 				D70CE4F72976821F00DFC8CE /* DataStore.swift in Sources */,
 				9216C1BF2977B5E100217C7F /* ReservedView_BottleShop.swift in Sources */,
