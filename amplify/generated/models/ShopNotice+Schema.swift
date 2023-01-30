@@ -13,6 +13,8 @@ extension ShopNotice {
     case shopID
     case createdAt
     case updatedAt
+
+    case createDate
   }
   
   public static let keys = CodingKeys.self
@@ -48,4 +50,14 @@ extension ShopNotice {
 extension ShopNotice: ModelIdentifiable {
   public typealias IdentifierFormat = ModelIdentifierFormat.Default
   public typealias IdentifierProtocol = DefaultModelIdentifier<Self>
+
+    model.pluralName = "ShopNotices"
+    
+    model.fields(
+      .field(shopNotice.id, is: .optional, ofType: .string),
+      .field(shopNotice.title, is: .optional, ofType: .string),
+      .field(shopNotice.body, is: .optional, ofType: .string),
+      .field(shopNotice.createDate, is: .optional, ofType: .dateTime)
+    )
+    }
 }

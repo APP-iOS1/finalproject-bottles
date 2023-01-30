@@ -11,6 +11,12 @@ public struct User: Model {
   public var pickupItemList: [String?]?
   public var userPhoneNumber: [String?]?
   public var recentlySearch: String?
+
+  public var followItemList: [String?]?
+  public var pickupList: [String?]?
+  public var userPhoneNumber: [String?]?
+  public var recentlyBottles: [String?]?
+  public var nickname: String?
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
   
@@ -30,6 +36,20 @@ public struct User: Model {
       pickupItemList: pickupItemList,
       userPhoneNumber: userPhoneNumber,
       recentlySearch: recentlySearch,
+
+      followItemList: [String?]? = nil,
+      pickupList: [String?]? = nil,
+      userPhoneNumber: [String?]? = nil,
+      recentlyBottles: [String?]? = nil,
+      nickname: String? = nil) {
+    self.init(id: id,
+      email: email,
+      followShopList: followShopList,
+      followItemList: followItemList,
+      pickupList: pickupList,
+      userPhoneNumber: userPhoneNumber,
+      recentlyBottles: recentlyBottles,
+      nickname: nickname,
       createdAt: nil,
       updatedAt: nil)
   }
@@ -41,6 +61,13 @@ public struct User: Model {
       pickupItemList: [String?]? = nil,
       userPhoneNumber: [String?]? = nil,
       recentlySearch: String? = nil,
+
+      followItemList: [String?]? = nil,
+      pickupList: [String?]? = nil,
+      userPhoneNumber: [String?]? = nil,
+      recentlyBottles: [String?]? = nil,
+      nickname: String? = nil,
+ 
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {
       self.id = id
@@ -51,6 +78,12 @@ public struct User: Model {
       self.pickupItemList = pickupItemList
       self.userPhoneNumber = userPhoneNumber
       self.recentlySearch = recentlySearch
+
+      self.followItemList = followItemList
+      self.pickupList = pickupList
+      self.userPhoneNumber = userPhoneNumber
+      self.recentlyBottles = recentlyBottles
+      self.nickname = nickname
       self.createdAt = createdAt
       self.updatedAt = updatedAt
   }

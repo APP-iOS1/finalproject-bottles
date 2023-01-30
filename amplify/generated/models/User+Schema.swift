@@ -13,6 +13,12 @@ extension User {
     case pickupItemList
     case userPhoneNumber
     case recentlySearch
+
+    case followItemList
+    case pickupList
+    case userPhoneNumber
+    case recentlyBottles
+    case nickname
     case createdAt
     case updatedAt
   }
@@ -42,6 +48,12 @@ extension User {
       .field(user.pickupItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(user.userPhoneNumber, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(user.recentlySearch, is: .optional, ofType: .string),
+
+      .field(user.followItemList, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.pickupList, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.userPhoneNumber, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.recentlyBottles, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(user.nickname, is: .optional, ofType: .string),
       .field(user.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(user.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )

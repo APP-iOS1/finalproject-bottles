@@ -44,4 +44,10 @@ public struct ShopNotice: Model {
       self.createdAt = createdAt
       self.updatedAt = updatedAt
   }
+
+public struct ShopNotice: Embeddable {
+  var id: String?
+  var title: String?
+  var body: String?
+  var createDate: Temporal.DateTime?
 }

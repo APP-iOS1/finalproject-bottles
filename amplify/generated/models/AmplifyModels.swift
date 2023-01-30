@@ -9,6 +9,10 @@ final public class AmplifyModels: AmplifyModelRegistration {
   
   public func registerModels(registry: ModelRegistry.Type) {
     ModelRegistry.register(modelType: ShopNotice.self)
+
+  public let version: String = "5ba6fef4689161da95b67f34a5728e14"
+  
+  public func registerModels(registry: ModelRegistry.Type) {
     ModelRegistry.register(modelType: Bottle.self)
     ModelRegistry.register(modelType: User.self)
     ModelRegistry.register(modelType: Shop.self)
