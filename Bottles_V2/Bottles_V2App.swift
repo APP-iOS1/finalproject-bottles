@@ -38,10 +38,9 @@ struct Bottles_V2App: App {
     init() {
         do {
             // AmplifyModels is generated in the previous step
-            let apiPlugin = AWSAPIPlugin(modelRegistration: AmplifyModels())
             let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels())
             try Amplify.add(plugin: dataStorePlugin)
-            try Amplify.add(plugin: apiPlugin)
+            try Amplify.configure()
             print("Amplify configured with DataStore plugin")
         } catch {
             print("Failed to initialize Amplify with \(error)")

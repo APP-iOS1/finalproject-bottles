@@ -27,17 +27,9 @@ struct ContentView: View {
             } label: {
                 Text("들어가지나?")
             }
-            
-            List {
-                ForEach(dataStore.user ?? [], id: \.id) { user in
-                    Text(user.email ?? "test")
-                }
-            }
+
         }
         .padding()
-        .task {
-            await dataStore.getDate()
-        }
     }
 }
 
