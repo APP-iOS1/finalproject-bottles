@@ -11,18 +11,17 @@ import CoreLocation
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     @Published var coord = (0.0, 0.0)
-//    @Published var foodCarts = foodCartDummy
     
-//    func checkIfLocationServicesIsEnabled() async {
-//
-//        if await CLLocationManager.locationServicesEnabled() {
-//            locationManager = CLLocationManager()
-//            locationManager!.delegate = self
-//            checkLocationAuthorization()
-//        } else {
-//            print("Show an alert letting them know this is off and to go turn i on.")
-//        }
-//    }
+    func checkIfLocationServicesIsEnabled() {
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager = CLLocationManager()
+            locationManager!.delegate = self
+            checkLocationAuthorization()
+        } else {
+            print("Show an alert letting them know this is off and to go turn i on.")
+        }
+    }
     /*
      Task { [weak self] in
 

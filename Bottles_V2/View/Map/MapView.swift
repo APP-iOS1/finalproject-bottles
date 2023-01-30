@@ -15,7 +15,7 @@ struct MapView: View {
     //    @State var coord: (Double, Double) = (126.9784147, 37.5666805)
     //    @State var locationManager: CLLocationManager!
     @State var mapSearchBarText: String = ""
-    @State var isShowingSheet: Bool = true
+    @State var isShowingSheet: Bool = false
     
     //    let heights = stride(from: 0.1, through: 1.0, by: 0.1).map { PresentationDetent.fraction($0) }
     
@@ -49,6 +49,11 @@ struct MapView: View {
                 .zIndex(1)
                 NaverMap((mapViewModel.coord.0, mapViewModel.coord.1))
                     .ignoresSafeArea(.all, edges: .top)
+                BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
+                    NearBySheetView()
+                }
+                .ignoresSafeArea(.all, edges: .top)
+                .zIndex(2)
                 
             }
             .task {
@@ -58,26 +63,24 @@ struct MapView: View {
                     locationManager.delegate = mapViewModel
                     mapViewModel.checkLocationAuthorization()
                 }
-                
-                
             }
-//            .onAppear {
-//                mapViewModel.checkIfLocationServicesIsEnabled()
-//            }
+            .onAppear {
+                mapViewModel.checkIfLocationServicesIsEnabled()
+            }
             
         }
-        .bottomSheet(isPresented: $isShowingSheet) {
-            NearBySheetView()
-            //                    .ignoresSafeArea()
-                .presentationDetents(
-                    undimmed: [
-                        .fraction(0.3),
-                        .fraction(0.5),
-                        .height(50)
-                    ],
-                    largestUndimmed: .fraction(0.5)
-                )
-        }
+//        .bottomSheet(isPresented: $isShowingSheet) {
+//            NearBySheetView()
+//            //                    .ignoresSafeArea()
+//                .presentationDetents(
+//                    undimmed: [
+//                        .fraction(0.3),
+//                        .fraction(0.5),
+//                        .height(50)
+//                    ],
+//                    largestUndimmed: .fraction(0.5)
+//                )
+//        }
     }
 }
 
