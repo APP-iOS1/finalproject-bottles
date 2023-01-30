@@ -1,17 +1,15 @@
+type ShopNotice {
+  id: ID
+  title: String
+  body: String
+  createDate: AWSDateTime
+}
+
 type Curation {
   shopCurationTitle: String
   shopCurationBody: String
   shopCurationImage: String
   shopCurationBottleID: [ID]
-}
-
-type ShopNotice @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  title: String
-  body: String
-  Image: String
-  date: AWSDateTime
-  shopID: ID! @index(name: "byShop")
 }
 
 type Bottle @model @auth(rules: [{allow: public}]) {
@@ -38,12 +36,12 @@ type Bottle @model @auth(rules: [{allow: public}]) {
 type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   email: String
-  followShopList: [String]
-  recentlyItem: [String]
-  followItemList: [String]
-  pickupItemList: [String]
+  followShopList: [ID]
+  followItemList: [ID]
+  pickupList: [ID]
   userPhoneNumber: [AWSPhone]
-  recentlySearch: String
+  recentlyBottles: [ID]
+  nickname: String
 }
 
 type Shop @model @auth(rules: [{allow: public}]) {
@@ -57,12 +55,11 @@ type Shop @model @auth(rules: [{allow: public}]) {
   registration: Boolean
   Bottles: [Bottle] @hasMany(indexName: "byShop", fields: ["id"])
   followerUserList: [String]
-  shopGrade: Float
-  ShopNotices: [ShopNotice] @hasMany(indexName: "byShop", fields: ["id"])
-  shopOpenCloseTime: [String]
+  shopOpenCloseTime: String
   shopImage: [String]
   shopSNS: String
   shopTitleImage: String
   shopCuration: Curation
+  shopNotice: [ShopNotice]
 }
  
