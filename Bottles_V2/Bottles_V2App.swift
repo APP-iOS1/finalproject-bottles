@@ -31,6 +31,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Bottles_V2App: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @ObservedObject var sessionManager = SessionManager()
+    @ObservedObject var bottleDataStore = BottleDataStore()
+    @ObservedObject var shopDataStore = ShopDataStore()
+    @ObservedObject var userStore = UserStore()
+   
     init() {
         do {
             // AmplifyModels is generated in the previous step
@@ -50,9 +54,11 @@ struct Bottles_V2App: App {
             case .login:
                 LoginView()
                     .environmentObject(sessionManager)
+                
             case .signUp:
                 SignUpView()
                     .environmentObject(sessionManager)
+                
             case .confirmCode(let username):
                 ConfirmationView(username: username)
                     .environmentObject(sessionManager)
@@ -60,6 +66,9 @@ struct Bottles_V2App: App {
             case .session(let user):
                 SessionView(user: user)
                     .environmentObject(sessionManager)
+                .environmentObject(bottleDataStore)
+                .environmentObject(shopDataStore)
+                .environmentObject(userStore)
             }
         }
         

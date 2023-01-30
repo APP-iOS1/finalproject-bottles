@@ -36,7 +36,8 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-01-22T11:59:20.837Z",
+
+      "lastPushTimeStamp": "2023-01-30T04:10:45.841Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiBottles"
@@ -71,7 +72,8 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/auth/bottles0863d2bd-cloudformation-template.json",
         "logicalId": "authbottles0863d2bd"
       },
-      "lastPushTimeStamp": "2023-01-22T11:59:20.962Z",
+
+      "lastPushTimeStamp": "2023-01-30T04:10:45.843Z",
       "output": {
         "UserPoolId": "ap-northeast-2_pJB3omuSt",
         "AppClientIDWeb": "3cma1mbc5ini2ir4e9t6ispo1e",

@@ -8,41 +8,65 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var dataStore : DataStore
+    @EnvironmentObject var shopDataStore: ShopDataStore
+    @EnvironmentObject var bottleStore: BottleDataStore
+    @EnvironmentObject var userStore: UserStore
+    @State private var testText: String = ""
     
     var body: some View {
         VStack {
             Button {
                 Task{
-                    await dataStore.getDate()
+                    await shopDataStore.getData()
+                    await userStore.getUserDataWithEmail()
+                    
                 }
             } label: {
                 Text("데이터 가져와지나?")
             }
             
-            Button {
-                Task{
-                    await dataStore.putData()
+            VStack {
+                ForEach(shopDataStore.shops, id: \.id) { shop in
+                    Text(shop.shopName ?? "")
+                    Text(shop.shopAddress ?? "")
                 }
-            } label: {
-                Text("들어가지나?")
             }
             
-            List {
-                ForEach(dataStore.user ?? [], id: \.id) { user in
-                    Text(user.email ?? "test")
-                }
-            }
+            Text(userStore.user?.id ?? "")
+            Text(userStore.user?.nickname ?? "")
+            
+//            TextField("일단 바틀 네임 입력", text: $testText)
+//                .frame(width: 300, height: 150)
+//                .border(.blue, width: 1)
+            
+            
+            
+//            Button {
+//                Task {
+//                    await bottleStore.searchBottleData(testText)
+//                }
+//
+//            } label: {
+//                Text("testText 바틀 다 가져와")
+//            }
+            
+//            VStack(alignment: .leading) {
+//                ForEach(bottleStore.bottles, id: \.id) { bottle in
+//                    HStack {
+//                        Text(bottle.itemName ?? "")
+//                        ForEach(bottle.itemTag ?? [], id: \.self) { tag in
+//                            Text(tag ?? "")
+//                        }
+//                    }
+//                }
+//            }
         }
         .padding()
-        .task {
-            await dataStore.getDate()
-        }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environmentObject(DataStore())
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView().environmentObject(DataStore())
+//    }
+//}
