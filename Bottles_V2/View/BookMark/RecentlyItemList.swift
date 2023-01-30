@@ -10,17 +10,8 @@ import SwiftUI
 struct RecentlyItemList: View {
     var recentSearches: [String] = ["와인", "와인앤모어", "위스키", "선물", "킬호만"]
     
-    @Environment(\.dismiss) private var dismiss
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "chevron.backward")
-            }
-
-            
-            
+        VStack(alignment: .leading, spacing: 10) {            
             Text("최근 검색어")
                 .font(.bottles18)
                 .bold()
