@@ -64,7 +64,7 @@ struct Bottles_V2App: App {
                     .environmentObject(sessionManager)
                 
             case .session(let user):
-                SessionView(user: user)
+                MainTabView(user: user)
                 .environmentObject(sessionManager)
                 .environmentObject(bottleDataStore)
                 .environmentObject(shopDataStore)
