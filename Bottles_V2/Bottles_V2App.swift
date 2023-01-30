@@ -13,22 +13,23 @@ import AWSCognitoAuthPlugin
 
 import UIKit
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
-    ) -> Bool {
-        do {
-            try Amplify.configure()
-        } catch {
-            print("An error occurred setting up Amplify: \(error)")
-        }
-        return true
-    }
-}
+//class AppDelegate: NSObject, UIApplicationDelegate {
+//    func application(
+//        _ application: UIApplication,
+//        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+//    ) -> Bool {
+//        do {
+//            try Amplify.configure()
+//        } catch {
+//            print("An error occurred setting up Amplify: \(error)")
+//        }
+//        return true
+//    }
+//}
 
 @main
 struct Bottles_V2App: App {
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @ObservedObject var sessionManager = SessionManager()
     @ObservedObject var bottleDataStore = BottleDataStore()
@@ -65,13 +66,11 @@ struct Bottles_V2App: App {
                 
             case .session(let user):
                 SessionView(user: user)
-                    .environmentObject(sessionManager)
+                .environmentObject(sessionManager)
                 .environmentObject(bottleDataStore)
                 .environmentObject(shopDataStore)
                 .environmentObject(userStore)
             }
         }
-        
-        
     }
 }
