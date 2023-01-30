@@ -54,7 +54,7 @@ struct SignUpView: View{
                 Task{
                     await sessionManager.signUp(username: username, password: password, email: email)
                 }
-            }).disabled(isDuplicated)
+            })
             
             Spacer()
             Button("Already have an account? Log in.", action: {

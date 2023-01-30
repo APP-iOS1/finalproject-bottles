@@ -17,7 +17,7 @@ struct SessionView: View {
             Text("You signed in using Amplify!")
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
-            Text("Your email is \(user.userId)")
+            Text("Your email is \(user.username)")
             Spacer()
             Button("로그아웃", action:{
                 Task{

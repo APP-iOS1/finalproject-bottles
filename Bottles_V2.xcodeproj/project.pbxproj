@@ -85,7 +85,6 @@
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
 		AEE99FB429799B59001A155E /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE99FB329799B59001A155E /* RecentlyItemList.swift */; };
 		AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBD4028344ED38D162747F /* Bottle+Schema.swift */; };
-		B35884C406980B048CC21F96 /* Pods_Bottles_V2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D520730858377D44BF863AAC /* Pods_Bottles_V2Tests.framework */; };
 		CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */; };
 		D3C7818C9A7970365A6A7879 /* ShopNotice+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D444CF6D8E41F32B3A84AB4 /* ShopNotice+Schema.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
@@ -94,8 +93,6 @@
 		D70CE4F129767EE900DFC8CE /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */; };
 		D70CE4F329767EE900DFC8CE /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F229767EE900DFC8CE /* AWSDataStorePlugin */; };
 		D70CE4F529767EE900DFC8CE /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F429767EE900DFC8CE /* Amplify */; };
-		D9C1944D7CE18DE4FDEA3729 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC351740CC6991FE2D538C3 /* Pods_Bottles_V2_Bottles_V2UITests.framework */; };
-		DA6D3BAD3E52F97AB6E58D8E /* Pods_Bottles_V2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCC1BF101DFFD561FA069F5D /* Pods_Bottles_V2.framework */; };
 		E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E0D5C3A6693423DABAFB70 /* Curation+Schema.swift */; };
 		ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE1FFF83D5D61F5453BF31 /* Curation.swift */; };
 		FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */; };
@@ -211,16 +208,13 @@
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		AEE99FB329799B59001A155E /* RecentlyItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
 		B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
-		BCC1BF101DFFD561FA069F5D /* Pods_Bottles_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BECBD4028344ED38D162747F /* Bottle+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Bottle+Schema.swift"; path = "amplify/generated/models/Bottle+Schema.swift"; sourceTree = "<group>"; };
-		D520730858377D44BF863AAC /* Pods_Bottles_V2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		D5FCB5C52987874E004BC279 /* SearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
 		DAA16DBB1B2143E762C79565 /* Pods-Bottles_V2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.release.xcconfig"; sourceTree = "<group>"; };
 		DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DB226594BFE981A9A631ED /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
-		EDC351740CC6991FE2D538C3 /* Pods_Bottles_V2_Bottles_V2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2_Bottles_V2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,7 +227,6 @@
 				D70CE4F329767EE900DFC8CE /* AWSDataStorePlugin in Frameworks */,
 				04F8B898297A646B0098DE93 /* AWSCognitoAuthPlugin in Frameworks */,
 				FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */,
-				DA6D3BAD3E52F97AB6E58D8E /* Pods_Bottles_V2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +235,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABE1CA6E6BE31F60C644A53F /* Pods_Bottles_V2Tests.framework in Frameworks */,
-				B35884C406980B048CC21F96 /* Pods_Bottles_V2Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,7 +243,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				59883C3FF144E2CA845F4DE6 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */,
-				D9C1944D7CE18DE4FDEA3729 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +275,6 @@
 				0427F562297677E60023E745 /* Products */,
 				374221B839BD3A0EC49DB004 /* AmplifyConfig */,
 				400173D66D87937F82516F2F /* AmplifyModels */,
-				04F8B896297A646B0098DE93 /* Frameworks */,
 				4F68E6EA943499F3BCE118BF /* Pods */,
 				0165582615B4CA84F65E4BF0 /* Frameworks */,
 				020DEB752987AA9100ED3DD6 /* Recovered References */,
@@ -354,16 +344,6 @@
 			);
 			path = Sign;
 			sourceTree = "<group>";
-		};
-		04F8B896297A646B0098DE93 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BCC1BF101DFFD561FA069F5D /* Pods_Bottles_V2.framework */,
-				EDC351740CC6991FE2D538C3 /* Pods_Bottles_V2_Bottles_V2UITests.framework */,
-				D520730858377D44BF863AAC /* Pods_Bottles_V2Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<unknown>";
 		};
 		27281CE0297784ED003BE8B4 /* View */ = {
 			isa = PBXGroup;
