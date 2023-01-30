@@ -24,4 +24,16 @@ class ShopDataStore : ObservableObject {
             print("Unexpected error \(error)")
         }
     }
+    
+    func queryData() async {
+        do {
+            let result = try await Amplify.DataStore.query(Shop.self)
+            // result will be of type [Post]
+            print("Posts: \(result)")
+        } catch let error as DataStoreError {
+            print("Error on query() for type Post - \(error)")
+        } catch {
+            print("Unexpected error \(error)")
+        }
+    }
 }
