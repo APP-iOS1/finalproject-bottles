@@ -33,7 +33,7 @@ struct CartView: View {
                     CartCell(isAllSelected: $isAllSelected, allSelectButtonCheck: $allSelectButtonCheck)
                     if cnt < 4 {
                         Divider()
-                            .background(.black)
+//                            .background(.black)
                     }
                 }
             }
