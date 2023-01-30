@@ -69,6 +69,7 @@
 		AE1070072977D64100AF9D1B /* SearchBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070062977D64100AF9D1B /* SearchBottleList.swift */; };
 		AE1070092977D8AC00AF9D1B /* SearchShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070082977D8AC00AF9D1B /* SearchShopList.swift */; };
 		AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */; };
+		AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E0AC0298110960002183B /* BookMarkTestModel.swift */; };
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
 		AEE99FB429799B59001A155E /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE99FB329799B59001A155E /* RecentlyItemList.swift */; };
 		CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */; };
@@ -171,6 +172,7 @@
 		AE1070062977D64100AF9D1B /* SearchBottleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBottleList.swift; sourceTree = "<group>"; };
 		AE1070082977D8AC00AF9D1B /* SearchShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchShopList.swift; sourceTree = "<group>"; };
 		AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewNavigationLink.swift; sourceTree = "<group>"; };
+		AE6E0AC0298110960002183B /* BookMarkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkTestModel.swift; sourceTree = "<group>"; };
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		AEE99FB329799B59001A155E /* RecentlyItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
 		B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				AEE99FB329799B59001A155E /* RecentlyItemList.swift */,
 				AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */,
 				AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */,
+				AE6E0AC0298110960002183B /* BookMarkTestModel.swift */,
 			);
 			path = BookMark;
 			sourceTree = "<group>";
@@ -772,6 +775,7 @@
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				AE106FFD2977925D00AF9D1B /* SearchViewSearchBar.swift in Sources */,
+				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,
 				D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */,
 				27D82C47297A7C34004F3D94 /* UISheetPresentationController.Detent.Identifier+Init.swift in Sources */,
 				27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */,

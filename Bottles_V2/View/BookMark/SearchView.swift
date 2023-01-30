@@ -23,6 +23,8 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
+            SearchViewSearchBar(searchBarText: $searchBarText)
+            
             if searchBarText == "" {
                 RecentlyItemList()
             } else {

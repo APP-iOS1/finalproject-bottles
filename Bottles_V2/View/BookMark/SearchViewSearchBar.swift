@@ -9,16 +9,28 @@ import SwiftUI
 
 struct SearchViewSearchBar: View {
     @Binding var searchBarText: String
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
-
+        
         // MARK: - SearchBar
         HStack {
+            Button {
+                dismiss()
+            } label: {
+                Image(systemName: "chevron.backward")
+                    .font(.title2)
+            }
+            .padding(5)
+            
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.accentColor)
                     .bold()
                 TextField("원하는 술, 바틀샵 검색", text: $searchBarText)
                     .multilineTextAlignment(.leading)
+                    .submitLabel(.search)
+                
                 if !searchBarText.isEmpty {
                     Button(action: {
                         self.searchBarText = ""
@@ -30,7 +42,7 @@ struct SearchViewSearchBar: View {
                 }
             }
             .padding(10)
-            .frame(width: 270)
+            .frame(width: 300)
             .background{
                 Color.white
             }
