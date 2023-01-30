@@ -10,22 +10,21 @@ import Amplify
 import AWSAPIPlugin
 import AWSDataStorePlugin
 import AWSCognitoAuthPlugin
-
 import UIKit
 
-//class AppDelegate: NSObject, UIApplicationDelegate {
-//    func application(
-//        _ application: UIApplication,
-//        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
-//    ) -> Bool {
-//        do {
-//            try Amplify.configure()
-//        } catch {
-//            print("An error occurred setting up Amplify: \(error)")
-//        }
-//        return true
-//    }
-//}
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    ) -> Bool {
+        do {
+            try Amplify.configure()
+        } catch {
+            print("An error occurred setting up Amplify: \(error)")
+        }
+        return true
+    }
+}
 
 @main
 struct Bottles_V2App: App {
@@ -42,7 +41,7 @@ struct Bottles_V2App: App {
             let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels())
             try Amplify.add(plugin: dataStorePlugin)
 
-            try Amplify.add(plugin: apiPlugin)
+//            try Amplify.add(plugin: apiPlugin)
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             print("Amplify configured with DataStore plugin")
         } catch {
