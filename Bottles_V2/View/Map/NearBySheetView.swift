@@ -10,6 +10,8 @@ import SwiftUI
 struct NearBySheetView: View {
     var body: some View {
         NavigationStack {
+            Text("둘러보기")
+                .font(.bottles24)
             VStack {
                 NearBySheetCell()
             }

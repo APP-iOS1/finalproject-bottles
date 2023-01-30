@@ -9,6 +9,11 @@ import SwiftUI
 
 struct MainTabView: View {
     @State private var selection: Int = 1
+    
+    init() {
+            UITabBar.appearance().backgroundColor = UIColor(Color.white)
+        }
+    
     var body: some View {
         TabView(selection: $selection) {
             MapView().tabItem {
@@ -28,7 +33,7 @@ struct MainTabView: View {
                 Text("MY")
             }.tag(4)
         }
-        //        .toolbarBackground(Color.white, for: .tabBar)
+        .toolbarBackground(Color.white, for: .tabBar)
     }
 }
 
