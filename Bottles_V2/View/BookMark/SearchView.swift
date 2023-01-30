@@ -28,9 +28,10 @@ struct SearchView: View {
             if searchBarText == "" {
                 RecentlyItemList()
             } else {
-                animate()
-                    .padding(.top, 10)
-                SearchTapView(searchTap: selectedPicker)
+                SearchResultList(searchBarText: $searchBarText)
+//                animate()
+//                    .padding(.top, 10)
+//                SearchTapView(searchTap: selectedPicker)
             }
         }
         .navigationBarHidden(true)
