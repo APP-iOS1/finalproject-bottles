@@ -11,14 +11,15 @@ import NMapsMap
 struct NaverMap: UIViewRepresentable {
     var coord: (Double, Double)
     //    var foodCarts: [FoodCart]
-    
+    @Binding var showMarkerDetailView: Bool
     func makeCoordinator() -> Coordinator {
         Coordinator(coord)
     }
     
-    init(_ coord: (Double, Double)//, foodCarts: [FoodCart]
+    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>//, foodCarts: [FoodCart]
     ) {
         self.coord = coord
+        self._showMarkerDetailView = showMarkerDetailView
         //        self.foodCarts = foodCarts
     }
     
@@ -56,23 +57,32 @@ struct NaverMap: UIViewRepresentable {
         view.showZoomControls = true
         let cameraPosition = view.mapView.cameraPosition
         
-        // Foodcart를 맵에 마커로 표현
+        // MARK: - 마커 생성
         //        for foodCart in foodCarts {
         let marker = NMFMarker()
         marker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
-//        marker.position = NMGLatLng(lat: foodCart.coordinate[0], lng: foodCart.coordinate[1])
+        //        marker.position = NMGLatLng(lat: foodCart.coordinate[0], lng: foodCart.coordinate[1])
         //            marker.iconImage = NMF_MARKER_IMAGE_BLACK
         //            marker.iconTintColor = UIColor.green
-//        marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
-//        marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
+        //        marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
+        //        marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
         marker.captionRequestedWidth = 100
         //            marker.captionText = foodCart.name
-//        marker.captionMinZoom = 12
+        //        marker.captionMinZoom = 12
         marker.captionMaxZoom = 16
+        
         // MARK: - 마커 이미지 변경
         marker.iconImage = NMFOverlayImage(name: "MapMarker")
         marker.width = 40
         marker.height = 50
+        
+        // MARK: - 마커 터치 핸들러
+        marker.touchHandler = { (overlay) -> Bool in
+            print("marker touched")
+            showMarkerDetailView.toggle()
+            return true
+        }
+        
         marker.mapView = view.mapView
         //        }
         
