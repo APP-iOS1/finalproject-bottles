@@ -32,8 +32,9 @@ struct Bottles_V2App: App {
     var body: some Scene {
         WindowGroup {
             //            ContentView().environmentObject(DataStore())
-            ContentView()
-                .accentColor(Color("AccentColor"))
+//            ContentView()
+//                .accentColor(Color("AccentColor"))
+            LoginView()
         }
     }
     
