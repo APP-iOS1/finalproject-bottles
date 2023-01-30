@@ -34,6 +34,7 @@ struct Bottles_V2App: App {
             ContentView()
                 .environmentObject(BottleDataStore())
                 .environmentObject(ShopDataStore())
+                .environmentObject(UserStore())
         }
     }
     

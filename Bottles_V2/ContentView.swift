@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleStore: BottleDataStore
+    @EnvironmentObject var userStore: UserStore
     @State private var testText: String = ""
     
     var body: some View {
@@ -17,6 +18,8 @@ struct ContentView: View {
             Button {
                 Task{
                     await shopDataStore.getData()
+                    await userStore.getUserDataWithEmail()
+                    
                 }
             } label: {
                 Text("데이터 가져와지나?")
@@ -28,6 +31,9 @@ struct ContentView: View {
                     Text(shop.shopAddress ?? "")
                 }
             }
+            
+            Text(userStore.user?.id ?? "")
+            Text(userStore.user?.nickname ?? "")
             
 //            TextField("일단 바틀 네임 입력", text: $testText)
 //                .frame(width: 300, height: 150)
