@@ -26,6 +26,7 @@ struct LoginView: View {
                 }){
                     Text("카카오로 시작하기")
                 }
+                .padding(.vertical)
                 Button(action:{
                     
                 }){
@@ -36,13 +37,21 @@ struct LoginView: View {
                 }){
                     Text("apple로 로그인")
                 }
-                Button(action:{
-                    
-                }){
-                    Text("이메일로 회원가입하기")
-                }
+                .padding(.vertical)
+                NavigationLink(destination: EmailRegisterView(), label: {
+                    HStack{
+                        Image(systemName: "envelope")
+                        Text("이메일로 회원가입하기")
+                    }
+                    .background{
+                        RoundedRectangle(cornerRadius: 7)
+                            .stroke(.secondary)
+                            .frame(width: 300, height: 40)
+                    }
+                    .foregroundColor(.secondary)
+                })
             }
-            .padding(.bottom)
+            .padding(.bottom, 50)
             HStack {
                 Text("이미 가입 하셨나요?")
                 NavigationLink(destination: Text("이메일 로그인 화면")) {
