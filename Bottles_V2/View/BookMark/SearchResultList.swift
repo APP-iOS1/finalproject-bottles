@@ -12,17 +12,26 @@ struct SearchResultList: View {
     @Binding var searchBarText: String
     @StateObject var testModel: BookMarkTestStore = BookMarkTestStore()
     
+    @Binding var doneTextFieldEdit: Bool
+    
+    @FocusState var focus: Bool
+    
     var body: some View {
         List {
             ForEach (testModel.BookMarkBottles, id: \.self) { bottle in
-                if bottle.BottleName.contains(searchBarText) {
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .padding([.leading, .trailing])
-                        Text(bottle.BottleName)
+                if bottle.bottleName.contains(searchBarText) {
+                    Button {
+                        doneTextFieldEdit = true
+                        searchBarText = bottle.bottleName
+                        focus = false
+                    } label: {
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .padding([.leading, .trailing])
+                            Text(bottle.bottleName)
+                        }
                     }
-                    
                 }
             }
             
@@ -32,8 +41,8 @@ struct SearchResultList: View {
 }
 
 
-struct SearchResultList_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResultList(searchBarText: .constant(""))
-    }
-}
+//struct SearchResultList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchResultList(searchBarText: .constant(""))
+//    }
+//}
