@@ -10,12 +10,19 @@ import SwiftUI
 struct NearBySheetView: View {
     var body: some View {
         NavigationStack {
+            HStack {
+                Text("둘러보기")
+                    .font(.bottles24)
+                    .bold()
+                    .padding(.leading, 10)
+                Spacer()
+            }
+            Spacer()
             VStack {
                 NearBySheetCell()
             }
-            .navigationTitle("둘러보기")
-            .navigationBarTitleDisplayMode(.inline)
         }
+//        .background(Color.white)
     }
 }
 

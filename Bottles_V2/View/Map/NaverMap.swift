@@ -67,7 +67,7 @@ struct NaverMap: UIViewRepresentable {
 //        marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
         marker.captionRequestedWidth = 100
         //            marker.captionText = foodCart.name
-        marker.captionMinZoom = 12
+//        marker.captionMinZoom = 12
         marker.captionMaxZoom = 16
         // MARK: - 마커 이미지 변경
         marker.iconImage = NMFOverlayImage(name: "MapMarker")
