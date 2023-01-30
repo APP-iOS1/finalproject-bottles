@@ -33,6 +33,7 @@
 		27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C3E297A6F29004F3D94 /* MapViewModel.swift */; };
 		27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C40297A6FD3004F3D94 /* NaverMap.swift */; };
 		27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C4B297A875F004F3D94 /* BottomSheet.swift */; };
+		27D82C58298780D8004F3D94 /* MarkerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C57298780D8004F3D94 /* MarkerDetailView.swift */; };
 		3A306746297A82BE0085CC6A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A306745297A82BE0085CC6A /* Color.swift */; };
 		3AA43A5529778EE400EB8551 /* BottleShopView_Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5429778EE400EB8551 /* BottleShopView_Search.swift */; };
 		3AA43A5729778EFB00EB8551 /* BottleShopView_Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5629778EFB00EB8551 /* BottleShopView_Notice.swift */; };
@@ -130,6 +131,7 @@
 		27D82C3E297A6F29004F3D94 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		27D82C40297A6FD3004F3D94 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		27D82C4B297A875F004F3D94 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		27D82C57298780D8004F3D94 /* MarkerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDetailView.swift; sourceTree = "<group>"; };
 		2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2_Bottles_V2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A306745297A82BE0085CC6A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				27281CFE2977B8C8003BE8B4 /* NearBySheetCell.swift */,
 				27D82C3E297A6F29004F3D94 /* MapViewModel.swift */,
 				27D82C40297A6FD3004F3D94 /* NaverMap.swift */,
+				27D82C57298780D8004F3D94 /* MarkerDetailView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */,
 				3AA43A612977E0AB00EB8551 /* BottleShopView_NoticeCell.swift in Sources */,
 				3AA43A5529778EE400EB8551 /* BottleShopView_Search.swift in Sources */,
+				27D82C58298780D8004F3D94 /* MarkerDetailView.swift in Sources */,
 				AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */,
 				3AA43A5929778F2D00EB8551 /* BottleShopDetailView.swift in Sources */,
 				92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */,

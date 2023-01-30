@@ -19,4 +19,5 @@ extension Font {
     static let bottles14: Font = .custom("SpoqaHanSansNeo-Regular", size: 14)
     static let bottles13: Font = .custom("SpoqaHanSansNeo-Regular", size: 13)
     static let bottles12: Font = .custom("SpoqaHanSansNeo-Regular", size: 12)
+    static let bottles11: Font = .custom("SpoqaHanSansNeo-Regular", size: 11)
 }

@@ -10,17 +10,19 @@ import SwiftUI
 struct NearBySheetView: View {
     var body: some View {
         NavigationStack {
-            HStack {
+            HStack(alignment: .top) {
                 Text("둘러보기")
-                    .font(.bottles24)
+                    .font(.bottles20)
                     .bold()
-                    .padding(.leading, 10)
+                    .padding(.leading, 15)
                 Spacer()
             }
-            Spacer()
+            
             VStack {
-                NearBySheetCell()
+//                NearBySheetCell()
+                    BookMarkShopListCell()
             }
+            Spacer()
         }
 //        .background(Color.white)
     }
