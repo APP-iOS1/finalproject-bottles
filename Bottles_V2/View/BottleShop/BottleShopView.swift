@@ -37,6 +37,8 @@ struct BottleShopView: View {
     @State private var selectedPicker: bottleShopInfo = .bottle
     @Namespace private var animation
     
+    var phoneNumber = "718-555-5555"
+    
     var body: some View {
         NavigationStack{
             ScrollView{
@@ -65,11 +67,18 @@ struct BottleShopView: View {
                         
                         Spacer()
                         
-                        Image("Phone.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 15)
-                            .padding(.trailing, 5)
+                        Button(action: {
+                                        let phone = "tel://"
+                                        let phoneNumberformatted = phone + phoneNumber
+                                        guard let url = URL(string: phoneNumberformatted) else { return }
+                                        UIApplication.shared.open(url)
+                        }){
+                            Image("Phone.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15)
+                                .padding(.trailing, 5)
+                        }
                         
                         Spacer()
                             .frame(width: 15)
