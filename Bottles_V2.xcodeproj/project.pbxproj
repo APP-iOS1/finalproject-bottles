@@ -14,15 +14,29 @@
 		0427F576297677E90023E745 /* Bottles_V2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F575297677E90023E745 /* Bottles_V2Tests.swift */; };
 		0427F580297677E90023E745 /* Bottles_V2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F57F297677E90023E745 /* Bottles_V2UITests.swift */; };
 		0427F582297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */; };
+		04F8B898297A646B0098DE93 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 04F8B897297A646B0098DE93 /* AWSCognitoAuthPlugin */; };
+		04F8B89A297A64900098DE93 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B899297A64900098DE93 /* SessionManager.swift */; };
+		04F8B89C297A64FA0098DE93 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B89B297A64FA0098DE93 /* SignupView.swift */; };
+		04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B89D297A652F0098DE93 /* LogInView.swift */; };
+		04F8B8A0297A83020098DE93 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B89F297A83020098DE93 /* ConfirmationView.swift */; };
+		04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B8A1297B00EB0098DE93 /* SessionView.swift */; };
+		471502BDC10E750066E1DD0F /* ShopNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68983E156D6EE873316F82B2 /* ShopNotice.swift */; };
 		92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB226594BFE981A9A631ED /* AmplifyModels.swift */; };
+		97B2595A988073C0B7C72503 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A883591C6680392930FF0A /* Shop.swift */; };
+		97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1C7CE791B7DC0F740CC5D /* Shop+Schema.swift */; };
 		9FA507820644AAAE35CB724F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F831F6E9B47A7334BFA205 /* User.swift */; };
 		ACA0514E444730D90B95F051 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */; };
+		AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBD4028344ED38D162747F /* Bottle+Schema.swift */; };
 		CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */; };
+		D3C7818C9A7970365A6A7879 /* ShopNotice+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D444CF6D8E41F32B3A84AB4 /* ShopNotice+Schema.swift */; };
 		D70CE4F129767EE900DFC8CE /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */; };
 		D70CE4F329767EE900DFC8CE /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F229767EE900DFC8CE /* AWSDataStorePlugin */; };
 		D70CE4F529767EE900DFC8CE /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F429767EE900DFC8CE /* Amplify */; };
 		D70CE4F72976821F00DFC8CE /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70CE4F62976821F00DFC8CE /* DataStore.swift */; };
+		E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E0D5C3A6693423DABAFB70 /* Curation+Schema.swift */; };
+		ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE1FFF83D5D61F5453BF31 /* Curation.swift */; };
 		FC5C40ACBD4A4B14412FA120 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 2788548CAED4926294E44B24 /* awsconfiguration.json */; };
+		FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC996EE791EC8ECC93A1C0 /* Bottle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,10 +67,24 @@
 		0427F57B297677E90023E745 /* Bottles_V2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bottles_V2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0427F57F297677E90023E745 /* Bottles_V2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2UITests.swift; sourceTree = "<group>"; };
 		0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		04A883591C6680392930FF0A /* Shop.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Shop.swift; path = amplify/generated/models/Shop.swift; sourceTree = "<group>"; };
+		04F8B894297A62C00098DE93 /* Bottles_V2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bottles_V2.entitlements; sourceTree = "<group>"; };
+		04F8B899297A64900098DE93 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		04F8B89B297A64FA0098DE93 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		04F8B89D297A652F0098DE93 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		04F8B89F297A83020098DE93 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		04F8B8A1297B00EB0098DE93 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		07EE1FFF83D5D61F5453BF31 /* Curation.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Curation.swift; path = amplify/generated/models/Curation.swift; sourceTree = "<group>"; };
+		25E1C7CE791B7DC0F740CC5D /* Shop+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Shop+Schema.swift"; path = "amplify/generated/models/Shop+Schema.swift"; sourceTree = "<group>"; };
 		2788548CAED4926294E44B24 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		2D444CF6D8E41F32B3A84AB4 /* ShopNotice+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ShopNotice+Schema.swift"; path = "amplify/generated/models/ShopNotice+Schema.swift"; sourceTree = "<group>"; };
+		33FC996EE791EC8ECC93A1C0 /* Bottle.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Bottle.swift; path = amplify/generated/models/Bottle.swift; sourceTree = "<group>"; };
 		3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
+		58E0D5C3A6693423DABAFB70 /* Curation+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Curation+Schema.swift"; path = "amplify/generated/models/Curation+Schema.swift"; sourceTree = "<group>"; };
+		68983E156D6EE873316F82B2 /* ShopNotice.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = ShopNotice.swift; path = amplify/generated/models/ShopNotice.swift; sourceTree = "<group>"; };
 		A7F831F6E9B47A7334BFA205 /* User.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = User.swift; path = amplify/generated/models/User.swift; sourceTree = "<group>"; };
 		B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		BECBD4028344ED38D162747F /* Bottle+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Bottle+Schema.swift"; path = "amplify/generated/models/Bottle+Schema.swift"; sourceTree = "<group>"; };
 		D70CE4F62976821F00DFC8CE /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		E3DB226594BFE981A9A631ED /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +97,7 @@
 				D70CE4F529767EE900DFC8CE /* Amplify in Frameworks */,
 				D70CE4F129767EE900DFC8CE /* AWSAPIPlugin in Frameworks */,
 				D70CE4F329767EE900DFC8CE /* AWSDataStorePlugin in Frameworks */,
+				04F8B898297A646B0098DE93 /* AWSCognitoAuthPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +127,7 @@
 				0427F562297677E60023E745 /* Products */,
 				374221B839BD3A0EC49DB004 /* AmplifyConfig */,
 				400173D66D87937F82516F2F /* AmplifyModels */,
+				04F8B896297A646B0098DE93 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +144,8 @@
 		0427F563297677E60023E745 /* Bottles_V2 */ = {
 			isa = PBXGroup;
 			children = (
+				04F8B895297A64290098DE93 /* Sign */,
+				04F8B894297A62C00098DE93 /* Bottles_V2.entitlements */,
 				D70CE4F82976823500DFC8CE /* ViewModel */,
 				0427F564297677E60023E745 /* Bottles_V2App.swift */,
 				0427F566297677E60023E745 /* ContentView.swift */,
@@ -148,6 +180,25 @@
 			path = Bottles_V2UITests;
 			sourceTree = "<group>";
 		};
+		04F8B895297A64290098DE93 /* Sign */ = {
+			isa = PBXGroup;
+			children = (
+				04F8B899297A64900098DE93 /* SessionManager.swift */,
+				04F8B89B297A64FA0098DE93 /* SignupView.swift */,
+				04F8B89D297A652F0098DE93 /* LogInView.swift */,
+				04F8B89F297A83020098DE93 /* ConfirmationView.swift */,
+				04F8B8A1297B00EB0098DE93 /* SessionView.swift */,
+			);
+			path = Sign;
+			sourceTree = "<group>";
+		};
+		04F8B896297A646B0098DE93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		374221B839BD3A0EC49DB004 /* AmplifyConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +214,14 @@
 				E3DB226594BFE981A9A631ED /* AmplifyModels.swift */,
 				3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */,
 				A7F831F6E9B47A7334BFA205 /* User.swift */,
+				BECBD4028344ED38D162747F /* Bottle+Schema.swift */,
+				33FC996EE791EC8ECC93A1C0 /* Bottle.swift */,
+				58E0D5C3A6693423DABAFB70 /* Curation+Schema.swift */,
+				07EE1FFF83D5D61F5453BF31 /* Curation.swift */,
+				25E1C7CE791B7DC0F740CC5D /* Shop+Schema.swift */,
+				04A883591C6680392930FF0A /* Shop.swift */,
+				2D444CF6D8E41F32B3A84AB4 /* ShopNotice+Schema.swift */,
+				68983E156D6EE873316F82B2 /* ShopNotice.swift */,
 			);
 			name = AmplifyModels;
 			sourceTree = "<group>";
@@ -195,6 +254,7 @@
 				D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */,
 				D70CE4F229767EE900DFC8CE /* AWSDataStorePlugin */,
 				D70CE4F429767EE900DFC8CE /* Amplify */,
+				04F8B897297A646B0098DE93 /* AWSCognitoAuthPlugin */,
 			);
 			productName = Bottles_V2;
 			productReference = 0427F561297677E60023E745 /* Bottles_V2.app */;
@@ -319,8 +379,21 @@
 				D70CE4F72976821F00DFC8CE /* DataStore.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */,
+				04F8B89C297A64FA0098DE93 /* SignupView.swift in Sources */,
 				CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */,
+				04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */,
+				04F8B8A0297A83020098DE93 /* ConfirmationView.swift in Sources */,
 				9FA507820644AAAE35CB724F /* User.swift in Sources */,
+				04F8B89A297A64900098DE93 /* SessionManager.swift in Sources */,
+				AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */,
+				FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */,
+				E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */,
+				ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */,
+				97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */,
+				97B2595A988073C0B7C72503 /* Shop.swift in Sources */,
+				04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */,
+				D3C7818C9A7970365A6A7879 /* ShopNotice+Schema.swift in Sources */,
+				471502BDC10E750066E1DD0F /* ShopNotice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +549,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Bottles_V2/Bottles_V2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Bottles_V2/Preview Content\"";
@@ -506,6 +580,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Bottles_V2/Bottles_V2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Bottles_V2/Preview Content\"";
@@ -660,6 +735,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		04F8B897297A646B0098DE93 /* AWSCognitoAuthPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D70CE4EF29767EE900DFC8CE /* XCRemoteSwiftPackageReference "amplify-swift" */;
+			productName = AWSCognitoAuthPlugin;
+		};
 		D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D70CE4EF29767EE900DFC8CE /* XCRemoteSwiftPackageReference "amplify-swift" */;

@@ -9,6 +9,8 @@ import SwiftUI
 import Amplify
 import AWSAPIPlugin
 import AWSDataStorePlugin
+import AWSCognitoAuthPlugin
+
 import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -28,13 +30,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct Bottles_V2App: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView().environmentObject(DataStore())
-        }
-    }
-    
+    @ObservedObject var sessionManager = SessionManager()
     init() {
         do {
             // AmplifyModels is generated in the previous step
@@ -42,9 +38,31 @@ struct Bottles_V2App: App {
             let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels())
             try Amplify.add(plugin: dataStorePlugin)
             try Amplify.add(plugin: apiPlugin)
+            try Amplify.add(plugin: AWSCognitoAuthPlugin())
             print("Amplify configured with DataStore plugin")
         } catch {
             print("Failed to initialize Amplify with \(error)")
         }
+    }
+    var body: some Scene {
+        WindowGroup {
+            switch sessionManager.authState{
+            case .login:
+                LoginView()
+                    .environmentObject(sessionManager)
+            case .signUp:
+                SignUpView()
+                    .environmentObject(sessionManager)
+            case .confirmCode(let username):
+                ConfirmationView(username: username)
+                    .environmentObject(sessionManager)
+                
+            case .session(let user):
+                SessionView(user: user)
+                    .environmentObject(sessionManager)
+            }
+        }
+        
+        
     }
 }
