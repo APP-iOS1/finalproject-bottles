@@ -15,12 +15,17 @@ extension Shop {
     case registration
     case Bottles
     case followerUserList
+    case shopGrade
+    case ShopNotices
+
     case shopOpenCloseTime
     case shopImage
     case shopSNS
     case shopTitleImage
     case shopCuration
+
     case shopNotice
+
     case createdAt
     case updatedAt
   }
@@ -52,11 +57,16 @@ extension Shop {
       .field(shop.registration, is: .optional, ofType: .bool),
       .hasMany(shop.Bottles, is: .optional, ofType: Bottle.self, associatedWith: Bottle.keys.shopID),
       .field(shop.followerUserList, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(shop.shopGrade, is: .optional, ofType: .double),
+      .hasMany(shop.ShopNotices, is: .optional, ofType: ShopNotice.self, associatedWith: ShopNotice.keys.shopID),
+      .field(shop.shopOpenCloseTime, is: .optional, ofType: .embeddedCollection(of: String.self)),
+
       .field(shop.shopOpenCloseTime, is: .optional, ofType: .string),
       .field(shop.shopImage, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(shop.shopSNS, is: .optional, ofType: .string),
       .field(shop.shopTitleImage, is: .optional, ofType: .string),
       .field(shop.shopCuration, is: .optional, ofType: .embedded(type: Curation.self)),
+
       .field(shop.shopNotice, is: .optional, ofType: .embeddedCollection(of: ShopNotice.self)),
       .field(shop.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(shop.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
@@ -67,4 +77,5 @@ extension Shop {
 extension Shop: ModelIdentifiable {
   public typealias IdentifierFormat = ModelIdentifierFormat.Default
   public typealias IdentifierProtocol = DefaultModelIdentifier<Self>
+}
 }

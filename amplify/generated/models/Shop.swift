@@ -13,12 +13,20 @@ public struct Shop: Model {
   public var registration: Bool?
   public var Bottles: List<Bottle>?
   public var followerUserList: [String?]?
+
+  public var shopGrade: Double?
+  public var ShopNotices: List<ShopNotice>?
+  public var shopOpenCloseTime: [String?]?
+
   public var shopOpenCloseTime: String?
+
   public var shopImage: [String?]?
   public var shopSNS: String?
   public var shopTitleImage: String?
   public var shopCuration: Curation?
+
   public var shopNotice: [ShopNotice?]?
+
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
   
@@ -32,6 +40,14 @@ public struct Shop: Model {
       registration: Bool? = nil,
       Bottles: List<Bottle>? = [],
       followerUserList: [String?]? = nil,
+      shopGrade: Double? = nil,
+      ShopNotices: List<ShopNotice>? = [],
+      shopOpenCloseTime: [String?]? = nil,
+      shopImage: [String?]? = nil,
+      shopSNS: String? = nil,
+      shopTitleImage: String? = nil,
+      shopCuration: Curation? = nil) {
+
       shopOpenCloseTime: String? = nil,
       shopImage: [String?]? = nil,
       shopSNS: String? = nil,
@@ -48,12 +64,17 @@ public struct Shop: Model {
       registration: registration,
       Bottles: Bottles,
       followerUserList: followerUserList,
+      shopGrade: shopGrade,
+      ShopNotices: ShopNotices,
+
       shopOpenCloseTime: shopOpenCloseTime,
       shopImage: shopImage,
       shopSNS: shopSNS,
       shopTitleImage: shopTitleImage,
       shopCuration: shopCuration,
+
       shopNotice: shopNotice,
+
       createdAt: nil,
       updatedAt: nil)
   }
@@ -67,12 +88,20 @@ public struct Shop: Model {
       registration: Bool? = nil,
       Bottles: List<Bottle>? = [],
       followerUserList: [String?]? = nil,
+
+      shopGrade: Double? = nil,
+      ShopNotices: List<ShopNotice>? = [],
+      shopOpenCloseTime: [String?]? = nil,
+
       shopOpenCloseTime: String? = nil,
+
       shopImage: [String?]? = nil,
       shopSNS: String? = nil,
       shopTitleImage: String? = nil,
       shopCuration: Curation? = nil,
+
       shopNotice: [ShopNotice?]? = nil,
+
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {
       self.id = id
@@ -85,12 +114,18 @@ public struct Shop: Model {
       self.registration = registration
       self.Bottles = Bottles
       self.followerUserList = followerUserList
+
+      self.shopGrade = shopGrade
+      self.ShopNotices = ShopNotices
+
       self.shopOpenCloseTime = shopOpenCloseTime
       self.shopImage = shopImage
       self.shopSNS = shopSNS
       self.shopTitleImage = shopTitleImage
       self.shopCuration = shopCuration
+
       self.shopNotice = shopNotice
+
       self.createdAt = createdAt
       self.updatedAt = updatedAt
   }
