@@ -16,7 +16,7 @@ struct MapView: View {
     //    @State var locationManager: CLLocationManager!
     @State var mapSearchBarText: String = ""
     @State var isShowingSheet: Bool = false
-    
+    @State var showMarkerDetailView: Bool = false
     //    let heights = stride(from: 0.1, through: 1.0, by: 0.1).map { PresentationDetent.fraction($0) }
     
     var body: some View {
@@ -47,7 +47,7 @@ struct MapView: View {
                     
                 }
                 .zIndex(1)
-                NaverMap((mapViewModel.coord.0, mapViewModel.coord.1))
+                NaverMap((mapViewModel.coord.0, mapViewModel.coord.1), $showMarkerDetailView)
                     .ignoresSafeArea(.all, edges: .top)
                 BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
                     NearBySheetView()
@@ -56,6 +56,11 @@ struct MapView: View {
                 .zIndex(2)
                 
             }
+            .sheet(isPresented: $showMarkerDetailView, content: {
+                MarkerDetailView()
+                    .presentationDetents([.height(250)])
+                    .presentationDragIndicator(.visible)
+            })
             .task {
                 if await mapViewModel.locationServicesEnabled() {
                     // Do something
