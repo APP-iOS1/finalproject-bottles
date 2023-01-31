@@ -9,11 +9,12 @@ import SwiftUI
 import SafariServices
 
 struct SafariWebView: UIViewControllerRepresentable {
-    var url: URL
+//    var url: URL
+    @Binding var selectedUrl: URL
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<SafariWebView>) -> SFSafariViewController {
 //        print("\(url)")
-        return SFSafariViewController(url: url)
+        return SFSafariViewController(url: selectedUrl)
     }
 
     func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
@@ -21,8 +22,8 @@ struct SafariWebView: UIViewControllerRepresentable {
     }
 }
     
-struct SafariWebView_Previews: PreviewProvider {
-    static var previews: some View {
-        SafariWebView(url: URL(string: "https://www.apple.com/kr/")!)
-    }
-}
+//struct SafariWebView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SafariWebView(selectedUrl: URL(string: "https://www.apple.com/kr/"))
+//    }
+//}

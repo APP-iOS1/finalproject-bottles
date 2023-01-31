@@ -13,8 +13,8 @@ struct MyPageView: View {
     var myPageList: [String] = ["바틀스 소개", "공지사항", "자주 묻는 질문",
                                 "1:1 문의하기", "서비스 이용약관", "개인정보 처리방침", "위치정보 이용약관", "버전 정보"]
     
-    @State var myPageListWebLink: [String] = [
-        "https://www.apple.com/kr/",
+    var myPageListWebLink: [String] = [
+        "https://www.apple.com/kr/", //바틀스 소개링크
         "https://www.google.com/",
         "https://www.naver.com/",
         "https://github.com/",
@@ -26,7 +26,8 @@ struct MyPageView: View {
     
     @State private var isShowingSheet: Bool = false
     
-    @State var num: Int = 0
+    
+    @State var selectedUrl: URL = URL(string: "https://www.naver.com")!
     
     var body: some View {
         NavigationStack {
@@ -68,58 +69,53 @@ struct MyPageView: View {
                 
                 // MARK: - 두번째 리스트
                 
+                //                List {
+                //                    ForEach(Array(myPageList.enumerated()), id: \.1) { (index, item) in
+                //
+                //                        //                        NavigationLink(destination: Webview(url: URL(string: myPageListWebLink[index])!)) {
+                //                        //                            Text("\(item)")
+                //                        //                        }
+                //
+                //                        Button(action: {
+                //
+                //                            isShowingSheet.toggle()
+                //
+                //                            //                            print("\(myPageListWebLink[index])")
+                //                        }){
+                //                            Text("\(item)")
+                //                                .font(.bottles15)
+                //                        }
+                //                        .sheet(isPresented: $isShowingSheet, content: {
+                //                            SafariWebView(url: URL(string: myPageListWebLink[index])!)
+                //                        })
+                //                        .listRowSeparator(.hidden)
+                //                    }
+                //                }
+                //                .listStyle(.plain)
+                //                .scrollDisabled(true)
+                
                 List {
-                    ForEach(Array(myPageList.enumerated()), id: \.1) { (index, item) in
-
-                        NavigationLink(destination: Webview(url: URL(string: myPageListWebLink[index])!)) {
-                            Text("\(item)")
+                    ForEach(0..<myPageList.count, id: \.self) { index in
+                        
+                        Button(action: {
+                            
+                            selectedUrl = URL(string: myPageListWebLink[index])!
+                            isShowingSheet.toggle()
+                            
+                        }){
+                            Text("\(myPageList[index])")
+                                .font(.bottles15)
                         }
-
-//                        Button(action: {
-//                            num = index
-//                            isShowingSheet.toggle()
-//
-////                            print("\(myPageListWebLink[index])")
-//                        }){
-//                            Text("\(item)")
-//                                .font(.bottles15)
-//                        }
-//                        .sheet(isPresented: $isShowingSheet, content: {
-//                            SafariWebView(url: URL(string: myPageListWebLink[num])!)
-//                        })
+                        .sheet(isPresented: $isShowingSheet, content: {
+                            SafariWebView(selectedUrl: $selectedUrl)
+                        })
                         .listRowSeparator(.hidden)
                     }
                 }
                 .listStyle(.plain)
                 .scrollDisabled(true)
                 
-//                List {
-//                    ForEach(0..<myPageList.count, id: \.self) { index in
-//
-////                        NavigationLink(destination: SafariWebView(url: URL(string: myPageListWebLink[index])!)) {
-////                            Text("\(item)")
-////                        }
-//
-//                        Button(action: {
-//                            print(num)
-//                            num = index
-//                            print(num)
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//                                isShowingSheet.toggle()
-//                            }
-////                            print("\(myPageListWebLink[index])")
-//                        }){
-//                            Text("\(myPageList[index])")
-//                                .font(.bottles15)
-//                        }
-//                        .sheet(isPresented: $isShowingSheet, content: {
-//                            SafariWebView(url: URL(string: myPageListWebLink[num])!)
-//                        })
-//                        .listRowSeparator(.hidden)
-//                    }
-//                }
-//                .listStyle(.plain)
-//                .scrollDisabled(true)
+                
             }
         }
     }
