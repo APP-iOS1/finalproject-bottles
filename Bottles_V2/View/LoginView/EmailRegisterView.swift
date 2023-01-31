@@ -74,7 +74,7 @@ struct EmailRegisterView: View {
                     Text("")
                         .frame(height: 7)
                 } else {
-                    passwordCheckFail ? Text("입력한 비밀번호와 다릅니다").font(.bottles12).foregroundColor(.red) : Text("비밀번호가 틀립니다").font(.bottles12).foregroundColor(.green)
+                    passwordCheckFail ? Text("입력한 비밀번호와 다릅니다").font(.bottles12).foregroundColor(.red) : Text("사용 가능한 비밀번호 입니다.").font(.bottles12).foregroundColor(.green)
                 }
             }
             
@@ -114,7 +114,7 @@ struct EmailRegisterView: View {
         registerPassword.range(of: passwordExpression, options: .regularExpression) == nil
     }
     
-    /// 비밀번호와 비밀번호 확인해주는 연산프로퍼티
+    /// 비밀번호와 비밀번호 확인이 서로 다르면 true 서로 같으면 false
     private var passwordCheckFail: Bool {
         passwordCheck != registerPassword
     }

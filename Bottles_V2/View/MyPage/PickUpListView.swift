@@ -11,6 +11,7 @@ struct PickUpListView: View {
     var body: some View {
         VStack{
             ScrollView{
+                // TODO: 예약 리스트 배열을 넣어 순회해줘야 함
                 ForEach(1..<4, id:\.self){ _ in
                     NavigationLink(destination: PickUpDetailView()){
                         PickUpListCell()
