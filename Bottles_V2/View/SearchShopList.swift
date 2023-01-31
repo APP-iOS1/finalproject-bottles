@@ -25,10 +25,12 @@ struct SearchShopList: View {
             // 검색어를 포함하는 Data가 없을 경우
             if filteredResult == [] {
                 Text("검색 결과가 없습니다.")
+                    .font(.bottles14)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top, 10)
                 Spacer()
             } else {
+                // TODO: 서버 Shop 데이터 연결
                 ScrollView {
                     ForEach(filteredResult, id: \.self) { shop in
                         NavigationLink {
@@ -48,7 +50,7 @@ struct SearchShopListCell: View {
     var shopInfo: BookMarkShop
     
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             // Shop 이미지
             RoundedRectangle(cornerRadius: 10)
                 .stroke(.black)
@@ -58,27 +60,30 @@ struct SearchShopListCell: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 115, height: 115)
+                            .frame(width: 120, height: 120)
+                            .cornerRadius(10)
                     } placeholder: {
                         Image("ready_image")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 115, height: 115)
+                            .frame(width: 120, height: 120)
+                            .cornerRadius(10)
                     }
                 }
                 .padding(.horizontal)
-            
+    
             VStack(alignment: .leading, spacing: 10) {
                 // Shop 이름
                 Text(shopInfo.shopName)
-                    .font(.title)
-                // Shop 소개
+                    .font(.bottles18)
+                    .bold()
+                // Shop 소개글
                 Text("바틀샵 소개 가나다라마 아자차 마바사가다")
-                    .font(.footnote)
+                    .font(.bottles14)
+                Spacer()
             }
             .foregroundColor(.black)
-            .bold()
-            .padding(.vertical)
+            .padding(.top, 5)
             
             Spacer()
             VStack {
@@ -92,6 +97,7 @@ struct SearchShopListCell: View {
             }
             .font(.title2)
             .padding()
+            .padding(.top, -5)
         }
         .frame(height: 130)
         .padding(.vertical, 5)

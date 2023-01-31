@@ -47,6 +47,7 @@ struct SearchViewSearchBar: View {
                 }, onCommit: {
                     doneTextFieldEdit = true
                 })
+                .font(.bottles16)
                 .multilineTextAlignment(.leading)
                 .submitLabel(.search)
                 .focused($focus)

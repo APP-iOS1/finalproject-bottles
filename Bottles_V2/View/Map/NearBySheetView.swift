@@ -9,6 +9,8 @@ import SwiftUI
 
 // MARK: - 둘러보기 디테일 뷰
 struct NearBySheetView: View {
+    // 테스트용 모델
+    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
     var body: some View {
         NavigationStack {
             HStack(alignment: .top) {
@@ -20,7 +22,7 @@ struct NearBySheetView: View {
             }
             
             VStack {
-                    BookMarkShopListCell()
+                BookMarkShopListCell(shopInfo: bookMarkTestStore.BookMarkShops[0])
             }
             Spacer()
         }

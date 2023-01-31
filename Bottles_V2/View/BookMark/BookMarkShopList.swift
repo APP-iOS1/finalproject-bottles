@@ -11,6 +11,8 @@ struct BookMarkShopList: View {
     // ActionSheet
     @State private var showingActionSheet: Bool = false
     @State private var selection = "기본순"
+    // 테스트용 모델
+    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
     
     var body: some View {
         VStack {
@@ -30,22 +32,14 @@ struct BookMarkShopList: View {
                 }
                 .padding(.trailing, 20)
             }
-            // TODO: ForEach로 BookMarkShopListCell에 Shop 데이터 넘겨줘야함
+            // TODO: 서버 Shop 데이터 연결
             ScrollView {
-                NavigationLink {
-                    BottleShopView()
-                } label: {
-                    BookMarkShopListCell()
-                }
-                NavigationLink {
-                    BottleShopView()
-                } label: {
-                    BookMarkShopListCell()
-                }
-                NavigationLink {
-                    BottleShopView()
-                } label: {
-                    BookMarkShopListCell()
+                ForEach(bookMarkTestStore.BookMarkShops, id: \.self) { shop in
+                    NavigationLink {
+                        BottleShopView()
+                    } label: {
+                        BookMarkShopListCell(shopInfo: shop)
+                    }
                 }
             }
         }
@@ -72,8 +66,11 @@ struct BookMarkShopList: View {
 }
 
 struct BookMarkShopListCell: View {
+    // Shop의 정보를 저장하는 변수
+    var shopInfo: BookMarkShop
+    
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             // Shop 이미지
             RoundedRectangle(cornerRadius: 10)
                 .stroke(.black)
@@ -83,19 +80,21 @@ struct BookMarkShopListCell: View {
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 115, height: 115)
+                            .frame(width: 120, height: 120)
+                            .cornerRadius(10)
                     } placeholder: {
                         Image("ready_image")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 115, height: 115)
+                            .frame(width: 120, height: 120)
+                            .cornerRadius(10)
                     }
                 }
                 .padding(.horizontal)
     
             VStack(alignment: .leading, spacing: 10) {
                 // Shop 이름
-                Text("와인앤모어")
+                Text(shopInfo.shopName)
                     .font(.bottles18)
                     .bold()
                 // Shop 소개글
@@ -104,7 +103,7 @@ struct BookMarkShopListCell: View {
                 Spacer()
             }
             .foregroundColor(.black)
-            .padding(.top, 10)
+            .padding(.top, 5)
             
             Spacer()
             VStack {
