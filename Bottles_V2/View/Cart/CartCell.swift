@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - 장바구니 Cell
 /// 장바구니 리스트의 셀
+// TODO: - 셀 각각 삭제 기능
 
 struct CartCell: View {
     

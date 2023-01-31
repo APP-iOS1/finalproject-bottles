@@ -10,6 +10,7 @@ import SwiftUI
 
 //MARK: - 장바구니 View
 /// 현재 로그인한 사용자의 장바구니를 보여주는 View
+// TODO: - 삭제 액션 추가
 
 struct CartView: View {
     
@@ -76,20 +77,18 @@ struct CartView: View {
                 Text("결제는 각 매장에서 진행됩니다.")
                     .font(.bottles13)
                     .padding(.top)
-                Button {
+                
+                NavigationLink(destination: ReservationPageView()) {
                     
-                    //예약하기 액션
-                    
-                } label: {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width : UIScreen.main.bounds.size.width-50, height: (UIScreen.main.bounds.size.width-50)/7)
-                        .overlay(Text("예약하기")
+                        .overlay(Text("예약하러 하기")
                             .foregroundColor(.white)
                             .font(.bottles18))
                             .bold()
                 }
+                .foregroundColor(.accentColor)
                 .padding(.bottom, 20)
-               
             }
             
         }

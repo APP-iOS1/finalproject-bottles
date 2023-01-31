@@ -25,7 +25,8 @@ struct NotificationCell: View {
                 .clipShape(Circle())
                 .padding([.leading, .trailing])
             
-            // MARK: - 가운데 텍스트(공지타이틀, 내용, 바틀샵 이름)
+            // MARK: - 가운데 텍스트
+            /// 공지타이틀, 내용, 바틀샵 이름
             VStack(alignment: .leading, spacing: 7) {
                 HStack {
                     // 공지 타이틀
