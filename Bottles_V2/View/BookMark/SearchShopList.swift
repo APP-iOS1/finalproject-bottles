@@ -29,22 +29,18 @@ struct SearchShopList: View {
 struct SearchShopListCell: View {
     var body: some View {
         HStack {
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(.black)
-                .frame(width: 150, height: 150)
-                .overlay {
-                    Image("oakDrum_Image")
+                    Image("bottleShop")
                          .resizable()
                          .aspectRatio(contentMode: .fit)
-                         .frame(width: 140, height: 140)
-                }
-                .padding()
+                         .cornerRadius(10)
+                         .frame(width: 120, height: 120)
+                         .padding(.horizontal)
     
             VStack(alignment: .leading, spacing: 10) {
                 Text("와인앤모어")
                     .font(.title)
-                Text("바틀샵 소개")
-                Text("위스키 럼 꼬냑")
+                Text("바틀샵 소개 가나다라마 아자차 마바사가다")
+                    .font(.footnote)
             }
             .foregroundColor(.black)
             .bold()
@@ -62,6 +58,8 @@ struct SearchShopListCell: View {
             .font(.title2)
             .padding()
         }
+        .frame(height: 130)
+        .padding(.vertical, 5)
     }
 }
 

@@ -11,37 +11,46 @@ struct SearchBottleList: View {
     // filter
     @State private var filterType: String = "최신 순"
     
+    var bottleName: String
+    
+    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    
+    var filteredResult: [BookMarkBottle] {
+        let bottles = bookMarkTestStore.BookMarkBottles
+        return bottles.filter {
+            $0.bottleName.contains(bottleName)
+        }
+    }
+    
     var body: some View {
         VStack {
             ScrollView {
-                SearchBottleListCell()
-                SearchBottleListCell()
-                SearchBottleListCell()
+                ForEach(filteredResult, id: \.self) { bottle in
+                    SearchBottleListCell(bottleInfo: bottle)
+                }
             }
         }
     }
 }
 
 struct SearchBottleListCell: View {
+    var bottleInfo: BookMarkBottle
+    
     var body: some View {
         HStack(alignment: .top) {
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(.black)
-                .frame(width: 150, height: 150)
-                .overlay {
                     Image("whisky_Image1")
                          .resizable()
                          .aspectRatio(contentMode: .fit)
-                         .frame(width: 140, height: 140)
-                }
-                .padding()
+                         .cornerRadius(10)
+                         .frame(width: 120, height: 120)
+                         .padding(.horizontal)
     
             VStack(alignment: .leading, spacing: 10) {
-                Text("킬호만 샤닉")
+                Text(bottleInfo.bottleName)
                     .font(.title3)
                 Text("350,000원")
                 NavigationLink {
-                    
+                    BottleShopView()
                 } label: {
                     HStack {
                         Image("MapMarker")
@@ -63,17 +72,24 @@ struct SearchBottleListCell: View {
                     Image(systemName: "bookmark.fill")
                 }
                 Spacer()
+                Button {
+                    
+                } label: {
+                    Image(systemName: "cart.badge.plus")
+                }
             }
             .font(.title2)
             .padding()
         }
+        .frame(height: 130)
+        .padding(.vertical, 5)
     }
 }
 
-struct SearchBottleList_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            SearchBottleList()
-        }
-    }
-}
+//struct SearchBottleList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            SearchBottleList()
+//        }
+//    }
+//}

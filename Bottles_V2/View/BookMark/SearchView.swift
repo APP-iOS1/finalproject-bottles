@@ -21,31 +21,32 @@ struct SearchView: View {
     @State var searchBarText: String = ""
     @State var isShowingSearchResult: Bool = false
     
+    @State var doneTextFieldEdit: Bool = false
+    
+    @FocusState var focus: Bool
+    
     var body: some View {
         VStack {
-            SearchViewSearchBar(searchBarText: $searchBarText)
+            SearchViewSearchBar(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
             
             if searchBarText == "" {
                 RecentlyItemList()
             } else {
-                SearchResultList(searchBarText: $searchBarText)
+                if !doneTextFieldEdit {
+                    SearchResultList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
+                } else {
+                    animate()
+                        .padding(.top, 10)
+                    SearchTapView(searchTap: selectedPicker, bottleName: searchBarText)
+                }
+                
 //                animate()
 //                    .padding(.top, 10)
 //                SearchTapView(searchTap: selectedPicker)
             }
         }
         .navigationBarHidden(true)
-//        .toolbar {
-//            ToolbarItem {
-//                HStack {
-//                    SearchViewSearchBar(searchBarText: $searchBarText)
-//                    CartViewNavigationLink()
-//                        .padding(.leading, 5)
-//                }
-//            }
-//        }
     }
-    
     // MARK: - Picker Animation 함수
     @ViewBuilder
     private func animate() -> some View {
@@ -79,17 +80,18 @@ struct SearchView: View {
             }
             .padding(.horizontal, 15)
         }
-
     }
 }
 
 struct SearchTapView: View {
     var searchTap: searchTapInfo
+    var bottleName: String
+    
     var body: some View {
         VStack {
             switch searchTap {
             case .bottle:
-                SearchBottleList()
+                SearchBottleList(bottleName: bottleName)
             case .shop:
                 SearchShopList()
             }

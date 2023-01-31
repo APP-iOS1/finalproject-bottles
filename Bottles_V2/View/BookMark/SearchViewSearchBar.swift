@@ -11,6 +11,10 @@ struct SearchViewSearchBar: View {
     @Binding var searchBarText: String
     @Environment(\.dismiss) private var dismiss
     
+    @Binding var doneTextFieldEdit: Bool
+    
+    @FocusState var focus: Bool
+    
     var body: some View {
         
         // MARK: - SearchBar
@@ -27,9 +31,18 @@ struct SearchViewSearchBar: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.accentColor)
                     .bold()
-                TextField("원하는 술, 바틀샵 검색", text: $searchBarText)
-                    .multilineTextAlignment(.leading)
-                    .submitLabel(.search)
+                TextField("원하는 술, 바틀샵 검색", text: $searchBarText, onEditingChanged: { bool in
+                    if bool {
+                        doneTextFieldEdit = false
+                    } else {
+                        doneTextFieldEdit = true
+                    }
+                }, onCommit: {
+                    doneTextFieldEdit = true
+                })
+                .multilineTextAlignment(.leading)
+                .submitLabel(.search)
+                .focused($focus)
                 
                 if !searchBarText.isEmpty {
                     Button(action: {
