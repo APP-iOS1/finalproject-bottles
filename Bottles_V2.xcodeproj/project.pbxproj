@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		020DEB7329878CC300ED3DD6 /* ShopStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020DEB7229878CC300ED3DD6 /* ShopStore.swift */; };
-		020DEB792987AADD00ED3DD6 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020DEB782987AADD00ED3DD6 /* UserStore.swift */; };
 		029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A23D0297A58BF00E7D602 /* BottleDataStore.swift */; };
 		0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F564297677E60023E745 /* Bottles_V2App.swift */; };
 		0427F569297677E80023E745 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0427F568297677E80023E745 /* Assets.xcassets */; };
@@ -92,6 +90,8 @@
 		D70CE4F129767EE900DFC8CE /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */; };
 		D70CE4F329767EE900DFC8CE /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F229767EE900DFC8CE /* AWSDataStorePlugin */; };
 		D70CE4F529767EE900DFC8CE /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F429767EE900DFC8CE /* Amplify */; };
+		D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBD7EB2988EA52002684DC /* UserDataStore.swift */; };
+		D7DBD7EE2988EA52002684DC /* ShopDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */; };
 		E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E0D5C3A6693423DABAFB70 /* Curation+Schema.swift */; };
 		ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE1FFF83D5D61F5453BF31 /* Curation.swift */; };
 		FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */; };
@@ -117,8 +117,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		020DEB7229878CC300ED3DD6 /* ShopStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopStore.swift; sourceTree = "<group>"; };
-		020DEB782987AADD00ED3DD6 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		029A23D0297A58BF00E7D602 /* BottleDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleDataStore.swift; sourceTree = "<group>"; };
 		0427F561297677E60023E745 /* Bottles_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bottles_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0427F564297677E60023E745 /* Bottles_V2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2App.swift; sourceTree = "<group>"; };
@@ -210,6 +208,8 @@
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		D5FCB5C52987874E004BC279 /* SearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
+		D7DBD7EB2988EA52002684DC /* UserDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
+		D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDataStore.swift; sourceTree = "<group>"; };
 		DAA16DBB1B2143E762C79565 /* Pods-Bottles_V2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.release.xcconfig"; sourceTree = "<group>"; };
 		DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3DB226594BFE981A9A631ED /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
@@ -534,8 +534,8 @@
 		D70CE4F82976823500DFC8CE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				020DEB782987AADD00ED3DD6 /* UserStore.swift */,
-				020DEB7229878CC300ED3DD6 /* ShopStore.swift */,
+				D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */,
+				D7DBD7EB2988EA52002684DC /* UserDataStore.swift */,
 				029A23D0297A58BF00E7D602 /* BottleDataStore.swift */,
 			);
 			path = ViewModel;
@@ -801,6 +801,7 @@
 				D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */,
 				7F76AAF6298780B100AAEBCA /* View+.swift in Sources */,
 				27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */,
+				D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
 				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
 				AE1070092977D8AC00AF9D1B /* SearchShopList.swift in Sources */,
@@ -809,6 +810,7 @@
 				7F2142BC2977956D0046D420 /* SettingView.swift in Sources */,
 				D5FCB5C62987874E004BC279 /* SearchResultList.swift in Sources */,
 				26D0E4382979164400524943 /* (null) in Sources */,
+				D7DBD7EE2988EA52002684DC /* ShopDataStore.swift in Sources */,
 				9216C1BF2977B5E100217C7F /* ReservedView_BottleShop.swift in Sources */,
 				27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
@@ -829,7 +831,6 @@
 				04F8B89C297A64FA0098DE93 /* SignupView.swift in Sources */,
 				CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */,
 				04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */,
-				020DEB792987AADD00ED3DD6 /* UserStore.swift in Sources */,
 				04F8B8A0297A83020098DE93 /* ConfirmationView.swift in Sources */,
 				9FA507820644AAAE35CB724F /* User.swift in Sources */,
 				04F8B89A297A64900098DE93 /* SessionManager.swift in Sources */,
@@ -843,7 +844,6 @@
 				AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */,
 				FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */,
 				E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */,
-				020DEB7329878CC300ED3DD6 /* ShopStore.swift in Sources */,
 				029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */,
 				ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */,
 				97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */,
