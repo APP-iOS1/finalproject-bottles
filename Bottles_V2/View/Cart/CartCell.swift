@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// MARK: - 장바구니 Cell
+/// 장바구니 리스트의 셀
+
 struct CartCell: View {
     
     @State private var isSelected: Bool = false
@@ -16,7 +19,8 @@ struct CartCell: View {
     
     var body: some View {
         VStack {
-            // MARK: - 선택, 바틀샵 이름, 삭제
+            // MARK: - Cell의 상단
+            /// 선택버튼 , 바틀샵 이름, 삭제 버튼
             HStack {
                 selectButton
                 Text("바틀샵 이름")
@@ -28,14 +32,15 @@ struct CartCell: View {
             .padding(.bottom, -10)
             .padding(.top, -5)
             
-            // MARK: - 사진, 상품명, 가격, 개수
+            // MARK: - Cell의 하단
+            /// bottle의 사진, 상품명, 가격, 품목의 개수와 증감 버튼
             HStack {
-                // 이미지 자리
-                Image("whisky_Image1")
-                    .resizable()
+                // bottle의 사진
+                AsyncImage(url: URL(string: ""))
                     .frame(width: UIScreen.main.bounds.size.width/4, height: UIScreen.main.bounds.size.width/4)
                     .padding(.trailing, 15)
                 
+                // 상품명, 가격, 품목의 개수, 증감버튼
                 VStack(alignment: .leading, spacing: 5) {
                     Text("디 오리지널 골드바 위스키")
                         .font(.bottles13)
@@ -102,7 +107,6 @@ struct CartCell: View {
                 .bold()
                 .frame(width: 22)
             
-            //TODO: - 최대 개수 제약하기
             Button {
                 amount += 1
             } label : {
