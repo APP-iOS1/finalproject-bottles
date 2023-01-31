@@ -74,7 +74,7 @@ struct EmailRegisterView: View {
                     Text("")
                         .frame(height: 7)
                 } else {
-                    passwordCheckFail ? Text("비밀번호가 틀립니다") : Text("비밀번호가 틀립니다")
+                    passwordCheckFail ? Text("입력한 비밀번호와 다릅니다").font(.bottles12).foregroundColor(.red) : Text("비밀번호가 틀립니다").font(.bottles12).foregroundColor(.green)
                 }
             }
             
