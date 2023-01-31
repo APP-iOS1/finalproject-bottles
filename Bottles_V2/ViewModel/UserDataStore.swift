@@ -27,31 +27,18 @@ import Combine
 
 
 // User 데이터를 받아올 때는 로그인, 팔로우여부, 검색 등 행동 시에만 갱신되고, 한번 저장된 데이터는 published로 앱 내에서 저장하도록 함.
-class UserStore : ObservableObject {
+class UserDataStore : ObservableObject {
     
     // User별 세부 데이터를 저장하는 변수
     @Published var user: User?
     
-    // 로그인한 사용자 정보
-    @Published var loginedUserEmail : String? = "test@naver.com"
-    @Published var loginedUserID : String?
-    @Published var loginedUserNickname : String?
-    @Published var followShopList : [String]?
-    @Published var recentlyBottles : [String]?
-    @Published var followItemList : [String]?
-    @Published var pickupList : [String]?
-    @Published var userPhoneNumber : String?  //82+1012345678 형식으로 데이터 변환 필요
-
     
     // 로그인된 User의 Email을 기반으로 하위 데이터를 전체 가져옴
     // 로그인 시 fetch, 코드상에서 데이터 수정된 후에 fetch 용도로 사용함
-    func getUserDataWithEmail() async {
+    func getUserDataWithEmail(userEmail : String) async {
         let user = User.keys
         do {
-            self.user = try await Amplify.DataStore.query(User.self, where: user.email == "test@naver.com")[0]
-//            let result = try await Amplify.DataStore.query(User.self, where: user.email == "test@naver.com")[0]
-            
-            
+            self.user = try await Amplify.DataStore.query(User.self, where: user.email == userEmail)[0]
             
 //            // 1. 사용자 고유 ID
 //            self.loginedUserID = result.id
@@ -101,10 +88,14 @@ class UserStore : ObservableObject {
     }
     
     
-    
-    func deleteUser() async {
+    // MARK: - DB에서 삭제하는 코드.
+    // TODO: Auth에서 삭제하는 코드는 별도로 작업 필요함
+    func deleteUser(user: AuthUser) async {
         do {
-            try await Amplify.DataStore.delete(User(id: "hihi"))
+            try await Amplify.DataStore.delete(User(id: user.userId))
+            /*
+             Auth에서 삭제하는 코드 작성 부분
+             */
             print("삭제 완료")
         } catch let error as DataStoreError {
             print("Error deleting item: \(error)")
@@ -112,6 +103,8 @@ class UserStore : ObservableObject {
             print("Unexpected error: \(error)")
         }
     }
+    
+    
     
 }
 

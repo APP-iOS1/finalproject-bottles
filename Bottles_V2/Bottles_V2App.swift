@@ -33,7 +33,7 @@ struct Bottles_V2App: App {
     @ObservedObject var sessionManager = SessionManager()
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
-    @ObservedObject var userStore = UserStore()
+    @ObservedObject var userDataStore = UserDataStore()
    
     init() {
         do {
@@ -68,7 +68,7 @@ struct Bottles_V2App: App {
                 .environmentObject(sessionManager)
                 .environmentObject(bottleDataStore)
                 .environmentObject(shopDataStore)
-                .environmentObject(userStore)
+                .environmentObject(userDataStore)
             }
         }
     }
