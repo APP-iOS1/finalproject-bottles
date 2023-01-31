@@ -9,6 +9,10 @@ import SwiftUI
 import Amplify
 struct MainTabView: View {
     @EnvironmentObject var sessionManager : SessionManager
+    @EnvironmentObject var shopDataStore : ShopDataStore
+    @EnvironmentObject var userDataStore : UserDataStore
+    @EnvironmentObject var bottleDataStore : BottleDataStore
+    
     let user: AuthUser
     
     @State private var selection: Int = 1
@@ -39,6 +43,11 @@ struct MainTabView: View {
             }.tag(4)
         }
         .toolbarBackground(Color.white, for: .tabBar)
+        .task{
+            await shopDataStore.fetchShopList()
+            await userDataStore.fetchUserWithEmail(userEmail: user.username)
+            await bottleDataStore.fetchBottleList()
+        }
     }
 }
 

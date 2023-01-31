@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BottleView: View {
+    @EnvironmentObject var userDataStore : UserDataStore
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowingSheet: Bool = false
     
@@ -49,6 +50,11 @@ struct BottleView: View {
             if isShowingSheet {
                 ReservationView(isShowing: $isShowingSheet)
             }
+        }
+        .task{
+            //TODO: bottleId연동하기
+            await userDataStore.updateRecentlyBottle(bottleId: "123")
+            
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(content: {

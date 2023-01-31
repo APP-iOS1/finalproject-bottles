@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3bottlesstorage1251cc4e",
+  "bucketName": "bottles-storage-1251cc4e",
+  "policyUUID": "780311e6",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "READ",
+    "CREATE_AND_UPDATE",
+    "DELETE"
+  ]
+}

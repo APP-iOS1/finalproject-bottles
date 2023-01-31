@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RecentlyItemList: View {
+    @EnvironmentObject var userDataStore: UserDataStore
+    
     var recentSearches: [String] = ["와인", "와인앤모어", "위스키", "선물", "킬호만"]
     
     var body: some View {
@@ -42,6 +44,9 @@ struct RecentlyItemList: View {
                 RecentlyItemListCell()
                 RecentlyItemListCell()
             }
+        }.task{
+            // TODO: 더미데이터 수정하기
+            await userDataStore.fetchUserWithEmail(userEmail: "test@naver.com")
         }
     }
 }
