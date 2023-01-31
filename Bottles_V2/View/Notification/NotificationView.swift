@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+//MARK: - 알림 View
+/// 현재 로그인한 사용자의 알림을 보여주는 View
+
 struct NotificationView: View {
     
     @State private var onlyReservation : Bool = false
