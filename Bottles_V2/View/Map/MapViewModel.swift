@@ -11,6 +11,8 @@ import CoreLocation
 final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager?
     @Published var coord = (0.0, 0.0)
+    // 마커 배열 생성
+//    @Published var marker: [Marker] = []
     
     func checkIfLocationServicesIsEnabled() {
 
@@ -22,6 +24,8 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             print("Show an alert letting them know this is off and to go turn i on.")
         }
     }
+    
+    // TODO: - CoreLocation 보라색 에러 해결하기
     /*
      Task { [weak self] in
 
@@ -30,6 +34,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
          }
      }
     */
+    
     func checkLocationAuthorization() {
         guard let locationManager = locationManager else { return }
         

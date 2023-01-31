@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - 둘러보기 디테일 뷰
 struct NearBySheetView: View {
     var body: some View {
         NavigationStack {
@@ -19,12 +20,10 @@ struct NearBySheetView: View {
             }
             
             VStack {
-//                NearBySheetCell()
                     BookMarkShopListCell()
             }
             Spacer()
         }
-//        .background(Color.white)
     }
 }
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - 둘러보기 뷰
 fileprivate enum Constants {
     static let radius: CGFloat = 16
     static let indicatorHeight: CGFloat = 6
@@ -27,7 +28,7 @@ struct BottomSheetView<Content: View>: View {
     private var offset: CGFloat {
         isOpen ? 0 : maxHeight - minHeight
     }
-
+// MARK: - indicator 속성 설정
     private var indicator: some View {
         RoundedRectangle(cornerRadius: Constants.radius)
             .fill(Color.secondary)
@@ -40,7 +41,9 @@ struct BottomSheetView<Content: View>: View {
     }
 
     init(isOpen: Binding<Bool>, maxHeight: CGFloat, @ViewBuilder content: () -> Content) {
-        self.minHeight = 100
+        // 둘러보기 Sheet 최소 창 크기
+        self.minHeight = 50
+        // 둘러보기 Sheet 최대 창 크기
         self.maxHeight = 700
         self.content = content()
         self._isOpen = isOpen
