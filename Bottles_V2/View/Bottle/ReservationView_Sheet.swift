@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - 예약하기
+/// 픽업 안내 사항을 확인하고 바틀의 수량을 선택하는 뷰 입니다.
 struct ReservationView_Sheet: View {
     @State private var count: Int = 1
     @State private var isShowingAlert: Bool = false
@@ -17,32 +19,27 @@ struct ReservationView_Sheet: View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 25) {
                 // MARK: - 픽업 매장 이름
-                VStack(alignment: .leading, spacing: 7) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text("픽업 매장")
-                        .font(.bottles15)
-                        .fontWeight(.bold)
+                        .modifier(titleModifier())
                     Text("바틀샵 이름")
-                        .font(.bottles13)
-                        .fontWeight(.medium)
+                        .modifier(contentModifier())
                 }
        
                 // MARK: - 픽업 안내
-                VStack(alignment: .leading, spacing: 7) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text("픽업 안내")
-                        .font(.bottles15)
-                        .fontWeight(.bold)
+                        .modifier(titleModifier())
                         
                     Text("예약 후 예약 확정 알림이 올 때까지 기다려주세요.\n예약 확정 알림을 받은 뒤 3일 이내에 픽업해주세요.")
-                        .font(.bottles13)
-                        .fontWeight(.medium)
-                        .frame(height: 45)
+                        .modifier(contentModifier())
+                        .frame(height: 35)
                 }
                 
                 // MARK: - 바틀 예약 수량
                 HStack {
                     Text("수량")
-                        .font(.bottles15)
-                        .fontWeight(.bold)
+                        .modifier(titleModifier())
                     
                     Spacer()
                     
@@ -86,6 +83,7 @@ struct ReservationView_Sheet: View {
                         .frame(width: 110, height: 30)
                     }
                 }
+                
                 // MARK: 장바구니 담기 버튼 및 바로 예약하기 버튼
                 HStack {
                     // MARK: - 장바구니 담기 버튼
@@ -99,10 +97,12 @@ struct ReservationView_Sheet: View {
                                 .modifier(AccentColorButtonModifier())
                         }
                     }
+                    // 장바구니 담기 버튼 클릭 시 Alert창 present
                     .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
                         Button("OK", role: .destructive) { isShowingCart.toggle() }
                         Button("cancel", role: .cancel) { }
                     }
+                    // Alert창에서 OK 버튼 클릭 시 장바구니 뷰로 이동
                     .navigationDestination(isPresented: $isShowingCart) {
                         CartView()
                     }
@@ -121,10 +121,9 @@ struct ReservationView_Sheet: View {
             }
         }
         .padding()
-        
     }
-
 }
+
 
 //struct ReservationView_Sheet_Previews: PreviewProvider {
 //    static var previews: some View {

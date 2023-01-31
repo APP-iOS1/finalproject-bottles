@@ -7,12 +7,12 @@
 
 import SwiftUI
 
+// MARK: - 예약 완료
 struct ReservedView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowing: Bool = true
     
     var body: some View {
-        // MARK: 예약 완료
         NavigationStack {
             ZStack {
                Circle()
@@ -59,13 +59,13 @@ struct ReservedView: View {
             }
             
         }
-        .offset(y: -110)
+        .offset(y: -60)
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop()
                 .presentationDetents([.height(210)])
         }
+        .navigationBarBackButtonHidden(true)
     }
-    
 }
 
 struct ReservedView_Previews: PreviewProvider {

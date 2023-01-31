@@ -7,11 +7,10 @@
 
 import SwiftUI
 
+// MARK: - 예약자 정보 (이름, 전화번호, 생년월일)
 struct ReservationPageView_Info: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            
-            // MARK: 예약자 정보 - 이름, 전화번호, 생년월일
             HStack {
                 Text("예약자 정보")
                     .font(.bottles16)

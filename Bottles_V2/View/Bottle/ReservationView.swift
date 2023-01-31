@@ -8,7 +8,9 @@
 import SwiftUI
 import Combine
 
-// 예약하기 Modal View
+// MARK: - 예약하기 Modal Custom View
+/// Custom View의 present 및 dismiss 기능을 위한 뷰입니다.
+/// 데이터 적용이 필요한 부분은 ReservationView_Sheet입니다.
 struct ReservationView: View {
     @Binding var isShowing: Bool
     @State var offset = UIScreen.main.bounds.height

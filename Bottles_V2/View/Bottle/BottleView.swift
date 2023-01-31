@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - 바틀 정보
+/// 바틀의 정보 및 해당 바틀을 판매하는 바틀샵 리스트를 표시하는 뷰입니다.
 struct BottleView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowingSheet: Bool = false
@@ -15,13 +17,13 @@ struct BottleView: View {
         NavigationStack {
             ZStack {
                 ScrollView {
-                    // MARK: - 바틀 기본 정보 (바틀 이름, 가격, 바틀샵 이름)
+                    // 바틀 기본 정보 (바틀 이미지, 바틀 이름, 북마크, 바틀 가격, 바틀샵 이름)
                     BottleView_Info()
                     
-                    // MARK: - 바틀 상세 정보
+                    // Tasting Notes, Information, Pairing
                     BottleView_Detail()
                     
-                    // MARK: - 바틀샵 리스트
+                    // 해당 바틀을 판매하는 바틀샵 리스트
                     VStack(alignment: .leading) {
                         Text("이 상품의 다른 바틀샵")
                             .font(.bottles15)
@@ -29,8 +31,10 @@ struct BottleView: View {
                             
                         ForEach(0..<3, id: \.self) {_ in
                             NavigationLink {
+                                // 바틀샵 뷰로 이동
                                 BottleShopView()
                             } label: {
+                                // 바틀샵 셀
                                 BottleView_ShopCell()
                             }
                         }
@@ -51,9 +55,9 @@ struct BottleView: View {
                     .padding()
                 }
             }
-            if isShowingSheet {
-                ReservationView(isShowing: $isShowingSheet)
-            }
+            
+            // 예약하기 버튼 클릭 시 예약하기 뷰 present
+            ReservationView(isShowing: $isShowingSheet)
         }
         // back button
         .navigationBarBackButtonHidden(true)
