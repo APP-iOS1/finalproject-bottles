@@ -15,22 +15,29 @@ struct BottleView: View {
         NavigationStack {
             ZStack {
                 ScrollView {
-                    // 바틀 정보
+                    // MARK: - 바틀 기본 정보 (바틀 이름, 가격, 바틀샵 이름)
                     BottleView_Info()
                     
-                    // 바틀샵 리스트
+                    // MARK: - 바틀 상세 정보
+                    BottleView_Detail()
+                    
+                    // MARK: - 바틀샵 리스트
                     VStack(alignment: .leading) {
                         Text("이 상품의 다른 바틀샵")
                             .font(.bottles15)
                             .fontWeight(.bold)
                             
                         ForEach(0..<3, id: \.self) {_ in
-                            BottleView_ShopCell()
+                            NavigationLink {
+                                BottleShopView()
+                            } label: {
+                                BottleView_ShopCell()
+                            }
                         }
                     }
                     .padding()
                     
-                    // 예약하기 버튼
+                    // MARK: - 예약하기 버튼
                     Button(action: {
                         isShowingSheet.toggle()
                     }) {
@@ -38,9 +45,7 @@ struct BottleView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 358, height: 51)
                             Text("예약하기")
-                                .foregroundColor(.white)
-                                .font(.bottles18)
-                                .fontWeight(.bold)
+                                .modifier(AccentColorButtonModifier())
                         }
                     }
                     .padding()
@@ -50,6 +55,7 @@ struct BottleView: View {
                 ReservationView(isShowing: $isShowingSheet)
             }
         }
+        // back button
         .navigationBarBackButtonHidden(true)
         .toolbar(content: {
             ToolbarItem (placement: .navigationBarLeading)  {
@@ -62,8 +68,8 @@ struct BottleView: View {
     }
 }
 
-struct BottleView_Previews: PreviewProvider {
-    static var previews: some View {
-        BottleView()
-    }
-}
+//struct BottleView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BottleView()
+//    }
+//}

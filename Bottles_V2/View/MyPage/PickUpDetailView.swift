@@ -38,6 +38,8 @@ struct PickUpDetailView: View {
                     
                     // MARK: - 픽업 매장 HStack내의 주소복사 버튼
                     Button(action: {
+                        
+                        // TODO: 주소를 copyToClipboard에 매개변수로 넘겨준다.
                         copyToClipboard()
                         isShowingPasted.toggle()
                         
@@ -61,6 +63,8 @@ struct PickUpDetailView: View {
                     }
                     // MARK: - 예약 세부 상품 HStack
                     HStack (alignment: .top){
+                        
+                        // TODO: 예약 상품에 대한 이미지
                         AsyncImage(url: URL(string: "https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/e8e8b60a-770c-4f67-ba67-ee3300ce0a5d.webp")) { image in
                             image
                                 .resizable()
@@ -74,7 +78,7 @@ struct PickUpDetailView: View {
                         VStack(alignment: .leading){
                             Text("디 오리지널 골드바 위스키")
                                 .font(.bottles13)
-                            Text("10,9000원")
+                            Text("109,000원")
                                 .font(.bottles15)
                                 .padding(.vertical, 1)
                                 .bold()

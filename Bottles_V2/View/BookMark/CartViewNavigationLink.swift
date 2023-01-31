@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// CartView로 이동하는 버튼
 struct CartViewNavigationLink: View {
     var body: some View {
         NavigationLink {
