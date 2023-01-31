@@ -7,30 +7,35 @@
 
 import SwiftUI
 
-enum tapInfo : String, CaseIterable {
+// BookMark Tab의 종류를 담은 열거형
+enum tabInfo : String, CaseIterable {
     case bottle = "저장한 상품"
     case shop = "저장한 바틀샵"
 }
 
 struct BookMarkView: View {
-    // tap picker
-    @State private var selectedPicker: tapInfo = .bottle
+    
+    // tab picker
+    @State private var selectedPicker: tabInfo = .bottle
     @Namespace private var animation
     
     var body: some View {
         NavigationStack {
             VStack {
                 HStack {
+                    // SearchView 로 이동하는 검색바 모양 버튼
                     NavigationLink {
                         SearchView()
                     } label: {
                         SearchViewNavigationLabel()
                     }
+                    // CartView 로 이동하는 버튼
                     CartViewNavigationLink()
                         .padding(.leading, 5)
                 }
+                // tab picker 애니메이션 함수 및 탭뷰
                 animate()
-                BookMarkTapView(bookMarkTap: selectedPicker)
+                BookMarkTabView(bookMarkTab: selectedPicker)
             }
         }
     }
@@ -40,7 +45,7 @@ struct BookMarkView: View {
     private func animate() -> some View {
         VStack {
             HStack {
-                ForEach(tapInfo.allCases, id: \.self) { item in
+                ForEach(tabInfo.allCases, id: \.self) { item in
                     VStack {
                         Text(item.rawValue)
                             .kerning(-1)
@@ -73,11 +78,11 @@ struct BookMarkView: View {
 }
 
 
-struct BookMarkTapView: View {
-    var bookMarkTap: tapInfo
+struct BookMarkTabView: View {
+    var bookMarkTab: tabInfo
     var body: some View {
         VStack {
-            switch bookMarkTap {
+            switch bookMarkTab {
             case .bottle:
                 BookMarkBottleList()
             case .shop:

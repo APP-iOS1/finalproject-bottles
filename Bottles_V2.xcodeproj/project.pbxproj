@@ -528,13 +528,13 @@
 		D5BC69F62988B42A0066A2DC /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				AEE99FB329799B59001A155E /* RecentlyItemList.swift */,
-				AE1070062977D64100AF9D1B /* SearchBottleList.swift */,
-				D5FCB5C52987874E004BC279 /* SearchResultList.swift */,
-				AE1070082977D8AC00AF9D1B /* SearchShopList.swift */,
 				AE1070022977CC9F00AF9D1B /* SearchView.swift */,
-				AE1070042977D24200AF9D1B /* SearchViewNavigationLabel.swift */,
+				AEE99FB329799B59001A155E /* RecentlyItemList.swift */,
+				D5FCB5C52987874E004BC279 /* SearchResultList.swift */,
+				AE1070062977D64100AF9D1B /* SearchBottleList.swift */,
+				AE1070082977D8AC00AF9D1B /* SearchShopList.swift */,
 				AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */,
+				AE1070042977D24200AF9D1B /* SearchViewNavigationLabel.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 테스트용
 struct BookMarkBottle : Hashable {
     let bottleName: String
     let shopName: String
