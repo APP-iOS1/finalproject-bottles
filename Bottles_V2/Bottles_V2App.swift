@@ -65,10 +65,10 @@ struct Bottles_V2App: App {
                 
             case .session(let user):
                 MainTabView(user: user)
-                .environmentObject(sessionManager)
-                .environmentObject(bottleDataStore)
-                .environmentObject(shopDataStore)
-                .environmentObject(userStore)
+                    .environmentObject(sessionManager)
+                    .environmentObject(bottleDataStore)
+                    .environmentObject(shopDataStore)
+                    .environmentObject(userStore)
             }
         }
     }

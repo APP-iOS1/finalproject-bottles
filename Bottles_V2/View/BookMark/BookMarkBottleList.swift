@@ -11,6 +11,8 @@ struct BookMarkBottleList: View {
     // ActionSheet (iOS 14 이하 - ActionSheet, iOS 15 이상 - confirmationDialog 사용해야함)
     @State private var showingActionSheet: Bool = false
     @State private var selection = "기본순"
+    // 테스트용 모델
+    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
     
     var body: some View {
         VStack {
@@ -30,11 +32,11 @@ struct BookMarkBottleList: View {
                 }
                 .padding(.trailing, 20)
             }
-            // TODO: ForEach로 BookMarkBottleListCell에 Bottle 데이터 넘겨줘야함, Bottle DetailView로 이동하는 NavigationLink 추가해야함
+            // TODO: 서버 Bottle 데이터 연결
             ScrollView {
-                BookMarkBottleListCell()
-                BookMarkBottleListCell()
-                BookMarkBottleListCell()
+                ForEach(bookMarkTestStore.BookMarkBottles, id: \.self) { bottle in
+                    BookMarkBottleListCell(bottleInfo: bottle)
+                }
             }
         }
         // MARK: - 정렬 ActionSheet
@@ -45,7 +47,7 @@ struct BookMarkBottleList: View {
             } label: {
                 Text("기본순")
             }
-
+            
             Button("신상품순") {
                 selection = "신상품순"
             }
@@ -62,30 +64,41 @@ struct BookMarkBottleList: View {
 }
 
 struct BookMarkBottleListCell: View {
+    // Bottle의 정보를 저장하는 변수
+    var bottleInfo: BookMarkBottle
+    
     var body: some View {
         HStack(alignment: .top) {
-            // Bottle 이미지
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(.black)
-                .frame(width: 120, height: 120)
-                .overlay {
-                    AsyncImage(url: URL(string: "https://kanashop.kr/web/product/big/201903/97ef5cee30f4cd6072fd736831623d2e.jpg")) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 115, height: 115)
-                    } placeholder: {
-                        Image("ready_image")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 115, height: 115)
+            // 이미지를 누르면 Bottle Detail View로 이동
+            NavigationLink {
+                BottleView()
+            } label: {
+                // Bottle 이미지
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(.black)
+                    .frame(width: 120, height: 120)
+                    .overlay {
+                        AsyncImage(url: URL(string: "https://kanashop.kr/web/product/big/201903/97ef5cee30f4cd6072fd736831623d2e.jpg")) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 120, height: 120)
+                                .cornerRadius(10)
+                        } placeholder: {
+                            Image("ready_image")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 120, height: 120)
+                                .cornerRadius(10)
+                        }
                     }
-                }
-                .padding(.horizontal)
+                    .padding(.horizontal)
+            }
+            
     
             VStack(alignment: .leading, spacing: 10) {
                 // Bottle 이름
-                Text("킬호만 샤닉")
+                Text(bottleInfo.bottleName)
                     .font(.bottles14)
                 // Bottle 가격
                 Text("350,000원")
@@ -101,7 +114,7 @@ struct BookMarkBottleListCell: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 20)
                         // Shop 이름
-                        Text("와인앤모어")
+                        Text(bottleInfo.shopName)
                             .font(.bottles14)
                             .foregroundColor(.black)
                     }

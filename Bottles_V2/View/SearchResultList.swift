@@ -15,19 +15,20 @@ import SwiftUI
 ///현재 bottle만 검색 가능
 
 struct SearchResultList: View {
-    
+    // 검색바에 입력된 Text
     @Binding var searchBarText: String
-    @StateObject var testModel: BookMarkTestStore = BookMarkTestStore()
-    
+    // 검색을 완료했는지 판단하는 Bool 값
     @Binding var doneTextFieldEdit: Bool
-    
+    // 검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
     @FocusState var focus: Bool
+    // 테스트용 모델
+    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
     
     var body: some View {
         List {
-            ForEach (testModel.BookMarkBottles, id: \.self) { bottle in
+            ForEach (bookMarkTestStore.BookMarkBottles, id: \.self) { bottle in
                 
-                //검색어와 겹치는 단어가 있는지 없는지 확인
+                // 검색어와 겹치는 단어가 있는지 없는지 확인
                 if bottle.bottleName.contains(searchBarText) {
                     Button {
                         doneTextFieldEdit = true

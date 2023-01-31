@@ -13,6 +13,7 @@ struct SearchViewNavigationLabel: View {
         HStack {
             HStack {
                 Text("원하는 술, 바틀샵 검색")
+                    .font(.bottles16)
                     .foregroundColor(.black)
                     .padding(.leading, 5)
                 Spacer()
