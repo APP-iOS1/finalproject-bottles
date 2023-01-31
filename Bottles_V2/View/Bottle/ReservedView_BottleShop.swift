@@ -16,6 +16,7 @@ struct ReservedView_BottleShop: View {
                 .font(.bottles16)
                 .fontWeight(.bold)
             
+            // MARK: - 픽업한 바틀샵
             BottleView_ShopCell()
         }
         .padding()

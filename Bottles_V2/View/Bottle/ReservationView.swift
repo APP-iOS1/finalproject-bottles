@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 
+// 예약하기 Modal View
 struct ReservationView: View {
     @Binding var isShowing: Bool
     @State var offset = UIScreen.main.bounds.height

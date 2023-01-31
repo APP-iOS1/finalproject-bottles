@@ -24,6 +24,7 @@ struct ReservationPageView: View {
                         Spacer()
                         
                         HStack {
+                            // MARK: - 예약 상품 총 개수
                             Text("2건")
                                 .font(.bottles16)
                                 .fontWeight(.bold)
@@ -35,47 +36,17 @@ struct ReservationPageView: View {
                         }
                     }
                     
-                    // 예약 상품 리스트
+                    // MARK: - 예약 상품 리스트
                     ForEach(0..<2, id: \.self) { _ in
                         ReservationPageView_BottleCell()
                     }
                 }
                 .padding()
                 
-                VStack(alignment: .leading, spacing: 15) {
-                    
-                    // MARK: 예약자 정보 - 이름, 전화번호, 생년월일
-                    HStack {
-                        Text("예약자 정보")
-                            .font(.bottles16)
-                            .fontWeight(.bold)
-                        
-                        Spacer()
-                        
-                        Image("arrowBottom")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 9, height: 9)
-                    }
-                    VStack(alignment: .leading, spacing: 7) {
-                        HStack {
-                            Text("이름")
-                            Text("안은노")
-                        }
-                        HStack {
-                            Text("전화번호")
-                            Text("010-0000-0000")
-                        }
-                        HStack {
-                            Text("생년월일")
-                            Text("1998-00-00")
-                        }
-                    }
-                    .font(.bottles15)
-                    .fontWeight(.medium)
-                }
-                .padding()
+                // MARK: - 예약자 정보
+                ReservationPageView_Info()
                 
+                // MARK: - 예약 체크 버튼
                 Button(action: {
                     check.toggle()
                 }) {
@@ -98,7 +69,7 @@ struct ReservationPageView: View {
                     .font(.bottles13)
                     .fontWeight(.medium)
                 
-                // 예약하기 버튼
+                // MARK: - 예약하기 버튼
                 Button(action: {
                     if check {
                         isShowing.toggle()
@@ -109,16 +80,15 @@ struct ReservationPageView: View {
                             .opacity(check ? 1 : 0.5)
                             .frame(width: 358, height: 51)
                         Text("예약하기")
-                            .foregroundColor(.white)
-                            .font(.bottles18)
-                            .fontWeight(.bold)
+                            .modifier(AccentColorButtonModifier())
                     }
                 }
                 .padding()
                 .fullScreenCover(isPresented: $isShowing) {
                     ReservedView()
-                        .accentColor(Color("AccentColor"))
+                        //.accentColor(Color("AccentColor"))
                 }
+                // Back Button
                 .navigationBarBackButtonHidden(true)
                 .toolbar(content: {
                     ToolbarItem (placement: .navigationBarLeading)  {
