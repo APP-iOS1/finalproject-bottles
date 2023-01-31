@@ -346,15 +346,16 @@
 		27281CE0297784ED003BE8B4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AE9E77072978179200A6B9D4 /* MainTabView.swift */,
-				7F76AAF02987659300AAEBCA /* LoginView */,
-				27281CF629778621003BE8B4 /* MyPage */,
-				27281CF3297785FE003BE8B4 /* Notification */,
 				27281CEE297785BC003BE8B4 /* BookMark */,
 				27281CE829778583003BE8B4 /* Bottle */,
 				27281CE72977856C003BE8B4 /* BottleShop */,
 				27281CE429778551003BE8B4 /* Cart */,
+				7F76AAF02987659300AAEBCA /* LoginView */,
+				AE9E77072978179200A6B9D4 /* MainTabView.swift */,
 				27281CE1297784F6003BE8B4 /* Map */,
+				27281CF629778621003BE8B4 /* MyPage */,
+				27281CF3297785FE003BE8B4 /* Notification */,
+				D5BC69F62988B42A0066A2DC /* Search */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -419,15 +420,8 @@
 				27281CEF297785DC003BE8B4 /* BookMarkView.swift */,
 				AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */,
 				AE1070002977B1B000AF9D1B /* BookMarkShopList.swift */,
-				AE1070042977D24200AF9D1B /* SearchViewNavigationLabel.swift */,
-				AE1070022977CC9F00AF9D1B /* SearchView.swift */,
-				AE1070062977D64100AF9D1B /* SearchBottleList.swift */,
-				AE1070082977D8AC00AF9D1B /* SearchShopList.swift */,
-				AEE99FB329799B59001A155E /* RecentlyItemList.swift */,
-				AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */,
 				AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */,
 				AE6E0AC0298110960002183B /* BookMarkTestModel.swift */,
-				D5FCB5C52987874E004BC279 /* SearchResultList.swift */,
 			);
 			path = BookMark;
 			sourceTree = "<group>";
@@ -529,6 +523,20 @@
 				7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */,
 			);
 			path = LoginView;
+			sourceTree = "<group>";
+		};
+		D5BC69F62988B42A0066A2DC /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				AEE99FB329799B59001A155E /* RecentlyItemList.swift */,
+				AE1070062977D64100AF9D1B /* SearchBottleList.swift */,
+				D5FCB5C52987874E004BC279 /* SearchResultList.swift */,
+				AE1070082977D8AC00AF9D1B /* SearchShopList.swift */,
+				AE1070022977CC9F00AF9D1B /* SearchView.swift */,
+				AE1070042977D24200AF9D1B /* SearchViewNavigationLabel.swift */,
+				AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */,
+			);
+			name = Search;
 			sourceTree = "<group>";
 		};
 		D70CE4F82976823500DFC8CE /* ViewModel */ = {
