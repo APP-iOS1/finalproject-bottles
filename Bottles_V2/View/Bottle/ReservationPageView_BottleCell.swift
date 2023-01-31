@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ReservationPageView_BottleCell: View {
     var body: some View {
-        // MARK: 예약 상품 셀
+        // MARK: - 예약 상품 셀
         HStack {
-            // 상품 이미지
+            // MARK: - 상품 이미지
             Image("kilchoman")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -20,15 +20,15 @@ struct ReservationPageView_BottleCell: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             
             VStack(alignment: .leading, spacing: 5) {
-                // 상품 이름
+                // MARK: - 상품 이름
                 Text("킬호만 샤닉")
                     .font(.bottles15)
                     .fontWeight(.bold)
-                // 상품 가격
+                // MARK: - 상품 가격
                 Text("350,000원")
                     .font(.bottles15)
                     .fontWeight(.bold)
-                // 상품 개수
+                // MARK: - 상품 개수
                 Text("1개")
                     .font(.bottles15)
                     .fontWeight(.medium)
@@ -40,7 +40,7 @@ struct ReservationPageView_BottleCell: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 11, height: 16)
-                    // 바틀샵 이름
+                    // MARK : -바틀샵 이름
                     Text("바틀샵 이름")
                         .font(.bottles15)
                         .fontWeight(.medium)
@@ -51,6 +51,8 @@ struct ReservationPageView_BottleCell: View {
         .frame(height: 129)
     }
 }
+
+
 
 struct ReservationPageView_BottleCell_Previews: PreviewProvider {
     static var previews: some View {
