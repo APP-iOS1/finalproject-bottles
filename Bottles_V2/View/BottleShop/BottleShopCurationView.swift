@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct BottleShopCurationView: View {
-    
     @State private var selectedSort = Sort.automatic
     @State private var showingActionSheet: Bool = false
     @State private var selection = "기본순"
