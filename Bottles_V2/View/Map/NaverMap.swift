@@ -8,19 +8,39 @@
 import SwiftUI
 import NMapsMap
 
+// MARK: - 마커 더미 데이터 생성
+//struct Marker: Identifiable {
+//    let id: String
+//    let latitude: Double
+//    let longitude: Double
+//}
+//
+//class MarkerStore: ObservableObject {
+//    var markers: [Marker] = []
+//
+//    init() {
+//        markers = [
+//            Marker(id: UUID().uuidString, latitude: 37.5670135, longitude: 126.9783740),
+//            Marker(id: UUID().uuidString, latitude: 37.6670135, longitude: 126.9883740),
+//            Marker(id: UUID().uuidString, latitude: 37.7670135, longitude: 126.9983740),
+//            Marker(id: UUID().uuidString, latitude: 37.3670135, longitude: 126.9683740),
+//            Marker(id: UUID().uuidString, latitude: 37.4670135, longitude: 126.9583740)
+//        ]
+//    }
+//}
+
 struct NaverMap: UIViewRepresentable {
     var coord: (Double, Double)
-    //    var foodCarts: [FoodCart]
+//    var markers: [Marker]
     @Binding var showMarkerDetailView: Bool
     func makeCoordinator() -> Coordinator {
         Coordinator(coord)
     }
     
-    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>//, foodCarts: [FoodCart]
+    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>
     ) {
         self.coord = coord
         self._showMarkerDetailView = showMarkerDetailView
-        //        self.foodCarts = foodCarts
     }
     
     class Coordinator: NSObject, NMFMapViewCameraDelegate {
@@ -50,7 +70,7 @@ struct NaverMap: UIViewRepresentable {
         
         let locationOverlay = view.mapView.locationOverlay
         
-        // MARK: - 현 위치 추적
+        // MARK: - 현 위치 추적 버튼
         view.showLocationButton = true
         
         view.showCompass = false
@@ -58,35 +78,31 @@ struct NaverMap: UIViewRepresentable {
         let cameraPosition = view.mapView.cameraPosition
         
         // MARK: - 마커 생성
-        //        for foodCart in foodCarts {
-        let marker = NMFMarker()
-        marker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
-        //        marker.position = NMGLatLng(lat: foodCart.coordinate[0], lng: foodCart.coordinate[1])
-        //            marker.iconImage = NMF_MARKER_IMAGE_BLACK
-        //            marker.iconTintColor = UIColor.green
-        //        marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
-        //        marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
-        marker.captionRequestedWidth = 100
-        //            marker.captionText = foodCart.name
-        //        marker.captionMinZoom = 12
-        marker.captionMaxZoom = 16
-        
-        // MARK: - 마커 이미지 변경
-        marker.iconImage = NMFOverlayImage(name: "MapMarker")
-        marker.width = 40
-        marker.height = 50
-        
-        // MARK: - 마커 터치 핸들러
-        marker.touchHandler = { (overlay) -> Bool in
-            print("marker touched")
-            showMarkerDetailView.toggle()
-            return true
-        }
-        
-        marker.mapView = view.mapView
-        //        }
-        
-        print("camera pos: \(cameraPosition)")
+//        for shopMarker in markers {
+            let marker = NMFMarker()
+//            marker.position = NMGLatLng(lat: shopMarker.latitude, lng: shopMarker.longitude)
+        // 임시 마커(서울시청)
+            marker.position = NMGLatLng(lat: 37.56668, lng: 126.978415)
+            marker.captionRequestedWidth = 100
+            //            marker.captionText = foodCart.name
+            marker.captionMinZoom = 12
+            marker.captionMaxZoom = 16
+            
+            // MARK: - 마커 이미지 변경
+            marker.iconImage = NMFOverlayImage(name: "MapMarker")
+            marker.width = 40
+            marker.height = 50
+            
+            // MARK: - 마커 터치 핸들러
+            marker.touchHandler = { (overlay) -> Bool in
+                print("marker touched")
+                showMarkerDetailView.toggle()
+                return true
+            }
+            
+            marker.mapView = view.mapView
+//        }
+        print("camera position: \(cameraPosition)")
         return view
     }
     
