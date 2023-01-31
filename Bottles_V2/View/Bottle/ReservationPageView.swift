@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - 예약페이지
+/// 예약한 상품 리스트 및 예약자 정보를 확인하는 뷰 입니다.
 struct ReservationPageView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var check: Bool = false
@@ -24,7 +26,7 @@ struct ReservationPageView: View {
                         Spacer()
                         
                         HStack {
-                            // MARK: - 예약 상품 총 개수
+                            // MARK: - 예약 바틀 총 개수
                             Text("2건")
                                 .font(.bottles16)
                                 .fontWeight(.bold)
@@ -36,8 +38,9 @@ struct ReservationPageView: View {
                         }
                     }
                     
-                    // MARK: - 예약 상품 리스트
+                    // MARK: - 예약 바틀 리스트
                     ForEach(0..<2, id: \.self) { _ in
+                        // 예약 바틀 셀
                         ReservationPageView_BottleCell()
                     }
                 }
@@ -71,6 +74,7 @@ struct ReservationPageView: View {
                 
                 // MARK: - 예약하기 버튼
                 Button(action: {
+                    // 예약확정 체크 시
                     if check {
                         isShowing.toggle()
                     }
@@ -84,7 +88,8 @@ struct ReservationPageView: View {
                     }
                 }
                 .padding()
-                .fullScreenCover(isPresented: $isShowing) {
+                // 예약 완료 뷰로 이동
+                .navigationDestination(isPresented: $isShowing) {
                     ReservedView()
                         //.accentColor(Color("AccentColor"))
                 }
@@ -108,6 +113,7 @@ struct ReservationPageView: View {
         
     }
 }
+
 
 //struct ReservationPageView_Previews: PreviewProvider {
 //    static var previews: some View {

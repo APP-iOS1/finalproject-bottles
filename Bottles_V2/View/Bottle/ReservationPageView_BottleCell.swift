@@ -7,9 +7,9 @@
 
 import SwiftUI
 
+// MARK: - 예약 바틀 셀 (상품 이미지, 상품 이름, 상품 가격, 상품 개수, 바틀샵 이름)
 struct ReservationPageView_BottleCell: View {
     var body: some View {
-        // MARK: - 예약 상품 셀
         HStack {
             // MARK: - 상품 이미지
             Image("kilchoman")
@@ -22,12 +22,10 @@ struct ReservationPageView_BottleCell: View {
             VStack(alignment: .leading, spacing: 5) {
                 // MARK: - 상품 이름
                 Text("킬호만 샤닉")
-                    .font(.bottles15)
-                    .fontWeight(.bold)
+                    .modifier(BottleTitleAndPriceModifier())
                 // MARK: - 상품 가격
                 Text("350,000원")
-                    .font(.bottles15)
-                    .fontWeight(.bold)
+                    .modifier(BottleTitleAndPriceModifier())
                 // MARK: - 상품 개수
                 Text("1개")
                     .font(.bottles15)
@@ -40,7 +38,7 @@ struct ReservationPageView_BottleCell: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 11, height: 16)
-                    // MARK : -바틀샵 이름
+                    // MARK: - 바틀샵 이름
                     Text("바틀샵 이름")
                         .font(.bottles15)
                         .fontWeight(.medium)

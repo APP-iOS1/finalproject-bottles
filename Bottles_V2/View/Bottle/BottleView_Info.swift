@@ -7,17 +7,17 @@
 
 import SwiftUI
 
+// MARK: - 바틀 기본 정보(바틀 이미지, 바틀 이름, 북마크, 바틀 가격, 바틀샵 이름)
 struct BottleView_Info: View {
     @State private var checkBookmark: Bool = true
+    var tagList: [String] = ["위스키", "한정판", "스모키"]
     
-    // MARK: - 바틀 기본 정보 (바틀 이름, 가격, 바틀샵 이름)
     var body: some View {
         // MARK: - 바틀 이미지
         Image("promesa")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: UIScreen.main.bounds.width, height: 220)
-        
         
         VStack(alignment: .leading) {
             HStack {
@@ -62,6 +62,35 @@ struct BottleView_Info: View {
             }
         }
         .padding()
+        
+        VStack(alignment: .leading) {
+            // MARK: - 바틀 소개
+            Text("술 소개. 친구 연인 가족과 함께 부담없이 마시기 좋은 스파클링 와인을 추천합니다.\n 어떤 음식과 페어링해도 평타 이상일거에요!")
+                .font(.bottles14)
+                .fontWeight(.medium)
+                .lineSpacing(3)
+            
+            HStack {
+                // MARK: - 바틀 태그
+                ForEach(tagList, id: \.self) { tag in
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.black, lineWidth: 1)
+                            .opacity(0.4)
+                            .frame(width: 54, height: 21)
+                        Text(tag)
+                            .font(.bottles12)
+                            .fontWeight(.medium)
+                            .opacity(0.4)
+                    }
+                }
+            }
+        }
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color(UIColor.systemGray5))
+        .cornerRadius(10)
+        .padding(.horizontal)
     }
 }
 

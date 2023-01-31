@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - 픽업 바틀샵 저장
 struct ReservedView_BottleShop: View {
     @State private var checkBookmark: Bool = false
     
