@@ -14,19 +14,19 @@ struct MyPageView: View {
                                 "1:1 문의하기", "서비스 이용약관", "개인정보 처리방침", "위치정보 이용약관", "버전 정보"]
     
     var myPageListWebLink: [String] = [
-        "https://www.apple.com/kr/", //바틀스 소개링크
-        "https://www.google.com/",
-        "https://www.naver.com/",
-        "https://github.com/",
-        "https://developer.apple.com/",
-        "https://portal.korea.ac.kr/front/Intro.kpd",
-        "https://console.firebase.google.com/",
-        "https://techit.education/"
+        "https://www.apple.com/kr/", //바틀스 소개링크 링크
+        "https://www.google.com/", // 공지사항 링크
+        "https://www.naver.com/", // 자주 묻는 질문 링크
+        "https://github.com/", // 1:1 문의하기 링크
+        "https://developer.apple.com/", // 서비스 이용약관 링크
+        "https://portal.korea.ac.kr/front/Intro.kpd", // 개인정보 처리방침 링크
+        "https://console.firebase.google.com/", // 위치정보 이용약관 링크
+        "https://techit.education/" // 버전정보 링크
     ]
     
     @State private var isShowingSheet: Bool = false
     
-    
+    /// SafariWebView에 바인딩으로 링크 자체를 넘겨준다.
     @State var selectedUrl: URL = URL(string: "https://www.naver.com")!
     
     var body: some View {
@@ -67,43 +67,18 @@ struct MyPageView: View {
                     .frame(height: 7)
                     .foregroundColor(Color("lightGray"))
                 
-                // MARK: - 두번째 리스트
-                
-                //                List {
-                //                    ForEach(Array(myPageList.enumerated()), id: \.1) { (index, item) in
-                //
-                //                        //                        NavigationLink(destination: Webview(url: URL(string: myPageListWebLink[index])!)) {
-                //                        //                            Text("\(item)")
-                //                        //                        }
-                //
-                //                        Button(action: {
-                //
-                //                            isShowingSheet.toggle()
-                //
-                //                            //                            print("\(myPageListWebLink[index])")
-                //                        }){
-                //                            Text("\(item)")
-                //                                .font(.bottles15)
-                //                        }
-                //                        .sheet(isPresented: $isShowingSheet, content: {
-                //                            SafariWebView(url: URL(string: myPageListWebLink[index])!)
-                //                        })
-                //                        .listRowSeparator(.hidden)
-                //                    }
-                //                }
-                //                .listStyle(.plain)
-                //                .scrollDisabled(true)
+                // MARK: - 두번째 리스트 ( 바틀스 소개, 공지사항, 자주묻는 질문...)
                 
                 List {
                     ForEach(0..<myPageList.count, id: \.self) { index in
                         
                         Button(action: {
-                            
+                            // 버튼 액션에서 selectedUrl에 지금 누른 버튼 링크 값을 넣어줌
                             selectedUrl = URL(string: myPageListWebLink[index])!
                             isShowingSheet.toggle()
                             
                         }){
-                            Text("\(myPageList[index])")
+                            Text("\(myPageList[index])") // 리스트 이름
                                 .font(.bottles15)
                         }
                         .sheet(isPresented: $isShowingSheet, content: {
@@ -121,15 +96,6 @@ struct MyPageView: View {
     }
 }
 
-
-//struct WebSheetView: View {
-//    var index: Int
-//    var webLinks: [String]
-//    
-//    var body: some View {
-//        SafariWebView(url: URL(string: $webLinks[index])!)
-//    }
-//}
 
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
