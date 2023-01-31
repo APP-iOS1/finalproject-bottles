@@ -19,13 +19,28 @@ struct BottleShopCurationView: View {
             VStack{
                 ZStack{
                     // 데이터 연동 시 "shopCurationImage" 연동
-                    Rectangle()
-                        .foregroundColor(.white)
-                        .frame(width: 370, height: 370)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 0.7)
-                        )
+                    AsyncImage(url: URL(string: "https://i0.wp.com/picjumbo.com/wp-content/uploads/new-years-toast-celebration-party-with-friends-free-photo.jpg?w=2210&quality=70")) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 370)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(.white.opacity(0.7))
+                            }
+                    } placeholder: {
+                        Rectangle()
+                            .frame(width: 370, height: 370)
+                    }
+                    .cornerRadius(12)
+                    .foregroundColor(.white)
+//                    .frame(width: 370, height: 370)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 0.7)
+                    )
+                    
+                    
                     
                     VStack{
                         
@@ -35,7 +50,7 @@ struct BottleShopCurationView: View {
                             
                             // 데이터 연동 시 "shopCurationTitle" 연동
                             Text("연말 파티에 어울리는 스파클링 와인들")
-                                .font(.bottles18)
+                                .font(.bottles20)
                                 .fontWeight(.semibold)
                             
                             // 데이터 연동 시 "shopCurationBody" 연동
@@ -48,6 +63,7 @@ struct BottleShopCurationView: View {
                         .padding(.trailing)
                         .padding(.bottom)
                         .padding(.leading, -10)
+                        .shadow(radius: 20)
                     }
                 }
                 

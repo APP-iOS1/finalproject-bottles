@@ -17,13 +17,19 @@ struct BottleShopView_BottleList: View {
         VStack {
             HStack{
                 // 데이터 연동 시 "바틀 이미지" 연동
-                Image("whisky_Image1")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(5)
-                    .background{Color.gray_f7}
-                    .cornerRadius(12)
-                    .frame(height: 128)
+                AsyncImage(url: URL(string: "https://cdn.imweb.me/thumbnail/20210103/27cdbc402d949.jpg")) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 128)
+                } placeholder: {
+                    Rectangle()
+                        .frame(height: 128)
+                }
+                .padding(5)
+                .background{Color.gray_f7}
+                .cornerRadius(12)
+                .frame(height: 128)
                 
                 Spacer()
                     .frame(width: 16)

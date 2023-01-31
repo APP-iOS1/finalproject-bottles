@@ -48,10 +48,17 @@ struct BottleShopView: View {
         NavigationStack{
             ScrollView{
                 VStack{
+                    
                     // 데이터 연동 시 "shopTitleImage" 연동
-                    Rectangle()
-                        .foregroundColor(.gray)
-                        .frame(height: 200)
+                    AsyncImage(url: URL(string: "https://media.timeout.com/images/103625148/750/422/image.jpg")) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    } placeholder: {
+                        Image("ready_image")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
                     
                     HStack{
                         // 데이터 연동 시 "shopName" 연동
