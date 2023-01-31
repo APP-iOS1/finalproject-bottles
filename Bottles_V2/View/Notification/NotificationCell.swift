@@ -13,7 +13,7 @@ import SwiftUI
 struct NotificationCell: View {
     //테스트용 텍스트
     var title : String = "test"
-    var subTitle : String = "test"
+    var description : String = "test"
     var time : String = "test"
     
     var body: some View {
@@ -43,7 +43,7 @@ struct NotificationCell: View {
                 }
                 
                 // 알림 내용
-                Text(subTitle)
+                Text(description)
                     .font(.bottles13)
                     .foregroundColor(.black)
                 

@@ -32,13 +32,13 @@ struct NotificationView: View {
                 ScrollView {
                     NavigationLink(destination: PickUpListView()){
                         NotificationCell(title: "예약이 확정되었습니다.",
-                        subTitle: "칼호만 샤닉", time: "2시간 전")
+                        description: "칼호만 샤닉", time: "2시간 전")
                     }
                     Divider()
                         .background(.black)
                     NavigationLink(destination: BottleShopCurationView()){
                         NotificationCell(title: "저장한 바틀샵의 새로운 소식",
-                        subTitle: "새로운 큐레이션 타이틀", time: "4시간 전")
+                        description: "새로운 큐레이션 타이틀", time: "4시간 전")
                     }
 
                     
