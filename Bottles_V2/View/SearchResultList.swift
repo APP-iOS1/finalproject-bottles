@@ -29,14 +29,25 @@ struct SearchResultList: View {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
                                 .padding([.leading, .trailing])
-                            Text(bottle.bottleName)
+                            Text(bottle.bottleName) { string in
+                                if let range = string.range(of: searchBarText) {
+                                    string[range].foregroundColor = Color("AccentColor")
+                                }
+                            }
                         }
                     }
                 }
             }
-            
         }
         .listStyle(.plain)
+    }
+}
+
+extension Text {
+    init(_ string: String, configure: ((inout AttributedString) -> Void)) {
+        var attributedString = AttributedString(string) /// create an `AttributedString`
+        configure(&attributedString) /// configure using the closure
+        self.init(attributedString) /// initialize a `Text`
     }
 }
 

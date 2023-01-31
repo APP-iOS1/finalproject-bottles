@@ -10,6 +10,12 @@ import SwiftUI
 struct RecentlyItemList: View {
     var recentSearches: [String] = ["와인", "와인앤모어", "위스키", "선물", "킬호만"]
     
+    @Binding var searchBarText: String
+    
+    @Binding var doneTextFieldEdit: Bool
+    
+    @FocusState var focus: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {            
             Text("최근 검색어")
@@ -21,7 +27,9 @@ struct RecentlyItemList: View {
                 HStack {
                     ForEach(recentSearches, id: \.self) { search in
                         Button  {
-                            
+                            searchBarText = search
+                            doneTextFieldEdit = true
+                            focus = false
                         } label: {
                             Text(search)
                                 .padding(12)
@@ -83,11 +91,6 @@ struct RecentlyItemListCell: View {
                     Image(systemName: "bookmark.fill")
                 }
                 Spacer()
-                Button {
-                    
-                } label: {
-                    Image(systemName: "cart.badge.plus")
-                }
             }
             .font(.title2)
             .padding()
@@ -97,8 +100,8 @@ struct RecentlyItemListCell: View {
     }
 }
 
-struct RecentlyItemList_Previews: PreviewProvider {
-    static var previews: some View {
-        RecentlyItemList()
-    }
-}
+//struct RecentlyItemList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RecentlyItemList()
+//    }
+//}

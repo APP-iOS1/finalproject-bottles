@@ -8,25 +8,42 @@
 import SwiftUI
 
 struct SearchShopList: View {
-    // filter
-    @State private var filterType: String = "최신 순"
+    var shopName: String
+    
+    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    
+    var filteredResult: [BookMarkShop] {
+        let bottles = bookMarkTestStore.BookMarkShops
+        return bottles.filter {
+            $0.shopName.contains(shopName)
+        }
+    }
     
     var body: some View {
         VStack {
-            ScrollView {
-                NavigationLink {
-                    
-                } label: {
-                    SearchShopListCell()
+            if filteredResult == [] {
+                Text("검색 결과가 없습니다.")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 10)
+                Spacer()
+            } else {
+                ScrollView {
+                    ForEach(filteredResult, id: \.self) { shop in
+                        NavigationLink {
+                            BottleShopView()
+                        } label: {
+                            SearchShopListCell(shopInfo: shop)
+                        }
+                    }
                 }
-                SearchShopListCell()
-                SearchShopListCell()
             }
         }
     }
 }
 
 struct SearchShopListCell: View {
+    var shopInfo: BookMarkShop
+    
     var body: some View {
         HStack {
                     Image("bottleShop")
@@ -37,7 +54,7 @@ struct SearchShopListCell: View {
                          .padding(.horizontal)
     
             VStack(alignment: .leading, spacing: 10) {
-                Text("와인앤모어")
+                Text(shopInfo.shopName)
                     .font(.title)
                 Text("바틀샵 소개 가나다라마 아자차 마바사가다")
                     .font(.footnote)
@@ -63,8 +80,8 @@ struct SearchShopListCell: View {
     }
 }
 
-struct SearchShopList_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchShopList()
-    }
-}
+//struct SearchShopList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchShopList()
+//    }
+//}

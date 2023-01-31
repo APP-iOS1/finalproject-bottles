@@ -47,6 +47,7 @@ struct SearchViewSearchBar: View {
                 if !searchBarText.isEmpty {
                     Button(action: {
                         self.searchBarText = ""
+                        focus = false
                     }) {
                         Image(systemName: "xmark.circle.fill")
                     }
@@ -55,7 +56,7 @@ struct SearchViewSearchBar: View {
                 }
             }
             .padding(10)
-            .frame(width: 300)
+            .frame(width: 270, height: 50)
             .background{
                 Color.white
             }

@@ -8,9 +8,6 @@
 import SwiftUI
 
 struct SearchBottleList: View {
-    // filter
-    @State private var filterType: String = "최신 순"
-    
     var bottleName: String
     
     @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
@@ -24,9 +21,16 @@ struct SearchBottleList: View {
     
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(filteredResult, id: \.self) { bottle in
-                    SearchBottleListCell(bottleInfo: bottle)
+            if filteredResult == [] {
+                Text("검색 결과가 없습니다.")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.top, 10)
+                Spacer()
+            } else {
+                ScrollView {
+                    ForEach(filteredResult, id: \.self) { bottle in
+                        SearchBottleListCell(bottleInfo: bottle)
+                    }
                 }
             }
         }
@@ -72,11 +76,6 @@ struct SearchBottleListCell: View {
                     Image(systemName: "bookmark.fill")
                 }
                 Spacer()
-                Button {
-                    
-                } label: {
-                    Image(systemName: "cart.badge.plus")
-                }
             }
             .font(.title2)
             .padding()

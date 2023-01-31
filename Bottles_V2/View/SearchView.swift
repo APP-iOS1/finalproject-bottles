@@ -27,10 +27,13 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            SearchViewSearchBar(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
+            HStack{
+                SearchViewSearchBar(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
+                CartViewNavigationLink()
+            }
             
             if searchBarText == "" {
-                RecentlyItemList()
+                RecentlyItemList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
             } else {
                 if !doneTextFieldEdit {
                     SearchResultList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
@@ -93,7 +96,7 @@ struct SearchTapView: View {
             case .bottle:
                 SearchBottleList(bottleName: bottleName)
             case .shop:
-                SearchShopList()
+                SearchShopList(shopName: bottleName)
             }
         }
     }
