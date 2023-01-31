@@ -22,8 +22,9 @@ struct BookMarkShopList: View {
                 } label: {
                     HStack {
                         Text("\(selection)")
+                            .font(.bottles14)
                         Image(systemName: "chevron.down")
-                            .font(.system(size: 12))
+                            .font(.system(size: 14))
                     }
                     .foregroundColor(.black)
                 }
@@ -95,14 +96,15 @@ struct BookMarkShopListCell: View {
             VStack(alignment: .leading, spacing: 10) {
                 // Shop 이름
                 Text("와인앤모어")
-                    .font(.title)
+                    .font(.bottles18)
+                    .bold()
                 // Shop 소개글
                 Text("바틀샵 소개 가나다라마 아자차 마바사가다")
-                    .font(.footnote)
+                    .font(.bottles14)
+                Spacer()
             }
             .foregroundColor(.black)
-            .bold()
-            .padding(.vertical)
+            .padding(.top, 10)
             
             Spacer()
             VStack {
@@ -116,6 +118,7 @@ struct BookMarkShopListCell: View {
             }
             .font(.title2)
             .padding()
+            .padding(.top, -5)
         }
         .frame(height: 130)
         .padding(.vertical, 5)

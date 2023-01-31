@@ -22,8 +22,9 @@ struct BookMarkBottleList: View {
                 } label: {
                     HStack {
                         Text("\(selection)")
+                            .font(.bottles14)
                         Image(systemName: "chevron.down")
-                            .font(.system(size: 12))
+                            .font(.system(size: 14))
                     }
                     .foregroundColor(.black)
                 }
@@ -85,9 +86,11 @@ struct BookMarkBottleListCell: View {
             VStack(alignment: .leading, spacing: 10) {
                 // Bottle 이름
                 Text("킬호만 샤닉")
-                    .font(.title3)
+                    .font(.bottles14)
                 // Bottle 가격
                 Text("350,000원")
+                    .font(.bottles18)
+                    .bold()
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
                     BottleShopView()
@@ -99,11 +102,13 @@ struct BookMarkBottleListCell: View {
                             .frame(height: 20)
                         // Shop 이름
                         Text("와인앤모어")
+                            .font(.bottles14)
+                            .foregroundColor(.black)
                     }
                 }
+                Spacer()
             }
-            .bold()
-            .padding(.vertical)
+            .padding(.top, 5)
             
             Spacer()
             VStack {
@@ -114,15 +119,10 @@ struct BookMarkBottleListCell: View {
                     Image(systemName: "bookmark.fill")
                 }
                 Spacer()
-                // TODO: 장바구니 기능 추가해야함
-                Button {
-                    
-                } label: {
-                    Image(systemName: "cart.badge.plus")
-                }
             }
             .font(.title2)
             .padding()
+            .padding(.top, -5)
         }
         .frame(height: 130)
         .padding(.vertical, 5)
