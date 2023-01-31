@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 바틀샵뷰 내 "사장님의 공지" 뷰 - "공지 셀"
 struct BottleShopView_NoticeCell: View {
     
     var selectedItem: Notice22
@@ -17,16 +18,19 @@ struct BottleShopView_NoticeCell: View {
             HStack{
                 VStack(alignment: .leading){
                     HStack{
+                        // 데이터 연동 시 "공지 카테고리" 연동
                         Text(selectedItem.category)
                             .fontWeight(.semibold)
                         Spacer()
                         
-//                        Text(selectedItem.time)
-//                            .foregroundColor(.gray)
+                        //                        Text(selectedItem.time)
+                        //                            .foregroundColor(.gray)
                     }
                     .padding(.bottom, 1)
+                    
+                    // 데이터 연동 시 "공지 내용" 연동
                     Text(selectedItem.contents)
-//                        .fontWeight(.medium)
+                    //                        .fontWeight(.medium)
                         .frame(alignment: .center)
                     
                 }
@@ -35,7 +39,7 @@ struct BottleShopView_NoticeCell: View {
             .padding()
             Divider()
             
-
+            
         }
         .font(.system(size: 15))
         .foregroundColor(.black)
