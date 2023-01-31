@@ -48,7 +48,8 @@ struct SettingView: View {
                             Text("로그아웃하고 메인 화면으로 돌아갑니다."),
                           primaryButton: .destructive(Text("예"),
                                                       action: {
-                        /// Todo: 계정 삭제 로직
+                        // TODO: 계정 삭제 로직
+                        
                     }), secondaryButton: .cancel(Text("아니오")))
                 }
                 
@@ -66,7 +67,8 @@ struct SettingView: View {
                             Text("회원을 탈퇴할 경우 해당 계정과 \n데이터 복구가 어렵습니다."),
                           primaryButton: .destructive(Text("회원 탈퇴"),
                                                       action: {
-                        /// Todo: 회원 탈퇴 로직
+                        // TODO: 회원 탈퇴 로직
+                        
                     }), secondaryButton: .cancel(Text("취소")))
                 }
             }
