@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// BookMarkView에서 사용하는 SearchView로 이동하는 버튼 라벨
 struct SearchViewNavigationLabel: View {
     var body: some View {
         HStack {

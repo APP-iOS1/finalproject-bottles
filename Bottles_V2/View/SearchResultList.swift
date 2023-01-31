@@ -60,6 +60,7 @@ struct SearchResultList: View {
     }
 }
 
+
 // MARK: - 특정 범위 텍스트 컬러 설정
 /// 사용자의 검색어와 동일한 텍스트의 컬러를 바꿔주기 위한 Extension
 extension Text {

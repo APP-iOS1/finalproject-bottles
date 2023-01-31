@@ -7,42 +7,45 @@
 
 import SwiftUI
 
-enum searchTapInfo : String, CaseIterable {
+// Search Tab의 종류를 담은 열거형
+enum searchTabInfo : String, CaseIterable {
     case bottle = "상품 검색"
     case shop = "바틀샵 검색"
 }
 
 struct SearchView: View {
     // tap picker
-    @State private var selectedPicker: searchTapInfo = .bottle
+    @State private var selectedPicker: searchTabInfo = .bottle
     @Namespace private var animation
-    
-    //searchBar
+    // searchBar
     @State var searchBarText: String = ""
     @State var isShowingSearchResult: Bool = false
-    
+    // 검색을 완료했는지 판단하는 Bool 값
     @State var doneTextFieldEdit: Bool = false
-    
+    // 검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
     @FocusState var focus: Bool
     
     var body: some View {
         VStack {
-            SearchViewSearchBar(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
+            HStack{
+                // 검색바 + 장바구니 버튼
+                SearchViewSearchBar(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
+                CartViewNavigationLink()
+            }
             
+            // 검색어를 입력하지 않았을 시에 최근 검색어 및 최근 본 상품을 보여준다
             if searchBarText == "" {
-                RecentlyItemList()
+                RecentlyItemList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
             } else {
+                // 검색어를 입력 중이고 검색을 완료하지 않았으면 검색어를 포함한 Bottle, Shop 들을 보여준다
                 if !doneTextFieldEdit {
                     SearchResultList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
                 } else {
+                    // 검색을 완료하면 검색어에 해당하는 검색 결과 탭뷰를 보여준다
                     animate()
                         .padding(.top, 10)
-                    SearchTapView(searchTap: selectedPicker, bottleName: searchBarText)
+                    SearchTabView(searchTab: selectedPicker, bottleName: searchBarText)
                 }
-                
-//                animate()
-//                    .padding(.top, 10)
-//                SearchTapView(searchTap: selectedPicker)
             }
         }
         .navigationBarHidden(true)
@@ -52,7 +55,7 @@ struct SearchView: View {
     private func animate() -> some View {
         VStack {
             HStack {
-                ForEach(searchTapInfo.allCases, id: \.self) { item in
+                ForEach(searchTabInfo.allCases, id: \.self) { item in
                     VStack {
                         Text(item.rawValue)
                             .kerning(-1)
@@ -83,17 +86,18 @@ struct SearchView: View {
     }
 }
 
-struct SearchTapView: View {
-    var searchTap: searchTapInfo
+struct SearchTabView: View {
+    var searchTab: searchTabInfo
+    // 검색어를 bottleName 변수로 받는다
     var bottleName: String
     
     var body: some View {
         VStack {
-            switch searchTap {
+            switch searchTab {
             case .bottle:
                 SearchBottleList(bottleName: bottleName)
             case .shop:
-                SearchShopList()
+                SearchShopList(shopName: bottleName)
             }
         }
     }
