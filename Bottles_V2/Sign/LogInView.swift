@@ -31,10 +31,19 @@ struct LoginView: View {
             VStack{
                 
                 Spacer()
-                TextField("Username", text: $email)
-                    .textInputAutocapitalization(.never) // 처음 문자를 자동으로 대문자로 바꾸는걸 막기
+                TextField("이메일", text: $email)
+                    .modifier(LoginTextFieldModifier())
+                    .padding(.bottom, -4)
                 SecureField("Password", text: $password)
-                    .textInputAutocapitalization(.never)// 처음 문자를 자동으로 대문자로 바꾸는걸 먹기
+                    .modifier(LoginTextFieldModifier())
+//                    .textInputAutocapitalization(.never)// 처음 문자를 자동으로 대문자로 바꾸는걸 먹기
+                Button(action: {
+                    Task{
+                        await sessionManager.signIn(email: email, password: password)
+                    }
+                }){
+                    Text("로그인")
+                }.disabled(email.isEmpty || password.isEmpty )
                 Button("Login", action: {
                     Task{
                         await sessionManager.signIn(email: email, password: password)
@@ -45,10 +54,11 @@ struct LoginView: View {
                 Button("Don`t have an account? Sign up.", action: {
                     sessionManager.showSignUp()
                 })
-                
-                
-            }.task{
-                await sessionManager.getCurrentAuthUser()
+            
+            }
+            .navigationTitle(Text("로그인").font(.bottles18))
+            .task{
+//                await sessionManager.getCurrentAuthUser()
                 
             }
         
@@ -76,6 +86,24 @@ struct LoginView: View {
     }
     
 }
+
+struct LoginTextFieldModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.bottles16)
+            .padding()
+            .textInputAutocapitalization(.never) // 처음 문자를 자동으로 대문자로 바꾸는걸 막기
+            .frame(width: 280)
+            .background{
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.gray_f7)
+                    .frame(width: 280,height: 48)
+            }
+    }
+}
+
+
+
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
