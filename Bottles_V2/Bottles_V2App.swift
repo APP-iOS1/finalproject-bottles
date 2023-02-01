@@ -50,28 +50,6 @@ struct Bottles_V2App: App {
     }
     var body: some Scene {
         WindowGroup {
-<<<<<<< Updated upstream
-            switch sessionManager.authState{
-            case .login:
-                LoginView()
-                    .environmentObject(sessionManager)
-                
-            case .signUp:
-                SignUpView()
-                    .environmentObject(sessionManager)
-                
-            case .confirmCode(let username):
-                ConfirmationView(username: username)
-                    .environmentObject(sessionManager)
-                
-            case .session(let user):
-                MainTabView(user: user)
-                    .environmentObject(sessionManager)
-                    .environmentObject(bottleDataStore)
-                    .environmentObject(shopDataStore)
-                    .environmentObject(userStore)
-            }
-=======
             // MARK: - UI피드백을 위한 주석 처리
             //            switch sessionManager.authState{
             //            case .login:
@@ -100,7 +78,6 @@ struct Bottles_V2App: App {
                 .environmentObject(shopDataStore)
                 .environmentObject(userStore)
                 .accentColor(Color("AccentColor"))
->>>>>>> Stashed changes
         }
     }
 }
