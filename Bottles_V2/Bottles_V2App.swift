@@ -7,15 +7,20 @@
 
 import SwiftUI
 import UIKit
+import FirebaseCore
 
 @main
 struct Bottles_V2App: App {
-//    @ObservedObject var sessionManager = SessionManager()
+    //    @ObservedObject var sessionManager = SessionManager()
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var userDataStore = UserDataStore()
-   
-
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()
