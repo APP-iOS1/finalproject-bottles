@@ -15,10 +15,12 @@
       "auth": {
         "Bottles": {},
         "bottles0863d2bd": {}
-
       },
       "api": {
         "Bottles": {}
+      },
+      "storage": {
+        "s3bottlesstorage1251cc4e": {}
       }
     }
   }

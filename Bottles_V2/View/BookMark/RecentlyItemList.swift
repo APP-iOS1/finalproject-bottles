@@ -9,11 +9,12 @@ import SwiftUI
 
 struct RecentlyItemList: View {
     @EnvironmentObject var userDataStore: UserDataStore
+    @EnvironmentObject var bottleDataStore: BottleDataStore
     
     var recentSearches: [String] = ["와인", "와인앤모어", "위스키", "선물", "킬호만"]
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {            
+        VStack(alignment: .leading, spacing: 10) {
             Text("최근 검색어")
                 .font(.bottles18)
                 .bold()
@@ -30,7 +31,7 @@ struct RecentlyItemList: View {
                                 .background(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
                                 .padding(.vertical)
                                 .padding(.leading, 5)
-                        }     
+                        }
                     }
                 }
             }
@@ -40,13 +41,14 @@ struct RecentlyItemList: View {
                 .bold()
                 .padding(.leading, 15)
             ScrollView {
-                RecentlyItemListCell()
-                RecentlyItemListCell()
-                RecentlyItemListCell()
+                ForEach(userDataStore.user?.recentlyBottles ?? [] , id: \.self) { item in
+                    Text(item ?? "없어")
+                }
             }
-        }.task{
+        }
+        .task{
             // TODO: 더미데이터 수정하기
-            await userDataStore.fetchUserWithEmail(userEmail: "test@naver.com")
+            
         }
     }
 }
@@ -54,13 +56,13 @@ struct RecentlyItemList: View {
 struct RecentlyItemListCell: View {
     var body: some View {
         HStack(alignment: .top) {
-                    Image("whisky_Image1")
-                         .resizable()
-                         .aspectRatio(contentMode: .fit)
-                         .cornerRadius(10)
-                         .frame(width: 120, height: 120)
-                         .padding(.horizontal)
-    
+            Image("whisky_Image1")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(10)
+                .frame(width: 120, height: 120)
+                .padding(.horizontal)
+            
             VStack(alignment: .leading, spacing: 10) {
                 Text("킬호만 샤닉")
                     .font(.title3)

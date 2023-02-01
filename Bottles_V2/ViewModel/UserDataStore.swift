@@ -42,52 +42,15 @@ class UserDataStore : ObservableObject {
     func fetchUserWithEmail(userEmail : String) async {
         let user = User.keys
         do {
-            self.user = try await Amplify.DataStore.query(User.self, where: user.email == "test@naver.com").first
-            
-            //            // 1. 사용자 고유 ID
-            //            self.loginedUserID = result.id
-            //
-            //            // 2. 사용자 고유 닉네임
-            //            if let nickname  = result.nickname {
-            //                self.loginedUserNickname = nickname
-            //            }
-            //
-            //            // 3. 팔로우한 샵 리스트
-            //            if let followShop = result.followItemList {
-            //                for i in followShop {
-            //                    self.followShopList?.append(i!)
-            //                }
-            //            }
-            //
-            //            // 4. 팔로우한 보틀 리스트
-            //            if let followItem = result.followItemList {
-            //                for i in followItem {
-            //                    self.followItemList?.append(i!)
-            //                }
-            //            }
-            //
-            //            // 5. 픽업 예약한 예약번호
-            ////            if let pickupID = result.followItemList {
-            ////                for i in pickupID {
-            ////                    self.pickupItemList.append(i!)
-            ////                }
-            ////            }
-            //
-            //            // 6. 유저 전화번호
-            //            self.userPhoneNumber = result.userPhoneNumber?[0] ?? "전화번호 없음"
-            //
-            //            // 7. 최근 검색한 바틀 ID
-            //            if let recentSearchBottle = result.recentlyBottles {
-            //                for i in recentSearchBottle {
-            //                    self.recentlyBottles?.append(i!)
-            //                }
-            //            }
-            
-            
+            self.user = try await Amplify.DataStore.query(
+                User.self,
+                where: user.email == "test@naver.com").first
+//            self.user = try await Amplify.DataStore.query(User.self, where: User.keys.email == userEmail).first
+            print("미지 id있나 \(user.id)")
         } catch let error as DataStoreError {
-            print("Error listing posts - \(error)")
+            print("Error listing posts - \(error.localizedDescription)")
         } catch {
-            print("Unexpected error \(error)")
+            print("Unexpected error \(error.localizedDescription)")
         }
     }
     

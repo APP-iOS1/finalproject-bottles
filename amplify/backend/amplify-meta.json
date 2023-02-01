@@ -36,8 +36,7 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-
-      "lastPushTimeStamp": "2023-01-30T04:10:45.841Z",
+      "lastPushTimeStamp": "2023-01-31T09:38:52.650Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apiBottles"
@@ -46,34 +45,28 @@
   },
   "auth": {
     "bottles0863d2bd": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL"
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
+        "signupAttributes": [
+          "EMAIL"
         ],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
       },
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/auth/bottles0863d2bd-cloudformation-template.json",
-        "logicalId": "authbottles0863d2bd"
-      },
-
-      "lastPushTimeStamp": "2023-01-30T04:10:45.843Z",
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
       "output": {
         "UserPoolId": "ap-northeast-2_pJB3omuSt",
         "AppClientIDWeb": "3cma1mbc5ini2ir4e9t6ispo1e",
@@ -83,7 +76,28 @@
         "IdentityPoolName": "bottles0863d2bd_identitypool_0863d2bd__staging",
         "UserPoolName": "bottles0863d2bd_userpool_0863d2bd"
       },
-      "lastPushDirHash": "DKfs+c0/U/si0csNwZzYgLO7jpc="
+      "lastPushTimeStamp": "2023-01-31T09:38:52.653Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/auth/bottles0863d2bd-cloudformation-template.json",
+        "logicalId": "authbottles0863d2bd"
+      }
+    }
+  },
+  "storage": {
+    "s3bottlesstorage1251cc4e": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "lastPushTimeStamp": "2023-01-31T09:38:54.425Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-bottles-staging-11959-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storages3bottlesstorage1251cc4e"
+      },
+      "output": {
+        "BucketName": "bottles-storage-1251cc4e11959-staging",
+        "Region": "ap-northeast-2"
+      },
+      "lastPushDirHash": "CFSPbCSIzYtYgiF0WmJNz5pgHjo="
     }
   }
 }

@@ -11,6 +11,8 @@ struct BookMarkBottleList: View {
     // ActionSheet (iOS 14 이하 - ActionSheet, iOS 15 이상 - confirmationDialog 사용해야함)
     @State private var showingActionSheet: Bool = false
     @State private var selection = "기본순"
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    @EnvironmentObject var userDataStore: UserDataStore
     
     var body: some View {
         VStack {
@@ -29,9 +31,14 @@ struct BookMarkBottleList: View {
                 .padding(.trailing, 20)
             }
             ScrollView {
-                BookMarkBottleListCell()
-                BookMarkBottleListCell()
-                BookMarkBottleListCell()
+                ForEach(bottleDataStore.bottles2 , id: \.id) { item in
+                    BookMarkBottleListCell(item: item)
+                }
+            }
+        }
+        .task {
+            if let recent = userDataStore.user?.followItemList {
+                await bottleDataStore.requestFollowItemList(likeItemList: recent)
             }
         }
         // MARK: - 정렬 ActionSheet
@@ -58,19 +65,20 @@ struct BookMarkBottleList: View {
 }
 
 struct BookMarkBottleListCell: View {
+    var item: Bottle
     var body: some View {
         HStack(alignment: .top) {
-                    Image("whisky_Image1")
-                         .resizable()
-                         .aspectRatio(contentMode: .fit)
-                         .cornerRadius(10)
-                         .frame(width: 120, height: 120)
-                         .padding(.horizontal)
-    
+            Image("whisky_Image1")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(10)
+                .frame(width: 120, height: 120)
+                .padding(.horizontal)
+            
             VStack(alignment: .leading, spacing: 10) {
-                Text("킬호만 샤닉")
+                Text(item.itemName ?? "")
                     .font(.title3)
-                Text("350,000원")
+                Text("\(item.itemPrice ?? 0)원")
                 NavigationLink {
                     BottleShopView()
                 } label: {

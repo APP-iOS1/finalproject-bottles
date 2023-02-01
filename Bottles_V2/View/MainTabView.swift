@@ -44,9 +44,13 @@ struct MainTabView: View {
         }
         .toolbarBackground(Color.white, for: .tabBar)
         .task{
+            await userDataStore.fetchUserWithEmail(userEmail: "test@naver.com")
+            print(userDataStore.user ?? User(id: "", email: "", followShopList: [], followItemList: [], pickupList: [], userPhoneNumber: [], recentlyBottles: [], nickname: ""))
             await shopDataStore.fetchShopList()
-            await userDataStore.fetchUserWithEmail(userEmail: user.username)
+            print(shopDataStore.shops)
+            
             await bottleDataStore.fetchBottleList()
+            print(bottleDataStore.bottles)
         }
     }
 }

@@ -14,6 +14,7 @@ enum tapInfo : String, CaseIterable {
 
 struct BookMarkView: View {
     // tap picker
+    
     @State private var selectedPicker: tapInfo = .bottle
     @Namespace private var animation
     
@@ -32,6 +33,7 @@ struct BookMarkView: View {
                 animate()
                 BookMarkTapView(bookMarkTap: selectedPicker)
             }
+           
         }
     }
     
