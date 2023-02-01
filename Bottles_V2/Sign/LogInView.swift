@@ -32,23 +32,26 @@ struct LoginView: View {
                 
                 Spacer()
                 TextField("이메일", text: $email)
-                    .modifier(LoginTextFieldModifier())
+//                    .modifier(LoginTextFieldModifier(width: <#CGFloat#>, height: <#CGFloat#>))
                     .padding(.bottom, -4)
                 SecureField("Password", text: $password)
-                    .modifier(LoginTextFieldModifier())
+//                    .modifier(LoginTextFieldModifier())
 //                    .textInputAutocapitalization(.never)// 처음 문자를 자동으로 대문자로 바꾸는걸 먹기
                 Button(action: {
                     Task{
                         await sessionManager.signIn(email: email, password: password)
                     }
                 }){
-                    Text("로그인")
-                }.disabled(email.isEmpty || password.isEmpty )
-                Button("Login", action: {
-                    Task{
-                        await sessionManager.signIn(email: email, password: password)
+                    VStack{
+                        Text("로그인")
+                            .font(.bottles16)
+                            .background{
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: 280, height: 48)
+                            }
                     }
-                }).disabled(email.isEmpty || password.isEmpty )
+                }
+                //.disabled(email.isEmpty || password.isEmpty )
                 
                 Spacer()
                 Button("Don`t have an account? Sign up.", action: {
@@ -56,7 +59,7 @@ struct LoginView: View {
                 })
             
             }
-            .navigationTitle(Text("로그인").font(.bottles18))
+//            .navigationTitle(Text("로그인").font(.bottles18))
             .task{
 //                await sessionManager.getCurrentAuthUser()
                 
@@ -87,20 +90,7 @@ struct LoginView: View {
     
 }
 
-struct LoginTextFieldModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .font(.bottles16)
-            .padding()
-            .textInputAutocapitalization(.never) // 처음 문자를 자동으로 대문자로 바꾸는걸 막기
-            .frame(width: 280)
-            .background{
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.gray_f7)
-                    .frame(width: 280,height: 48)
-            }
-    }
-}
+
 
 
 

@@ -28,13 +28,28 @@ struct EmailRegisterView: View {
     @State private var checkingPasswordError: Bool = false
     
     var body: some View {
-        VStack(alignment: .leading) {
+        ScrollView {
             // MARK: - email 입력창
             Group {
                 Text("이메일")
-                    .font(.bottles12)
-                TextField("예: bottles@bottles.com", text: $registerEmail)
-                    .checkRegisterEffect(trigger: emailError)
+                    .font(.bottles14)
+                + Text("*")
+                    .foregroundColor(.accentColor)
+                HStack {
+                    TextField("예: bottles@bottles.com", text: $registerEmail)
+                        .modifier(LoginTextFieldModifier(width: 250, height: 48))
+                    Button(action: {
+                        //TODO 중복확인 로직
+                    }){
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .frame(width: 100, height: 48)
+                            Text("중복확인")
+                                .foregroundColor(.primary)
+                                .colorInvert()
+                        }
+                    }
+                }
                 
                 // 뷰에 이메일 형식이 맞는지 틀린지 사용자가 볼 수 있게 Text로 띄워준다.
                 if registerEmail == "" {
@@ -48,9 +63,11 @@ struct EmailRegisterView: View {
             // MARK: - 비밀번호 입력창
             Group {
                 Text("비밀번호")
-                    .font(.bottles12)
+                    .font(.bottles14)
+                + Text("*")
+                    .foregroundColor(.accentColor)
                 TextField("영어, 숫자, 특수문자 포함 8~15자리", text: $registerPassword)
-                    .checkRegisterEffect(trigger: passwordError)
+                    .modifier(LoginTextFieldModifier(width: 357, height: 48))
                 
                 // 뷰에 비밀번호 형식이 맞는지 틀린지 사용자가 볼 수 있게 Text로 띄워준다.
                 
@@ -102,6 +119,7 @@ struct EmailRegisterView: View {
             }
             
         }
+        
     }
     
     /// 이메일이 정규식에 맞는지 확인 해주는 연산프로퍼티

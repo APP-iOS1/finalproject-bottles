@@ -57,6 +57,8 @@
 		7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142C12977B43B0046D420 /* PickUpDetailView.swift */; };
 		7F5397BE2989F9DC00A67CDA /* MainLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5397BD2989F9DC00A67CDA /* MainLoginView.swift */; };
 		7F5857B4298A00AD003402B0 /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5857B3298A00AD003402B0 /* Image+.swift */; };
+		7F5857B6298A35FB003402B0 /* TotalLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5857B5298A35FB003402B0 /* TotalLoginView.swift */; };
+		7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5857B7298A37E3003402B0 /* EmailLoginView.swift */; };
 		7F647DC32988B69D0022590A /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F647DC22988B69D0022590A /* SafariWebView.swift */; };
 		7F76AAF429876D0E00AAEBCA /* EmailRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */; };
 		7F76AAF6298780B100AAEBCA /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F76AAF5298780B100AAEBCA /* View+.swift */; };
@@ -189,6 +191,8 @@
 		7F2142C12977B43B0046D420 /* PickUpDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpDetailView.swift; sourceTree = "<group>"; };
 		7F5397BD2989F9DC00A67CDA /* MainLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginView.swift; sourceTree = "<group>"; };
 		7F5857B3298A00AD003402B0 /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
+		7F5857B5298A35FB003402B0 /* TotalLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalLoginView.swift; sourceTree = "<group>"; };
+		7F5857B7298A37E3003402B0 /* EmailLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLoginView.swift; sourceTree = "<group>"; };
 		7F647DC22988B69D0022590A /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterView.swift; sourceTree = "<group>"; };
 		7F76AAF5298780B100AAEBCA /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -536,6 +540,8 @@
 			isa = PBXGroup;
 			children = (
 				7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */,
+				7F5857B5298A35FB003402B0 /* TotalLoginView.swift */,
+				7F5857B7298A37E3003402B0 /* EmailLoginView.swift */,
 			);
 			path = LoginView;
 			sourceTree = "<group>";
@@ -829,6 +835,7 @@
 				AE1070092977D8AC00AF9D1B /* SearchShopList.swift in Sources */,
 				7F76AAF429876D0E00AAEBCA /* EmailRegisterView.swift in Sources */,
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
+				7F5857B6298A35FB003402B0 /* TotalLoginView.swift in Sources */,
 				7F2142BC2977956D0046D420 /* SettingView.swift in Sources */,
 				92D45CAB2988FC2B00DB4D11 /* BottleView_Info.swift in Sources */,
 				D5FCB5C62987874E004BC279 /* SearchResultList.swift in Sources */,
@@ -898,6 +905,7 @@
 				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
+				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,
 				AE106FFD2977925D00AF9D1B /* SearchViewSearchBar.swift in Sources */,
 				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,
 				D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */,
