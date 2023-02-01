@@ -32,6 +32,7 @@
 		27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CF72977862F003BE8B4 /* MyPageView.swift */; };
 		27281CFB2977AD3C003BE8B4 /* MapViewSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */; };
 		27281CFD2977B851003BE8B4 /* NearBySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CFC2977B851003BE8B4 /* NearBySheetView.swift */; };
+		276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276367E1298A584300C04CFA /* MarkerDetailSheet.swift */; };
 		27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C2E297A58E9004F3D94 /* Font+.swift */; };
 		27D82C36297A5AC1004F3D94 /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C31297A5AC0004F3D94 /* SpoqaHanSansNeo-Thin.otf */; };
 		27D82C37297A5AC1004F3D94 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C32297A5AC0004F3D94 /* SpoqaHanSansNeo-Light.otf */; };
@@ -153,6 +154,7 @@
 		27281CF92977A650003BE8B4 /* Bottles-V2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Bottles-V2-Info.plist"; sourceTree = SOURCE_ROOT; };
 		27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewSearchBar.swift; sourceTree = "<group>"; };
 		27281CFC2977B851003BE8B4 /* NearBySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearBySheetView.swift; sourceTree = "<group>"; };
+		276367E1298A584300C04CFA /* MarkerDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDetailSheet.swift; sourceTree = "<group>"; };
 		2788548CAED4926294E44B24 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		27D82C2E297A58E9004F3D94 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		27D82C31297A5AC0004F3D94 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				27D82C3E297A6F29004F3D94 /* MapViewModel.swift */,
 				27D82C40297A6FD3004F3D94 /* NaverMap.swift */,
 				27D82C57298780D8004F3D94 /* MarkerDetailView.swift */,
+				276367E1298A584300C04CFA /* MarkerDetailSheet.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -856,6 +859,7 @@
 				FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */,
 				E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */,
 				ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */,
+				276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */,
 				97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */,
 				97B2595A988073C0B7C72503 /* Shop.swift in Sources */,
 				04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */,

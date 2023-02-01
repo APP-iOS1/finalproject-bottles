@@ -20,7 +20,7 @@ import NMapsMap
 //
 //    init() {
 //        markers = [
-//            Marker(id: UUID().uuidString, latitude: 37.5670135, longitude: 126.9783740),
+//            Marker(id: UUID().uuidString, latitude: 37.5670135, longitude: 126.9783740, bookmark),
 //            Marker(id: UUID().uuidString, latitude: 37.6670135, longitude: 126.9883740),
 //            Marker(id: UUID().uuidString, latitude: 37.7670135, longitude: 126.9983740),
 //            Marker(id: UUID().uuidString, latitude: 37.3670135, longitude: 126.9683740),
