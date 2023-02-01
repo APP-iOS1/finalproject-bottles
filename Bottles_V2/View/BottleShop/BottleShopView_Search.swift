@@ -22,16 +22,26 @@ struct BottleShopView_Search: View {
     @State private var showingActionSheet: Bool = false
     @State private var selection = "기본순"
     
+    @Binding var search: Bool
+    @FocusState var focus: Bool
+    @Binding var isNavigationBarHidden: Bool
+    
     var body: some View {
         VStack(alignment: .leading){
             // 검색창
             VStack{
+                Button {
+                    search = true
+                    focus = true
+                    isNavigationBarHidden = true
+                } label: {
                 HStack {
-                    TextField("이 바틀샵의 상품을 검색해보세요", text: $text)
+                    Text("이 바틀샵의 상품을 검색해보세요")
                         .font(.bottles16)
+                        .foregroundColor(.gray)
                         .padding(7)
                         .padding(.horizontal, 25)
-                        .background{Color.gray_f7}
+                        
                         .cornerRadius(8)
                         .overlay(
                             HStack {
@@ -40,43 +50,43 @@ struct BottleShopView_Search: View {
                                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                     .padding(.leading, 8)
                                 
-                                if isEditing {
-                                    Button(action: {
-                                        self.text = ""
-                                    }) {
-                                        Image(systemName: "multiply.circle.fill")
-                                            .foregroundColor(.gray)
-                                            .padding(.trailing, 8)
-                                    }
-                                }
+//                                if isEditing {
+//                                    Button(action: {
+//                                        self.text = ""
+//                                    }) {
+//                                        Image(systemName: "multiply.circle.fill")
+//                                            .foregroundColor(.gray)
+//                                            .padding(.trailing, 8)
+//                                    }
+//                                }
                             }
                         )
                     //                    .padding(.horizontal, 10)
-                        .onTapGesture {
-                            self.isEditing = true
-                        }
+//                        .onTapGesture {
+//                            self.isEditing = true
+//                        }
                     
-                    if isEditing {
-                        Button(action: {
-                            self.isEditing = false
-                            self.text = ""
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                            
-                        }) {
-                            Text("  종료  ")
-                        }
-                        .transition(.move(edge: .trailing))
-                        .animation(.default)
-                    }
+//                    if isEditing {
+//                        Button(action: {
+//                            self.isEditing = false
+//                            self.text = ""
+//                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+//
+//                        }) {
+//                            Text("  종료  ")
+//                        }
+//                        .transition(.move(edge: .trailing))
+//                        .animation(.default)
+//                    }
                 }
+                .background{Color.gray_f7}
                 .padding(.bottom, 10)
-                
-                // 검색뷰 수정시 살릴 것
-                //            ForEach(bottleItems.filter({text.isEmpty ? false : $0.name.contains(text)}), id: \.self) { item in
-                //                NavigationLink(destination: BottleView(), label:{
-                //                    BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
-                //                })
-                //            }
+            }
+//                            ForEach(bottleItems.filter({text.isEmpty ? false : $0.name.contains(text)}), id: \.self) { item in
+//                                NavigationLink(destination: BottleView(), label:{
+//                                    BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
+//                                })
+//                            }
             }
             
             // 바틀 정렬 버튼
@@ -122,7 +132,7 @@ struct BottleShopView_Search: View {
             // 검색 결과에 따라 정렬함(검색하지 않는 경우 모든 바틀 보여주고, 검색 텍스트 입력시 텍스트가 포함되어있는 해당 바틀만 보여줌)
             // 데이터 연동 시 "해당 샵의 바틀 리스트" 연동
             // 바틀 셀 반복문
-            ForEach(bottleItems.filter({text.isEmpty ? true : $0.name.contains(text)}), id: \.self) { item in
+            ForEach(bottleItems, id: \.self) { item in
                 
                 // 바틀셀 누를 시 바틀뷰로 이동
                 NavigationLink(destination: BottleView(), label:{
@@ -135,8 +145,8 @@ struct BottleShopView_Search: View {
     }
 }
 
-struct BottleShopView_Search_Previews: PreviewProvider {
-    static var previews: some View {
-        BottleShopView_Search(text: .constant(""))
-    }
-}
+//struct BottleShopView_Search_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BottleShopView_Search(text: <#Binding<String>#>, search: <#Binding<Bool>#>, isNavigationBarHidden: <#Binding<Bool>#>)
+//    }
+//}

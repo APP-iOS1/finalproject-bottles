@@ -37,124 +37,216 @@ struct BottleShopView: View {
     @State var text: String = ""
     @State private var bookmarkToggle = false
     @State private var isSearchView: Bool = true
-    
+    @State private var isEditing = false
     @State private var selectedPicker: bottleShopInfo = .bottle
     @Namespace private var animation
     
     // 임의로 가게 전화번호 지정 (데이터 연동시 삭제)
     var phoneNumber = "718-555-5555"
     
+    // Test
+    @State var search: Bool = false
+    @State var testSearchText: String = ""
+    // 테스트용 모델
+    //    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    // 검색 결과를 필터링해주는 연산 프로퍼티
+    var filteredResult: [BottleItem22] {
+        let bottles = bottleItems
+        return bottles.filter {
+            $0.name.contains(testSearchText)
+        }
+    }
+    
+    @FocusState var focus: Bool
+    @State var isNavigationBarHidden: Bool = false
+    
     var body: some View {
         NavigationStack{
-            ScrollView{
-                VStack{
-                    
-                    // 데이터 연동 시 "shopTitleImage" 연동
-                    AsyncImage(url: URL(string: "https://media.timeout.com/images/103625148/750/422/image.jpg")) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    } placeholder: {
-                        Image("ready_image")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    
-                    HStack{
-                        // 데이터 연동 시 "shopName" 연동
-                        Text("바틀샵 이름")
-                            .font(.bottles20)
-                            .fontWeight(.bold)
+            ZStack {
+                ScrollView{
+                    VStack{
                         
-                        Spacer()
-                            .frame(width: 10)
-                        
-                        // "매장 정보 뷰"로 이동
-                        NavigationLink(destination: BottleShopDetailView())
-                        {
-                            HStack{
-                                Text("매장정보")
-                                Image(systemName: "chevron.right")
-                                    .padding(.leading, -5)
-                            }
-                            .font(.bottles14)
-                            .foregroundColor(.gray)
+                        // 데이터 연동 시 "shopTitleImage" 연동
+                        AsyncImage(url: URL(string: "https://media.timeout.com/images/103625148/750/422/image.jpg")) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        } placeholder: {
+                            Image("ready_image")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
                         }
                         
-                        Spacer()
-                        
-                        // 전화 아이콘 버튼
-                        Button(action: {
-                            let phone = "tel://"
+                        HStack{
+                            // 데이터 연동 시 "shopName" 연동
+                            Text("바틀샵 이름")
+                                .font(.bottles20)
+                                .fontWeight(.bold)
                             
-                            // 데이터 연동 시 "shopPhoneNumber" 연동 (phoneNumber 자리에)
-                            let phoneNumberformatted = phone + phoneNumber
-                            guard let url = URL(string: phoneNumberformatted) else { return }
-                            UIApplication.shared.open(url)
-                        }){
-                            Image("Phone.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 15)
-                                .padding(.trailing, 5)
-                        }
-                        
-                        Spacer()
-                            .frame(width: 15)
-                        
-                        // 북마크 아이콘 버튼
-                        Button(action: {
-                            withAnimation(.easeOut(duration: 0.5)) {
-                                bookmarkToggle.toggle()
+                            Spacer()
+                                .frame(width: 10)
+                            
+                            // "매장 정보 뷰"로 이동
+                            NavigationLink(destination: BottleShopDetailView())
+                            {
+                                HStack{
+                                    Text("매장정보")
+                                    Image(systemName: "chevron.right")
+                                        .padding(.leading, -5)
+                                }
+                                .font(.bottles14)
+                                .foregroundColor(.gray)
                             }
-                        }) {
-                            Image(bookmarkToggle ? "BookMark.fill" : "BookMark")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
+                            
+                            Spacer()
+                            
+                            // 전화 아이콘 버튼
+                            Button(action: {
+                                let phone = "tel://"
+                                
+                                // 데이터 연동 시 "shopPhoneNumber" 연동 (phoneNumber 자리에)
+                                let phoneNumberformatted = phone + phoneNumber
+                                guard let url = URL(string: phoneNumberformatted) else { return }
+                                UIApplication.shared.open(url)
+                            }){
+                                Image("Phone.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15)
+                                    .padding(.trailing, 5)
+                            }
+                            
+                            Spacer()
                                 .frame(width: 15)
-                                .padding(.trailing, 5)
+                            
+                            // 북마크 아이콘 버튼
+                            Button(action: {
+                                withAnimation(.easeOut(duration: 0.5)) {
+                                    bookmarkToggle.toggle()
+                                }
+                            }) {
+                                Image(bookmarkToggle ? "BookMark.fill" : "BookMark")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15)
+                                    .padding(.trailing, 5)
+                            }
+                            
                         }
+                        .padding()
                         
-                    }
-                    .padding()
-                    
-                    HStack{
-                        
-                        // 데이터 연동 시 "shopIntroduction" 연동
-                        Text("바틀샵 한 줄 소개 바틀샵에 오신 걸 환영합니다.")
-                            .font(.bottles14)
-                        
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-                    .padding(.top, -15)
-                    
-                    // "큐레이션 뷰"로 이동
-                    NavigationLink(destination: BottleShopCurationView()){
                         HStack{
                             
-                            // 데이터 연동 시 "shopCurationTitle" 연동
-                            Text("연말 파티에 어울리는 스파클링 와인들")
-                            Image(systemName: "chevron.right")
-                                .padding(.leading, -5)
+                            // 데이터 연동 시 "shopIntroduction" 연동
+                            Text("바틀샵 한 줄 소개 바틀샵에 오신 걸 환영합니다.")
+                                .font(.bottles14)
+                            
                             Spacer()
                         }
-                        .fontWeight(.semibold)
+                        .padding(.horizontal)
+                        .padding(.top, -15)
+                        
+                        // "큐레이션 뷰"로 이동
+                        NavigationLink(destination: BottleShopCurationView()){
+                            HStack{
+                                
+                                // 데이터 연동 시 "shopCurationTitle" 연동
+                                Text("연말 파티에 어울리는 스파클링 와인들")
+                                Image(systemName: "chevron.right")
+                                    .padding(.leading, -5)
+                                Spacer()
+                            }
+                            .fontWeight(.semibold)
+                        }
+                        .font(.bottles14)
+                        .padding()
+                        .background(Color.accentColor.opacity(0.1))
+                        .cornerRadius(12)
+                        .padding(.horizontal)
+                        .padding(.vertical, 5)
+                        
+                        VStack {
+                            animate()
+                            BottleShopInfoView(text: $text, bottleShopInfo: selectedPicker, search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden)
+                        }
+                        
                     }
-                    .font(.bottles14)
-                    .padding()
-                    .background(Color.accentColor.opacity(0.1))
-                    .cornerRadius(12)
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
-                    
-                    VStack {
-                        animate()
-                        BottleShopInfoView(text: $text, bottleShopInfo: selectedPicker)
+                }
+                if search {
+                    Color(.gray)
+                        .opacity(0.3)
+                    VStack{
+                        HStack {
+                            TextField(" 이 바틀샵의 상품을 검색해보세요", text: $testSearchText)
+                                .focused($focus)
+                                .font(.bottles16)
+                                .padding(7)
+                                .padding(.horizontal, 25)
+                                .cornerRadius(8)
+                                .overlay(
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                            .foregroundColor(.gray)
+                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                            .padding(.leading, 8)
+                                        
+                                        if isEditing {
+                                            Button(action: {
+                                                self.text = ""
+                                            }) {
+                                                Image(systemName: "multiply.circle.fill")
+                                                    .foregroundColor(.gray)
+                                                    .padding(.trailing, 8)
+                                            }
+                                        }
+                                    }
+                                )
+                                .padding(.leading, 10)
+                                .onTapGesture {
+                                    self.isEditing = true
+                                }
+                            
+                            // 검색종료버튼(검색창, 키보드 내리기 및 네비게이션바 다시 보이게 하는 액션)
+                            Button(action: {
+                                search = false
+                                focus = false
+                                isNavigationBarHidden = false
+                                self.isEditing = false
+                                self.text = ""
+                                
+                                // Dismiss the keyboard
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                
+                            }) {
+                                Text("종료  ")
+                                    .padding(.trailing, 20)
+                            }
+//                            .transition(.move(edge: .trailing))
+//                            .animation(.default)
+                            
+                        }
+                        .background(.white)
+                        .padding(.bottom, -10)
+                        
+                        ScrollView {
+                            ForEach(filteredResult, id: \.self) { item in
+                                NavigationLink(destination: BottleView(), label:{
+                                    BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
+                                        .padding()
+                                })
+                            }
+                        }
+                        
+                        .background(Color.white)
+                        
                     }
-                    
+                    .transition(.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
+                                            removal: AnyTransition.opacity.animation(.easeInOut))
+                    )
+                    //                    .animation(.easeOut)
                 }
             }
+            .navigationBarHidden(isNavigationBarHidden)
         }
     }
     
@@ -200,6 +292,12 @@ struct BottleShopView: View {
 struct BottleShopInfoView: View {
     @Binding var text: String
     var bottleShopInfo: bottleShopInfo
+    
+    // test
+    @Binding var search: Bool
+    @FocusState var focus: Bool
+    @Binding var isNavigationBarHidden: Bool
+    
     var body: some View {
         VStack {
             switch bottleShopInfo {
@@ -207,7 +305,7 @@ struct BottleShopInfoView: View {
                 // "상품 검색 탭"
             case .bottle:
                 VStack(alignment: .leading){
-                    BottleShopView_Search(text: $text)
+                    BottleShopView_Search(text: $text, search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden)
                 }
                 
                 // "사장님의 공지 탭"
