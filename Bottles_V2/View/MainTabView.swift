@@ -6,22 +6,22 @@
 //
 
 import SwiftUI
-import Amplify
+
 struct MainTabView: View {
-    @EnvironmentObject var sessionManager : SessionManager
+//    @EnvironmentObject var sessionManager : SessionManager
     @EnvironmentObject var shopDataStore : ShopDataStore
     @EnvironmentObject var userDataStore : UserDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
     
-    let user: AuthUser
+//    let user: AuthUser
     
     @State private var selection: Int = 1
     
     // TabBar 백그라운드 컬러 지정
-    init(user : AuthUser) {
-            UITabBar.appearance().backgroundColor = UIColor(Color.white)
-        self.user = user
-    }
+//    init(user : AuthUser) {
+//            UITabBar.appearance().backgroundColor = UIColor(Color.white)
+//        self.user = user
+//    }
     
     var body: some View {
         TabView(selection: $selection) {
@@ -43,15 +43,6 @@ struct MainTabView: View {
             }.tag(4)
         }
         .toolbarBackground(Color.white, for: .tabBar)
-        .task{
-            await userDataStore.fetchUserWithEmail(userEmail: "test@naver.com")
-            print(userDataStore.user ?? User(id: "", email: "", followShopList: [], followItemList: [], pickupList: [], userPhoneNumber: [], recentlyBottles: [], nickname: ""))
-            await shopDataStore.fetchShopList()
-            print(shopDataStore.shops)
-            
-            await bottleDataStore.fetchBottleList()
-            print(bottleDataStore.bottles)
-        }
     }
 }
 

@@ -19,7 +19,7 @@ struct MyPageView: View {
                 HStack {
                     Circle()
                         .frame(width: 65, height: 65)
-                    Text(userStore.user?.nickname ?? "")
+                    Text("밤삭바보")
                         .font(.bottles18)
                         .bold()
                     Spacer()

@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct BookMarkBottleList: View {
-    // ActionSheet (iOS 14 이하 - ActionSheet, iOS 15 이상 - confirmationDialog 사용해야함)
-    @State private var showingActionSheet: Bool = false
-    @State private var selection = "기본순"
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var userDataStore: UserDataStore
     
+    // ActionSheet (iOS 14 이하 - ActionSheet, iOS 15 이상 - confirmationDialog 사용해야함)
+    @State private var showingActionSheet: Bool = false
+    @State private var selection = "기본순"
+
     var body: some View {
         VStack {
             HStack {
@@ -31,14 +32,9 @@ struct BookMarkBottleList: View {
                 .padding(.trailing, 20)
             }
             ScrollView {
-                ForEach(bottleDataStore.bottles2 , id: \.id) { item in
-                    BookMarkBottleListCell(item: item)
-                }
-            }
-        }
-        .task {
-            if let recent = userDataStore.user?.followItemList {
-                await bottleDataStore.requestFollowItemList(likeItemList: recent)
+                BookMarkBottleListCell()
+                BookMarkBottleListCell()
+                BookMarkBottleListCell()
             }
         }
         // MARK: - 정렬 ActionSheet
@@ -65,7 +61,6 @@ struct BookMarkBottleList: View {
 }
 
 struct BookMarkBottleListCell: View {
-    var item: Bottle
     var body: some View {
         HStack(alignment: .top) {
             Image("whisky_Image1")
@@ -76,9 +71,9 @@ struct BookMarkBottleListCell: View {
                 .padding(.horizontal)
             
             VStack(alignment: .leading, spacing: 10) {
-                Text(item.itemName ?? "")
+                Text("바틀명")
                     .font(.title3)
-                Text("\(item.itemPrice ?? 0)원")
+                Text("바틀가격")
                 NavigationLink {
                     BottleShopView()
                 } label: {

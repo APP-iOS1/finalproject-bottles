@@ -14,7 +14,6 @@
 		0427F576297677E90023E745 /* Bottles_V2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F575297677E90023E745 /* Bottles_V2Tests.swift */; };
 		0427F580297677E90023E745 /* Bottles_V2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F57F297677E90023E745 /* Bottles_V2UITests.swift */; };
 		0427F582297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */; };
-		04F8B898297A646B0098DE93 /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 04F8B897297A646B0098DE93 /* AWSCognitoAuthPlugin */; };
 		04F8B89A297A64900098DE93 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B899297A64900098DE93 /* SessionManager.swift */; };
 		04F8B89C297A64FA0098DE93 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B89B297A64FA0098DE93 /* SignupView.swift */; };
 		04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B89D297A652F0098DE93 /* LogInView.swift */; };
@@ -48,7 +47,6 @@
 		3AA43A5B29778F7200EB8551 /* BottleShopCurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5A29778F7200EB8551 /* BottleShopCurationView.swift */; };
 		3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5C2977C8BD00EB8551 /* BottleShopView_BottleList.swift */; };
 		3AA43A612977E0AB00EB8551 /* BottleShopView_NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A602977E0AB00EB8551 /* BottleShopView_NoticeCell.swift */; };
-		471502BDC10E750066E1DD0F /* ShopNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68983E156D6EE873316F82B2 /* ShopNotice.swift */; };
 		59883C3FF144E2CA845F4DE6 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */; };
 		7F2142BC2977956D0046D420 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BB2977956D0046D420 /* SettingView.swift */; };
 		7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BD2977AF290046D420 /* PickUpListView.swift */; };
@@ -64,12 +62,7 @@
 		92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9A297E3B7C00580EC2 /* ReservationView.swift */; };
 		92906F9D297E3EB600580EC2 /* BottleView_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9C297E3EB600580EC2 /* BottleView_Info.swift */; };
 		9293B9DB297A544E00E1EB34 /* BottleView_ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */; };
-		92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DB226594BFE981A9A631ED /* AmplifyModels.swift */; };
-		97B2595A988073C0B7C72503 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A883591C6680392930FF0A /* Shop.swift */; };
-		97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1C7CE791B7DC0F740CC5D /* Shop+Schema.swift */; };
-		9FA507820644AAAE35CB724F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F831F6E9B47A7334BFA205 /* User.swift */; };
 		ABE1CA6E6BE31F60C644A53F /* Pods_Bottles_V2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */; };
-		ACA0514E444730D90B95F051 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */; };
 		AE106FFD2977925D00AF9D1B /* SearchViewSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */; };
 		AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */; };
 		AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070002977B1B000AF9D1B /* BookMarkShopList.swift */; };
@@ -81,22 +74,12 @@
 		AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E0AC0298110960002183B /* BookMarkTestModel.swift */; };
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
 		AEE99FB429799B59001A155E /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE99FB329799B59001A155E /* RecentlyItemList.swift */; };
-		AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBD4028344ED38D162747F /* Bottle+Schema.swift */; };
-		CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */; };
-		D3C7818C9A7970365A6A7879 /* ShopNotice+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D444CF6D8E41F32B3A84AB4 /* ShopNotice+Schema.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
 		D5FCB5C62987874E004BC279 /* SearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FCB5C52987874E004BC279 /* SearchResultList.swift */; };
-		D70CE4F129767EE900DFC8CE /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */; };
-		D70CE4F329767EE900DFC8CE /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F229767EE900DFC8CE /* AWSDataStorePlugin */; };
-		D70CE4F529767EE900DFC8CE /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = D70CE4F429767EE900DFC8CE /* Amplify */; };
 		D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBD7EB2988EA52002684DC /* UserDataStore.swift */; };
 		D7DBD7EE2988EA52002684DC /* ShopDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */; };
-		E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E0D5C3A6693423DABAFB70 /* Curation+Schema.swift */; };
-		ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EE1FFF83D5D61F5453BF31 /* Curation.swift */; };
 		FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */; };
-		FC5C40ACBD4A4B14412FA120 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 2788548CAED4926294E44B24 /* awsconfiguration.json */; };
-		FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC996EE791EC8ECC93A1C0 /* Bottle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,17 +110,14 @@
 		0427F57B297677E90023E745 /* Bottles_V2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bottles_V2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0427F57F297677E90023E745 /* Bottles_V2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2UITests.swift; sourceTree = "<group>"; };
 		0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		04A883591C6680392930FF0A /* Shop.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Shop.swift; path = amplify/generated/models/Shop.swift; sourceTree = "<group>"; };
 		04F8B894297A62C00098DE93 /* Bottles_V2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bottles_V2.entitlements; sourceTree = "<group>"; };
 		04F8B899297A64900098DE93 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		04F8B89B297A64FA0098DE93 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		04F8B89D297A652F0098DE93 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		04F8B89F297A83020098DE93 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		04F8B8A1297B00EB0098DE93 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
-		07EE1FFF83D5D61F5453BF31 /* Curation.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Curation.swift; path = amplify/generated/models/Curation.swift; sourceTree = "<group>"; };
 		1A4B03D15F61D2058B49F1EB /* Pods-Bottles_V2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1E38E30FED3A6D500B88EE64 /* Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; sourceTree = "<group>"; };
-		25E1C7CE791B7DC0F740CC5D /* Shop+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Shop+Schema.swift"; path = "amplify/generated/models/Shop+Schema.swift"; sourceTree = "<group>"; };
 		27281CE22977854D003BE8B4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		27281CE52977856A003BE8B4 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27281CEA297785AA003BE8B4 /* BottleShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView.swift; sourceTree = "<group>"; };
@@ -149,7 +129,6 @@
 		27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewSearchBar.swift; sourceTree = "<group>"; };
 		27281CFC2977B851003BE8B4 /* NearBySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearBySheetView.swift; sourceTree = "<group>"; };
 		27281CFE2977B8C8003BE8B4 /* NearBySheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearBySheetCell.swift; sourceTree = "<group>"; };
-		2788548CAED4926294E44B24 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		27D82C2E297A58E9004F3D94 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		27D82C31297A5AC0004F3D94 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
 		27D82C32297A5AC0004F3D94 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
@@ -160,10 +139,8 @@
 		27D82C40297A6FD3004F3D94 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		27D82C4B297A875F004F3D94 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		27D82C57298780D8004F3D94 /* MarkerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDetailView.swift; sourceTree = "<group>"; };
-		2D444CF6D8E41F32B3A84AB4 /* ShopNotice+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "ShopNotice+Schema.swift"; path = "amplify/generated/models/ShopNotice+Schema.swift"; sourceTree = "<group>"; };
 		2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2_Bottles_V2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		33FC996EE791EC8ECC93A1C0 /* Bottle.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Bottle.swift; path = amplify/generated/models/Bottle.swift; sourceTree = "<group>"; };
 		3A306745297A82BE0085CC6A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3AA43A5429778EE400EB8551 /* BottleShopView_Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_Search.swift; sourceTree = "<group>"; };
 		3AA43A5629778EFB00EB8551 /* BottleShopView_Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_Notice.swift; sourceTree = "<group>"; };
@@ -171,12 +148,9 @@
 		3AA43A5A29778F7200EB8551 /* BottleShopCurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopCurationView.swift; sourceTree = "<group>"; };
 		3AA43A5C2977C8BD00EB8551 /* BottleShopView_BottleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_BottleList.swift; sourceTree = "<group>"; };
 		3AA43A602977E0AB00EB8551 /* BottleShopView_NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_NoticeCell.swift; sourceTree = "<group>"; };
-		3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "User+Schema.swift"; path = "amplify/generated/models/User+Schema.swift"; sourceTree = "<group>"; };
 		4F05C0664583932B22FDC119 /* Pods-Bottles_V2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F497AFA31D64A6C7C8D5DAB /* Pods-Bottles_V2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.debug.xcconfig"; sourceTree = "<group>"; };
 		534C0901FECD300F1E9C28B3 /* Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; sourceTree = "<group>"; };
-		58E0D5C3A6693423DABAFB70 /* Curation+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Curation+Schema.swift"; path = "amplify/generated/models/Curation+Schema.swift"; sourceTree = "<group>"; };
-		68983E156D6EE873316F82B2 /* ShopNotice.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = ShopNotice.swift; path = amplify/generated/models/ShopNotice.swift; sourceTree = "<group>"; };
 		7F2142BB2977956D0046D420 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		7F2142BD2977AF290046D420 /* PickUpListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListView.swift; sourceTree = "<group>"; };
 		7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListCell.swift; sourceTree = "<group>"; };
@@ -191,7 +165,6 @@
 		92906F9A297E3B7C00580EC2 /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		92906F9C297E3EB600580EC2 /* BottleView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Info.swift; sourceTree = "<group>"; };
 		9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_ShopCell.swift; sourceTree = "<group>"; };
-		A7F831F6E9B47A7334BFA205 /* User.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = User.swift; path = amplify/generated/models/User.swift; sourceTree = "<group>"; };
 		AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewSearchBar.swift; sourceTree = "<group>"; };
 		AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkBottleList.swift; sourceTree = "<group>"; };
 		AE1070002977B1B000AF9D1B /* BookMarkShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkShopList.swift; sourceTree = "<group>"; };
@@ -203,8 +176,6 @@
 		AE6E0AC0298110960002183B /* BookMarkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkTestModel.swift; sourceTree = "<group>"; };
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		AEE99FB329799B59001A155E /* RecentlyItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
-		B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
-		BECBD4028344ED38D162747F /* Bottle+Schema.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "Bottle+Schema.swift"; path = "amplify/generated/models/Bottle+Schema.swift"; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		D5FCB5C52987874E004BC279 /* SearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
@@ -212,7 +183,6 @@
 		D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDataStore.swift; sourceTree = "<group>"; };
 		DAA16DBB1B2143E762C79565 /* Pods-Bottles_V2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.release.xcconfig"; sourceTree = "<group>"; };
 		DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3DB226594BFE981A9A631ED /* AmplifyModels.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = AmplifyModels.swift; path = amplify/generated/models/AmplifyModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,10 +190,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D70CE4F529767EE900DFC8CE /* Amplify in Frameworks */,
-				D70CE4F129767EE900DFC8CE /* AWSAPIPlugin in Frameworks */,
-				D70CE4F329767EE900DFC8CE /* AWSDataStorePlugin in Frameworks */,
-				04F8B898297A646B0098DE93 /* AWSCognitoAuthPlugin in Frameworks */,
 				FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,13 +223,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		020DEB752987AA9100ED3DD6 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		0427F558297677E60023E745 = {
 			isa = PBXGroup;
 			children = (
@@ -271,11 +230,8 @@
 				0427F574297677E90023E745 /* Bottles_V2Tests */,
 				0427F57E297677E90023E745 /* Bottles_V2UITests */,
 				0427F562297677E60023E745 /* Products */,
-				374221B839BD3A0EC49DB004 /* AmplifyConfig */,
-				400173D66D87937F82516F2F /* AmplifyModels */,
 				4F68E6EA943499F3BCE118BF /* Pods */,
 				0165582615B4CA84F65E4BF0 /* Frameworks */,
-				020DEB752987AA9100ED3DD6 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -292,6 +248,7 @@
 		0427F563297677E60023E745 /* Bottles_V2 */ = {
 			isa = PBXGroup;
 			children = (
+				0427F564297677E60023E745 /* Bottles_V2App.swift */,
 				04F8B895297A64290098DE93 /* Sign */,
 				04F8B894297A62C00098DE93 /* Bottles_V2.entitlements */,
 				27281CF92977A650003BE8B4 /* Bottles-V2-Info.plist */,
@@ -299,7 +256,6 @@
 				27D82C2D297A58C1004F3D94 /* Extension */,
 				27281CE0297784ED003BE8B4 /* View */,
 				D70CE4F82976823500DFC8CE /* ViewModel */,
-				0427F564297677E60023E745 /* Bottles_V2App.swift */,
 				0427F568297677E80023E745 /* Assets.xcassets */,
 				0427F56A297677E80023E745 /* Preview Content */,
 			);
@@ -483,33 +439,6 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		374221B839BD3A0EC49DB004 /* AmplifyConfig */ = {
-			isa = PBXGroup;
-			children = (
-				2788548CAED4926294E44B24 /* awsconfiguration.json */,
-				B2476BAD8D856CB02F902560 /* amplifyconfiguration.json */,
-			);
-			name = AmplifyConfig;
-			sourceTree = "<group>";
-		};
-		400173D66D87937F82516F2F /* AmplifyModels */ = {
-			isa = PBXGroup;
-			children = (
-				E3DB226594BFE981A9A631ED /* AmplifyModels.swift */,
-				3C3A3B4C9D93EEEBDA3893CB /* User+Schema.swift */,
-				A7F831F6E9B47A7334BFA205 /* User.swift */,
-				BECBD4028344ED38D162747F /* Bottle+Schema.swift */,
-				33FC996EE791EC8ECC93A1C0 /* Bottle.swift */,
-				58E0D5C3A6693423DABAFB70 /* Curation+Schema.swift */,
-				07EE1FFF83D5D61F5453BF31 /* Curation.swift */,
-				25E1C7CE791B7DC0F740CC5D /* Shop+Schema.swift */,
-				04A883591C6680392930FF0A /* Shop.swift */,
-				2D444CF6D8E41F32B3A84AB4 /* ShopNotice+Schema.swift */,
-				68983E156D6EE873316F82B2 /* ShopNotice.swift */,
-			);
-			name = AmplifyModels;
-			sourceTree = "<group>";
-		};
 		4F68E6EA943499F3BCE118BF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,10 +489,6 @@
 			);
 			name = Bottles_V2;
 			packageProductDependencies = (
-				D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */,
-				D70CE4F229767EE900DFC8CE /* AWSDataStorePlugin */,
-				D70CE4F429767EE900DFC8CE /* Amplify */,
-				04F8B897297A646B0098DE93 /* AWSCognitoAuthPlugin */,
 			);
 			productName = Bottles_V2;
 			productReference = 0427F561297677E60023E745 /* Bottles_V2.app */;
@@ -641,7 +566,6 @@
 			);
 			mainGroup = 0427F558297677E60023E745;
 			packageReferences = (
-				D70CE4EF29767EE900DFC8CE /* XCRemoteSwiftPackageReference "amplify-swift" */,
 			);
 			productRefGroup = 0427F562297677E60023E745 /* Products */;
 			projectDirPath = "";
@@ -666,8 +590,6 @@
 				27D82C3A297A5AC1004F3D94 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				27D82C36297A5AC1004F3D94 /* SpoqaHanSansNeo-Thin.otf in Resources */,
 				0427F569297677E80023E745 /* Assets.xcassets in Resources */,
-				FC5C40ACBD4A4B14412FA120 /* awsconfiguration.json in Resources */,
-				ACA0514E444730D90B95F051 /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,31 +757,13 @@
 				27D82C58298780D8004F3D94 /* MarkerDetailView.swift in Sources */,
 				AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */,
 				3AA43A5929778F2D00EB8551 /* BottleShopDetailView.swift in Sources */,
-				92B83683AB9F1D8D3F206DC1 /* AmplifyModels.swift in Sources */,
 				04F8B89C297A64FA0098DE93 /* SignupView.swift in Sources */,
-				CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */,
 				04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */,
 				04F8B8A0297A83020098DE93 /* ConfirmationView.swift in Sources */,
-				9FA507820644AAAE35CB724F /* User.swift in Sources */,
 				04F8B89A297A64900098DE93 /* SessionManager.swift in Sources */,
-				AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */,
-				FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */,
-				E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */,
-				ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */,
-				97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */,
-				97B2595A988073C0B7C72503 /* Shop.swift in Sources */,
 				04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */,
-				AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */,
-				FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */,
-				E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */,
 				029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */,
-				ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */,
-				97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */,
-				97B2595A988073C0B7C72503 /* Shop.swift in Sources */,
-				D3C7818C9A7970365A6A7879 /* ShopNotice+Schema.swift in Sources */,
-				471502BDC10E750066E1DD0F /* ShopNotice.swift in Sources */,
 				AE1070052977D24200AF9D1B /* SearchViewNavigationLabel.swift in Sources */,
-				CEA1675F94344CE0EBECE655 /* User+Schema.swift in Sources */,
 				9216C1BD2977B4BF00217C7F /* ReservedView.swift in Sources */,
 				AE1070072977D64100AF9D1B /* SearchBottleList.swift in Sources */,
 				3AA43A5B29778F7200EB8551 /* BottleShopCurationView.swift in Sources */,
@@ -874,7 +778,6 @@
 				27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */,
 				27281CFB2977AD3C003BE8B4 /* MapViewSearchBar.swift in Sources */,
 				7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */,
-				9FA507820644AAAE35CB724F /* User.swift in Sources */,
 				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
@@ -1225,40 +1128,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		D70CE4EF29767EE900DFC8CE /* XCRemoteSwiftPackageReference "amplify-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aws-amplify/amplify-swift";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		04F8B897297A646B0098DE93 /* AWSCognitoAuthPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D70CE4EF29767EE900DFC8CE /* XCRemoteSwiftPackageReference "amplify-swift" */;
-			productName = AWSCognitoAuthPlugin;
-		};
-		D70CE4F029767EE900DFC8CE /* AWSAPIPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D70CE4EF29767EE900DFC8CE /* XCRemoteSwiftPackageReference "amplify-swift" */;
-			productName = AWSAPIPlugin;
-		};
-		D70CE4F229767EE900DFC8CE /* AWSDataStorePlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D70CE4EF29767EE900DFC8CE /* XCRemoteSwiftPackageReference "amplify-swift" */;
-			productName = AWSDataStorePlugin;
-		};
-		D70CE4F429767EE900DFC8CE /* Amplify */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D70CE4EF29767EE900DFC8CE /* XCRemoteSwiftPackageReference "amplify-swift" */;
-			productName = Amplify;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0427F559297677E60023E745 /* Project object */;
 }

@@ -41,14 +41,8 @@ struct RecentlyItemList: View {
                 .bold()
                 .padding(.leading, 15)
             ScrollView {
-                ForEach(userDataStore.user?.recentlyBottles ?? [] , id: \.self) { item in
-                    Text(item ?? "없어")
-                }
+                RecentlyItemListCell()
             }
-        }
-        .task{
-            // TODO: 더미데이터 수정하기
-            
         }
     }
 }

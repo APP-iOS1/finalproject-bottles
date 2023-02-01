@@ -51,11 +51,6 @@ struct BottleView: View {
                 ReservationView(isShowing: $isShowingSheet)
             }
         }
-        .task{
-            //TODO: bottleId연동하기
-            await userDataStore.updateRecentlyBottle(bottleId: "123")
-            
-        }
         .navigationBarBackButtonHidden(true)
         .toolbar(content: {
             ToolbarItem (placement: .navigationBarLeading)  {
