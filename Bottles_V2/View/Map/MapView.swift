@@ -56,6 +56,10 @@ struct MapView: View {
                 .ignoresSafeArea(.all, edges: .top)
                 .zIndex(2)
                 
+                MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
+                    MarkerDetailView()
+                }
+                .zIndex(3)
                 // MARK: - 현재 위치 이동 버튼(커스텀)
 //                Button {
 //                    //
@@ -63,11 +67,11 @@ struct MapView: View {
 //                    Text("현재 위치로 이동")
 //                }
             }
-            .sheet(isPresented: $showMarkerDetailView, content: {
-                MarkerDetailView()
-                    .presentationDetents([.height(250)])
-                    .presentationDragIndicator(.visible)
-            })
+//            .sheet(isPresented: $showMarkerDetailView, content: {
+//                MarkerDetailView()
+//                    .presentationDetents([.height(250)])
+//                    .presentationDragIndicator(.visible)
+//            })
             
             // TODO: - 보라색 에러 async/await로 해결해보기
 //            .task {
