@@ -74,8 +74,14 @@ struct EmailRegisterView: View {
                 HStack {
                     TextField("예: bottles@bottles.com", text: $registerEmail)
                         .modifier(LoginTextFieldModifier(width: 250, height: 48))
+                        .shakeEffect(trigger: emailError)
                     Button(action: {
                         //TODO 중복확인 로직
+                        // 중복에 걸린다면 아래 코드를 넣어주시면 이펙트가 발동 됩니다. 어려울 것 같으면 지워도 돼요
+                        emailError = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                            emailError = false
+                        }
                     }){
                        Text("중복확인")
                             .modifier(EmailViewButtonModifier(width: 100, height: 48))
@@ -148,24 +154,7 @@ struct EmailRegisterView: View {
                     .keyboardType(.numberPad)
             }
             Button(action: {
-//                if emailNotFitFormat {
-//                    emailError = true
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//                        emailError = false
-//                    }
-//                } else if passwordNotFitFormat {
-//                    passwordError = true
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//                        passwordError = false
-//                    }
-//                } else if passwordCheckFail {
-//                    checkingPasswordError = true
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//                        checkingPasswordError = false
-//                    }
-//                } else {
-//                    // TODO: 이메일로 회원가입 로직 넣기
-//                }
+                // TODO: 이메일로 회원가입 로직 넣기
             }){
                 Text("회원가입하기")
                     .modifier(EmailViewButtonModifier(width: 358, height: 56))
