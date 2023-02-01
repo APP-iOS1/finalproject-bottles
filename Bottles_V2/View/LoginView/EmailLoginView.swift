@@ -18,7 +18,7 @@ struct EmailLoginView: View {
     @State var loginError: Bool = false
     
     /// 로그인 에러가 났을 때 텍스트로 사용자에게 보여주기 위한 변수
-    var loginResult: String {
+    private var loginResult: String {
         loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
     }
     var body: some View {
@@ -48,19 +48,11 @@ struct EmailLoginView: View {
                     
                 }
             }){
-                ZStack{
-                    RoundedRectangle(cornerRadius: 12)
-                        .frame(width: 280, height: 48)
-                    Text("로그인")
-                        .fontWeight(.semibold)
-                        .font(.bottles16)
-                        .foregroundColor(.primary) // 다크모드 대응
-                        .colorInvert() // primaryColor로 하게 되면 검은색을 색상 반전으로 하얀색으로 만들어 줌
-                    
-                }
+                Text("로그인")
+                    .modifier(EmailViewButtonModifier(width: 280, height: 48))
             }
             
-            NavigationLink(destination: Text("회원가입 뷰")) {
+            NavigationLink(destination: EmailRegisterView()) {
                 Text("회원가입하기")
                     .modifier(LoginViewNavigationLinkModifier())
             }
@@ -77,6 +69,26 @@ struct EmailLoginView: View {
             //
             //            })
             
+        }
+    }
+}
+
+
+//MARK: - EamilLoginView,EmailRegisterView 버튼 Modifier
+struct EmailViewButtonModifier: ViewModifier {
+    
+    var width: CGFloat
+    var height: CGFloat
+    
+    func body(content: Content) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 12)
+                .frame(width: width, height: height)
+            content
+                .fontWeight(.semibold)
+                .font(.bottles16)
+                .foregroundColor(.primary) // 다크모드 대응
+                .colorInvert() // primaryColor로 하게 되면 검은색을 색상 반전으로 하얀색으로 만들어 줌
         }
     }
 }
