@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct MainTabView: View {
-//    @EnvironmentObject var sessionManager : SessionManager
+    //    @EnvironmentObject var sessionManager : SessionManager
     @EnvironmentObject var shopDataStore : ShopDataStore
     @EnvironmentObject var userDataStore : UserDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
     
-//    let user: AuthUser
+    //    let user: AuthUser
     
     @State private var selection: Int = 1
     
-    // TabBar 백그라운드 컬러 지정
-//    init(user : AuthUser) {
-//            UITabBar.appearance().backgroundColor = UIColor(Color.white)
-//        self.user = user
-//    }
+    //     TabBar 백그라운드 컬러 지정
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(Color.white)
+    }
     
     var body: some View {
         TabView(selection: $selection) {

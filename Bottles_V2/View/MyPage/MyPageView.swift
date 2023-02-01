@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyPageView: View {
-    @EnvironmentObject var userStore: UserDataStore
+    @EnvironmentObject var userDataStore: UserDataStore
     
     var myPageList: [String] = ["바틀스 소개", "공지사항", "자주 묻는 질문", "1:1 문의하기", "서비스 이용약관", "개인정보 처리방침", "위치정보 이용약관", "버전 정보"]
     
@@ -25,7 +25,7 @@ struct MyPageView: View {
                     Spacer()
                     NavigationLink(destination: SettingView()){
                         Image(systemName: "gearshape.fill")
-//                            .foregroundColor(.accentColor)
+                        //                            .foregroundColor(.accentColor)
                             .font(.title2)
                     }
                 }
@@ -52,7 +52,7 @@ struct MyPageView: View {
                         NavigationLink(destination: Text("\(item)")){
                             Text("\(item)")
                                 .font(.bottles15)
-                                
+                            
                         }
                         .listRowSeparator(.hidden)
                     }
