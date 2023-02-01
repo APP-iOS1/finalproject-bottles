@@ -9,15 +9,18 @@ import SwiftUI
 import Amplify
 struct MainTabView: View {
     @EnvironmentObject var sessionManager : SessionManager
-    let user: AuthUser
+    
+    // MARK: - UI피드백을 위한 주석 처리
+//    let user: AuthUser
     
     @State private var selection: Int = 1
     
+    // MARK: - UI피드백을 위한 주석 처리
     // TabBar 백그라운드 컬러 지정
-    init(user : AuthUser) {
-            UITabBar.appearance().backgroundColor = UIColor(Color.white)
-        self.user = user
-    }
+//    init(user : AuthUser) {
+//            UITabBar.appearance().backgroundColor = UIColor(Color.white)
+//        self.user = user
+//    }
     
     var body: some View {
         TabView(selection: $selection) {

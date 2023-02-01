@@ -28,20 +28,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct Bottles_V2App: App {
-
+    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @ObservedObject var sessionManager = SessionManager()
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var userStore = UserStore()
-   
+    
     init() {
         do {
             // AmplifyModels is generated in the previous step
             let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels())
             try Amplify.add(plugin: dataStorePlugin)
-
-//            try Amplify.add(plugin: apiPlugin)
+            
+            //            try Amplify.add(plugin: apiPlugin)
             try Amplify.add(plugin: AWSCognitoAuthPlugin())
             print("Amplify configured with DataStore plugin")
         } catch {
@@ -50,6 +50,7 @@ struct Bottles_V2App: App {
     }
     var body: some Scene {
         WindowGroup {
+<<<<<<< Updated upstream
             switch sessionManager.authState{
             case .login:
                 LoginView()
@@ -70,6 +71,36 @@ struct Bottles_V2App: App {
                     .environmentObject(shopDataStore)
                     .environmentObject(userStore)
             }
+=======
+            // MARK: - UI피드백을 위한 주석 처리
+            //            switch sessionManager.authState{
+            //            case .login:
+            //                LoginView()
+            //                    .environmentObject(sessionManager)
+            //
+            //            case .signUp:
+            //                SignUpView()
+            //                    .environmentObject(sessionManager)
+            //
+            //            case .confirmCode(let username):
+            //                ConfirmationView(username: username)
+            //                    .environmentObject(sessionManager)
+            //
+            //            case .session(let user):
+            //                MainTabView(user: user)
+            //                .environmentObject(sessionManager)
+            //                .environmentObject(bottleDataStore)
+            //                .environmentObject(shopDataStore)
+            //                .environmentObject(userStore)
+            //                .accentColor(Color("AccentColor"))
+            //            }
+            MainTabView()
+                .environmentObject(sessionManager)
+                .environmentObject(bottleDataStore)
+                .environmentObject(shopDataStore)
+                .environmentObject(userStore)
+                .accentColor(Color("AccentColor"))
+>>>>>>> Stashed changes
         }
     }
 }
