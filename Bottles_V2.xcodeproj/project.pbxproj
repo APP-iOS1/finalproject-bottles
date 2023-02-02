@@ -76,6 +76,8 @@
 		AEE99FB429799B59001A155E /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE99FB329799B59001A155E /* RecentlyItemList.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
+		D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E26940298B40E700C975F4 /* TestRegisterView.swift */; };
+		D5E26943298B433800C975F4 /* TestLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E26942298B433800C975F4 /* TestLoginView.swift */; };
 		D5FCB5C62987874E004BC279 /* SearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FCB5C52987874E004BC279 /* SearchResultList.swift */; };
 		D746C974298A41F400E27E16 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D746C973298A41F400E27E16 /* GoogleService-Info.plist */; };
 		D746C977298A426200E27E16 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D746C976298A426200E27E16 /* FirebaseAuth */; };
@@ -183,6 +185,8 @@
 		AEE99FB329799B59001A155E /* RecentlyItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		D5E26940298B40E700C975F4 /* TestRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRegisterView.swift; sourceTree = "<group>"; };
+		D5E26942298B433800C975F4 /* TestLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginView.swift; sourceTree = "<group>"; };
 		D5FCB5C52987874E004BC279 /* SearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
 		D746C973298A41F400E27E16 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7DBD7EB2988EA52002684DC /* UserDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 				04F8B895297A64290098DE93 /* Sign */,
 				04F8B894297A62C00098DE93 /* Bottles_V2.entitlements */,
 				27281CF92977A650003BE8B4 /* Bottles-V2-Info.plist */,
+				D5E2693F298B40B300C975F4 /* TestAuth */,
 				27D82C3B297A5C0A004F3D94 /* Resource */,
 				27D82C2D297A58C1004F3D94 /* Extension */,
 				27281CE0297784ED003BE8B4 /* View */,
@@ -469,6 +474,15 @@
 				7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */,
 			);
 			path = LoginView;
+			sourceTree = "<group>";
+		};
+		D5E2693F298B40B300C975F4 /* TestAuth */ = {
+			isa = PBXGroup;
+			children = (
+				D5E26940298B40E700C975F4 /* TestRegisterView.swift */,
+				D5E26942298B433800C975F4 /* TestLoginView.swift */,
+			);
+			path = TestAuth;
 			sourceTree = "<group>";
 		};
 		D70CE4F82976823500DFC8CE /* ViewModel */ = {
@@ -701,13 +715,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -722,13 +732,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -747,7 +753,9 @@
 				27281CED297785B2003BE8B4 /* BottleView.swift in Sources */,
 				D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */,
 				7F76AAF6298780B100AAEBCA /* View+.swift in Sources */,
+				D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */,
 				27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */,
+				D5E26943298B433800C975F4 /* TestLoginView.swift in Sources */,
 				D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
 				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
