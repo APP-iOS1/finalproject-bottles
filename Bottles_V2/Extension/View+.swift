@@ -16,4 +16,5 @@ extension View {
     func checkRegisterEffect(trigger: Bool) -> some View {
         modifier(TextFieldModifier(trigger: trigger))
     }
+    
 }

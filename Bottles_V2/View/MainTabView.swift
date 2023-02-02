@@ -25,7 +25,7 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selection) {
             MapView().tabItem {
-                Image(selection == 1 ? "Map_tab_fill" : "Map_tab")
+                Image(selection == 1 ? "Map_Tab_fill" : "Map_tab")
                 Text("주변")
             }.tag(1)
             BookMarkView().tabItem {
