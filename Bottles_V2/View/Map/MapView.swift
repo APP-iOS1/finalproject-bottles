@@ -48,8 +48,13 @@ struct MapView: View {
                 /// 네이버 지도 뷰
                 NaverMap((mapViewModel.coord.0, mapViewModel.coord.1), $showMarkerDetailView)
                     .ignoresSafeArea(.all, edges: .top)
-                
+                /// 북마크 & 현재 위치 버튼
+                HStack {
+                    Spacer()
+                    SideButtonCell()
+                }
                 /// 둘러보기 뷰
+                
                 BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
                     NearBySheetView()
                 }
