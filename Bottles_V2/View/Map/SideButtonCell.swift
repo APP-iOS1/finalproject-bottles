@@ -6,10 +6,25 @@
 //
 
 import SwiftUI
-
+// MARK: - 맵뷰 사이드 셀 자리(북마크 & GPS 버튼)
 struct SideButtonCell: View {
+    
+    @State var isBookMarkTapped: Bool = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: -20) {
+            Button {
+                isBookMarkTapped.toggle()
+            } label: {
+                Image(isBookMarkTapped ? "Map_BookMark_tapped" : "Map_BookMark")
+            }
+            
+            Button {
+                //
+            } label: {
+                Image("Map_GPS")
+            }
+        }
     }
 }
 
