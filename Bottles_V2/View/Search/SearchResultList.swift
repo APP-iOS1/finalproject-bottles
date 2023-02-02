@@ -23,6 +23,9 @@ struct SearchResultList: View {
     @FocusState var focus: Bool
     // 테스트용 모델
     @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    // coreData
+    @Environment(\.managedObjectContext) var managedObjContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
     
     var body: some View {
         List {
@@ -37,6 +40,8 @@ struct SearchResultList: View {
                         searchBarText = bottle.bottleName
                         
                         focus = false
+                        // CoreData 최근 검색어 추가
+                        addSearchHistory()
                         
                     } label: {
                         HStack {
@@ -58,6 +63,22 @@ struct SearchResultList: View {
             }
         }
         .listStyle(.plain)
+    }
+    func addSearchHistory() {
+        var check: Bool = true
+        // 중복 검사 (중복시 삭제)
+        for search in searchHistory {
+            if search.text == searchBarText {
+                managedObjContext.delete(search)
+                check = false
+            }
+        }
+        // 5개로 개수 제한
+        if searchHistory.count == 5 && check {
+            managedObjContext.delete(searchHistory[4])
+        }
+        // Add
+        DataController().addSearchHistory(text: searchBarText, context: managedObjContext)
     }
 }
 

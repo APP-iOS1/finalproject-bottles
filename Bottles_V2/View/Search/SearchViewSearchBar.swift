@@ -17,6 +17,9 @@ struct SearchViewSearchBar: View {
     @Binding var doneTextFieldEdit: Bool
     // 검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
     @FocusState var focus: Bool
+    // coreData
+    @Environment(\.managedObjectContext) var managedObjContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
     
     var body: some View {
         
@@ -46,6 +49,9 @@ struct SearchViewSearchBar: View {
                     }
                 }, onCommit: {
                     doneTextFieldEdit = true
+                    // CoreData 최근 검색어 추가
+                    addSearchHistory()
+                    
                 })
                 .font(.bottles16)
                 .multilineTextAlignment(.leading)
@@ -71,6 +77,22 @@ struct SearchViewSearchBar: View {
             .cornerRadius(10)
             .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
         }
+    }
+    func addSearchHistory() {
+        var check: Bool = true
+        // 중복 검사 (중복시 삭제)
+        for search in searchHistory {
+            if search.text == searchBarText {
+                managedObjContext.delete(search)
+                check = false
+            }
+        }
+        // 5개로 개수 제한
+        if searchHistory.count == 5 && check {
+            managedObjContext.delete(searchHistory[4])
+        }
+        // Add
+        DataController().addSearchHistory(text: searchBarText, context: managedObjContext)
     }
 }
 

@@ -25,6 +25,8 @@ struct SearchView: View {
     // 검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
     @FocusState var focus: Bool
     
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
+    
     var body: some View {
         VStack {
             HStack{
