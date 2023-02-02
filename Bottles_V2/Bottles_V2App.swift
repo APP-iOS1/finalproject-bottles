@@ -21,10 +21,12 @@ struct Bottles_V2App: App {
         FirebaseApp.configure()
     }
     
-    
     var body: some Scene {
         WindowGroup {
             MainTabView()
+            
+            // MARK: - AccentColor 적용
+                .accentColor(Color("AccentColor"))
 //            switch sessionManager.authState{
 //            case .login:
 //                LoginView()

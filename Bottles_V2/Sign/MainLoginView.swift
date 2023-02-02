@@ -81,7 +81,7 @@ struct MainLoginView: View {
                 .foregroundColor(.gray)
             }
             .padding(.vertical, 40)
-            NavigationLink(destination: LoginView()) {
+            NavigationLink(destination: EmailLoginView()) {
                 Text("이메일로 로그인")
                     .font(.bottles12)
                     .foregroundColor(.gray)
