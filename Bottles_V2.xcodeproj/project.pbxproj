@@ -30,11 +30,24 @@
 		27281CFB2977AD3C003BE8B4 /* MapViewSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */; };
 		27281CFD2977B851003BE8B4 /* NearBySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CFC2977B851003BE8B4 /* NearBySheetView.swift */; };
 		276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276367E1298A584300C04CFA /* MarkerDetailSheet.swift */; };
+		27A02689298B51AC00F71705 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02682298B51AC00F71705 /* SearchView.swift */; };
+		27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02683298B51AC00F71705 /* RecentlyItemList.swift */; };
+		27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02684298B51AC00F71705 /* SearchBottleList.swift */; };
+		27A0268C298B51AC00F71705 /* SearchShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02685298B51AC00F71705 /* SearchShopList.swift */; };
+		27A0268D298B51AC00F71705 /* SearchViewNavigationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02686298B51AC00F71705 /* SearchViewNavigationLabel.swift */; };
+		27A0268E298B51AC00F71705 /* SearchViewSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02687298B51AC00F71705 /* SearchViewSearchBar.swift */; };
+		27A0268F298B51AC00F71705 /* SearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02688298B51AC00F71705 /* SearchResultList.swift */; };
+		27A02690298B572100F71705 /* BottleView_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D45CAA2988FC2B00DB4D11 /* BottleView_Info.swift */; };
+		27A02691298B572600F71705 /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D45CA42988B35300DB4D11 /* Modifiers.swift */; };
+		27A02692298B5CE800F71705 /* ReservationPageView_Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */; };
+		27A02693298BAAF500F71705 /* Bottles-V2-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27281CF92977A650003BE8B4 /* Bottles-V2-Info.plist */; };
+		27A02694298BAB5B00F71705 /* Bottles-V2-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27281CF92977A650003BE8B4 /* Bottles-V2-Info.plist */; };
+		27A02695298BAB6100F71705 /* Bottles-V2-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27281CF92977A650003BE8B4 /* Bottles-V2-Info.plist */; };
+		27A0269A298BAC6500F71705 /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27A02696298BAC6300F71705 /* SpoqaHanSansNeo-Thin.otf */; };
+		27A0269B298BAC6500F71705 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27A02697298BAC6400F71705 /* SpoqaHanSansNeo-Medium.otf */; };
+		27A0269C298BAC6500F71705 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27A02698298BAC6400F71705 /* SpoqaHanSansNeo-Light.otf */; };
+		27A0269D298BAC6500F71705 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27A02699298BAC6400F71705 /* SpoqaHanSansNeo-Bold.otf */; };
 		27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C2E297A58E9004F3D94 /* Font+.swift */; };
-		27D82C36297A5AC1004F3D94 /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C31297A5AC0004F3D94 /* SpoqaHanSansNeo-Thin.otf */; };
-		27D82C37297A5AC1004F3D94 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C32297A5AC0004F3D94 /* SpoqaHanSansNeo-Light.otf */; };
-		27D82C38297A5AC1004F3D94 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C33297A5AC0004F3D94 /* SpoqaHanSansNeo-Bold.otf */; };
-		27D82C39297A5AC1004F3D94 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C34297A5AC0004F3D94 /* SpoqaHanSansNeo-Medium.otf */; };
 		27D82C3A297A5AC1004F3D94 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */; };
 		27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C3E297A6F29004F3D94 /* MapViewModel.swift */; };
 		27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C40297A6FD3004F3D94 /* NaverMap.swift */; };
@@ -68,22 +81,15 @@
 		92906F9D297E3EB600580EC2 /* BottleView_Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */; };
 		9293B9DB297A544E00E1EB34 /* BottleView_ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */; };
 		ABE1CA6E6BE31F60C644A53F /* Pods_Bottles_V2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */; };
-		AE106FFD2977925D00AF9D1B /* SearchViewSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */; };
 		AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */; };
 		AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070002977B1B000AF9D1B /* BookMarkShopList.swift */; };
-		AE1070032977CC9F00AF9D1B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070022977CC9F00AF9D1B /* SearchView.swift */; };
-		AE1070052977D24200AF9D1B /* SearchViewNavigationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070042977D24200AF9D1B /* SearchViewNavigationLabel.swift */; };
-		AE1070072977D64100AF9D1B /* SearchBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070062977D64100AF9D1B /* SearchBottleList.swift */; };
-		AE1070092977D8AC00AF9D1B /* SearchShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070082977D8AC00AF9D1B /* SearchShopList.swift */; };
 		AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */; };
 		AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E0AC0298110960002183B /* BookMarkTestModel.swift */; };
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
-		AEE99FB429799B59001A155E /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE99FB329799B59001A155E /* RecentlyItemList.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
 		D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E26940298B40E700C975F4 /* TestRegisterView.swift */; };
 		D5E26943298B433800C975F4 /* TestLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E26942298B433800C975F4 /* TestLoginView.swift */; };
-		D5FCB5C62987874E004BC279 /* SearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FCB5C52987874E004BC279 /* SearchResultList.swift */; };
 		D746C974298A41F400E27E16 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D746C973298A41F400E27E16 /* GoogleService-Info.plist */; };
 		D746C977298A426200E27E16 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D746C976298A426200E27E16 /* FirebaseAuth */; };
 		D746C979298A426200E27E16 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D746C978298A426200E27E16 /* FirebaseFirestore */; };
@@ -141,13 +147,18 @@
 		27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewSearchBar.swift; sourceTree = "<group>"; };
 		27281CFC2977B851003BE8B4 /* NearBySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearBySheetView.swift; sourceTree = "<group>"; };
 		276367E1298A584300C04CFA /* MarkerDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDetailSheet.swift; sourceTree = "<group>"; };
-		2788548CAED4926294E44B24 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		27281CFE2977B8C8003BE8B4 /* NearBySheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearBySheetCell.swift; sourceTree = "<group>"; };
+		27A02682298B51AC00F71705 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		27A02683298B51AC00F71705 /* RecentlyItemList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
+		27A02684298B51AC00F71705 /* SearchBottleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBottleList.swift; sourceTree = "<group>"; };
+		27A02685298B51AC00F71705 /* SearchShopList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchShopList.swift; sourceTree = "<group>"; };
+		27A02686298B51AC00F71705 /* SearchViewNavigationLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewNavigationLabel.swift; sourceTree = "<group>"; };
+		27A02687298B51AC00F71705 /* SearchViewSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewSearchBar.swift; sourceTree = "<group>"; };
+		27A02688298B51AC00F71705 /* SearchResultList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
+		27A02696298BAC6300F71705 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
+		27A02697298BAC6400F71705 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
+		27A02698298BAC6400F71705 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
+		27A02699298BAC6400F71705 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
 		27D82C2E297A58E9004F3D94 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
-		27D82C31297A5AC0004F3D94 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
-		27D82C32297A5AC0004F3D94 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
-		27D82C33297A5AC0004F3D94 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
-		27D82C34297A5AC0004F3D94 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		27D82C3E297A6F29004F3D94 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		27D82C40297A6FD3004F3D94 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
@@ -187,23 +198,15 @@
 		92D45CA42988B35300DB4D11 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView_Info.swift; sourceTree = "<group>"; };
 		92D45CAA2988FC2B00DB4D11 /* BottleView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Info.swift; sourceTree = "<group>"; };
-		A7F831F6E9B47A7334BFA205 /* User.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = User.swift; path = amplify/generated/models/User.swift; sourceTree = "<group>"; };
-		AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewSearchBar.swift; sourceTree = "<group>"; };
 		AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkBottleList.swift; sourceTree = "<group>"; };
 		AE1070002977B1B000AF9D1B /* BookMarkShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkShopList.swift; sourceTree = "<group>"; };
-		AE1070022977CC9F00AF9D1B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		AE1070042977D24200AF9D1B /* SearchViewNavigationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewNavigationLabel.swift; sourceTree = "<group>"; };
-		AE1070062977D64100AF9D1B /* SearchBottleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBottleList.swift; sourceTree = "<group>"; };
-		AE1070082977D8AC00AF9D1B /* SearchShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchShopList.swift; sourceTree = "<group>"; };
 		AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewNavigationLink.swift; sourceTree = "<group>"; };
 		AE6E0AC0298110960002183B /* BookMarkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkTestModel.swift; sourceTree = "<group>"; };
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		AEE99FB329799B59001A155E /* RecentlyItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		D5E26940298B40E700C975F4 /* TestRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRegisterView.swift; sourceTree = "<group>"; };
 		D5E26942298B433800C975F4 /* TestLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginView.swift; sourceTree = "<group>"; };
-		D5FCB5C52987874E004BC279 /* SearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultList.swift; sourceTree = "<group>"; };
 		D746C973298A41F400E27E16 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7DBD7EB2988EA52002684DC /* UserDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDataStore.swift; sourceTree = "<group>"; };
@@ -335,6 +338,7 @@
 		27281CE0297784ED003BE8B4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				27A02681298B51AC00F71705 /* Search */,
 				27281CEE297785BC003BE8B4 /* BookMark */,
 				27281CE829778583003BE8B4 /* Bottle */,
 				27281CE72977856C003BE8B4 /* BottleShop */,
@@ -344,7 +348,6 @@
 				27281CE1297784F6003BE8B4 /* Map */,
 				27281CF629778621003BE8B4 /* MyPage */,
 				27281CF3297785FE003BE8B4 /* Notification */,
-				D5BC69F62988B42A0066A2DC /* Search */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -439,6 +442,20 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		27A02681298B51AC00F71705 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				27A02682298B51AC00F71705 /* SearchView.swift */,
+				27A02683298B51AC00F71705 /* RecentlyItemList.swift */,
+				27A02684298B51AC00F71705 /* SearchBottleList.swift */,
+				27A02685298B51AC00F71705 /* SearchShopList.swift */,
+				27A02686298B51AC00F71705 /* SearchViewNavigationLabel.swift */,
+				27A02687298B51AC00F71705 /* SearchViewSearchBar.swift */,
+				27A02688298B51AC00F71705 /* SearchResultList.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		27D82C2D297A58C1004F3D94 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,11 +471,11 @@
 		27D82C30297A5AC0004F3D94 /* SpoqaHanSansNeo_OTF_original */ = {
 			isa = PBXGroup;
 			children = (
-				27D82C31297A5AC0004F3D94 /* SpoqaHanSansNeo-Thin.otf */,
-				27D82C32297A5AC0004F3D94 /* SpoqaHanSansNeo-Light.otf */,
-				27D82C33297A5AC0004F3D94 /* SpoqaHanSansNeo-Bold.otf */,
-				27D82C34297A5AC0004F3D94 /* SpoqaHanSansNeo-Medium.otf */,
 				27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */,
+				27A02699298BAC6400F71705 /* SpoqaHanSansNeo-Bold.otf */,
+				27A02698298BAC6400F71705 /* SpoqaHanSansNeo-Light.otf */,
+				27A02697298BAC6400F71705 /* SpoqaHanSansNeo-Medium.otf */,
+				27A02696298BAC6300F71705 /* SpoqaHanSansNeo-Thin.otf */,
 			);
 			path = SpoqaHanSansNeo_OTF_original;
 			sourceTree = "<group>";
@@ -494,20 +511,6 @@
 			path = LoginView;
 			sourceTree = "<group>";
 		};
-		D5BC69F62988B42A0066A2DC /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				AE1070022977CC9F00AF9D1B /* SearchView.swift */,
-				AEE99FB329799B59001A155E /* RecentlyItemList.swift */,
-				D5FCB5C52987874E004BC279 /* SearchResultList.swift */,
-				AE1070062977D64100AF9D1B /* SearchBottleList.swift */,
-				AE1070082977D8AC00AF9D1B /* SearchShopList.swift */,
-				AE106FFC2977925D00AF9D1B /* SearchViewSearchBar.swift */,
-				AE1070042977D24200AF9D1B /* SearchViewNavigationLabel.swift */,
-			);
-            path = Search;
-            sourceTree = "<group>";
-        };
 		D5E2693F298B40B300C975F4 /* TestAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -645,14 +648,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A02693298BAAF500F71705 /* Bottles-V2-Info.plist in Resources */,
 				0427F56C297677E80023E745 /* Preview Assets.xcassets in Resources */,
+				27A0269B298BAC6500F71705 /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				D746C974298A41F400E27E16 /* GoogleService-Info.plist in Resources */,
-				27D82C39297A5AC1004F3D94 /* SpoqaHanSansNeo-Medium.otf in Resources */,
-				27D82C38297A5AC1004F3D94 /* SpoqaHanSansNeo-Bold.otf in Resources */,
-				27D82C37297A5AC1004F3D94 /* SpoqaHanSansNeo-Light.otf in Resources */,
 				27D82C3A297A5AC1004F3D94 /* SpoqaHanSansNeo-Regular.otf in Resources */,
-				27D82C36297A5AC1004F3D94 /* SpoqaHanSansNeo-Thin.otf in Resources */,
 				0427F569297677E80023E745 /* Assets.xcassets in Resources */,
+				27A0269D298BAC6500F71705 /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				27A0269A298BAC6500F71705 /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				27A0269C298BAC6500F71705 /* SpoqaHanSansNeo-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +664,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A02694298BAB5B00F71705 /* Bottles-V2-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +672,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A02695298BAB6100F71705 /* Bottles-V2-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -780,10 +786,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A0268F298B51AC00F71705 /* SearchResultList.swift in Sources */,
 				92906F9D297E3EB600580EC2 /* BottleView_Detail.swift in Sources */,
 				AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */,
 				27281CED297785B2003BE8B4 /* BottleView.swift in Sources */,
 				D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */,
+				27A0268C298B51AC00F71705 /* SearchShopList.swift in Sources */,
 				7F76AAF6298780B100AAEBCA /* View+.swift in Sources */,
 				D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */,
 				27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */,
@@ -791,65 +799,46 @@
 				D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
 				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
-				AE1070092977D8AC00AF9D1B /* SearchShopList.swift in Sources */,
 				7F76AAF429876D0E00AAEBCA /* EmailRegisterView.swift in Sources */,
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
 				7F5857B6298A35FB003402B0 /* TotalLoginView.swift in Sources */,
 				7F2142BC2977956D0046D420 /* SettingView.swift in Sources */,
-				92D45CAB2988FC2B00DB4D11 /* BottleView_Info.swift in Sources */,
-				D5FCB5C62987874E004BC279 /* SearchResultList.swift in Sources */,
 				26D0E4382979164400524943 /* (null) in Sources */,
 				D7DBD7EE2988EA52002684DC /* ShopDataStore.swift in Sources */,
 				9216C1BF2977B5E100217C7F /* ReservedView_BottleShop.swift in Sources */,
 				27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */,
-				92D45CA52988B35300DB4D11 /* Modifiers.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				9216C1B92977AF1D00217C7F /* ReservationView_Sheet.swift in Sources */,
-				AEE99FB429799B59001A155E /* RecentlyItemList.swift in Sources */,
-				AE1070032977CC9F00AF9D1B /* SearchView.swift in Sources */,
+				27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */,
 				3A306746297A82BE0085CC6A /* Color.swift in Sources */,
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,
+				27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */,
 				AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */,
 				3AA43A612977E0AB00EB8551 /* BottleShopView_NoticeCell.swift in Sources */,
 				3AA43A5529778EE400EB8551 /* BottleShopView_Search.swift in Sources */,
+				27A02689298B51AC00F71705 /* SearchView.swift in Sources */,
 				27D82C58298780D8004F3D94 /* MarkerDetailView.swift in Sources */,
 				AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */,
 				3AA43A5929778F2D00EB8551 /* BottleShopDetailView.swift in Sources */,
 				04F8B89C297A64FA0098DE93 /* SignupView.swift in Sources */,
 				04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */,
-				020DEB792987AADD00ED3DD6 /* UserStore.swift in Sources */,
 				7F5857B4298A00AD003402B0 /* Image+.swift in Sources */,
 				04F8B8A0297A83020098DE93 /* ConfirmationView.swift in Sources */,
+				27A0268E298B51AC00F71705 /* SearchViewSearchBar.swift in Sources */,
 				04F8B89A297A64900098DE93 /* SessionManager.swift in Sources */,
-				AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */,
-				FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */,
-				E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */,
-				ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */,
 				276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */,
-				97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */,
-				97B2595A988073C0B7C72503 /* Shop.swift in Sources */,
 				04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */,
-				92D45CA72988F73700DB4D11 /* ReservationPageView_Info.swift in Sources */,
-				AF815ED8EEBD16C0035B0A63 /* Bottle+Schema.swift in Sources */,
-				FFB9DE7523C484CD2DF1E6B4 /* Bottle.swift in Sources */,
-				E34FA72386F0536FEF6A05AE /* Curation+Schema.swift in Sources */,
 				7F5397BE2989F9DC00A67CDA /* MainLoginView.swift in Sources */,
-				020DEB7329878CC300ED3DD6 /* ShopStore.swift in Sources */,
 				029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */,
-				ECCA76561FCA5D7A5EC9CA53 /* Curation.swift in Sources */,
-				97B9279200B1B08F9EB60788 /* Shop+Schema.swift in Sources */,
-				97B2595A988073C0B7C72503 /* Shop.swift in Sources */,
 				7F647DC32988B69D0022590A /* SafariWebView.swift in Sources */,
-				D3C7818C9A7970365A6A7879 /* ShopNotice+Schema.swift in Sources */,
-				471502BDC10E750066E1DD0F /* ShopNotice.swift in Sources */,
 				04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */,
+				27A02690298B572100F71705 /* BottleView_Info.swift in Sources */,
 				029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */,
-				AE1070052977D24200AF9D1B /* SearchViewNavigationLabel.swift in Sources */,
 				9216C1BD2977B4BF00217C7F /* ReservedView.swift in Sources */,
-				AE1070072977D64100AF9D1B /* SearchBottleList.swift in Sources */,
 				3AA43A5B29778F7200EB8551 /* BottleShopCurationView.swift in Sources */,
+				27A02691298B572600F71705 /* Modifiers.swift in Sources */,
 				3AA43A5729778EFB00EB8551 /* BottleShopView_Notice.swift in Sources */,
 				3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
@@ -859,16 +848,17 @@
 				27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */,
 				27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */,
 				27281CFB2977AD3C003BE8B4 /* MapViewSearchBar.swift in Sources */,
+				27A02692298B5CE800F71705 /* ReservationPageView_Info.swift in Sources */,
 				7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */,
 				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,
-				AE106FFD2977925D00AF9D1B /* SearchViewSearchBar.swift in Sources */,
 				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,
 				D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */,
 				27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */,
 				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
+				27A0268D298B51AC00F71705 /* SearchViewNavigationLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
