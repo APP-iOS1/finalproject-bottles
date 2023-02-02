@@ -37,6 +37,7 @@ struct BookMarkView: View {
                 animate()
                 BookMarkTabView(bookMarkTab: selectedPicker)
             }
+           
         }
     }
     

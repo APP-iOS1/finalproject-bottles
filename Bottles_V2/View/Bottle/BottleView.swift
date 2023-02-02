@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - 바틀 정보
 /// 바틀의 정보 및 해당 바틀을 판매하는 바틀샵 리스트를 표시하는 뷰입니다.
 struct BottleView: View {
+    @EnvironmentObject var userDataStore : UserDataStore
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowingSheet: Bool = false
     

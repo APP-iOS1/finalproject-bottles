@@ -6,24 +6,24 @@
 //
 
 import SwiftUI
-import Amplify
+//import Amplify
 
-struct SessionView: View {
-    @EnvironmentObject var sessionManager : SessionManager
-    let user: AuthUser
-    var body: some View {
-        VStack{
-            Spacer()
-            Text("You signed in using Amplify!")
-                .font(.largeTitle)
-                .multilineTextAlignment(.center)
-            Text("Your email is \(user.username)")
-            Spacer()
-            Button("로그아웃", action:{
-                Task{
-                    await sessionManager.signOutLocally()
-                }
-            })
-        }
-    }
-}
+//struct SessionView: View {
+//    @EnvironmentObject var sessionManager : SessionManager
+//    let user: AuthUser
+//    var body: some View {
+//        VStack{
+//            Spacer()
+//            Text("You signed in using Amplify!")
+//                .font(.largeTitle)
+//                .multilineTextAlignment(.center)
+//            Text("Your email is \(user.username)")
+//            Spacer()
+//            Button("로그아웃", action:{
+//                Task{
+//                    await sessionManager.signOutLocally()
+//                }
+//            })
+//        }
+//    }
+//}

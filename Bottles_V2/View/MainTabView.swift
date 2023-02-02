@@ -6,21 +6,22 @@
 //
 
 import SwiftUI
-import Amplify
+
 struct MainTabView: View {
-    @EnvironmentObject var sessionManager : SessionManager
+
+    //    @EnvironmentObject var sessionManager : SessionManager
+    @EnvironmentObject var shopDataStore : ShopDataStore
+    @EnvironmentObject var userDataStore : UserDataStore
+    @EnvironmentObject var bottleDataStore : BottleDataStore
     
-    // MARK: - UI피드백을 위한 주석 처리
-//    let user: AuthUser
+    //    let user: AuthUser
     
     @State private var selection: Int = 1
     
-    // MARK: - UI피드백을 위한 주석 처리
-    // TabBar 백그라운드 컬러 지정
-//    init(user : AuthUser) {
-//            UITabBar.appearance().backgroundColor = UIColor(Color.white)
-//        self.user = user
-//    }
+    //     TabBar 백그라운드 컬러 지정
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(Color.white)
+    }
     
     var body: some View {
         TabView(selection: $selection) {

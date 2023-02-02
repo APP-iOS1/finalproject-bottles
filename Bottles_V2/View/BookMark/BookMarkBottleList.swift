@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct BookMarkBottleList: View {
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    @EnvironmentObject var userDataStore: UserDataStore
+    
     // ActionSheet (iOS 14 이하 - ActionSheet, iOS 15 이상 - confirmationDialog 사용해야함)
     @State private var showingActionSheet: Bool = false
     @State private var selection = "기본순"
+
     // 테스트용 모델
     @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
-    
+
     var body: some View {
         VStack {
             HStack {
