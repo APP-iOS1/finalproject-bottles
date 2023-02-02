@@ -47,10 +47,11 @@
 		27A0269B298BAC6500F71705 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27A02697298BAC6400F71705 /* SpoqaHanSansNeo-Medium.otf */; };
 		27A0269C298BAC6500F71705 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27A02698298BAC6400F71705 /* SpoqaHanSansNeo-Light.otf */; };
 		27A0269D298BAC6500F71705 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27A02699298BAC6400F71705 /* SpoqaHanSansNeo-Bold.otf */; };
+		27A0269F298C064F00F71705 /* SideButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A0269E298C064F00F71705 /* SideButtonCell.swift */; };
+		27A026A1298C11A300F71705 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A026A0298C11A300F71705 /* NaverMap.swift */; };
 		27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C2E297A58E9004F3D94 /* Font+.swift */; };
 		27D82C3A297A5AC1004F3D94 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */; };
 		27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C3E297A6F29004F3D94 /* MapViewModel.swift */; };
-		27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C40297A6FD3004F3D94 /* NaverMap.swift */; };
 		27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C4B297A875F004F3D94 /* BottomSheet.swift */; };
 		27D82C58298780D8004F3D94 /* MarkerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C57298780D8004F3D94 /* MarkerDetailView.swift */; };
 		3A306746297A82BE0085CC6A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A306745297A82BE0085CC6A /* Color.swift */; };
@@ -160,10 +161,11 @@
 		27A02697298BAC6400F71705 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		27A02698298BAC6400F71705 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
 		27A02699298BAC6400F71705 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		27A0269E298C064F00F71705 /* SideButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideButtonCell.swift; sourceTree = "<group>"; };
+		27A026A0298C11A300F71705 /* NaverMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		27D82C2E297A58E9004F3D94 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		27D82C3E297A6F29004F3D94 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
-		27D82C40297A6FD3004F3D94 /* NaverMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		27D82C4B297A875F004F3D94 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		27D82C57298780D8004F3D94 /* MarkerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDetailView.swift; sourceTree = "<group>"; };
 		2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2_Bottles_V2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -365,9 +367,10 @@
 				27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */,
 				27281CFC2977B851003BE8B4 /* NearBySheetView.swift */,
 				27D82C3E297A6F29004F3D94 /* MapViewModel.swift */,
-				27D82C40297A6FD3004F3D94 /* NaverMap.swift */,
+				27A026A0298C11A300F71705 /* NaverMap.swift */,
 				27D82C57298780D8004F3D94 /* MarkerDetailView.swift */,
 				276367E1298A584300C04CFA /* MarkerDetailSheet.swift */,
+				27A0269E298C064F00F71705 /* SideButtonCell.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -800,7 +803,6 @@
 				27A0268C298B51AC00F71705 /* SearchShopList.swift in Sources */,
 				7F76AAF6298780B100AAEBCA /* View+.swift in Sources */,
 				D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */,
-				27D82C41297A6FD3004F3D94 /* NaverMap.swift in Sources */,
 				D5E26943298B433800C975F4 /* TestLoginView.swift in Sources */,
 				AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */,
 				D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */,
@@ -847,6 +849,7 @@
 				3AA43A5B29778F7200EB8551 /* BottleShopCurationView.swift in Sources */,
 				27A02691298B572600F71705 /* Modifiers.swift in Sources */,
 				3AA43A5729778EFB00EB8551 /* BottleShopView_Notice.swift in Sources */,
+				27A026A1298C11A300F71705 /* NaverMap.swift in Sources */,
 				3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
 				9293B9DB297A544E00E1EB34 /* BottleView_ShopCell.swift in Sources */,
@@ -859,6 +862,7 @@
 				7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */,
 				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
+				27A0269F298C064F00F71705 /* SideButtonCell.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,
 				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,
