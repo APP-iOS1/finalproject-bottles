@@ -56,6 +56,10 @@ struct NaverMap: UIViewRepresentable {
         
         func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
             print("카메라 변경 - reason: \(reason)")
+            let cameraPosition = mapView.cameraPosition
+            
+        // MARK: - 카메라 위치 변경 시 위도/경도 값 받아오기
+            print(cameraPosition.target.lat, cameraPosition.target.lng)
         }
     }
     
@@ -65,7 +69,7 @@ struct NaverMap: UIViewRepresentable {
         view.mapView.positionMode = .direction
         
         // MARK: - 줌 레벨 제한
-        view.mapView.zoomLevel = 17
+        view.mapView.zoomLevel = 20
         view.mapView.minZoomLevel = 15
         
         let locationOverlay = view.mapView.locationOverlay
@@ -89,9 +93,9 @@ struct NaverMap: UIViewRepresentable {
             marker.captionMaxZoom = 16
             
             // MARK: - 마커 이미지 변경
-            marker.iconImage = NMFOverlayImage(name: "MapMarker")
-            marker.width = 40
-            marker.height = 50
+            marker.iconImage = NMFOverlayImage(name: "MapMarker.fill")
+//            marker.width = 40
+//            marker.height = 50
             
             // MARK: - 마커 터치 핸들러
             marker.touchHandler = { (overlay) -> Bool in
