@@ -16,6 +16,8 @@ struct Bottles_V2App: App {
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var userDataStore = UserDataStore()
+    // coreData
+    @StateObject var dataController = DataController()
     
     init() {
         FirebaseApp.configure()
@@ -24,6 +26,8 @@ struct Bottles_V2App: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
+            // coreData
+                .environment(\.managedObjectContext, dataController.container.viewContext)
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))

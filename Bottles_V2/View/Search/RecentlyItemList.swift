@@ -18,6 +18,9 @@ struct RecentlyItemList: View {
     @FocusState var focus: Bool
     // 테스트용 모델
     @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    // coreData
+    @Environment(\.managedObjectContext) var managedObjContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {            
@@ -29,19 +32,35 @@ struct RecentlyItemList: View {
             // 최근 검색어 나열
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(recentSearches, id: \.self) { search in
-                        // 최근 검색어를 누르면 해당 검색어로 검색이 진행된다
-                        Button  {
-                            searchBarText = search
-                            doneTextFieldEdit = true
-                            focus = false
-                        } label: {
-                            Text(search)
-                                .font(.bottles16)
-                                .padding(12)
-                                .background(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
-                                .padding(.vertical)
-                                .padding(.leading, 5)
+                    if searchHistory.isEmpty {
+                        Text("최근 검색어가 없습니다.")
+                            .padding(.vertical)
+                    } else {
+                        ForEach(searchHistory, id: \.self) { search in
+                            HStack {
+                                // 최근 검색어를 누르면 해당 검색어로 검색이 진행된다
+                                Button  {
+                                    searchBarText = search.text!
+                                    doneTextFieldEdit = true
+                                    focus = false
+                                    searchAgain(search: search)
+                                } label: {
+                                    Text(search.text!)
+                                }
+                                
+                                Button {
+                                    if let index = searchHistory.firstIndex(of: search) {
+                                        deleteSearchHistory(offsets: IndexSet(integer: index))
+                                    }
+                                } label: {
+                                    Image(systemName: "xmark")
+                                }
+                            }
+                            .font(.bottles16)
+                            .padding(12)
+                            .background(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
+                            .padding(.vertical)
+                            .padding(.leading, 5)
                         }
                     }
                 }
@@ -58,6 +77,20 @@ struct RecentlyItemList: View {
                 }
             }
         }
+    }
+    // 개별 삭제
+    func deleteSearchHistory(offsets: IndexSet) {
+        offsets.map { searchHistory[$0] }.forEach(managedObjContext.delete)
+        
+        DataController().save(context: managedObjContext)
+    }
+    
+    func searchAgain(search: SearchHistory) {
+        // 삭제하고 다시 새롭게 Add
+        if let index = searchHistory.firstIndex(of: search) {
+            deleteSearchHistory(offsets: IndexSet(integer: index))
+        }
+        DataController().addSearchHistory(text: searchBarText, context: managedObjContext)
     }
 }
 
