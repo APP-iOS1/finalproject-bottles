@@ -17,7 +17,7 @@ enum Sort: String, CaseIterable, Identifiable {
 struct BottleShopView_Search: View {
     
     @Binding var text: String
-    @State private var isEditing = false
+    @State private var isEditing: Bool = false
     @State private var selectedSort = Sort.automatic
     @State private var showingActionSheet: Bool = false
     @State private var selection = "기본순"

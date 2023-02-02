@@ -35,9 +35,9 @@ enum bottleShopInfo : String, CaseIterable {
 // 바틀샵 메인 뷰
 struct BottleShopView: View {
     @State var text: String = ""
-    @State private var bookmarkToggle = false
+    @State private var bookmarkToggle: Bool = false
     @State private var isSearchView: Bool = true
-    @State private var isEditing = false
+    @State private var isEditing: Bool = false
     @State private var selectedPicker: bottleShopInfo = .bottle
     @Namespace private var animation
     
