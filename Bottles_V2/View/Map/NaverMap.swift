@@ -56,7 +56,6 @@ struct NaverMap: UIViewRepresentable {
             self._showMarkerDetailView = showMarkerDetailView
         }
         
-        
         func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
             print("카메라 변경 - reason: \(reason)")
         }
