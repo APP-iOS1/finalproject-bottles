@@ -19,25 +19,60 @@ struct BookMarkView: View {
     @State private var selectedPicker: tabInfo = .bottle
     @Namespace private var animation
     
+    
+    // Test
+    @State var transitionView: Bool = false
+    @Namespace var transition
+    @FocusState var focus: Bool
+    
     var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    // SearchView 로 이동하는 검색바 모양 버튼
-                    NavigationLink {
-                        SearchView()
-                    } label: {
-                        SearchViewNavigationLabel()
+                if !transitionView {
+                    VStack {
+                        // Test
+                        Button {
+                            withAnimation(.spring(response: 0.5)) {
+                                transitionView.toggle()
+                                focus = true
+                            }
+                            
+                        } label: {
+                            SearchViewNavigationLabel()
+                        }
+                        .matchedGeometryEffect(id: "search", in: transition)
+                        // tab picker 애니메이션 함수 및 탭뷰
+                        animate()
+                        BookMarkTabView(bookMarkTab: selectedPicker)
                     }
-                    // CartView 로 이동하는 버튼
-                    CartViewNavigationLink()
-                        .padding(.leading, 5)
+                } else {
+                    VStack {
+                        SearchView(focus: _focus, transitionView: $transitionView)
+                    }
+                    .matchedGeometryEffect(id: "search", in: transition)
                 }
+                
+//                HStack {
+//
+//                    // SearchView 로 이동하는 검색바 모양 버튼
+//                    //                        NavigationLink {
+//                    //                            SearchView()
+//                    //                        } label: {
+//                    //                            SearchViewNavigationLabel()
+//                    //                        }
+//
+//
+//
+//
+//                    // CartView 로 이동하는 버튼
+//                    CartViewNavigationLink()
+//                        .padding(.leading, 5)
+//                }
                 // tab picker 애니메이션 함수 및 탭뷰
-                animate()
-                BookMarkTabView(bookMarkTab: selectedPicker)
+//                animate()
+//                BookMarkTabView(bookMarkTab: selectedPicker)
             }
-           
+            
         }
     }
     
