@@ -42,9 +42,9 @@ struct MapMarkerByShopData {
 struct NaverMap: UIViewRepresentable {
     
     @Binding var showMarkerDetailView: Bool
-    @Binding var mappinShopID : String
+    @Binding var mappinShopID : ShopModel
     @EnvironmentObject var shopDataStore : ShopDataStore
-    @State var shopInfo : [Any] = []
+    @State var shopInfo : [MapMarkerByShopData] = []
     
     var coord: (Double, Double)
     //    var markers: [Marker]
@@ -53,11 +53,17 @@ struct NaverMap: UIViewRepresentable {
         Coordinator(coord, $showMarkerDetailView)
     }
     
-    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>, _ mappinShopID: Binding<String>
+    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>, _ mappinShopID: Binding<ShopModel>
     ) {
         self.coord = coord
         self._showMarkerDetailView = showMarkerDetailView
         self._mappinShopID = mappinShopID
+        
+//        for shopMarker in shopDataStore.shopData {
+//                let marker = NMFMarker()
+//            marker.position = NMGLatLng(lat: shopMarker.location.latitude, lng: shopMarker.location.longitude)
+//            }
+        
     }
     
     // 모든 shopDataStore의 위경도, 샵이름, 샵ID를 배열로 가지는 배열을 생성
@@ -136,18 +142,17 @@ struct NaverMap: UIViewRepresentable {
 //                MapMarkerByShopData(shopID: oneShop.id, shopName: oneShop.shopName, location: oneShop.location)
 //            )
 //        }
-        
+        print("샵데이터 : \(self.shopDataStore.shopData.count)")
         
         for shopMarker in self.shopDataStore.shopData {
-            
             let marker = NMFMarker()
             //            marker.position = NMGLatLng(lat: shopMarker.latitude, lng: shopMarker.longitude)
             // 임시 마커(서울시청)
             // TODO: 아래 코드 위경도를 바꿔주면 서 for 문 생성
-            
-            let test = shopMarker.location.latitude
-            let test2 = shopMarker.location.longitude
-            print("이게 찐중요 위경도 나와라 얍 : \(test), \(test2)")
+//
+//            let test = shopMarker.location.latitude
+//            let test2 = shopMarker.location.longitude
+//            print("이게 찐중요 위경도 나와라 얍 : \(test), \(test2)")
             marker.position = NMGLatLng(lat: shopMarker.location.latitude, lng: shopMarker.location.longitude)
             //        marker.position = NMGLatLng(lat: 32.56668, lng: 124.978415)
             marker.captionRequestedWidth = 100
@@ -163,6 +168,7 @@ struct NaverMap: UIViewRepresentable {
             // MARK: - 마커 터치 핸들러
             marker.touchHandler = { (overlay) -> Bool in
                 print("marker touched")
+                mappinShopID = shopMarker
                 showMarkerDetailView.toggle()
                 
                 // 마커 터치 시 마커 아이콘 크기 변경

@@ -99,6 +99,7 @@
 		D746C97B298A426200E27E16 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D746C97A298A426200E27E16 /* FirebaseFirestoreSwift */; };
 		D746C97D298A426200E27E16 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D746C97C298A426200E27E16 /* FirebaseStorage */; };
 		D7B5EA57298CA54400DC648A /* ReservationDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B5EA56298CA54400DC648A /* ReservationDataStore.swift */; };
+		D7B5EA59298CFEBB00DC648A /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B5EA58298CFEBB00DC648A /* LaunchView.swift */; };
 		D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBD7EB2988EA52002684DC /* UserDataStore.swift */; };
 		D7DBD7EE2988EA52002684DC /* ShopDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */; };
 		FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */; };
@@ -216,6 +217,7 @@
 		D5E26942298B433800C975F4 /* TestLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginView.swift; sourceTree = "<group>"; };
 		D746C973298A41F400E27E16 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7B5EA56298CA54400DC648A /* ReservationDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDataStore.swift; sourceTree = "<group>"; };
+		D7B5EA58298CFEBB00DC648A /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		D7DBD7EB2988EA52002684DC /* UserDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDataStore.swift; sourceTree = "<group>"; };
 		DAA16DBB1B2143E762C79565 /* Pods-Bottles_V2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.release.xcconfig"; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				0427F568297677E80023E745 /* Assets.xcassets */,
 				AE2AD6DB298BF9EE00C40EE8 /* SearchModel.xcdatamodeld */,
 				0427F56A297677E80023E745 /* Preview Content */,
+				D7B5EA58298CFEBB00DC648A /* LaunchView.swift */,
 			);
 			path = Bottles_V2;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 				27A02691298B572600F71705 /* Modifiers.swift in Sources */,
 				3AA43A5729778EFB00EB8551 /* BottleShopView_Notice.swift in Sources */,
 				27A026A1298C11A300F71705 /* NaverMap.swift in Sources */,
+				D7B5EA59298CFEBB00DC648A /* LaunchView.swift in Sources */,
 				3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
 				9293B9DB297A544E00E1EB34 /* BottleView_ShopCell.swift in Sources */,

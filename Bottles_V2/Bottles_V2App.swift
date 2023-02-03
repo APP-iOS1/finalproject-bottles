@@ -26,7 +26,7 @@ struct Bottles_V2App: App {
     
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            LaunchView()
             // coreData
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(bottleDataStore)
@@ -34,9 +34,6 @@ struct Bottles_V2App: App {
                 .environmentObject(userDataStore)
                 .environmentObject(reservationDataStore)
                 .task {
-                    await shopDataStore.getAllShopData()
-                    await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllResevationData()
                     await shopDataStore.getAllShopData()
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.getAllResevationData()

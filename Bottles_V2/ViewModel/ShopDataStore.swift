@@ -52,9 +52,7 @@ class ShopDataStore : ObservableObject {
                 // 있는지를 따져서 있으면 데이터 넣어주고, 없으면 옵셔널 처리
                 
                 let id : String = document.documentID
-                print("id \(id)")
                 let shopName : String = docData["shopName"] as? String ?? ""
-                print("shopName \(shopName)")
                 let shopOpenCloseTime : String = docData["shopOpenCloseTime"] as? String ?? ""
                 let shopAddress : String = docData["shopAddress"] as? String ?? ""
                 let shopPhoneNumber : String = docData["shopPhoneNumber"] as? String ?? ""
@@ -77,7 +75,7 @@ class ShopDataStore : ObservableObject {
                 let shopData : ShopModel = ShopModel(id: id, shopName: shopName, shopOpenCloseTime: shopOpenCloseTime, shopAddress: shopAddress, shopPhoneNumber: shopPhoneNumber, shopIntroduction: shopIntroduction, shopSNS: shopSNS, followerUserList: followerUserList, isRegister: isRegister, location: location, reservedList: reservedList, shopTitleImage: shopTitleImage, shopImages: shopImages, shopCurationTitle: shopCurationTitle, shopCurationBody: shopCurationBody, shopCurationImage: shopCurationImage, shopCurationBottleID: shopCurationBottleID, bottleCollections: bottleCollections, noticeCollection: noticeCollection, reservationCollection: reservationCollection)
                 
                 self.shopData.append(shopData)
-                //                        print("우하하하 \(self.shopData)")
+//                                        print("우하하하 \(self.shopData)")
             }
         } catch {
             print(error.localizedDescription)

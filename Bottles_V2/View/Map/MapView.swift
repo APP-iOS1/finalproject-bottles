@@ -8,6 +8,10 @@
 import SwiftUI
 import NMapsMap
 import CoreLocation
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 struct MapView: View {
     
@@ -16,7 +20,7 @@ struct MapView: View {
     @State var isShowingSheet: Bool = false
     @State var showMarkerDetailView: Bool = false
     
-    @State var mappinShopID : String = ""
+    @State var mappinShopID : ShopModel = ShopModel(id: "0", shopName: "0", shopOpenCloseTime: "0", shopAddress: "0", shopPhoneNumber: "0", shopIntroduction: "0", shopSNS: "0", followerUserList: ["0"], isRegister: true, location: GeoPoint(latitude: 0, longitude: 0), reservedList: ["0"], shopTitleImage: "0", shopImages: ["0"], shopCurationTitle: "0", shopCurationBody: "0", shopCurationImage: "0", shopCurationBottleID: ["0"], bottleCollections: ["0"], noticeCollection: ["0"], reservationCollection: ["0"])
     
     var body: some View {
         NavigationStack {
@@ -64,7 +68,7 @@ struct MapView: View {
                 .zIndex(2)
                 
                 MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
-                    MarkerDetailView()
+                    MarkerDetailView(mappinShop: $mappinShopID)
                 }
                 .zIndex(3)
                 // MARK: - 현재 위치 이동 버튼(커스텀)
