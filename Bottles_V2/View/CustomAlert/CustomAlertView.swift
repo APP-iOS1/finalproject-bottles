@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct CustomAlertView: View {
+    /// CustomAlert을 띄워줄 trigger
     @Binding var isPresented: Bool
     
+    /// CustomAlert 내용
     let message: String
+    
+    /// 동작시킬 버튼 이름 (ex: '확인')
     let primaryButtonTitle: String
     
+    /// 동작시킬 버튼의 메소드
     let primaryAction: () -> Void
     
+    /// 취소 버튼이 필요할 때 true 필요 없으면 false
     let withCancelButton: Bool
     
     var body: some View {

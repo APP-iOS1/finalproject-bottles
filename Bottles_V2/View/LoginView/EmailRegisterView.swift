@@ -72,6 +72,9 @@ struct EmailRegisterView: View {
     
     /// SafariWebView 시트로 띄우는 변수
     @State private var isShowingSheet: Bool = false
+    
+    /// 중복확인을 눌렀을 때 CustomAlert을 띄워주는 변수
+    @State private var dupilicateCheck: Bool = false
     var body: some View {
         ScrollView {
             // MARK: - email 입력창
@@ -95,7 +98,9 @@ struct EmailRegisterView: View {
                         .modifier(LoginTextFieldModifier(width: 250, height: 48))
                         .shakeEffect(trigger: emailError)
                     Button(action: {
+                        dupilicateCheck = true
                         //TODO 중복확인 로직
+                        
                         // 중복에 걸린다면 아래 코드를 넣어주시면 이펙트가 발동 됩니다. 어려울 것 같으면 지워도 돼요
                         emailError = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
@@ -334,6 +339,7 @@ struct EmailRegisterView: View {
             }
             
         }
+        .customAlert(isPresented: $dupilicateCheck, message: "사용 가능한 이메일 입니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
         .navigationBarTitle("회원가입")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
@@ -419,22 +425,7 @@ struct ShakeEffect: ViewModifier {
     }
 }
 
-// TODO: 필요 없음 나중에 지울 것 extension View+ 파일에서도 지우기
-struct TextFieldModifier: ViewModifier {
-    var trigger: Bool
-    
-    func body(content: Content) -> some View {
-        content
-            .padding()
-            .frame(height: 40)
-            .background{
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(trigger ? .red : .secondary)
-            }
-            .shakeEffect(trigger: trigger)
-            .autocapitalization(.none)
-    }
-}
+
 
 struct EmailRegisterView_Previews: PreviewProvider {
     static var previews: some View {
