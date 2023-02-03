@@ -42,14 +42,16 @@ struct EmailRegisterView: View {
     /// 중복확인 버튼을 누르면 이메일 인증 번호 입력하는 창 띄워주는 변수
     @State private var isShowingVerificationCode: Bool = false
     
+    /// 전체 이용약관 동의 변수
+    @State private var allAgreement: Bool = false
     /// 첫번째 이용약관 동의 변수
-    @State var firstAgreement: Bool = false
+    @State private var firstAgreement: Bool = false
     
     /// 개인정보 수집 이용 동의 변수
-    @State var secondAgreement: Bool = false
+    @State private var secondAgreement: Bool = false
     
     /// 만 19세 이상 동의 변수
-    @State var thirdAgreement: Bool = false
+    @State private var thirdAgreement: Bool = false
     
     /// 이용약관 버튼 눌렀을 때 이동하는 웹링크 배열
     let agreementURLs: [String] = [
@@ -245,9 +247,17 @@ struct EmailRegisterView: View {
                 .padding(20)
                 // MARK: - 이용약관 전체동의
                 Button(action: {
-                    firstAgreement.toggle()
-                    secondAgreement.toggle()
-                    thirdAgreement.toggle()
+                    if allAgreement {
+                        firstAgreement = false
+                        secondAgreement = false
+                        thirdAgreement = false
+                        allAgreement = false
+                    } else {
+                        firstAgreement = true
+                        secondAgreement = true
+                        thirdAgreement = true
+                        allAgreement = true
+                    }
                 }){
                     HStack{
                         Image(systemName: "checkmark.circle")
@@ -324,6 +334,7 @@ struct EmailRegisterView: View {
             }
             
         }
+        .navigationBarTitle("회원가입")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
     }

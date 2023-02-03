@@ -69,6 +69,7 @@ struct EmailLoginView: View {
                 .frame(height: 400)
             
         }
+        .navigationTitle("로그인")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
     }

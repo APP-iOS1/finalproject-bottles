@@ -73,6 +73,7 @@
 		7F647DC32988B69D0022590A /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F647DC22988B69D0022590A /* SafariWebView.swift */; };
 		7F76AAF429876D0E00AAEBCA /* EmailRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */; };
 		7F76AAF6298780B100AAEBCA /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F76AAF5298780B100AAEBCA /* View+.swift */; };
+		7FB3D69E298CAB5300EA8884 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */; };
 		9216C1B92977AF1D00217C7F /* ReservationView_Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1B82977AF1D00217C7F /* ReservationView_Sheet.swift */; };
 		9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */; };
 		9216C1BD2977B4BF00217C7F /* ReservedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BC2977B4BF00217C7F /* ReservedView.swift */; };
@@ -191,6 +192,7 @@
 		7F647DC22988B69D0022590A /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterView.swift; sourceTree = "<group>"; };
 		7F76AAF5298780B100AAEBCA /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		9216C1B82977AF1D00217C7F /* ReservationView_Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_Sheet.swift; sourceTree = "<group>"; };
 		9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView.swift; sourceTree = "<group>"; };
 		9216C1BC2977B4BF00217C7F /* ReservedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 		27281CE0297784ED003BE8B4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7FB3D69A298CAAF800EA8884 /* CustomAlert */,
 				27A02681298B51AC00F71705 /* Search */,
 				27281CEE297785BC003BE8B4 /* BookMark */,
 				27281CE829778583003BE8B4 /* Bottle */,
@@ -518,6 +521,14 @@
 				7F5857B7298A37E3003402B0 /* EmailLoginView.swift */,
 			);
 			path = LoginView;
+			sourceTree = "<group>";
+		};
+		7FB3D69A298CAAF800EA8884 /* CustomAlert */ = {
+			isa = PBXGroup;
+			children = (
+				7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */,
+			);
+			path = CustomAlert;
 			sourceTree = "<group>";
 		};
 		D5E2693F298B40B300C975F4 /* TestAuth */ = {
@@ -852,6 +863,7 @@
 				27A026A1298C11A300F71705 /* NaverMap.swift in Sources */,
 				3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
+				7FB3D69E298CAB5300EA8884 /* CustomAlertView.swift in Sources */,
 				9293B9DB297A544E00E1EB34 /* BottleView_ShopCell.swift in Sources */,
 				27281CFD2977B851003BE8B4 /* NearBySheetView.swift in Sources */,
 				27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */,
