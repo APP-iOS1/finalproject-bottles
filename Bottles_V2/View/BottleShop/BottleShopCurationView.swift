@@ -11,34 +11,25 @@ import SwiftUI
 struct BottleShopCurationView: View {
     @State private var selectedSort = Sort.automatic
     @State private var showingActionSheet: Bool = false
-    @State private var selection = "기본순"
+    @State private var selection = "이름순"
     
     var body: some View {
         ScrollView{
             VStack{
                 ZStack{
                     // 데이터 연동 시 "shopCurationImage" 연동
-                    AsyncImage(url: URL(string: "https://i0.wp.com/picjumbo.com/wp-content/uploads/new-years-toast-celebration-party-with-friends-free-photo.jpg?w=2210&quality=70")) { image in
+                    AsyncImage(url: URL(string: "https://images.unsplash.com/photo-1591243315780-978fd00ff9db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80")) { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 370)
-                            .overlay{
-                                RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(.white.opacity(0.7))
-                            }
                     } placeholder: {
                         Rectangle()
                             .frame(width: 370, height: 370)
                     }
-                    .cornerRadius(12)
+                    .cornerRadius(12, corners: [.topLeft, .topRight])
                     .foregroundColor(.white)
-//                    .frame(width: 370, height: 370)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray, lineWidth: 0.7)
-                    )
-                    
+                }
                     
                     
                     VStack{
@@ -49,22 +40,30 @@ struct BottleShopCurationView: View {
                             
                             // 데이터 연동 시 "shopCurationTitle" 연동
                             Text("연말 파티에 어울리는 스파클링 와인들")
-                                .font(.bottles20)
-                                .fontWeight(.semibold)
+                                .font(.bottles18)
+                                .fontWeight(.bold)
+                                .foregroundColor(.accentColor)
+                                .padding(.bottom, -2)
+                                .padding(.top)
                             
                             // 데이터 연동 시 "shopCurationBody" 연동
                             Text("다가오는 연말, 친구 / 연인 / 가족과 함께 \n부담없이 마시기 좋은 스파클링 와인을 추천합니다. \n어떤 음식과 페어링해도 평타 이상일 거예요!")
                                 .padding(.top, 1)
                                 .font(.bottles14)
+                                .foregroundColor(.black)
+                                .padding(.bottom)
                         }
-                        .foregroundColor(.black)
-                        .fontWeight(.medium)
                         .padding(.trailing)
-                        .padding(.bottom)
-                        .padding(.leading, -10)
+                        .padding(.leading, -24)
                         .shadow(radius: 20)
-                    }
-                }
+                        .background{
+                            Rectangle()
+                                .frame(width: 370)
+                                .foregroundColor(.purple_3)
+                                .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+                        }
+                    }.padding(.top, -16)
+
                 
                 VStack(alignment: .leading){
                     
@@ -90,13 +89,9 @@ struct BottleShopCurationView: View {
                     // MARK: - 정렬 ActionSheet
                     .confirmationDialog("select a sort", isPresented: $showingActionSheet) {
                         Button {
-                            selection = "기본순"
+                            selection = "이름순"
                         } label: {
-                            Text("기본순")
-                        }
-                        
-                        Button("신상품순") {
-                            selection = "신상품순"
+                            Text("이름순")
                         }
                         
                         Button("낮은 가격순") {
@@ -123,6 +118,23 @@ struct BottleShopCurationView: View {
             .padding()
             .navigationBarTitle("바틀샵 이름")
         }
+    }
+}
+
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
     }
 }
 

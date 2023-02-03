@@ -34,21 +34,21 @@ enum bottleShopInfo : String, CaseIterable {
 
 // 바틀샵 메인 뷰
 struct BottleShopView: View {
-    @State var text: String = ""
+    
     @State private var bookmarkToggle: Bool = false
     @State private var isSearchView: Bool = true
-    @State private var isEditing: Bool = false
     @State private var selectedPicker: bottleShopInfo = .bottle
+    
+    @FocusState var focus: Bool
+    @State var isNavigationBarHidden: Bool = false
+    @State var search: Bool = false
+    @State var testSearchText: String = ""
+    
     @Namespace private var animation
     
     // 임의로 가게 전화번호 지정 (데이터 연동시 삭제)
     var phoneNumber = "718-555-5555"
     
-    // Test
-    @State var search: Bool = false
-    @State var testSearchText: String = ""
-    // 테스트용 모델
-    //    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
     // 검색 결과를 필터링해주는 연산 프로퍼티
     var filteredResult: [BottleItem22] {
         let bottles = bottleItems
@@ -56,9 +56,6 @@ struct BottleShopView: View {
             $0.name.contains(testSearchText)
         }
     }
-    
-    @FocusState var focus: Bool
-    @State var isNavigationBarHidden: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -160,24 +157,26 @@ struct BottleShopView: View {
                         }
                         .font(.bottles14)
                         .padding()
-                        .background(Color.accentColor.opacity(0.1))
+                        .background(Color.purple_3)
                         .cornerRadius(12)
                         .padding(.horizontal)
                         .padding(.vertical, 5)
                         
                         VStack {
                             animate()
-                            BottleShopInfoView(text: $text, bottleShopInfo: selectedPicker, search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden)
+                            BottleShopInfoView(bottleShopInfo: selectedPicker, search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden)
                         }
                         
                     }
                 }
+                
+                // MARK: - 상품검색 클릭시 navigationbarhidden 후 상단에 나오는 검색창
                 if search {
-                    Color(.gray)
-                        .opacity(0.3)
+//                    Color(.gray)
+//                        .opacity(0.3)
                     VStack{
                         HStack {
-                            TextField(" 이 바틀샵의 상품을 검색해보세요", text: $testSearchText)
+                            TextField(" 이 바틀샵의 상품 검색", text: $testSearchText)
                                 .focused($focus)
                                 .font(.bottles16)
                                 .padding(7)
@@ -186,33 +185,28 @@ struct BottleShopView: View {
                                 .overlay(
                                     HStack {
                                         Image(systemName: "magnifyingglass")
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(.black)
+                                            .font(.system(size: 18))
                                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                             .padding(.leading, 8)
                                         
-                                        if isEditing {
-                                            Button(action: {
-                                                self.text = ""
-                                            }) {
-                                                Image(systemName: "multiply.circle.fill")
-                                                    .foregroundColor(.gray)
-                                                    .padding(.trailing, 8)
-                                            }
+                                        Button(action: {
+                                            self.testSearchText = ""
+                                        }) {
+                                            Image(systemName: "multiply.circle.fill")
+                                                .foregroundColor(.gray)
+                                                .padding(.trailing, 8)
                                         }
                                     }
                                 )
                                 .padding(.leading, 10)
-                                .onTapGesture {
-                                    self.isEditing = true
-                                }
                             
                             // 검색종료버튼(검색창, 키보드 내리기 및 네비게이션바 다시 보이게 하는 액션)
                             Button(action: {
                                 search = false
                                 focus = false
                                 isNavigationBarHidden = false
-                                self.isEditing = false
-                                self.text = ""
+                                self.testSearchText = ""
                                 
                                 // Dismiss the keyboard
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -221,8 +215,6 @@ struct BottleShopView: View {
                                 Text("종료  ")
                                     .padding(.trailing, 20)
                             }
-//                            .transition(.move(edge: .trailing))
-//                            .animation(.default)
                             
                         }
                         .background(.white)
@@ -290,10 +282,8 @@ struct BottleShopView: View {
 
 // 바틀샵 메인 뷰 내 [1. "상품 검색"과 2. "사장님의 공지" 뷰] 탭
 struct BottleShopInfoView: View {
-    @Binding var text: String
     var bottleShopInfo: bottleShopInfo
     
-    // test
     @Binding var search: Bool
     @FocusState var focus: Bool
     @Binding var isNavigationBarHidden: Bool
@@ -305,7 +295,7 @@ struct BottleShopInfoView: View {
                 // "상품 검색 탭"
             case .bottle:
                 VStack(alignment: .leading){
-                    BottleShopView_Search(text: $text, search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden)
+                    BottleShopView_Search(search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden)
                 }
                 
                 // "사장님의 공지 탭"
@@ -321,7 +311,7 @@ struct BottleShopInfoView: View {
 struct BottleShopView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
-            BottleShopView(text: "")
+            BottleShopView()
         }
     }
 }
