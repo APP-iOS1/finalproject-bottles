@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "bottle_test.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "BookMark.fill.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
