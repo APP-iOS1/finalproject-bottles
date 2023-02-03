@@ -21,6 +21,11 @@ struct EmailRegisterView: View {
     @State var nickname: String = ""
     @State var phoneNumber: String = ""
     
+    /// 비밀번호 입력 창을 TextField로 보여주거나 SecureField로 보여주는 변수
+    @State private var isShowingPasswordText: Bool = true
+    
+    /// 비밀번호 확인 입력창을 TextField로 보여주거나 SecureField로 보여주는 변수
+    @State private var isShowingPasswordCheckText: Bool = false
     
     /// 중복확인 버튼을 누르고 이메일이 중복일 때 텍스트 필드 애니메이션을 활성화 시켜주는 변수
     @State private var emailError: Bool = false
@@ -81,8 +86,10 @@ struct EmailRegisterView: View {
                         .foregroundColor(emailNotFitFormat ? .red : .green)
                 }
                 .padding(.horizontal, 20)
+                .padding(.bottom, -5)
                 HStack {
                     TextField("예: bottles@bottles.com", text: $registerEmail)
+                        .keyboardType(.emailAddress)
                         .modifier(LoginTextFieldModifier(width: 250, height: 48))
                         .shakeEffect(trigger: emailError)
                     Button(action: {
@@ -112,6 +119,7 @@ struct EmailRegisterView: View {
                         Spacer()
                     }
                     .padding(.horizontal, 20)
+                    .padding(.bottom, -5)
                     HStack{
                         TextField("인증번호를 입력해주세요.", text: $verificationCode)
                             .modifier(LoginTextFieldModifier(width: 225, height: 48))
@@ -139,11 +147,27 @@ struct EmailRegisterView: View {
                         .foregroundColor(passwordNotFitFormat ? .secondary : .green)
                 }
                 .padding(.horizontal, 20)
-                TextField("영어, 숫자, 특수문자 포함 8~15자리", text: $registerPassword)
-                    .modifier(LoginTextFieldModifier(width: 357, height: 48))
-
+                .padding(.bottom, isShowingPasswordText ? 2 : 3)
+                ZStack {
+                    if isShowingPasswordText {
+                        TextField("영어, 숫자, 특수문자 포함 8~15자리", text: $registerPassword)
+//                            .padding(.top, 10)
+                            .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    } else {
+                        SecureField("영어, 숫자, 특수문자 포함 8~15자리", text: $registerPassword)
+                            .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    }
+                    HStack{
+                        Spacer()
+                        Button(action:{
+                            isShowingPasswordText.toggle()
+                        }){
+                            Image(systemName: isShowingPasswordText ? "eye.slash" : "eye")
+                        }
+                    }
+                    .padding(.trailing, 30)
+                }
             }
-            
             // MARK: - 비밀번호 확인
             Group {
                 HStack {
@@ -157,9 +181,26 @@ struct EmailRegisterView: View {
                         .foregroundColor(passwordCheckFail ? .red : .green)
                 }
                 .padding(.horizontal, 20)
-                TextField("비밀번호 확인", text: $passwordCheck)
-                    .modifier(LoginTextFieldModifier(width: 357, height: 48))
-                
+                .padding(.top, isShowingPasswordText ? 4.5 : 5)
+                .padding(.bottom, isShowingPasswordCheckText ? 2 : 3)
+                ZStack{
+                    if isShowingPasswordCheckText {
+                        TextField("비밀번호 확인", text: $passwordCheck)
+                            .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    } else {
+                        SecureField("비밀번호 확인", text: $passwordCheck)
+                            .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    }
+                    HStack{
+                        Spacer()
+                        Button(action:{
+                            isShowingPasswordCheckText.toggle()
+                        }){
+                            Image(systemName: isShowingPasswordCheckText ? "eye.slash" : "eye")
+                        }
+                    }
+                    .padding(.trailing, 30)
+                }
             }
             
             // MARK: - 닉네임 입력
@@ -172,6 +213,7 @@ struct EmailRegisterView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
+                .padding(.bottom, -5)
                 TextField("닉네임을 입력해주세요", text: $nickname)
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
             }
@@ -184,6 +226,7 @@ struct EmailRegisterView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
+                .padding(.bottom, -5)
                 TextField("숫자만 입력해주세요", text: $phoneNumber)
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
                     .keyboardType(.numberPad)
@@ -201,13 +244,14 @@ struct EmailRegisterView: View {
                 .padding(20)
                 // MARK: - 이용약관 전체동의
                 Button(action: {
-                    
-                    allAgreement.toggle()
+                    firstAgreement.toggle()
+                    secondAgreement.toggle()
+                    thirdAgreement.toggle()
                 }){
                     HStack{
                         Image(systemName: "checkmark.circle")
                             .font(.title2)
-                            .foregroundColor(allAgreement ? .accentColor : .secondary)
+                            .foregroundColor(firstAgreement && secondAgreement && thirdAgreement ? .accentColor : .secondary)
                         Text("전체 동의합니다.")
                             .font(.bottles19)
                             .foregroundColor(.primary)
@@ -226,21 +270,21 @@ struct EmailRegisterView: View {
                             firstAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
-                                .foregroundColor(allAgreement || firstAgreement ? .accentColor : .secondary)
+                                .foregroundColor(firstAgreement ? .accentColor : .secondary)
                                 .font(.title2)
                         }
                         Button(action: {
                             secondAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
-                                .foregroundColor(allAgreement || secondAgreement ? .accentColor : .secondary)
+                                .foregroundColor(secondAgreement ? .accentColor : .secondary)
                                 .font(.title2)
                         }
                         Button(action: {
                             thirdAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
-                                .foregroundColor(allAgreement || thirdAgreement ? .accentColor : .secondary)
+                                .foregroundColor(thirdAgreement ? .accentColor : .secondary)
                                 .font(.title2)
                         }
                     }
