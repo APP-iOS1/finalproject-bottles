@@ -22,16 +22,19 @@ struct SearchView: View {
     @State var isShowingSearchResult: Bool = false
     // 검색을 완료했는지 판단하는 Bool 값
     @State var doneTextFieldEdit: Bool = false
-    // 검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
+//     검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
     @FocusState var focus: Bool
     
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
+    
+    // transition Test
+    @Binding var transitionView: Bool
     
     var body: some View {
         VStack {
             HStack{
                 // 검색바 + 장바구니 버튼
-                SearchViewSearchBar(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
+                SearchViewSearchBar(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus, transitionView: $transitionView)
                 CartViewNavigationLink()
             }
             
@@ -106,10 +109,10 @@ struct SearchTabView: View {
 }
 
 
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            SearchView()
-        }
-    }
-}
+//struct SearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            SearchView()
+//        }
+//    }
+//}

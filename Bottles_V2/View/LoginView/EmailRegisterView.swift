@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct EmailRegisterView: View {
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     /// email확인 정규식
     let emailExpression: String = "^([a-zA-Z0-9._-])+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,20}$"
     
@@ -21,6 +24,11 @@ struct EmailRegisterView: View {
     @State var nickname: String = ""
     @State var phoneNumber: String = ""
     
+    /// 비밀번호 입력 창을 TextField로 보여주거나 SecureField로 보여주는 변수
+    @State private var isShowingPasswordText: Bool = false
+    
+    /// 비밀번호 확인 입력창을 TextField로 보여주거나 SecureField로 보여주는 변수
+    @State private var isShowingPasswordCheckText: Bool = false
     
     /// 중복확인 버튼을 누르고 이메일이 중복일 때 텍스트 필드 애니메이션을 활성화 시켜주는 변수
     @State private var emailError: Bool = false
@@ -34,17 +42,16 @@ struct EmailRegisterView: View {
     /// 중복확인 버튼을 누르면 이메일 인증 번호 입력하는 창 띄워주는 변수
     @State private var isShowingVerificationCode: Bool = false
     
-    /// 이용약관 전체 동의 변수
-    @State var allAgreement: Bool = false
-    
+    /// 전체 이용약관 동의 변수
+    @State private var allAgreement: Bool = false
     /// 첫번째 이용약관 동의 변수
-    @State var firstAgreement: Bool = false
+    @State private var firstAgreement: Bool = false
     
     /// 개인정보 수집 이용 동의 변수
-    @State var secondAgreement: Bool = false
+    @State private var secondAgreement: Bool = false
     
     /// 만 19세 이상 동의 변수
-    @State var thirdAgreement: Bool = false
+    @State private var thirdAgreement: Bool = false
     
     /// 이용약관 버튼 눌렀을 때 이동하는 웹링크 배열
     let agreementURLs: [String] = [
@@ -65,6 +72,9 @@ struct EmailRegisterView: View {
     
     /// SafariWebView 시트로 띄우는 변수
     @State private var isShowingSheet: Bool = false
+    
+    /// 중복확인을 눌렀을 때 CustomAlert을 띄워주는 변수
+    @State private var dupilicateCheck: Bool = false
     var body: some View {
         ScrollView {
             // MARK: - email 입력창
@@ -81,12 +91,17 @@ struct EmailRegisterView: View {
                         .foregroundColor(emailNotFitFormat ? .red : .green)
                 }
                 .padding(.horizontal, 20)
+                .padding(.bottom, -5)
                 HStack {
                     TextField("예: bottles@bottles.com", text: $registerEmail)
+                        .keyboardType(.emailAddress)
                         .modifier(LoginTextFieldModifier(width: 250, height: 48))
                         .shakeEffect(trigger: emailError)
                     Button(action: {
+                        // CustomAlert을 띄워 줌 이메일 중복에 걸리지 않는 조건에 추가하면 될 듯
+                        dupilicateCheck = true
                         //TODO 중복확인 로직
+                        
                         // 중복에 걸린다면 아래 코드를 넣어주시면 이펙트가 발동 됩니다. 어려울 것 같으면 지워도 돼요
                         emailError = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
@@ -112,6 +127,7 @@ struct EmailRegisterView: View {
                         Spacer()
                     }
                     .padding(.horizontal, 20)
+                    .padding(.bottom, -5)
                     HStack{
                         TextField("인증번호를 입력해주세요.", text: $verificationCode)
                             .modifier(LoginTextFieldModifier(width: 225, height: 48))
@@ -138,12 +154,29 @@ struct EmailRegisterView: View {
                         .font(.bottles12)
                         .foregroundColor(passwordNotFitFormat ? .secondary : .green)
                 }
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
-                TextField("영어, 숫자, 특수문자 포함 8~15자리", text: $registerPassword)
-                    .modifier(LoginTextFieldModifier(width: 357, height: 48))
-
+                .padding(.bottom, isShowingPasswordText ? 2 : 3)
+                ZStack {
+                    if isShowingPasswordText {
+                        TextField("영어, 숫자, 특수문자 포함 8~15자리", text: $registerPassword)
+//                            .padding(.top, 10)
+                            .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    } else {
+                        SecureField("영어, 숫자, 특수문자 포함 8~15자리", text: $registerPassword)
+                            .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    }
+                    HStack{
+                        Spacer()
+                        Button(action:{
+                            isShowingPasswordText.toggle()
+                        }){
+                            Image(systemName: isShowingPasswordText ? "eye.slash" : "eye")
+                        }
+                    }
+                    .padding(.trailing, 30)
+                }
             }
-            
             // MARK: - 비밀번호 확인
             Group {
                 HStack {
@@ -156,10 +189,29 @@ struct EmailRegisterView: View {
                         .font(.bottles12)
                         .foregroundColor(passwordCheckFail ? .red : .green)
                 }
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
-                TextField("비밀번호 확인", text: $passwordCheck)
-                    .modifier(LoginTextFieldModifier(width: 357, height: 48))
-                
+                .padding(.top, isShowingPasswordText ? 4.5 : 5)
+                .padding(.bottom, isShowingPasswordCheckText ? 2 : 3)
+                ZStack{
+                    // 버튼을 누름에 따라 TextField or SecureField
+                    if isShowingPasswordCheckText {
+                        TextField("비밀번호 확인", text: $passwordCheck)
+                            .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    } else {
+                        SecureField("비밀번호 확인", text: $passwordCheck)
+                            .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    }
+                    HStack{
+                        Spacer()
+                        Button(action:{
+                            isShowingPasswordCheckText.toggle()
+                        }){
+                            Image(systemName: isShowingPasswordCheckText ? "eye.slash" : "eye")
+                        }
+                    }
+                    .padding(.trailing, 30)
+                }
             }
             
             // MARK: - 닉네임 입력
@@ -171,7 +223,10 @@ struct EmailRegisterView: View {
                         .foregroundColor(.accentColor)
                     Spacer()
                 }
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
+                .padding(.top, isShowingPasswordCheckText ? 4.5 : 5)
+                .padding(.bottom, -5)
                 TextField("닉네임을 입력해주세요", text: $nickname)
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
             }
@@ -183,7 +238,9 @@ struct EmailRegisterView: View {
                         .font(.bottles14)
                     Spacer()
                 }
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
+                .padding(.bottom, -5)
                 TextField("숫자만 입력해주세요", text: $phoneNumber)
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
                     .keyboardType(.numberPad)
@@ -201,13 +258,22 @@ struct EmailRegisterView: View {
                 .padding(20)
                 // MARK: - 이용약관 전체동의
                 Button(action: {
-                    
-                    allAgreement.toggle()
+                    if allAgreement {
+                        firstAgreement = false
+                        secondAgreement = false
+                        thirdAgreement = false
+                        allAgreement = false
+                    } else {
+                        firstAgreement = true
+                        secondAgreement = true
+                        thirdAgreement = true
+                        allAgreement = true
+                    }
                 }){
                     HStack{
                         Image(systemName: "checkmark.circle")
                             .font(.title2)
-                            .foregroundColor(allAgreement ? .accentColor : .secondary)
+                            .foregroundColor(firstAgreement && secondAgreement && thirdAgreement ? .accentColor : .secondary)
                         Text("전체 동의합니다.")
                             .font(.bottles19)
                             .foregroundColor(.primary)
@@ -224,23 +290,26 @@ struct EmailRegisterView: View {
                     VStack(spacing: 10) {
                         Button(action: {
                             firstAgreement.toggle()
+                            allAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
-                                .foregroundColor(allAgreement || firstAgreement ? .accentColor : .secondary)
+                                .foregroundColor(firstAgreement ? .accentColor : .secondary)
                                 .font(.title2)
                         }
                         Button(action: {
                             secondAgreement.toggle()
+                            allAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
-                                .foregroundColor(allAgreement || secondAgreement ? .accentColor : .secondary)
+                                .foregroundColor(secondAgreement ? .accentColor : .secondary)
                                 .font(.title2)
                         }
                         Button(action: {
                             thirdAgreement.toggle()
+                            allAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
-                                .foregroundColor(allAgreement || thirdAgreement ? .accentColor : .secondary)
+                                .foregroundColor(thirdAgreement ? .accentColor : .secondary)
                                 .font(.title2)
                         }
                     }
@@ -279,10 +348,10 @@ struct EmailRegisterView: View {
             }
             
         }
-//        .sheet(isPresented: $isShowingSheet) {
-//            SafariWebView(selectedUrl: selectedAgreementWebLink)
-//        }
-        
+        .customAlert(isPresented: $dupilicateCheck, message: "사용 가능한 이메일 입니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        .navigationBarTitle("회원가입")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
     }
     
     //MARK: - 뷰에 사용되는 연산프로퍼티들
@@ -329,6 +398,17 @@ struct EmailRegisterView: View {
         }
     }
     
+    /// CustomNavigationBackButton
+    var backButton : some View {
+        Button(
+            action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.backward")    // back button 이미지
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color.black)
+            }
+    }
 }
 
 
@@ -354,22 +434,7 @@ struct ShakeEffect: ViewModifier {
     }
 }
 
-// TODO: 필요 없음 나중에 지울 것 extension View+ 파일에서도 지우기
-struct TextFieldModifier: ViewModifier {
-    var trigger: Bool
-    
-    func body(content: Content) -> some View {
-        content
-            .padding()
-            .frame(height: 40)
-            .background{
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(trigger ? .red : .secondary)
-            }
-            .shakeEffect(trigger: trigger)
-            .autocapitalization(.none)
-    }
-}
+
 
 struct EmailRegisterView_Previews: PreviewProvider {
     static var previews: some View {

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EmailLoginView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     /// 페이스 아이디 Unlock
     @State private var isUnlocked = false
     
@@ -22,7 +24,7 @@ struct EmailLoginView: View {
         loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
     }
     var body: some View {
-        VStack{
+        VStack {
             
             Spacer()
             TextField("이메일", text: $email)
@@ -34,6 +36,7 @@ struct EmailLoginView: View {
             
             // 로그인 에러 났을 때 화면에 띄워줌
             Text("\(loginResult)")
+                .frame(height: 10)
                 .foregroundColor(loginError ? .red : .primary)
                 .font(.bottles12)
                 .shakeEffect(trigger: loginError)
@@ -65,11 +68,22 @@ struct EmailLoginView: View {
             
             Spacer()
                 .frame(height: 400)
-            //            Button("Don`t have an account? Sign up.", action: {
-            //
-            //            })
             
         }
+        .navigationTitle("로그인")
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
+    }
+    /// CustomNavigationBackButton
+    var backButton : some View {
+        Button(
+            action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.backward")    // back button 이미지
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color.black)
+            }
     }
 }
 

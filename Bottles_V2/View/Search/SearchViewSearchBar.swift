@@ -21,13 +21,21 @@ struct SearchViewSearchBar: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
     
+    // transition Test
+    @Binding var transitionView: Bool
+    
     var body: some View {
         
         // MARK: - SearchBar
         HStack {
             //  Navigation Bar 의 Back Button을 유사하게 구현
             Button {
-                dismiss()
+//                dismiss()
+                withAnimation(.spring(response: 0.5)) {
+                    transitionView.toggle()
+                    focus = false
+                }
+                
             } label: {
                 Image(systemName: "chevron.backward")
                     .font(.title2)
