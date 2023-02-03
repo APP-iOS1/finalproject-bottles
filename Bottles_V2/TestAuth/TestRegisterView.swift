@@ -14,7 +14,11 @@ import SwiftUI
 struct TestRegisterView: View {
     @State private var userEmail = ""
     @State private var userPassword = ""
+    @State private var userPhoneNumber = ""
+    @State private var nickname = ""
+
     @StateObject var auth: AuthStore
+    @StateObject var user: UserStore
     
     var body: some View {
         TextField("이메일", text: $userEmail)
@@ -23,9 +27,11 @@ struct TestRegisterView: View {
         }
         Text("이메일 인증 \(String(auth.isEmailVerified()))")
         TextField("비밀번호", text: $userPassword)
+        TextField("휴대폰 번호", text: $userPhoneNumber)
+        TextField("닉네임", text: $nickname)
         Button("회원가입") {
-            auth.registerUser(name: "", email: userEmail, password: userPassword)
-        }.disabled(auth.isEmailVerified())
+            auth.registerUser(email: userEmail, password: userPassword, nickname: nickname, userPhoneNumber: userPhoneNumber)
+        }
     }
 }
 

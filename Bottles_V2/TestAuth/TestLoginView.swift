@@ -10,7 +10,8 @@ import SwiftUI
 struct TestLoginView: View {
     @State private var email = ""
     @State private var password = ""
-    @StateObject private var auth =  AuthStore()
+    @StateObject private var auth = AuthStore()
+    @StateObject private var user = UserStore()
     
     var body: some View {
         NavigationStack {
@@ -23,7 +24,7 @@ struct TestLoginView: View {
                     auth.login(email: email, password: password)
                 }
                 
-                NavigationLink(destination: RegisterView(auth: auth)) {
+                NavigationLink(destination: TestRegisterView(auth: auth, user: user)) {
                     Text("회원가입")
                 }
                 

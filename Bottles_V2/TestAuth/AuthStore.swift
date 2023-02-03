@@ -11,14 +11,12 @@ import FirebaseAuth
 import SwiftUI
 
 // 현재 로그인한 user의 UID, 전역 변수로 지정
-var userUID = ""
-
 class AuthStore: ObservableObject {
     
     @Published var currentUser: Firebase.User?
-    //let database = Firestore.firestore()
     @Published var isLogin = false
-    //let userStore: UserStore = UserStore()
+    let database = Firestore.firestore()
+    let userStore: UserStore = UserStore()
     
     init() {
         currentUser = Auth.auth().currentUser
@@ -35,8 +33,6 @@ class AuthStore: ObservableObject {
                 self.currentUser = result?.user
                 self.isLogin = true
                 print("로그인 성공")
-                userUID = self.currentUser?.uid ?? ""
-            
             }
         }
 
@@ -46,11 +42,10 @@ class AuthStore: ObservableObject {
         currentUser = nil
         self.isLogin = false
         try? Auth.auth().signOut()
-        userUID = ""
     }
     
     // MARK: - 계정 생성
-    func registerUser(name: String, email: String, password: String) {
+    func registerUser(email: String, password: String, nickname: String, userPhoneNumber: String) {
         Auth.auth().createUser(withEmail: email, password: password) { [self] result, error in
             if let error = error {
                 print("Error : \(error.localizedDescription)")
@@ -58,6 +53,7 @@ class AuthStore: ObservableObject {
             }
             
             guard let authUser = result?.user else { return }
+            userStore.createUser(user: User(id: UUID().uuidString, email: email, followItemList: [], followShopList: [], nickname: nickname, pickupItemList: [], recentlyItem: [], userPhoneNumber: userPhoneNumber))
             print("회원가입 완료")
             //let user: User = User(id: authUser.uid, name: name, email: email, temperature: 36.5, registDate: getStringDate(date: Date()),chatIDList: [])
             //FIXME: 여기에 addUser 함수 호출
