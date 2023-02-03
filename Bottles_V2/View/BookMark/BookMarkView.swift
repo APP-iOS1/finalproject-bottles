@@ -30,15 +30,22 @@ struct BookMarkView: View {
             VStack {
                 if !transitionView {
                     VStack {
-                        // Test
-                        Button {
-                            withAnimation(.spring(response: 0.5)) {
-                                transitionView.toggle()
-                                focus = true
+                        HStack {
+                            // Test
+                            Button {
+                                withAnimation(.spring(response: 0.5)) {
+                                    transitionView.toggle()
+                                    focus = true
+                                }
+                                
+                            } label: {
+                                SearchViewNavigationLabel()
                             }
                             
-                        } label: {
-                            SearchViewNavigationLabel()
+                            
+                            // CartView 로 이동하는 버튼
+                            CartViewNavigationLink()
+                                .padding(.leading, 5)
                         }
                         .matchedGeometryEffect(id: "search", in: transition)
                         // tab picker 애니메이션 함수 및 탭뷰
