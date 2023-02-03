@@ -36,6 +36,7 @@ struct EmailLoginView: View {
             
             // 로그인 에러 났을 때 화면에 띄워줌
             Text("\(loginResult)")
+                .frame(height: 10)
                 .foregroundColor(loginError ? .red : .primary)
                 .font(.bottles12)
                 .shakeEffect(trigger: loginError)
