@@ -26,6 +26,7 @@ class AuthStore: ObservableObject {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("Error : \(error.localizedDescription)")
+                
                 return
             }
             DispatchQueue.main.async { [weak self] in
@@ -34,6 +35,7 @@ class AuthStore: ObservableObject {
                 self.isLogin = true
                 print("로그인 성공")
             }
+            
         }
 
     }

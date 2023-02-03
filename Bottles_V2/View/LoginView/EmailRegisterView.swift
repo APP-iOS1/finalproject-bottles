@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmailRegisterView: View {
     
-    @StateObject var authStore: AuthStore = AuthStore()
+    @StateObject var authStore: AuthStore
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -463,6 +463,6 @@ struct ShakeEffect: ViewModifier {
 
 struct EmailRegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailRegisterView()
+        EmailRegisterView(authStore: AuthStore())
     }
 }
