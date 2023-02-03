@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct EmailRegisterView: View {
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     /// email확인 정규식
     let emailExpression: String = "^([a-zA-Z0-9._-])+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,20}$"
     
@@ -22,7 +25,7 @@ struct EmailRegisterView: View {
     @State var phoneNumber: String = ""
     
     /// 비밀번호 입력 창을 TextField로 보여주거나 SecureField로 보여주는 변수
-    @State private var isShowingPasswordText: Bool = true
+    @State private var isShowingPasswordText: Bool = false
     
     /// 비밀번호 확인 입력창을 TextField로 보여주거나 SecureField로 보여주는 변수
     @State private var isShowingPasswordCheckText: Bool = false
@@ -38,9 +41,6 @@ struct EmailRegisterView: View {
     
     /// 중복확인 버튼을 누르면 이메일 인증 번호 입력하는 창 띄워주는 변수
     @State private var isShowingVerificationCode: Bool = false
-    
-    /// 이용약관 전체 동의 변수
-    @State var allAgreement: Bool = false
     
     /// 첫번째 이용약관 동의 변수
     @State var firstAgreement: Bool = false
@@ -213,6 +213,7 @@ struct EmailRegisterView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
+                .padding(.top, isShowingPasswordCheckText ? 4.5 : 5)
                 .padding(.bottom, -5)
                 TextField("닉네임을 입력해주세요", text: $nickname)
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
@@ -323,10 +324,8 @@ struct EmailRegisterView: View {
             }
             
         }
-//        .sheet(isPresented: $isShowingSheet) {
-//            SafariWebView(selectedUrl: selectedAgreementWebLink)
-//        }
-        
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
     }
     
     //MARK: - 뷰에 사용되는 연산프로퍼티들
@@ -373,6 +372,17 @@ struct EmailRegisterView: View {
         }
     }
     
+    /// CustomNavigationBackButton
+    var backButton : some View {
+        Button(
+            action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.backward")    // back button 이미지
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color.black)
+            }
+    }
 }
 
 
