@@ -61,15 +61,16 @@ struct BottleView: View {
             ReservationView(isShowing: $isShowingSheet)
         }
         // back button
-        .navigationBarBackButtonHidden(true)
-        .toolbar(content: {
-            ToolbarItem (placement: .navigationBarLeading)  {
-                Image("back")
-                    .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-            }
-        })
+//        .navigationBarBackButtonHidden(true)
+//        .toolbar(content: {
+//            ToolbarItem (placement: .navigationBarLeading)  {
+//                Image("back")
+//                    .onTapGesture {
+//                        self.presentationMode.wrappedValue.dismiss()
+//                    }
+//            }
+//        })
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
