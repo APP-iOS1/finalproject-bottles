@@ -7,6 +7,10 @@
 
 import SwiftUI
 import NMapsMap
+import Firebase
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 // MARK: - 마커 더미 데이터 생성
 //struct Marker: Identifiable {
@@ -29,9 +33,19 @@ import NMapsMap
 //    }
 //}
 
+struct MapMarkerByShopData {
+    var shopID: String
+    var shopName: String
+    var location: GeoPoint
+}
+
 struct NaverMap: UIViewRepresentable {
     
     @Binding var showMarkerDetailView: Bool
+    @Binding var mappinShopID : String
+    @EnvironmentObject var shopDataStore : ShopDataStore
+    @State var shopInfo : [Any] = []
+    
     var coord: (Double, Double)
     //    var markers: [Marker]
     
@@ -39,12 +53,26 @@ struct NaverMap: UIViewRepresentable {
         Coordinator(coord, $showMarkerDetailView)
     }
     
-    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>
+    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>, _ mappinShopID: Binding<String>
     ) {
         self.coord = coord
         self._showMarkerDetailView = showMarkerDetailView
-        
+        self._mappinShopID = mappinShopID
     }
+    
+    // 모든 shopDataStore의 위경도, 샵이름, 샵ID를 배열로 가지는 배열을 생성
+    //    func locationAndshopInfo() {
+    //
+    //        let shopAllData = shopDataStore.shopData
+    //
+    //        for oneShop in shopAllData {
+    //            var data : [MapMarkerByShopData] = []
+    //            self.shopInfo.append(
+    //                MapMarkerByShopData(shopID: oneShop.id, shopName: oneShop.shopName, location: oneShop.location)
+    //            )
+    //            print("나왕라ㅏㅏ \(self.shopInfo)")
+    //        }
+    //    }
     
     class Coordinator: NSObject, NMFMapViewCameraDelegate, NMFMapViewTouchDelegate {
         
@@ -100,42 +128,59 @@ struct NaverMap: UIViewRepresentable {
         let cameraPosition = view.mapView.cameraPosition
         
         // MARK: - 마커 생성
-        //        for shopMarker in markers {
-        let marker = NMFMarker()
-        //            marker.position = NMGLatLng(lat: shopMarker.latitude, lng: shopMarker.longitude)
-        // 임시 마커(서울시청)
-        marker.position = NMGLatLng(lat: 37.56668, lng: 126.978415)
-        marker.captionRequestedWidth = 100
-        //            marker.captionText = foodCart.name
-        marker.captionMinZoom = 12
-        marker.captionMaxZoom = 16
         
-        // MARK: - 마커 이미지 변경
-        marker.iconImage = NMFOverlayImage(name: "MapMarker.fill")
-        marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
-        marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
+//        let shopAllData = self.shopDataStore.shopData
+//        var shopInfoList : [MapMarkerByShopData] = []
+//        for oneShop in shopAllData {
+//            shopInfoList.append(
+//                MapMarkerByShopData(shopID: oneShop.id, shopName: oneShop.shopName, location: oneShop.location)
+//            )
+//        }
         
-        // MARK: - 마커 터치 핸들러
-        marker.touchHandler = { (overlay) -> Bool in
-            print("marker touched")
-            showMarkerDetailView.toggle()
+        
+        for shopMarker in self.shopDataStore.shopData {
             
-            // 마커 터치 시 마커 아이콘 크기 변경
-            marker.iconImage = NMFOverlayImage(name: showMarkerDetailView ? "MapMarker_tapped" : "MapMarker.fill")
+            let marker = NMFMarker()
+            //            marker.position = NMGLatLng(lat: shopMarker.latitude, lng: shopMarker.longitude)
+            // 임시 마커(서울시청)
+            // TODO: 아래 코드 위경도를 바꿔주면 서 for 문 생성
+            
+            let test = shopMarker.location.latitude
+            let test2 = shopMarker.location.longitude
+            print("이게 찐중요 위경도 나와라 얍 : \(test), \(test2)")
+            marker.position = NMGLatLng(lat: shopMarker.location.latitude, lng: shopMarker.location.longitude)
+            //        marker.position = NMGLatLng(lat: 32.56668, lng: 124.978415)
+            marker.captionRequestedWidth = 100
+            //            marker.captionText = foodCart.name
+            marker.captionMinZoom = 12
+            marker.captionMaxZoom = 16
+            
+            // MARK: - 마커 이미지 변경
+            marker.iconImage = NMFOverlayImage(name: "MapMarker.fill")
             marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
             marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
-
-            return true
+            
+            // MARK: - 마커 터치 핸들러
+            marker.touchHandler = { (overlay) -> Bool in
+                print("marker touched")
+                showMarkerDetailView.toggle()
+                
+                // 마커 터치 시 마커 아이콘 크기 변경
+                marker.iconImage = NMFOverlayImage(name: showMarkerDetailView ? "MapMarker_tapped" : "MapMarker.fill")
+                marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
+                marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
+                
+                return true
+            }
+            
+            marker.mapView = view.mapView
+            
+            // MARK: - NMFMapViewCameraDelegate를 상속 받은 Coordinator 클래스 넘겨주기
+            view.mapView.addCameraDelegate(delegate: context.coordinator)
+            
+            // MARK: - 지도 터치 시 발생하는 touchDelegate
+            view.mapView.touchDelegate = context.coordinator
         }
-        
-        marker.mapView = view.mapView
-        
-        // MARK: - NMFMapViewCameraDelegate를 상속 받은 Coordinator 클래스 넘겨주기
-        view.mapView.addCameraDelegate(delegate: context.coordinator)
-        
-        // MARK: - 지도 터치 시 발생하는 touchDelegate
-        view.mapView.touchDelegate = context.coordinator
-        //        }
         print("camera position: \(cameraPosition)")
         return view
     }

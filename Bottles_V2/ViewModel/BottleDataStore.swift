@@ -72,7 +72,7 @@ class BottleDataStore : ObservableObject {
                         let shopData : BottleModel = BottleModel(id: id, shopID: shopID, shopName: shopName, itemVarities: itemVarities, itemType: itemType, itemTaste: itemTaste, itemTag: itemTag, itemProducer: itemProducer, itemPrice: itemPrice, itemPairing: itemPairing, itemNation: itemNation, itemName: itemName, itemML: itemML, itemImage: itemImage, itemFinish: itemFinish, itemDegree: itemDegree, itemAroma: itemAroma, itemAdv: itemAdv)
                         
                         self.bottleData.append(shopData)
-                        print("우하하하 \(self.bottleData)")
+//                        print("우하하하 \(self.bottleData)")
                     }
                 }
             }

@@ -42,11 +42,6 @@ struct MainTabView: View {
                 Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                 Text("MY")
             }.tag(4)
-                .task {
-                    await shopDataStore.getAllShopData()
-                    await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllResevationData()
-                }
         }
         .toolbarBackground(Color.white, for: .tabBar)
 

@@ -61,7 +61,7 @@ class ResevationDataStore : ObservableObject {
                     )
                 )
                 
-                print("나와라라ㅏㅏ \(self.resevationData)")
+//                print("나와라라ㅏㅏ \(self.resevationData)")
             }
             
         } catch {

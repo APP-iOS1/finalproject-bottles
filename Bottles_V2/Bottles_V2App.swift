@@ -33,6 +33,14 @@ struct Bottles_V2App: App {
                 .environmentObject(shopDataStore)
                 .environmentObject(userDataStore)
                 .environmentObject(reservationDataStore)
+                .task {
+                    await shopDataStore.getAllShopData()
+                    await bottleDataStore.getAllBottleData()
+                    await reservationDataStore.getAllResevationData()
+                    await shopDataStore.getAllShopData()
+                    await bottleDataStore.getAllBottleData()
+                    await reservationDataStore.getAllResevationData()
+                }
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))

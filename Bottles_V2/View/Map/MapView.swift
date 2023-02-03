@@ -16,6 +16,8 @@ struct MapView: View {
     @State var isShowingSheet: Bool = false
     @State var showMarkerDetailView: Bool = false
     
+    @State var mappinShopID : String = ""
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -46,7 +48,7 @@ struct MapView: View {
                 .zIndex(1)
                 
                 /// 네이버 지도 뷰
-                NaverMap((mapViewModel.coord.0, mapViewModel.coord.1), $showMarkerDetailView)
+                NaverMap((mapViewModel.coord.0, mapViewModel.coord.1), $showMarkerDetailView, $mappinShopID)
                     .ignoresSafeArea(.all, edges: .top)
                 /// 북마크 & 현재 위치 버튼
                 HStack {
@@ -89,6 +91,7 @@ struct MapView: View {
 //            }
             .onAppear {
                 mapViewModel.checkIfLocationServicesIsEnabled()
+                
             }
             
         }
