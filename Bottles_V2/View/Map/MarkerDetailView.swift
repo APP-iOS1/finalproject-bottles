@@ -18,12 +18,13 @@ struct MarkerDetailView: View {
     ]
     
     @State private var checkBookmark: Bool = true
+    @Binding var mappinShop : ShopModel
     
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 8) {
-                    Text("바틀샵 이름")
+                    Text("\(mappinShop.shopName)")
                         .font(.bottles20)
                         .fontWeight(.bold)
                     
@@ -61,11 +62,11 @@ struct MarkerDetailView: View {
                     }
                 }
                 
-                Text("한 줄 소개 내추럴 와인 포트와인 위스키 림 꼬낙")
+                Text("\(mappinShop.shopIntroduction)")
                     .font(.bottles13)
                     .fontWeight(.medium)
                     .opacity(0.5)
-                Text("연말 파티에 어울리는 스파클링 와인들")
+                Text("\(mappinShop.shopCurationTitle)")
                     .font(.bottles15)
                     .fontWeight(.medium)
             }
@@ -74,7 +75,7 @@ struct MarkerDetailView: View {
             
             ScrollView(.horizontal) {
                 HStack(spacing: 0) {
-                    ForEach(dummyImages, id: \.self) { index in
+                    ForEach(mappinShop.shopImages, id: \.self) { index in
                         // 바틀샵 이미지
                         AsyncImage(url: URL(string: index)) { image in
                             image.resizable()
@@ -93,8 +94,8 @@ struct MarkerDetailView: View {
     }
 }
 
-struct MarkerDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        MarkerDetailView()
-    }
-}
+//struct MarkerDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MarkerDetailView(mappinShop: $)
+//    }
+//}
