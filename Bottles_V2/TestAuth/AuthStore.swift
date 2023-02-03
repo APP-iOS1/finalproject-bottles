@@ -66,7 +66,7 @@ class AuthStore: ObservableObject {
         guard let email = userEmail else { return }
             
             let actionCodeSettings = ActionCodeSettings()
-            actionCodeSettings.url = URL(string: "https://authtest-681ea.firebaseapp.com/?email=\(email)")
+            actionCodeSettings.url = URL(string: "https://bottlesv2.firebaseapp.com/?email=\(email)")
             actionCodeSettings.handleCodeInApp = true
             actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
             

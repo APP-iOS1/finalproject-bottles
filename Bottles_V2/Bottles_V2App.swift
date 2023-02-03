@@ -25,9 +25,10 @@ struct Bottles_V2App: App {
     
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            TotalLoginView()
+//            MainTabView()
             // coreData
-                .environment(\.managedObjectContext, dataController.container.viewContext)
+//                .environment(\.managedObjectContext, dataController.container.viewContext)
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))

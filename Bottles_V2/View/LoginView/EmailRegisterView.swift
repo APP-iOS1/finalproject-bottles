@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EmailRegisterView: View {
     
+    @StateObject var authStore: AuthStore = AuthStore()
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /// email확인 정규식
@@ -73,8 +75,18 @@ struct EmailRegisterView: View {
     /// SafariWebView 시트로 띄우는 변수
     @State private var isShowingSheet: Bool = false
     
+    /// 메일로 이메일 인증을 보냈을 때
+    @State private var emailSent: Bool = false
+    
     /// 중복확인을 눌렀을 때 CustomAlert을 띄워주는 변수
     @State private var dupilicateCheck: Bool = false
+    
+    /// 회원 가입 실패했을 때 CustomAlert을 띄워주는 변수
+    @State private var registerFailed: Bool = false
+    
+    /// 회원 가입 성공했을 때 CustomAlert을 띄워주는 변수
+    @State private var registerSuccessed: Bool = false
+    
     var body: some View {
         ScrollView {
             // MARK: - email 입력창
@@ -100,7 +112,8 @@ struct EmailRegisterView: View {
                     Button(action: {
                         // CustomAlert을 띄워 줌 이메일 중복에 걸리지 않는 조건에 추가하면 될 듯
                         dupilicateCheck = true
-                        //TODO 중복확인 로직
+                        // TODO: 중복확인 로직
+                        
                         
                         // 중복에 걸린다면 아래 코드를 넣어주시면 이펙트가 발동 됩니다. 어려울 것 같으면 지워도 돼요
                         emailError = true
@@ -133,6 +146,8 @@ struct EmailRegisterView: View {
                             .modifier(LoginTextFieldModifier(width: 225, height: 48))
                         Button(action: {
                             //TODO: 이메일 인증번호 확인 로직
+                            authStore.emailCheck(userEmail: registerEmail)
+                            emailSent = true
                         }){
                             Text("인증번호 받기")
                                 .modifier(EmailViewButtonModifier(width: 125, height: 48))
@@ -342,6 +357,13 @@ struct EmailRegisterView: View {
             }
             Button(action: {
                 // TODO: 이메일로 회원가입 로직 넣기
+            
+                if emailNotFitFormat || passwordNotFitFormat || passwordCheckFail || !authStore.isEmailVerified() || nickname == "" || !firstAgreement || !secondAgreement || !thirdAgreement {
+                    registerFailed = true
+                } else {
+                    authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
+                    registerSuccessed = true
+                }
             }){
                 Text("회원가입하기")
                     .modifier(EmailViewButtonModifier(width: 358, height: 56))
@@ -349,6 +371,9 @@ struct EmailRegisterView: View {
             
         }
         .customAlert(isPresented: $dupilicateCheck, message: "사용 가능한 이메일 입니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        .customAlert(isPresented: $emailSent, message: "입력한 이메일 주소에 인증 메일을 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        .customAlert(isPresented: $registerFailed, message: "입력하신 정보를 다시 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        .customAlert(isPresented: $registerSuccessed, message: "회원가입이 완료 됐습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
         .navigationBarTitle("회원가입")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
