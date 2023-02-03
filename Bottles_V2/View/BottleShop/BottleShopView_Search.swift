@@ -16,11 +16,10 @@ enum Sort: String, CaseIterable, Identifiable {
 // 바틀샵뷰 내 "상품 검색" 뷰
 struct BottleShopView_Search: View {
     
-    @Binding var text: String
     @State private var isEditing: Bool = false
     @State private var selectedSort = Sort.automatic
     @State private var showingActionSheet: Bool = false
-    @State private var selection = "기본순"
+    @State private var selection = "이름순"
     
     @Binding var search: Bool
     @FocusState var focus: Bool
@@ -28,58 +27,66 @@ struct BottleShopView_Search: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            // 검색창
-            VStack{
+            // 검색창 버튼
                 Button {
                     search = true
                     focus = true
                     isNavigationBarHidden = true
                 } label: {
-                HStack {
-                    Text("이 바틀샵의 상품을 검색해보세요")
-                        .font(.bottles16)
-                        .foregroundColor(.gray)
-                        .padding(7)
-                        .padding(.horizontal, 25)
+                    ZStack{
                         
-                        .cornerRadius(8)
-                        .overlay(
-                            HStack {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.gray)
-                                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                    .padding(.leading, 8)
-                                
-//                                if isEditing {
-//                                    Button(action: {
-//                                        self.text = ""
-//                                    }) {
-//                                        Image(systemName: "multiply.circle.fill")
-//                                            .foregroundColor(.gray)
-//                                            .padding(.trailing, 8)
-//                                    }
-//                                }
-                            }
-                        )
-                    //                    .padding(.horizontal, 10)
-//                        .onTapGesture {
-//                            self.isEditing = true
-//                        }
-                    
-//                    if isEditing {
-//                        Button(action: {
-//                            self.isEditing = false
-//                            self.text = ""
-//                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//
-//                        }) {
-//                            Text("  종료  ")
-//                        }
-//                        .transition(.move(edge: .trailing))
-//                        .animation(.default)
-//                    }
-                }
-                .background{Color.gray_f7}
+                        Rectangle()
+                            .frame(width: 370)
+                            .foregroundColor(Color.gray_f7)
+                            .cornerRadius(12)
+                        
+                        HStack {
+                            Text("이 바틀샵의 상품 검색")
+                                .font(.bottles16)
+                                .foregroundColor(.gray)
+                                .padding(7)
+                                .padding(.horizontal, 25)
+                            
+                                .cornerRadius(8)
+                                .overlay(
+                                    HStack {
+                                        Image(systemName: "magnifyingglass")
+                                            .foregroundColor(.black)
+                                            .font(.system(size: 18))
+                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                                            .padding(.leading, 8)
+                                        
+                                        //                                if isEditing {
+                                        //                                    Button(action: {
+                                        //                                        self.text = ""
+                                        //                                    }) {
+                                        //                                        Image(systemName: "multiply.circle.fill")
+                                        //                                            .foregroundColor(.gray)
+                                        //                                            .padding(.trailing, 8)
+                                        //                                    }
+                                        //                                }
+                                    }
+                                )
+                            //                    .padding(.horizontal, 10)
+                            //                        .onTapGesture {
+                            //                            self.isEditing = true
+                            //                        }
+                            
+                            //                    if isEditing {
+                            //                        Button(action: {
+                            //                            self.isEditing = false
+                            //                            self.text = ""
+                            //                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            //
+                            //                        }) {
+                            //                            Text("  종료  ")
+                            //                        }
+                            //                        .transition(.move(edge: .trailing))
+                            //                        .animation(.default)
+                            //                    }
+                            Spacer()
+                        }
+                    }
                 .padding(.bottom, 10)
             }
 //                            ForEach(bottleItems.filter({text.isEmpty ? false : $0.name.contains(text)}), id: \.self) { item in
@@ -87,7 +94,6 @@ struct BottleShopView_Search: View {
 //                                    BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
 //                                })
 //                            }
-            }
             
             // 바틀 정렬 버튼
             HStack {
@@ -111,13 +117,9 @@ struct BottleShopView_Search: View {
             // MARK: - 정렬 ActionSheet
             .confirmationDialog("select a sort", isPresented: $showingActionSheet) {
                 Button {
-                    selection = "기본순"
+                    selection = "이름순"
                 } label: {
-                    Text("기본순")
-                }
-                
-                Button("신상품순") {
-                    selection = "신상품순"
+                    Text("이름순")
                 }
                 
                 Button("낮은 가격순") {

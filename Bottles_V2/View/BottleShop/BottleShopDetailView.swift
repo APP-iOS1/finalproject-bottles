@@ -34,6 +34,7 @@ struct BottleShopDetailView: View {
             VStack(alignment: .leading, spacing: 20){
                 HStack{
                     Image(systemName: "mappin")
+                        .foregroundColor(.purple_2)
                     
                     // 데이터 연동 시 "바틀샵 주소" 연동
                     Text("서울 광진구 면목로7길 8 1층")
@@ -41,6 +42,7 @@ struct BottleShopDetailView: View {
                 
                 HStack{
                     Image(systemName: "house.fill")
+                        .foregroundColor(.purple_2)
                     
                     // 데이터 연동 시 "바틀샵 sns" 연동
                     Text("https://www.instagram.com/thousand_coffee_")
@@ -48,6 +50,7 @@ struct BottleShopDetailView: View {
                 
                 HStack{
                     Image(systemName: "phone.fill")
+                        .foregroundColor(.purple_2)
                     
                     // 데이터 연동 시 "바틀샵 연락처" 연동
                     Text("0507-1347-830")
@@ -55,6 +58,7 @@ struct BottleShopDetailView: View {
                 
                 HStack{
                     Image(systemName: "clock.fill")
+                        .foregroundColor(.purple_2)
                     
                     // 데이터 연동 시 "바틀샵 운영시간" 연동
                     VStack(alignment: .leading){
