@@ -154,6 +154,7 @@ struct EmailRegisterView: View {
                         .font(.bottles12)
                         .foregroundColor(passwordNotFitFormat ? .secondary : .green)
                 }
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
                 .padding(.bottom, isShowingPasswordText ? 2 : 3)
                 ZStack {
@@ -188,6 +189,7 @@ struct EmailRegisterView: View {
                         .font(.bottles12)
                         .foregroundColor(passwordCheckFail ? .red : .green)
                 }
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
                 .padding(.top, isShowingPasswordText ? 4.5 : 5)
                 .padding(.bottom, isShowingPasswordCheckText ? 2 : 3)
@@ -221,6 +223,7 @@ struct EmailRegisterView: View {
                         .foregroundColor(.accentColor)
                     Spacer()
                 }
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
                 .padding(.top, isShowingPasswordCheckText ? 4.5 : 5)
                 .padding(.bottom, -5)
@@ -235,6 +238,7 @@ struct EmailRegisterView: View {
                         .font(.bottles14)
                     Spacer()
                 }
+                .padding(.top, 24)
                 .padding(.horizontal, 20)
                 .padding(.bottom, -5)
                 TextField("숫자만 입력해주세요", text: $phoneNumber)
