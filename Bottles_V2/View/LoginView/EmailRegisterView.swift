@@ -98,6 +98,7 @@ struct EmailRegisterView: View {
                         .modifier(LoginTextFieldModifier(width: 250, height: 48))
                         .shakeEffect(trigger: emailError)
                     Button(action: {
+                        // CustomAlert을 띄워 줌 이메일 중복에 걸리지 않는 조건에 추가하면 될 듯
                         dupilicateCheck = true
                         //TODO 중복확인 로직
                         
@@ -191,6 +192,7 @@ struct EmailRegisterView: View {
                 .padding(.top, isShowingPasswordText ? 4.5 : 5)
                 .padding(.bottom, isShowingPasswordCheckText ? 2 : 3)
                 ZStack{
+                    // 버튼을 누름에 따라 TextField or SecureField
                     if isShowingPasswordCheckText {
                         TextField("비밀번호 확인", text: $passwordCheck)
                             .modifier(LoginTextFieldModifier(width: 357, height: 48))
@@ -284,6 +286,7 @@ struct EmailRegisterView: View {
                     VStack(spacing: 10) {
                         Button(action: {
                             firstAgreement.toggle()
+                            allAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
                                 .foregroundColor(firstAgreement ? .accentColor : .secondary)
@@ -291,6 +294,7 @@ struct EmailRegisterView: View {
                         }
                         Button(action: {
                             secondAgreement.toggle()
+                            allAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
                                 .foregroundColor(secondAgreement ? .accentColor : .secondary)
@@ -298,6 +302,7 @@ struct EmailRegisterView: View {
                         }
                         Button(action: {
                             thirdAgreement.toggle()
+                            allAgreement.toggle()
                         }) {
                             Image(systemName: "checkmark.circle")
                                 .foregroundColor(thirdAgreement ? .accentColor : .secondary)
