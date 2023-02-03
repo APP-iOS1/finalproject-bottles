@@ -98,6 +98,7 @@
 		D746C979298A426200E27E16 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D746C978298A426200E27E16 /* FirebaseFirestore */; };
 		D746C97B298A426200E27E16 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D746C97A298A426200E27E16 /* FirebaseFirestoreSwift */; };
 		D746C97D298A426200E27E16 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D746C97C298A426200E27E16 /* FirebaseStorage */; };
+		D7B5EA57298CA54400DC648A /* ReservationDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B5EA56298CA54400DC648A /* ReservationDataStore.swift */; };
 		D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBD7EB2988EA52002684DC /* UserDataStore.swift */; };
 		D7DBD7EE2988EA52002684DC /* ShopDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */; };
 		FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */; };
@@ -214,6 +215,7 @@
 		D5E26940298B40E700C975F4 /* TestRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRegisterView.swift; sourceTree = "<group>"; };
 		D5E26942298B433800C975F4 /* TestLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLoginView.swift; sourceTree = "<group>"; };
 		D746C973298A41F400E27E16 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D7B5EA56298CA54400DC648A /* ReservationDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDataStore.swift; sourceTree = "<group>"; };
 		D7DBD7EB2988EA52002684DC /* UserDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDataStore.swift; sourceTree = "<group>"; };
 		D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDataStore.swift; sourceTree = "<group>"; };
 		DAA16DBB1B2143E762C79565 /* Pods-Bottles_V2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.release.xcconfig"; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */,
 				D7DBD7EB2988EA52002684DC /* UserDataStore.swift */,
 				029A23D0297A58BF00E7D602 /* BottleDataStore.swift */,
+				D7B5EA56298CA54400DC648A /* ReservationDataStore.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -869,6 +872,7 @@
 				AE2AD6DD298BF9EE00C40EE8 /* SearchModel.xcdatamodeld in Sources */,
 				D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */,
 				27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */,
+				D7B5EA57298CA54400DC648A /* ReservationDataStore.swift in Sources */,
 				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
 				27A0268D298B51AC00F71705 /* SearchViewNavigationLabel.swift in Sources */,
 			);

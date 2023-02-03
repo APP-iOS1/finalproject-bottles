@@ -13,6 +13,7 @@ struct MainTabView: View {
     @EnvironmentObject var shopDataStore : ShopDataStore
     @EnvironmentObject var userDataStore : UserDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
+    @EnvironmentObject var reservationDataStore : ResevationDataStore
     
     //    let user: AuthUser
     
@@ -41,8 +42,14 @@ struct MainTabView: View {
                 Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                 Text("MY")
             }.tag(4)
+                .task {
+                    await shopDataStore.getAllShopData()
+                    await bottleDataStore.getAllBottleData()
+                    await reservationDataStore.getAllResevationData()
+                }
         }
         .toolbarBackground(Color.white, for: .tabBar)
+
     }
 }
 
