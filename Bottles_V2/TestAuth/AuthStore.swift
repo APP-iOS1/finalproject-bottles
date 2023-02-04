@@ -27,11 +27,15 @@ class AuthStore: ObservableObject {
             if let error = error {
                 print("Error : \(error.localizedDescription)")
                 self.loginError = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.loginError = false
+                }
                 return
             }
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.currentUser = result?.user
+                self.loginError = false
                 self.isLogin = true
                 print("로그인 성공")
             }
