@@ -23,7 +23,7 @@ struct EmailLoginView: View {
     
     /// 로그인 에러가 났을 때 텍스트로 사용자에게 보여주기 위한 변수
     private var loginResult: String {
-        loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
+        authStore.loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
     }
     var body: some View {
         VStack {
@@ -39,13 +39,14 @@ struct EmailLoginView: View {
             // 로그인 에러 났을 때 화면에 띄워줌
             Text("\(loginResult)")
                 .frame(height: 10)
-                .foregroundColor(loginError ? .red : .primary)
+                .foregroundColor(authStore.loginError ? .red : .primary)
                 .font(.bottles12)
-                .shakeEffect(trigger: loginError)
+                .shakeEffect(trigger: authStore.loginError)
             
             Button(action: {
                 // TODO: 로그인 로직이 들어오면 입력한 아이디, 비밀번호가 틀릴 경우 뷰에 보여줌
-                print("\(authStore.isLogin)")
+                //print("\(authStore.isLogin)")
+                authStore.login(email: email, password: password)
             
                
                 Task{

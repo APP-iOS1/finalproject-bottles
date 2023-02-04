@@ -10,11 +10,11 @@ import Firebase
 import FirebaseAuth
 import SwiftUI
 
-// 현재 로그인한 user의 UID, 전역 변수로 지정
 class AuthStore: ObservableObject {
     
     @Published var currentUser: Firebase.User?
     @Published var isLogin = false
+    @Published var loginError : Bool = false
     let database = Firestore.firestore()
     let userStore: UserStore = UserStore()
     
@@ -26,7 +26,7 @@ class AuthStore: ObservableObject {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("Error : \(error.localizedDescription)")
-                
+                self.loginError = true
                 return
             }
             DispatchQueue.main.async { [weak self] in
