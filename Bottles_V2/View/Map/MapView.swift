@@ -16,10 +16,12 @@ import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 struct MapView: View {
     
     @StateObject var mapViewModel: MapViewModel = MapViewModel()
+    @State var coord: (Double, Double) = (37.56668, 126.978419)
+    @State var userLocation: (Double, Double) = (37.56668, 126.978419)
     @State var mapSearchBarText: String = ""
     @State var isShowingSheet: Bool = false
     @State var showMarkerDetailView: Bool = false
-    
+    @State var moveToUserLocation: Bool = true
     @State var mappinShopID : ShopModel = ShopModel(id: "0", shopName: "0", shopOpenCloseTime: "0", shopAddress: "0", shopPhoneNumber: "0", shopIntroduction: "0", shopSNS: "0", followerUserList: ["0"], isRegister: true, location: GeoPoint(latitude: 0, longitude: 0), reservedList: ["0"], shopTitleImage: "0", shopImages: ["0"], shopCurationTitle: "0", shopCurationBody: "0", shopCurationImage: "0", shopCurationBottleID: ["0"], bottleCollections: ["0"], noticeCollection: ["0"], reservationCollection: ["0"])
     
     var body: some View {
@@ -52,12 +54,12 @@ struct MapView: View {
                 .zIndex(1)
                 
                 /// 네이버 지도 뷰
-                NaverMap((mapViewModel.coord.0, mapViewModel.coord.1), $showMarkerDetailView, $mappinShopID)
+                NaverMap($mapViewModel.coord, $mapViewModel.userLocation, $showMarkerDetailView, $mappinShopID, $moveToUserLocation)
                     .ignoresSafeArea(.all, edges: .top)
                 /// 북마크 & 현재 위치 버튼
                 HStack {
                     Spacer()
-                    SideButtonCell()
+                    SideButtonCell(mapViewModel: mapViewModel, userLocation: $userLocation, moveToUserLocation: $moveToUserLocation)
                 }
                 /// 둘러보기 뷰
                 
@@ -95,7 +97,7 @@ struct MapView: View {
 //            }
             .onAppear {
                 mapViewModel.checkIfLocationServicesIsEnabled()
-                
+                coord = mapViewModel.coord
             }
             
         }
