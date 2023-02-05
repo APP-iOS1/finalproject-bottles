@@ -9,8 +9,13 @@ import SwiftUI
 // MARK: - 맵뷰 사이드 셀 자리(북마크 & GPS 버튼)
 struct SideButtonCell: View {
     
+    @StateObject var mapViewModel: MapViewModel
+
     @State var isBookMarkTapped: Bool = false
     
+    @Binding var userLocation: (Double, Double)
+    
+    @Binding var moveToUserLocation: Bool
     var body: some View {
         VStack(spacing: -20) {
             Button {
@@ -20,7 +25,11 @@ struct SideButtonCell: View {
             }
             
             Button {
-                //
+                
+                userLocation = mapViewModel.userLocation
+                // current Coordinate -> mapViewModel 설정
+                print("userLocation : \(userLocation)")
+                moveToUserLocation = true
             } label: {
                 Image("Map_GPS")
             }
@@ -28,8 +37,8 @@ struct SideButtonCell: View {
     }
 }
 
-struct SideButtonCell_Previews: PreviewProvider {
-    static var previews: some View {
-        SideButtonCell()
-    }
-}
+//struct SideButtonCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SideButtonCell()
+//    }
+//}
