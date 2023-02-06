@@ -77,12 +77,17 @@ struct RecentlyItemList: View {
                 }
             }
         }
+        .onTapGesture {
+            endTextEditing()
+        }
     }
     // 개별 삭제
     func deleteSearchHistory(offsets: IndexSet) {
-        offsets.map { searchHistory[$0] }.forEach(managedObjContext.delete)
-        
-        DataController().save(context: managedObjContext)
+        withAnimation(.default.speed(3)) {
+            offsets.map { searchHistory[$0] }.forEach(managedObjContext.delete)
+            
+            DataController().save(context: managedObjContext)
+        }
     }
     
     func searchAgain(search: SearchHistory) {

@@ -60,16 +60,38 @@ struct BottleView: View {
             // 예약하기 버튼 클릭 시 예약하기 뷰 present
             ReservationView(isShowing: $isShowingSheet)
         }
-        // back button
-        .navigationBarBackButtonHidden(true)
+        // MARK: - 바틀샵 이름
         .toolbar(content: {
-            ToolbarItem (placement: .navigationBarLeading)  {
-                Image("back")
-                    .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
+            //ToolbarItem (placement: .navigationBarLeading)  {
+            //                Image("back")
+            //                    .onTapGesture {
+            //                        self.presentationMode.wrappedValue.dismiss()
+            //                    }
+            //            }
+            
+            // 네비게이션 장바구니 아이콘
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Image("Map_Tab_fill")
+                        .resizable()
+                        .frame(width: 11, height: 16)
+                    Text("미들바틀")
+                        .font(.bottles18)
+                        .fontWeight(.medium)
+                }
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: {
+                    CartView()
+                }) {
+                    Image("cart")
+                        .resizable()
+                        .frame(width: 19, height: 18)
+                }
             }
         })
+        // TabView hidden
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
