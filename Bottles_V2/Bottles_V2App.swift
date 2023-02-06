@@ -26,6 +26,9 @@ struct Bottles_V2App: App {
     
     var body: some Scene {
         WindowGroup {
+//            MainTabView()
+            // coreData
+//                .environment(\.managedObjectContext, dataController.container.viewContext)
             LaunchView()
             // coreData
                 .environment(\.managedObjectContext, dataController.container.viewContext)

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EmailLoginView: View {
+    @StateObject var authStore: AuthStore = AuthStore()
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /// 페이스 아이디 Unlock
@@ -21,7 +23,7 @@ struct EmailLoginView: View {
     
     /// 로그인 에러가 났을 때 텍스트로 사용자에게 보여주기 위한 변수
     private var loginResult: String {
-        loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
+        authStore.loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
     }
     var body: some View {
         VStack {
@@ -37,16 +39,16 @@ struct EmailLoginView: View {
             // 로그인 에러 났을 때 화면에 띄워줌
             Text("\(loginResult)")
                 .frame(height: 10)
-                .foregroundColor(loginError ? .red : .primary)
+                .foregroundColor(authStore.loginError ? .red : .primary)
                 .font(.bottles12)
-                .shakeEffect(trigger: loginError)
+                .shakeEffect(trigger: authStore.loginError)
             
             Button(action: {
                 // TODO: 로그인 로직이 들어오면 입력한 아이디, 비밀번호가 틀릴 경우 뷰에 보여줌
-                loginError = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    loginError = false
-                }
+                print("\(authStore.isLogin)")
+                authStore.login(email: email, password: password)
+            
+               
                 Task{
                     
                 }
@@ -54,8 +56,13 @@ struct EmailLoginView: View {
                 Text("로그인")
                     .modifier(EmailViewButtonModifier(width: 280, height: 48))
             }
+            Button(action:{
+                authStore.logout()
+            }){
+                Text("로그아웃")
+            }
             
-            NavigationLink(destination: EmailRegisterView()) {
+            NavigationLink(destination: EmailRegisterView(authStore: authStore)) {
                 Text("회원가입하기")
                     .modifier(LoginViewNavigationLinkModifier())
             }
