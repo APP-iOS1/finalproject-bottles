@@ -102,26 +102,27 @@ struct ReservationPageView: View {
             .frame(alignment: .bottom)
             //.padding(.top, 55)
             // 예약 완료 뷰로 이동
-        }
-        .navigationDestination(isPresented: $isShowing) {
-            ReservedView()
-                //.accentColor(Color("AccentColor"))
-        }
-        // Back Button
-//                .navigationBarBackButtonHidden(true)
-        .toolbar(content: {
-//                    ToolbarItem (placement: .navigationBarLeading)  {
-//                        Image("back")
-//                            .onTapGesture {
-//                                self.presentationMode.wrappedValue.dismiss()
-//                            }
-//                    }
-            ToolbarItem(placement: .principal) {
-                Text("예약하기")
-                    .font(.bottles18)
-                    .fontWeight(.medium)
+            .navigationDestination(isPresented: $isShowing) {
+                ReservedView()
+                    //.accentColor(Color("AccentColor"))
             }
-        })
+            // Back Button
+    //                .navigationBarBackButtonHidden(true)
+            .toolbar(content: {
+    //                    ToolbarItem (placement: .navigationBarLeading)  {
+    //                        Image("back")
+    //                            .onTapGesture {
+    //                                self.presentationMode.wrappedValue.dismiss()
+    //                            }
+    //                    }
+                ToolbarItem(placement: .principal) {
+                    Text("예약하기")
+                        .font(.bottles18)
+                        .fontWeight(.medium)
+                }
+            })
+        }
+       
         
     }
 }

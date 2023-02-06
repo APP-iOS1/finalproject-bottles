@@ -14,12 +14,22 @@ struct ReservedView: View {
     
     var body: some View {
         NavigationStack {
+            // TODO: - 루트뷰로 이동해야함
+            Button(action: {}) {
+                Image(systemName: "xmark")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .foregroundColor(.black)
+                    .padding()
+            }
+
+            Spacer()
+            
             VStack {
-                ZStack {
-                    Image("check")
-                        .resizable()
-                        .frame(width: 162.5, height: 162.5)
-                }
+                Image("check")
+                    .resizable()
+                    .frame(width: 162.5, height: 162.5)
                 
                 Text("예약이 완료되었습니다.\n곧 예약 확정 알림을 보내드릴게요!")
                     .font(.bottles18)
@@ -29,21 +39,20 @@ struct ReservedView: View {
                     .lineSpacing(5)
                     .padding()
             }
-            .offset(y: 110)
+            .offset(y: -85)
             
             Spacer()
-            
+       
             // MARK: - 예약 확인 버튼
             NavigationLink(destination: PickUpDetailView()) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: UIScreen.main.bounds.width-20, height: 51)
+                        .frame(width: 358, height: 56)
                     Text("예약 확인하기")
                         .modifier(AccentColorButtonModifier())
                 }
             }
-            
-            
+            .padding(.bottom)
         }
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop()
