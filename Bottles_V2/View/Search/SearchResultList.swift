@@ -23,21 +23,35 @@ struct SearchResultList: View {
     @FocusState var focus: Bool
     // 테스트용 모델
     @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    var testBottleAndShop: [String] {
+        let bookMarkBottles = bookMarkTestStore.BookMarkBottles
+        let bookMarkShops = bookMarkTestStore.BookMarkShops
+        var bottleAndShop: [String] = []
+        
+        for bottle in bookMarkBottles {
+            bottleAndShop.append(bottle.bottleName)
+        }
+        for shop in bookMarkShops {
+            bottleAndShop.append(shop.shopName)
+        }
+        return bottleAndShop.sorted(by: <)
+    }
+    
     // coreData
     @Environment(\.managedObjectContext) var managedObjContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
     
     var body: some View {
         List {
-            ForEach (bookMarkTestStore.BookMarkBottles, id: \.self) { bottle in
+            ForEach (testBottleAndShop, id: \.self) { bottle in
                 
                 // 검색어와 겹치는 단어가 있는지 없는지 확인
-                if bottle.bottleName.contains(searchBarText) {
+                if bottle.replacingOccurrences(of: " ", with: "").contains(searchBarText.replacingOccurrences(of: " ", with: "")) {
                     Button {
                         doneTextFieldEdit = true
                         
                         // 사용자가 리스트에서 찾고자하는 단어가 있어 터치 시, 해당 단어를 검색창의 텍스트로 전환
-                        searchBarText = bottle.bottleName
+                        searchBarText = bottle
                         
                         focus = false
                         // CoreData 최근 검색어 추가
@@ -51,8 +65,8 @@ struct SearchResultList: View {
                             
                             // 검색어와 겹치는 단어가 있는 bottleName의 경우, 검색어와 겹치는 단어들만 accentColor
                             // 현재는 shop을 제외한 bottleName만 리스트에 보임
-                            Text(bottle.bottleName) { string in
-                                if let range = string.range(of: searchBarText) {
+                            Text(bottle) { string in
+                                if let range = string.range(of: searchBarText.trimmingCharacters(in: .whitespaces)) {
                                     string[range].foregroundColor = Color("AccentColor")
                                 }
                             }
