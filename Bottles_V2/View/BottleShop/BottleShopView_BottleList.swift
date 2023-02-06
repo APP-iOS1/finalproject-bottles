@@ -10,8 +10,8 @@ import SwiftUI
 // 바틀샵뷰 내 "상품 검색" 뷰 - "바틀 셀"
 struct BottleShopView_BottleList: View {
     @State private var bookmarkToggle: Bool = false
-    @State private var bookmarkToggle_fill: Bool
-    @State private var bookmarkToggle_empty: Bool
+    @State private var bookmarkToggle_fill: Bool = false
+    @State private var bookmarkToggle_empty: Bool = false
     
     var selectedItem: BottleItem22
     
