@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct NearBySheetCell: View {
+    
     // Shop의 정보를 저장하는 변수
+    @Binding var checkBookmark: Bool
     var shopModel: ShopModel
     
     var body: some View {
@@ -50,9 +52,9 @@ struct NearBySheetCell: View {
             VStack {
                 // TODO: 즐겨찾기 기능 추가해야함
                 Button {
-                    
+                    checkBookmark.toggle()
                 } label: {
-                    Image(systemName: "bookmark.fill")
+                    Image(systemName: checkBookmark ? "bookmark.fill" : "bookmark")
                 }
                 Spacer()
             }
