@@ -30,8 +30,7 @@ struct BottleShopCurationView: View {
             return bottleItems.sorted(by: {$0.name < $1.name})
         }
     }
-    
-    
+
     var body: some View {
         ScrollView{
             VStack{
@@ -123,7 +122,7 @@ struct BottleShopCurationView: View {
                     }
                     
                     // 데이터 연동 시 "큐레이션 추천 바틀" 연동
-                    // 바틀 셀 반복문
+                    // 바틀 셀(정렬 후) 반복문
                     ForEach(sortBottleData(), id: \.self) { item in
                         
                         // 바틀셀 누를 시 바틀뷰로 이동

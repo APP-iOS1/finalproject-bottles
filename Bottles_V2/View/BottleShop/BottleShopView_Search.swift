@@ -117,7 +117,7 @@ struct BottleShopView_Search: View {
             
             // 검색 결과에 따라 정렬함(검색하지 않는 경우 모든 바틀 보여주고, 검색 텍스트 입력시 텍스트가 포함되어있는 해당 바틀만 보여줌)
             // 데이터 연동 시 "해당 샵의 바틀 리스트" 연동
-            // 바틀 셀 반복문
+            // 바틀 셀(정렬 후) 반복문
             ForEach(sortBottleData(), id: \.self) { item in
                 
                 // 바틀셀 누를 시 바틀뷰로 이동

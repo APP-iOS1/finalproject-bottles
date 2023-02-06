@@ -17,8 +17,8 @@ enum bottleShopInfo : String, CaseIterable {
 struct BottleShopView: View {
     
     @State private var bookmarkToggle: Bool = false
-    @State private var bookmarkToggle2: Bool = false
-    @State private var bookmarkToggle3: Bool = false
+    @State private var bookmarkToggle_fill: Bool = false
+    @State private var bookmarkToggle_empty: Bool = false
     @State private var isSearchView: Bool = true
     @State private var selectedPicker: bottleShopInfo = .bottle
     
@@ -111,21 +111,23 @@ struct BottleShopView: View {
                                 
                                 if bookmarkToggle == true{
                                     withAnimation(.easeOut(duration: 1.5)) {
-                                        bookmarkToggle2.toggle()
+                                        bookmarkToggle_fill.toggle()
+                                        print("북마크 완료")
                                     }
                                     
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-                                        bookmarkToggle2.toggle()
+                                        bookmarkToggle_fill.toggle()
                                     }
                                 }
                                 
                                 if bookmarkToggle == false{
                                     withAnimation(.easeOut(duration: 1.5)) {
-                                        bookmarkToggle3.toggle()
+                                        bookmarkToggle_empty.toggle()
+                                        print("북마크 해제")
                                     }
                                     
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-                                        bookmarkToggle3.toggle()
+                                        bookmarkToggle_empty.toggle()
                                     }
                                 }
                                 
@@ -228,6 +230,7 @@ struct BottleShopView: View {
                         .background(.white)
                         .padding(.bottom, -10)
                         
+                        // 검색결과 필터링 후 바틀셀 반복문
                         ScrollView {
                             ForEach(filteredResult, id: \.self) { item in
                                 NavigationLink(destination: BottleView(), label:{
@@ -236,9 +239,8 @@ struct BottleShopView: View {
                                 })
                             }
                         }
-                        
                         .background(Color.white)
-                        
+                        .zIndex(1)
                     }
                     .transition(.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
                                             removal: AnyTransition.opacity.animation(.easeInOut))
@@ -247,7 +249,7 @@ struct BottleShopView: View {
                 }
                 
                 // MARK: - "BookMark 완료"시 애니메이션
-                if bookmarkToggle2{
+                if bookmarkToggle_fill{
                     HStack{
                         Image("BookMark.fill")
                         Text("북마크가 완료되었습니다.")
@@ -266,7 +268,7 @@ struct BottleShopView: View {
                 }
                 
                 // MARK: - "BookMark 해제"시 애니메이션
-                if bookmarkToggle3{
+                if bookmarkToggle_empty{
                     HStack{
                         Image("BookMark")
                         Text("북마크가 해제되었습니다.")
