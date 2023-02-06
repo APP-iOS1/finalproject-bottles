@@ -80,7 +80,7 @@ struct NaverMap: UIViewRepresentable {
         let locationOverlay = view.mapView.locationOverlay
         
         // MARK: - 현 위치 추적 버튼
-        view.showLocationButton = true
+        view.showLocationButton = false
         
         view.showCompass = false
         view.showZoomControls = false
@@ -107,7 +107,7 @@ struct NaverMap: UIViewRepresentable {
             marker.touchHandler = { (overlay) -> Bool in
                 print("marker touched")
                 currentShopIndex = index
-                showMarkerDetailView.toggle()
+                showMarkerDetailView = true
                 
                 // 마커 터치 시 마커 아이콘 크기 변경
                 if shopMarker.isRegister {
