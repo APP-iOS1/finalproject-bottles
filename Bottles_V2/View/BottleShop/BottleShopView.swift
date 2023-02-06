@@ -7,25 +7,6 @@
 
 import SwiftUI
 
-// 임의로 바틀 아이템이 담긴 구조체 생성 (데이터 연동시 삭제)
-struct BottleItem22: Identifiable, Hashable{
-    var id = UUID()
-    var name: String
-    var price: Int
-    var category: String?
-    var tag: String?
-    var use: String?
-}
-
-// 임의로 바틀 아이템 데이터 생성 (데이터 연동시 삭제)
-var bottleItems: [BottleItem22] = [
-    BottleItem22(name: "화이트 와인", price: 350000, category: "화이트", tag: "와인", use: "메인"),
-    BottleItem22(name: "레드 와인", price: 400000, category: "레드", tag: "와인", use: "에피타이저"),
-    BottleItem22(name: "스파클링 와인", price: 450000, category: "스파클링", tag: "와인", use: "에피타이저"),
-    BottleItem22(name: "어쩌구 보드카", price: 500000, category: "보드카", tag: "어쩌구", use: "메인"),
-    BottleItem22(name: "어쩌구 저쩌구 위스키 이름 완전 길게 쮸루룩", price: 550000, category: "위스키", tag: "저쩌구", use: "에피타이저")
-]
-
 // 바틀샵 뷰 내에서 [1. "상품 검색"과 2. "사장님의 공지" 뷰 이동]시 사용할 enum
 enum bottleShopInfo : String, CaseIterable {
     case bottle = "상품 검색"
@@ -48,6 +29,8 @@ struct BottleShopView: View {
     
     @Namespace private var animation
     
+    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
+    
 //    @Binding var mappinShopID : ShopModel
     
     // 임의로 가게 전화번호 지정 (데이터 연동시 삭제)
@@ -55,7 +38,7 @@ struct BottleShopView: View {
     
     // 검색 결과를 필터링해주는 연산 프로퍼티
     var filteredResult: [BottleItem22] {
-        let bottles = bottleItems
+        let bottles = bottleShopStore.bottleItems
         return bottles.filter {
             $0.name.contains(testSearchText)
         }
