@@ -19,8 +19,8 @@ struct NearBySheetView: View {
     var body: some View {
         NavigationStack {
             HStack(alignment: .top) {
-                Text("둘러보기")
-                    .font(.bottles20)
+                Text("내 주변 둘러보기")
+                    .font(.bottles14)
                     .bold()
                     .padding(.leading, 15)
                 Spacer()
