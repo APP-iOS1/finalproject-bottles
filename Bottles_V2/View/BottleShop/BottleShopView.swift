@@ -11,7 +11,7 @@ import SwiftUI
 struct BottleItem22: Identifiable, Hashable{
     var id = UUID()
     var name: String
-    var price: String
+    var price: Int
     var category: String?
     var tag: String?
     var use: String?
@@ -19,11 +19,11 @@ struct BottleItem22: Identifiable, Hashable{
 
 // 임의로 바틀 아이템 데이터 생성 (데이터 연동시 삭제)
 var bottleItems: [BottleItem22] = [
-    BottleItem22(name: "화이트 와인", price: "350,000원", category: "화이트", tag: "와인", use: "메인"),
-    BottleItem22(name: "레드 와인", price: "400,000원", category: "레드", tag: "와인", use: "에피타이저"),
-    BottleItem22(name: "스파클링 와인", price: "450,000원", category: "스파클링", tag: "와인", use: "에피타이저"),
-    BottleItem22(name: "어쩌구 보드카", price: "500,000원", category: "보드카", tag: "어쩌구", use: "메인"),
-    BottleItem22(name: "어쩌구 저쩌구 위스키 이름 완전 길게 쮸루룩", price: "550,000원", category: "위스키", tag: "저쩌구", use: "에피타이저")
+    BottleItem22(name: "화이트 와인", price: 350000, category: "화이트", tag: "와인", use: "메인"),
+    BottleItem22(name: "레드 와인", price: 400000, category: "레드", tag: "와인", use: "에피타이저"),
+    BottleItem22(name: "스파클링 와인", price: 450000, category: "스파클링", tag: "와인", use: "에피타이저"),
+    BottleItem22(name: "어쩌구 보드카", price: 500000, category: "보드카", tag: "어쩌구", use: "메인"),
+    BottleItem22(name: "어쩌구 저쩌구 위스키 이름 완전 길게 쮸루룩", price: 550000, category: "위스키", tag: "저쩌구", use: "에피타이저")
 ]
 
 // 바틀샵 뷰 내에서 [1. "상품 검색"과 2. "사장님의 공지" 뷰 이동]시 사용할 enum
@@ -36,6 +36,8 @@ enum bottleShopInfo : String, CaseIterable {
 struct BottleShopView: View {
     
     @State private var bookmarkToggle: Bool = false
+    @State private var bookmarkToggle2: Bool = false
+    @State private var bookmarkToggle3: Bool = false
     @State private var isSearchView: Bool = true
     @State private var selectedPicker: bottleShopInfo = .bottle
     
@@ -45,6 +47,8 @@ struct BottleShopView: View {
     @State var testSearchText: String = ""
     
     @Namespace private var animation
+    
+//    @Binding var mappinShopID : ShopModel
     
     // 임의로 가게 전화번호 지정 (데이터 연동시 삭제)
     var phoneNumber = "718-555-5555"
@@ -121,6 +125,27 @@ struct BottleShopView: View {
                                 withAnimation(.easeOut(duration: 0.5)) {
                                     bookmarkToggle.toggle()
                                 }
+                                
+                                if bookmarkToggle == true{
+                                    withAnimation(.easeOut(duration: 1.5)) {
+                                        bookmarkToggle2.toggle()
+                                    }
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                                        bookmarkToggle2.toggle()
+                                    }
+                                }
+                                
+                                if bookmarkToggle == false{
+                                    withAnimation(.easeOut(duration: 1.5)) {
+                                        bookmarkToggle3.toggle()
+                                    }
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                                        bookmarkToggle3.toggle()
+                                    }
+                                }
+                                
                             }) {
                                 Image(bookmarkToggle ? "BookMark.fill" : "BookMark")
                                     .resizable()
@@ -237,8 +262,54 @@ struct BottleShopView: View {
                     )
                     //                    .animation(.easeOut)
                 }
+                
+                // MARK: - "BookMark 완료"시 애니메이션
+                if bookmarkToggle2{
+                    HStack{
+                        Image(bookmarkToggle2 ? "BookMark.fill" : "BookMark")
+                        Text(bookmarkToggle2 ? "북마크가 완료되었습니다." : "북마크가 해제되었습니다.")
+                            .foregroundColor(.gray)
+                            .font(.bottles11)
+                        
+                    }
+                    .zIndex(1)
+                    .transition(.opacity.animation(.easeIn))
+                    .background{
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: 300, height: 30)
+                            .foregroundColor(.gray_f7)
+                    }
+                    .offset(y: 300)
+                }
+                
+                // MARK: - "BookMark 해제"시 애니메이션
+                if bookmarkToggle3{
+                    HStack{
+                        Image("BookMark")
+                        Text("북마크가 해제되었습니다.")
+                            .foregroundColor(.gray)
+                            .font(.bottles11)
+                        
+                    }
+                    .zIndex(1)
+                    .transition(.opacity.animation(.easeIn))
+                    .background{
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: 300, height: 30)
+                            .foregroundColor(.gray_f7)
+                    }
+                    .offset(y: 300)
+                }
+                
             }
             .navigationBarHidden(isNavigationBarHidden)
+            .toolbar { // <-
+                    NavigationLink {
+                        SearchViewNavigationLabel()
+                    } label: {
+                      Label("Profile", systemImage: "person.crop.circle")
+                    }
+                  }
         }
     }
     
@@ -308,10 +379,10 @@ struct BottleShopInfoView: View {
     }
 }
 
-struct BottleShopView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack{
-            BottleShopView()
-        }
-    }
-}
+//struct BottleShopView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack{
+//            BottleShopView()
+//        }
+//    }
+//}

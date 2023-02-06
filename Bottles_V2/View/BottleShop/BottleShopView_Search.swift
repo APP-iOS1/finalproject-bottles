@@ -56,44 +56,13 @@ struct BottleShopView_Search: View {
                                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                                             .padding(.leading, 8)
                                         
-                                        //                                if isEditing {
-                                        //                                    Button(action: {
-                                        //                                        self.text = ""
-                                        //                                    }) {
-                                        //                                        Image(systemName: "multiply.circle.fill")
-                                        //                                            .foregroundColor(.gray)
-                                        //                                            .padding(.trailing, 8)
-                                        //                                    }
-                                        //                                }
                                     }
                                 )
-                            //                    .padding(.horizontal, 10)
-                            //                        .onTapGesture {
-                            //                            self.isEditing = true
-                            //                        }
-                            
-                            //                    if isEditing {
-                            //                        Button(action: {
-                            //                            self.isEditing = false
-                            //                            self.text = ""
-                            //                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                            //
-                            //                        }) {
-                            //                            Text("  종료  ")
-                            //                        }
-                            //                        .transition(.move(edge: .trailing))
-                            //                        .animation(.default)
-                            //                    }
                             Spacer()
                         }
                     }
                 .padding(.bottom, 10)
             }
-//                            ForEach(bottleItems.filter({text.isEmpty ? false : $0.name.contains(text)}), id: \.self) { item in
-//                                NavigationLink(destination: BottleView(), label:{
-//                                    BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
-//                                })
-//                            }
             
             // 바틀 정렬 버튼
             HStack {
