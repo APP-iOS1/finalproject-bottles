@@ -16,15 +16,16 @@ struct MarkerDetailView: View {
         "https://mblogthumb-phinf.pstatic.net/MjAyMDA5MDhfMjk1/MDAxNTk5NTIwMDk4MDAz.xK6sV-9Ep_Z7DNE_We9ConkWU9UiBmGYg3npakZpQfsg.CT3SyyXcMrzfYo6BoLHfzqFJPxBsJp5T275E79RKv-Mg.JPEG.wolfin/SE-25173810-e2c1-4eeb-95ee-3c093b7c21ce.jpg?type=w800",
         "https://www.qplace.kr/content/images/2022/04/2-13.jpg"
     ]
-    
+    var shopData: ShopModel
     @State private var checkBookmark: Bool = true
-    @Binding var mappinShop : ShopModel
+    @Binding var showMarkerDetailView: Bool
+    @Binding var currentShopIndex: Int
     
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 8) {
-                    Text("\(mappinShop.shopName)")
+                    Text("\(shopData.shopName)")
                         .font(.bottles20)
                         .fontWeight(.bold)
                     
@@ -62,11 +63,11 @@ struct MarkerDetailView: View {
                     }
                 }
                 
-                Text("\(mappinShop.shopIntroduction)")
+                Text("\(shopData.shopIntroduction)")
                     .font(.bottles13)
                     .fontWeight(.medium)
                     .opacity(0.5)
-                Text("\(mappinShop.shopCurationTitle)")
+                Text("\(shopData.shopCurationTitle)")
                     .font(.bottles15)
                     .fontWeight(.medium)
             }
@@ -75,9 +76,9 @@ struct MarkerDetailView: View {
             
             ScrollView(.horizontal) {
                 HStack(spacing: 0) {
-                    ForEach(mappinShop.shopImages, id: \.self) { index in
+                    ForEach(shopData.shopImages, id: \.self) { imageLink in
                         // 바틀샵 이미지
-                        AsyncImage(url: URL(string: index)) { image in
+                        AsyncImage(url: URL(string: imageLink)) { image in
                             image.resizable()
                         } placeholder: {
                             // FIXME: - 무한로딩 이슈
