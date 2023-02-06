@@ -77,13 +77,16 @@
 		7F76AAF6298780B100AAEBCA /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F76AAF5298780B100AAEBCA /* View+.swift */; };
 		7FB3D69E298CAB5300EA8884 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */; };
 		7FB3D6A0298CB97B00EA8884 /* CustomAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3D69F298CB97B00EA8884 /* CustomAlertModifier.swift */; };
-		9216C1B92977AF1D00217C7F /* ReservationView_Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1B82977AF1D00217C7F /* ReservationView_Sheet.swift */; };
+		92158B5429908DD100FCB475 /* BottleView_BottleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92158B5329908DD100FCB475 /* BottleView_BottleCell.swift */; };
+		92158B56299099FA00FCB475 /* ReservationView_OutOfFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92158B55299099FA00FCB475 /* ReservationView_OutOfFocus.swift */; };
+		9216C1B92977AF1D00217C7F /* ReservationView_Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1B82977AF1D00217C7F /* ReservationView_Content.swift */; };
 		9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */; };
 		9216C1BD2977B4BF00217C7F /* ReservedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BC2977B4BF00217C7F /* ReservedView.swift */; };
 		9216C1BF2977B5E100217C7F /* ReservedView_BottleShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BE2977B5E100217C7F /* ReservedView_BottleShop.swift */; };
 		923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D1D3F297E783D00988EE3 /* ReservationPageView_BottleCell.swift */; };
 		92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9A297E3B7C00580EC2 /* ReservationView.swift */; };
 		92906F9D297E3EB600580EC2 /* BottleView_Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */; };
+		9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */; };
 		9293B9DB297A544E00E1EB34 /* BottleView_ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */; };
 		ABE1CA6E6BE31F60C644A53F /* Pods_Bottles_V2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */; };
 		AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */; };
@@ -93,8 +96,8 @@
 		AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2AD6DE298BFAB000C40EE8 /* DataController.swift */; };
 		AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E0AC0298110960002183B /* BookMarkTestModel.swift */; };
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
-		D5769B31298C8E73005528DB /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5769B30298C8E73005528DB /* AuthStore.swift */; };
 		AECF7F4A298D0211002593C3 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECF7F49298D0211002593C3 /* Text+.swift */; };
+		D5769B31298C8E73005528DB /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5769B30298C8E73005528DB /* AuthStore.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
 		D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E26940298B40E700C975F4 /* TestRegisterView.swift */; };
@@ -203,13 +206,16 @@
 		7F76AAF5298780B100AAEBCA /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		7FB3D69F298CB97B00EA8884 /* CustomAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertModifier.swift; sourceTree = "<group>"; };
-		9216C1B82977AF1D00217C7F /* ReservationView_Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_Sheet.swift; sourceTree = "<group>"; };
+		92158B5329908DD100FCB475 /* BottleView_BottleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_BottleCell.swift; sourceTree = "<group>"; };
+		92158B55299099FA00FCB475 /* ReservationView_OutOfFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_OutOfFocus.swift; sourceTree = "<group>"; };
+		9216C1B82977AF1D00217C7F /* ReservationView_Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_Content.swift; sourceTree = "<group>"; };
 		9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView.swift; sourceTree = "<group>"; };
 		9216C1BC2977B4BF00217C7F /* ReservedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView.swift; sourceTree = "<group>"; };
 		9216C1BE2977B5E100217C7F /* ReservedView_BottleShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView_BottleShop.swift; sourceTree = "<group>"; };
 		923D1D3F297E783D00988EE3 /* ReservationPageView_BottleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView_BottleCell.swift; sourceTree = "<group>"; };
 		92906F9A297E3B7C00580EC2 /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Detail.swift; sourceTree = "<group>"; };
+		9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_Content_Amount.swift; sourceTree = "<group>"; };
 		9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_ShopCell.swift; sourceTree = "<group>"; };
 		92D45CA42988B35300DB4D11 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView_Info.swift; sourceTree = "<group>"; };
@@ -221,8 +227,8 @@
 		AE2AD6DE298BFAB000C40EE8 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		AE6E0AC0298110960002183B /* BookMarkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkTestModel.swift; sourceTree = "<group>"; };
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		D5769B30298C8E73005528DB /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		AECF7F49298D0211002593C3 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
+		D5769B30298C8E73005528DB /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		D5E26940298B40E700C975F4 /* TestRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRegisterView.swift; sourceTree = "<group>"; };
@@ -422,12 +428,15 @@
 				27281CEC297785B2003BE8B4 /* BottleView.swift */,
 				92D45CAA2988FC2B00DB4D11 /* BottleView_Info.swift */,
 				92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */,
+				92158B5329908DD100FCB475 /* BottleView_BottleCell.swift */,
 				9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */,
 				92906F9A297E3B7C00580EC2 /* ReservationView.swift */,
-				9216C1B82977AF1D00217C7F /* ReservationView_Sheet.swift */,
+				92158B55299099FA00FCB475 /* ReservationView_OutOfFocus.swift */,
+				9216C1B82977AF1D00217C7F /* ReservationView_Content.swift */,
+				9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */,
 				9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */,
-				92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */,
 				923D1D3F297E783D00988EE3 /* ReservationPageView_BottleCell.swift */,
+				92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */,
 				9216C1BC2977B4BF00217C7F /* ReservedView.swift */,
 				9216C1BE2977B5E100217C7F /* ReservedView_BottleShop.swift */,
 			);
@@ -837,6 +846,7 @@
 				D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */,
 				D5E26943298B433800C975F4 /* TestLoginView.swift in Sources */,
 				AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */,
+				92158B56299099FA00FCB475 /* ReservationView_OutOfFocus.swift in Sources */,
 				D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
 				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
@@ -849,7 +859,7 @@
 				9216C1BF2977B5E100217C7F /* ReservedView_BottleShop.swift in Sources */,
 				27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
-				9216C1B92977AF1D00217C7F /* ReservationView_Sheet.swift in Sources */,
+				9216C1B92977AF1D00217C7F /* ReservationView_Content.swift in Sources */,
 				D5769B31298C8E73005528DB /* AuthStore.swift in Sources */,
 				27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */,
 				3A306746297A82BE0085CC6A /* Color.swift in Sources */,
@@ -869,6 +879,7 @@
 				04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */,
 				7F5857B4298A00AD003402B0 /* Image+.swift in Sources */,
 				04F8B8A0297A83020098DE93 /* ConfirmationView.swift in Sources */,
+				92158B5429908DD100FCB475 /* BottleView_BottleCell.swift in Sources */,
 				27A0268E298B51AC00F71705 /* SearchViewSearchBar.swift in Sources */,
 				04F8B89A297A64900098DE93 /* SessionManager.swift in Sources */,
 				276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */,
@@ -900,6 +911,7 @@
 				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
 				27A0269F298C064F00F71705 /* SideButtonCell.swift in Sources */,
+				9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,
 				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,

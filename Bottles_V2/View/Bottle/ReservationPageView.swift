@@ -21,7 +21,7 @@ struct ReservationPageView: View {
                     HStack {
                         Text("예약 상품")
                             .font(.bottles16)
-                            .fontWeight(.bold)
+                            .fontWeight(.medium)
                         
                         Spacer()
                         
@@ -29,47 +29,57 @@ struct ReservationPageView: View {
                             // MARK: - 예약 바틀 총 개수
                             Text("2건")
                                 .font(.bottles16)
-                                .fontWeight(.bold)
+                                .fontWeight(.medium)
                             
                             Image("arrowBottom")
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 9, height: 9)
+                                .frame(width: 10, height: 6)
                         }
                     }
                     
                     // MARK: - 예약 바틀 리스트
-                    ForEach(0..<2, id: \.self) { _ in
+                    ForEach(bottleReservationData, id: \.self) { bottle in
                         // 예약 바틀 셀
-                        ReservationPageView_BottleCell()
+                        ReservationPageView_BottleCell(bottleReservation: bottle)
                     }
                 }
                 .padding()
                 
+                Divider()
+                
                 // MARK: - 예약자 정보
                 ReservationPageView_Info()
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
+                
+                Divider()
                 
                 // MARK: - 예약 체크 버튼
                 Button(action: {
                     check.toggle()
                 }) {
                     HStack {
-                        Image(systemName: check ? "checkmark.square.fill" : "square")
+                        Image(systemName: check ? "checkmark.circle.fill" : "circle")
                             .resizable()
-                            .frame(width: 25, height: 25)
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(check ? Color("AccentColor") : Color("AccentColor").opacity(0.1))
                         Text("예약 확정 후 3일 이내 미방문시 예약이 취소됩니다.")
-                            .font(.bottles15)
+                            .font(.bottles14)
                             .fontWeight(.medium)
-                            .foregroundColor(.black)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
-                
-                Spacer()
-                
+                .padding(.vertical, 10)
+            
+               
+            }
+            
+            
+            VStack(spacing: 8) {
                 Text("이용정책 및 개인정보 제공에 동의합니다.")
-                    .font(.bottles13)
+                    .foregroundColor(.black.opacity(0.5))
+                    .font(.bottles12)
                     .fontWeight(.medium)
                 
                 // MARK: - 예약하기 버튼
@@ -80,39 +90,56 @@ struct ReservationPageView: View {
                     }
                 }) {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: 12)
                             .opacity(check ? 1 : 0.5)
-                            .frame(width: 358, height: 51)
+                            .frame(width: 358, height: 56)
                         Text("예약하기")
                             .modifier(AccentColorButtonModifier())
                     }
                 }
-                .padding()
-                // 예약 완료 뷰로 이동
-                .navigationDestination(isPresented: $isShowing) {
-                    ReservedView()
-                        //.accentColor(Color("AccentColor"))
-                }
-                // Back Button
-                .navigationBarBackButtonHidden(true)
-                .toolbar(content: {
-                    ToolbarItem (placement: .navigationBarLeading)  {
-                        Image("back")
-                            .onTapGesture {
-                                self.presentationMode.wrappedValue.dismiss()
-                            }
-                    }
-                    ToolbarItem(placement: .principal) {
-                        Text("예약하기")
-                            .font(.bottles20)
-                            .fontWeight(.medium)
-                    }
-                })
+                .padding(.horizontal)
             }
+            .frame(alignment: .bottom)
+            //.padding(.top, 55)
+            // 예약 완료 뷰로 이동
         }
+        .navigationDestination(isPresented: $isShowing) {
+            ReservedView()
+                //.accentColor(Color("AccentColor"))
+        }
+        // Back Button
+//                .navigationBarBackButtonHidden(true)
+        .toolbar(content: {
+//                    ToolbarItem (placement: .navigationBarLeading)  {
+//                        Image("back")
+//                            .onTapGesture {
+//                                self.presentationMode.wrappedValue.dismiss()
+//                            }
+//                    }
+            ToolbarItem(placement: .principal) {
+                Text("예약하기")
+                    .font(.bottles18)
+                    .fontWeight(.medium)
+            }
+        })
         
     }
 }
+
+// 예약 상품 샘플 구조체
+struct Bottle_reservation: Hashable {
+    var image: String
+    var title: String
+    var price: Int
+    var count: Int
+    var shop: String
+}
+
+// 예약 상품 더미데이터
+var bottleReservationData = [
+    Bottle_reservation(image: "bottle", title: "프로메샤 모스카토", price: 110000, count: 1, shop: "와인앤모어 군자점"),
+    Bottle_reservation(image: "bottle2", title: "샤도네이 화이트 와인", price: 58000, count: 1, shop: "와인앤모어 군자점")
+]
 
 
 //struct ReservationPageView_Previews: PreviewProvider {

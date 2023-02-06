@@ -29,7 +29,8 @@ struct Bottles_V2App: App {
 //            MainTabView()
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
-            LaunchView()
+            //LaunchView()
+            BottleView()
             // coreData
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(bottleDataStore)

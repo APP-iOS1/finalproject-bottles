@@ -26,17 +26,17 @@ struct BottleView: View {
                     
                     // 해당 바틀을 판매하는 바틀샵 리스트
                     VStack(alignment: .leading) {
-                        Text("이 상품의 다른 바틀샵")
-                            .font(.bottles15)
-                            .fontWeight(.bold)
+                        Text("다른 바틀샵의 이 상품")
+                            .font(.bottles18)
+                            .fontWeight(.medium)
                             
-                        ForEach(0..<3, id: \.self) {_ in
+                        ForEach(0..<2, id: \.self) {_ in
                             NavigationLink {
                                 // 바틀샵 뷰로 이동
                                 BottleShopView()
                             } label: {
                                 // 바틀샵 셀
-                                BottleView_ShopCell()
+                                BottleView_BottleCell()
                             }
                         }
                     }
@@ -47,13 +47,13 @@ struct BottleView: View {
                         isShowingSheet.toggle()
                     }) {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 358, height: 51)
+                            RoundedRectangle(cornerRadius: 12)
+                                .frame(width: 358, height: 56)
                             Text("예약하기")
                                 .modifier(AccentColorButtonModifier())
                         }
                     }
-                    .padding()
+                    .padding(.horizontal)
                 }
             }
             
@@ -68,7 +68,7 @@ struct BottleView: View {
             //                        self.presentationMode.wrappedValue.dismiss()
             //                    }
             //            }
-            
+
             // 네비게이션 장바구니 아이콘
             ToolbarItem(placement: .principal) {
                 HStack {
