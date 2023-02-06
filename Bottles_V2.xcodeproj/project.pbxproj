@@ -64,6 +64,8 @@
 		3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5C2977C8BD00EB8551 /* BottleShopView_BottleList.swift */; };
 		3AA43A612977E0AB00EB8551 /* BottleShopView_NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A602977E0AB00EB8551 /* BottleShopView_NoticeCell.swift */; };
 		59883C3FF144E2CA845F4DE6 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */; };
+		7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */; };
+		7F0C61FD2990C30C00B4CE4D /* SentEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */; };
 		7F2142BC2977956D0046D420 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BB2977956D0046D420 /* SettingView.swift */; };
 		7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BD2977AF290046D420 /* PickUpListView.swift */; };
 		7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */; };
@@ -93,8 +95,8 @@
 		AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2AD6DE298BFAB000C40EE8 /* DataController.swift */; };
 		AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E0AC0298110960002183B /* BookMarkTestModel.swift */; };
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
-		D5769B31298C8E73005528DB /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5769B30298C8E73005528DB /* AuthStore.swift */; };
 		AECF7F4A298D0211002593C3 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECF7F49298D0211002593C3 /* Text+.swift */; };
+		D5769B31298C8E73005528DB /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5769B30298C8E73005528DB /* AuthStore.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
 		D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E26940298B40E700C975F4 /* TestRegisterView.swift */; };
@@ -190,6 +192,8 @@
 		4F05C0664583932B22FDC119 /* Pods-Bottles_V2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F497AFA31D64A6C7C8D5DAB /* Pods-Bottles_V2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.debug.xcconfig"; sourceTree = "<group>"; };
 		534C0901FECD300F1E9C28B3 /* Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordView.swift; sourceTree = "<group>"; };
+		7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentEmailView.swift; sourceTree = "<group>"; };
 		7F2142BB2977956D0046D420 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		7F2142BD2977AF290046D420 /* PickUpListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListView.swift; sourceTree = "<group>"; };
 		7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListCell.swift; sourceTree = "<group>"; };
@@ -221,8 +225,8 @@
 		AE2AD6DE298BFAB000C40EE8 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		AE6E0AC0298110960002183B /* BookMarkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkTestModel.swift; sourceTree = "<group>"; };
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		D5769B30298C8E73005528DB /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		AECF7F49298D0211002593C3 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
+		D5769B30298C8E73005528DB /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		D5E26940298B40E700C975F4 /* TestRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRegisterView.swift; sourceTree = "<group>"; };
@@ -535,6 +539,8 @@
 				7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */,
 				7F5857B5298A35FB003402B0 /* TotalLoginView.swift */,
 				7F5857B7298A37E3003402B0 /* EmailLoginView.swift */,
+				7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */,
+				7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */,
 			);
 			path = LoginView;
 			sourceTree = "<group>";
@@ -856,6 +862,7 @@
 				26A66485298CC6F1004E15EA /* User.swift in Sources */,
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
+				7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */,
 				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,
 				27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */,
 				AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */,
@@ -899,6 +906,7 @@
 				7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */,
 				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
+				7F0C61FD2990C30C00B4CE4D /* SentEmailView.swift in Sources */,
 				27A0269F298C064F00F71705 /* SideButtonCell.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,

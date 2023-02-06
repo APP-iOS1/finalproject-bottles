@@ -26,6 +26,8 @@ struct Bottles_V2App: App {
     
     var body: some Scene {
         WindowGroup {
+//            TotalLoginView()
+//                .environmentObject(UserStore())
 //            MainTabView()
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)

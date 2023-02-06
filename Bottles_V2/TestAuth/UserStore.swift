@@ -15,7 +15,14 @@ import SwiftUI
 class UserStore: ObservableObject {
     
     @Published var user: User
+    
     let database = Firestore.firestore()
+    
+    /// 이메일 중복확인 결과에 따른 EmailRegisterView에서 CustomAlert의 String
+    @Published var emailCheckStr: String = ""
+    
+    /// emailRegisterView에서 중복확인에 걸리지 않으면 인증코드 입력 화면을 띄워준다.
+    @Published var isShowingVerificationCode: Bool = false
     
     init() {
         user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "")
@@ -67,4 +74,22 @@ class UserStore: ObservableObject {
             .document(userId).delete()
     }
     
+    /// email 중복확인 메소드
+    func doubleCheckEmail(userEmail: String) {
+        database.collection("User")
+            .whereField("email", isEqualTo: userEmail)
+            .getDocuments { snapshot, error in
+                if snapshot!.documents.isEmpty {
+                    print("사용 가능한 이메일입니다.")
+                    self.emailCheckStr = "사용 가능한 이메일입니다."
+                    self.isShowingVerificationCode = true
+                } else {
+                    print("중복된 이메일 입니다. 다른 이메일을 사용해주세요")
+                    self.emailCheckStr = "중복된 이메일 입니다. 다른 이메일을 사용해주세요"
+                    self.isShowingVerificationCode = false
+                }
+            }
+                
+            
+    }
 }
