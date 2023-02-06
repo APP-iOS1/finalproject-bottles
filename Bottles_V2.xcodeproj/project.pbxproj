@@ -64,8 +64,6 @@
 		3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5C2977C8BD00EB8551 /* BottleShopView_BottleList.swift */; };
 		3AA43A612977E0AB00EB8551 /* BottleShopView_NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A602977E0AB00EB8551 /* BottleShopView_NoticeCell.swift */; };
 		59883C3FF144E2CA845F4DE6 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */; };
-		7F0C61F729908EE400B4CE4D /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0C61F629908EE400B4CE4D /* SwiftSMTP */; };
-		7F0C61F929908F0C00B4CE4D /* SMTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61F829908F0C00B4CE4D /* SMTP.swift */; };
 		7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */; };
 		7F0C61FD2990C30C00B4CE4D /* SentEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */; };
 		7F2142BC2977956D0046D420 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BB2977956D0046D420 /* SettingView.swift */; };
@@ -194,7 +192,6 @@
 		4F05C0664583932B22FDC119 /* Pods-Bottles_V2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F497AFA31D64A6C7C8D5DAB /* Pods-Bottles_V2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.debug.xcconfig"; sourceTree = "<group>"; };
 		534C0901FECD300F1E9C28B3 /* Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; sourceTree = "<group>"; };
-		7F0C61F829908F0C00B4CE4D /* SMTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMTP.swift; sourceTree = "<group>"; };
 		7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordView.swift; sourceTree = "<group>"; };
 		7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentEmailView.swift; sourceTree = "<group>"; };
 		7F2142BB2977956D0046D420 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -250,7 +247,6 @@
 			files = (
 				FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */,
 				D746C977298A426200E27E16 /* FirebaseAuth in Frameworks */,
-				7F0C61F729908EE400B4CE4D /* SwiftSMTP in Frameworks */,
 				D746C979298A426200E27E16 /* FirebaseFirestore in Frameworks */,
 				D746C97D298A426200E27E16 /* FirebaseStorage in Frameworks */,
 				D746C97B298A426200E27E16 /* FirebaseFirestoreSwift in Frameworks */,
@@ -545,7 +541,6 @@
 				7F5857B7298A37E3003402B0 /* EmailLoginView.swift */,
 				7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */,
 				7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */,
-				7F0C61F829908F0C00B4CE4D /* SMTP.swift */,
 			);
 			path = LoginView;
 			sourceTree = "<group>";
@@ -605,7 +600,6 @@
 				D746C978298A426200E27E16 /* FirebaseFirestore */,
 				D746C97A298A426200E27E16 /* FirebaseFirestoreSwift */,
 				D746C97C298A426200E27E16 /* FirebaseStorage */,
-				7F0C61F629908EE400B4CE4D /* SwiftSMTP */,
 			);
 			productName = Bottles_V2;
 			productReference = 0427F561297677E60023E745 /* Bottles_V2.app */;
@@ -684,7 +678,6 @@
 			mainGroup = 0427F558297677E60023E745;
 			packageReferences = (
 				D746C975298A426200E27E16 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				7F0C61F529908EE400B4CE4D /* XCRemoteSwiftPackageReference "Swift-SMTP" */,
 			);
 			productRefGroup = 0427F562297677E60023E745 /* Products */;
 			projectDirPath = "";
@@ -842,7 +835,6 @@
 			files = (
 				27A0268F298B51AC00F71705 /* SearchResultList.swift in Sources */,
 				92906F9D297E3EB600580EC2 /* BottleView_Detail.swift in Sources */,
-				7F0C61F929908F0C00B4CE4D /* SMTP.swift in Sources */,
 				AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */,
 				27281CED297785B2003BE8B4 /* BottleView.swift in Sources */,
 				D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */,
@@ -1271,14 +1263,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7F0C61F529908EE400B4CE4D /* XCRemoteSwiftPackageReference "Swift-SMTP" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/IBM-Swift/Swift-SMTP";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
 		D746C975298A426200E27E16 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1290,11 +1274,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7F0C61F629908EE400B4CE4D /* SwiftSMTP */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7F0C61F529908EE400B4CE4D /* XCRemoteSwiftPackageReference "Swift-SMTP" */;
-			productName = SwiftSMTP;
-		};
 		D746C976298A426200E27E16 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D746C975298A426200E27E16 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

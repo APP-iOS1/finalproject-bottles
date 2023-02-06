@@ -131,7 +131,7 @@ struct LoginTextFieldModifier: ViewModifier {
             .font(.bottles16)
             .padding()
             .textInputAutocapitalization(.never) // 처음 문자를 자동으로 대문자로 바꾸는걸 막기
-            .frame(width: width)
+            .frame(width: width, height: height)
             .background{
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundColor(.gray_f7)
