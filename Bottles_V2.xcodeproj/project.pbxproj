@@ -19,6 +19,8 @@
 		04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B89D297A652F0098DE93 /* LogInView.swift */; };
 		04F8B8A0297A83020098DE93 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B89F297A83020098DE93 /* ConfirmationView.swift */; };
 		04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B8A1297B00EB0098DE93 /* SessionView.swift */; };
+		26A66485298CC6F1004E15EA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66484298CC6F1004E15EA /* User.swift */; };
+		26A66487298CC865004E15EA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66486298CC865004E15EA /* UserStore.swift */; };
 		26D0E4382979164400524943 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		27281CE32977854D003BE8B4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE22977854D003BE8B4 /* MapView.swift */; };
 		27281CE62977856A003BE8B4 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE52977856A003BE8B4 /* CartView.swift */; };
@@ -91,6 +93,7 @@
 		AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2AD6DE298BFAB000C40EE8 /* DataController.swift */; };
 		AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E0AC0298110960002183B /* BookMarkTestModel.swift */; };
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
+		D5769B31298C8E73005528DB /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5769B30298C8E73005528DB /* AuthStore.swift */; };
 		AECF7F4A298D0211002593C3 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECF7F49298D0211002593C3 /* Text+.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
@@ -142,6 +145,8 @@
 		04F8B8A1297B00EB0098DE93 /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		1A4B03D15F61D2058B49F1EB /* Pods-Bottles_V2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1E38E30FED3A6D500B88EE64 /* Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		26A66484298CC6F1004E15EA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		26A66486298CC865004E15EA /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		27281CE22977854D003BE8B4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		27281CE52977856A003BE8B4 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27281CEA297785AA003BE8B4 /* BottleShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView.swift; sourceTree = "<group>"; };
@@ -214,6 +219,7 @@
 		AE2AD6DE298BFAB000C40EE8 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		AE6E0AC0298110960002183B /* BookMarkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkTestModel.swift; sourceTree = "<group>"; };
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		D5769B30298C8E73005528DB /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		AECF7F49298D0211002593C3 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -542,6 +548,9 @@
 			children = (
 				D5E26940298B40E700C975F4 /* TestRegisterView.swift */,
 				D5E26942298B433800C975F4 /* TestLoginView.swift */,
+				D5769B30298C8E73005528DB /* AuthStore.swift */,
+				26A66486298CC865004E15EA /* UserStore.swift */,
+				26A66484298CC6F1004E15EA /* User.swift */,
 			);
 			path = TestAuth;
 			sourceTree = "<group>";
@@ -835,8 +844,10 @@
 				27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				9216C1B92977AF1D00217C7F /* ReservationView_Sheet.swift in Sources */,
+				D5769B31298C8E73005528DB /* AuthStore.swift in Sources */,
 				27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */,
 				3A306746297A82BE0085CC6A /* Color.swift in Sources */,
+				26A66485298CC6F1004E15EA /* User.swift in Sources */,
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,
@@ -885,6 +896,7 @@
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,
 				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,
+				26A66487298CC865004E15EA /* UserStore.swift in Sources */,
 				AE2AD6DD298BF9EE00C40EE8 /* SearchModel.xcdatamodeld in Sources */,
 				AECF7F4A298D0211002593C3 /* Text+.swift in Sources */,
 				D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */,
