@@ -14,52 +14,46 @@ struct ReservedView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-               Circle()
-                    .fill(Color(UIColor(red: 246/255, green: 243/255, blue: 238/255, alpha: 1.0)))
-                    .frame(width: 221, height: 221)
-                // MARK: - 예약 상품 이미지
-                Image("kilchoman")
+            // TODO: - 루트뷰로 이동해야함
+            Button(action: {}) {
+                Image(systemName: "xmark")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 180, height: 180)
-                    .clipShape(Circle())
+                    .frame(width: 20, height: 20)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .foregroundColor(.black)
+                    .padding()
             }
+
+            Spacer()
             
             VStack {
-                Text("예약이 완료되었습니다.")
-                    .font(.bottles20)
-                    .fontWeight(.bold)
-                Text("곧 예약 확정 알림을 보내드릴게요!")
-                    .font(.bottles20)
-                    .fontWeight(.bold)
-            }
-            .padding()
-            
-            HStack {
-                // MARK: - 다른 상품 보러가기 버튼
-                NavigationLink(destination: BottleShopView()) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 171, height: 51)
-                        Text("다른 상품 보러가기")
-                            .modifier(AccentColorButtonModifier())
-                    }
-                }
+                Image("check")
+                    .resizable()
+                    .frame(width: 162.5, height: 162.5)
                 
-                // MARK: - 예약 확인 버튼
-                NavigationLink(destination: PickUpDetailView()) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 171, height: 51)
-                        Text("예약 확인하기")
-                            .modifier(AccentColorButtonModifier())
-                    }
+                Text("예약이 완료되었습니다.\n곧 예약 확정 알림을 보내드릴게요!")
+                    .font(.bottles18)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color("AccentColor"))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(5)
+                    .padding()
+            }
+            .offset(y: -85)
+            
+            Spacer()
+       
+            // MARK: - 예약 확인 버튼
+            NavigationLink(destination: PickUpDetailView()) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 358, height: 56)
+                    Text("예약 확인하기")
+                        .modifier(AccentColorButtonModifier())
                 }
             }
-            
+            .padding(.bottom)
         }
-        .offset(y: -60)
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop()
                 .presentationDetents([.height(210)])

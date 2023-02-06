@@ -14,7 +14,7 @@ struct BottleView_Info: View {
     
     var body: some View {
         // MARK: - 바틀 이미지
-        Image("bottle_test")
+        Image("bottle")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: UIScreen.main.bounds.width, height: 390)
@@ -49,7 +49,7 @@ struct BottleView_Info: View {
                 }
             }
             // MARK: - 가격
-            Text("110,100원")
+            Text("110,000원")
                 .font(.bottles24)
                 .fontWeight(.bold)
             
@@ -59,7 +59,7 @@ struct BottleView_Info: View {
                     .frame(width: 14, height: 17)
                 // MARK: - 바틀샵 이름
                 Text("미들바틀")
-                    .font(.bottles15)
+                    .font(.bottles14)
                     .fontWeight(.medium)
             }
         }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - 바틀샵 셀(바틀샵 이미지, 바틀샵 이름, 바틀샵 소개, 북마크)
-struct BottleView_ShopCell: View {
+struct ReservedView_ShopCell: View {
     @State private var checkBookmark: Bool = false
     
     var body: some View {
@@ -17,18 +17,27 @@ struct BottleView_ShopCell: View {
             Image("bottleShop")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 110, height: 110)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .frame(width: 112, height: 112)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
             
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 5) {
+                VStack(alignment: .leading, spacing: 8) {
                     // MARK: - 바틀샵 이름
-                    Text("바틀샵 이름")
-                        .modifier(BottleShopTitleModifier())
+                    Text("바틀리스트")
+                        .font(.bottles18)
+                        .fontWeight(.bold)
                     
                     // MARK: - 바틀샵 소개
-                    Text("한 줄 소개 내추럴 와인 포트와인 위스키 럼 꼬냑")
-                        .modifier(BottleShopIntroductionModifier())
+                    Text("눈 감고 먹어도 맛있는 곳.\n직접 먹어보고 추천해 드립니다.")
+                        .font(.bottles14)
+                        .fontWeight(.regular)
+                        .lineSpacing(5)
+                    
+                    // MARK: - 거리
+                    Text("500m")
+                        .font(.bottles14)
+                        .fontWeight(.medium)
+                        .opacity(0.4)
                 }
                 .foregroundColor(.black)
                 
@@ -38,19 +47,20 @@ struct BottleView_ShopCell: View {
                 Button(action: {
                     checkBookmark.toggle()
                 }) {
-                    Image(checkBookmark ? "BookMark.fill" : "BookMark")
+                    Image(checkBookmark ? "bookmark_fill" : "bookmark")
                         .resizable()
-                        .frame(width: 15, height: 19)
+                        .frame(width: 16, height: 19)
                         .padding(.horizontal, 10)
                 }
             }
-            .padding(.vertical)
+            .padding(.vertical, 10)
         }
+        .padding()
     }
 }
 
-struct BottleView_ShopCell_Previews: PreviewProvider {
+struct ReservedView_ShopCell_Previews: PreviewProvider {
     static var previews: some View {
-        BottleView_ShopCell()
+        ReservedView_ShopCell()
     }
 }

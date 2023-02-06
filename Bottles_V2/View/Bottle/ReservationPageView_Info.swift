@@ -14,36 +14,37 @@ struct ReservationPageView_Info: View {
             HStack {
                 Text("예약자 정보")
                     .font(.bottles16)
-                    .fontWeight(.bold)
+                    .fontWeight(.medium)
                 
                 Spacer()
                 
                 Image("arrowBottom")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 9, height: 9)
+                    .frame(width: 10, height: 6)
             }
             VStack(alignment: .leading, spacing: 7) {
-                HStack {
+                HStack(spacing: 13) {
                     // MARK: - 예약자 이름
                     Text("이름")
+                        .frame(width: 55, alignment: .leading)
                     Text("안은노")
                 }
-                HStack {
+                HStack(spacing: 13) {
                     // MARK: - 예약자 전화번호
                     Text("전화번호")
-                    Text("010-0000-0000")
+                        .frame(width: 55, alignment: .leading)
+                    Text("010 - 0000 - 0000")
                 }
-                HStack {
+                HStack(spacing: 13) {
                     // MARK: - 예약자 생년월일
                     Text("생년월일")
-                    Text("1998-00-00")
+                        .frame(width: 55, alignment: .leading)
+                    Text("1998 - 00 - 00")
                 }
             }
-            .font(.bottles15)
-            .fontWeight(.medium)
+            .font(.bottles14)
+            .fontWeight(.regular)
         }
-        .padding()
     }
 }
 
