@@ -11,11 +11,12 @@ import FirebaseCore
 
 @main
 struct Bottles_V2App: App {
-
+    
     //    @ObservedObject var sessionManager = SessionManager()
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var userDataStore = UserDataStore()
+    @ObservedObject var reservationDataStore = ResevationDataStore()
     // coreData
     @StateObject var dataController = DataController()
     
@@ -25,33 +26,44 @@ struct Bottles_V2App: App {
     
     var body: some Scene {
         WindowGroup {
-            TotalLoginView()
 //            MainTabView()
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
+            LaunchView()
+            // coreData
+                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(bottleDataStore)
+                .environmentObject(shopDataStore)
+                .environmentObject(userDataStore)
+                .environmentObject(reservationDataStore)
+                .task {
+                    await shopDataStore.getAllShopData()
+                    await bottleDataStore.getAllBottleData()
+                    await reservationDataStore.getAllResevationData()
+                }
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))
-//            switch sessionManager.authState{
-//            case .login:
-//                LoginView()
-//                    .environmentObject(sessionManager)
-//
-//            case .signUp:
-//                SignUpView()
-//                    .environmentObject(sessionManager)
-//
-//            case .confirmCode(let username):
-//                ConfirmationView(username: username)
-//                    .environmentObject(sessionManager)
-//
-//            case .session(let user):
-//                MainTabView(user: user)
-//                .environmentObject(sessionManager)
-//                .environmentObject(bottleDataStore)
-//                .environmentObject(shopDataStore)
-//                .environmentObject(userDataStore)
-//            }
+            //            switch sessionManager.authState{
+            //            case .login:
+            //                LoginView()
+            //                    .environmentObject(sessionManager)
+            //
+            //            case .signUp:
+            //                SignUpView()
+            //                    .environmentObject(sessionManager)
+            //
+            //            case .confirmCode(let username):
+            //                ConfirmationView(username: username)
+            //                    .environmentObject(sessionManager)
+            //
+            //            case .session(let user):
+            //                MainTabView(user: user)
+            //                .environmentObject(sessionManager)
+            //                .environmentObject(bottleDataStore)
+            //                .environmentObject(shopDataStore)
+            //                .environmentObject(userDataStore)
+            //            }
         }
     }
 }

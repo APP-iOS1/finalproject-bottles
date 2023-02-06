@@ -13,6 +13,7 @@ struct MainTabView: View {
     @EnvironmentObject var shopDataStore : ShopDataStore
     @EnvironmentObject var userDataStore : UserDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
+    @EnvironmentObject var reservationDataStore : ResevationDataStore
     
     //    let user: AuthUser
     
@@ -47,6 +48,7 @@ struct MainTabView: View {
             }.tag(5)
         }
         .toolbarBackground(Color.white, for: .tabBar)
+
     }
 }
 

@@ -70,6 +70,7 @@ struct BottleView_Info: View {
             Text("술 소개. 친구 연인 가족과 함께 부담없이 마시기 좋은 스파클링 와인을 추천합니다.\n어떤 음식과 페어링해도 평타 이상일거에요!")
                 .font(.bottles14)
                 .fontWeight(.medium)
+                .foregroundColor(Color("AccentColor"))
                 .lineSpacing(3)
             
             HStack {
@@ -77,8 +78,7 @@ struct BottleView_Info: View {
                 ForEach(tagList, id: \.self) { tag in
                     Text(tag)
                         .font(.bottles12)
-                        .fontWeight(.medium)
-                        .foregroundColor(Color("AccentColor"))
+                        .fontWeight(.regular)
                         .opacity(0.7)
                         .padding(.vertical, 4)
                         .padding(.horizontal, 8)
