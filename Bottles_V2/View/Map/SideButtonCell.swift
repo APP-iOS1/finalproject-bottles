@@ -26,7 +26,7 @@ struct SideButtonCell: View {
             
             Button {
                 
-                userLocation = mapViewModel.userLocation
+                mapViewModel.coord = mapViewModel.userLocation
                 // current Coordinate -> mapViewModel 설정
                 print("userLocation : \(userLocation)")
                 moveToUserLocation = true
