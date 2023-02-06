@@ -10,6 +10,8 @@ import SwiftUI
 // 바틀샵뷰 내 "상품 검색" 뷰 - "바틀 셀"
 struct BottleShopView_BottleList: View {
     @State private var bookmarkToggle = false
+    @State private var bookmarkToggle2: Bool = false
+    @State private var bookmarkToggle3: Bool = false
     
     var selectedItem: BottleItem22
     
@@ -68,9 +70,13 @@ struct BottleShopView_BottleList: View {
                     //
                     
                     // 데이터 연동 시 "바틀 가격" 연동
-                    Text(selectedItem.price)
-                        .font(.bottles18)
-                        .fontWeight(.heavy)
+                    HStack{
+                        Text("\(selectedItem.price)")
+                            .padding(.trailing, -5)
+                        Text("원")
+                    }
+                    .font(.bottles18)
+                    .fontWeight(.heavy)
                     
                     HStack{
                         // 데이터 연동 시 "바틀 카테고리" 연동
@@ -122,13 +128,15 @@ struct BottleShopView_BottleList: View {
         }
         .foregroundColor(.black)
         //                    .frame(height: 400)
+        
+        
     }
 }
 
 
 
-struct BottleShopView_BottleList_Previews: PreviewProvider {
-    static var previews: some View {
-        BottleShopView_BottleList(selectedItem: BottleItem22(id: UUID(), name: "화이트 와인", price: "350,000원", category: "화이트", tag: "와인", use: "메인"))
-    }
-}
+//struct BottleShopView_BottleList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BottleShopView_BottleList(selectedItem: BottleItem22(id: UUID(), name: "화이트 와인", price: 350000, category: "화이트", tag: "와인", use: "메인"))
+//    }
+//}
