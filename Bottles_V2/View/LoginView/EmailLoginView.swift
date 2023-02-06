@@ -56,11 +56,6 @@ struct EmailLoginView: View {
                 Text("로그인")
                     .modifier(EmailViewButtonModifier(width: 280, height: 48))
             }
-            Button(action:{
-                authStore.logout()
-            }){
-                Text("로그아웃")
-            }
             
             NavigationLink(destination: EmailRegisterView(authStore: authStore)) {
                 Text("회원가입하기")
@@ -68,7 +63,7 @@ struct EmailLoginView: View {
             }
             .padding(.top, 24)
             .padding(.bottom, 16)
-            NavigationLink(destination: Text("비밀번호 찾기")){
+            NavigationLink(destination: FindPasswordView()){
                 Text("비밀번호 찾기")
                     .modifier(LoginViewNavigationLinkModifier())
             }

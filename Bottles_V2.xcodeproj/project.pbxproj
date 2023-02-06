@@ -66,6 +66,7 @@
 		59883C3FF144E2CA845F4DE6 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */; };
 		7F0C61F729908EE400B4CE4D /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = 7F0C61F629908EE400B4CE4D /* SwiftSMTP */; };
 		7F0C61F929908F0C00B4CE4D /* SMTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61F829908F0C00B4CE4D /* SMTP.swift */; };
+		7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */; };
 		7F2142BC2977956D0046D420 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BB2977956D0046D420 /* SettingView.swift */; };
 		7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BD2977AF290046D420 /* PickUpListView.swift */; };
 		7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */; };
@@ -193,6 +194,7 @@
 		4F497AFA31D64A6C7C8D5DAB /* Pods-Bottles_V2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.debug.xcconfig"; sourceTree = "<group>"; };
 		534C0901FECD300F1E9C28B3 /* Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F0C61F829908F0C00B4CE4D /* SMTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMTP.swift; sourceTree = "<group>"; };
+		7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordView.swift; sourceTree = "<group>"; };
 		7F2142BB2977956D0046D420 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		7F2142BD2977AF290046D420 /* PickUpListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListView.swift; sourceTree = "<group>"; };
 		7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListCell.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 				7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */,
 				7F5857B5298A35FB003402B0 /* TotalLoginView.swift */,
 				7F5857B7298A37E3003402B0 /* EmailLoginView.swift */,
+				7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */,
 				7F0C61F829908F0C00B4CE4D /* SMTP.swift */,
 			);
 			path = LoginView;
@@ -864,6 +867,7 @@
 				26A66485298CC6F1004E15EA /* User.swift in Sources */,
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
+				7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */,
 				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,
 				27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */,
 				AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */,
