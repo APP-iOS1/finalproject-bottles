@@ -12,6 +12,8 @@ import CoreLocation
 struct NearBySheetView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @StateObject var mapViewModel: MapViewModel
+    @State private var checkBookmark: Bool = false
+
     @Binding var isOpen: Bool
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopIndex: Int
@@ -21,7 +23,7 @@ struct NearBySheetView: View {
         NavigationStack {
             HStack(alignment: .top) {
                 Text("내 주변 둘러보기")
-                    .font(.bottles14)
+                    .font(.bottles16)
                     .bold()
                     .padding(.leading, 15)
                 Spacer()
@@ -39,7 +41,7 @@ struct NearBySheetView: View {
                                 currentShopIndex = index
                                 mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
                             } label: {
-                                NearBySheetCell(shopModel: shop)
+                                NearBySheetCell(checkBookmark: $checkBookmark, shopModel: shop)
                             }
                         }
                     }
