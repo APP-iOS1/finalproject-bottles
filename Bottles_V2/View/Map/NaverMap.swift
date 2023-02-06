@@ -18,7 +18,7 @@ struct NaverMap: UIViewRepresentable {
     @Binding var showMarkerDetailView: Bool
     @Binding var coord: (Double, Double)
     @Binding var userLocation: (Double, Double)
-    
+        
     func makeCoordinator() -> Coordinator {
         Coordinator(coord, $showMarkerDetailView, userLocation)
     }
@@ -74,14 +74,11 @@ struct NaverMap: UIViewRepresentable {
         view.mapView.positionMode = .direction
         
         // MARK: - 줌 레벨 제한
-        view.mapView.zoomLevel = 13 // 기본 카메라 줌 레벨
+        view.mapView.zoomLevel = 15 // 기본 카메라 줌 레벨
         view.mapView.minZoomLevel = 10 // 최소 줌 레벨
-        
-        let locationOverlay = view.mapView.locationOverlay
-        
+        view.mapView.maxZoomLevel = 17 // 최대 줌 레벨
         // MARK: - 현 위치 추적 버튼
         view.showLocationButton = false
-        
         view.showCompass = false
         view.showZoomControls = false
         let cameraPosition = view.mapView.cameraPosition
@@ -93,10 +90,10 @@ struct NaverMap: UIViewRepresentable {
             marker.position = NMGLatLng(
                 lat: shopMarker.location.latitude,
                 lng: shopMarker.location.longitude)
-            marker.captionRequestedWidth = 100
+            marker.captionRequestedWidth = 100 // 마커 캡션 너비 지정
             marker.captionText = shopMarker.shopName
-            marker.captionMinZoom = 12
-            marker.captionMaxZoom = 16
+            marker.captionMinZoom = 15
+            marker.captionMaxZoom = 17
             
             // MARK: - 마커 이미지 변경
             marker.iconImage = NMFOverlayImage(name: shopMarker.isRegister ? "MapMarker.fill" : "MapMarker")
@@ -116,7 +113,7 @@ struct NaverMap: UIViewRepresentable {
                     // TODO: isRegister == false일 때 이미지 추가/수정
                     marker.iconImage = NMFOverlayImage(name: showMarkerDetailView ? "MapMarker" : "MapMarker")
                 }
-               
+                
                 marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
                 marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
                 coord = (marker.position.lat,marker.position.lng)
@@ -131,6 +128,7 @@ struct NaverMap: UIViewRepresentable {
             // MARK: - 지도 터치 시 발생하는 touchDelegate
             view.mapView.touchDelegate = context.coordinator
         }
+        
         print("camera position: \(cameraPosition)")
         return view
     }
@@ -141,7 +139,16 @@ struct NaverMap: UIViewRepresentable {
         cameraUpdate.animation = .fly
         cameraUpdate.animationDuration = 1
         uiView.mapView.moveCamera(cameraUpdate)
+        
+        // MARK: - 내 주변 5km 반경 overlay 표시
+        let circle = NMFCircleOverlay()
+        circle.center = NMGLatLng(lat: userLocation.0, lng: userLocation.1)
+        circle.radius = 5000
+        circle.mapView = uiView.mapView
+        
+        // MARK: - 현재 위치 좌표 overlay 마커 표시
+        let locationOverlay = uiView.mapView.locationOverlay
+        locationOverlay.location = NMGLatLng(lat: userLocation.0, lng: userLocation.1)
+        locationOverlay.hidden = false
     }
 }
-
-
