@@ -66,7 +66,7 @@ struct MapView: View {
                         mapViewModel: mapViewModel,
                         isOpen: $isShowingSheet,
                         showMarkerDetailView: $showMarkerDetailView,
-                        currentShopIndex: $currentShopIndex, coord: $coord)
+                        currentShopIndex: $currentShopIndex)
                 }
                 .ignoresSafeArea(.all, edges: .top)
                 .zIndex(2)
