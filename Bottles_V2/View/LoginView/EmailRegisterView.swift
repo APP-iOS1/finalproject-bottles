@@ -11,10 +11,12 @@ struct EmailRegisterView: View {
     
     @StateObject var authStore: AuthStore
     
+    @EnvironmentObject var userStore: UserStore
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /// email확인 정규식
-    let emailExpression: String = "^([a-zA-Z0-9._-])+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,20}$"
+    let emailExpression: String = "^([a-zA-Z0-9._-])+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{3,20}$"
     
     /// 비밀번호 확인 정규식 (영어, 숫자, 특수문자 8~18자리)
     let passwordExpression: String = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}$"
@@ -41,8 +43,6 @@ struct EmailRegisterView: View {
     /// 비밀번호 확인이 같지 않으면 사용자에게 뷰에서 에러를 표현해주는 변수
     @State private var checkingPasswordError: Bool = false
     
-    /// 중복확인 버튼을 누르면 이메일 인증 번호 입력하는 창 띄워주는 변수
-    @State private var isShowingVerificationCode: Bool = false
     
     /// 전체 이용약관 동의 변수
     @State private var allAgreement: Bool = false
@@ -110,18 +110,11 @@ struct EmailRegisterView: View {
                         .modifier(LoginTextFieldModifier(width: 250, height: 48))
                         .shakeEffect(trigger: emailError)
                     Button(action: {
-                        // CustomAlert을 띄워 줌 이메일 중복에 걸리지 않는 조건에 추가하면 될 듯
+                        // CustomAlert을 띄워 줌 이메일 중복에 따라 텍스트가 다르게 띄워짐
                         dupilicateCheck = true
-                        // TODO: 중복확인 로직
+                        // 중복확인 로직
+                        userStore.doubleCheckEmail(userEmail: registerEmail)
                         
-                        
-                        // 중복에 걸린다면 아래 코드를 넣어주시면 이펙트가 발동 됩니다. 어려울 것 같으면 지워도 돼요
-                        emailError = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-                            emailError = false
-                        }
-                        // 이메일 인증 번호 입력창 활성화
-                        isShowingVerificationCode.toggle()
                     }){
                        Text("중복확인")
                             .modifier(EmailViewButtonModifier(width: 100, height: 48))
@@ -130,7 +123,7 @@ struct EmailRegisterView: View {
             }
             
             //MARK: - 이메일 인증번호 입력창
-            if isShowingVerificationCode {
+            if userStore.isShowingVerificationCode {
                 Group {
                     HStack(alignment: .bottom) {
                         Text("이메일 인증")
@@ -370,7 +363,7 @@ struct EmailRegisterView: View {
             }
             
         }
-        .customAlert(isPresented: $dupilicateCheck, message: "사용 가능한 이메일 입니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        .customAlert(isPresented: $dupilicateCheck, message: userStore.emailCheckStr, primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
         .customAlert(isPresented: $emailSent, message: "입력한 이메일 주소에 인증 메일을 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
         .customAlert(isPresented: $registerFailed, message: "입력하신 정보를 다시 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
         .customAlert(isPresented: $registerSuccessed, message: "회원가입이 완료 됐습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
@@ -401,7 +394,7 @@ struct EmailRegisterView: View {
         if registerEmail == "" {
             return ""
         } else {
-            return emailNotFitFormat ? "올바른 이메일 형식이 아닙니다." : "사용 가능한 이메일 입니다."
+            return emailNotFitFormat ? "올바른 이메일 형식이 아닙니다." : "올바른 이메일 형식입니다."
         }
     }
     
@@ -463,6 +456,6 @@ struct ShakeEffect: ViewModifier {
 
 struct EmailRegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailRegisterView(authStore: AuthStore())
+        EmailRegisterView(authStore: AuthStore()).environmentObject(UserStore())
     }
 }

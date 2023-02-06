@@ -26,21 +26,23 @@ struct Bottles_V2App: App {
     
     var body: some Scene {
         WindowGroup {
+            TotalLoginView()
+                .environmentObject(UserStore())
 //            MainTabView()
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
-            LaunchView()
-            // coreData
-                .environment(\.managedObjectContext, dataController.container.viewContext)
-                .environmentObject(bottleDataStore)
-                .environmentObject(shopDataStore)
-                .environmentObject(userDataStore)
-                .environmentObject(reservationDataStore)
-                .task {
-                    await shopDataStore.getAllShopData()
-                    await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllResevationData()
-                }
+//            LaunchView()
+//            // coreData
+//                .environment(\.managedObjectContext, dataController.container.viewContext)
+//                .environmentObject(bottleDataStore)
+//                .environmentObject(shopDataStore)
+//                .environmentObject(userDataStore)
+//                .environmentObject(reservationDataStore)
+//                .task {
+//                    await shopDataStore.getAllShopData()
+//                    await bottleDataStore.getAllBottleData()
+//                    await reservationDataStore.getAllResevationData()
+//                }
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))
