@@ -92,7 +92,7 @@ struct NaverMap: UIViewRepresentable {
                 lng: shopMarker.location.longitude)
             marker.captionRequestedWidth = 100 // 마커 캡션 너비 지정
             marker.captionText = shopMarker.shopName
-            marker.captionMinZoom = 15
+            marker.captionMinZoom = 10
             marker.captionMaxZoom = 17
             
             // MARK: - 마커 이미지 변경
