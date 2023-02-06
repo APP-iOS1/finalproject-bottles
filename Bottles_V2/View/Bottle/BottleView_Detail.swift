@@ -9,23 +9,33 @@ import SwiftUI
 
 // MARK: - Tasting Notes, Information, Pairing
 struct BottleView_Detail: View {
-    var tastingNotesTitle: [String] = ["Aroma", "Taste", "Finish"]
-    var tastingNotesContent: [String] = ["사과, 시트러스, 그린 애플", "복숭아, 파인애플, 망고, 미네랄", "꽃, 구아바, 체리, 달콤한"]
-    var informationTitle: [String] = ["종류", "용량", "도수", "국가", "품종"]
-    var informationContent: [String] = ["스파클링 와인", "750ml", "8%", "스페인", "모스카토"]
-    
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 15) {
                 VStack(alignment: .leading, spacing: 5) {
                     // MARK: - Tasting Notes
                     Text("Tasting Notes")
+                        .modifier(titleModifier())
                         .padding(.vertical, 3)
                     
-                    ForEach(0..<tastingNotesTitle.count, id: \.self) { index in
-                        HStack {
-                            Text(tastingNotesTitle[index])
-                            Text(tastingNotesContent[index])
+                    Group {
+                        HStack(spacing: 5) {
+                            // Aroma
+                            Text("Aroma")
+                                .frame(maxWidth: 38, alignment: .leading)
+                            Text("사과, 시트러스, 그린 애플")
+                        }
+                        HStack(spacing: 5) {
+                            // Taste
+                            Text("Taste")
+                                .frame(maxWidth: 38, alignment: .leading)
+                            Text("복숭아, 파인애플, 망고, 미네랄")
+                        }
+                        HStack(spacing: 5) {
+                            // Finish
+                            Text("Finish")
+                                .frame(maxWidth: 38, alignment: .leading)
+                            Text("꽃, 구아바, 체리, 달콤한")
                         }
                     }
                     .modifier(contentModifier())
@@ -36,10 +46,36 @@ struct BottleView_Detail: View {
                     Text("Information")
                         .modifier(titleModifier())
                     
-                    ForEach(0..<informationTitle.count, id: \.self) { index in
-                        HStack {
-                            Text(informationTitle[index])
-                            Text(informationContent[index])
+                    Group {
+                        HStack(spacing: 5) {
+                            // 종류
+                            Text("종류")
+                                .frame(maxWidth: 38, alignment: .leading)
+                            Text("스파클링 와인")
+                        }
+                        HStack(spacing: 5) {
+                            // 용량
+                            Text("용량")
+                                .frame(maxWidth: 38, alignment: .leading)
+                            Text("750ml")
+                        }
+                        HStack(spacing: 5) {
+                            // 도수
+                            Text("도수")
+                                .frame(maxWidth: 38, alignment: .leading)
+                            Text("8%")
+                        }
+                        HStack(spacing: 5) {
+                            // 국가
+                            Text("국가")
+                                .frame(maxWidth: 38, alignment: .leading)
+                            Text("스페인")
+                        }
+                        HStack(spacing: 5) {
+                            // 품종
+                            Text("품종")
+                                .frame(maxWidth: 38, alignment: .leading)
+                            Text("모스카토")
                         }
                     }
                     .modifier(contentModifier())
@@ -56,16 +92,17 @@ struct BottleView_Detail: View {
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(UIColor.systemGray5))
+            .background(Color("AccentColor").opacity(0.1))
             .cornerRadius(10)
-            .padding()
+            .padding(.horizontal)
+            .padding(.vertical, 5)
         }
     }
 }
 
 // MARK: - Tasting Notes, Information, Pairing의 Title Modifier
 struct titleModifier: ViewModifier {
-    var font = Font.bottles15
+    var font = Font.bottles14
     var fontWeight = Font.Weight.bold
     
     func body(content: Content) -> some View {
@@ -78,8 +115,8 @@ struct titleModifier: ViewModifier {
 
 // MARK: - Tasting Notes, Information, Pairing의 Content Modifier
 struct contentModifier: ViewModifier {
-    var font = Font.bottles13
-    var fontWeight = Font.Weight.medium
+    var font = Font.bottles12
+    var fontWeight = Font.Weight.regular
     
     func body(content: Content) -> some View {
         content
@@ -88,9 +125,9 @@ struct contentModifier: ViewModifier {
     }
 }
 
-
-struct BottleView_Info_Previews: PreviewProvider {
-    static var previews: some View {
-        BottleView_Detail()
-    }
-}
+//
+//struct BottleView_Info_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BottleView_Detail()
+//    }
+//}
