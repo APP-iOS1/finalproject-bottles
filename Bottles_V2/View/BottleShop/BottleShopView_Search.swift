@@ -35,8 +35,6 @@ struct BottleShopView_Search: View {
     func sortBottleData() -> [BottleItem22] {
         let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
         switch selection {
-//        case "거리순":
-//            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.distance < $1.distance})
         case "낮은 가격순":
             return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price < $1.price})
         case "높은 가격순":
