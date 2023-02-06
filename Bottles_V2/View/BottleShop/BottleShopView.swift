@@ -266,8 +266,8 @@ struct BottleShopView: View {
                 // MARK: - "BookMark 완료"시 애니메이션
                 if bookmarkToggle2{
                     HStack{
-                        Image(bookmarkToggle2 ? "BookMark.fill" : "BookMark")
-                        Text(bookmarkToggle2 ? "북마크가 완료되었습니다." : "북마크가 해제되었습니다.")
+                        Image("BookMark.fill")
+                        Text("북마크가 완료되었습니다.")
                             .foregroundColor(.gray)
                             .font(.bottles11)
                         
