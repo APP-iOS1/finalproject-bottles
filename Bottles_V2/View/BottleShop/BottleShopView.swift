@@ -305,9 +305,9 @@ struct BottleShopView: View {
             .navigationBarHidden(isNavigationBarHidden)
             .toolbar { // <-
                     NavigationLink {
-                        SearchViewNavigationLabel()
+                        CartView()
                     } label: {
-                      Label("Profile", systemImage: "person.crop.circle")
+                      Image("cart")
                     }
                   }
         }
