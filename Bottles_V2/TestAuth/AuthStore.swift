@@ -14,7 +14,9 @@ class AuthStore: ObservableObject {
     
     @Published var currentUser: Firebase.User?
     @Published var isLogin = false
-    @Published var loginError : Bool = false
+    @Published var loginError: Bool = false
+    @Published var resetPassword: Bool = false
+    
     let database = Firestore.firestore()
     let userStore: UserStore = UserStore()
     
@@ -101,6 +103,18 @@ class AuthStore: ObservableObject {
 //                // Account deleted
 //            }
 //        }
+    }
+    
+    func sendPasswordReset(email: String) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                print("비밀번호 재설정 에러: \(error)")
+                self.resetPassword = false
+            } else {
+                self.resetPassword = true
+                print("메일 보내짐")
+            }
+        }
     }
 
 }

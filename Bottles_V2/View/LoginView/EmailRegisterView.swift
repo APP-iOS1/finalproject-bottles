@@ -87,6 +87,7 @@ struct EmailRegisterView: View {
     /// 회원 가입 성공했을 때 CustomAlert을 띄워주는 변수
     @State private var registerSuccessed: Bool = false
     
+    
     var body: some View {
         ScrollView {
             // MARK: - email 입력창
@@ -349,25 +350,30 @@ struct EmailRegisterView: View {
                 .padding(.horizontal, 20)
                 .padding(.bottom, 30)
             }
+            
+            // MARK: - 회원가입 버튼
             Button(action: {
                 // TODO: 이메일로 회원가입 로직 넣기
-            
+                /*
                 if emailNotFitFormat || passwordNotFitFormat || passwordCheckFail || !authStore.isEmailVerified() || nickname == "" || !firstAgreement || !secondAgreement || !thirdAgreement {
                     registerFailed = true
                 } else {
                     authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
                     registerSuccessed = true
                 }
+                 */
+                authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
+                registerSuccessed = true
             }){
                 Text("회원가입하기")
                     .modifier(EmailViewButtonModifier(width: 358, height: 56))
             }
             
         }
-        .customAlert(isPresented: $dupilicateCheck, message: userStore.emailCheckStr, primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
-        .customAlert(isPresented: $emailSent, message: "입력한 이메일 주소에 인증 메일을 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
-        .customAlert(isPresented: $registerFailed, message: "입력하신 정보를 다시 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
-        .customAlert(isPresented: $registerSuccessed, message: "회원가입이 완료 됐습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        .customAlert(isPresented: $dupilicateCheck, message: userStore.emailCheckStr, primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false) // 이메일 중복확인 customAlert
+        .customAlert(isPresented: $emailSent, message: "입력한 이메일 주소에 인증 메일을 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false) // 이메일에 인증번호를 보냈을 때 띄워주는 customAlert
+        .customAlert(isPresented: $registerFailed, message: "입력하신 정보를 다시 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false) // 회원가입 조건에 맞지 않을 때 띄워주는 customAlert
+        .customAlert(isPresented: $registerSuccessed, message: "회원가입이 완료 됐습니다.", primaryButtonTitle: "확인", primaryAction: {self.presentationMode.wrappedValue.dismiss()}, withCancelButton: false) // 회원가입이 완료 되었을 때 띄워주는 customAlert
         .navigationBarTitle("회원가입")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
