@@ -110,9 +110,13 @@ class AuthStore: ObservableObject {
             if let error = error {
                 print("비밀번호 재설정 에러: \(error)")
                 self.resetPassword = false
+                self.loginError = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.loginError = false
+                }
             } else {
-                self.resetPassword = true
                 print("메일 보내짐")
+                self.resetPassword = true
             }
         }
     }

@@ -15,7 +15,9 @@ struct FindPasswordView: View {
     
     @State private var email = ""
     
-
+    private var findResultText: String {
+        authStore.loginError ? "이메일을 다시 한번 확인해주세요." : ""
+    }
     var body: some View {
         
         if authStore.resetPassword{
@@ -23,9 +25,6 @@ struct FindPasswordView: View {
                 .navigationBarBackButtonHidden(true)
                 .navigationTitle("비밀번호 찾기")
                 .navigationBarItems(leading: backButton)
-                .onAppear{
-                    authStore.resetPassword = false
-                }
         } else {
             VStack{
                 HStack{
@@ -36,6 +35,11 @@ struct FindPasswordView: View {
                 .padding(.horizontal, 20)
                 TextField("이메일을 입력해주세요", text: $email)
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                Text("\(findResultText)")
+                    .frame(height: 10)
+                    .foregroundColor(authStore.loginError ? .red : .primary)
+                    .font(.bottles12)
+                    .shakeEffect(trigger: authStore.loginError)
                 Button(action: {
                     authStore.sendPasswordReset(email: email)
                     print("\(authStore.resetPassword)")
@@ -56,6 +60,7 @@ struct FindPasswordView: View {
         Button(
             action: {
                 self.presentationMode.wrappedValue.dismiss()
+                authStore.resetPassword = false
             }) {
                 Image(systemName: "chevron.backward")    // back button 이미지
                     .aspectRatio(contentMode: .fit)
