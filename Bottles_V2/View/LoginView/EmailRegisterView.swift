@@ -108,17 +108,18 @@ struct EmailRegisterView: View {
                     TextField("예: bottles@bottles.com", text: $registerEmail)
                         .keyboardType(.emailAddress)
                         .modifier(LoginTextFieldModifier(width: 250, height: 48))
-                        .shakeEffect(trigger: emailError)
+                        
                     Button(action: {
                         // CustomAlert을 띄워 줌 이메일 중복에 따라 텍스트가 다르게 띄워짐
                         dupilicateCheck = true
                         // 중복확인 로직
                         userStore.doubleCheckEmail(userEmail: registerEmail)
-                        
                     }){
                        Text("중복확인")
                             .modifier(EmailViewButtonModifier(width: 100, height: 48))
                     }
+                    .disabled(emailNotFitFormat) // 이메일 형식이 안맞을 때 버튼 비활성화
+                
                 }
             }
             
