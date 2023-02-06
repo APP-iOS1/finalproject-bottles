@@ -12,27 +12,6 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
-// MARK: - 마커 더미 데이터 생성
-//struct Marker: Identifiable {
-//    let id: String
-//    let latitude: Double
-//    let longitude: Double
-//}
-//
-//class MarkerStore: ObservableObject {
-//    var markers: [Marker] = []
-//
-//    init() {
-//        markers = [
-//            Marker(id: UUID().uuidString, latitude: 37.5670135, longitude: 126.9783740, bookmark),
-//            Marker(id: UUID().uuidString, latitude: 37.6670135, longitude: 126.9883740),
-//            Marker(id: UUID().uuidString, latitude: 37.7670135, longitude: 126.9983740),
-//            Marker(id: UUID().uuidString, latitude: 37.3670135, longitude: 126.9683740),
-//            Marker(id: UUID().uuidString, latitude: 37.4670135, longitude: 126.9583740)
-//        ]
-//    }
-//}
-
 struct MapMarkerByShopData {
     var shopID: String
     var shopName: String
@@ -40,29 +19,36 @@ struct MapMarkerByShopData {
 }
 
 struct NaverMap: UIViewRepresentable {
-    
+    @Binding var moveToUserLocation: Bool
     @Binding var showMarkerDetailView: Bool
     @Binding var mappinShopID : ShopModel
     @EnvironmentObject var shopDataStore : ShopDataStore
     @State var shopInfo : [MapMarkerByShopData] = []
     
-    var coord: (Double, Double)
+    @Binding var coord: (Double, Double)
+    @Binding var userLocation: (Double, Double)
     //    var markers: [Marker]
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(coord, $showMarkerDetailView)
+        Coordinator(coord, userLocation, $showMarkerDetailView, $moveToUserLocation)
     }
     
-    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>, _ mappinShopID: Binding<ShopModel>
+    init(_ coord: Binding<(Double, Double)>,
+         _ userLocation: Binding<(Double, Double)>,
+         _ showMarkerDetailView: Binding<Bool>,
+         _ mappinShopID: Binding<ShopModel>,
+         _ moveToUserLocation: Binding<Bool>
     ) {
-        self.coord = coord
+        self._coord = coord
+        self._userLocation = userLocation
         self._showMarkerDetailView = showMarkerDetailView
         self._mappinShopID = mappinShopID
+        self._moveToUserLocation = moveToUserLocation
         
-//        for shopMarker in shopDataStore.shopData {
-//                let marker = NMFMarker()
-//            marker.position = NMGLatLng(lat: shopMarker.location.latitude, lng: shopMarker.location.longitude)
-//            }
+        //        for shopMarker in shopDataStore.shopData {
+        //                let marker = NMFMarker()
+        //            marker.position = NMGLatLng(lat: shopMarker.location.latitude, lng: shopMarker.location.longitude)
+        //            }
         
     }
     
@@ -81,13 +67,16 @@ struct NaverMap: UIViewRepresentable {
     //    }
     
     class Coordinator: NSObject, NMFMapViewCameraDelegate, NMFMapViewTouchDelegate {
-        
+        @Binding var moveToUserLocation: Bool
         @Binding var showMarkerDetailView: Bool
         var coord: (Double, Double)
+        var userLocation: (Double, Double)
         
-        init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>) {
+        init(_ coord: (Double, Double), _ userLocation: (Double, Double), _ showMarkerDetailView: Binding<Bool>, _ moveToUserLocation: Binding<Bool>) {
             self.coord = coord
+            self.userLocation = userLocation
             self._showMarkerDetailView = showMarkerDetailView
+            self._moveToUserLocation = moveToUserLocation
         }
         
         func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
@@ -135,13 +124,13 @@ struct NaverMap: UIViewRepresentable {
         
         // MARK: - 마커 생성
         
-//        let shopAllData = self.shopDataStore.shopData
-//        var shopInfoList : [MapMarkerByShopData] = []
-//        for oneShop in shopAllData {
-//            shopInfoList.append(
-//                MapMarkerByShopData(shopID: oneShop.id, shopName: oneShop.shopName, location: oneShop.location)
-//            )
-//        }
+        //        let shopAllData = self.shopDataStore.shopData
+        //        var shopInfoList : [MapMarkerByShopData] = []
+        //        for oneShop in shopAllData {
+        //            shopInfoList.append(
+        //                MapMarkerByShopData(shopID: oneShop.id, shopName: oneShop.shopName, location: oneShop.location)
+        //            )
+        //        }
         print("샵데이터 : \(self.shopDataStore.shopData.count)")
         
         for shopMarker in self.shopDataStore.shopData {
@@ -149,10 +138,10 @@ struct NaverMap: UIViewRepresentable {
             //            marker.position = NMGLatLng(lat: shopMarker.latitude, lng: shopMarker.longitude)
             // 임시 마커(서울시청)
             // TODO: 아래 코드 위경도를 바꿔주면 서 for 문 생성
-//
-//            let test = shopMarker.location.latitude
-//            let test2 = shopMarker.location.longitude
-//            print("이게 찐중요 위경도 나와라 얍 : \(test), \(test2)")
+            //
+            //            let test = shopMarker.location.latitude
+            //            let test2 = shopMarker.location.longitude
+            //            print("이게 찐중요 위경도 나와라 얍 : \(test), \(test2)")
             marker.position = NMGLatLng(lat: shopMarker.location.latitude, lng: shopMarker.location.longitude)
             //        marker.position = NMGLatLng(lat: 32.56668, lng: 124.978415)
             marker.captionRequestedWidth = 100
@@ -169,12 +158,15 @@ struct NaverMap: UIViewRepresentable {
             marker.touchHandler = { (overlay) -> Bool in
                 print("marker touched")
                 mappinShopID = shopMarker
-                showMarkerDetailView.toggle()
+                showMarkerDetailView = true
                 
                 // 마커 터치 시 마커 아이콘 크기 변경
                 marker.iconImage = NMFOverlayImage(name: showMarkerDetailView ? "MapMarker_tapped" : "MapMarker.fill")
                 marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
                 marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
+                
+                // 마커 터치 시 해당 마커 좌표로 카메라 이동
+                coord = (marker.position.lat,marker.position.lng)
                 
                 return true
             }
@@ -192,11 +184,22 @@ struct NaverMap: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        let coord = NMGLatLng(lat: coord.0, lng: coord.1)
-        let cameraUpdate = NMFCameraUpdate(scrollTo: coord)
-        cameraUpdate.animation = .fly
-        cameraUpdate.animationDuration = 1
-        uiView.mapView.moveCamera(cameraUpdate)
+        if moveToUserLocation {
+            let userLocation = NMGLatLng(lat: userLocation.0, lng: userLocation.1)
+            let cameraUpdate = NMFCameraUpdate(scrollTo: userLocation)
+            cameraUpdate.animation = .fly
+            cameraUpdate.animationDuration = 1
+            uiView.mapView.moveCamera(cameraUpdate)
+            
+            moveToUserLocation = false
+            
+        } else {
+            let coord = NMGLatLng(lat: coord.0, lng: coord.1)
+            let cameraUpdate = NMFCameraUpdate(scrollTo: coord)
+            cameraUpdate.animation = .fly
+            cameraUpdate.animationDuration = 1
+            uiView.mapView.moveCamera(cameraUpdate)
+        }
     }
 }
 

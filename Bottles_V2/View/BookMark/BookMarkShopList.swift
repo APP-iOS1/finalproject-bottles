@@ -10,9 +10,18 @@ import SwiftUI
 struct BookMarkShopList: View {
     // ActionSheet
     @State private var showingActionSheet: Bool = false
-    @State private var selection = "기본순"
+    @State private var selection = "이름순"
     // 테스트용 모델
     @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    func sortShopData() -> [BookMarkShop] {
+        let bookMarkShops: [BookMarkShop] = bookMarkTestStore.BookMarkShops
+        switch selection {
+        case "거리순":
+            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {$0.distance < $1.distance})
+        default:
+            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName})
+        }
+    }
     
     var body: some View {
         VStack {
@@ -34,7 +43,7 @@ struct BookMarkShopList: View {
             }
             // TODO: 서버 Shop 데이터 연결
             ScrollView {
-                ForEach(bookMarkTestStore.BookMarkShops, id: \.self) { shop in
+                ForEach(sortShopData(), id: \.self) { shop in
                     NavigationLink {
                         BottleShopView()
                     } label: {
@@ -46,20 +55,12 @@ struct BookMarkShopList: View {
         // MARK: - 정렬 ActionSheet
         .confirmationDialog("select a sort", isPresented: $showingActionSheet) {
             // TODO: 각 버튼 별로 정렬 액션 추가해야함
-            Button("기본순") {
-                selection = "기본순"
+            Button("이름순") {
+                selection = "이름순"
             }
             
-            Button("신상품순") {
-                selection = "신상품순"
-            }
-            
-            Button("낮은 가격순") {
-                selection = "낮은 가격순"
-            }
-            
-            Button("높은 가격순") {
-                selection = "높은 가격순"
+            Button("거리순") {
+                selection = "거리순"
             }
         }
     }
@@ -99,6 +100,9 @@ struct BookMarkShopListCell: View {
                     .bold()
                 // Shop 소개글
                 Text("바틀샵 소개 가나다라마 아자차 마바사가다")
+                    .font(.bottles14)
+                // 테스트용
+                Text("거리 : \(shopInfo.distance)")
                     .font(.bottles14)
                 Spacer()
             }

@@ -12,7 +12,25 @@ struct BottleShopCurationView: View {
     @State private var selectedSort = Sort.automatic
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
+    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
     
+    var sortedBottleData: [BottleItem22] {
+        let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
+        return bottleItems.sorted(by: {$0.name < $1.name})
+    }
+    
+    func sortBottleData() -> [BottleItem22] {
+        let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
+        switch selection {
+        case "낮은 가격순":
+            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price < $1.price})
+        case "높은 가격순":
+            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price > $1.price})
+        default:
+            return bottleItems.sorted(by: {$0.name < $1.name})
+        }
+    }
+
     var body: some View {
         ScrollView{
             VStack{
@@ -104,8 +122,8 @@ struct BottleShopCurationView: View {
                     }
                     
                     // 데이터 연동 시 "큐레이션 추천 바틀" 연동
-                    // 바틀 셀 반복문
-                    ForEach(bottleItems, id: \.self) { item in
+                    // 바틀 셀(정렬 후) 반복문
+                    ForEach(sortBottleData(), id: \.self) { item in
                         
                         // 바틀셀 누를 시 바틀뷰로 이동
                         NavigationLink(destination: BottleView(), label:{
