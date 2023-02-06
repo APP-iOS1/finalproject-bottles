@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "list.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -10,6 +9,7 @@
       "scale" : "2x"
     },
     {
+      "filename" : "Vector 504 (Stroke).png",
       "idiom" : "universal",
       "scale" : "3x"
     }
