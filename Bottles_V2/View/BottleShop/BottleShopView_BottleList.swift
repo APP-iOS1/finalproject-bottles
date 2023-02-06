@@ -10,8 +10,8 @@ import SwiftUI
 // 바틀샵뷰 내 "상품 검색" 뷰 - "바틀 셀"
 struct BottleShopView_BottleList: View {
     @State private var bookmarkToggle: Bool = false
-    @State private var bookmarkToggle_fill: Bool = false
-    @State private var bookmarkToggle_empty: Bool = false
+    @State private var bookmarkToggle_fill: Bool
+    @State private var bookmarkToggle_empty: Bool
     
     var selectedItem: BottleItem22
     
@@ -155,42 +155,42 @@ struct BottleShopView_BottleList: View {
             //                    .frame(height: 400)
             
             // MARK: - "BookMark 완료"시 애니메이션
-            if bookmarkToggle_fill{
-                HStack{
-                    Image("BookMark.fill")
-                    Text("북마크가 완료되었습니다.")
-                        .foregroundColor(.gray)
-                        .font(.bottles11)
-
-                }
-                .zIndex(1)
-                .transition(.opacity.animation(.easeIn))
-                .background{
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 300, height: 30)
-                        .foregroundColor(.gray_f7)
-                }
-                .offset(y: 300)
-            }
-
-            // MARK: - "BookMark 해제"시 애니메이션
-            if bookmarkToggle_empty{
-                HStack{
-                    Image("BookMark")
-                    Text("북마크가 해제되었습니다.")
-                        .foregroundColor(.gray)
-                        .font(.bottles11)
-
-                }
-                .zIndex(1)
-                .transition(.opacity.animation(.easeIn))
-                .background{
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 300, height: 30)
-                        .foregroundColor(.gray_f7)
-                }
-                .offset(y: 300)
-            }
+//            if bookmarkToggle_fill{
+//                HStack{
+//                    Image("BookMark.fill")
+//                    Text("북마크가 완료되었습니다.")
+//                        .foregroundColor(.gray)
+//                        .font(.bottles11)
+//
+//                }
+//                .zIndex(1)
+//                .transition(.opacity.animation(.easeIn))
+//                .background{
+//                    RoundedRectangle(cornerRadius: 10)
+//                        .frame(width: 300, height: 30)
+//                        .foregroundColor(.gray_f7)
+//                }
+//                .offset(y: 300)
+//            }
+//
+//            // MARK: - "BookMark 해제"시 애니메이션
+//            if bookmarkToggle_empty{
+//                HStack{
+//                    Image("BookMark")
+//                    Text("북마크가 해제되었습니다.")
+//                        .foregroundColor(.gray)
+//                        .font(.bottles11)
+//
+//                }
+//                .zIndex(1)
+//                .transition(.opacity.animation(.easeIn))
+//                .background{
+//                    RoundedRectangle(cornerRadius: 10)
+//                        .frame(width: 300, height: 30)
+//                        .foregroundColor(.gray_f7)
+//                }
+//                .offset(y: 300)
+//            }
             
         }
     }
