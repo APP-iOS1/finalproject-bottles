@@ -166,12 +166,9 @@ struct BookMarkBottleListCell: View {
                 Text("\(bottleInfo.itemPrice)원")
                     .font(.bottles18)
                     .bold()
-                // Test용 Shop 정보
-                Text("\(shopInfo.shopIntroduction)")
-                    .font(.footnote)
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
-//                    BottleShopView(bottleShop: <#ShopModel#>)
+                    BottleShopView(bottleShop: shopInfo)
                 } label: {
                     HStack {
                         Image("MapMarker")
