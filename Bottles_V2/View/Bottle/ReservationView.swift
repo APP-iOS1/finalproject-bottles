@@ -10,19 +10,24 @@ import Combine
 
 // MARK: - 예약하기 Modal Custom View
 /// Custom View의 present 및 dismiss 기능을 위한 뷰입니다.
-/// 데이터 적용이 필요한 부분은 ReservationView_Sheet입니다.
+/// 데이터 적용이 필요한 부분은 ReservationView_Content입니다.
 struct ReservationView: View {
     @Binding var isShowing: Bool
     @State var offset = UIScreen.main.bounds.height
     @State private var isDragging = false
     
     let heightToDisappear = UIScreen.main.bounds.height
+    let outOfFocusOpacity: CGFloat = 0.7
     let minimumDragDistanceToHide: CGFloat = 150
     
     var body: some View {
         Group {
             if isShowing {
-                sheetView
+                ZStack {
+                    //outOfFocusArea
+                    sheetView
+                }
+                
             }
         }
         .onReceive(Just(isShowing), perform: { isShowing in
@@ -34,12 +39,6 @@ struct ReservationView: View {
         offset = heightToDisappear
         isDragging = false
         isShowing = false
-    }
-    
-    var topHalfMiddleBar: some View {
-        Capsule()
-            .frame(width: 40, height: 4)
-            .foregroundColor(.gray)
     }
     
     func dragGestureOnChange(_ value: DragGesture.Value) {
@@ -68,22 +67,28 @@ struct ReservationView: View {
             })
     }
     
-    var sheetView: some View {
-        VStack {
-            Spacer()
-            
-            VStack {
-                topHalfMiddleBar
-                ReservationView_Sheet()
-            }
-            .cornerRadius(15)
-            .offset(y: offset)
-            .gesture(interactiveGesture)
-            .onTapGesture {
-                hide()
+    var outOfFocusArea: some View {
+        Group {
+            if isShowing {
+                ReservationView_OutOfFocus(opacity: outOfFocusOpacity) {
+                    self.isShowing = false
+                }
             }
         }
-        .frame(height: 320)
+    }
+    
+    var sheetView: some View {
+        VStack {
+            ReservationView_Content()
+                .background(.white)
+                .cornerRadius(15)
+                .cornerRadius(12, corners: [.topLeft, .topRight])
+                .offset(y: offset)
+                .gesture(interactiveGesture)
+                .onTapGesture {
+                    hide()
+                }
+        }
     }
     
     

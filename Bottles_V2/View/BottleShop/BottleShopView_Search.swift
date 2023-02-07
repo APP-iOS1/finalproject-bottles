@@ -25,6 +25,26 @@ struct BottleShopView_Search: View {
     @FocusState var focus: Bool
     @Binding var isNavigationBarHidden: Bool
     
+    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
+    
+    var sortedBottleData: [BottleItem22] {
+        let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
+        return bottleItems.sorted(by: {$0.name < $1.name})
+    }
+    
+    func sortBottleData() -> [BottleItem22] {
+        let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
+        switch selection {
+        case "낮은 가격순":
+            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price < $1.price})
+        case "높은 가격순":
+            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price > $1.price})
+        default:
+            return bottleItems.sorted(by: {$0.name < $1.name})
+        }
+    }
+    
+    
     var body: some View {
         VStack(alignment: .leading){
             // 검색창 버튼
@@ -36,64 +56,28 @@ struct BottleShopView_Search: View {
                     ZStack{
                         
                         Rectangle()
-                            .frame(width: 370)
+                            .frame(width: 358)
                             .foregroundColor(Color.gray_f7)
                             .cornerRadius(12)
                         
                         HStack {
+                            
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
+                                .font(.system(size: 18))
+                                .padding(.leading, 8)
+                            
                             Text("이 바틀샵의 상품 검색")
                                 .font(.bottles16)
                                 .foregroundColor(.gray)
                                 .padding(7)
-                                .padding(.horizontal, 25)
-                            
-                                .cornerRadius(8)
-                                .overlay(
-                                    HStack {
-                                        Image(systemName: "magnifyingglass")
-                                            .foregroundColor(.black)
-                                            .font(.system(size: 18))
-                                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                            .padding(.leading, 8)
-                                        
-                                        //                                if isEditing {
-                                        //                                    Button(action: {
-                                        //                                        self.text = ""
-                                        //                                    }) {
-                                        //                                        Image(systemName: "multiply.circle.fill")
-                                        //                                            .foregroundColor(.gray)
-                                        //                                            .padding(.trailing, 8)
-                                        //                                    }
-                                        //                                }
-                                    }
-                                )
-                            //                    .padding(.horizontal, 10)
-                            //                        .onTapGesture {
-                            //                            self.isEditing = true
-                            //                        }
-                            
-                            //                    if isEditing {
-                            //                        Button(action: {
-                            //                            self.isEditing = false
-                            //                            self.text = ""
-                            //                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                            //
-                            //                        }) {
-                            //                            Text("  종료  ")
-                            //                        }
-                            //                        .transition(.move(edge: .trailing))
-                            //                        .animation(.default)
-                            //                    }
+                                .padding(.trailing, 25)
+
                             Spacer()
                         }
                     }
                 .padding(.bottom, 10)
             }
-//                            ForEach(bottleItems.filter({text.isEmpty ? false : $0.name.contains(text)}), id: \.self) { item in
-//                                NavigationLink(destination: BottleView(), label:{
-//                                    BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
-//                                })
-//                            }
             
             // 바틀 정렬 버튼
             HStack {
@@ -110,7 +94,7 @@ struct BottleShopView_Search: View {
                     .font(.bottles14)
                     .foregroundColor(.black)
                 }
-                .padding(.leading, 20)
+                .padding(.leading, 22)
                 .padding(.bottom, -10)
             }
             
@@ -133,8 +117,8 @@ struct BottleShopView_Search: View {
             
             // 검색 결과에 따라 정렬함(검색하지 않는 경우 모든 바틀 보여주고, 검색 텍스트 입력시 텍스트가 포함되어있는 해당 바틀만 보여줌)
             // 데이터 연동 시 "해당 샵의 바틀 리스트" 연동
-            // 바틀 셀 반복문
-            ForEach(bottleItems, id: \.self) { item in
+            // 바틀 셀(정렬 후) 반복문
+            ForEach(sortBottleData(), id: \.self) { item in
                 
                 // 바틀셀 누를 시 바틀뷰로 이동
                 NavigationLink(destination: BottleView(), label:{

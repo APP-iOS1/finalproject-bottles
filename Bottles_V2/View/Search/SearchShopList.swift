@@ -12,6 +12,9 @@ struct SearchShopList: View {
     var shopName: String
     // 테스트용 모델
     @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    // ActionSheet
+    @State private var showingActionSheet: Bool = false
+    @State private var selection = "이름순"
     // 검색 결과를 필터링해주는 연산 프로퍼티
     var filteredResult: [BookMarkShop] {
         let bottles = bookMarkTestStore.BookMarkShops
@@ -20,8 +23,35 @@ struct SearchShopList: View {
         }
     }
     
+    // Test
+    func sortShopData() -> [BookMarkShop] {
+        let searchedShops: [BookMarkShop] = bookMarkTestStore.BookMarkShops
+        switch selection {
+        case "거리순":
+            return searchedShops.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {$0.distance < $1.distance})
+        default:
+            return searchedShops.sorted(by: {$0.shopName < $1.shopName})
+        }
+    }
+    
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                // 정렬 기준 선택 버튼
+                Button {
+                    showingActionSheet = true
+                } label: {
+                    HStack {
+                        Text("\(selection)")
+                            .font(.bottles14)
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 14))
+                    }
+                    .foregroundColor(.black)
+                }
+                .padding(.trailing, 20)
+            }
             // 검색어를 포함하는 Data가 없을 경우
             if filteredResult == [] {
                 Text("검색 결과가 없습니다.")
@@ -32,7 +62,7 @@ struct SearchShopList: View {
             } else {
                 // TODO: 서버 Shop 데이터 연결
                 ScrollView {
-                    ForEach(filteredResult, id: \.self) { shop in
+                    ForEach(sortShopData(), id: \.self) { shop in
                         NavigationLink {
                             BottleShopView()
                         } label: {
@@ -40,6 +70,16 @@ struct SearchShopList: View {
                         }
                     }
                 }
+            }
+        }
+        // MARK: - 정렬 ActionSheet
+        .confirmationDialog("select a sort", isPresented: $showingActionSheet) {
+            // TODO: 각 버튼 별로 정렬 액션 추가해야함
+            Button("이름순") {
+                selection = "이름순"
+            }
+            Button("거리순") {
+                selection = "거리순"
             }
         }
     }

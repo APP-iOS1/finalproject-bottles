@@ -16,6 +16,8 @@ import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 struct MapView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @StateObject var mapViewModel: MapViewModel = MapViewModel()
+    @State var coord: (Double, Double) = (37.56668, 126.978419)
+    @State var userLocation: (Double, Double) = (37.56668, 126.978419)
     @State var mapSearchBarText: String = ""
     @State var isShowingSheet: Bool = false
     @State var showMarkerDetailView: Bool = false
@@ -51,12 +53,14 @@ struct MapView: View {
                 .zIndex(1)
                 
                 /// 네이버 지도 뷰
+
                 NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopIndex, $mapViewModel.userLocation)
                     .ignoresSafeArea(.all, edges: .top)
                 
                 /// 북마크 & 현재 위치 버튼
                 HStack {
                     Spacer()
+
                     SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation)
                 }
                 
@@ -103,7 +107,7 @@ struct MapView: View {
 //            }
             .onAppear {
                 mapViewModel.checkIfLocationServicesIsEnabled()
-                
+                coord = mapViewModel.coord
             }
             
         }

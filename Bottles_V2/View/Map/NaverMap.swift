@@ -32,13 +32,14 @@ struct NaverMap: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, NMFMapViewCameraDelegate, NMFMapViewTouchDelegate {
-        
+        @Binding var moveToUserLocation: Bool
         @Binding var showMarkerDetailView: Bool
         var coord: (Double, Double)
         var userLocation: (Double, Double)
         
         init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>, _ userLocation: (Double, Double)) {
             self.coord = coord
+            self.userLocation = userLocation
             self._showMarkerDetailView = showMarkerDetailView
             self.userLocation = userLocation
         }
@@ -116,6 +117,8 @@ struct NaverMap: UIViewRepresentable {
                 
                 marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
                 marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
+
+                // 마커 터치 시 해당 마커 좌표로 카메라 이동
                 coord = (marker.position.lat,marker.position.lng)
                 return true
             }
