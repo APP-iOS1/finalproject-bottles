@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1078533988319-q9d9r3j1dludm1fo8596815iup1jjaan</string>
+			</array>
+		</dict>
+	</array>
+	<key>NMFClientId</key>
+	<string>x1vqbmfk4m</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SpoqaHanSansNeo-Regular.otf</string>
@@ -10,7 +23,5 @@
 		<string>SpoqaHanSansNeo-Light.otf</string>
 		<string>SpoqaHanSansNeo-Thin.otf</string>
 	</array>
-	<key>NMFClientId</key>
-	<string>x1vqbmfk4m</string>
 </dict>
 </plist>

@@ -18,29 +18,31 @@ struct Bottles_V2App: App {
     // coreData
     @StateObject var dataController = DataController()
     
+    @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
     init() {
         FirebaseApp.configure()
     }
     
     var body: some Scene {
+        
         WindowGroup {
-//            TotalLoginView()
-//                .environmentObject(UserStore())
+            TotalLoginView()
+                .environmentObject(UserStore()).environmentObject(googleLoginViewModel)
 //            MainTabView()
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
             //LaunchView()
-            LaunchView()
-            // coreData
-                .environment(\.managedObjectContext, dataController.container.viewContext)
-                .environmentObject(bottleDataStore)
-                .environmentObject(shopDataStore)
-                .environmentObject(reservationDataStore)
-                .task {
-                    await shopDataStore.getAllShopData()
-                    await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllResevationData()
-                }
+//            LaunchView()
+//            // coreData
+//                .environment(\.managedObjectContext, dataController.container.viewContext)
+//                .environmentObject(bottleDataStore)
+//                .environmentObject(shopDataStore)
+//                .environmentObject(reservationDataStore)
+//                .task {
+//                    await shopDataStore.getAllShopData()
+//                    await bottleDataStore.getAllBottleData()
+//                    await reservationDataStore.getAllResevationData()
+//                }
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))
