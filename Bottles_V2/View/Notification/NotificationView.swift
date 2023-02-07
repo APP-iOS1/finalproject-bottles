@@ -24,28 +24,28 @@ struct NotificationView: View {
                     Spacer()
                 }
                 Divider()
-                    .background(.black)
                 
                 // MARK: - 알림 Cell
-                // TODO: 네비게이션 링크 연결
                 /// 예약내역, 새로운 소식,
                 ScrollView {
                     NavigationLink(destination: PickUpListView()){
-                        NotificationCell(title: "예약이 확정되었습니다.",
-                        description: "칼호만 샤닉", time: "2시간 전")
+                        NotificationCell(imgName: "checkNotification", title: "예약이 확정되었습니다.", description: "샤도네이 2017", storeName: "와인앤모어 군자점", time: "2시간 전")
+                        
                     }
                     Divider()
-                        .background(.black)
-                    
-                    // BottleShopCurationView()로 변경해야 함
-                    NavigationLink(destination: BottleView()){
-                        NotificationCell(title: "저장한 바틀샵의 새로운 소식",
-                        description: "새로운 큐레이션 타이틀", time: "4시간 전")
+
+                    NavigationLink(destination: BottleShopCurationView()){
+                        NotificationCell(imgName: "shopNotification", title: "저장한 바틀샵의 새 소식", description: "연말에 어울리는 스파클링 와인 10종", storeName: "어썸와인", time: "4시간 전")
+
                     }
 
+                    Divider()
+                    
+                    NavigationLink(destination: BottleShopCurationView()){
+                        NotificationCell(imgName: "shopNotification", title: "저장한 바틀샵의 새 소식", description: "깔끔한 화이트와인 10종 추천", storeName: "미들바틀", time: "7일 전")
+                    }
                     
                     Divider()
-                        .background(.black)
                 }
             }.navigationBarTitle("알림", displayMode: .inline)
         }
@@ -58,7 +58,15 @@ struct NotificationView: View {
         Button {
             onlyReservation.toggle()
         } label : {
-            Image(systemName: onlyReservation ? "checkmark.square.fill" : "square")
+            if onlyReservation {
+                Image(systemName: "checkmark.circle")
+                    .foregroundColor(.accentColor)
+            }
+            else {
+                Image(systemName: "circle")
+                    .foregroundColor(.gray)
+            }
+
         }
         .padding([.leading, .top, .bottom])
     }

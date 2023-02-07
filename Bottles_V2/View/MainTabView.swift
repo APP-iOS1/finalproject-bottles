@@ -13,6 +13,7 @@ struct MainTabView: View {
     @EnvironmentObject var shopDataStore : ShopDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
     @EnvironmentObject var reservationDataStore : ResevationDataStore
+    @EnvironmentObject var mapViewModel: MapViewModel
     
     //    let user: AuthUser
     
