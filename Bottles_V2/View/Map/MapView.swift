@@ -15,7 +15,7 @@ import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 struct MapView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
-    @StateObject var mapViewModel: MapViewModel = MapViewModel()
+    @EnvironmentObject var mapViewModel: MapViewModel
     @State var coord: (Double, Double) = (37.56668, 126.978419)
     @State var userLocation: (Double, Double) = (37.56668, 126.978419)
     @State var mapSearchBarText: String = ""
