@@ -136,6 +136,7 @@ struct RecentlyItemListCell: View {
                 // Bottle 이름
                 Text(bottleInfo.bottleName)
                     .font(.bottles14)
+                    .fontWeight(.medium)
                 // Bottle 가격
                 Text("350,000원")
                     .font(.bottles18)
@@ -145,13 +146,13 @@ struct RecentlyItemListCell: View {
 //                    BottleShopView(bottleShop: <#ShopModel#>)
                 } label: {
                     HStack {
-                        Image("MapMarker")
+                        Image("Map_tab_fill")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 20)
+                            .frame(width: 14, height: 17)
                         // Shop 이름
                         Text(bottleInfo.shopName)
                             .font(.bottles14)
+                            .fontWeight(.medium)
                             .foregroundColor(.black)
                     }
                 }

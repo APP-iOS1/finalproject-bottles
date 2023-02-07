@@ -174,6 +174,7 @@ struct SearchBottleListCell: View {
                 // Bottle 이름
                 Text(bottleInfo.itemName)
                     .font(.bottles14)
+                    .fontWeight(.medium)
                 // Bottle 가격
                 Text("\(bottleInfo.itemPrice)원")
                     .font(.bottles18)
@@ -183,13 +184,13 @@ struct SearchBottleListCell: View {
                     BottleShopView(bottleShop: shopInfo)
                 } label: {
                     HStack {
-                        Image("MapMarker")
+                        Image("Map_tab_fill")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 20)
+                            .frame(width: 14, height: 17)
                         // Shop 이름
                         Text(shopInfo.shopName)
                             .font(.bottles14)
+                            .fontWeight(.medium)
                             .foregroundColor(.black)
                     }
                 }
