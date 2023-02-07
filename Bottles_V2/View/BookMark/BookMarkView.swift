@@ -33,21 +33,15 @@ struct BookMarkView: View {
                         HStack {
                             // Test
                             Button {
-                                withAnimation(.spring(response: 0.5)) {
-                                    transitionView.toggle()
-                                    focus = true
-                                }
-                                
+                                transitionView.toggle()
+                                focus = true
                             } label: {
                                 SearchViewNavigationLabel()
                             }
-                            
-                            
                             // CartView 로 이동하는 버튼
                             CartViewNavigationLink()
                                 .padding(.leading, 5)
                         }
-                        .matchedGeometryEffect(id: "search", in: transition)
                         // tab picker 애니메이션 함수 및 탭뷰
                         animate()
                         BookMarkTabView(bookMarkTab: selectedPicker)
@@ -56,28 +50,7 @@ struct BookMarkView: View {
                     VStack {
                         SearchView(focus: _focus, transitionView: $transitionView)
                     }
-                    .matchedGeometryEffect(id: "search", in: transition)
                 }
-                
-//                HStack {
-//
-//                    // SearchView 로 이동하는 검색바 모양 버튼
-//                    //                        NavigationLink {
-//                    //                            SearchView()
-//                    //                        } label: {
-//                    //                            SearchViewNavigationLabel()
-//                    //                        }
-//
-//
-//
-//
-//                    // CartView 로 이동하는 버튼
-//                    CartViewNavigationLink()
-//                        .padding(.leading, 5)
-//                }
-                // tab picker 애니메이션 함수 및 탭뷰
-//                animate()
-//                BookMarkTabView(bookMarkTab: selectedPicker)
             }
             
         }

@@ -95,7 +95,7 @@ struct SearchBottleList: View {
             }
             
             if bookMarkAlarm {
-                Text(bookMark ? "즐겨찾기 추가" : "즐겨찾기 해제")
+                Text(bookMark ? "즐겨찾기에 추가되었습니다." : "즐겨찾기에서 해제되었습니다.")
                     .foregroundColor(.white)
                     .font(.caption)
                     .background{
@@ -182,8 +182,9 @@ struct SearchBottleListCell: View {
                 VStack {
                     // TODO: 즐겨찾기 기능 추가해야함
                     Button {
-                        bookMark.toggle()
+                        
                         withAnimation(.easeIn(duration: 1)) {
+                            bookMark.toggle()
                             bookMarkAlarm.toggle()
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2){
