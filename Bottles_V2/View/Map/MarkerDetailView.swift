@@ -10,17 +10,12 @@ import SwiftUI
 // MARK: - 마커 클릭 시 모달 뷰
 struct MarkerDetailView: View {
     
-    /// 바틀샵 이미지(더미 데이터)
-    var dummyImages: [String] = [
-        "https://www.qplace.kr/content/images/2022/04/1-9.jpg",
-        "https://mblogthumb-phinf.pstatic.net/MjAyMDA5MDhfMjk1/MDAxNTk5NTIwMDk4MDAz.xK6sV-9Ep_Z7DNE_We9ConkWU9UiBmGYg3npakZpQfsg.CT3SyyXcMrzfYo6BoLHfzqFJPxBsJp5T275E79RKv-Mg.JPEG.wolfin/SE-25173810-e2c1-4eeb-95ee-3c093b7c21ce.jpg?type=w800",
-        "https://www.qplace.kr/content/images/2022/04/2-13.jpg"
-    ]
     var shopData: ShopModel
     @State private var checkBookmark: Bool = true
     @Binding var showMarkerDetailView: Bool
-    @Binding var currentShopIndex: Int
-    
+    @Binding var currentShopId: String
+//    @Binding var shopModel: ShopModel
+
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 10) {
