@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - 예약페이지
 /// 예약한 상품 리스트 및 예약자 정보를 확인하는 뷰 입니다.
 struct ReservationPageView: View {
+    //@EnvironmentObject var path: Path
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
@@ -71,10 +72,7 @@ struct ReservationPageView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal)
                 .padding(.vertical, 10)
-            
-               
             }
-            
             
             VStack(spacing: 8) {
                 Text("이용정책 및 개인정보 제공에 동의합니다.")
@@ -100,21 +98,13 @@ struct ReservationPageView: View {
                 .padding(.horizontal)
             }
             .frame(alignment: .bottom)
-            //.padding(.top, 55)
+      
             // 예약 완료 뷰로 이동
             .navigationDestination(isPresented: $isShowing) {
                 ReservedView()
-                    //.accentColor(Color("AccentColor"))
+                    //.environmentObject(path)
             }
-            // Back Button
-    //                .navigationBarBackButtonHidden(true)
             .toolbar(content: {
-    //                    ToolbarItem (placement: .navigationBarLeading)  {
-    //                        Image("back")
-    //                            .onTapGesture {
-    //                                self.presentationMode.wrappedValue.dismiss()
-    //                            }
-    //                    }
                 ToolbarItem(placement: .principal) {
                     Text("예약하기")
                         .font(.bottles18)

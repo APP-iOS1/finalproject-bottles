@@ -12,6 +12,7 @@ import Combine
 /// Custom View의 present 및 dismiss 기능을 위한 뷰입니다.
 /// 데이터 적용이 필요한 부분은 ReservationView_Content입니다.
 struct ReservationView: View {
+    //@EnvironmentObject var path: Path
     @Binding var isShowing: Bool
     @State var offset = UIScreen.main.bounds.height
     @State private var isDragging = false
@@ -82,9 +83,10 @@ struct ReservationView: View {
             ReservationView_Content()
                 .background(.white)
                 .cornerRadius(15)
-                .cornerRadius(12, corners: [.topLeft, .topRight])
+                //.cornerRadius(12, corners: [.topLeft, .topRight])
                 .offset(y: offset)
                 .gesture(interactiveGesture)
+                //.environmentObject(path)
                 .onTapGesture {
                     hide()
                 }

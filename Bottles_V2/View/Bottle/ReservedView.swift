@@ -9,13 +9,20 @@ import SwiftUI
 
 // MARK: - 예약 완료
 struct ReservedView: View {
+    //@EnvironmentObject var path: Path
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowing: Bool = true
+    @State private var isShowingBookmarkView: Bool = false
     
     var body: some View {
         NavigationStack {
             // TODO: - 루트뷰로 이동해야함
-            Button(action: {}) {
+            Button(action: {
+                //print(path.path)
+                //path.path = NavigationPath()
+                UIView.setAnimationsEnabled(false) 
+                isShowingBookmarkView.toggle()
+            }) {
                 Image(systemName: "xmark")
                     .resizable()
                     .frame(width: 20, height: 20)
@@ -54,10 +61,17 @@ struct ReservedView: View {
             }
             .padding(.bottom)
         }
+        // TabView hidden
+        .toolbar(.hidden, for: .tabBar)
+        
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop()
                 .presentationDetents([.height(210)])
         }
+        .fullScreenCover(isPresented: $isShowingBookmarkView, content: {
+            MainTabView()
+                .accentColor(Color("AccentColor"))
+        })
         .navigationBarBackButtonHidden(true)
     }
 }

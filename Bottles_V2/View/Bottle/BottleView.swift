@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - 바틀 정보
 /// 바틀의 정보 및 해당 바틀을 판매하는 바틀샵 리스트를 표시하는 뷰입니다.
 struct BottleView: View {
+    //@EnvironmentObject private var path: Path
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
@@ -33,10 +34,10 @@ struct BottleView: View {
                             
                         ForEach(bottleDataStore.bottleData) {bottleShop in
                             NavigationLink {
-                                // 바틀샵 뷰로 이동
-//                                BottleShopView()
+                                // 바틀 뷰로 이동
+                                //BottleShopView(bottleShop: <#ShopModel#>)
                             } label: {
-                                // 바틀샵 셀
+                                // 바틀 셀
                                 BottleView_BottleCell()
                             }
                         }
@@ -44,6 +45,7 @@ struct BottleView: View {
                     .padding()
                     
                     // MARK: - 예약하기 버튼
+                    
                     Button(action: {
                         isShowingSheet.toggle()
                     }) {
@@ -60,16 +62,10 @@ struct BottleView: View {
             
             // 예약하기 버튼 클릭 시 예약하기 뷰 present
             ReservationView(isShowing: $isShowingSheet)
+                //.environmentObject(path)
         }
         // MARK: - 바틀샵 이름
         .toolbar(content: {
-            //ToolbarItem (placement: .navigationBarLeading)  {
-            //                Image("back")
-            //                    .onTapGesture {
-            //                        self.presentationMode.wrappedValue.dismiss()
-            //                    }
-            //            }
-
             // 네비게이션 장바구니 아이콘
             ToolbarItem(placement: .principal) {
                 HStack {
@@ -94,6 +90,10 @@ struct BottleView: View {
         // TabView hidden
         .toolbar(.hidden, for: .tabBar)
     }
+}
+
+class Path: ObservableObject {
+    @Published var path: NavigationPath = NavigationPath()
 }
 
 //struct BottleView_Previews: PreviewProvider {

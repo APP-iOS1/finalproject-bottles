@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - 예약하기
 /// 픽업 안내 사항을 확인하고 바틀의 수량을 선택하는 뷰 입니다.
 struct ReservationView_Content: View {
+    //@EnvironmentObject var path: Path
     @State private var count: Int = 1
     @State private var isShowingAlert: Bool = false
     @State private var isShowingCart: Bool = false
@@ -73,6 +74,19 @@ struct ReservationView_Content: View {
                 }
              
                 // MARK: - 바로 예약하기 버튼
+//                NavigationLink(value: "") {
+//                    ZStack {
+//                        RoundedRectangle(cornerRadius: 12)
+//                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
+//                        Text("바로 예약하기")
+//                            .modifier(AccentColorButtonModifier())
+//                    }
+//                }
+//                .navigationDestination(for: String.self) { _ in
+//                    ReservationPageView()
+//                        .environmentObject(path)
+//                }
+                
                 NavigationLink(destination: ReservationPageView()) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
