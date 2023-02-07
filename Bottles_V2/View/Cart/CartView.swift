@@ -20,35 +20,19 @@ struct CartView: View {
     
     var body: some View {
         VStack {
-            
-            // MARK: - View의 상단
-            /// 전체선택, 선택삭제
-            
-            HStack {
-                AllSelectButton
-                Text("전체 선택")
-                    .font(.bottles16)
-                    .bold()
-                Spacer()
-                Button {
-                    
-                    // 선택 삭제 액션 추가
-                    /// 품목 선택 후 선택삭제 버튼을 통한 삭제
-                    
-                } label: {
-                    Text("선택 삭제")
-                        .font(.bottles13)
-                        .foregroundColor(.black)
-                        .padding(.trailing)
-                }
-                
-            }
-            Divider()
-                .background(.black)
-            
-            //MARK: - View의 중간
             /// 장바구니에 들어있는 품목 목록
             ScrollView {
+                
+                HStack {
+                    Image("Map_tab_fill")
+                        .padding(.leading)
+                    Text("미들바틀")
+                        .font(.bottles20)
+                        .bold()
+                    Spacer()
+                }
+                Divider()
+                
                 ForEach (0..<5) { cnt in
                     CartCell(isAllSelected: $isAllSelected, allSelectButtonCheck: $allSelectButtonCheck)
                     if cnt < 4 {
@@ -64,18 +48,17 @@ struct CartView: View {
             VStack {
                 HStack {
                     Text("총 금액")
-                        .font(.bottles16)
-                        .bold()
+                        .font(.bottles18)
                         .padding(.leading)
                     Spacer()
                     Text("1,750,000원")
-                        .font(.bottles16)
+                        .font(.bottles18)
                         .bold()
                         .padding(.trailing)
                 }
                 .padding([.leading, .trailing, .top])
                 Text("결제는 각 매장에서 진행됩니다.")
-                    .font(.bottles13)
+                    .font(.bottles12)
                     .padding(.top)
                 
                 NavigationLink(destination: ReservationPageView()) {

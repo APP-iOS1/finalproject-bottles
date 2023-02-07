@@ -14,71 +14,44 @@ import SwiftUI
 struct CartCell: View {
     
     @State private var isSelected: Bool = false
-    @State private var amount : Int = 1
+    @State private var count : Int = 1
     @Binding var isAllSelected : Bool
     @Binding var allSelectButtonCheck : Bool
     
     var body: some View {
-        VStack {
-            // MARK: - Cell의 상단
-            /// 선택버튼 , 바틀샵 이름, 삭제 버튼
-            HStack {
-                selectButton
-                Text("바틀샵 이름")
-                    .font(.bottles13)
-                    .bold()
-                Spacer()
-                deleteButton
-            }
-            .padding(.bottom, -10)
-            .padding(.top, -5)
+        HStack(alignment: .top, spacing: 15) {
+            // MARK: - 바틀 이미지
+            Image("bottle")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 128, height: 128)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .padding(.leading)
             
-            // MARK: - Cell의 하단
-            /// bottle의 사진, 상품명, 가격, 품목의 개수와 증감 버튼
-            HStack {
-                // bottle의 사진
-                AsyncImage(url: URL(string: ""))
-                    .frame(width: UIScreen.main.bounds.size.width/4, height: UIScreen.main.bounds.size.width/4)
-                    .padding(.trailing, 15)
-                
-                // 상품명, 가격, 품목의 개수, 증감버튼
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("디 오리지널 골드바 위스키")
-                        .font(.bottles13)
-                        .padding(.bottom,3)
-                    Text("350,000원")
-                        .font(.bottles15)
-                        .bold()
-                    Spacer()
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 10) {
+                    // MARK: - 바틀 이름
+                    Text("프로메샤 모스카토")
+                        .font(.bottles14)
+                        .fontWeight(.medium)
+                    
+                    // MARK: - 바틀 가격
+                    Text("110,000원")
+                        .font(.bottles18)
+                        .fontWeight(.bold)
+                    
                     increaseButtonView
-                        .padding(.bottom, 2)
+                        .padding(.top)
                 }
-                .padding(.trailing, 30)
+                .foregroundColor(.black)
                 
+                Spacer()
+                
+                deleteButton
+                    .padding(.trailing)
             }
-            .frame(width:UIScreen.main.bounds.size.width ,height: UIScreen.main.bounds.size.width/4)
+            .padding(.top, 10)
         }
-        .padding(.bottom)
-        .onChange(of: isAllSelected) { value in
-            if (allSelectButtonCheck) {
-                isSelected = value
-            }
-        }
-    }
-    
-    // MARK: -View : 선택 버튼
-    private var selectButton : some View {
-        Button {
-            allSelectButtonCheck = false
-            if isSelected {
-                isAllSelected.toggle()
-            }
-            isSelected.toggle()
-            
-        } label : {
-            Image(systemName: (isSelected) ? "checkmark.circle.fill" : "circle")
-        }
-        .padding([.leading, .top, .bottom])
     }
     
     // MARK: -View : 삭제 버튼
@@ -87,40 +60,53 @@ struct CartCell: View {
             // 뷰에서 삭제하는 기능 추가
         } label : {
             Image(systemName: "multiply")
+                .foregroundColor(.black)
         }
-        .padding()
+        .padding(.bottom, 20)
     }
     
     // MARK: -View : 증감 버튼
     private var increaseButtonView : some View {
-        HStack {
-            Button {
-                if amount > 1 {
-                    amount -= 1
+        // MARK: - 수량 선택 버튼
+        ZStack {
+            RoundedRectangle(cornerRadius: 200)
+                .stroke(.black.opacity(0.2), lineWidth: 1)
+                .frame(width: 140, height: 37)
+            HStack {
+                // MARK: - -버튼
+                Button(action: {
+                    if count > 1 {
+                        count -= 1
+                    }
+                }) {
+                    Image(systemName: "minus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 13, height: 13)
                 }
-            } label : {
-                Image(systemName: "minus")
+                
+                Spacer()
+                
+                // MARK: - 선택 수량
+                Text("\(count)")
+                    .font(.bottles15)
+                    .fontWeight(.bold)
+                
+                Spacer()
+                
+                // MARK: - +버튼
+                Button(action: {
+                    count += 1
+                }) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 13, height: 13)
+                }
             }
-            .padding([.leading, .trailing])
-            .padding([.top, .bottom], 15)
-            Text("\(amount)")
-                .font(.bottles15)
-                .bold()
-                .frame(width: 22)
-            
-            Button {
-                amount += 1
-            } label : {
-                Image(systemName: "plus")
-            }
-            .padding([.leading, .trailing])
+            .frame(width: 110, height: 30)
         }
-        .overlay(
-            Capsule()
-                .stroke()
-                .foregroundColor(.black)
-                .frame(width: UIScreen.main.bounds.size.width/3)
-        )
+
     }
 }
 
