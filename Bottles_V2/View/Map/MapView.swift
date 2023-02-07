@@ -24,7 +24,6 @@ struct MapView: View {
     @State var showMarkerDetailView: Bool = false
     @State var currentShopId: String = "보리마루"
     @State var searchResult: [ShopModel] = []
-//    @State var shopModel: ShopModel = ShopModel(id: "", shopName: "", shopOpenCloseTime: "", shopAddress: "", shopPhoneNumber: "", shopIntroduction: "", shopSNS: "", followerUserList: [""], isRegister: false, location: GeoPoint(latitude: 0.0, longitude: 0.0), reservedList: [""], shopTitleImage: "", shopImages: [""], shopCurationTitle: "", shopCurationBody: "", shopCurationImage: "", shopCurationBottleID: [""], bottleCollections: [""], noticeCollection: [""], reservationCollection: [""])
     
     var body: some View {
         NavigationStack {
@@ -80,7 +79,7 @@ struct MapView: View {
                 
                     MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
                         NavigationLink{
-                            BottleShopView(bottleShop: shopDataStore.shopData[currentShopIndex])
+                            BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
                         } label: {
                             MarkerDetailView(
                                 shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],

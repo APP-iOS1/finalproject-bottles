@@ -12,6 +12,7 @@ import SwiftUI
 struct BottleView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var shopDataStore: ShopDataStore
+    @EnvironmentObject var bottleDataStore: BottleDataStore
     @State private var isShowingSheet: Bool = false
     
     var body: some View {
@@ -30,10 +31,10 @@ struct BottleView: View {
                             .font(.bottles18)
                             .fontWeight(.medium)
                             
-                        ForEach(shopDataStore.shopData) {bottleShop in
+                        ForEach(bottleDataStore.bottleData) {bottleShop in
                             NavigationLink {
                                 // 바틀샵 뷰로 이동
-                                BottleShopView(bottleShop: bottleShop)
+//                                BottleShopView()
                             } label: {
                                 // 바틀샵 셀
                                 BottleView_BottleCell()
@@ -72,7 +73,7 @@ struct BottleView: View {
             // 네비게이션 장바구니 아이콘
             ToolbarItem(placement: .principal) {
                 HStack {
-                    Image("Map_Tab_fill")
+                    Image("Map_tab_fill")
                         .resizable()
                         .frame(width: 11, height: 16)
                     Text("미들바틀")

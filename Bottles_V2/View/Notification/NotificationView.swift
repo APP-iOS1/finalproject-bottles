@@ -34,16 +34,16 @@ struct NotificationView: View {
                     }
                     Divider()
 
-                    NavigationLink(destination: BottleShopCurationView()){
+//                    NavigationLink(destination: BottleShopCurationView()){
                         NotificationCell(imgName: "shopNotification", title: "저장한 바틀샵의 새 소식", description: "연말에 어울리는 스파클링 와인 10종", storeName: "어썸와인", time: "4시간 전")
 
-                    }
+//                    }
 
                     Divider()
                     
-                    NavigationLink(destination: BottleShopCurationView()){
+//                    NavigationLink(destination: BottleShopCurationView()){
                         NotificationCell(imgName: "shopNotification", title: "저장한 바틀샵의 새 소식", description: "깔끔한 화이트와인 10종 추천", storeName: "미들바틀", time: "7일 전")
-                    }
+//                    }
                     
                     Divider()
                 }

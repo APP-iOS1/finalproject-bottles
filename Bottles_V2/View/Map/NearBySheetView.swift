@@ -12,7 +12,7 @@ import CoreLocation
 struct NearBySheetView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @StateObject var mapViewModel: MapViewModel
-    @State private var checkBookmark: Bool = false
+//    @State private var checkBookmark: Bool = false
     @Binding var isOpen: Bool
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopId: String
@@ -40,7 +40,7 @@ struct NearBySheetView: View {
                                     currentShopId = shop.id
                                     mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
                                 } label: {
-                                    NearBySheetCell(checkBookmark: $checkBookmark, shopModel: shop, distance: distance)
+                                    NearBySheetCell(shopModel: shop, distance: distance)
                                 }
                             }
                     }

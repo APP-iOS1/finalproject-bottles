@@ -183,7 +183,7 @@ struct SearchBottleListCell: View {
                     .font(.footnote)
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
-                    BottleShopView()
+//                    BottleShopView(bottleShop: <#ShopModel#>)
                 } label: {
                     HStack {
                         Image("MapMarker")

@@ -87,6 +87,7 @@ struct MarkerDetailView: View {
             }
             .scrollIndicators(.hidden)
         }
+        .foregroundColor(.black)
     }
 }
 

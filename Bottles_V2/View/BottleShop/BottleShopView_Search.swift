@@ -125,7 +125,6 @@ struct BottleShopView_Search: View {
             // 데이터 연동 시 "해당 샵의 바틀 리스트" 연동
             // 바틀 셀(정렬 후) 반복문
             ForEach(sortBottleData(), id: \.self) { item in
-                
                 // 바틀셀 누를 시 바틀뷰로 이동
                 NavigationLink(destination: BottleView(), label:{
                     BottleShopView_BottleList(selectedItem: item)

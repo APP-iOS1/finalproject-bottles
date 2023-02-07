@@ -79,7 +79,7 @@ struct SearchShopList: View {
                     ScrollView {
                         ForEach(sortShopData()) { shop in
                             NavigationLink {
-                                BottleShopView()
+                                BottleShopView(bottleShop: shop)
                             } label: {
                                 SearchShopListCell(shopInfo: shop, distance: distance(shop.location.latitude, shop.location.longitude), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
                             }
