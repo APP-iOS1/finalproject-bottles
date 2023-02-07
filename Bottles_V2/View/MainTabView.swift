@@ -14,6 +14,7 @@ struct MainTabView: View {
     @EnvironmentObject var bottleDataStore : BottleDataStore
     @EnvironmentObject var reservationDataStore : ResevationDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
+
     //    let user: AuthUser
     
     @State private var selection: Int = 1

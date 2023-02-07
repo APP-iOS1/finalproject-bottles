@@ -78,15 +78,17 @@ struct MapView: View {
                 .ignoresSafeArea(.all, edges: .top)
                 .zIndex(2)
                 
-                MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
-                    MarkerDetailView(
-                        shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
-                        showMarkerDetailView: $showMarkerDetailView,
-                        currentShopId: $currentShopId
-//                        currentShopIndex: $currentShopIndex,
-//                        shopModel: $shopModel
-                    )
-                }
+                    MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
+                        NavigationLink{
+                            BottleShopView(bottleShop: shopDataStore.shopData[currentShopIndex])
+                        } label: {
+                            MarkerDetailView(
+                                shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
+                                showMarkerDetailView: $showMarkerDetailView,
+                                currentShopId: $currentShopId
+                            )
+                        }
+                    }
                 .zIndex(3)
                 
                 // MARK: - 현재 위치 이동 버튼(커스텀)

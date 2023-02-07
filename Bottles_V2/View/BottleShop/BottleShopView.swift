@@ -29,18 +29,22 @@ struct BottleShopView: View {
     
     @Namespace private var animation
     
-    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
+//    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
+    @EnvironmentObject var shopDataStore: ShopDataStore
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    
+    var bottleShop: ShopModel
     
 //    @Binding var mappinShopID : ShopModel
     
     // 임의로 가게 전화번호 지정 (데이터 연동시 삭제)
-    var phoneNumber = "718-555-5555"
+//    var phoneNumber = "718-555-5555"
     
     // 검색 결과를 필터링해주는 연산 프로퍼티
-    var filteredResult: [BottleItem22] {
-        let bottles = bottleShopStore.bottleItems
+    var filteredResult: [BottleModel] {
+        let bottles = bottleDataStore.bottleData
         return bottles.filter {
-            $0.name.contains(testSearchText)
+            $0.itemName.contains(testSearchText)
         }
     }
     
@@ -51,19 +55,20 @@ struct BottleShopView: View {
                     VStack{
                         
                         // 데이터 연동 시 "shopTitleImage" 연동
-                        AsyncImage(url: URL(string: "https://media.timeout.com/images/103625148/750/422/image.jpg")) { image in
+                        AsyncImage(url: URL(string: String(bottleShop.shopTitleImage)), content: { image in
                             image
                                 .resizable()
+//                                .scaledToFit()
                                 .aspectRatio(contentMode: .fit)
-                        } placeholder: {
+                        }, placeholder: {
                             Image("ready_image")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                        }
+                        })
                         
                         HStack{
                             // 데이터 연동 시 "shopName" 연동
-                            Text("바틀샵 이름")
+                            Text(bottleShop.shopName)
                                 .font(.bottles20)
                                 .fontWeight(.bold)
                             
@@ -71,7 +76,7 @@ struct BottleShopView: View {
                                 .frame(width: 10)
                             
                             // "매장 정보 뷰"로 이동
-                            NavigationLink(destination: BottleShopDetailView())
+                            NavigationLink(destination: BottleShopDetailView(bottleShop: bottleShop))
                             {
                                 HStack{
                                     Text("매장정보")
@@ -86,12 +91,19 @@ struct BottleShopView: View {
                             
                             // 전화 아이콘 버튼
                             Button(action: {
-                                let phone = "tel://"
                                 
-                                // 데이터 연동 시 "shopPhoneNumber" 연동 (phoneNumber 자리에)
-                                let phoneNumberformatted = phone + phoneNumber
-                                guard let url = URL(string: phoneNumberformatted) else { return }
-                                UIApplication.shared.open(url)
+                                if let url = URL(string: "tel://\(bottleShop.shopPhoneNumber)"), UIApplication.shared.canOpenURL(url) {
+                                    UIApplication.shared.open(url)
+                                    
+                                }
+//                                let phone = "tel://"
+//
+//                                // 데이터 연동 시 "shopPhoneNumber" 연동 (phoneNumber 자리에)
+//                                let phoneNumberformatted = phone + bottleShop.shopPhoneNumber
+//                                guard let url = URL(string: phoneNumberformatted) else { return }
+//                                UIApplication.shared.open(url)
+                                
+                                print(bottleShop.shopPhoneNumber)
                             }){
                                 Image("Phone.fill")
                                     .resizable()
@@ -145,7 +157,7 @@ struct BottleShopView: View {
                         HStack{
                             
                             // 데이터 연동 시 "shopIntroduction" 연동
-                            Text("바틀샵 한 줄 소개 바틀샵에 오신 걸 환영합니다.")
+                            Text(bottleShop.shopIntroduction)
                                 .font(.bottles14)
                             
                             Spacer()
@@ -154,14 +166,15 @@ struct BottleShopView: View {
                         .padding(.top, -15)
                         
                         // "큐레이션 뷰"로 이동
-                        NavigationLink(destination: BottleShopCurationView()){
+                        NavigationLink(destination: BottleShopCurationView(bottleShop: bottleShop)){
                             HStack{
                                 
                                 // 데이터 연동 시 "shopCurationTitle" 연동
-                                Text("연말 파티에 어울리는 스파클링 와인들")
+                                Text(bottleShop.shopCurationTitle)
+                                Spacer()
                                 Image(systemName: "chevron.right")
                                     .padding(.leading, -5)
-                                Spacer()
+                                
                             }
                             .fontWeight(.semibold)
                         }
@@ -174,7 +187,7 @@ struct BottleShopView: View {
                         
                         VStack {
                             animate()
-                            BottleShopInfoView(bottleShopInfo: selectedPicker, search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden)
+                            BottleShopInfoView(bottleShopInfo: selectedPicker, search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden, bottleShop: bottleShop)
                         }
                         
                     }
@@ -234,7 +247,7 @@ struct BottleShopView: View {
                         ScrollView {
                             ForEach(filteredResult, id: \.self) { item in
                                 NavigationLink(destination: BottleView(), label:{
-                                    BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
+                                    BottleShopView_BottleList(selectedItem: item)
                                         .padding()
                                 })
                             }
@@ -253,7 +266,7 @@ struct BottleShopView: View {
                     HStack{
                         Image("BookMark.fill")
                         Text("북마크가 완료되었습니다.")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.black)
                             .font(.bottles11)
                         
                     }
@@ -272,7 +285,7 @@ struct BottleShopView: View {
                     HStack{
                         Image("BookMark")
                         Text("북마크가 해제되었습니다.")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.black)
                             .font(.bottles11)
                         
                     }
@@ -344,6 +357,8 @@ struct BottleShopInfoView: View {
     @FocusState var focus: Bool
     @Binding var isNavigationBarHidden: Bool
     
+    var bottleShop: ShopModel
+    
     var body: some View {
         VStack {
             switch bottleShopInfo {
@@ -351,7 +366,7 @@ struct BottleShopInfoView: View {
                 // "상품 검색 탭"
             case .bottle:
                 VStack(alignment: .leading){
-                    BottleShopView_Search(search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden)
+                    BottleShopView_Search(search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden, bottleShop: bottleShop)
                 }
                 
                 // "사장님의 공지 탭"

@@ -28,6 +28,10 @@ struct EmailRegisterView: View {
     @State var nickname: String = ""
     @State var phoneNumber: String = ""
     
+    // 휴대폰 번호와 닉네임의 최대 글자수
+    let phoneNumberMaximumCount: Int = 11
+    let nicknameMaximumCount: Int = 10
+    
     /// 비밀번호 입력 창을 TextField로 보여주거나 SecureField로 보여주는 변수
     @State private var isShowingPasswordText: Bool = false
     
@@ -104,7 +108,7 @@ struct EmailRegisterView: View {
                         .foregroundColor(emailNotFitFormat ? .red : .green)
                 }
                 .padding(.horizontal, 20)
-                .padding(.bottom, -5)
+            
                 HStack {
                     TextField("예: bottles@bottles.com", text: $registerEmail)
                         .keyboardType(.emailAddress)
@@ -124,32 +128,7 @@ struct EmailRegisterView: View {
                 }
             }
             
-            //MARK: - 이메일 인증번호 입력창
-            if userStore.isShowingVerificationCode {
-                Group {
-                    HStack(alignment: .bottom) {
-                        Text("이메일 인증")
-                            .font(.bottles14)
-                        + Text("*")
-                            .foregroundColor(.accentColor)
-                        Spacer()
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, -5)
-                    HStack{
-                        TextField("인증번호를 입력해주세요.", text: $verificationCode)
-                            .modifier(LoginTextFieldModifier(width: 225, height: 48))
-                        Button(action: {
-                            //TODO: 이메일 인증번호 확인 로직
-                            authStore.emailCheck(userEmail: registerEmail)
-                            emailSent = true
-                        }){
-                            Text("인증번호 받기")
-                                .modifier(EmailViewButtonModifier(width: 125, height: 48))
-                        }
-                    }
-                }
-            }
+            
             
             // MARK: - 비밀번호 입력창
             Group {
@@ -237,9 +216,14 @@ struct EmailRegisterView: View {
                 .padding(.top, 24)
                 .padding(.horizontal, 20)
                 .padding(.top, isShowingPasswordCheckText ? 4.5 : 5)
-                .padding(.bottom, -5)
-                TextField("닉네임을 입력해주세요", text: $nickname)
+                
+                TextField("닉네임을 입력해주세요.(최대 10자)", text: $nickname)
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
+                    .onChange(of: nickname) { newValue in
+                        if newValue.count > nicknameMaximumCount {
+                            nickname = String(newValue.prefix(nicknameMaximumCount))
+                        }
+                    }
             }
             
             // MARK: - 휴대폰
@@ -251,10 +235,15 @@ struct EmailRegisterView: View {
                 }
                 .padding(.top, 24)
                 .padding(.horizontal, 20)
-                .padding(.bottom, -5)
+                
                 TextField("숫자만 입력해주세요", text: $phoneNumber)
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
                     .keyboardType(.numberPad)
+                    .onChange(of: phoneNumber) { newValue in
+                        if newValue.count > phoneNumberMaximumCount {
+                            phoneNumber = String(newValue.prefix(phoneNumberMaximumCount))
+                        }
+                    }
             }
             
             // MARK: - 이용약관동의

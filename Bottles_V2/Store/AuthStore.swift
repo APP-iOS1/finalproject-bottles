@@ -43,7 +43,7 @@ class AuthStore: ObservableObject {
             }
             
         }
-
+        
     }
     
     func logout() {
@@ -72,21 +72,21 @@ class AuthStore: ObservableObject {
     
     func emailCheck(userEmail: String?) {
         guard let email = userEmail else { return }
-            
-            let actionCodeSettings = ActionCodeSettings()
-            actionCodeSettings.url = URL(string: "https://bottlesv2.firebaseapp.com/?email=\(email)")
-            actionCodeSettings.handleCodeInApp = true
-            actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
-            
-            Auth.auth().sendSignInLink(toEmail: email,
-                                       actionCodeSettings: actionCodeSettings) { error in
-                if let error = error {
-                    print(error)
-                    print("email not sent \"\(error.localizedDescription)\"")
-                } else {
-                    print("email sent")
-                }
+        
+        let actionCodeSettings = ActionCodeSettings()
+        actionCodeSettings.url = URL(string: "https://bottlesv2.firebaseapp.com/?email=\(email)")
+        actionCodeSettings.handleCodeInApp = true
+        actionCodeSettings.setIOSBundleID(Bundle.main.bundleIdentifier!)
+        
+        Auth.auth().sendSignInLink(toEmail: email,
+                                   actionCodeSettings: actionCodeSettings) { error in
+            if let error = error {
+                print(error)
+                print("email not sent \"\(error.localizedDescription)\"")
+            } else {
+                print("email sent")
             }
+        }
     }
     
     func isEmailVerified() -> Bool {
@@ -94,15 +94,15 @@ class AuthStore: ObservableObject {
     }
     
     // MARK: - Method : 계정 삭제
-    func deleteUser() {
+    func deleteUser(userEmail: String) {
         let user = Auth.auth().currentUser
-//        user?.delete { error in
-//            if let error = error {
-//                print("계정 삭제 실패")
-//            } else {
-//                // Account deleted
-//            }
-//        }
+        user?.delete { error in
+            if let error = error {
+                print("계정 삭제 실패")
+            } else {
+                self.userStore.deleteUser(userId: userEmail)
+            }
+        }
     }
     
     func sendPasswordReset(email: String) {
@@ -120,7 +120,7 @@ class AuthStore: ObservableObject {
             }
         }
     }
-
+    
 }
 
 extension AuthStore {

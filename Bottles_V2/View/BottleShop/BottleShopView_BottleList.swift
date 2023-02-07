@@ -13,7 +13,7 @@ struct BottleShopView_BottleList: View {
     @State private var bookmarkToggle_fill: Bool = false
     @State private var bookmarkToggle_empty: Bool = false
     
-    var selectedItem: BottleItem22
+    var selectedItem: BottleModel
     
     var body: some View {
         ZStack{
@@ -41,7 +41,7 @@ struct BottleShopView_BottleList: View {
                         
                         HStack{
                             // 데이터 연동 시 "바틀 이름" 연동
-                            Text(selectedItem.name)
+                            Text(selectedItem.itemName)
                                 .font(.bottles14)
                                 .fontWeight(.semibold)
                                 .multilineTextAlignment(.leading)
@@ -96,7 +96,7 @@ struct BottleShopView_BottleList: View {
                         
                         // 데이터 연동 시 "바틀 가격" 연동
                         HStack{
-                            Text("\(selectedItem.price)")
+                            Text("\(selectedItem.itemPrice)")
                                 .padding(.trailing, -5)
                             Text("원")
                         }
@@ -105,7 +105,7 @@ struct BottleShopView_BottleList: View {
                         
                         HStack{
                             // 데이터 연동 시 "바틀 카테고리" 연동
-                            Text(selectedItem.category ?? "")
+                            Text(selectedItem.itemType ?? "")
                                 .lineLimit(1)
                                 .padding(.horizontal)
                                 .padding(.vertical, 3)
@@ -115,18 +115,18 @@ struct BottleShopView_BottleList: View {
                                 )
                             
                             // 데이터 연동 시 "바틀 태그" 연동
-                            Text(selectedItem.tag ?? "")
-                                .lineLimit(1)
-                                .padding(.horizontal)
-                                .padding(.vertical, 3)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.gray, lineWidth: 0.7)
-                                    
-                                )
+//                            Text(selectedItem.itemTag ?? "")
+//                                .lineLimit(1)
+//                                .padding(.horizontal)
+//                                .padding(.vertical, 3)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(Color.gray, lineWidth: 0.7)
+//
+//                                )
                             
-                            // 데이터 연동 시 "바틀 쓰임새(ex) 에피타이저, 테이블 ...)" 연동
-                            Text(selectedItem.use ?? "")
+                            // 데이터 연동 시 "itemTaste" 연동
+                            Text(selectedItem.itemTaste ?? "")
                                 .lineLimit(1)
                                 .padding(.horizontal)
                                 .padding(.vertical, 3)

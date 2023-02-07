@@ -6,39 +6,57 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct SearchBottleList: View {
     // 검색어를 저장하는 변수
     var bottleName: String
-    // 테스트용 모델
-    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
     // ActionSheet
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
-    // 검색 결과를 필터링해주는 연산 프로퍼티
-    var filteredResult: [BookMarkBottle] {
-        let bottles = bookMarkTestStore.BookMarkBottles
-        return bottles.filter {
-            $0.bottleName.contains(bottleName)
-        }
-    }
-    //Test
-    func sortBottleData() -> [BookMarkBottle] {
-        let searchedBottles: [BookMarkBottle] = filteredResult
-        switch selection {
-        case "거리순":
-            return searchedBottles.sorted(by: {$0.bottleName < $1.bottleName}).sorted(by: {$0.distance < $1.distance})
-        case "낮은 가격순":
-            return searchedBottles.sorted(by: {$0.bottleName < $1.bottleName}).sorted(by: {$0.price < $1.price})
-        case "높은 가격순":
-            return searchedBottles.sorted(by: {$0.bottleName < $1.bottleName}).sorted(by: {$0.price > $1.price})
-        default:
-            return searchedBottles.sorted(by: {$0.bottleName < $1.bottleName})
-        }
-    }
+    // 북마크 알림 Test
     @State var bookMarkAlarm: Bool = false
     @State var bookMark: Bool = false
     
+    // Server Data Test
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    @EnvironmentObject var shopDataStore: ShopDataStore
+    @EnvironmentObject var mapViewModel: MapViewModel
+    // 검색 결과를 필터링해주는 연산 프로퍼티
+    var filteredResult: [BottleModel] {
+        let bottles = bottleDataStore.bottleData
+        return bottles.filter {
+            $0.itemName.contains(bottleName)
+        }
+    }
+    
+    func getMattchedShopData(bottleData: BottleModel) -> ShopModel {
+        let mattchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
+        return mattchedShopData[0]
+    }
+    
+    func sortBottleData() -> [BottleModel] {
+        let bookMarkBottles: [BottleModel] = filteredResult
+        switch selection {
+        case "거리순":
+            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
+                .sorted(by: {distance(getMattchedShopData(bottleData: $0).location.latitude, getMattchedShopData(bottleData: $0).location.longitude) < distance(getMattchedShopData(bottleData: $1).location.latitude, getMattchedShopData(bottleData: $1).location.longitude)})
+        case "낮은 가격순":
+            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
+        case "높은 가격순":
+            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice > $1.itemPrice})
+        default:
+            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
+        }
+    }
+    
+    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
+        let from = CLLocation(latitude: lat, longitude: log)
+        let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
+        print("\(from.distance(from: to))")
+        return from.distance(from: to)
+    }
+
     var body: some View {
         ZStack {
             VStack {
@@ -59,7 +77,7 @@ struct SearchBottleList: View {
                     .padding(.trailing, 20)
                 }
                 // 검색어를 포함하는 Data가 없을 경우
-                if filteredResult == [] {
+                if filteredResult.isEmpty {
                     Text("검색 결과가 없습니다.")
                         .font(.bottles14)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -68,8 +86,8 @@ struct SearchBottleList: View {
                 } else {
                     // TODO: 서버 Bottle 데이터 연결
                     ScrollView {
-                        ForEach(sortBottleData(), id: \.self) { bottle in
-                            SearchBottleListCell(bottleInfo: bottle, bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                        ForEach(sortBottleData()) { bottle in
+                            SearchBottleListCell(bottleInfo: bottle, shopInfo: getMattchedShopData(bottleData: bottle), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
                         }
                     }
                 }
@@ -95,16 +113,21 @@ struct SearchBottleList: View {
             }
             
             if bookMarkAlarm {
-                Text(bookMark ? "즐겨찾기에 추가되었습니다." : "즐겨찾기에서 해제되었습니다.")
-                    .foregroundColor(.white)
-                    .font(.caption)
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 200, height: 30)
-                            .opacity(0.5)
-                    }
-                    .offset(y: 200)
-                    .zIndex(1)
+                HStack{
+                    Image(bookMark ? "BookMark.fill" : "BookMark")
+                    Text(bookMark ? "북마크가 완료되었습니다." : "북마크가 해제되었습니다.")
+                        .foregroundColor(.black)
+                        .font(.bottles11)
+                    
+                }
+                .zIndex(1)
+                .transition(.opacity.animation(.easeIn))
+                .background{
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 300, height: 30)
+                        .foregroundColor(.gray_f7)
+                }
+                .offset(y: 250)
             }
         }
     }
@@ -112,97 +135,92 @@ struct SearchBottleList: View {
 
 struct SearchBottleListCell: View {
     // 필터링된 Bottle의 정보를 저장하는 변수
-    var bottleInfo: BookMarkBottle
+    var bottleInfo: BottleModel
+    // Shop의 정보를 저장하는 변수
+    var shopInfo: ShopModel
     
-    // Test
+    // 북마크 알림 Test
     @Binding var bookMark: Bool
     @Binding var bookMarkAlarm: Bool
     
     var body: some View {
         HStack(alignment: .top) {
-            HStack(alignment: .top) {
-                // 이미지를 누르면 Bottle Detail View로 이동
+            // 이미지를 누르면 Bottle Detail View로 이동
+            NavigationLink {
+                BottleView()
+            } label: {
+                // Bottle 이미지
+                AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 128, height: 128)
+                        .cornerRadius(12)
+                } placeholder: {
+                    Image("ready_image")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 128, height: 128)
+                        .cornerRadius(12)
+                }
+                .background(Color.gray_f7)
+                .cornerRadius(12)
+                .frame(height: 128)
+                .padding(.horizontal)
+            }
+            
+            
+            VStack(alignment: .leading, spacing: 10) {
+                // Bottle 이름
+                Text(bottleInfo.itemName)
+                    .font(.bottles14)
+                // Bottle 가격
+                Text("\(bottleInfo.itemPrice)원")
+                    .font(.bottles18)
+                    .bold()
+                // Test용 Shop 정보
+                Text("\(shopInfo.shopIntroduction)")
+                    .font(.footnote)
+                // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
-                    BottleView()
+                    BottleShopView()
                 } label: {
-                    // Bottle 이미지
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(.black)
-                        .frame(width: 120, height: 120)
-                        .overlay {
-                            AsyncImage(url: URL(string: "https://kanashop.kr/web/product/big/201903/97ef5cee30f4cd6072fd736831623d2e.jpg")) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 120, height: 120)
-                                    .cornerRadius(10)
-                            } placeholder: {
-                                Image("ready_image")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 120, height: 120)
-                                    .cornerRadius(10)
-                            }
-                        }
-                        .padding(.horizontal)
-                }
-                
-                
-                VStack(alignment: .leading, spacing: 10) {
-                    // Bottle 이름
-                    Text(bottleInfo.bottleName)
-                        .font(.bottles14)
-                    // Bottle 가격
-                    Text("가격 : \(bottleInfo.price)")
-                        .font(.bottles18)
-                        .bold()
-                    // Test
-                    Text("거리 : \(bottleInfo.distance)")
-                        .font(.bottles14)
-                    // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
-                    NavigationLink {
-                        BottleShopView()
-                    } label: {
-                        HStack {
-                            Image("MapMarker")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 20)
-                            // Shop 이름
-                            Text(bottleInfo.shopName)
-                                .font(.bottles14)
-                                .foregroundColor(.black)
-                        }
+                    HStack {
+                        Image("MapMarker")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 20)
+                        // Shop 이름
+                        Text(shopInfo.shopName)
+                            .font(.bottles14)
+                            .foregroundColor(.black)
                     }
-                    Spacer()
                 }
-                .padding(.top, 5)
-                
                 Spacer()
-                VStack {
-                    // TODO: 즐겨찾기 기능 추가해야함
-                    Button {
-                        
+            }
+            .padding(.top, 10)
+            
+            Spacer()
+            VStack {
+                // TODO: 즐겨찾기 기능 추가해야함
+                Button {
+                    withAnimation(.easeIn(duration: 1)) {
+                        bookMark.toggle()
+                        bookMarkAlarm.toggle()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
                         withAnimation(.easeIn(duration: 1)) {
-                            bookMark.toggle()
                             bookMarkAlarm.toggle()
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-                            withAnimation(.easeIn(duration: 1)) {
-                                bookMarkAlarm.toggle()
-                            }
-                        }
-                    } label: {
-                        Image(systemName: bookMark ? "bookmark.fill" : "bookmark")
                     }
-                    Spacer()
+                } label: {
+                    Image(systemName: "bookmark.fill")
                 }
-                .font(.title2)
-                .padding()
-                .padding(.top, -5)
+                Spacer()
             }
-            .frame(height: 130)
-            .padding(.vertical, 5)
+            .font(.title2)
+            .padding()
+            .padding(.top, -5)
         }
         .frame(height: 130)
         .padding(.vertical, 5)

@@ -12,18 +12,24 @@ import SwiftUI
 
 struct NotificationCell: View {
     //테스트용 텍스트
+    var imgName: String = "checkNotification"
     var title : String = "test"
     var description : String = "test"
+    var storeName = ""
     var time : String = "test"
+
     
     var body: some View {
         HStack {
             Spacer()
             // MARK: - 이미지
-            AsyncImage(url: URL(string: ""))
+            Image(imgName)
                 .frame(width: UIScreen.main.bounds.size.width/7, height: UIScreen.main.bounds.size.width/7)
-                .clipShape(Circle())
-                .padding([.leading, .trailing])
+                .padding(.bottom, 38)
+//            AsyncImage(url: URL(string: ""))
+//                .frame(width: UIScreen.main.bounds.size.width/7, height: UIScreen.main.bounds.size.width/7)
+//                .clipShape(Circle())
+//                .padding([.leading, .trailing])
             
             // MARK: - 가운데 텍스트
             /// 공지타이틀, 내용, 바틀샵 이름
@@ -31,31 +37,31 @@ struct NotificationCell: View {
                 HStack {
                     // 공지 타이틀
                     Text(title)
-                        .font(.bottles15)
+                        .font(.bottles18)
                         .foregroundColor(.black)
                         .bold()
                     Spacer()
                     
                     // 알림이 온 지 얼마나 지났는지
                     Text(time)
-                        .font(.bottles13)
+                        .font(.bottles14)
                         .foregroundColor(.gray)
                         .padding(.trailing)
                 }
                 
                 // 알림 내용
                 Text(description)
-                    .font(.bottles13)
+                    .font(.bottles14)
                     .foregroundColor(.black)
                 
                 // 알림이 온 바틀샵의 이름
-                HStack {
-                    Image("MapMarker")
+                HStack(spacing: 2) {
+                    Image("MapMarker.fill")
                         .resizable()
-                        .frame(width: 12, height: 17)
-                    Text("바틀샵 이름")
+                        .frame(width: 20, height: 20)
+                    Text(storeName)
                         .foregroundColor(.black)
-                        .font(.bottles15)
+                        .font(.bottles14)
                 }
 
             }
