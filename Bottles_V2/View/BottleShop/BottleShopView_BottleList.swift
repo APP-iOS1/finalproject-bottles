@@ -19,23 +19,28 @@ struct BottleShopView_BottleList: View {
         ZStack{
             VStack{
                 HStack{
+                    
+                    Spacer()
+                        .frame(width: 10)
+                    
                     // 데이터 연동 시 "바틀 이미지" 연동
-                    AsyncImage(url: URL(string: "https://cdn.imweb.me/thumbnail/20210103/27cdbc402d949.jpg")) { image in
+                    AsyncImage(url: URL(string: String(selectedItem.itemImage)), content:  { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(height: 128)
-                    } placeholder: {
-                        Rectangle()
-                            .frame(height: 128)
-                    }
+                            .frame(width: 100, height: 128)
+                    }, placeholder: {
+                            Rectangle()
+                            .frame(width: 100, height: 128)
+                                .foregroundColor(.gray_f7)
+                    })
                     .padding(5)
                     .background{Color.gray_f7}
                     .cornerRadius(12)
-                    .frame(height: 128)
+                    .frame(width: 100, height: 128)
                     
                     Spacer()
-                        .frame(width: 16)
+                        .frame(width: 20)
                     
                     VStack(alignment: .leading){
                         
@@ -113,17 +118,6 @@ struct BottleShopView_BottleList: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.gray, lineWidth: 0.7)
                                 )
-                            
-                            // 데이터 연동 시 "바틀 태그" 연동
-//                            Text(selectedItem.itemTag ?? "")
-//                                .lineLimit(1)
-//                                .padding(.horizontal)
-//                                .padding(.vertical, 3)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 10)
-//                                        .stroke(Color.gray, lineWidth: 0.7)
-//
-//                                )
                             
                             // 데이터 연동 시 "itemTaste" 연동
                             Text(selectedItem.itemTaste ?? "")
