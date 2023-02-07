@@ -14,22 +14,21 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 struct MapView: View {
-    
+    @EnvironmentObject var shopDataStore: ShopDataStore
     @StateObject var mapViewModel: MapViewModel = MapViewModel()
     @State var coord: (Double, Double) = (37.56668, 126.978419)
     @State var userLocation: (Double, Double) = (37.56668, 126.978419)
     @State var mapSearchBarText: String = ""
     @State var isShowingSheet: Bool = false
     @State var showMarkerDetailView: Bool = false
-    @State var moveToUserLocation: Bool = true
-    @State var mappinShopID : ShopModel = ShopModel(id: "0", shopName: "0", shopOpenCloseTime: "0", shopAddress: "0", shopPhoneNumber: "0", shopIntroduction: "0", shopSNS: "0", followerUserList: ["0"], isRegister: true, location: GeoPoint(latitude: 0, longitude: 0), reservedList: ["0"], shopTitleImage: "0", shopImages: ["0"], shopCurationTitle: "0", shopCurationBody: "0", shopCurationImage: "0", shopCurationBottleID: ["0"], bottleCollections: ["0"], noticeCollection: ["0"], reservationCollection: ["0"])
+    @State var currentShopIndex: Int = 0
+    @State var coord: (Double, Double) = (37.56668, 126.978419)
     
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack {
                     HStack {
-                        
                         // 검색 바
                         MapViewSearchBar(mapSearchBarText: $mapSearchBarText)
                         
@@ -54,25 +53,36 @@ struct MapView: View {
                 .zIndex(1)
                 
                 /// 네이버 지도 뷰
-                NaverMap($mapViewModel.coord, $mapViewModel.userLocation, $showMarkerDetailView, $mappinShopID, $moveToUserLocation)
+
+                NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopIndex, $mapViewModel.userLocation)
                     .ignoresSafeArea(.all, edges: .top)
+                
                 /// 북마크 & 현재 위치 버튼
                 HStack {
                     Spacer()
-                    SideButtonCell(mapViewModel: mapViewModel, userLocation: $userLocation, moveToUserLocation: $moveToUserLocation)
+
+                    SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation)
                 }
-                /// 둘러보기 뷰
                 
+                /// 둘러보기 뷰
                 BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
-                    NearBySheetView()
+                    NearBySheetView(
+                        mapViewModel: mapViewModel,
+                        isOpen: $isShowingSheet,
+                        showMarkerDetailView: $showMarkerDetailView,
+                        currentShopIndex: $currentShopIndex)
                 }
                 .ignoresSafeArea(.all, edges: .top)
                 .zIndex(2)
                 
                 MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
-                    MarkerDetailView(mappinShop: $mappinShopID)
+                    MarkerDetailView(
+                        shopData: shopDataStore.shopData[currentShopIndex],
+                        showMarkerDetailView: $showMarkerDetailView,
+                        currentShopIndex: $currentShopIndex)
                 }
                 .zIndex(3)
+                
                 // MARK: - 현재 위치 이동 버튼(커스텀)
 //                Button {
 //                    //

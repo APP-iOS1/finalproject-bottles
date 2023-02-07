@@ -51,7 +51,7 @@ final class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate 
             print("You have denied this app location permission. Go into setting to change it.")
             coord = (37.56668,126.978415)
         case .authorizedAlways, .authorizedWhenInUse:
-            coord = (Double(locationManager.location?.coordinate.latitude ?? 0.0), Double(locationManager.location?.coordinate.longitude ?? 0.0))
+            coord = (Double(locationManager.location?.coordinate.latitude ?? 37.56668), Double(locationManager.location?.coordinate.longitude ?? 126.978415))
             userLocation = (Double(locationManager.location?.coordinate.latitude ?? 0.0), Double(locationManager.location?.coordinate.longitude ?? 0.0))
             print("GPS 권한 설정 완료")
             print("coord : \(coord)")

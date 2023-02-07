@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A23D0297A58BF00E7D602 /* BottleDataStore.swift */; };
+		02ABC40C2990BA4B00768078 /* NearBySheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABC40B2990BA4B00768078 /* NearBySheetCell.swift */; };
 		0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F564297677E60023E745 /* Bottles_V2App.swift */; };
 		0427F569297677E80023E745 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0427F568297677E80023E745 /* Assets.xcassets */; };
 		0427F56C297677E80023E745 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0427F56B297677E80023E745 /* Preview Assets.xcassets */; };
@@ -138,6 +139,7 @@
 
 /* Begin PBXFileReference section */
 		029A23D0297A58BF00E7D602 /* BottleDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleDataStore.swift; sourceTree = "<group>"; };
+		02ABC40B2990BA4B00768078 /* NearBySheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearBySheetCell.swift; sourceTree = "<group>"; };
 		0427F561297677E60023E745 /* Bottles_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bottles_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0427F564297677E60023E745 /* Bottles_V2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2App.swift; sourceTree = "<group>"; };
 		0427F568297677E80023E745 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				27D82C4B297A875F004F3D94 /* BottomSheet.swift */,
 				27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */,
 				27281CFC2977B851003BE8B4 /* NearBySheetView.swift */,
+				02ABC40B2990BA4B00768078 /* NearBySheetCell.swift */,
 				27D82C3E297A6F29004F3D94 /* MapViewModel.swift */,
 				27A026A0298C11A300F71705 /* NaverMap.swift */,
 				27D82C57298780D8004F3D94 /* MarkerDetailView.swift */,
@@ -856,6 +859,7 @@
 				AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */,
 				27281CED297785B2003BE8B4 /* BottleView.swift in Sources */,
 				D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */,
+				02ABC40C2990BA4B00768078 /* NearBySheetCell.swift in Sources */,
 				27A0268C298B51AC00F71705 /* SearchShopList.swift in Sources */,
 				7F76AAF6298780B100AAEBCA /* View+.swift in Sources */,
 				D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */,
