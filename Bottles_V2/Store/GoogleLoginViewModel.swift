@@ -52,7 +52,7 @@ class GoogleLoginViewModel: ObservableObject {
         
         let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
         
-        Auth.auth().signIn(with: credential) { [unowned self] (_, erro) in
+        Auth.auth().signIn(with: credential) { [unowned self] (_, error) in
             if let error = error {
                 print(error.localizedDescription)
             } else {

@@ -63,6 +63,9 @@ struct TotalLoginView: View {
                     
                     Button(action: {
                         // TODO: 페이스북 로그인 로직
+                        Task {
+                            await kakaoLoginViewModel.handleKakaoLogout()
+                        }
                     }){
                         VStack {
                             Image("FacebookLogin")

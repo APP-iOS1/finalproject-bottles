@@ -36,7 +36,10 @@ class KakaoLoginViewModel: ObservableObject {
                 print("loginWithKakaoTalk() success.")
                 //TODO: FirebaseAuth에 심어야 함
                 //do something
-                _ = oauthToken
+                if let oauthToken = oauthToken {
+                    print("카카오톡: \(oauthToken)")
+                    self.signUpInFirebase()
+                }
             }
         }
     }
@@ -51,7 +54,10 @@ class KakaoLoginViewModel: ObservableObject {
                     print("loginWithKakaoAccount() success.")
                     //TODO: FirebaseAuth에 심어야 함
                     //do something
-                    _ = oauthToken
+                    if let oauthToken = oauthToken {
+                        print("카카오톡: \(oauthToken)")
+                        self.signUpInFirebase()
+                    }
                 }
             }
     }
@@ -64,6 +70,43 @@ class KakaoLoginViewModel: ObservableObject {
             else {
                 print("logout() success.")
             }
+        }
+    }
+    
+    // MARK: - 카카오톡 계정 파이어베이스 auth에 추가
+    func signUpInFirebase() {
+        UserApi.shared.me() { user, error in
+            if let error = error {
+                print("카카오톡 사용자 정보 가져오기 에러: \(error.localizedDescription)")
+            } else {
+                // 파이어베이스 유저 생성
+                Auth.auth().createUser(withEmail: (user?.kakaoAccount?.email)!, password: "\(String(describing: user?.id))") { result, error in
+                    print("email: \(String(describing: user?.kakaoAccount?.email))")
+                    
+                    print("userid: \(String(describing: user?.id))")
+                    
+                    if let error = error {
+                        print("파이어베이스 사용자 생성 실패: \(error.localizedDescription)")
+                        print("파이어베이스 로그인 시작")
+                        Auth.auth().signIn(withEmail: (user?.kakaoAccount?.email)!, password: "\(String(describing: user?.id))") { result, error in
+                            if let error = error {
+                                print("로그인 에러: \(error.localizedDescription)")
+                                return
+                            } else {
+                                print("카카오 파이어베이스 어스 로그인 성공")
+                            }
+                            
+                        }
+                       
+                    } else {
+                        print("파이어베이스 사용자 생성 성공")
+
+                    }
+                    
+                }
+                
+            }
+            
         }
     }
 }
