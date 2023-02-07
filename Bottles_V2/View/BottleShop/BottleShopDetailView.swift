@@ -11,10 +11,10 @@ import Foundation
 // 바틀샵뷰 내 "매장 정보" 뷰
 struct BottleShopDetailView: View {
     
-    //    @Binding var mappinShopID : ShopModel
-    
-    /// 주소 복사를 했을 때 주소 복사 알림을 띄워줌
+    // 주소 복사를 했을 때 주소 복사 알림을 띄워줌
     @State private var isShowingPasted_Address: Bool = false
+    
+    // 연락처 복사를 했을 때 연락처 복사 알림을 띄워줌
     @State private var isShowingPasted_PhoneNumber: Bool = false
     
     var bottleShop: ShopModel
@@ -26,10 +26,12 @@ struct BottleShopDetailView: View {
             ScrollView{
                 // 데이터 연동 시 "바틀샵 위치" 연동
                 // 맵뷰 위에 핀 띄워줘야 함
-                VStack{
-                    VStack{
+                VStack(alignment: .leading){
+                    HStack{
+                        Spacer()
                         Text("bottleshop 위치")
                         //                NaverMap((37.56668, 126.978419), .constant(false), $mappinShopID)
+                        Spacer()
                     }
                     .frame(height: 442)
                     
@@ -42,7 +44,10 @@ struct BottleShopDetailView: View {
                         
                         HStack{
                             VStack{
-                                Image("Mappin.bottleshop")
+                                VStack{
+                                    Image("Mappin.bottleshop")
+                                }
+                                Spacer()
                             }
                             // 데이터 연동 시 "바틀샵 주소" 연동
                             Text(bottleShop.shopAddress)
@@ -66,7 +71,10 @@ struct BottleShopDetailView: View {
                         
                         HStack{
                             VStack{
-                                Image("House.bottleshop")
+                                VStack{
+                                    Image("House.bottleshop")
+                                }
+                                Spacer()
                             }
                             // 데이터 연동 시 "바틀샵 sns" 연동
                             Text(bottleShop.shopSNS)
@@ -74,7 +82,10 @@ struct BottleShopDetailView: View {
                         
                         HStack{
                             VStack{
-                                Image("Phone.bottleshop")
+                                VStack{
+                                    Image("Phone.bottleshop")
+                                }
+                                Spacer()
                             }
                             // 데이터 연동 시 "바틀샵 연락처" 연동
                             Text(bottleShop.shopPhoneNumber)
@@ -104,14 +115,23 @@ struct BottleShopDetailView: View {
                             
                             // 데이터 연동 시 "바틀샵 운영시간" 연동
                             VStack(alignment: .leading){
+                                
+                                // 바틀샵 운영시간 받아옴
                                 let shopOpenCloseTime = bottleShop.shopOpenCloseTime
+                                
+                                // 바틀샵 운영시간(문자열)을 요일별로 나눌 때 사용한 "|" 문자 기준으로, 문자열을 배열로 separate시킴
                                 let seperatedshopOpenCloseTime = shopOpenCloseTime.components(separatedBy: ["|"])
                                 
                                 ForEach(seperatedshopOpenCloseTime, id: \.self){ time in
+                                    
+                                    // 바틀샵 운영시간(문자열)을 오픈시간/클로즈시간 별로 나눌 때 사용한 "/" 문자 기준으로, 문자열을 배열로 separate시킴
                                     let dayOpenCloseTime = time.components(separatedBy: ["/"])
                                     
+                                    // 바틀샵 오픈시간[1]과 클로즈시간[2]이 같을 시 휴무일로 지정
                                     if dayOpenCloseTime[1] == dayOpenCloseTime[2]{
                                         HStack{
+                                            
+                                            // 해당 요일[0]이 오늘의 요일과 같을 때
                                             if dayOpenCloseTime[0] == self.today {
                                                 Text("\(dayOpenCloseTime[0])")
                                                     .fontWeight(.bold)
@@ -128,6 +148,7 @@ struct BottleShopDetailView: View {
                                         }
                                     }else{
                                         HStack{
+                                            // 해당 요일[0]이 오늘의 요일과 같을 때
                                             if dayOpenCloseTime[0] == self.today {
                                                 Text("\(dayOpenCloseTime[0])")
                                                     .fontWeight(.bold)
@@ -149,18 +170,18 @@ struct BottleShopDetailView: View {
                         
                     }
                     .font(.bottles15)
-                    .padding(.horizontal, 5)
+                    .padding(.horizontal, 15)
                 }
+                
             }
         }
         .onAppear(){
+            // 대한민국의 날짜(요일) 계산
             koreanDate()
         }
+        
         // 데이터 연동 시 "바틀샵 이름" 연동
         .navigationBarTitle("바틀샵 이름")
-        //        .sheet(isPresented: $showingSheet) {
-        //
-        //        }
         
         //MARK: - 주소복사 버튼 눌렀을 시 뜨는 알림
         
@@ -227,14 +248,14 @@ struct BottleShopDetailView: View {
         //        }
     }
     
-    // MARK: - 대한민국 날짜 계산
+    // MARK: - 대한민국의 날짜(요일) 계산
     func koreanDate() {
         let date = Date()
         let dateFormatter = DateFormatter()
         
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.setLocalizedDateFormatFromTemplate("EEEE")
-        var dayInKorean = dateFormatter.string(from: date)
+        let dayInKorean = dateFormatter.string(from: date)
         today = String(dayInKorean[0])
         
         print("Today is \(dayInKorean) in Korean")

@@ -17,8 +17,8 @@ enum bottleShopInfo : String, CaseIterable {
 struct BottleShopView: View {
     
     @State private var bookmarkToggle: Bool = false
-    @State private var bookmarkToggle_fill: Bool = false
-    @State private var bookmarkToggle_empty: Bool = false
+    @State var bookmarkToggle_fill: Bool = false
+    @State var bookmarkToggle_empty: Bool = false
     @State private var isSearchView: Bool = true
     @State private var selectedPicker: bottleShopInfo = .bottle
     
@@ -29,16 +29,10 @@ struct BottleShopView: View {
     
     @Namespace private var animation
     
-//    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     
     var bottleShop: ShopModel
-    
-//    @Binding var mappinShopID : ShopModel
-    
-    // 임의로 가게 전화번호 지정 (데이터 연동시 삭제)
-//    var phoneNumber = "718-555-5555"
     
     // 검색 결과를 필터링해주는 연산 프로퍼티
     var filteredResult: [BottleModel] {
@@ -58,7 +52,7 @@ struct BottleShopView: View {
                         AsyncImage(url: URL(string: String(bottleShop.shopTitleImage)), content: { image in
                             image
                                 .resizable()
-//                                .scaledToFit()
+                            //                                .scaledToFit()
                                 .aspectRatio(contentMode: .fit)
                         }, placeholder: {
                             Image("ready_image")
@@ -96,12 +90,12 @@ struct BottleShopView: View {
                                     UIApplication.shared.open(url)
                                     
                                 }
-//                                let phone = "tel://"
-//
-//                                // 데이터 연동 시 "shopPhoneNumber" 연동 (phoneNumber 자리에)
-//                                let phoneNumberformatted = phone + bottleShop.shopPhoneNumber
-//                                guard let url = URL(string: phoneNumberformatted) else { return }
-//                                UIApplication.shared.open(url)
+                                //                                let phone = "tel://"
+                                //
+                                //                                // 데이터 연동 시 "shopPhoneNumber" 연동 (phoneNumber 자리에)
+                                //                                let phoneNumberformatted = phone + bottleShop.shopPhoneNumber
+                                //                                guard let url = URL(string: phoneNumberformatted) else { return }
+                                //                                UIApplication.shared.open(url)
                                 
                                 print(bottleShop.shopPhoneNumber)
                             }){
@@ -165,26 +159,43 @@ struct BottleShopView: View {
                         .padding(.horizontal)
                         .padding(.top, -15)
                         
-                        // "큐레이션 뷰"로 이동
-                        NavigationLink(destination: BottleShopCurationView(bottleShop: bottleShop)){
+                        if bottleShop.shopCurationTitle == "" {
                             HStack{
-                                
-                                // 데이터 연동 시 "shopCurationTitle" 연동
-                                Text(bottleShop.shopCurationTitle)
-                                Spacer()
-                                Image(systemName: "chevron.right")
+                                Image(systemName: "wineglass")
                                     .padding(.leading, -5)
-                                
+                                Text("큐레이션 준비 중이에요!")
+                                Spacer()
                             }
                             .fontWeight(.semibold)
+                            .foregroundColor(.gray)
+                            .font(.bottles14)
+                            .padding()
+                            .background(Color.purple_3)
+                            .cornerRadius(12)
+                            .padding(.horizontal)
+                            .padding(.vertical, 5)
+                            
+                        }else{
+                            // 큐레이션 있을 시 "큐레이션 뷰"로 이동
+                            NavigationLink(destination: BottleShopCurationView(bottleShop: bottleShop)){
+                                HStack{
+                                    
+                                    // 데이터 연동 시 "shopCurationTitle" 연동
+                                    Text(bottleShop.shopCurationTitle)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .padding(.leading, -5)
+                                    
+                                }
+                                .fontWeight(.semibold)
+                            }
+                            .font(.bottles14)
+                            .padding()
+                            .background(Color.purple_3)
+                            .cornerRadius(12)
+                            .padding(.horizontal)
+                            .padding(.vertical, 5)
                         }
-                        .font(.bottles14)
-                        .padding()
-                        .background(Color.purple_3)
-                        .cornerRadius(12)
-                        .padding(.horizontal)
-                        .padding(.vertical, 5)
-                        
                         VStack {
                             animate()
                             BottleShopInfoView(bottleShopInfo: selectedPicker, search: $search, focus: _focus, isNavigationBarHidden: $isNavigationBarHidden, bottleShop: bottleShop)
@@ -195,8 +206,6 @@ struct BottleShopView: View {
                 
                 // MARK: - 상품검색 클릭시 navigationbarhidden 후 상단에 나오는 검색창
                 if search {
-//                    Color(.gray)
-//                        .opacity(0.3)
                     VStack{
                         HStack {
                             TextField(" 이 바틀샵의 상품 검색", text: $testSearchText)
@@ -302,12 +311,12 @@ struct BottleShopView: View {
             }
             .navigationBarHidden(isNavigationBarHidden)
             .toolbar { // <-
-                    NavigationLink {
-                        CartView()
-                    } label: {
-                      Image("cart")
-                    }
-                  }
+                NavigationLink {
+                    CartView()
+                } label: {
+                    Image("cart")
+                }
+            }
         }
     }
     

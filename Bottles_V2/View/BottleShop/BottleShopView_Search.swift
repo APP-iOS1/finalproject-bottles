@@ -25,8 +25,6 @@ struct BottleShopView_Search: View {
     @FocusState var focus: Bool
     @Binding var isNavigationBarHidden: Bool
     
-//    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
-    
     @EnvironmentObject var bottleDataStore: BottleDataStore
     
     var bottleShop: ShopModel
@@ -76,8 +74,9 @@ struct BottleShopView_Search: View {
                             Text("이 바틀샵의 상품 검색")
                                 .font(.bottles16)
                                 .foregroundColor(.gray)
+                                .padding(.leading, -8)
                                 .padding(7)
-                                .padding(.trailing, 25)
+                            
 
                             Spacer()
                         }

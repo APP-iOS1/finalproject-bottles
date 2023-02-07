@@ -12,7 +12,6 @@ struct BottleShopCurationView: View {
     @State private var selectedSort = Sort.automatic
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
-//    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
     
     @EnvironmentObject var bottleDataStore: BottleDataStore
     
@@ -41,19 +40,20 @@ struct BottleShopCurationView: View {
         ScrollView{
             VStack{
                 ZStack{
+                                        
                     // 데이터 연동 시 "shopCurationImage" 연동
-                    AsyncImage(url: URL(string: "https://images.unsplash.com/photo-1591243315780-978fd00ff9db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80")) { image in
+                    AsyncImage(url: URL(string: String(bottleShop.shopCurationImage)), content: { image in
                         image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 370)
-                    } placeholder: {
+                    }, placeholder: {
                         Rectangle()
                             .frame(width: 370, height: 370)
-                    }
+                    })
                     .cornerRadius(12, corners: [.topLeft, .topRight])
                     .foregroundColor(.white)
-                }
+                        }
                     
                     
                     VStack{
@@ -77,6 +77,8 @@ struct BottleShopCurationView: View {
                             
                             // 데이터 연동 시 "shopCurationBody" 연동
                             let shopCurationBody = bottleShop.shopCurationBody
+                            
+                            // 줄 바꿈시 사용한 "|"을 기준으로 문자열을 배열로 나눔
                             let seperatedshopCurationBody = shopCurationBody.components(separatedBy: ["|"])
                             ForEach(seperatedshopCurationBody, id: \.self){ curationBody in
                                 
@@ -84,7 +86,7 @@ struct BottleShopCurationView: View {
                                     .padding(.top, 1)
                                     .font(.bottles14)
                                     .foregroundColor(.black)
-                                    .padding(.bottom, -7)
+                                    .padding(.bottom, -6)
                             }
                             }
                             .padding(.horizontal, 1)
@@ -157,6 +159,8 @@ struct BottleShopCurationView: View {
     }
 }
 
+
+// MARK: - cornerRadius 각별로 다르게 사용하기 위함
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
