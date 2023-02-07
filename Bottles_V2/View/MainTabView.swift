@@ -42,10 +42,6 @@ struct MainTabView: View {
                 Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                 Text("MY")
             }.tag(4)
-            TestLoginView().tabItem {
-                Image(selection == 1 ? "Map_tab_fill" : "Map_tab")
-                Text("로그인테스트")
-            }.tag(5)
         }
         .toolbarBackground(Color.white, for: .tabBar)
 

@@ -22,7 +22,6 @@ struct MapView: View {
     @State var isShowingSheet: Bool = false
     @State var showMarkerDetailView: Bool = false
     @State var currentShopIndex: Int = 0
-    @State var coord: (Double, Double) = (37.56668, 126.978419)
     
     var body: some View {
         NavigationStack {

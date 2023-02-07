@@ -32,7 +32,7 @@ struct Bottles_V2App: App {
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
             //LaunchView()
-            BottleView()
+            LaunchView()
             // coreData
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(bottleDataStore)
