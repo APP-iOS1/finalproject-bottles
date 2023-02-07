@@ -21,6 +21,8 @@
 		04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B8A1297B00EB0098DE93 /* SessionView.swift */; };
 		26A66485298CC6F1004E15EA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66484298CC6F1004E15EA /* User.swift */; };
 		26A66487298CC865004E15EA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66486298CC865004E15EA /* UserStore.swift */; };
+		26BA41C6299136F100419584 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C5299136F100419584 /* Cart.swift */; };
+		26BA41C82991389D00419584 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C72991389D00419584 /* CartStore.swift */; };
 		26D0E4382979164400524943 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		27281CE32977854D003BE8B4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE22977854D003BE8B4 /* MapView.swift */; };
 		27281CE62977856A003BE8B4 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE52977856A003BE8B4 /* CartView.swift */; };
@@ -65,6 +67,8 @@
 		3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5C2977C8BD00EB8551 /* BottleShopView_BottleList.swift */; };
 		3AA43A612977E0AB00EB8551 /* BottleShopView_NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A602977E0AB00EB8551 /* BottleShopView_NoticeCell.swift */; };
 		59883C3FF144E2CA845F4DE6 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */; };
+		7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */; };
+		7F0C61FD2990C30C00B4CE4D /* SentEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */; };
 		7F2142BC2977956D0046D420 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BB2977956D0046D420 /* SettingView.swift */; };
 		7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BD2977AF290046D420 /* PickUpListView.swift */; };
 		7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */; };
@@ -78,14 +82,17 @@
 		7F76AAF6298780B100AAEBCA /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F76AAF5298780B100AAEBCA /* View+.swift */; };
 		7FB3D69E298CAB5300EA8884 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */; };
 		7FB3D6A0298CB97B00EA8884 /* CustomAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3D69F298CB97B00EA8884 /* CustomAlertModifier.swift */; };
-		9216C1B92977AF1D00217C7F /* ReservationView_Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1B82977AF1D00217C7F /* ReservationView_Sheet.swift */; };
+		92158B5429908DD100FCB475 /* BottleView_BottleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92158B5329908DD100FCB475 /* BottleView_BottleCell.swift */; };
+		92158B56299099FA00FCB475 /* ReservationView_OutOfFocus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92158B55299099FA00FCB475 /* ReservationView_OutOfFocus.swift */; };
+		9216C1B92977AF1D00217C7F /* ReservationView_Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1B82977AF1D00217C7F /* ReservationView_Content.swift */; };
 		9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */; };
 		9216C1BD2977B4BF00217C7F /* ReservedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BC2977B4BF00217C7F /* ReservedView.swift */; };
 		9216C1BF2977B5E100217C7F /* ReservedView_BottleShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9216C1BE2977B5E100217C7F /* ReservedView_BottleShop.swift */; };
 		923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D1D3F297E783D00988EE3 /* ReservationPageView_BottleCell.swift */; };
 		92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9A297E3B7C00580EC2 /* ReservationView.swift */; };
 		92906F9D297E3EB600580EC2 /* BottleView_Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */; };
-		9293B9DB297A544E00E1EB34 /* BottleView_ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */; };
+		9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */; };
+		9293B9DB297A544E00E1EB34 /* ReservedView_ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */; };
 		ABE1CA6E6BE31F60C644A53F /* Pods_Bottles_V2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */; };
 		AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */; };
 		AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070002977B1B000AF9D1B /* BookMarkShopList.swift */; };
@@ -150,6 +157,8 @@
 		1E38E30FED3A6D500B88EE64 /* Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; sourceTree = "<group>"; };
 		26A66484298CC6F1004E15EA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		26A66486298CC865004E15EA /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
+		26BA41C5299136F100419584 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		26BA41C72991389D00419584 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
 		27281CE22977854D003BE8B4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		27281CE52977856A003BE8B4 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27281CEA297785AA003BE8B4 /* BottleShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView.swift; sourceTree = "<group>"; };
@@ -192,6 +201,8 @@
 		4F05C0664583932B22FDC119 /* Pods-Bottles_V2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F497AFA31D64A6C7C8D5DAB /* Pods-Bottles_V2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.debug.xcconfig"; sourceTree = "<group>"; };
 		534C0901FECD300F1E9C28B3 /* Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordView.swift; sourceTree = "<group>"; };
+		7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentEmailView.swift; sourceTree = "<group>"; };
 		7F2142BB2977956D0046D420 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		7F2142BD2977AF290046D420 /* PickUpListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListView.swift; sourceTree = "<group>"; };
 		7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpListCell.swift; sourceTree = "<group>"; };
@@ -205,14 +216,17 @@
 		7F76AAF5298780B100AAEBCA /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		7FB3D69F298CB97B00EA8884 /* CustomAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertModifier.swift; sourceTree = "<group>"; };
-		9216C1B82977AF1D00217C7F /* ReservationView_Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_Sheet.swift; sourceTree = "<group>"; };
+		92158B5329908DD100FCB475 /* BottleView_BottleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_BottleCell.swift; sourceTree = "<group>"; };
+		92158B55299099FA00FCB475 /* ReservationView_OutOfFocus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_OutOfFocus.swift; sourceTree = "<group>"; };
+		9216C1B82977AF1D00217C7F /* ReservationView_Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_Content.swift; sourceTree = "<group>"; };
 		9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView.swift; sourceTree = "<group>"; };
 		9216C1BC2977B4BF00217C7F /* ReservedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView.swift; sourceTree = "<group>"; };
 		9216C1BE2977B5E100217C7F /* ReservedView_BottleShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView_BottleShop.swift; sourceTree = "<group>"; };
 		923D1D3F297E783D00988EE3 /* ReservationPageView_BottleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView_BottleCell.swift; sourceTree = "<group>"; };
 		92906F9A297E3B7C00580EC2 /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 		92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Detail.swift; sourceTree = "<group>"; };
-		9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_ShopCell.swift; sourceTree = "<group>"; };
+		9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_Content_Amount.swift; sourceTree = "<group>"; };
+		9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView_ShopCell.swift; sourceTree = "<group>"; };
 		92D45CA42988B35300DB4D11 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView_Info.swift; sourceTree = "<group>"; };
 		92D45CAA2988FC2B00DB4D11 /* BottleView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Info.swift; sourceTree = "<group>"; };
@@ -400,6 +414,8 @@
 			children = (
 				27281CE52977856A003BE8B4 /* CartView.swift */,
 				D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */,
+				26BA41C5299136F100419584 /* Cart.swift */,
+				26BA41C72991389D00419584 /* CartStore.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -425,14 +441,17 @@
 				27281CEC297785B2003BE8B4 /* BottleView.swift */,
 				92D45CAA2988FC2B00DB4D11 /* BottleView_Info.swift */,
 				92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */,
-				9293B9DA297A544E00E1EB34 /* BottleView_ShopCell.swift */,
+				92158B5329908DD100FCB475 /* BottleView_BottleCell.swift */,
 				92906F9A297E3B7C00580EC2 /* ReservationView.swift */,
-				9216C1B82977AF1D00217C7F /* ReservationView_Sheet.swift */,
+				92158B55299099FA00FCB475 /* ReservationView_OutOfFocus.swift */,
+				9216C1B82977AF1D00217C7F /* ReservationView_Content.swift */,
+				9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */,
 				9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */,
-				92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */,
 				923D1D3F297E783D00988EE3 /* ReservationPageView_BottleCell.swift */,
+				92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */,
 				9216C1BC2977B4BF00217C7F /* ReservedView.swift */,
 				9216C1BE2977B5E100217C7F /* ReservedView_BottleShop.swift */,
+				9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */,
 			);
 			path = Bottle;
 			sourceTree = "<group>";
@@ -538,6 +557,8 @@
 				7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */,
 				7F5857B5298A35FB003402B0 /* TotalLoginView.swift */,
 				7F5857B7298A37E3003402B0 /* EmailLoginView.swift */,
+				7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */,
+				7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */,
 			);
 			path = LoginView;
 			sourceTree = "<group>";
@@ -840,6 +861,7 @@
 				D5E26941298B40E700C975F4 /* TestRegisterView.swift in Sources */,
 				D5E26943298B433800C975F4 /* TestLoginView.swift in Sources */,
 				AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */,
+				92158B56299099FA00FCB475 /* ReservationView_OutOfFocus.swift in Sources */,
 				D7DBD7ED2988EA52002684DC /* UserDataStore.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
 				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
@@ -847,12 +869,13 @@
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
 				7F5857B6298A35FB003402B0 /* TotalLoginView.swift in Sources */,
 				7F2142BC2977956D0046D420 /* SettingView.swift in Sources */,
+				26BA41C82991389D00419584 /* CartStore.swift in Sources */,
 				26D0E4382979164400524943 /* (null) in Sources */,
 				D7DBD7EE2988EA52002684DC /* ShopDataStore.swift in Sources */,
 				9216C1BF2977B5E100217C7F /* ReservedView_BottleShop.swift in Sources */,
 				27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
-				9216C1B92977AF1D00217C7F /* ReservationView_Sheet.swift in Sources */,
+				9216C1B92977AF1D00217C7F /* ReservationView_Content.swift in Sources */,
 				D5769B31298C8E73005528DB /* AuthStore.swift in Sources */,
 				27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */,
 				3A306746297A82BE0085CC6A /* Color.swift in Sources */,
@@ -860,6 +883,7 @@
 				26A66485298CC6F1004E15EA /* User.swift in Sources */,
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
+				7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */,
 				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,
 				27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */,
 				AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */,
@@ -873,6 +897,7 @@
 				04F8B89E297A652F0098DE93 /* LogInView.swift in Sources */,
 				7F5857B4298A00AD003402B0 /* Image+.swift in Sources */,
 				04F8B8A0297A83020098DE93 /* ConfirmationView.swift in Sources */,
+				92158B5429908DD100FCB475 /* BottleView_BottleCell.swift in Sources */,
 				27A0268E298B51AC00F71705 /* SearchViewSearchBar.swift in Sources */,
 				04F8B89A297A64900098DE93 /* SessionManager.swift in Sources */,
 				276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */,
@@ -888,12 +913,13 @@
 				27A02691298B572600F71705 /* Modifiers.swift in Sources */,
 				3AA43A5729778EFB00EB8551 /* BottleShopView_Notice.swift in Sources */,
 				7FB3D6A0298CB97B00EA8884 /* CustomAlertModifier.swift in Sources */,
+				26BA41C6299136F100419584 /* Cart.swift in Sources */,
 				27A026A1298C11A300F71705 /* NaverMap.swift in Sources */,
 				D7B5EA59298CFEBB00DC648A /* LaunchView.swift in Sources */,
 				3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
 				7FB3D69E298CAB5300EA8884 /* CustomAlertView.swift in Sources */,
-				9293B9DB297A544E00E1EB34 /* BottleView_ShopCell.swift in Sources */,
+				9293B9DB297A544E00E1EB34 /* ReservedView_ShopCell.swift in Sources */,
 				27281CFD2977B851003BE8B4 /* NearBySheetView.swift in Sources */,
 				27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */,
 				27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */,
@@ -903,7 +929,9 @@
 				7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */,
 				9216C1BB2977B0DB00217C7F /* ReservationPageView.swift in Sources */,
 				AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */,
+				7F0C61FD2990C30C00B4CE4D /* SentEmailView.swift in Sources */,
 				27A0269F298C064F00F71705 /* SideButtonCell.swift in Sources */,
+				9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,
 				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,

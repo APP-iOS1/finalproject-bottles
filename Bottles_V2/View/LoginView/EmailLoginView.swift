@@ -47,16 +47,13 @@ struct EmailLoginView: View {
                 // TODO: 로그인 로직이 들어오면 입력한 아이디, 비밀번호가 틀릴 경우 뷰에 보여줌
                 print("\(authStore.isLogin)")
                 authStore.login(email: email, password: password)
-            
-               
-                Task{
-                    
-                }
+        
             }){
                 Text("로그인")
                     .modifier(EmailViewButtonModifier(width: 280, height: 48))
             }
-            Button(action:{
+            
+            Button(action: {
                 authStore.logout()
             }){
                 Text("로그아웃")
@@ -68,7 +65,7 @@ struct EmailLoginView: View {
             }
             .padding(.top, 24)
             .padding(.bottom, 16)
-            NavigationLink(destination: Text("비밀번호 찾기")){
+            NavigationLink(destination: FindPasswordView(authStore: authStore)){
                 Text("비밀번호 찾기")
                     .modifier(LoginViewNavigationLinkModifier())
             }
@@ -134,7 +131,7 @@ struct LoginTextFieldModifier: ViewModifier {
             .font(.bottles16)
             .padding()
             .textInputAutocapitalization(.never) // 처음 문자를 자동으로 대문자로 바꾸는걸 막기
-            .frame(width: width)
+            .frame(width: width, height: height)
             .background{
                 RoundedRectangle(cornerRadius: 12)
                     .foregroundColor(.gray_f7)
