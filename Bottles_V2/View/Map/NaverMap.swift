@@ -32,7 +32,6 @@ struct NaverMap: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, NMFMapViewCameraDelegate, NMFMapViewTouchDelegate {
-        @Binding var moveToUserLocation: Bool
         @Binding var showMarkerDetailView: Bool
         var coord: (Double, Double)
         var userLocation: (Double, Double)
@@ -147,7 +146,7 @@ struct NaverMap: UIViewRepresentable {
         let circle = NMFCircleOverlay()
         circle.center = NMGLatLng(lat: userLocation.0, lng: userLocation.1)
         circle.radius = 5000
-        circle.mapView = uiView.mapView
+        circle.mapView = nil
         
         // MARK: - 현재 위치 좌표 overlay 마커 표시
         let locationOverlay = uiView.mapView.locationOverlay
