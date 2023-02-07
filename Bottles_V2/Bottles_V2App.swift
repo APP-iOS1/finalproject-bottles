@@ -8,6 +8,8 @@
 import SwiftUI
 import UIKit
 import FirebaseCore
+import KakaoSDKCommon
+import KakaoSDKAuth
 import FirebaseFirestore
 
 @main
@@ -20,19 +22,30 @@ struct Bottles_V2App: App {
     // coreData
     @StateObject var dataController = DataController()
     
-    
+
+    @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
+
+
     init() {
         FirebaseApp.configure()
+        KakaoSDK.initSDK(appKey: "f2abf38572d20d5dde71ea5c33a02c07")
     }
     
     var body: some Scene {
+        
         WindowGroup {
-//            TotalLoginView()
-//                .environmentObject(UserStore())
+     //       TotalLoginView()
+     //          .environmentObject(UserStore()).environmentObject(googleLoginViewModel)
+     //           .onOpenURL(perform: { url in
+     //               if AuthApi.isKakaoTalkLoginUrl(url) {
+     //                   AuthController.handleOpenUrl(url: url)
+     //              }
+     //           })
 //            MainTabView()
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
-            //LaunchView()
+         
+
             LaunchView()
             // coreData
                 .environment(\.managedObjectContext, dataController.container.viewContext)
@@ -41,11 +54,12 @@ struct Bottles_V2App: App {
                 .environmentObject(reservationDataStore)
                 .environmentObject(userDataStore)
                 .task {
-                    userDataStore.readUser(userId: "jdyoung1002@naver.com")
+                    userDataStore.readUser(userId: "test@naver.com")
                     await shopDataStore.getAllShopData()
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.getAllResevationData()
                 }
+
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))
