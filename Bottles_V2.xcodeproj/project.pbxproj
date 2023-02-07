@@ -21,6 +21,8 @@
 		04F8B8A2297B00EB0098DE93 /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F8B8A1297B00EB0098DE93 /* SessionView.swift */; };
 		26A66485298CC6F1004E15EA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66484298CC6F1004E15EA /* User.swift */; };
 		26A66487298CC865004E15EA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66486298CC865004E15EA /* UserStore.swift */; };
+		26BA41C6299136F100419584 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C5299136F100419584 /* Cart.swift */; };
+		26BA41C82991389D00419584 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C72991389D00419584 /* CartStore.swift */; };
 		26D0E4382979164400524943 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		27281CE32977854D003BE8B4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE22977854D003BE8B4 /* MapView.swift */; };
 		27281CE62977856A003BE8B4 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE52977856A003BE8B4 /* CartView.swift */; };
@@ -154,6 +156,8 @@
 		1E38E30FED3A6D500B88EE64 /* Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; sourceTree = "<group>"; };
 		26A66484298CC6F1004E15EA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		26A66486298CC865004E15EA /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
+		26BA41C5299136F100419584 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		26BA41C72991389D00419584 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
 		27281CE22977854D003BE8B4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		27281CE52977856A003BE8B4 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27281CEA297785AA003BE8B4 /* BottleShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView.swift; sourceTree = "<group>"; };
@@ -408,6 +412,8 @@
 			children = (
 				27281CE52977856A003BE8B4 /* CartView.swift */,
 				D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */,
+				26BA41C5299136F100419584 /* Cart.swift */,
+				26BA41C72991389D00419584 /* CartStore.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -860,6 +866,7 @@
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
 				7F5857B6298A35FB003402B0 /* TotalLoginView.swift in Sources */,
 				7F2142BC2977956D0046D420 /* SettingView.swift in Sources */,
+				26BA41C82991389D00419584 /* CartStore.swift in Sources */,
 				26D0E4382979164400524943 /* (null) in Sources */,
 				D7DBD7EE2988EA52002684DC /* ShopDataStore.swift in Sources */,
 				9216C1BF2977B5E100217C7F /* ReservedView_BottleShop.swift in Sources */,
@@ -902,6 +909,7 @@
 				27A02691298B572600F71705 /* Modifiers.swift in Sources */,
 				3AA43A5729778EFB00EB8551 /* BottleShopView_Notice.swift in Sources */,
 				7FB3D6A0298CB97B00EA8884 /* CustomAlertModifier.swift in Sources */,
+				26BA41C6299136F100419584 /* Cart.swift in Sources */,
 				27A026A1298C11A300F71705 /* NaverMap.swift in Sources */,
 				D7B5EA59298CFEBB00DC648A /* LaunchView.swift in Sources */,
 				3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */,
