@@ -64,7 +64,7 @@ struct SearchShopList: View {
                 ScrollView {
                     ForEach(sortShopData(), id: \.self) { shop in
                         NavigationLink {
-                            BottleShopView()
+//                            BottleShopView(bottleShop: <#ShopModel#>)
                         } label: {
                             SearchShopListCell(shopInfo: shop)
                         }

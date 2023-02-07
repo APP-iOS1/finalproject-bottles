@@ -36,7 +36,9 @@ struct NotificationView: View {
                     }
                     Divider()
                         .background(.black)
-                    NavigationLink(destination: BottleShopCurationView()){
+                    
+                    // BottleShopCurationView()로 변경해야 함
+                    NavigationLink(destination: BottleView()){
                         NotificationCell(title: "저장한 바틀샵의 새로운 소식",
                         description: "새로운 큐레이션 타이틀", time: "4시간 전")
                     }
