@@ -44,8 +44,8 @@ struct SearchViewSearchBar: View {
             
             HStack {
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(.accentColor)
-                    .bold()
+                    .foregroundColor(.black)
+                    .font(.system(size: 18))
                 // 검색바 TextField
                 // onEditingChanged : TextField 편집 상태를 bool값으로 받는다
                 // onCommit : TextField 작업 중 Return 키를 누를 때 수행할 작업
@@ -78,12 +78,11 @@ struct SearchViewSearchBar: View {
                 }
             }
             .padding(10)
-            .frame(width: 270, height: 50)
+            .frame(width: 270, height: 52)
             .background{
-                Color.white
+                Color.gray_f7
             }
-            .cornerRadius(10)
-            .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
+            .cornerRadius(12)
         }
     }
     func addSearchHistory() {

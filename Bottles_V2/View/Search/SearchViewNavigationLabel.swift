@@ -18,17 +18,16 @@ struct SearchViewNavigationLabel: View {
                     .padding(.leading, 5)
                 Spacer()
                 Image(systemName: "magnifyingglass")
-                    .foregroundColor(.accentColor)
-                    .bold()
+                    .foregroundColor(.black)
+                    .font(.system(size: 18))
                     .padding(.trailing, 5)
             }
             .padding(10)
-            .frame(width: 300, height: 50, alignment: .leading)
+            .frame(width: 294, height: 52, alignment: .leading)
             .background{
-                Color.white
+                Color.gray_f7
             }
-            .cornerRadius(10)
-            .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
+            .cornerRadius(12)
         }
     }
 }

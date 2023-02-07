@@ -12,22 +12,28 @@ struct BottleShopCurationView: View {
     @State private var selectedSort = Sort.automatic
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
-    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
+//    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
     
-    var sortedBottleData: [BottleItem22] {
-        let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
-        return bottleItems.sorted(by: {$0.name < $1.name})
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    
+    var bottleShop: ShopModel
+    
+    var sortedBottleData: [BottleModel] {
+        let bottleItems: [BottleModel] = bottleDataStore.bottleData
+        return bottleItems.sorted(by: {$0.itemName < $1.itemName})
     }
     
-    func sortBottleData() -> [BottleItem22] {
-        let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
+    func sortBottleData() -> [BottleModel] {
+        let bottleItems: [BottleModel] = bottleDataStore.bottleData
+        let test = bottleItems.filter{ $0.shopID == bottleShop.id }
+        
         switch selection {
         case "낮은 가격순":
-            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price < $1.price})
+            return test.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
-            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price > $1.price})
+            return test.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {$0.itemPrice > $1.itemPrice})
         default:
-            return bottleItems.sorted(by: {$0.name < $1.name})
+            return test.sorted(by: {$0.shopName < $1.shopName})
         }
     }
 
@@ -57,29 +63,41 @@ struct BottleShopCurationView: View {
                         VStack(alignment: .leading){
                             
                             // 데이터 연동 시 "shopCurationTitle" 연동
-                            Text("연말 파티에 어울리는 스파클링 와인들")
-                                .font(.bottles18)
-                                .fontWeight(.bold)
-                                .foregroundColor(.accentColor)
-                                .padding(.bottom, -2)
-                                .padding(.top)
+                            HStack{
+                                Text(bottleShop.shopCurationTitle)
+                                    .font(.bottles18)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.accentColor)
+                                    .padding(.bottom, -1)
+                                    .padding(.top)
+                                
+                                Spacer()
+                                    .frame(width: 1)
+                            }
                             
                             // 데이터 연동 시 "shopCurationBody" 연동
-                            Text("다가오는 연말, 친구 / 연인 / 가족과 함께 \n부담없이 마시기 좋은 스파클링 와인을 추천합니다. \n어떤 음식과 페어링해도 평타 이상일 거예요!")
-                                .padding(.top, 1)
-                                .font(.bottles14)
-                                .foregroundColor(.black)
-                                .padding(.bottom)
-                        }
-                        .padding(.trailing)
-                        .padding(.leading, -24)
-                        .shadow(radius: 20)
-                        .background{
-                            Rectangle()
-                                .frame(width: 370)
-                                .foregroundColor(.purple_3)
-                                .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
-                        }
+                            let shopCurationBody = bottleShop.shopCurationBody
+                            let seperatedshopCurationBody = shopCurationBody.components(separatedBy: ["|"])
+                            ForEach(seperatedshopCurationBody, id: \.self){ curationBody in
+                                
+                                Text(curationBody)
+                                    .padding(.top, 1)
+                                    .font(.bottles14)
+                                    .foregroundColor(.black)
+                                    .padding(.bottom, -7)
+                            }
+                            }
+                            .padding(.horizontal, 1)
+                            .padding(.bottom, 25)
+                            //                        .padding(.leading, -24)
+                            .shadow(radius: 20)
+                            .background{
+                                Rectangle()
+                                    .frame(width: 370)
+                                    .foregroundColor(.purple_3)
+                                    .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+                            }
+                            .frame(alignment: .leading)
                     }.padding(.top, -16)
 
                 
@@ -127,7 +145,7 @@ struct BottleShopCurationView: View {
                         
                         // 바틀셀 누를 시 바틀뷰로 이동
                         NavigationLink(destination: BottleView(), label:{
-                            BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
+                            BottleShopView_BottleList(selectedItem: item)
                         })
                         
                     }
@@ -156,8 +174,8 @@ struct RoundedCorner: Shape {
     }
 }
 
-struct BottleShopCurationView_Previews: PreviewProvider {
-    static var previews: some View {
-        BottleShopCurationView()
-    }
-}
+//struct BottleShopCurationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BottleShopCurationView()
+//    }
+//}

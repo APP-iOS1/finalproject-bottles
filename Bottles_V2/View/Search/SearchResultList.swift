@@ -21,26 +21,28 @@ struct SearchResultList: View {
     @Binding var doneTextFieldEdit: Bool
     // 검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
     @FocusState var focus: Bool
-    // 테스트용 모델
-    @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
+    
+    // coreData
+    @Environment(\.managedObjectContext) var managedObjContext
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
+    
+    // Server Data Test
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    @EnvironmentObject var shopDataStore: ShopDataStore
     var testBottleAndShop: [String] {
-        let bookMarkBottles = bookMarkTestStore.BookMarkBottles
-        let bookMarkShops = bookMarkTestStore.BookMarkShops
+        let bookMarkBottles = bottleDataStore.bottleData
+        let bookMarkShops = shopDataStore.shopData
         var bottleAndShop: [String] = []
         
         for bottle in bookMarkBottles {
-            bottleAndShop.append(bottle.bottleName)
+            bottleAndShop.append(bottle.itemName)
         }
         for shop in bookMarkShops {
             bottleAndShop.append(shop.shopName)
         }
         return bottleAndShop.sorted(by: <)
     }
-    
-    // coreData
-    @Environment(\.managedObjectContext) var managedObjContext
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
-    
+
     var body: some View {
         List {
             ForEach (testBottleAndShop, id: \.self) { bottle in

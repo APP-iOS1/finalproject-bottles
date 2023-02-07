@@ -25,22 +25,28 @@ struct BottleShopView_Search: View {
     @FocusState var focus: Bool
     @Binding var isNavigationBarHidden: Bool
     
-    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
+//    @StateObject var bottleShopStore: BottleShopTestStore = BottleShopTestStore()
     
-    var sortedBottleData: [BottleItem22] {
-        let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
-        return bottleItems.sorted(by: {$0.name < $1.name})
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    
+    var bottleShop: ShopModel
+    
+    var sortedBottleData: [BottleModel] {
+        let bottleItems: [BottleModel] = bottleDataStore.bottleData
+        return bottleItems.sorted(by: {$0.itemName < $1.itemName})
     }
     
-    func sortBottleData() -> [BottleItem22] {
-        let bottleItems: [BottleItem22] = bottleShopStore.bottleItems
+    func sortBottleData() -> [BottleModel] {
+        let bottleItems: [BottleModel] = bottleDataStore.bottleData
+        let test = bottleItems.filter{ $0.shopID == bottleShop.id }
+        
         switch selection {
         case "낮은 가격순":
-            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price < $1.price})
+            return test.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
-            return bottleItems.sorted(by: {$0.name < $1.name}).sorted(by: {$0.price > $1.price})
+            return test.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {$0.itemPrice > $1.itemPrice})
         default:
-            return bottleItems.sorted(by: {$0.name < $1.name})
+            return test.sorted(by: {$0.shopName < $1.shopName})
         }
     }
     
@@ -122,7 +128,7 @@ struct BottleShopView_Search: View {
                 
                 // 바틀셀 누를 시 바틀뷰로 이동
                 NavigationLink(destination: BottleView(), label:{
-                    BottleShopView_BottleList(selectedItem: BottleItem22(name: item.name, price: item.price, category: item.category, tag: item.tag, use: item.use))
+                    BottleShopView_BottleList(selectedItem: item)
                 })
             }
             

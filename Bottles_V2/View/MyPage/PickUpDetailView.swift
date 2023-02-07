@@ -104,7 +104,8 @@ struct PickUpDetailView: View {
                 .padding(.bottom, 50)
                 
                 //MARK: - 다른 샵 보러가기 버튼
-                NavigationLink(destination: BottleShopView()){
+                // BottleShopView()로 변경해야 함
+                NavigationLink(destination: BottleView()){
                     Text("이 바틀샵의 다른 상품 보러가기")
                         .font(.bottles18)
                         .bold()
