@@ -13,9 +13,9 @@ import SwiftUI
 
 struct CartCell: View {
     
-    var bottleName: String = ""
-    var price: String = ""
-    @State var count: Int = 1
+    var cartStore: CartStore
+    var userStore: UserStore
+    var cart: Cart
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -30,12 +30,12 @@ struct CartCell: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 10) {
                     // MARK: - 바틀 이름
-                    Text(bottleName)
+                    Text(cart.bottleId)
                         .font(.bottles14)
                         .fontWeight(.medium)
                     
                     // MARK: - 바틀 가격
-                    Text("\(price)")
+                    Text("\(cart.eachPrice * cart.itemCount)")
                         .font(.bottles18)
                         .fontWeight(.bold)
                     
@@ -56,7 +56,7 @@ struct CartCell: View {
     // MARK: -View : 삭제 버튼
     private var deleteButton : some View {
         Button {
-            // 뷰에서 삭제하는 기능 추가
+            cartStore.deleteCart(cart: cart, userEmail: userStore.user.email)
         } label : {
             Image(systemName: "multiply")
                 .foregroundColor(.black)
@@ -64,7 +64,7 @@ struct CartCell: View {
         .padding(.bottom, 20)
     }
     
-    // MARK: -View : 증감 버튼
+    // MARK: -View : 수량 관리 버튼
     private var increaseButtonView : some View {
         // MARK: - 수량 선택 버튼
         ZStack {
@@ -74,8 +74,8 @@ struct CartCell: View {
             HStack {
                 // MARK: - -버튼
                 Button(action: {
-                    if count > 1 {
-                        count -= 1
+                    if cart.itemCount > 1 {
+                        cartStore.manageItemCount(cart: cart, userEmail: userStore.user.email, op: "-")
                     }
                 }) {
                     Image(systemName: "minus")
@@ -87,7 +87,7 @@ struct CartCell: View {
                 Spacer()
                 
                 // MARK: - 선택 수량
-                Text("\(count)")
+                Text("\(cart.itemCount)")
                     .font(.bottles15)
                     .fontWeight(.bold)
                 
@@ -95,7 +95,7 @@ struct CartCell: View {
                 
                 // MARK: - +버튼
                 Button(action: {
-                    count += 1
+                    cartStore.manageItemCount(cart: cart, userEmail: userStore.user.email, op: "+")
                 }) {
                     Image(systemName: "plus")
                         .resizable()

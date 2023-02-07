@@ -10,13 +10,16 @@ import SwiftUI
 
 //MARK: - 장바구니 View
 /// 현재 로그인한 사용자의 장바구니를 보여주는 View
-// TODO: - 삭제 액션 추가
+// TODO: - 바틀 이미지 데이터 연동, 바틀 이름 데이터 연동
 
 struct CartView: View {
     
-    // 각각의 항목을 선택하였는지, 전체 선택을 사용하여 선택하였는지를 판별하기 위한 변수
-    @State var isAllSelected: Bool = false
-    @State var allSelectButtonCheck : Bool = false
+    @ObservedObject var cartStore = CartStore()
+    @EnvironmentObject var userStore: UserStore
+    
+//    // 각각의 항목을 선택하였는지, 전체 선택을 사용하여 선택하였는지를 판별하기 위한 변수
+//    @State var isAllSelected: Bool = false
+//    @State var allSelectButtonCheck : Bool = false
     
     var body: some View {
         VStack {
@@ -26,18 +29,18 @@ struct CartView: View {
                 HStack {
                     Image("Map_tab_fill")
                         .padding(.leading)
-                    Text("미들바틀")
+                    Text("\(cartStore.shopName)")
                         .font(.bottles20)
                         .bold()
                     Spacer()
                 }
                 Divider()
                 
-                ForEach (0..<5) { cnt in
-                    CartCell(isAllSelected: $isAllSelected, allSelectButtonCheck: $allSelectButtonCheck)
-                    if cnt < 4 {
-                        Divider()
-                    }
+                ForEach (cartStore.carts) { cart in
+                    CartCell(cartStore: cartStore, userStore: userStore, cart: cart)
+                    //                    if cart < cartStore.carts.count - 1 {
+                    Divider()
+                    //                    }
                 }
             }
             Divider()
@@ -51,7 +54,7 @@ struct CartView: View {
                         .font(.bottles18)
                         .padding(.leading)
                     Spacer()
-                    Text("1,750,000원")
+                    Text("\(cartStore.totalPrice)원")
                         .font(.bottles18)
                         .bold()
                         .padding(.trailing)
@@ -68,26 +71,29 @@ struct CartView: View {
                         .overlay(Text("예약하러 하기")
                             .foregroundColor(.white)
                             .font(.bottles18))
-                            .bold()
+                        .bold()
                 }
                 .foregroundColor(.accentColor)
                 .padding(.bottom, 20)
             }
             
         }
+        .onAppear {
+            cartStore.readCart(userEmail: userStore.user.email)
+        }
     }
     
     // MARK: - 전체 선택 버튼
-    private var AllSelectButton : some View {
-        Button {
-            allSelectButtonCheck = true
-            isAllSelected.toggle()
-        } label : {
-            Image(systemName: isAllSelected ? "checkmark.circle.fill" : "circle")
-        }
-        .padding([.leading, .top, .bottom])
-
-    }
+    //      var AllSelectButton : some View {
+    //        Button {
+    //            allSelectButtonCheck = true
+    //            isAllSelected.toggle()
+    //        } label : {
+    //            Image(systemName: isAllSelected ? "checkmark.circle.fill" : "circle")
+    //        }
+    //        .padding([.leading, .top, .bottom])
+    //
+    //    }
     
 }
 

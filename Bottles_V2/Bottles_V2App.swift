@@ -41,7 +41,7 @@ struct Bottles_V2App: App {
                 .environmentObject(reservationDataStore)
                 .environmentObject(userDataStore)
                 .task {
-                    userDataStore.readUser(userId: "test@naver.com")
+                    userDataStore.readUser(userId: "jdyoung1002@naver.com")
                     await shopDataStore.getAllShopData()
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.getAllResevationData()
