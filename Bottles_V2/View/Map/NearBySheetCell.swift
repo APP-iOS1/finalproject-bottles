@@ -10,7 +10,7 @@ import SwiftUI
 struct NearBySheetCell: View {
     
     // Shop의 정보를 저장하는 변수
-    @Binding var checkBookmark: Bool
+    @State private var checkBookmark: Bool = false
     var shopModel: ShopModel
     var distance: Double
     
@@ -53,9 +53,11 @@ struct NearBySheetCell: View {
                 if distance/1000 < 1 {
                     Text("\(String(format: "%.0f", round(distance))) m")
                         .font(.bottles14)
+                        .foregroundColor(.gray)
                 } else {
                     Text("\(String(format: "%.0f", round(distance/1000))) km")
                         .font(.bottles14)
+                        .foregroundColor(.gray)
                 }
                 Spacer()
             }
@@ -64,7 +66,7 @@ struct NearBySheetCell: View {
             
             Spacer()
             VStack {
-                // TODO: 즐겨찾기 기능 추가해야함
+                // TODO: 북마크 기능 추가해야함
                 Button {
                     checkBookmark.toggle()
                 } label: {
