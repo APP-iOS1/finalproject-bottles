@@ -12,6 +12,7 @@ struct NearBySheetCell: View {
     // Shop의 정보를 저장하는 변수
     @Binding var checkBookmark: Bool
     var shopModel: ShopModel
+    var distance: Double
     
     var body: some View {
         HStack(alignment: .top) {
@@ -40,9 +41,22 @@ struct NearBySheetCell: View {
                 Text(shopModel.shopName)
                     .font(.bottles18)
                     .bold()
+                
                 // Shop 소개글
                 Text(shopModel.shopIntroduction)
                     .font(.bottles14)
+                    .multilineTextAlignment(.leading)
+                
+                /// 현재 위치와 바틀샵과의 거리
+                /// 초기 distance 값(m) -> km로 환산 후 소수점 1번째 자리까지 제거
+                ///  distance -> m 값 분기처리
+                if distance/1000 < 1 {
+                    Text("\(String(format: "%.0f", round(distance))) m")
+                        .font(.bottles14)
+                } else {
+                    Text("\(String(format: "%.0f", round(distance/1000))) km")
+                        .font(.bottles14)
+                }
                 Spacer()
             }
             .foregroundColor(.black)

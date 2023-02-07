@@ -30,7 +30,6 @@ class ResevationDataStore : ObservableObject {
     
     @Published var resevationData : [ResevationModel] = []
     
-    
     func getAllResevationData() async {
         
         do{

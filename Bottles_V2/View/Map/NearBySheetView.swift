@@ -13,12 +13,11 @@ struct NearBySheetView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @StateObject var mapViewModel: MapViewModel
     @State private var checkBookmark: Bool = false
-
     @Binding var isOpen: Bool
     @Binding var showMarkerDetailView: Bool
-    @Binding var currentShopIndex: Int
-//    @Binding var coord: (Double, Double)
-    
+    @Binding var currentShopId: String
+//    @Binding var shopModel: ShopModel
+
     var body: some View {
         NavigationStack {
             HStack(alignment: .top) {
@@ -32,29 +31,37 @@ struct NearBySheetView: View {
             // 현재 위치 mapViewModel.userLocation
             ScrollView {
                 LazyVStack {
-                    ForEach(Array(shopDataStore.shopData.enumerated()), id: \.offset) { (index, shop) in
-                        let distance = distance(shop.location.latitude, shop.location.longitude)
-                        if distance <= 5000 {
-                            Button {
-                                isOpen = false
-                                showMarkerDetailView = true
-                                currentShopIndex = index
-                                mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
-                            } label: {
-                                NearBySheetCell(checkBookmark: $checkBookmark, shopModel: shop)
+                    ForEach(Array(sortShopData().enumerated()), id: \.offset) { (index, shop) in
+                            let distance = distance(shop.location.latitude, shop.location.longitude)
+                            if distance <= 5000 {
+                                Button {
+                                    isOpen = false
+                                    showMarkerDetailView = true
+                                    currentShopId = shop.id
+                                    mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
+                                } label: {
+                                    NearBySheetCell(checkBookmark: $checkBookmark, shopModel: shop, distance: distance)
+                                }
                             }
-                        }
                     }
                 }
             }
         }
+        .background {
+            Color.white
+        }
     }
-    
+    // MARK: - 현재 위치 좌표 거리 계산 함수
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
         let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
-        print("\(from.distance(from: to))")
+//        print("\(from.distance(from: to))")
         return from.distance(from: to)
+    }
+    // MARK: - 둘러보기 뷰 거리 순 오름차순 정렬 함수
+    func sortShopData() -> [ShopModel] {
+        let shopModel: [ShopModel] = shopDataStore.shopData
+        return shopModel.sorted(by: {$0.shopName < $1.shopName }).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
     }
 }
 
