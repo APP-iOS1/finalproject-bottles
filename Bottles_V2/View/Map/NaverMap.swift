@@ -14,7 +14,7 @@ import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 struct NaverMap: UIViewRepresentable {
     @EnvironmentObject var shopDataStore : ShopDataStore
-    @Binding var currentShopIndex: Int
+    @Binding var currentShopId: String
     @Binding var showMarkerDetailView: Bool
     @Binding var coord: (Double, Double)
     @Binding var userLocation: (Double, Double)
@@ -23,11 +23,11 @@ struct NaverMap: UIViewRepresentable {
         Coordinator(coord, $showMarkerDetailView, userLocation)
     }
     
-    init(_ coord: Binding<(Double, Double)>, _ showMarkerDetailView: Binding<Bool>, _ currentShopIndex: Binding<Int>, _ userLocation: Binding<(Double, Double)>
+    init(_ coord: Binding<(Double, Double)>, _ showMarkerDetailView: Binding<Bool>, _ currentShopId: Binding<String>, _ userLocation: Binding<(Double, Double)>
     ) {
         self._coord = coord
         self._showMarkerDetailView = showMarkerDetailView
-        self._currentShopIndex = currentShopIndex
+        self._currentShopId = currentShopId
         self._userLocation = userLocation
     }
     
@@ -40,11 +40,10 @@ struct NaverMap: UIViewRepresentable {
             self.coord = coord
             self.userLocation = userLocation
             self._showMarkerDetailView = showMarkerDetailView
-            self.userLocation = userLocation
         }
         
         func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
-            print("카메라 변경 - reason: \(reason)")
+//            print("카메라 변경 - reason: \(reason)")
         }
         
         func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
@@ -53,11 +52,11 @@ struct NaverMap: UIViewRepresentable {
             /// -1 : 사용자의 제스처로 화면이 움직였을 때
             /// -2 : 버튼 선택으로 카메라가 움직였을 때
             /// -3 : 네이버 지도가 제공하는 위치 트래킹 기능으로 카메라가 움직였을 때
-            print("카메라 변경 - reason: \(reason)")
+//            print("카메라 변경 - reason: \(reason)")
             
             // MARK: - 카메라 위치 변경 시 위도/경도 값 받아오기
             let cameraPosition = mapView.cameraPosition
-            print("카메라 위치 변경 : \(cameraPosition.target.lat)", "\(cameraPosition.target.lng)")
+//            print("카메라 위치 변경 : \(cameraPosition.target.lat)", "\(cameraPosition.target.lng)")
         }
         
         // MARK: - 지도 터치에 이용되는 Delegate
@@ -102,8 +101,8 @@ struct NaverMap: UIViewRepresentable {
             
             // MARK: - 마커 터치 핸들러
             marker.touchHandler = { (overlay) -> Bool in
-                print("marker touched")
-                currentShopIndex = index
+//                print("marker touched")
+                currentShopId = shopMarker.id
                 showMarkerDetailView = true
                 
                 // 마커 터치 시 마커 아이콘 크기 변경
@@ -116,9 +115,10 @@ struct NaverMap: UIViewRepresentable {
                 
                 marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
                 marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
-
+                
                 // 마커 터치 시 해당 마커 좌표로 카메라 이동
                 coord = (marker.position.lat,marker.position.lng)
+                
                 return true
             }
             
