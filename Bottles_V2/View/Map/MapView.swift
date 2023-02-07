@@ -22,6 +22,7 @@ struct MapView: View {
     @State var isShowingSheet: Bool = false
     @State var showMarkerDetailView: Bool = false
     @State var currentShopIndex: Int = 0
+    @State var searchResult: [ShopModel] = []
     
     var body: some View {
         NavigationStack {
@@ -29,12 +30,12 @@ struct MapView: View {
                 VStack {
                     HStack {
                         // 검색 바
-                        MapViewSearchBar(mapSearchBarText: $mapSearchBarText)
+                        MapViewSearchBar(mapSearchBarText: $mapSearchBarText, searchResult: $searchResult)
                         
                         NavigationLink {
                             CartView()
                         } label: {
-                            Image(systemName: "cart")
+                            Image("cart")
                                 .foregroundColor(.accentColor)
                                 .bold()
                                 .padding(10)
@@ -52,14 +53,13 @@ struct MapView: View {
                 .zIndex(1)
                 
                 /// 네이버 지도 뷰
-
                 NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopIndex, $mapViewModel.userLocation)
                     .ignoresSafeArea(.all, edges: .top)
                 
                 /// 북마크 & 현재 위치 버튼
                 HStack {
                     Spacer()
-
+                    
                     SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation)
                 }
                 
@@ -83,27 +83,27 @@ struct MapView: View {
                 .zIndex(3)
                 
                 // MARK: - 현재 위치 이동 버튼(커스텀)
-//                Button {
-//                    //
-//                } label: {
-//                    Text("현재 위치로 이동")
-//                }
+                //                Button {
+                //                    //
+                //                } label: {
+                //                    Text("현재 위치로 이동")
+                //                }
             }
-//            .sheet(isPresented: $showMarkerDetailView, content: {
-//                MarkerDetailView()
-//                    .presentationDetents([.height(250)])
-//                    .presentationDragIndicator(.visible)
-//            })
+            //            .sheet(isPresented: $showMarkerDetailView, content: {
+            //                MarkerDetailView()
+            //                    .presentationDetents([.height(250)])
+            //                    .presentationDragIndicator(.visible)
+            //            })
             
             // TODO: - 보라색 에러 async/await로 해결해보기
-//            .task {
-//                if await mapViewModel.locationServicesEnabled() {
-//                    // Do something
-//                    let locationManager = CLLocationManager()
-//                    locationManager.delegate = mapViewModel
-//                    mapViewModel.checkLocationAuthorization()
-//                }
-//            }
+            //            .task {
+            //                if await mapViewModel.locationServicesEnabled() {
+            //                    // Do something
+            //                    let locationManager = CLLocationManager()
+            //                    locationManager.delegate = mapViewModel
+            //                    mapViewModel.checkLocationAuthorization()
+            //                }
+            //            }
             .onAppear {
                 mapViewModel.checkIfLocationServicesIsEnabled()
                 coord = mapViewModel.coord
