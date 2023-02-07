@@ -8,6 +8,9 @@
 import SwiftUI
 import UIKit
 import FirebaseCore
+import KakaoSDKCommon
+import KakaoSDKAuth
+
 
 @main
 struct Bottles_V2App: App {
@@ -21,6 +24,7 @@ struct Bottles_V2App: App {
     @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
     init() {
         FirebaseApp.configure()
+        KakaoSDK.initSDK(appKey: "f2abf38572d20d5dde71ea5c33a02c07")
     }
     
     var body: some Scene {
@@ -28,6 +32,11 @@ struct Bottles_V2App: App {
         WindowGroup {
             TotalLoginView()
                 .environmentObject(UserStore()).environmentObject(googleLoginViewModel)
+                .onOpenURL(perform: { url in
+                    if AuthApi.isKakaoTalkLoginUrl(url) {
+                        AuthController.handleOpenUrl(url: url)
+                    }
+                })
 //            MainTabView()
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)

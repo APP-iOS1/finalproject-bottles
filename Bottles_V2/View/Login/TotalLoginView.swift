@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TotalLoginView: View {
     @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
+    @StateObject var kakaoLoginViewModel: KakaoLoginViewModel = KakaoLoginViewModel()
     var body: some View {
         NavigationStack {
             Spacer()
@@ -39,6 +40,7 @@ struct TotalLoginView: View {
                 HStack {
                     Button(action: {
                         // TODO: 카카오 로그인 로직
+                        kakaoLoginViewModel.handleKakaoLogin()
                     }){
                         VStack {
                             Image("KakaoLogin")
