@@ -1,6 +1,6 @@
 //
-//  AuthStore.swift
-//  AuthTest
+//  UserStore.swift
+//  UserTest
 //
 //  Created by 장다영 on 2023/02/02.
 //
@@ -11,12 +11,12 @@ import FirebaseAuth
 import FirebaseFirestore
 import SwiftUI
 
-// 현재 로그인한 user의 UID, 전역 변수로 지정
+
 class UserStore: ObservableObject {
     
     @Published var user: User
     
-    let database = Firestore.firestore()
+    //let database = Firestore.firestore()
     
     /// 이메일 중복확인 결과에 따른 EmailRegisterView에서 CustomAlert의 String
     @Published var emailCheckStr: String = ""
@@ -29,7 +29,7 @@ class UserStore: ObservableObject {
     }
     
     func createUser(user: User) {
-        database.collection("User")
+        Firestore.firestore().collection("User")
             .document(user.email)
             .setData(["id" : user.id,
                       "email" : user.email,
@@ -43,22 +43,43 @@ class UserStore: ObservableObject {
     }
     
     func readUser(userId: String) {
-        database.collection("User").document(userId).getDocument { (snapshot, error) in
-            
-            let currentData = snapshot!.data()
-            let email: String = currentData!["email"] as? String ?? ""
-            let followItemList: [String] = currentData!["followItemList"] as? [String] ?? []
-            let followShopList: [String] = currentData!["followShopList"] as? [String] ?? []
-            let nickname: String = currentData!["nickname"] as? String ?? ""
-            let pickupItemList: [String] = currentData!["pickupItemList"] as? [String] ?? []
-            let recentlyItem: [String] = currentData!["recentlyItem"] as? [String] ?? []
-            let userPhoneNumber: String = currentData!["userPhoneNumber"] as? String ?? ""
-            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber)
+        Firestore.firestore().collection("User").document(userId).getDocument { (snapshot, error) in
+                
+                let currentData = snapshot!.data()
+                let email: String = currentData!["email"] as? String ?? ""
+                let followItemList: [String] = currentData!["followItemList"] as? [String] ?? []
+                let followShopList: [String] = currentData!["followShopList"] as? [String] ?? []
+                let nickname: String = currentData!["nickname"] as? String ?? ""
+                let pickupItemList: [String] = currentData!["pickupItemList"] as? [String] ?? []
+                let recentlyItem: [String] = currentData!["recentlyItem"] as? [String] ?? []
+                let userPhoneNumber: String = currentData!["userPhoneNumber"] as? String ?? ""
+                self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber)
+            }
         }
-    }
+    
+//    func readUserOnly(userId: String) async {
+//
+//        do {
+//            let documents = try await Firestore.firestore().collection("User").document("test@naver.com").getDocument()
+//            if let docData = documents.data(){
+//                // 있는지를 따져서 있으면 데이터 넣어주고, 없으면 옵셔널 처리
+//
+//                let email: String = docData["email"] as? String ?? ""
+//                let followItemList: [String] = docData["followItemList"] as? [String] ?? []
+//                let followShopList: [String] = docData["followShopList"] as? [String] ?? []
+//                let nickname: String = docData["nickname"] as? String ?? ""
+//                let pickupItemList: [String] = docData["pickupItemList"] as? [String] ?? []
+//                let recentlyItem: [String] = docData["recentlyItem"] as? [String] ?? []
+//                let userPhoneNumber: String = docData["userPhoneNumber"] as? String ?? ""
+//                self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber)
+//            }
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//    }
     
     func updateUser(user: User) {
-        database.collection("User").document(user.id)
+        Firestore.firestore().collection("User").document(user.id)
             .updateData(["email" : user.email,
                          "followItemList" : user.followItemList,
                          "followShopList" : user.followShopList,
@@ -70,13 +91,13 @@ class UserStore: ObservableObject {
     }
     
     func deleteUser(userId: String) {
-        database.collection("User")
+        Firestore.firestore().collection("User")
             .document(userId).delete()
     }
     
     /// email 중복확인 메소드
     func doubleCheckEmail(userEmail: String) {
-        database.collection("User")
+        Firestore.firestore().collection("User")
             .whereField("email", isEqualTo: userEmail)
             .getDocuments { snapshot, error in
                 if snapshot!.documents.isEmpty {
@@ -89,7 +110,8 @@ class UserStore: ObservableObject {
                     self.isShowingVerificationCode = false
                 }
             }
-                
-            
+        
+        
     }
 }
+
