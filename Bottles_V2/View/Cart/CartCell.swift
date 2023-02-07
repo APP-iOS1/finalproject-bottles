@@ -13,10 +13,9 @@ import SwiftUI
 
 struct CartCell: View {
     
-    @State private var isSelected: Bool = false
-    @State private var count : Int = 1
-    @Binding var isAllSelected : Bool
-    @Binding var allSelectButtonCheck : Bool
+    var bottleName: String = ""
+    var price: String = ""
+    @State var count: Int = 1
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -31,12 +30,12 @@ struct CartCell: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 10) {
                     // MARK: - 바틀 이름
-                    Text("프로메샤 모스카토")
+                    Text(bottleName)
                         .font(.bottles14)
                         .fontWeight(.medium)
                     
                     // MARK: - 바틀 가격
-                    Text("110,000원")
+                    Text("\(price)")
                         .font(.bottles18)
                         .fontWeight(.bold)
                     
@@ -110,9 +109,9 @@ struct CartCell: View {
     }
 }
 
-struct CartCell_Previews: PreviewProvider {
-    @State var test = false
-    static var previews: some View {
-        CartCell(isAllSelected: .constant(false), allSelectButtonCheck: .constant(false))
-    }
-}
+//struct CartCell_Previews: PreviewProvider {
+//    @State var test = false
+//    static var previews: some View {
+//        CartCell(isAllSelected: .constant(false), allSelectButtonCheck: .constant(false))
+//    }
+//}
