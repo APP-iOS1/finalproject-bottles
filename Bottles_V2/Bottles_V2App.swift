@@ -15,6 +15,7 @@ struct Bottles_V2App: App {
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var reservationDataStore = ResevationDataStore()
+    @ObservedObject var mapViewModel = MapViewModel()
     // coreData
     @StateObject var dataController = DataController()
     
@@ -36,6 +37,7 @@ struct Bottles_V2App: App {
                 .environmentObject(bottleDataStore)
                 .environmentObject(shopDataStore)
                 .environmentObject(reservationDataStore)
+                .environmentObject(mapViewModel)
                 .task {
                     await shopDataStore.getAllShopData()
                     await bottleDataStore.getAllBottleData()
