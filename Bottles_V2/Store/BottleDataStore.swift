@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
-struct BottleModel : Codable, Identifiable {
+struct BottleModel : Codable, Identifiable, Hashable {
     var id : String
     var shopID : String
     var shopName : String

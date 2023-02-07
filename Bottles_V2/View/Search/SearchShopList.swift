@@ -66,6 +66,7 @@ struct SearchShopList: View {
                     }
                     .padding(.trailing, 20)
                 }
+
                 // 검색어를 포함하는 Data가 없을 경우
                 if filteredResult.isEmpty {
                     Text("검색 결과가 없습니다.")

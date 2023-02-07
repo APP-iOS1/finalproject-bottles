@@ -136,6 +136,7 @@ struct BookMarkBottleListCell: View {
                 BottleView()
             } label: {
                 // Bottle 이미지
+
                 AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
                     image
                         .resizable()
@@ -148,6 +149,7 @@ struct BookMarkBottleListCell: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 128, height: 128)
                         .cornerRadius(12)
+
                 }
                 .background(Color.gray_f7)
                 .cornerRadius(12)
@@ -169,7 +171,7 @@ struct BookMarkBottleListCell: View {
                     .font(.footnote)
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
-                    BottleShopView()
+//                    BottleShopView(bottleShop: <#ShopModel#>)
                 } label: {
                     HStack {
                         Image("MapMarker")

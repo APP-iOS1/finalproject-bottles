@@ -33,8 +33,10 @@ struct NotificationView: View {
                         
                     }
                     Divider()
+
                     NavigationLink(destination: BottleShopCurationView()){
                         NotificationCell(imgName: "shopNotification", title: "저장한 바틀샵의 새 소식", description: "연말에 어울리는 스파클링 와인 10종", storeName: "어썸와인", time: "4시간 전")
+
                     }
 
                     Divider()

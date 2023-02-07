@@ -11,6 +11,7 @@ import SwiftUI
 /// 바틀의 정보 및 해당 바틀을 판매하는 바틀샵 리스트를 표시하는 뷰입니다.
 struct BottleView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var shopDataStore: ShopDataStore
     @State private var isShowingSheet: Bool = false
     
     var body: some View {
@@ -29,10 +30,10 @@ struct BottleView: View {
                             .font(.bottles18)
                             .fontWeight(.medium)
                             
-                        ForEach(0..<2, id: \.self) {_ in
+                        ForEach(shopDataStore.shopData) {bottleShop in
                             NavigationLink {
                                 // 바틀샵 뷰로 이동
-                                BottleShopView()
+                                BottleShopView(bottleShop: bottleShop)
                             } label: {
                                 // 바틀샵 셀
                                 BottleView_BottleCell()

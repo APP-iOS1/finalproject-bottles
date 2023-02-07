@@ -63,6 +63,7 @@ struct BookMarkShopList: View {
                     }
                     .padding(.trailing, 20)
                 }
+
                 // TODO: 서버 Shop 데이터 연결
                 ScrollView {
                     ForEach(sortShopData()) { shop in
@@ -71,6 +72,7 @@ struct BookMarkShopList: View {
                         } label: {
                             BookMarkShopListCell(shopInfo: shop, bookMarkAlarm: $bookMarkAlarm, distance: distance(shop.location.latitude, shop.location.longitude))
                         }
+
                     }
                 }
             }
