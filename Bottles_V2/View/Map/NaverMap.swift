@@ -12,82 +12,35 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
-// MARK: - 마커 더미 데이터 생성
-//struct Marker: Identifiable {
-//    let id: String
-//    let latitude: Double
-//    let longitude: Double
-//}
-//
-//class MarkerStore: ObservableObject {
-//    var markers: [Marker] = []
-//
-//    init() {
-//        markers = [
-//            Marker(id: UUID().uuidString, latitude: 37.5670135, longitude: 126.9783740, bookmark),
-//            Marker(id: UUID().uuidString, latitude: 37.6670135, longitude: 126.9883740),
-//            Marker(id: UUID().uuidString, latitude: 37.7670135, longitude: 126.9983740),
-//            Marker(id: UUID().uuidString, latitude: 37.3670135, longitude: 126.9683740),
-//            Marker(id: UUID().uuidString, latitude: 37.4670135, longitude: 126.9583740)
-//        ]
-//    }
-//}
-
-struct MapMarkerByShopData {
-    var shopID: String
-    var shopName: String
-    var location: GeoPoint
-}
-
 struct NaverMap: UIViewRepresentable {
-    
-    @Binding var showMarkerDetailView: Bool
-    @Binding var mappinShopID : ShopModel
     @EnvironmentObject var shopDataStore : ShopDataStore
-    @State var shopInfo : [MapMarkerByShopData] = []
-    
-    var coord: (Double, Double)
-    //    var markers: [Marker]
-    
+    @Binding var currentShopIndex: Int
+    @Binding var showMarkerDetailView: Bool
+    @Binding var coord: (Double, Double)
+    @Binding var userLocation: (Double, Double)
+        
     func makeCoordinator() -> Coordinator {
-        Coordinator(coord, $showMarkerDetailView)
+        Coordinator(coord, $showMarkerDetailView, userLocation)
     }
     
-    init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>, _ mappinShopID: Binding<ShopModel>
+    init(_ coord: Binding<(Double, Double)>, _ showMarkerDetailView: Binding<Bool>, _ currentShopIndex: Binding<Int>, _ userLocation: Binding<(Double, Double)>
     ) {
-        self.coord = coord
+        self._coord = coord
         self._showMarkerDetailView = showMarkerDetailView
-        self._mappinShopID = mappinShopID
-        
-//        for shopMarker in shopDataStore.shopData {
-//                let marker = NMFMarker()
-//            marker.position = NMGLatLng(lat: shopMarker.location.latitude, lng: shopMarker.location.longitude)
-//            }
-        
+        self._currentShopIndex = currentShopIndex
+        self._userLocation = userLocation
     }
-    
-    // 모든 shopDataStore의 위경도, 샵이름, 샵ID를 배열로 가지는 배열을 생성
-    //    func locationAndshopInfo() {
-    //
-    //        let shopAllData = shopDataStore.shopData
-    //
-    //        for oneShop in shopAllData {
-    //            var data : [MapMarkerByShopData] = []
-    //            self.shopInfo.append(
-    //                MapMarkerByShopData(shopID: oneShop.id, shopName: oneShop.shopName, location: oneShop.location)
-    //            )
-    //            print("나왕라ㅏㅏ \(self.shopInfo)")
-    //        }
-    //    }
     
     class Coordinator: NSObject, NMFMapViewCameraDelegate, NMFMapViewTouchDelegate {
         
         @Binding var showMarkerDetailView: Bool
         var coord: (Double, Double)
+        var userLocation: (Double, Double)
         
-        init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>) {
+        init(_ coord: (Double, Double), _ showMarkerDetailView: Binding<Bool>, _ userLocation: (Double, Double)) {
             self.coord = coord
             self._showMarkerDetailView = showMarkerDetailView
+            self.userLocation = userLocation
         }
         
         func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
@@ -121,61 +74,49 @@ struct NaverMap: UIViewRepresentable {
         view.mapView.positionMode = .direction
         
         // MARK: - 줌 레벨 제한
-        view.mapView.zoomLevel = 13 // 기본 카메라 줌 레벨
+        view.mapView.zoomLevel = 15 // 기본 카메라 줌 레벨
         view.mapView.minZoomLevel = 10 // 최소 줌 레벨
-        
-        let locationOverlay = view.mapView.locationOverlay
-        
+        view.mapView.maxZoomLevel = 17 // 최대 줌 레벨
         // MARK: - 현 위치 추적 버튼
-        view.showLocationButton = true
-        
+        view.showLocationButton = false
         view.showCompass = false
         view.showZoomControls = false
         let cameraPosition = view.mapView.cameraPosition
         
         // MARK: - 마커 생성
-        
-//        let shopAllData = self.shopDataStore.shopData
-//        var shopInfoList : [MapMarkerByShopData] = []
-//        for oneShop in shopAllData {
-//            shopInfoList.append(
-//                MapMarkerByShopData(shopID: oneShop.id, shopName: oneShop.shopName, location: oneShop.location)
-//            )
-//        }
-        print("샵데이터 : \(self.shopDataStore.shopData.count)")
-        
-        for shopMarker in self.shopDataStore.shopData {
+        for (index, shopMarker) in self.shopDataStore.shopData.enumerated() {
             let marker = NMFMarker()
-            //            marker.position = NMGLatLng(lat: shopMarker.latitude, lng: shopMarker.longitude)
-            // 임시 마커(서울시청)
             // TODO: 아래 코드 위경도를 바꿔주면 서 for 문 생성
-//
-//            let test = shopMarker.location.latitude
-//            let test2 = shopMarker.location.longitude
-//            print("이게 찐중요 위경도 나와라 얍 : \(test), \(test2)")
-            marker.position = NMGLatLng(lat: shopMarker.location.latitude, lng: shopMarker.location.longitude)
-            //        marker.position = NMGLatLng(lat: 32.56668, lng: 124.978415)
-            marker.captionRequestedWidth = 100
-            //            marker.captionText = foodCart.name
-            marker.captionMinZoom = 12
-            marker.captionMaxZoom = 16
+            marker.position = NMGLatLng(
+                lat: shopMarker.location.latitude,
+                lng: shopMarker.location.longitude)
+            marker.captionRequestedWidth = 100 // 마커 캡션 너비 지정
+            marker.captionText = shopMarker.shopName
+            marker.captionMinZoom = 10
+            marker.captionMaxZoom = 17
             
             // MARK: - 마커 이미지 변경
-            marker.iconImage = NMFOverlayImage(name: "MapMarker.fill")
+            marker.iconImage = NMFOverlayImage(name: shopMarker.isRegister ? "MapMarker.fill" : "MapMarker")
             marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
             marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
             
             // MARK: - 마커 터치 핸들러
             marker.touchHandler = { (overlay) -> Bool in
                 print("marker touched")
-                mappinShopID = shopMarker
-                showMarkerDetailView.toggle()
+                currentShopIndex = index
+                showMarkerDetailView = true
                 
                 // 마커 터치 시 마커 아이콘 크기 변경
-                marker.iconImage = NMFOverlayImage(name: showMarkerDetailView ? "MapMarker_tapped" : "MapMarker.fill")
+                if shopMarker.isRegister {
+                    marker.iconImage = NMFOverlayImage(name: showMarkerDetailView ? "MapMarker_tapped" : "MapMarker.fill")
+                } else {
+                    // TODO: isRegister == false일 때 이미지 추가/수정
+                    marker.iconImage = NMFOverlayImage(name: showMarkerDetailView ? "MapMarker" : "MapMarker")
+                }
+                
                 marker.width = CGFloat(NMF_MARKER_SIZE_AUTO)
                 marker.height = CGFloat(NMF_MARKER_SIZE_AUTO)
-                
+                coord = (marker.position.lat,marker.position.lng)
                 return true
             }
             
@@ -187,6 +128,7 @@ struct NaverMap: UIViewRepresentable {
             // MARK: - 지도 터치 시 발생하는 touchDelegate
             view.mapView.touchDelegate = context.coordinator
         }
+        
         print("camera position: \(cameraPosition)")
         return view
     }
@@ -197,7 +139,16 @@ struct NaverMap: UIViewRepresentable {
         cameraUpdate.animation = .fly
         cameraUpdate.animationDuration = 1
         uiView.mapView.moveCamera(cameraUpdate)
+        
+        // MARK: - 내 주변 5km 반경 overlay 표시
+        let circle = NMFCircleOverlay()
+        circle.center = NMGLatLng(lat: userLocation.0, lng: userLocation.1)
+        circle.radius = 5000
+        circle.mapView = uiView.mapView
+        
+        // MARK: - 현재 위치 좌표 overlay 마커 표시
+        let locationOverlay = uiView.mapView.locationOverlay
+        locationOverlay.location = NMGLatLng(lat: userLocation.0, lng: userLocation.1)
+        locationOverlay.hidden = false
     }
 }
-
-
