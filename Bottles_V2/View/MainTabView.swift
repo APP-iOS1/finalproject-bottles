@@ -11,7 +11,6 @@ struct MainTabView: View {
 
     //    @EnvironmentObject var sessionManager : SessionManager
     @EnvironmentObject var shopDataStore : ShopDataStore
-    @EnvironmentObject var userDataStore : UserDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
     @EnvironmentObject var reservationDataStore : ResevationDataStore
     

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct BookMarkBottleList: View {
     @EnvironmentObject var bottleDataStore: BottleDataStore
-    @EnvironmentObject var userDataStore: UserDataStore
     
     // ActionSheet (iOS 14 이하 - ActionSheet, iOS 15 이상 - confirmationDialog 사용해야함)
     @State private var showingActionSheet: Bool = false
