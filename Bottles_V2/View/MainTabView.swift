@@ -13,11 +13,10 @@ struct MainTabView: View {
     @EnvironmentObject var shopDataStore : ShopDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
     @EnvironmentObject var reservationDataStore : ResevationDataStore
-    
+    @EnvironmentObject var mapViewModel: MapViewModel
     //    let user: AuthUser
     
     @State private var selection: Int = 1
-    
     //     TabBar 백그라운드 컬러 지정
     init() {
         UITabBar.appearance().backgroundColor = UIColor(Color.white)
@@ -46,7 +45,7 @@ struct MainTabView: View {
 
     }
 }
-
+//
 //struct TabButtonModifier: ViewModifier {
 //    func body(image: Image) -> some View {
 //        image
