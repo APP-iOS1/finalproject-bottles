@@ -40,10 +40,12 @@ struct NearBySheetView: View {
                                 showMarkerDetailView = true
                                 currentShopIndex = index
                                 mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
+                                print("distance: \(distance)")
                             } label: {
                                 NearBySheetCell(checkBookmark: $checkBookmark, shopModel: shop)
                             }
                         }
+
                     }
                 }
             }
