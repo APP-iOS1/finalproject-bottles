@@ -31,7 +31,6 @@ struct NearBySheetView: View {
             }
             
             // 현재 위치 mapViewModel.userLocation
-            
             ScrollView {
                 LazyVStack {
                     ForEach(Array(sortShopData().enumerated()), id: \.offset) { (index, shop) in
