@@ -16,6 +16,7 @@ struct CartView: View {
     
     @ObservedObject var cartStore = CartStore()
     @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var bottleDataStore: BottleDataStore
     
 //    // 각각의 항목을 선택하였는지, 전체 선택을 사용하여 선택하였는지를 판별하기 위한 변수
 //    @State var isAllSelected: Bool = false
@@ -37,7 +38,7 @@ struct CartView: View {
                 Divider()
                 
                 ForEach (cartStore.carts) { cart in
-                    CartCell(cartStore: cartStore, userStore: userStore, cart: cart)
+                    CartCell(cartStore: cartStore, userStore: userStore, bottleDataStore: bottleDataStore, cart: cart)
                     //                    if cart < cartStore.carts.count - 1 {
                     Divider()
                     //                    }

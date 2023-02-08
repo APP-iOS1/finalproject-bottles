@@ -15,12 +15,13 @@ struct CartCell: View {
     
     var cartStore: CartStore
     var userStore: UserStore
+    var bottleDataStore: BottleDataStore
     var cart: Cart
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             // MARK: - 바틀 이미지
-            Image("bottle")
+            AsyncImage(url: URL(string: bottleDataStore.bottleData[0].itemImage))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 128, height: 128)
@@ -106,6 +107,11 @@ struct CartCell: View {
             .frame(width: 110, height: 30)
         }
 
+    }
+    
+    func getBottleModel(bottleId: String) -> BottleModel {
+        let matchedBottleData = bottleDataStore.bottleData.filter { $0.itemId }
+        
     }
 }
 
