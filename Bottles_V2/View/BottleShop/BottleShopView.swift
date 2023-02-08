@@ -15,7 +15,7 @@ enum bottleShopInfo : String, CaseIterable {
 
 // 바틀샵 메인 뷰
 struct BottleShopView: View {
-    
+    @EnvironmentObject var userStore: UserStore
     @State private var bookmarkToggle: Bool = false
     @State var bookmarkToggle_fill: Bool = false
     @State var bookmarkToggle_empty: Bool = false
@@ -110,23 +110,15 @@ struct BottleShopView: View {
                                 .frame(width: 15)
                             
                             // 북마크 아이콘 버튼
+                            
                             Button(action: {
                                 withAnimation(.easeOut(duration: 0.5)) {
                                     bookmarkToggle.toggle()
                                 }
                                 
-                                if bookmarkToggle == true{
-                                    withAnimation(.easeOut(duration: 1.5)) {
-                                        bookmarkToggle_fill.toggle()
-                                        print("북마크 완료")
-                                    }
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-                                        bookmarkToggle_fill.toggle()
-                                    }
-                                }
-                                
-                                if bookmarkToggle == false{
+                                if compareMyFollowShopID(bottleShop.id) == true {
+                                    bookmarkToggle = false
+                                    userStore.deleteFollowShopId(bottleShop.id)
                                     withAnimation(.easeOut(duration: 1.5)) {
                                         bookmarkToggle_empty.toggle()
                                         print("북마크 해제")
@@ -137,14 +129,26 @@ struct BottleShopView: View {
                                     }
                                 }
                                 
+                                if compareMyFollowShopID(bottleShop.id) == false {
+                                    bookmarkToggle = true
+                                    userStore.addFollowShopId(bottleShop.id)
+                                    withAnimation(.easeOut(duration: 1.5)) {
+                                        bookmarkToggle_fill.toggle()
+                                        print("북마크 완료")
+                                    }
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                                        bookmarkToggle_fill.toggle()
+                                    }
+                                }
+                                
                             }) {
-                                Image(bookmarkToggle ? "BookMark.fill" : "BookMark")
+                                Image(compareMyFollowShopID(bottleShop.id) ? "BookMark.fill" : "BookMark")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 15)
                                     .padding(.trailing, 5)
                             }
-                            
                         }
                         .padding()
                         
@@ -356,6 +360,9 @@ struct BottleShopView: View {
         
     }
     
+    func compareMyFollowShopID(_ shopId: String) -> Bool {
+        return (userStore.user.followShopList.filter { $0 == shopId }.count != 0) ? true : false
+    }
 }
 
 // 바틀샵 메인 뷰 내 [1. "상품 검색"과 2. "사장님의 공지" 뷰] 탭

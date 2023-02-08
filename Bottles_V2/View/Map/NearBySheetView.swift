@@ -10,6 +10,7 @@ import CoreLocation
 
 // MARK: - 둘러보기 디테일 뷰
 struct NearBySheetView: View {
+    @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @StateObject var mapViewModel: MapViewModel
 //    @State private var checkBookmark: Bool = false
