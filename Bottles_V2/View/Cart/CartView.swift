@@ -17,6 +17,7 @@ struct CartView: View {
     @ObservedObject var cartStore = CartStore()
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
 //    // 각각의 항목을 선택하였는지, 전체 선택을 사용하여 선택하였는지를 판별하기 위한 변수
 //    @State var isAllSelected: Bool = false
@@ -33,8 +34,10 @@ struct CartView: View {
                     Text("\(cartStore.shopName)")
                         .font(.bottles20)
                         .bold()
+                        
                     Spacer()
                 }
+                .padding(.top)
                 Divider()
                 
                 ForEach (cartStore.carts) { cart in
@@ -79,6 +82,9 @@ struct CartView: View {
             }
             
         }
+        .navigationBarTitle("장바구니", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
         .onAppear {
             cartStore.readCart(userEmail: userStore.user.email)
         }
@@ -92,6 +98,17 @@ struct CartView: View {
         return matchedBottleData[0]
     }
     
+    /// CustomNavigationBackButton
+    var backButton : some View {
+        Button(
+            action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.backward")    // back button 이미지
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color.black)
+            }
+    }
     // MARK: - 전체 선택 버튼
     //      var AllSelectButton : some View {
     //        Button {
