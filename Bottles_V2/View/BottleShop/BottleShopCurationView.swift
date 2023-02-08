@@ -35,25 +35,26 @@ struct BottleShopCurationView: View {
             return test.sorted(by: {$0.shopName < $1.shopName})
         }
     }
-
+    
     var body: some View {
         ScrollView{
             VStack{
-                ZStack{
-                                        
-                    // 데이터 연동 시 "shopCurationImage" 연동
-                    AsyncImage(url: URL(string: String(bottleShop.shopCurationImage)), content: { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 370)
-                    }, placeholder: {
-                        Rectangle()
-                            .frame(width: 370, height: 370)
-                    })
-//                    .cornerRadius(12, corners: [.topLeft, .topRight])
-                    .foregroundColor(.white)
-                        }
+                VStack{
+                    ZStack{
+                        
+                        // 데이터 연동 시 "shopCurationImage" 연동
+                        AsyncImage(url: URL(string: String(bottleShop.shopCurationImage)), content: { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 370)
+                        }, placeholder: {
+                            Rectangle()
+                                .frame(width: 370, height: 370)
+                        })
+                        //                    .cornerRadius(12, corners: [.topLeft, .topRight])
+                        .foregroundColor(.white)
+                    }
                     
                     
                     VStack{
@@ -88,20 +89,21 @@ struct BottleShopCurationView: View {
                                     .foregroundColor(.black)
                                     .padding(.bottom, -6)
                             }
-                            }
-                            .padding(.horizontal, 1)
-                            .padding(.bottom, 25)
-                            //                        .padding(.leading, -24)
-                            .shadow(radius: 20)
-                            .background{
-                                Rectangle()
-                                    .frame(width: 370)
-                                    .foregroundColor(.purple_3)
-//                                    .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
-                            }
-                            .frame(alignment: .leading)
+                        }
+                        .padding(.horizontal, 1)
+                        .padding(.bottom, 25)
+                        //                        .padding(.leading, -24)
+                        .shadow(radius: 20)
+                        .background{
+                            Rectangle()
+                                .frame(width: 370)
+                                .foregroundColor(.purple_3)
+                            //                                    .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+                        }
+                        .frame(alignment: .leading)
                     }.padding(.top, -16)
-
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 12))
                 
                 VStack(alignment: .leading){
                     
@@ -176,14 +178,7 @@ struct BottleShopCurationView: View {
 //        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
 //        return Path(path.cgPath)
 //    }
-    
-//    var radius: CGFloat = .infinity
-//    var corners: UIRectCorner = .allCorners
-
-//    func path(in rect: CGRect) -> Path {
-//        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-//        return Path(path.Path)
-//    }
+//
 //}
 
 //struct BottleShopCurationView_Previews: PreviewProvider {
