@@ -45,7 +45,14 @@ struct EmailLoginView: View {
             
             Button(action: {
                 // TODO: 로그인 로직이 들어오면 입력한 아이디, 비밀번호가 틀릴 경우 뷰에 보여줌
-                authStore.login(email: email, password: password)
+                Task{
+                    await authStore.currentUserReload()
+                    if authStore.isEmailVerified(){
+                        authStore.login(email: email, password: password)
+                    } else {
+                        print("로그인 실패")
+                    }
+                }
                 
             }){
                 Text("로그인")
@@ -77,6 +84,7 @@ struct EmailLoginView: View {
         .navigationTitle("로그인")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .customAlert(isPresented: $authStore.emailVerification, message: "이메일 인증이 완료되지 않았습니다", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
     }
     /// CustomNavigationBackButton
     var backButton : some View {

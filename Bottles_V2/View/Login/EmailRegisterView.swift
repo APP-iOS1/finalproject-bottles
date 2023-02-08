@@ -130,7 +130,6 @@ struct EmailRegisterView: View {
             }
             
             
-            
             // MARK: - 비밀번호 입력창
             Group {
                 HStack(alignment: .bottom){
