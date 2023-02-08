@@ -24,14 +24,18 @@ struct MapView: View {
     @State var showMarkerDetailView: Bool = false
     @State var currentShopId: String = "보리마루"
     @State var searchResult: [ShopModel] = []
+    @State var tapSearchButton: Bool = false
+    
+    @Namespace private var animation
     
     var body: some View {
         NavigationStack {
             ZStack {
+                
                 VStack {
                     HStack {
                         // 검색 바
-                        MapViewSearchBar(mapSearchBarText: $mapSearchBarText, searchResult: $searchResult)
+                        MapViewSearchBar(showMarkerDetailView: $showMarkerDetailView, mapSearchBarText: $mapSearchBarText, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
                         
                         NavigationLink {
                             CartView()
@@ -45,8 +49,29 @@ struct MapView: View {
                                     Color.white
                                 }
                                 .cornerRadius(10)
-                                .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
+//                                .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
                         }
+                    }
+                    .padding(.bottom, 10)
+                    
+                    if tapSearchButton {
+                        HStack{
+                            Image("xmark")
+                            Text("검색 결과가 없습니다.")
+                                .shakeEffect(trigger: tapSearchButton)
+                                .foregroundColor(.black)
+                                .font(.bottles11)
+                        }
+                        .zIndex(2)
+                        
+//                        .transition(.opacity.animation(.easeIn))
+                        
+                        .background{
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(width: 300, height: 30)
+                                .foregroundColor(.gray_f7)
+                        }
+                        
                     }
                     Spacer()
                 }
@@ -70,24 +95,24 @@ struct MapView: View {
                         isOpen: $isShowingSheet,
                         showMarkerDetailView: $showMarkerDetailView,
                         currentShopId: $currentShopId
-//                        currentShopIndex: $currentShopIndex,
-//                        shopModel: $shopModel
+                        //                        currentShopIndex: $currentShopIndex,
+                        //                        shopModel: $shopModel
                     )
                 }
                 .ignoresSafeArea(.all, edges: .top)
                 .zIndex(2)
                 
-                    MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
-                        NavigationLink{
-                            BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
-                        } label: {
-                            MarkerDetailView(
-                                shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
-                                showMarkerDetailView: $showMarkerDetailView,
-                                currentShopId: $currentShopId
-                            )
-                        }
+                MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
+                    NavigationLink{
+                        BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
+                    } label: {
+                        MarkerDetailView(
+                            shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
+                            showMarkerDetailView: $showMarkerDetailView,
+                            currentShopId: $currentShopId
+                        )
                     }
+                }
                 .zIndex(3)
                 
                 // MARK: - 현재 위치 이동 버튼(커스텀)
