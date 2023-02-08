@@ -38,7 +38,7 @@ struct CartView: View {
                 Divider()
                 
                 ForEach (cartStore.carts) { cart in
-                    CartCell(cartStore: cartStore, userStore: userStore, bottleDataStore: bottleDataStore, cart: cart)
+                    CartCell(cartStore: cartStore, userStore: userStore, cart: cart, bottle: getBottleModel(bottleId: cart.bottleId))
                     //                    if cart < cartStore.carts.count - 1 {
                     Divider()
                     //                    }
@@ -82,6 +82,14 @@ struct CartView: View {
         .onAppear {
             cartStore.readCart(userEmail: userStore.user.email)
         }
+    }
+    
+    func getBottleModel(bottleId: String) -> BottleModel {
+        let matchedBottleData = bottleDataStore.bottleData.filter {
+            $0.id == bottleId
+        }
+        
+        return matchedBottleData[0]
     }
     
     // MARK: - 전체 선택 버튼
