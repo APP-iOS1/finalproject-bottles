@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - 바틀 기본 정보(바틀 이미지, 바틀 이름, 북마크, 바틀 가격, 바틀샵 이름)
 struct BottleView_Info: View {
+    @EnvironmentObject var userStore: UserStore
     @State private var checkBookmark: Bool = false
     var tagList: [String] = ["위스키", "한정판", "스모키"]
     var bottleData: BottleModel
@@ -50,11 +51,25 @@ struct BottleView_Info: View {
                     
                     // MARK: - 북마크 버튼
                     Button(action: {
-                        checkBookmark.toggle()
+                        withAnimation(.easeOut(duration: 0.5)) {
+                            checkBookmark.toggle()
+                        }
+                        if compareMyFollowBottleID(bottleData.id) == true {
+                            checkBookmark = false
+                            userStore.deleteFollowItemId(bottleData.id)
+                        }
+
+                        if compareMyFollowBottleID(bottleData.id) == false {
+                            checkBookmark = true
+                            userStore.addFollowItemId(bottleData.id)
+                        }
+                        
                     }) {
-                        Image(checkBookmark ? "bookmark_fill" : "bookmark")
+                        Image(compareMyFollowBottleID(bottleData.id) ? "BookMark.fill" : "BookMark")
                             .resizable()
+                            .aspectRatio(contentMode: .fit)
                             .frame(width: 15, height: 18)
+                            .padding(.horizontal, 10)
                     }
                 }
             }
@@ -105,6 +120,10 @@ struct BottleView_Info: View {
         .cornerRadius(10)
         .padding(.horizontal)
         .padding(.vertical, 5)
+    }
+    
+    func compareMyFollowBottleID(_ bottleId: String) -> Bool {
+        return (userStore.user.followItemList.filter { $0 == bottleId }.count != 0) ? true : false
     }
 }
 

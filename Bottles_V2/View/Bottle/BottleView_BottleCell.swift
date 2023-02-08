@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - 바틀 셀(바틀 이미지, 바틀 이름, 바틀 가격, 바틀샵 이름, 북마크)
 struct BottleView_BottleCell: View {
+    @EnvironmentObject var userStore: UserStore
     var bottleData: BottleModel
     @State private var checkBookmark: Bool = false
     
@@ -59,17 +60,45 @@ struct BottleView_BottleCell: View {
                 Spacer()
                 
                 // MARK: - 북마크
+                
                 Button(action: {
-                    checkBookmark.toggle()
+                    withAnimation(.easeOut(duration: 0.5)) {
+                        checkBookmark.toggle()
+                    }
+                    print(bottleData.id)
+                    if compareMyFollowBottleID(bottleData.id) == true {
+                        checkBookmark = false
+                        userStore.deleteFollowItemId(bottleData.id)
+                    }
+
+                    if compareMyFollowBottleID(bottleData.id) == false {
+                        checkBookmark = true
+                        userStore.addFollowItemId(bottleData.id)
+                    }
+                    
                 }) {
-                    Image(checkBookmark ? "bookmark_fill" : "bookmark")
+                    Image(compareMyFollowBottleID(bottleData.id) ? "BookMark.fill" : "BookMark")
                         .resizable()
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: 15, height: 18)
                         .padding(.horizontal, 10)
                 }
+                
+//                Button(action: {
+//                    checkBookmark.toggle()
+//                }) {
+//                    Image(checkBookmark ? "bookmark_fill" : "bookmark")
+//                        .resizable()
+//                        .frame(width: 15, height: 18)
+//                        .padding(.horizontal, 10)
+//                }
             }
             .padding(.top, 10)
         }
+    }
+    
+    func compareMyFollowBottleID(_ bottleId: String) -> Bool {
+        return (userStore.user.followItemList.filter { $0 == bottleId }.count != 0) ? true : false
     }
 }
 
