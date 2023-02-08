@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SkeletonUI
 
 // MARK: - 마커 클릭 시 모달 뷰
 struct MarkerDetailView: View {
@@ -14,6 +15,8 @@ struct MarkerDetailView: View {
     @State private var checkBookmark: Bool = true
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopId: String
+    @State var colors = [String]()
+
 //    @Binding var shopModel: ShopModel
 
     var body: some View {
@@ -76,18 +79,21 @@ struct MarkerDetailView: View {
                         AsyncImage(url: URL(string: imageLink)) { image in
                             image.resizable()
                         } placeholder: {
-                            // FIXME: - 무한로딩 이슈
-                            // ProgressView()
-                            Image("oakDrum_Image")
-                                .resizable()
+                            ProgressView()
                         }
                         .frame(width: 126, height: 126)
                     }
                 }
             }
+            .skeleton(with: colors.isEmpty)
             .scrollIndicators(.hidden)
         }
         .foregroundColor(.black)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.colors = ["GREEN", "RED", "BLUE", "YELLOW", "BLACK"]
+                  }
+        }
     }
 }
 
