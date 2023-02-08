@@ -9,6 +9,8 @@ import SwiftUI
 
 // MARK: - Tasting Notes, Information, Pairing
 struct BottleView_Detail: View {
+    var bottleData: BottleModel
+
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading, spacing: 15) {
@@ -23,19 +25,19 @@ struct BottleView_Detail: View {
                             // Aroma
                             Text("Aroma")
                                 .frame(maxWidth: 38, alignment: .leading)
-                            Text("사과, 시트러스, 그린 애플")
+                            Text(bottleData.itemAroma)
                         }
                         HStack(spacing: 5) {
                             // Taste
                             Text("Taste")
                                 .frame(maxWidth: 38, alignment: .leading)
-                            Text("복숭아, 파인애플, 망고, 미네랄")
+                            Text(bottleData.itemTaste)
                         }
                         HStack(spacing: 5) {
                             // Finish
                             Text("Finish")
                                 .frame(maxWidth: 38, alignment: .leading)
-                            Text("꽃, 구아바, 체리, 달콤한")
+                            Text(bottleData.itemFinish)
                         }
                     }
                     .modifier(contentModifier())
@@ -51,31 +53,31 @@ struct BottleView_Detail: View {
                             // 종류
                             Text("종류")
                                 .frame(maxWidth: 38, alignment: .leading)
-                            Text("스파클링 와인")
+                            Text(bottleData.itemType)
                         }
                         HStack(spacing: 5) {
                             // 용량
                             Text("용량")
                                 .frame(maxWidth: 38, alignment: .leading)
-                            Text("750ml")
+                            Text("\(bottleData.itemML)ML")
                         }
                         HStack(spacing: 5) {
                             // 도수
                             Text("도수")
                                 .frame(maxWidth: 38, alignment: .leading)
-                            Text("8%")
+                            Text(bottleData.stringItemDegree)
                         }
                         HStack(spacing: 5) {
                             // 국가
                             Text("국가")
                                 .frame(maxWidth: 38, alignment: .leading)
-                            Text("스페인")
+                            Text(bottleData.itemNation)
                         }
                         HStack(spacing: 5) {
                             // 품종
                             Text("품종")
                                 .frame(maxWidth: 38, alignment: .leading)
-                            Text("모스카토")
+                            Text(bottleData.itemVarities[0])
                         }
                     }
                     .modifier(contentModifier())
@@ -86,7 +88,7 @@ struct BottleView_Detail: View {
                     Text("Pairing")
                         .modifier(titleModifier())
                     
-                    Text("회, 생선, 랍스타 등의 해산물")
+                    Text(bottleData.itemPairing)
                         .modifier(contentModifier())
                 }
             }

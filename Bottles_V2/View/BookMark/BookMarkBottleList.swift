@@ -146,7 +146,7 @@ struct BookMarkBottleListCell: View {
         HStack(alignment: .top) {
             // 이미지를 누르면 Bottle Detail View로 이동
             NavigationLink {
-                BottleView()
+                BottleView(bottleData: bottleInfo)
             } label: {
                 // Bottle 이미지
                 AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in

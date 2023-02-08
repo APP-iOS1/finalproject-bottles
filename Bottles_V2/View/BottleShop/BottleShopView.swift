@@ -255,7 +255,7 @@ struct BottleShopView: View {
                         // 검색결과 필터링 후 바틀셀 반복문
                         ScrollView {
                             ForEach(filteredResult, id: \.self) { item in
-                                NavigationLink(destination: BottleView(), label:{
+                                NavigationLink(destination: BottleView(bottleData: item), label:{
                                     BottleShopView_BottleList(selectedItem: item)
                                         .padding()
                                 })

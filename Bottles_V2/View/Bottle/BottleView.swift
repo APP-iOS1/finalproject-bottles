@@ -15,16 +15,17 @@ struct BottleView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @State private var isShowingSheet: Bool = false
+    var bottleData: BottleModel
     
     var body: some View {
         NavigationStack {
             ZStack {
                 ScrollView {
                     // 바틀 기본 정보 (바틀 이미지, 바틀 이름, 북마크, 바틀 가격, 바틀샵 이름)
-                    BottleView_Info()
+                    BottleView_Info(bottleData: bottleData)
                     
                     // Tasting Notes, Information, Pairing
-                    BottleView_Detail()
+                    BottleView_Detail(bottleData: bottleData)
                     
                     // 해당 바틀을 판매하는 바틀샵 리스트
                     VStack(alignment: .leading) {
@@ -69,10 +70,10 @@ struct BottleView: View {
             // 네비게이션 장바구니 아이콘
             ToolbarItem(placement: .principal) {
                 HStack {
-                    Image("Map_tab_fill")
+                    Image("Maptabfill")
                         .resizable()
                         .frame(width: 11, height: 16)
-                    Text("미들바틀")
+                    Text(bottleData.shopName)
                         .font(.bottles18)
                         .fontWeight(.medium)
                 }

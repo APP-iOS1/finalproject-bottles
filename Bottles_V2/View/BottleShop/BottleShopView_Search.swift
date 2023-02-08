@@ -125,7 +125,7 @@ struct BottleShopView_Search: View {
             // 바틀 셀(정렬 후) 반복문
             ForEach(sortBottleData(), id: \.self) { item in
                 // 바틀셀 누를 시 바틀뷰로 이동
-                NavigationLink(destination: BottleView(), label:{
+                NavigationLink(destination: BottleView(bottleData: item), label:{
                     BottleShopView_BottleList(selectedItem: item)
                 })
             }
