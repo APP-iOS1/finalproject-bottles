@@ -135,6 +135,7 @@ struct SearchBottleList: View {
 
 struct SearchBottleListCell: View {
     // 필터링된 Bottle의 정보를 저장하는 변수
+    @EnvironmentObject var userStore: UserStore
     var bottleInfo: BottleModel
     // Shop의 정보를 저장하는 변수
     var shopInfo: ShopModel
@@ -201,7 +202,7 @@ struct SearchBottleListCell: View {
             Spacer()
             VStack {
                 // TODO: 즐겨찾기 기능 추가해야함
-                Button {
+                Button(action: {
                     withAnimation(.easeIn(duration: 1)) {
                         bookMark.toggle()
                         bookMarkAlarm.toggle()
@@ -211,9 +212,25 @@ struct SearchBottleListCell: View {
                             bookMarkAlarm.toggle()
                         }
                     }
-                } label: {
-                    Image(systemName: "bookmark.fill")
+                    
+                    if compareMyFollowBottleID(bottleInfo.id) == true {
+                        bookMark = false
+                        userStore.deleteFollowItemId(bottleInfo.id)
+                    }
+
+                    if compareMyFollowBottleID(bottleInfo.id) == false {
+                        bookMark = true
+                        userStore.addFollowItemId(bottleInfo.id)
+                    }
+                    
+                }) {
+                    Image(compareMyFollowBottleID(bottleInfo.id) ? "BookMark.fill" : "BookMark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 15, height: 18)
+                        .padding(.horizontal, 10)
                 }
+                
                 Spacer()
             }
             .font(.title2)
@@ -222,6 +239,10 @@ struct SearchBottleListCell: View {
         }
         .frame(height: 130)
         .padding(.vertical, 5)
+    }
+    
+    func compareMyFollowBottleID(_ bottleId: String) -> Bool {
+        return (userStore.user.followItemList.filter { $0 == bottleId }.count != 0) ? true : false
     }
 }
 
