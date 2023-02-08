@@ -51,7 +51,7 @@ struct BottleShopCurationView: View {
                         Rectangle()
                             .frame(width: 370, height: 370)
                     })
-                    .cornerRadius(12, corners: [.topLeft, .topRight])
+//                    .cornerRadius(12, corners: [.topLeft, .topRight])
                     .foregroundColor(.white)
                         }
                     
@@ -97,7 +97,7 @@ struct BottleShopCurationView: View {
                                 Rectangle()
                                     .frame(width: 370)
                                     .foregroundColor(.purple_3)
-                                    .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+//                                    .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
                             }
                             .frame(alignment: .leading)
                     }.padding(.top, -16)
@@ -160,23 +160,31 @@ struct BottleShopCurationView: View {
 }
 
 
-// MARK: - cornerRadius 각별로 다르게 사용하기 위함
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
-    }
-}
+// MARK: - cornerRadius 각별로 다르게 사용하기 위함(갑자기 오류남;)
+//extension View {
+//    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+//        clipShape( RoundedCorner(radius: radius, corners: corners) )
+//    }
+//}
+//
+//struct RoundedCorner: Shape {
+//
+//    var radius: CGFloat = .infinity
+//    var corners: UIRectCorner = .allCorners
+//
+//    func path(in rect: CGRect) -> Path {
+//        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+//        return Path(path.cgPath)
+//    }
+    
+//    var radius: CGFloat = .infinity
+//    var corners: UIRectCorner = .allCorners
 
-struct RoundedCorner: Shape {
-
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-}
+//    func path(in rect: CGRect) -> Path {
+//        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+//        return Path(path.Path)
+//    }
+//}
 
 //struct BottleShopCurationView_Previews: PreviewProvider {
 //    static var previews: some View {
