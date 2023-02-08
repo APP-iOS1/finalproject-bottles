@@ -13,6 +13,7 @@ import Combine
 /// 데이터 적용이 필요한 부분은 ReservationView_Content입니다.
 struct ReservationView: View {
     //@EnvironmentObject var path: Path
+    @EnvironmentObject var bottleDataStore: BottleDataStore
     @Binding var isShowing: Bool
     @State var offset = UIScreen.main.bounds.height
     @State private var isDragging = false
@@ -81,7 +82,7 @@ struct ReservationView: View {
     
     var sheetView: some View {
         VStack {
-            ReservationView_Content(bottleDataStore: BottleDataStore, bottleId: bottle)
+            ReservationView_Content(bottleDataStore: _bottleDataStore, bottleId: "")
                 .background(.white)
                 .cornerRadius(15)
                 //.cornerRadius(12, corners: [.topLeft, .topRight])

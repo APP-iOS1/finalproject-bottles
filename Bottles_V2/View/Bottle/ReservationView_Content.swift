@@ -90,7 +90,7 @@ struct ReservationView_Content: View {
 //                        .environmentObject(path)
 //                }
                 
-                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleId: bottddddddd))) {
+                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleId: ""))) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
