@@ -14,6 +14,8 @@ import FirebaseAuth
 
 class KakaoLoginViewModel: ObservableObject {
     
+    let userStore: UserStore = UserStore()
+    
     func handleKakaoLogin() {
         // 카카오톡 설치 여부 확인 - 카카오톡이 설치가 되어있을 때
         Task {
@@ -99,6 +101,7 @@ class KakaoLoginViewModel: ObservableObject {
                         }
                        
                     } else {
+                        self.userStore.createUser(user: User(id: (user?.kakaoAccount?.email)!, email: (user?.kakaoAccount?.email)!, followItemList: [], followShopList: [], nickname: (user?.kakaoAccount?.profile?.nickname)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: ""))
                         print("파이어베이스 사용자 생성 성공")
 
                     }

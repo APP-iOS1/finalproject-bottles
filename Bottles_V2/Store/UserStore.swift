@@ -112,5 +112,21 @@ class UserStore: ObservableObject {
         
         
     }
+    
+//    func doubleCheckEmail2(userEmail: String, userNickname: String) async -> Bool{
+//        
+//        var userCheckResult: Bool = false
+//        do {
+//            let document = try await Firestore.firestore().collection("User").whereField("email", isEqualTo: userEmail).whereField("nicname", isEqualTo: userNickname)
+//                .getDocuments()
+//            if document.isEmpty {
+//                userCheckResult = false
+//            } else {
+//                userCheckResult = true
+//            }
+//            
+//        }
+//        return userCheckResult
+//    }
 }
 

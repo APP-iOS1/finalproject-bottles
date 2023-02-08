@@ -76,6 +76,7 @@ struct TotalLoginView: View {
                     .padding(.trailing)
                     Button(action: {
                         // TODO: 애플 로그인 로직
+                        googleLoginViewModel.signOut()
                     }){
                         VStack {
                             Image("AppleLogin")
