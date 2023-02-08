@@ -16,6 +16,13 @@ class KakaoLoginViewModel: ObservableObject {
     
     let userStore: UserStore = UserStore()
     
+    /// 데이터 베이스 안에 같은 이메일이 있으면 customAlert을 뷰에 띄워줌
+    @Published var kakaoLoginError: Bool = false
+    
+    /// 데이터 베이스 안에 같은 이메일이 있으면 customAlert의 내용에 사용자가 어떤 종류의 소셜 로그인으로 회원 가입했는지 보여줌
+    var errorSocialType: String = ""
+    
+    
     func handleKakaoLogin() {
         // 카카오톡 설치 여부 확인 - 카카오톡이 설치가 되어있을 때
         Task {
@@ -137,6 +144,8 @@ class KakaoLoginViewModel: ObservableObject {
                                         else {
                                             print("unlink() success.")
                                             // MARK: 사용자에게 무언가 알려줘야 함
+                                            self.errorSocialType = socialLoginType
+                                            self.kakaoLoginError = true
                                         }
                                     }
                                     // 뷰를 login뷰로 다시 넘겨주기 (따로 없어도 됨)
