@@ -15,6 +15,8 @@
 		0427F576297677E90023E745 /* Bottles_V2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F575297677E90023E745 /* Bottles_V2Tests.swift */; };
 		0427F580297677E90023E745 /* Bottles_V2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F57F297677E90023E745 /* Bottles_V2UITests.swift */; };
 		0427F582297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */; };
+		048F5CD129938241005163EC /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 048F5CD029938241005163EC /* FirebaseMessaging */; };
+		048F5CD3299390B0005163EC /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048F5CD2299390B0005163EC /* Data.swift */; };
 		26A66485298CC6F1004E15EA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66484298CC6F1004E15EA /* User.swift */; };
 		26A66487298CC865004E15EA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66486298CC865004E15EA /* UserStore.swift */; };
 		26BA41C6299136F100419584 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C5299136F100419584 /* Cart.swift */; };
@@ -148,6 +150,7 @@
 		0427F57B297677E90023E745 /* Bottles_V2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Bottles_V2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0427F57F297677E90023E745 /* Bottles_V2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2UITests.swift; sourceTree = "<group>"; };
 		0427F581297677E90023E745 /* Bottles_V2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		048F5CD2299390B0005163EC /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		04F8B894297A62C00098DE93 /* Bottles_V2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bottles_V2.entitlements; sourceTree = "<group>"; };
 		1A4B03D15F61D2058B49F1EB /* Pods-Bottles_V2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1E38E30FED3A6D500B88EE64 /* Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -261,6 +264,7 @@
 				D746C97B298A426200E27E16 /* FirebaseFirestoreSwift in Frameworks */,
 				7FB12078299223990071AB3F /* GoogleSignIn in Frameworks */,
 				7FB12083299226EE0071AB3F /* KakaoSDKUser in Frameworks */,
+				048F5CD129938241005163EC /* FirebaseMessaging in Frameworks */,
 				7FB1207F299226EE0071AB3F /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +512,7 @@
 				7F5857B3298A00AD003402B0 /* Image+.swift */,
 				AECF7F49298D0211002593C3 /* Text+.swift */,
 				3A47F38E2992368700F8D603 /* String.swift */,
+				048F5CD2299390B0005163EC /* Data.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -610,6 +615,7 @@
 				7FB1207E299226EE0071AB3F /* KakaoSDKAuth */,
 				7FB12080299226EE0071AB3F /* KakaoSDKCommon */,
 				7FB12082299226EE0071AB3F /* KakaoSDKUser */,
+				048F5CD029938241005163EC /* FirebaseMessaging */,
 			);
 			productName = Bottles_V2;
 			productReference = 0427F561297677E60023E745 /* Bottles_V2.app */;
@@ -921,6 +927,7 @@
 				7FB1207C299223EA0071AB3F /* GoogleLoginViewModel.swift in Sources */,
 				9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
+				048F5CD3299390B0005163EC /* Data.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,
 				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,
 				26A66487298CC865004E15EA /* UserStore.swift in Sources */,
@@ -1092,7 +1099,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Bottles_V2/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6R3M7VGRP2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bottles-V2-Info.plist";
@@ -1128,7 +1135,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Bottles_V2/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CGUAL476T6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bottles-V2-Info.plist";
@@ -1302,6 +1309,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		048F5CD029938241005163EC /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D746C975298A426200E27E16 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		7FB12077299223990071AB3F /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7FB12076299223990071AB3F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
