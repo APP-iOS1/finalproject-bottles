@@ -45,15 +45,19 @@ struct EmailLoginView: View {
             
             Button(action: {
                 // TODO: 로그인 로직이 들어오면 입력한 아이디, 비밀번호가 틀릴 경우 뷰에 보여줌
-                print("\(authStore.isLogin)")
                 authStore.login(email: email, password: password)
-        
+                
             }){
                 Text("로그인")
                     .modifier(EmailViewButtonModifier(width: 280, height: 48))
             }
             
-            
+            Button(action: {
+                authStore.logout()
+                print("\(authStore.isEmailVerified())")
+            }) {
+                Text("로그아웃")
+            }
             
             NavigationLink(destination: EmailRegisterView(authStore: authStore)) {
                 Text("회원가입하기")

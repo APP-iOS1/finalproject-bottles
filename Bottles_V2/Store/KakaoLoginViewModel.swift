@@ -114,6 +114,8 @@ class KakaoLoginViewModel: ObservableObject {
                                 
                             }
                             
+                            
+                            
                         } else {
                             Firestore.firestore().collection("User").document((user?.kakaoAccount?.email)!).getDocument { (snapshot, error) in
                                 

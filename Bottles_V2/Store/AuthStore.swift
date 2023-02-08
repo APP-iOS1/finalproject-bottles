@@ -25,6 +25,7 @@ class AuthStore: ObservableObject {
     }
     
     func login(email: String, password: String) {
+        
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("Error : \(error.localizedDescription)")
@@ -61,6 +62,15 @@ class AuthStore: ObservableObject {
             }
             
             guard let authUser = result?.user else { return }
+            
+            // 회원 가입시 해당 유저가 입력한 이메일로 인증 링크를 보내줌
+            Auth.auth().currentUser?.sendEmailVerification{ error in
+                if let error = error {
+                    print("이메일 전송 실패: \(error.localizedDescription)")
+                } else {
+                    print("이메일 전송 완료")
+                }
+            }
             userStore.createUser(user: User(id: UUID().uuidString, email: email, followItemList: [], followShopList: [], nickname: nickname, pickupItemList: [], recentlyItem: [], userPhoneNumber: userPhoneNumber))
             print("회원가입 완료")
             //let user: User = User(id: authUser.uid, name: name, email: email, temperature: 36.5, registDate: getStringDate(date: Date()),chatIDList: [])

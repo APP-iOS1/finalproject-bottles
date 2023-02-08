@@ -21,6 +21,7 @@ struct EmailRegisterView: View {
     /// 비밀번호 확인 정규식 (영어, 숫자, 특수문자 8~18자리)
     let passwordExpression: String = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}$"
     
+    
     @State var registerEmail: String = ""
     @State var verificationCode: String = ""
     @State var registerPassword: String = ""
@@ -344,16 +345,16 @@ struct EmailRegisterView: View {
             // MARK: - 회원가입 버튼
             Button(action: {
                 // TODO: 이메일로 회원가입 로직 넣기
-                /*
-                if emailNotFitFormat || passwordNotFitFormat || passwordCheckFail || !authStore.isEmailVerified() || nickname == "" || !firstAgreement || !secondAgreement || !thirdAgreement {
+                
+                if emailNotFitFormat || passwordNotFitFormat || passwordCheckFail || nickname == "" || !firstAgreement || !secondAgreement || !thirdAgreement {
                     registerFailed = true
                 } else {
                     authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
                     registerSuccessed = true
                 }
-                 */
-                authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
-                registerSuccessed = true
+                 
+//                authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
+//                registerSuccessed = true
             }){
                 Text("회원가입하기")
                     .modifier(EmailViewButtonModifier(width: 358, height: 56))
