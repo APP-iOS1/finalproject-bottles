@@ -41,8 +41,6 @@ struct BookMarkBottleList: View {
     }
     
     func sortBottleData(_ filterBottleData: [BottleModel]) -> [BottleModel] {
-        print("userdata is \(userDataStore.user)")
-        let bookMarkBottles: [BottleModel] = bottleDataStore.bottleData
         switch selection {
         case "거리순":
             return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
@@ -151,7 +149,6 @@ struct BookMarkBottleListCell: View {
                 BottleView()
             } label: {
                 // Bottle 이미지
-
                 AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
                     image
                         .resizable()
@@ -164,7 +161,6 @@ struct BookMarkBottleListCell: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 128, height: 128)
                         .cornerRadius(12)
-
                 }
                 .background(Color.gray_f7)
                 .cornerRadius(12)

@@ -16,6 +16,7 @@ struct BookMarkShopList: View {
     @State var bookMarkAlarm: Bool = false
     
     // Server Data Test
+    @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
     
@@ -33,9 +34,19 @@ struct BookMarkShopList: View {
         print("\(from.distance(from: to))")
         return from.distance(from: to)
     }
+    
+    func filterUserShopData() -> [ShopModel] {
+        var resultData: [ShopModel] = []
+        
+        for itemList in userDataStore.user.followShopList {
+            let filterData = shopDataStore.shopData.filter {$0.id == itemList}[0]
+            resultData.append(filterData)
+        }
+        
+        return sortShopData(resultData)
+    }
 
-    func sortShopData() -> [ShopModel] {
-        let bookMarkShops: [ShopModel] = testShopData
+    func sortShopData(_ bookMarkShops: [ShopModel]) -> [ShopModel] {
         switch selection {
         case "거리순":
             return bookMarkShops.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
@@ -66,11 +77,17 @@ struct BookMarkShopList: View {
 
                 // TODO: 서버 Shop 데이터 연결
                 ScrollView {
-                    ForEach(sortShopData()) { shop in
+                    ForEach(filterUserShopData()) { shop in
                         NavigationLink {
                             BottleShopView(bottleShop: shop)
                         } label: {
-                            BookMarkShopListCell(shopInfo: shop, bookMarkAlarm: $bookMarkAlarm, distance: distance(shop.location.latitude, shop.location.longitude))
+                            BookMarkShopListCell(
+                                userStore: userDataStore,
+                                shopInfo: shop,
+                                bookMarkAlarm: $bookMarkAlarm,
+                                distance: distance(
+                                    shop.location.latitude,
+                                    shop.location.longitude))
                         }
 
                     }
@@ -110,6 +127,7 @@ struct BookMarkShopList: View {
 
 struct BookMarkShopListCell: View {
     // Shop의 정보를 저장하는 변수
+    var userStore: UserStore
     var shopInfo: ShopModel
     @Binding var bookMarkAlarm: Bool
     var distance: Double
@@ -120,7 +138,7 @@ struct BookMarkShopListCell: View {
             AsyncImage(url: URL(string: shopInfo.shopTitleImage)) { image in
                 image
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 128, height: 128)
                     .cornerRadius(12)
             } placeholder: {
@@ -165,6 +183,7 @@ struct BookMarkShopListCell: View {
             VStack {
                 // TODO: 즐겨찾기 기능 추가해야함
                 Button {
+                    userStore.deleteFollowShopId(shopInfo.id)
                     withAnimation(.easeIn(duration: 1)) {
                         bookMarkAlarm.toggle()
                     }
