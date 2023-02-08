@@ -17,6 +17,7 @@ struct ReservationView: View {
     @State var offset = UIScreen.main.bounds.height
     @State private var isDragging = false
     
+    
     let heightToDisappear = UIScreen.main.bounds.height
     let outOfFocusOpacity: CGFloat = 0.7
     let minimumDragDistanceToHide: CGFloat = 150
@@ -80,7 +81,7 @@ struct ReservationView: View {
     
     var sheetView: some View {
         VStack {
-            ReservationView_Content()
+            ReservationView_Content(bottleDataStore: BottleDataStore, bottleId: bottle)
                 .background(.white)
                 .cornerRadius(15)
                 //.cornerRadius(12, corners: [.topLeft, .topRight])

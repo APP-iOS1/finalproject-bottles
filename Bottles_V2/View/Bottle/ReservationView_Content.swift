@@ -15,6 +15,9 @@ struct ReservationView_Content: View {
     @State private var isShowingAlert: Bool = false
     @State private var isShowingCart: Bool = false
     @State private var isShowingReservationPage: Bool = false
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    var bottleId: String
+    
     
     var body: some View {
         NavigationStack {
@@ -87,7 +90,7 @@ struct ReservationView_Content: View {
 //                        .environmentObject(path)
 //                }
                 
-                NavigationLink(destination: ReservationPageView()) {
+                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleId: bottddddddd))) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
@@ -101,6 +104,24 @@ struct ReservationView_Content: View {
         }
         .padding(.top)
         .padding(.horizontal)
+    }
+    
+    func getBottleModel(bottleId: String) -> BottleModel {
+        let matchedBottleData = bottleDataStore.bottleData.filter {
+            $0.id == bottleId
+        }
+        
+        return matchedBottleData[0]
+    }
+    
+    func getBottleReservation(bottleId: String) -> [BottleReservation] {
+        var matchedBottleReservation: [BottleReservation] = []
+        var bottleModel: BottleModel
+        
+            bottleModel = getBottleModel(bottleId: bottleId)
+        matchedBottleReservation.append(BottleReservation(image: bottleModel.itemImage, title: bottleModel.itemName, price: bottleModel.itemPrice * count, count: count, shop: bottleModel.shopName))
+        
+        return matchedBottleReservation
     }
 }
 

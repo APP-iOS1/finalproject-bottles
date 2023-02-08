@@ -14,6 +14,7 @@ struct ReservationPageView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
+    let bottleReservations: [BottleReservation]
     
     var body: some View {
         NavigationStack {
@@ -28,7 +29,7 @@ struct ReservationPageView: View {
                         
                         HStack {
                             // MARK: - 예약 바틀 총 개수
-                            Text("2건")
+                            Text("\(bottleReservations.count)건")
                                 .font(.bottles16)
                                 .fontWeight(.medium)
                             
@@ -39,9 +40,9 @@ struct ReservationPageView: View {
                     }
                     
                     // MARK: - 예약 바틀 리스트
-                    ForEach(bottleReservationData, id: \.self) { bottle in
+                    ForEach(bottleReservations, id: \.self) { bottleReservation in
                         // 예약 바틀 셀
-                        ReservationPageView_BottleCell(bottleReservation: bottle)
+                        ReservationPageView_BottleCell(bottleReservation: bottleReservation)
                     }
                 }
                 .padding()
@@ -112,25 +113,14 @@ struct ReservationPageView: View {
                 }
             })
         }
-       
-        
     }
 }
 
-// 예약 상품 샘플 구조체
-struct Bottle_reservation: Hashable {
-    var image: String
-    var title: String
-    var price: Int
-    var count: Int
-    var shop: String
-}
-
-// 예약 상품 더미데이터
-var bottleReservationData = [
-    Bottle_reservation(image: "bottle", title: "프로메샤 모스카토", price: 110000, count: 1, shop: "와인앤모어 군자점"),
-    Bottle_reservation(image: "bottle2", title: "샤도네이 화이트 와인", price: 58000, count: 1, shop: "와인앤모어 군자점")
-]
+//// 예약 상품 더미데이터
+//var bottleReservationData = [
+//    BottleReservation(image: "bottle", title: "프로메샤 모스카토", price: 110000, count: 1, shop: "와인앤모어 군자점"),
+//    BottleReservation(image: "bottle2", title: "샤도네이 화이트 와인", price: 58000, count: 1, shop: "와인앤모어 군자점")
+//]
 
 
 //struct ReservationPageView_Previews: PreviewProvider {

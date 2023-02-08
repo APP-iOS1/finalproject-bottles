@@ -68,8 +68,8 @@ struct CartView: View {
                     .font(.bottles12)
                     .padding(.top)
                 
-                NavigationLink(destination: ReservationPageView()) {
-                    
+                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(carts: cartStore.carts))) {
+                
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width : UIScreen.main.bounds.size.width-50, height: (UIScreen.main.bounds.size.width-50)/7)
                         .overlay(Text("예약하러 하기")
@@ -80,7 +80,6 @@ struct CartView: View {
                 .foregroundColor(.accentColor)
                 .padding(.bottom, 20)
             }
-            
         }
         .navigationBarTitle("장바구니", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
@@ -96,6 +95,18 @@ struct CartView: View {
         }
         
         return matchedBottleData[0]
+    }
+    
+    func getBottleReservation(carts: [Cart]) -> [BottleReservation] {
+        var matchedBottleReservation: [BottleReservation] = []
+        var bottleModel: BottleModel
+        
+        for cart in carts {
+            bottleModel = getBottleModel(bottleId: cart.bottleId)
+            matchedBottleReservation.append(BottleReservation(image: bottleModel.itemImage, title: bottleModel.itemName, price: cart.eachPrice * cart.itemCount, count: cart.itemCount, shop: cart.shopName))
+        }
+        
+        return matchedBottleReservation
     }
     
     /// CustomNavigationBackButton
