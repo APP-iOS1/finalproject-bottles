@@ -391,7 +391,7 @@ struct BottleShopInfoView: View {
                 // "사장님의 공지 탭"
             case .notice:
                 VStack{
-                    BottleShopView_Notice()
+                    BottleShopView_Notice(shopData: bottleShop)
                 }
             }
         }

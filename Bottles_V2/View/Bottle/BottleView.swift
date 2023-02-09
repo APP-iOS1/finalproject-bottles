@@ -12,6 +12,7 @@ import SwiftUI
 struct BottleView: View {
     //@EnvironmentObject private var path: Path
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @State private var isShowingSheet: Bool = false
@@ -70,6 +71,9 @@ struct BottleView: View {
                         }
                     }
                     .padding(.horizontal)
+                }
+                .onAppear {
+                    userStore.addRecentlyItem(bottleData.id)
                 }
             }
             

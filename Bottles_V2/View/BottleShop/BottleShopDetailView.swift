@@ -28,10 +28,7 @@ struct BottleShopDetailView: View {
                 // 맵뷰 위에 핀 띄워줘야 함
                 VStack(alignment: .leading){
                     HStack{
-                        Spacer()
-                        Text("bottleshop 위치")
-                        //                NaverMap((37.56668, 126.978419), .constant(false), $mappinShopID)
-                        Spacer()
+                        BottleShopDetailMapView((bottleShop.location.latitude, bottleShop.location.longitude), bottleShop)
                     }
                     .frame(height: 442)
                     

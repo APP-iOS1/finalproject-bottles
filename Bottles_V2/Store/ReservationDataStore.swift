@@ -12,24 +12,6 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
-//MARK: - 예약 모델
-struct ReservationModel : Codable, Identifiable {
-    var id : String
-    var shopId : String
-    var userId : String      // 이메일 형식으로 들어옴
-    var reservedTime : String
-    var state: String
-    var reservedBottles : [ReservedBottles]
-}
-
-//MARK: - 예약한 바틀 모델
-struct ReservedBottles : Codable {
-    var id : String
-    var bottleId : String
-    var itemCount : Int
-}
-
-//MARK: - 예약 데이터 스토어
 class ResevationDataStore : ObservableObject {
     
     @Published var reservationData: [ReservationModel] = []

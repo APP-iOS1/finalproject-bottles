@@ -14,19 +14,12 @@ struct BookMarkShopList: View {
     @State private var selection = "이름순"
     // 북마크 알림 Test
     @State var bookMarkAlarm: Bool = false
+    @State var resetDeletedShopId: String = ""
     
     // Server Data Test
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
-    
-    var testShopData: [ShopModel] {
-        var test: [ShopModel] = []
-        for i in 0...9 {
-            test.append( shopDataStore.shopData[i])
-        }
-        return test
-    }
     
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
@@ -85,6 +78,7 @@ struct BookMarkShopList: View {
                                 userStore: userDataStore,
                                 shopInfo: shop,
                                 bookMarkAlarm: $bookMarkAlarm,
+                                resetDeletedShopId: $resetDeletedShopId,
                                 distance: distance(
                                     shop.location.latitude,
                                     shop.location.longitude))
@@ -110,7 +104,12 @@ struct BookMarkShopList: View {
                     Text("북마크가 해제되었습니다.")
                         .foregroundColor(.black)
                         .font(.bottles11)
-                    
+                    Button {
+                        userDataStore.addFollowShopId(resetDeletedShopId)
+                    } label: {
+                        Text("실행취소")
+                            .font(.bottles11)
+                    }
                 }
                 .zIndex(1)
                 .transition(.opacity.animation(.easeIn))
@@ -130,6 +129,7 @@ struct BookMarkShopListCell: View {
     var userStore: UserStore
     var shopInfo: ShopModel
     @Binding var bookMarkAlarm: Bool
+    @Binding var resetDeletedShopId: String
     var distance: Double
     
     var body: some View {
@@ -183,6 +183,7 @@ struct BookMarkShopListCell: View {
             VStack {
                 // TODO: 즐겨찾기 기능 추가해야함
                 Button {
+                    resetDeletedShopId = shopInfo.id
                     userStore.deleteFollowShopId(shopInfo.id)
                     withAnimation(.easeIn(duration: 1)) {
                         bookMarkAlarm.toggle()
@@ -193,7 +194,11 @@ struct BookMarkShopListCell: View {
                         }
                     }
                 } label: {
-                    Image(systemName: "bookmark.fill")
+                    Image("BookMark.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 15, height: 18)
+                        .padding(.trailing, 10)
                 }
                 Spacer()
             }
@@ -201,7 +206,7 @@ struct BookMarkShopListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(height: 130)
+        .frame(minHeight: 130, maxHeight: 200)
         .padding(.vertical, 5)
     }
 }
@@ -213,4 +218,3 @@ struct BookMarkShopListCell: View {
 //        }
 //    }
 //}
-//"https://wine21.speedgabia.com/NEWS_MST/froala/202007/20200716101122567972.jpg"
