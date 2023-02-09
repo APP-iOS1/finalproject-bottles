@@ -24,7 +24,6 @@ struct MapSearchView: View {
                 if !tapped {
                     VStack {
                         // MARK: - SearchBar
-                        
                         HStack {
                             //  Navigation Bar 의 Back Button을 유사하게 구현
                             Image(systemName: "chevron.backward")
