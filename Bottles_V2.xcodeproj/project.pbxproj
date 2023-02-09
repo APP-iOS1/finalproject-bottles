@@ -19,6 +19,7 @@
 		26A66487298CC865004E15EA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66486298CC865004E15EA /* UserStore.swift */; };
 		26BA41C6299136F100419584 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C5299136F100419584 /* Cart.swift */; };
 		26BA41C82991389D00419584 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C72991389D00419584 /* CartStore.swift */; };
+		26BA41CA2993869D00419584 /* BottleReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C92993869D00419584 /* BottleReservation.swift */; };
 		26D0E4382979164400524943 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		27281CE32977854D003BE8B4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE22977854D003BE8B4 /* MapView.swift */; };
 		27281CE62977856A003BE8B4 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE52977856A003BE8B4 /* CartView.swift */; };
@@ -30,6 +31,7 @@
 		27281CFB2977AD3C003BE8B4 /* MapViewSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */; };
 		27281CFD2977B851003BE8B4 /* NearBySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CFC2977B851003BE8B4 /* NearBySheetView.swift */; };
 		276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276367E1298A584300C04CFA /* MarkerDetailSheet.swift */; };
+		27951FD429937B2A00690ADD /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 27951FD329937B2A00690ADD /* SkeletonUI */; };
 		27A02689298B51AC00F71705 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02682298B51AC00F71705 /* SearchView.swift */; };
 		27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02683298B51AC00F71705 /* RecentlyItemList.swift */; };
 		27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02684298B51AC00F71705 /* SearchBottleList.swift */; };
@@ -155,6 +157,7 @@
 		26A66486298CC865004E15EA /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		26BA41C5299136F100419584 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		26BA41C72991389D00419584 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
+		26BA41C92993869D00419584 /* BottleReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleReservation.swift; sourceTree = "<group>"; };
 		27281CE22977854D003BE8B4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		27281CE52977856A003BE8B4 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27281CEA297785AA003BE8B4 /* BottleShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView.swift; sourceTree = "<group>"; };
@@ -259,6 +262,7 @@
 				7FB12081299226EE0071AB3F /* KakaoSDKCommon in Frameworks */,
 				D746C97D298A426200E27E16 /* FirebaseStorage in Frameworks */,
 				D746C97B298A426200E27E16 /* FirebaseFirestoreSwift in Frameworks */,
+				27951FD429937B2A00690ADD /* SkeletonUI in Frameworks */,
 				7FB12078299223990071AB3F /* GoogleSignIn in Frameworks */,
 				7FB12083299226EE0071AB3F /* KakaoSDKUser in Frameworks */,
 				7FB1207F299226EE0071AB3F /* KakaoSDKAuth in Frameworks */,
@@ -365,6 +369,7 @@
 			children = (
 				26A66484298CC6F1004E15EA /* User.swift */,
 				26BA41C5299136F100419584 /* Cart.swift */,
+				26BA41C92993869D00419584 /* BottleReservation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -610,6 +615,7 @@
 				7FB1207E299226EE0071AB3F /* KakaoSDKAuth */,
 				7FB12080299226EE0071AB3F /* KakaoSDKCommon */,
 				7FB12082299226EE0071AB3F /* KakaoSDKUser */,
+				27951FD329937B2A00690ADD /* SkeletonUI */,
 			);
 			productName = Bottles_V2;
 			productReference = 0427F561297677E60023E745 /* Bottles_V2.app */;
@@ -690,6 +696,7 @@
 				D746C975298A426200E27E16 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				7FB12076299223990071AB3F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				7FB1207D299226EE0071AB3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				27951FD229937B2900690ADD /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = 0427F562297677E60023E745 /* Products */;
 			projectDirPath = "";
@@ -930,6 +937,7 @@
 				27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */,
 				D7B5EA57298CA54400DC648A /* ReservationDataStore.swift in Sources */,
 				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
+				26BA41CA2993869D00419584 /* BottleReservation.swift in Sources */,
 				27A0268D298B51AC00F71705 /* SearchViewNavigationLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1275,6 +1283,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		27951FD229937B2900690ADD /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CSolanaM/SkeletonUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		7FB12076299223990071AB3F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -1302,6 +1318,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		27951FD329937B2A00690ADD /* SkeletonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 27951FD229937B2900690ADD /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			productName = SkeletonUI;
+		};
 		7FB12077299223990071AB3F /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7FB12076299223990071AB3F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;

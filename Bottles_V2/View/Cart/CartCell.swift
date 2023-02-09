@@ -9,30 +9,48 @@ import SwiftUI
 
 // MARK: - 장바구니 Cell
 /// 장바구니 리스트의 셀
-// TODO: - 셀 각각 삭제 기능
-
+///
 struct CartCell: View {
     
     var cartStore: CartStore
     var userStore: UserStore
     var cart: Cart
+    var bottle: BottleModel
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
             // MARK: - 바틀 이미지
-            Image("bottle")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 128, height: 128)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .padding(.leading)
+            AsyncImage(url: URL(string: bottle.itemImage)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 128, height: 128)
+                    .cornerRadius(12)
+            } placeholder: {
+                Image("ready_image")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 128, height: 128)
+                    .cornerRadius(12)
+
+            }
+            .background(Color.gray_f7)
+            .cornerRadius(12)
+            .frame(height: 128)
+            .padding(.horizontal)
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 10) {
-                    // MARK: - 바틀 이름
-                    Text(cart.bottleId)
-                        .font(.bottles14)
-                        .fontWeight(.medium)
+                    HStack {
+                        // MARK: - 바틀 이름
+                        Text(bottle.itemName)
+                            .font(.bottles14)
+                            .fontWeight(.medium)
+                        Spacer()
+                        
+                        deleteButton
+                            .padding(.trailing)
+                    }
                     
                     // MARK: - 바틀 가격
                     Text("\(cart.eachPrice * cart.itemCount)")
@@ -46,8 +64,7 @@ struct CartCell: View {
                 
                 Spacer()
                 
-                deleteButton
-                    .padding(.trailing)
+                
             }
             .padding(.top, 10)
         }
@@ -61,7 +78,7 @@ struct CartCell: View {
             Image(systemName: "multiply")
                 .foregroundColor(.black)
         }
-        .padding(.bottom, 20)
+        //.padding(.bottom, 20)
     }
     
     // MARK: -View : 수량 관리 버튼
@@ -90,6 +107,7 @@ struct CartCell: View {
                 Text("\(cart.itemCount)")
                     .font(.bottles15)
                     .fontWeight(.bold)
+                    .foregroundColor(.accentColor)
                 
                 Spacer()
                 
@@ -107,6 +125,7 @@ struct CartCell: View {
         }
 
     }
+
 }
 
 //struct CartCell_Previews: PreviewProvider {

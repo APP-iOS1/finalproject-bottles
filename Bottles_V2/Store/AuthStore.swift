@@ -16,6 +16,7 @@ class AuthStore: ObservableObject {
     @Published var isLogin = false
     @Published var loginError: Bool = false
     @Published var resetPassword: Bool = false
+    @Published var emailVerification: Bool = false
     
     let database = Firestore.firestore()
     let userStore: UserStore = UserStore()
@@ -25,6 +26,7 @@ class AuthStore: ObservableObject {
     }
     
     func login(email: String, password: String) {
+        
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("Error : \(error.localizedDescription)")
@@ -33,13 +35,14 @@ class AuthStore: ObservableObject {
                     self.loginError = false
                 }
                 return
-            }
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                self.currentUser = result?.user
-                self.loginError = false
-                self.isLogin = true
-                print("로그인 성공")
+            } else {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.currentUser = result?.user
+                    self.loginError = false
+                    self.isLogin = true
+                    print("로그인 성공")
+                }
             }
             
         }
@@ -61,6 +64,15 @@ class AuthStore: ObservableObject {
             }
             
             guard let authUser = result?.user else { return }
+            currentUser = authUser
+            // 회원 가입시 해당 유저가 입력한 이메일로 인증 링크를 보내줌
+            Auth.auth().currentUser?.sendEmailVerification{ error in
+                if let error = error {
+                    print("이메일 전송 실패: \(error.localizedDescription)")
+                } else {
+                    print("이메일 전송 완료")
+                }
+            }
             userStore.createUser(user: User(id: UUID().uuidString, email: email, followItemList: [], followShopList: [], nickname: nickname, pickupItemList: [], recentlyItem: [], userPhoneNumber: userPhoneNumber))
             print("회원가입 완료")
             //let user: User = User(id: authUser.uid, name: name, email: email, temperature: 36.5, registDate: getStringDate(date: Date()),chatIDList: [])
@@ -90,7 +102,28 @@ class AuthStore: ObservableObject {
     }
     
     func isEmailVerified() -> Bool {
-        return ((Auth.auth().currentUser?.isEmailVerified) != nil)
+        
+        if Auth.auth().currentUser?.isEmailVerified == true{
+            print("이메일 인증 성공: \(String(describing: Auth.auth().currentUser?.isEmailVerified))")
+            return true
+        } else if Auth.auth().currentUser?.isEmailVerified == false{
+            print("이메일 인증 실패: \(String(describing: Auth.auth().currentUser?.isEmailVerified))")
+            emailVerification = true
+            return false
+        } else {
+            // 로그아웃 시에 currentUser의 이메일 인증을 확인하는 isEmailVerified이 nil이기 때문에 이미 한번 이메일 인증을 받고 로그인 성공한 계정은 바로 로그인 되게 해줌
+            return true
+        }
+    }
+    
+    /// 이메일 인증을 했는지 currentUser의 isEmailVerified 값을 확인하기 위해 비동기 처리로 현재 currentUser의 email인증을 true인지 false인지 확인 해주는 함수
+    func currentUserReload() async {
+        do {
+            try await Auth.auth().currentUser?.reload()
+        }
+        catch {
+            print("Auth.auth().currentUser?.reload() error")
+        }
     }
     
     // MARK: - Method : 계정 삭제
@@ -98,7 +131,7 @@ class AuthStore: ObservableObject {
         let user = Auth.auth().currentUser
         user?.delete { error in
             if let error = error {
-                print("계정 삭제 실패")
+                print("계정 삭제 실패: \(error.localizedDescription)")
             } else {
                 self.userStore.deleteUser(userId: userEmail)
             }
@@ -120,6 +153,7 @@ class AuthStore: ObservableObject {
             }
         }
     }
+    
     
 }
 

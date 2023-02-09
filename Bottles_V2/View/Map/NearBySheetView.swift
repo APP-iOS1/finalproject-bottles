@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SkeletonUI
 import CoreLocation
 
 // MARK: - 둘러보기 디테일 뷰
@@ -13,12 +14,13 @@ struct NearBySheetView: View {
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @StateObject var mapViewModel: MapViewModel
-//    @State private var checkBookmark: Bool = false
+    //    @State private var checkBookmark: Bool = false
     @Binding var isOpen: Bool
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopId: String
-//    @Binding var shopModel: ShopModel
-
+    //    @Binding var shopModel: ShopModel
+    @State var colors = [SkeletonColor]()
+    
     var body: some View {
         NavigationStack {
             HStack(alignment: .top) {
@@ -33,21 +35,32 @@ struct NearBySheetView: View {
             ScrollView {
                 LazyVStack {
                     ForEach(Array(sortShopData().enumerated()), id: \.offset) { (index, shop) in
-                            let distance = distance(shop.location.latitude, shop.location.longitude)
-                            if distance <= 5000 {
-                                Button {
-                                    isOpen = false
-                                    showMarkerDetailView = true
-                                    currentShopId = shop.id
-                                    mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
-                                } label: {
-                                    NearBySheetCell(shopModel: shop, distance: distance)
-                                }
+                        let distance = distance(shop.location.latitude, shop.location.longitude)
+                        if distance <= 5000 {
+                            Button {
+                                isOpen = false
+                                showMarkerDetailView = true
+                                currentShopId = shop.id
+                                mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
+                            } label: {
+                                NearBySheetCell(shopModel: shop, distance: distance)
                             }
+                        }
                     }
                 }
             }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                    self.colors = [
+                        SkeletonColor(name: "GREEN"),
+                        SkeletonColor(name: "RED"),
+                        SkeletonColor(name: "BLUE"),
+                        SkeletonColor(name: "BLACK")
+                    ]
+                }
+            }
         }
+        
         .background {
             Color.white
         }
@@ -56,7 +69,7 @@ struct NearBySheetView: View {
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
         let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
-//        print("\(from.distance(from: to))")
+        //        print("\(from.distance(from: to))")
         return from.distance(from: to)
     }
     // MARK: - 둘러보기 뷰 거리 순 오름차순 정렬 함수
@@ -64,6 +77,11 @@ struct NearBySheetView: View {
         let shopModel: [ShopModel] = shopDataStore.shopData
         return shopModel.sorted(by: {$0.shopName < $1.shopName }).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
     }
+}
+
+struct SkeletonColor: Identifiable {
+    let id = UUID()
+    let name: String
 }
 
 //struct NearBySheetView_Previews: PreviewProvider {

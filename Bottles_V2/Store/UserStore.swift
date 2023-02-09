@@ -21,7 +21,7 @@ class UserStore: ObservableObject {
     /// 이메일 중복확인 결과에 따른 EmailRegisterView에서 CustomAlert의 String
     @Published var emailCheckStr: String = ""
     
-    
+    @Published var isShowingVerification: Bool = false
     
     init() {
         user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "")
@@ -102,7 +102,7 @@ class UserStore: ObservableObject {
                 if snapshot!.documents.isEmpty {
                     print("사용 가능한 이메일입니다.")
                     self.emailCheckStr = "사용 가능한 이메일입니다."
-                    
+                    self.isShowingVerification = true
                 } else {
                     print("중복된 이메일 입니다. 다른 이메일을 사용해주세요")
                     self.emailCheckStr = "중복된 이메일 입니다. 다른 이메일을 사용해주세요"
@@ -112,7 +112,7 @@ class UserStore: ObservableObject {
         
         
     }
-    
+
     func addFollowItemId(_ id: String) {
         Firestore.firestore().collection("User")
             .document(user.id)

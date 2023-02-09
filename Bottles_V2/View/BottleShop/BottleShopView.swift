@@ -263,6 +263,9 @@ struct BottleShopView: View {
                                     BottleShopView_BottleList(selectedItem: item)
                                         .padding()
                                 })
+                                .simultaneousGesture(TapGesture().onEnded {
+                                    focus = false
+                                })
                             }
                         }
                         .background(Color.white)

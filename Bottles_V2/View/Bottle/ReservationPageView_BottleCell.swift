@@ -9,17 +9,35 @@ import SwiftUI
 
 // MARK: - 예약 바틀 셀 (상품 이미지, 상품 이름, 상품 가격, 상품 개수, 바틀샵 이름)
 struct ReservationPageView_BottleCell: View {
-    var bottleReservation: Bottle_reservation
+    var bottleReservation: BottleReservation
     
     var body: some View {
         HStack(alignment: .top) {
             // MARK: - 상품 이미지
-            Image(bottleReservation.image)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 129, height: 129)
-                .background(Color(UIColor(red: 246/255, green: 243/255, blue: 238/255, alpha: 1.0)))
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+            AsyncImage(url: URL(string: bottleReservation.image)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 128, height: 128)
+                    .cornerRadius(12)
+            } placeholder: {
+                Image("ready_image")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 128, height: 128)
+                    .cornerRadius(12)
+
+            }
+            .background(Color.gray_f7)
+            .cornerRadius(12)
+            .frame(height: 128)
+            .padding(.horizontal)
+//            Image(bottleReservation.image)
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 129, height: 129)
+//                .background(Color(UIColor(red: 246/255, green: 243/255, blue: 238/255, alpha: 1.0)))
+//                .clipShape(RoundedRectangle(cornerRadius: 10))
             
             VStack(alignment: .leading, spacing: 8) {
                 // MARK: - 상품 이름
@@ -38,7 +56,7 @@ struct ReservationPageView_BottleCell: View {
                     .fontWeight(.medium)
                 
                 HStack {
-                    Image("Map_Tab_fill")
+                    Image("Map_tab_fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 14, height: 17)
