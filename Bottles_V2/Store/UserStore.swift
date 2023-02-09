@@ -118,6 +118,7 @@ class UserStore: ObservableObject {
         
     }
 
+    // 북마크: 내가 저장한 바틀 추가하기
     func addFollowItemId(_ id: String) {
         Firestore.firestore().collection("User")
             .document(user.id)
@@ -125,6 +126,7 @@ class UserStore: ObservableObject {
         readUser(userId: user.id)
     }
     
+    // 북마크: 내가 저장한 바틀 삭제하기
     func deleteFollowItemId(_ id: String) {
         Firestore.firestore().collection("User")
             .document(user.id)
@@ -132,6 +134,7 @@ class UserStore: ObservableObject {
         readUser(userId: user.id)
     }
     
+    // 북마크: 내가 저장한 샵 추가하기
     func addFollowShopId(_ id: String) {
         Firestore.firestore().collection("User")
             .document(user.id)
@@ -139,10 +142,19 @@ class UserStore: ObservableObject {
         readUser(userId: user.id)
     }
     
+    // 북마크: 내가 저장한 샵 제거하기
     func deleteFollowShopId(_ id: String) {
         Firestore.firestore().collection("User")
             .document(user.id)
             .updateData(["followShopList": FieldValue.arrayRemove([id])])
+        readUser(userId: user.id)
+    }
+    
+    // 최근 본 상품
+    func addRecentlyItem(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["recentlyItem": FieldValue.arrayUnion([id])])
         readUser(userId: user.id)
     }
 }
