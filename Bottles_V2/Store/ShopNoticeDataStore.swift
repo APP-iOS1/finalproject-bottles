@@ -11,15 +11,6 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct ShopNotice : Codable, Identifiable, Hashable {
-    var id : String
-    var category : String
-    var shopName : String
-    var date : Date
-    var title : String
-    var body: String
-}
-
 class ShopNoticeDataStore : ObservableObject {
     // 전체 샵 데이터 저장 변수
     @Published var shopNoticeData : [ShopNotice] = []
