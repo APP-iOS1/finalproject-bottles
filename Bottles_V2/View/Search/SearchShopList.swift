@@ -120,6 +120,7 @@ struct SearchShopList: View {
 
 struct SearchShopListCell: View {
     // 필터링된 Shop의 정보를 저장하는 변수
+    @EnvironmentObject var userStore: UserStore
     var shopInfo: ShopModel
     var distance: Double
     // 북마크 알림 Test
@@ -176,7 +177,7 @@ struct SearchShopListCell: View {
             Spacer()
             VStack {
                 // TODO: 즐겨찾기 기능 추가해야함
-                Button {
+                Button(action: {
                     withAnimation(.easeIn(duration: 1)) {
                         bookMark.toggle()
                         bookMarkAlarm.toggle()
@@ -186,9 +187,38 @@ struct SearchShopListCell: View {
                             bookMarkAlarm.toggle()
                         }
                     }
-                } label: {
-                    Image(systemName: "bookmark.fill")
+                    
+                    if compareMyFollowShopID(shopInfo.id) == true {
+                        bookMark = false
+                        userStore.deleteFollowShopId(shopInfo.id)
+                    }
+                    
+                    if compareMyFollowShopID(shopInfo.id) == false {
+                        bookMark = true
+                        userStore.addFollowShopId(shopInfo.id)
+                    }
+                    
+                }) {
+                    Image(compareMyFollowShopID(shopInfo.id) ? "BookMark.fill" : "BookMark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 15, height: 18)
+                        .padding(.horizontal, 10)
                 }
+                
+//                Button {
+//                    withAnimation(.easeIn(duration: 1)) {
+//                        bookMark.toggle()
+//                        bookMarkAlarm.toggle()
+//                    }
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+//                        withAnimation(.easeIn(duration: 1)) {
+//                            bookMarkAlarm.toggle()
+//                        }
+//                    }
+//                } label: {
+//                    Image(systemName: "bookmark.fill")
+//                }
                 Spacer()
             }
             .font(.title2)
@@ -197,6 +227,10 @@ struct SearchShopListCell: View {
         }
         .frame(height: 130)
         .padding(.vertical, 5)
+    }
+    
+    func compareMyFollowShopID(_ shopId: String) -> Bool {
+        return (userStore.user.followShopList.filter { $0 == shopId }.count != 0) ? true : false
     }
 }
 

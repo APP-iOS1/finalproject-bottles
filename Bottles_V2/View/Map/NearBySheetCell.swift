@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct NearBySheetCell: View {
-    
+    @EnvironmentObject var userStore: UserStore
+//    var userStore: UserStore
     // Shop의 정보를 저장하는 변수
     @State private var checkBookmark: Bool = false
     var shopModel: ShopModel
     var distance: Double
+    
+    func compareMyFollowShopID(_ shopId: String) -> Bool {
+        return (userStore.user.followShopList.filter { $0 == shopId }.count != 0) ? true : false
+    }
     
     var body: some View {
         HStack(alignment: .top) {
@@ -67,11 +72,30 @@ struct NearBySheetCell: View {
             Spacer()
             VStack {
                 // TODO: 북마크 기능 추가해야함
-                Button {
-                    checkBookmark.toggle()
-                } label: {
-                    Image(systemName: checkBookmark ? "bookmark.fill" : "bookmark")
+                Button(action: {
+                    withAnimation(.easeOut(duration: 0.5)) {
+                        checkBookmark.toggle()
+                    }
+                    
+                    if compareMyFollowShopID(shopModel.id) == true {
+                        checkBookmark = false
+                        userStore.deleteFollowShopId(shopModel.id)
+                    }
+                    
+                    if compareMyFollowShopID(shopModel.id) == false {
+                        checkBookmark = true
+                        userStore.addFollowShopId(shopModel.id)
+                        
+                    }
+                    
+                }) {
+                    Image(compareMyFollowShopID(shopModel.id) ? "BookMark.fill" : "BookMark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 15)
+                        .padding(.trailing, 5)
                 }
+                
                 Spacer()
             }
             .font(.title2)
