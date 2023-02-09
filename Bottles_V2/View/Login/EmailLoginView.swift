@@ -26,7 +26,7 @@ struct EmailLoginView: View {
         authStore.loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
     }
     var body: some View {
-        VStack {
+        ScrollView {
             
             Spacer()
             TextField("이메일", text: $email)
@@ -45,15 +45,26 @@ struct EmailLoginView: View {
             
             Button(action: {
                 // TODO: 로그인 로직이 들어오면 입력한 아이디, 비밀번호가 틀릴 경우 뷰에 보여줌
-                print("\(authStore.isLogin)")
-                authStore.login(email: email, password: password)
-        
+                Task{
+                    await authStore.currentUserReload()
+                    if authStore.isEmailVerified(){
+                        authStore.login(email: email, password: password)
+                    } else {
+                        print("로그인 실패")
+                    }
+                }
+                
             }){
                 Text("로그인")
                     .modifier(EmailViewButtonModifier(width: 280, height: 48))
             }
             
-            
+            Button(action: {
+                authStore.logout()
+                print("\(authStore.isEmailVerified())")
+            }) {
+                Text("로그아웃")
+            }
             
             NavigationLink(destination: EmailRegisterView(authStore: authStore)) {
                 Text("회원가입하기")
@@ -70,9 +81,14 @@ struct EmailLoginView: View {
                 .frame(height: 400)
             
         }
+        .scrollDisabled(true)
+        .onTapGesture{
+            endTextEditing()
+        }
         .navigationTitle("로그인")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .customAlert(isPresented: $authStore.emailVerification, message: "이메일 인증이 완료되지 않았습니다", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
     }
     /// CustomNavigationBackButton
     var backButton : some View {

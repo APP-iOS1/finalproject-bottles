@@ -76,6 +76,7 @@ struct TotalLoginView: View {
                     .padding(.trailing)
                     Button(action: {
                         // TODO: 애플 로그인 로직
+                        googleLoginViewModel.signOut()
                     }){
                         VStack {
                             Image("AppleLogin")
@@ -97,7 +98,7 @@ struct TotalLoginView: View {
             .padding(.top, 10)
             .padding(.bottom, 40)
             
-        }
+        }.customAlert(isPresented: $kakaoLoginViewModel.kakaoLoginError, message: "\(kakaoLoginViewModel.errorSocialType)계정으로 이미 가입 된 계정이 있습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
     }
 }
 

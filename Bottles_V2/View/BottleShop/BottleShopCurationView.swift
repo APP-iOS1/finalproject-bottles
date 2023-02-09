@@ -148,7 +148,7 @@ struct BottleShopCurationView: View {
                     ForEach(sortBottleData(), id: \.self) { item in
                         
                         // 바틀셀 누를 시 바틀뷰로 이동
-                        NavigationLink(destination: BottleView(), label:{
+                        NavigationLink(destination: BottleView(bottleData: item), label:{
                             BottleShopView_BottleList(selectedItem: item)
                         })
                         

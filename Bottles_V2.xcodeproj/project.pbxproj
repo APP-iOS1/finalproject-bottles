@@ -19,6 +19,7 @@
 		26A66487298CC865004E15EA /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A66486298CC865004E15EA /* UserStore.swift */; };
 		26BA41C6299136F100419584 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C5299136F100419584 /* Cart.swift */; };
 		26BA41C82991389D00419584 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C72991389D00419584 /* CartStore.swift */; };
+		26BA41CA2993869D00419584 /* BottleReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C92993869D00419584 /* BottleReservation.swift */; };
 		26D0E4382979164400524943 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		27281CE32977854D003BE8B4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE22977854D003BE8B4 /* MapView.swift */; };
 		27281CE62977856A003BE8B4 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE52977856A003BE8B4 /* CartView.swift */; };
@@ -156,6 +157,7 @@
 		26A66486298CC865004E15EA /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		26BA41C5299136F100419584 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		26BA41C72991389D00419584 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
+		26BA41C92993869D00419584 /* BottleReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleReservation.swift; sourceTree = "<group>"; };
 		27281CE22977854D003BE8B4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		27281CE52977856A003BE8B4 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27281CEA297785AA003BE8B4 /* BottleShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			children = (
 				26A66484298CC6F1004E15EA /* User.swift */,
 				26BA41C5299136F100419584 /* Cart.swift */,
+				26BA41C92993869D00419584 /* BottleReservation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -934,6 +937,7 @@
 				27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */,
 				D7B5EA57298CA54400DC648A /* ReservationDataStore.swift in Sources */,
 				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
+				26BA41CA2993869D00419584 /* BottleReservation.swift in Sources */,
 				27A0268D298B51AC00F71705 /* SearchViewNavigationLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

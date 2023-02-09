@@ -16,6 +16,8 @@ struct CartView: View {
     
     @ObservedObject var cartStore = CartStore()
     @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
 //    // 각각의 항목을 선택하였는지, 전체 선택을 사용하여 선택하였는지를 판별하기 위한 변수
 //    @State var isAllSelected: Bool = false
@@ -32,12 +34,14 @@ struct CartView: View {
                     Text("\(cartStore.shopName)")
                         .font(.bottles20)
                         .bold()
+                        
                     Spacer()
                 }
+                .padding(.top)
                 Divider()
                 
                 ForEach (cartStore.carts) { cart in
-                    CartCell(cartStore: cartStore, userStore: userStore, cart: cart)
+                    CartCell(cartStore: cartStore, userStore: userStore, cart: cart, bottle: getBottleModel(bottleId: cart.bottleId))
                     //                    if cart < cartStore.carts.count - 1 {
                     Divider()
                     //                    }
@@ -64,8 +68,8 @@ struct CartView: View {
                     .font(.bottles12)
                     .padding(.top)
                 
-                NavigationLink(destination: ReservationPageView()) {
-                    
+                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(carts: cartStore.carts))) {
+                
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width : UIScreen.main.bounds.size.width-50, height: (UIScreen.main.bounds.size.width-50)/7)
                         .overlay(Text("예약하러 하기")
@@ -76,13 +80,46 @@ struct CartView: View {
                 .foregroundColor(.accentColor)
                 .padding(.bottom, 20)
             }
-            
         }
+        .navigationBarTitle("장바구니", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
         .onAppear {
             cartStore.readCart(userEmail: userStore.user.email)
         }
     }
     
+    func getBottleModel(bottleId: String) -> BottleModel {
+        let matchedBottleData = bottleDataStore.bottleData.filter {
+            $0.id == bottleId
+        }
+        
+        return matchedBottleData[0]
+    }
+    
+    func getBottleReservation(carts: [Cart]) -> [BottleReservation] {
+        var matchedBottleReservation: [BottleReservation] = []
+        var bottleModel: BottleModel
+        
+        for cart in carts {
+            bottleModel = getBottleModel(bottleId: cart.bottleId)
+            matchedBottleReservation.append(BottleReservation(image: bottleModel.itemImage, title: bottleModel.itemName, price: cart.eachPrice * cart.itemCount, count: cart.itemCount, shop: cart.shopName))
+        }
+        
+        return matchedBottleReservation
+    }
+    
+    /// CustomNavigationBackButton
+    var backButton : some View {
+        Button(
+            action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.backward")    // back button 이미지
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color.black)
+            }
+    }
     // MARK: - 전체 선택 버튼
     //      var AllSelectButton : some View {
     //        Button {
