@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingView: View {
-    var settingViewList: [String] = ["휴대폰 번호 변경", "알림 설정"]
     /// 로그아웃 Alert창을 띄웁니다.
     @State private var logoutAlert: Bool = false
     /// 회원 탈퇴 Alert창을 띄웁니다.
@@ -17,14 +16,34 @@ struct SettingView: View {
         VStack {
             // MARK: - 휴대폰 번호 변경, 알림 설정
             List {
-                ForEach(settingViewList, id: \.self) { item in
-                    NavigationLink(destination: Text("\(item)")) {
-                        Text("\(item)")
-                            .font(.bottles15)
-                    }
-                    .listRowSeparator(.hidden)
+                NavigationLink(destination: Text("휴대폰 번호 변경")) {
+                    Text("휴대폰 번호 변경")
                 }
+                .listRowSeparator(.hidden)
+                Button(action: {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                                if UIApplication.shared.canOpenURL(url) {
+                                    Task {
+                                        await UIApplication.shared.open(url)
+                                    }
+                                }
+                            }
+                }){
+                    HStack {
+                        Text("알림설정")
+                        Spacer()
+                        Image(systemName: "chevron.forward")
+                    }
+                }
+//                ForEach(settingViewList, id: \.self) { item in
+//                    NavigationLink(destination: Text("\(item)")) {
+//                        Text("\(item)")
+//                            .font(.bottles15)
+//                    }
+//                    .listRowSeparator(.hidden)
+//                }
             }
+            .font(.bottles15)
             .listStyle(.plain)
             .frame(height: 80)
             .scrollDisabled(true)

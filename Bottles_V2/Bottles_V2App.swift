@@ -35,32 +35,32 @@ struct Bottles_V2App: App {
     var body: some Scene {
         
         WindowGroup {
-            TotalLoginView()
-               .environmentObject(UserStore()).environmentObject(googleLoginViewModel)
-                .onOpenURL(perform: { url in
-                    if AuthApi.isKakaoTalkLoginUrl(url) {
-                        AuthController.handleOpenUrl(url: url)
-                   }
-                })
+//            TotalLoginView()
+//               .environmentObject(UserStore()).environmentObject(googleLoginViewModel)
+//                .onOpenURL(perform: { url in
+//                    if AuthApi.isKakaoTalkLoginUrl(url) {
+//                        AuthController.handleOpenUrl(url: url)
+//                   }
+//                })
 //            MainTabView()
             // coreData
 //                .environment(\.managedObjectContext, dataController.container.viewContext)
          
 
-//            LaunchView()
-//            // coreData
-//                .environment(\.managedObjectContext, dataController.container.viewContext)
-//                .environmentObject(bottleDataStore)
-//                .environmentObject(shopDataStore)
-//                .environmentObject(reservationDataStore)
-//                .environmentObject(mapViewModel)
-//                .environmentObject(userDataStore)
-//                .task {
-//                    userDataStore.readUser(userId: "test@naver.com")
-//                    await shopDataStore.getAllShopData()
-//                    await bottleDataStore.getAllBottleData()
-//                    await reservationDataStore.getAllResevationData()
-//                }
+            LaunchView()
+            // coreData
+                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(bottleDataStore)
+                .environmentObject(shopDataStore)
+                .environmentObject(reservationDataStore)
+                .environmentObject(mapViewModel)
+                .environmentObject(userDataStore)
+                .task {
+                    userDataStore.readUser(userId: "test@naver.com")
+                    await shopDataStore.getAllShopData()
+                    await bottleDataStore.getAllBottleData()
+                    await reservationDataStore.getAllResevationData()
+                }
 
             
             // MARK: - AccentColor 적용
