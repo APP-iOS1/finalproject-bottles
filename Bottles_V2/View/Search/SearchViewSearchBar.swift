@@ -71,8 +71,9 @@ struct SearchViewSearchBar: View {
                         self.searchBarText = ""
                         focus = false
                     }) {
-                        Image(systemName: "xmark.circle.fill")
+                        Image("xmark")
                     }
+                    .padding(.trailing, 8)
                 } else {
                     EmptyView()
                 }
