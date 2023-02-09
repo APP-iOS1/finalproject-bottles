@@ -100,6 +100,7 @@
 		92906F9D297E3EB600580EC2 /* BottleView_Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */; };
 		9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */; };
 		9293B9DB297A544E00E1EB34 /* ReservedView_ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */; };
+		92FBAD3C29933DE500DC4669 /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBAD3B29933DE500DC4669 /* MapSearchView.swift */; };
 		ABE1CA6E6BE31F60C644A53F /* Pods_Bottles_V2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */; };
 		AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */; };
 		AE1070012977B1B000AF9D1B /* BookMarkShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1070002977B1B000AF9D1B /* BookMarkShopList.swift */; };
@@ -234,6 +235,7 @@
 		92D45CA42988B35300DB4D11 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView_Info.swift; sourceTree = "<group>"; };
 		92D45CAA2988FC2B00DB4D11 /* BottleView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Info.swift; sourceTree = "<group>"; };
+		92FBAD3B29933DE500DC4669 /* MapSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchView.swift; sourceTree = "<group>"; };
 		AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkBottleList.swift; sourceTree = "<group>"; };
 		AE1070002977B1B000AF9D1B /* BookMarkShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkShopList.swift; sourceTree = "<group>"; };
 		AE10700C2977DB2700AF9D1B /* CartViewNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewNavigationLink.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				27D82C57298780D8004F3D94 /* MarkerDetailView.swift */,
 				276367E1298A584300C04CFA /* MarkerDetailSheet.swift */,
 				27A0269E298C064F00F71705 /* SideButtonCell.swift */,
+				92FBAD3B29933DE500DC4669 /* MapSearchView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -891,6 +894,7 @@
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */,
+				92FBAD3C29933DE500DC4669 /* MapSearchView.swift in Sources */,
 				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,
 				27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */,
 				AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */,
