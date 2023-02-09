@@ -22,7 +22,7 @@ struct BookMarkBottleList: View {
     @EnvironmentObject var mapViewModel: MapViewModel
     
     //
-    func getMattchedShopData(bottleData: BottleModel) -> ShopModel {
+    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
         let mattchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
         return mattchedShopData[0]
     }
@@ -32,7 +32,7 @@ struct BookMarkBottleList: View {
         switch selection {
         case "거리순":
             return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
-                .sorted(by: {distance(getMattchedShopData(bottleData: $0).location.latitude, getMattchedShopData(bottleData: $0).location.longitude) < distance(getMattchedShopData(bottleData: $1).location.latitude, getMattchedShopData(bottleData: $1).location.longitude)})
+                .sorted(by: {distance(getMatchedShopData(bottleData: $0).location.latitude, getMatchedShopData(bottleData: $0).location.longitude) < distance(getMatchedShopData(bottleData: $1).location.latitude, getMatchedShopData(bottleData: $1).location.longitude)})
         case "낮은 가격순":
             return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
@@ -73,7 +73,7 @@ struct BookMarkBottleList: View {
                     ForEach(sortBottleData()) { bottle in
                         // 테스트용
 //                        if bottle.bookMark == true {
-                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMattchedShopData(bottleData: bottle), bookMarkAlarm: $bookMarkAlarm)
+                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle), bookMarkAlarm: $bookMarkAlarm)
 //                        }
                     }
                 }

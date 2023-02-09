@@ -29,31 +29,31 @@ struct SearchResultList: View {
     // Server Data Test
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-    var testBottleAndShop: [String] {
+    var testBottleAndShop: [(String, String)] {
         let bookMarkBottles = bottleDataStore.bottleData
         let bookMarkShops = shopDataStore.shopData
-        var bottleAndShop: [String] = []
+        var bottleAndShop: [(String, String)] = []
         
         for bottle in bookMarkBottles {
-            bottleAndShop.append(bottle.itemName)
+            bottleAndShop.append((bottle.itemName, "bottle"))
         }
         for shop in bookMarkShops {
-            bottleAndShop.append(shop.shopName)
+            bottleAndShop.append((shop.shopName, "shop"))
         }
         return bottleAndShop.sorted(by: <)
     }
 
     var body: some View {
         List {
-            ForEach (testBottleAndShop, id: \.self) { bottle in
+            ForEach (testBottleAndShop, id: \.0) { bottle in
                 
                 // 검색어와 겹치는 단어가 있는지 없는지 확인
-                if bottle.replacingOccurrences(of: " ", with: "").contains(searchBarText.replacingOccurrences(of: " ", with: "")) {
+                if bottle.0.replacingOccurrences(of: " ", with: "").contains(searchBarText.replacingOccurrences(of: " ", with: "")) {
                     Button {
                         doneTextFieldEdit = true
                         
                         // 사용자가 리스트에서 찾고자하는 단어가 있어 터치 시, 해당 단어를 검색창의 텍스트로 전환
-                        searchBarText = bottle
+                        searchBarText = bottle.0
                         
                         focus = false
                         // CoreData 최근 검색어 추가
@@ -67,13 +67,19 @@ struct SearchResultList: View {
                             
                             // 검색어와 겹치는 단어가 있는 bottleName의 경우, 검색어와 겹치는 단어들만 accentColor
                             // 현재는 shop을 제외한 bottleName만 리스트에 보임
-                            Text(bottle) { string in
+                            Text(bottle.0) { string in
                                 if let range = string.range(of: searchBarText.trimmingCharacters(in: .whitespaces)) {
                                     string[range].foregroundColor = Color("AccentColor")
                                 }
                             }
+                            .font(.bottles16)
+                            Spacer()
+                            Text(bottle.1)
+                                .foregroundColor(bottle.1 == "bottle" ? .red : .blue)
+                                .font(.bottles12)
+                                .frame(width: 40, alignment: .center)
                         }
-                        .font(.bottles16)
+                        
                     }
                 }
             }
