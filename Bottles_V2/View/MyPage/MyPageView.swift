@@ -25,7 +25,6 @@ struct MyPageView: View {
         "https://console.firebase.google.com/", // 위치정보 이용약관 링크
         "https://techit.education/" // 버전정보 링크
     ]
-    
     @State private var isShowingSheet: Bool = false
     
     /// SafariWebView에 바인딩으로 링크 자체를 넘겨준다.
@@ -46,7 +45,7 @@ struct MyPageView: View {
                         .font(.bottles18)
                         .bold()
                     Spacer()
-                    NavigationLink(destination: SettingView(isSignIn: $isSignIn)){
+                    NavigationLink(destination: SettingView(isSignIn: $isSignIn){
                         Image(systemName: "gearshape.fill")
                         //                            .foregroundColor(.accentColor)
                             .font(.title2)

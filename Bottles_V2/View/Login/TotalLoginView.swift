@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TotalLoginView: View {
-    @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
-    @StateObject var kakaoLoginViewModel: KakaoLoginViewModel = KakaoLoginViewModel()
+    
+    @EnvironmentObject var kakaoLoginViewModel: KakaoLoginViewModel
     @Binding var isSignIn: Bool
     var body: some View {
         NavigationStack {
@@ -41,7 +41,12 @@ struct TotalLoginView: View {
                 HStack {
                     Button(action: {
                         // TODO: 카카오 로그인 로직
-                        kakaoLoginViewModel.handleKakaoLogin()
+                        Task{
+                         await kakaoLoginViewModel.handleKakaoLogin()
+                            print("\(kakaoLoginViewModel.kakaoLogin)")
+                            kakaoViewRouter()
+                           
+                        }
                     }){
                         VStack {
                             Image("KakaoLogin")
@@ -52,7 +57,7 @@ struct TotalLoginView: View {
                     
                     Button(action: {
                         // TODO: 구글 로그인 로직
-                        googleLoginViewModel.signIn()
+                        
                     }){
                         VStack {
                             Image("GoogleLogin")
@@ -64,9 +69,8 @@ struct TotalLoginView: View {
                     
                     Button(action: {
                         // TODO: 페이스북 로그인 로직
-                        Task {
-                            await kakaoLoginViewModel.handleKakaoLogout()
-                        }
+//                        kakaoViewRouter()
+                        
                     }){
                         VStack {
                             Image("FacebookLogin")
@@ -77,7 +81,7 @@ struct TotalLoginView: View {
                     .padding(.trailing)
                     Button(action: {
                         // TODO: 애플 로그인 로직
-                        googleLoginViewModel.signOut()
+                        
                     }){
                         VStack {
                             Image("AppleLogin")
@@ -100,6 +104,12 @@ struct TotalLoginView: View {
             .padding(.bottom, 40)
             
         }.customAlert(isPresented: $kakaoLoginViewModel.kakaoLoginError, message: "\(kakaoLoginViewModel.errorSocialType)계정으로 이미 가입 된 계정이 있습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+    }
+    
+    func kakaoViewRouter() {
+        if kakaoLoginViewModel.kakaoLogin {
+            isSignIn = true
+        }
     }
 }
 

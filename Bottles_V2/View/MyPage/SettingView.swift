@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var authStore: AuthStore
+    @EnvironmentObject var kakaoLoginViewModel: KakaoLoginViewModel
     /// 로그아웃 Alert창을 띄웁니다.
     @State private var logoutAlert: Bool = false
     /// 회원 탈퇴 Alert창을 띄웁니다.
@@ -58,10 +59,14 @@ struct SettingView: View {
                 
                 // MARK: - 로그아웃 버튼
                 Button(action:{
-                    if isSignIn {
-                        authStore.logout()
-                        isSignIn = false
-                    }
+                    
+                        
+                        if isSignIn {
+                            authStore.logout()
+                            kakaoLoginViewModel.kakaoLogout()
+                            isSignIn = false
+                        }
+                    
 //                    logoutAlert.toggle()
                 }){
                     Text("로그아웃")
