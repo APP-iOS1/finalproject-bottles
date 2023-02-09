@@ -21,14 +21,6 @@ struct BookMarkShopList: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
     
-    var testShopData: [ShopModel] {
-        var test: [ShopModel] = []
-        for i in 0...9 {
-            test.append( shopDataStore.shopData[i])
-        }
-        return test
-    }
-    
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
         let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
@@ -202,7 +194,11 @@ struct BookMarkShopListCell: View {
                         }
                     }
                 } label: {
-                    Image(systemName: "bookmark.fill")
+                    Image("BookMark.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 15, height: 18)
+                        .padding(.trailing, 10)
                 }
                 Spacer()
             }
@@ -210,7 +206,7 @@ struct BookMarkShopListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(height: 130)
+        .frame(minHeight: 130, maxHeight: 200)
         .padding(.vertical, 5)
     }
 }
@@ -222,4 +218,3 @@ struct BookMarkShopListCell: View {
 //        }
 //    }
 //}
-//"https://wine21.speedgabia.com/NEWS_MST/froala/202007/20200716101122567972.jpg"

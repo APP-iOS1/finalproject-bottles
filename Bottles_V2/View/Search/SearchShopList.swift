@@ -153,6 +153,7 @@ struct SearchShopListCell: View {
                 Text(shopInfo.shopName)
                     .font(.bottles18)
                     .bold()
+                    .multilineTextAlignment(.leading)
                 // Shop 소개글
                 Text(shopInfo.shopIntroduction)
                     .font(.bottles14)
@@ -203,29 +204,15 @@ struct SearchShopListCell: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 15, height: 18)
-                        .padding(.horizontal, 10)
+                        .padding(.trailing, 10)
                 }
-                
-//                Button {
-//                    withAnimation(.easeIn(duration: 1)) {
-//                        bookMark.toggle()
-//                        bookMarkAlarm.toggle()
-//                    }
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
-//                        withAnimation(.easeIn(duration: 1)) {
-//                            bookMarkAlarm.toggle()
-//                        }
-//                    }
-//                } label: {
-//                    Image(systemName: "bookmark.fill")
-//                }
                 Spacer()
             }
             .font(.title2)
             .padding()
             .padding(.top, -5)
         }
-        .frame(height: 130)
+        .frame(minHeight: 130, maxHeight: 200)
         .padding(.vertical, 5)
     }
     
