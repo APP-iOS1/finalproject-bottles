@@ -44,7 +44,9 @@ struct BookMarkBottleList: View {
         switch selection {
         case "거리순":
             return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
+
                 .sorted(by: {distance(getMatchedShopData(bottleData: $0).location.latitude, getMatchedShopData(bottleData: $0).location.longitude) < distance(getMatchedShopData(bottleData: $1).location.latitude, getMatchedShopData(bottleData: $1).location.longitude)})
+
         case "낮은 가격순":
             return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
@@ -84,7 +86,9 @@ struct BookMarkBottleList: View {
                 // TODO: 서버 Bottle 데이터 연결
                 ScrollView {
                     ForEach(filterUserBottleData()) { bottle in
+
                         BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle),   userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm)
+
                     }
                 }
             }

@@ -20,9 +20,12 @@ struct Bottles_V2App: App {
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var shopNoticeDataStore = ShopNoticeDataStore()
     @ObservedObject var reservationDataStore = ResevationDataStore()
+    @ObservedObject var cartStore = CartStore()
     @ObservedObject var mapViewModel = MapViewModel()
+    
     // coreData
     @StateObject var dataController = DataController()
+    
     
 
     @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
@@ -57,12 +60,14 @@ struct Bottles_V2App: App {
                 .environmentObject(reservationDataStore)
                 .environmentObject(mapViewModel)
                 .environmentObject(userDataStore)
+                .environmentObject(cartStore)
                 .task {
                     userDataStore.readUser(userId: "test@naver.com")
+                    cartStore.readCart(userEmail: "test@naver.com")
                     await shopDataStore.getAllShopData()
                     await shopNoticeDataStore.getAllShopNoticeData()
                     await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllResevationData()
+                    await reservationDataStore.getAllReservationData()
                 }
             
             // MARK: - AccentColor 적용

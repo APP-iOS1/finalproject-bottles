@@ -14,7 +14,7 @@ import SwiftUI
 
 struct CartView: View {
     
-    @ObservedObject var cartStore = CartStore()
+    @EnvironmentObject var cartStore: CartStore
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -26,60 +26,69 @@ struct CartView: View {
     var body: some View {
         VStack {
             /// 장바구니에 들어있는 품목 목록
-            ScrollView {
-                
-                HStack {
-                    Image("Map_tab_fill")
-                        .padding(.leading)
-                    Text("\(cartStore.shopName)")
-                        .font(.bottles20)
-                        .bold()
-                        
-                    Spacer()
-                }
-                .padding(.top)
-                Divider()
-                
-                ForEach (cartStore.carts) { cart in
-                    CartCell(cartStore: cartStore, userStore: userStore, cart: cart, bottle: getBottleModel(bottleId: cart.bottleId))
-                    //                    if cart < cartStore.carts.count - 1 {
-                    Divider()
-                    //                    }
-                }
-            }
-            Divider()
-                .background(.black)
             
-            // MARK: - View의 하단
-            // 총 금액, 예약하기 버튼
-            VStack {
-                HStack {
-                    Text("총 금액")
-                        .font(.bottles18)
-                        .padding(.leading)
-                    Spacer()
-                    Text("\(cartStore.totalPrice)원")
-                        .font(.bottles18)
-                        .bold()
-                        .padding(.trailing)
-                }
-                .padding([.leading, .trailing, .top])
-                Text("결제는 각 매장에서 진행됩니다.")
-                    .font(.bottles12)
-                    .padding(.top)
-                
-                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(carts: cartStore.carts))) {
-                
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width : UIScreen.main.bounds.size.width-50, height: (UIScreen.main.bounds.size.width-50)/7)
-                        .overlay(Text("예약하러 하기")
-                            .foregroundColor(.white)
-                            .font(.bottles18))
-                        .bold()
-                }
-                .foregroundColor(.accentColor)
-                .padding(.bottom, 20)
+            if cartStore.carts.count == 0 {
+                Text("장바구니가 비었습니다.")
             }
+            
+            else {
+                ScrollView {
+                    
+                    HStack {
+                        Image("Map_tab_fill")
+                            .padding(.leading)
+                        Text("\(cartStore.shopName)")
+                            .font(.bottles20)
+                            .bold()
+                            
+                        Spacer()
+                    }
+                    .padding(.top)
+                    Divider()
+                    
+                    ForEach (cartStore.carts) { cart in
+                        CartCell(cartStore: cartStore, userStore: userStore, cart: cart, bottle: getBottleModel(bottleId: cart.bottleId))
+                        //                    if cart < cartStore.carts.count - 1 {
+                        Divider()
+                        //                    }
+                    }
+                }
+                Divider()
+                    .background(.black)
+                // MARK: - View의 하단
+                // 총 금액, 예약하기 버튼
+                VStack {
+                    HStack {
+                        Text("총 금액")
+                            .font(.bottles18)
+                            .padding(.leading)
+                        Spacer()
+                        Text("\(cartStore.totalPrice)원")
+                            .font(.bottles18)
+                            .bold()
+                            .padding(.trailing)
+                    }
+                    .padding([.leading, .trailing, .top])
+                    Text("결제는 각 매장에서 진행됩니다.")
+                        .font(.bottles12)
+                        .padding(.top)
+                    
+                    NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(carts: cartStore.carts))) {
+                    
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width : UIScreen.main.bounds.size.width-50, height: (UIScreen.main.bounds.size.width-50)/7)
+                            .overlay(Text("예약 진행하기")
+                                .foregroundColor(.white)
+                                .font(.bottles18))
+                            .bold()
+                    }
+                    .foregroundColor(.accentColor)
+                    .padding(.bottom, 20)
+                }
+            }
+            
+            
+            
         }
         .navigationBarTitle("장바구니", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
@@ -139,3 +148,4 @@ struct CartView_Previews: PreviewProvider {
         CartView()
     }
 }
+

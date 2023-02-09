@@ -14,14 +14,31 @@ import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 class ResevationDataStore : ObservableObject {
     
-    @Published var resevationData : [ResevationModel] = []
+    @Published var reservationData: [ReservationModel] = []
+    @Published var reservedBottles: [ReservedBottles] = []
     
-    func getAllResevationData() async {
+    let database = Firestore.firestore()
+
+    //MARK: - 예약 등록
+    func createReservation(reservationData: ReservationModel, reservedBottles: ReservedBottles, userEmail: String) {
+        database.collection("Reservation")
+            .document(userEmail)
+            .collection("ReservedBottles")
+            .document(reservedBottles.bottleId)
+            .setData(["reservedTime" : reservationData.reservedTime,
+                      "state" : reservationData.state,
+                      "shopId" : reservationData.shopId,
+                      "userId" : reservationData.userId])
+//        getAllReservationData(userId: userId)
+    }
+    
+    // MARK: - 예약 불러오기
+    func getAllReservationData() async {
         
         do{
             let documents = try await Firestore.firestore().collection("Reservation").getDocuments()
             for document in documents.documents {
-                let reservedBottles = await self.getReservedBottls(snapshot: document)
+//                let reservedBottles = await self.getReservedBottls(snapshot: document)
                 
                 
                 let id : String = document.documentID
@@ -40,13 +57,12 @@ class ResevationDataStore : ObservableObject {
                     return dateFormatter.string(from: dateCreatedAt)
                 }
                 
-                self.resevationData.append(
-                    ResevationModel(
-                        id: id, shopID: shopID, userID: userID, reservedTime: reservedTime, reservedBottles: reservedBottles
-                    )
-                )
+//                self.resevationData.append(
+//                    ReservationModel(
+//                        id: id, shopId: shopId, userId: userId, reservedTime: reservedTime, reservedBottles: reservedBottles
+//                    )
+//                )
                 
-//                print("나와라라ㅏㅏ \(self.resevationData)")
             }
             
         } catch {
@@ -55,17 +71,38 @@ class ResevationDataStore : ObservableObject {
         
     }
     
+    //MARK: - 예약 삭제
+    func deleteReservation(reservationData: ReservationModel, reservedBottles: ReservedBottles, userEmail: String) {
+        database.collection("Reservation")
+            .document(userEmail)
+            .collection("ReservedBottles")
+            .document(reservedBottles.bottleId).delete()
+//        getAllReservationData(userEmail: userEmail)
+    }
     
+    //MARK: - 예약한 바틀 등록
+//    func createReservation(reservationData: ReservationModel, reservedBottles: ReservedBottles, userEmail: String) {
+//        database.collection("Reservation")
+//            .document(userEmail)
+//            .collection("ReservedBottles")
+//            .document(reservedBottles.bottleId)
+//            .setData(["id" : reservedBottles.id,
+//                      "bottleId" : reservedBottles.bottleId,
+//                      "itemCount" : reservedBottles.itemCount])
+//        getReservedBottls(userEmail: userEmail)
+//    }
+    
+    //MARK: - 예약한 바틀 불러오기
     func getReservedBottls(snapshot: DocumentSnapshot) async -> [ReservedBottles] {
         var resultData: [ReservedBottles] = []
-
+        
         do {
             let documents = try await snapshot.reference.collection("ReservedBottles").getDocuments()
             print(documents.documents)
             for document in documents.documents {
                 resultData.append(ReservedBottles(
                     id: document.documentID,
-                    BottleID: document["BottleID"] as? String ?? "",
+                    bottleId: document["bottleId"] as? String ?? "",
                     itemCount: document["itemCount"] as? Int ?? 0
                 ))
             }
@@ -75,4 +112,14 @@ class ResevationDataStore : ObservableObject {
         }
         return []
     }
+    
+    //MARK: - 예약한 바틀 삭제
+//    func deleteReservation(reservationData: ReservationModel, reservedBottles: ReservedBottles, userEmail: String) {
+//        database.collection("Reservation")
+//            .document(userEmail)
+//            .collection("ReservedBottles")
+//            .document(reservedBottles.bottleId).delete()
+//        getAllReservationData(userEmail: userEmail)
+//    }
+    
 }
