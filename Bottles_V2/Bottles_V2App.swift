@@ -18,10 +18,14 @@ struct Bottles_V2App: App {
     @ObservedObject var userDataStore = UserStore()
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
+    @ObservedObject var shopNoticeDataStore = ShopNoticeDataStore()
     @ObservedObject var reservationDataStore = ResevationDataStore()
+    @ObservedObject var cartStore = CartStore()
     @ObservedObject var mapViewModel = MapViewModel()
+    
     // coreData
     @StateObject var dataController = DataController()
+    
     
 
     @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
@@ -52,18 +56,21 @@ struct Bottles_V2App: App {
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(bottleDataStore)
                 .environmentObject(shopDataStore)
+                .environmentObject(shopNoticeDataStore)
                 .environmentObject(reservationDataStore)
                 .environmentObject(mapViewModel)
                 .environmentObject(userDataStore)
+                .environmentObject(cartStore)
                 .task {
                     userDataStore.readUser(userId: "test@naver.com")
+                    cartStore.readCart(userEmail: "test@naver.com")
                     await shopDataStore.getAllShopData()
+                    await shopNoticeDataStore.getAllShopNoticeData()
                     await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllResevationData()
+                    await reservationDataStore.getAllReservationData()
                 }
                 .environmentObject(AuthStore())
                 .environmentObject(KakaoLoginViewModel())
-
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))

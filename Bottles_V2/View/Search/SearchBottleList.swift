@@ -1,10 +1,3 @@
-//
-//  SearchBottleList.swift
-//  Bottles_V2
-//
-//  Created by 서찬호 on 2023/01/18.
-//
-
 import SwiftUI
 import CoreLocation
 
@@ -30,9 +23,9 @@ struct SearchBottleList: View {
         }
     }
     
-    func getMattchedShopData(bottleData: BottleModel) -> ShopModel {
-        let mattchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
-        return mattchedShopData[0]
+    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
+        let matchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
+        return matchedShopData[0]
     }
     
     func sortBottleData() -> [BottleModel] {
@@ -40,7 +33,7 @@ struct SearchBottleList: View {
         switch selection {
         case "거리순":
             return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
-                .sorted(by: {distance(getMattchedShopData(bottleData: $0).location.latitude, getMattchedShopData(bottleData: $0).location.longitude) < distance(getMattchedShopData(bottleData: $1).location.latitude, getMattchedShopData(bottleData: $1).location.longitude)})
+                .sorted(by: {distance(getMatchedShopData(bottleData: $0).location.latitude, getMatchedShopData(bottleData: $0).location.longitude) < distance(getMatchedShopData(bottleData: $1).location.latitude, getMatchedShopData(bottleData: $1).location.longitude)})
         case "낮은 가격순":
             return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
@@ -87,7 +80,7 @@ struct SearchBottleList: View {
                     // TODO: 서버 Bottle 데이터 연결
                     ScrollView {
                         ForEach(sortBottleData()) { bottle in
-                            SearchBottleListCell(bottleInfo: bottle, shopInfo: getMattchedShopData(bottleData: bottle), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                            SearchBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
                         }
                     }
                 }
@@ -201,7 +194,6 @@ struct SearchBottleListCell: View {
             
             Spacer()
             VStack {
-                // TODO: 즐겨찾기 기능 추가해야함
                 Button(action: {
                     withAnimation(.easeIn(duration: 1)) {
                         bookMark.toggle()
@@ -230,14 +222,13 @@ struct SearchBottleListCell: View {
                         .frame(width: 15, height: 18)
                         .padding(.horizontal, 10)
                 }
-                
                 Spacer()
             }
             .font(.title2)
             .padding()
             .padding(.top, -5)
         }
-        .frame(height: 130)
+        .frame(minHeight: 130, maxHeight: 200)
         .padding(.vertical, 5)
     }
     

@@ -16,26 +16,31 @@ struct RecentlyItemList: View {
     @Binding var doneTextFieldEdit: Bool
     // 검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
     @FocusState var focus: Bool
+    @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var shopDataStore: ShopDataStore
+    @EnvironmentObject var bottleDataStore: BottleDataStore
     // 테스트용 모델
     @StateObject var bookMarkTestStore: BookMarkTestStore = BookMarkTestStore()
     // coreData
     @Environment(\.managedObjectContext) var managedObjContext
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
     
+    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
+        let matchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
+        return matchedShopData[0]
+    }
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {            
+        VStack(alignment: .leading, spacing: 10) {
+            if !searchHistory.isEmpty {
             Text("최근 검색어")
                 .font(.bottles18)
                 .bold()
                 .padding([.leading, .top], 15)
             
-            // 최근 검색어 나열
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    if searchHistory.isEmpty {
-                        Text("최근 검색어가 없습니다.")
-                            .padding(.vertical)
-                    } else {
+                // 최근 검색어 나열
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
                         ForEach(searchHistory, id: \.self) { search in
                             HStack {
                                 // 최근 검색어를 누르면 해당 검색어로 검색이 진행된다
@@ -62,18 +67,23 @@ struct RecentlyItemList: View {
                             .padding(.vertical)
                             .padding(.leading, 5)
                         }
+                        
                     }
                 }
+                .padding(.leading, 10)
+                .padding(.bottom, -5)
             }
-            .padding(.leading, 10)
+        
             Text("최근 본 상품")
                 .font(.bottles18)
                 .bold()
-                .padding(.leading, 15)
+                .padding([.leading, .top], 15)
             // TODO: 서버 최근 본 상품(Bottle) 데이터 연결
             ScrollView {
-                ForEach(bookMarkTestStore.BookMarkBottles, id: \.self) { bottle in
-                    RecentlyItemListCell(bottleInfo: bottle)
+                ForEach(filterRecentlyBottle(), id: \.self) { bottle in
+                    RecentlyItemListCell(
+                        bottleInfo: bottle,
+                        shopInfo: getMatchedShopData(bottleData: bottle))
                 }
             }
         }
@@ -81,6 +91,20 @@ struct RecentlyItemList: View {
             endTextEditing()
         }
     }
+    
+    func filterRecentlyBottle() -> [BottleModel] {
+        var resultData: [BottleModel] = []
+        for (index, item) in userStore.user.recentlyItem.enumerated() {
+            print("최근 본 상품 \(item)")
+            let filter = bottleDataStore.bottleData.filter { $0.id == item }
+            if index < 21 {
+                resultData.append(contentsOf: filter)
+            }
+        }
+        
+        return resultData.reversed()
+    }
+    
     // 개별 삭제
     func deleteSearchHistory(offsets: IndexSet) {
         withAnimation(.default.speed(3)) {
@@ -101,20 +125,22 @@ struct RecentlyItemList: View {
 
 struct RecentlyItemListCell: View {
     // Bottle의 정보를 저장하는 변수
-    var bottleInfo: BookMarkBottle
+    @EnvironmentObject var userStore: UserStore
+    var bottleInfo: BottleModel
+    var shopInfo: ShopModel
     
     var body: some View {
         HStack(alignment: .top) {
             // 이미지를 누르면 Bottle Detail View로 이동
             NavigationLink {
-//                BottleView(bottleData: bottleInfo)
+                //                BottleView(bottleData: bottleInfo)
             } label: {
                 // Bottle 이미지
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(.black)
                     .frame(width: 120, height: 120)
                     .overlay {
-                        AsyncImage(url: URL(string: "https://kanashop.kr/web/product/big/201903/97ef5cee30f4cd6072fd736831623d2e.jpg")) { image in
+                        AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -131,19 +157,18 @@ struct RecentlyItemListCell: View {
                     .padding(.horizontal)
             }
             
-            
             VStack(alignment: .leading, spacing: 10) {
                 // Bottle 이름
-                Text(bottleInfo.bottleName)
+                Text(bottleInfo.itemName)
                     .font(.bottles14)
                     .fontWeight(.medium)
                 // Bottle 가격
-                Text("350,000원")
+                Text("\(bottleInfo.itemPrice)원")
                     .font(.bottles18)
                     .bold()
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
-//                    BottleShopView(bottleShop: <#ShopModel#>)
+                    //                    BottleShopView(bottleShop: <#ShopModel#>)
                 } label: {
                     HStack {
                         Image("Map_tab_fill")
@@ -162,11 +187,21 @@ struct RecentlyItemListCell: View {
             
             Spacer()
             VStack {
-                // TODO: 즐겨찾기 기능 추가해야함
-                Button {
+                Button(action: {
+                    if compareMyFollowBottleID(bottleInfo.id) == true {
+                        userStore.deleteFollowItemId(bottleInfo.id)
+                    }
+
+                    if compareMyFollowBottleID(bottleInfo.id) == false {
+                        userStore.addFollowItemId(bottleInfo.id)
+                    }
                     
-                } label: {
-                    Image(systemName: "bookmark.fill")
+                }) {
+                    Image(compareMyFollowBottleID(bottleInfo.id) ? "BookMark.fill" : "BookMark")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 15, height: 18)
+                        .padding(.horizontal, 10)
                 }
                 Spacer()
             }
@@ -174,8 +209,12 @@ struct RecentlyItemListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(height: 130)
+        .frame(minHeight: 130, maxHeight: 200)
         .padding(.vertical, 5)
+    }
+    
+    func compareMyFollowBottleID(_ bottleId: String) -> Bool {
+        return (userStore.user.followItemList.filter { $0 == bottleId }.count != 0) ? true : false
     }
 }
 

@@ -21,6 +21,8 @@ struct SearchResultList: View {
     @Binding var doneTextFieldEdit: Bool
     // 검색 TextField 작성 완료시 키보드를 내리기위한 Bool 값
     @FocusState var focus: Bool
+    // 검색 결과뷰의 Tab을 결정하는 값
+    @Binding var selectedPicker: searchTabInfo
     
     // coreData
     @Environment(\.managedObjectContext) var managedObjContext
@@ -29,35 +31,46 @@ struct SearchResultList: View {
     // Server Data Test
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-    var testBottleAndShop: [(String, String)] {
+    struct SearchResult: Hashable {
+        let name: String
+        let type: String
+    }
+    var bottleAndShop: [SearchResult] {
         let bookMarkBottles = bottleDataStore.bottleData
         let bookMarkShops = shopDataStore.shopData
-        var bottleAndShop: [(String, String)] = []
+        var bottleAndShop: [SearchResult] = []
         
         for bottle in bookMarkBottles {
-            bottleAndShop.append((bottle.itemName, "bottle"))
+            bottleAndShop.append(SearchResult(name: bottle.itemName, type: "bottle"))
         }
         for shop in bookMarkShops {
-            bottleAndShop.append((shop.shopName, "shop"))
+            bottleAndShop.append(SearchResult(name: shop.shopName, type: "shop"))
         }
-        return bottleAndShop.sorted(by: <)
+        let setbottleAndShop = Set(bottleAndShop)
+        return Array(setbottleAndShop).sorted(by: {$0.name < $1.name})
     }
 
     var body: some View {
         List {
-            ForEach (testBottleAndShop, id: \.0) { bottle in
+            ForEach (bottleAndShop, id: \.self) { item in
                 
                 // 검색어와 겹치는 단어가 있는지 없는지 확인
-                if bottle.0.replacingOccurrences(of: " ", with: "").contains(searchBarText.replacingOccurrences(of: " ", with: "")) {
+                if item.name.replacingOccurrences(of: " ", with: "").contains(searchBarText.replacingOccurrences(of: " ", with: "")) {
                     Button {
                         doneTextFieldEdit = true
                         
                         // 사용자가 리스트에서 찾고자하는 단어가 있어 터치 시, 해당 단어를 검색창의 텍스트로 전환
-                        searchBarText = bottle.0
+                        searchBarText = item.name
                         
                         focus = false
                         // CoreData 최근 검색어 추가
                         addSearchHistory()
+                        // 검색어 타입에 따라 검색 결과뷰에서 보여주는 Tab을 결정
+                        if item.type == "bottle" {
+                            selectedPicker = .bottle
+                        } else {
+                            selectedPicker = .shop
+                        }
                         
                     } label: {
                         HStack {
@@ -67,19 +80,24 @@ struct SearchResultList: View {
                             
                             // 검색어와 겹치는 단어가 있는 bottleName의 경우, 검색어와 겹치는 단어들만 accentColor
                             // 현재는 shop을 제외한 bottleName만 리스트에 보임
-                            Text(bottle.0) { string in
+                            Text(item.name) { string in
                                 if let range = string.range(of: searchBarText.trimmingCharacters(in: .whitespaces)) {
                                     string[range].foregroundColor = Color("AccentColor")
                                 }
                             }
                             .font(.bottles16)
                             Spacer()
-                            Text(bottle.1)
-                                .foregroundColor(bottle.1 == "bottle" ? .red : .blue)
-                                .font(.bottles12)
-                                .frame(width: 40, alignment: .center)
+                            if item.type == "bottle" {
+                                Image(systemName: "wineglass")
+                                    .foregroundColor(.accentColor)
+                                    .font(.bottles16)
+                            } else {
+                                Image("Map_tab_fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 16, height: 16)
+                            }
                         }
-                        
                     }
                 }
             }

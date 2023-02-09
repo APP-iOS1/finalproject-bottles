@@ -60,7 +60,6 @@ struct BottleView_BottleCell: View {
                 Spacer()
                 
                 // MARK: - 북마크
-                
                 Button(action: {
                     withAnimation(.easeOut(duration: 0.5)) {
                         checkBookmark.toggle()

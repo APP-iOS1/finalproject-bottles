@@ -16,7 +16,11 @@ struct ReservationView_Content: View {
     @State private var isShowingCart: Bool = false
     @State private var isShowingReservationPage: Bool = false
     @EnvironmentObject var bottleDataStore: BottleDataStore
-    var bottleId: String
+    @EnvironmentObject var cartStore: CartStore
+    @EnvironmentObject var userStore: UserStore
+    var bottleData: BottleModel
+    @State private var anotherShopInCart: Bool = false
+    //@State private var isShowingAnotherShopAlert: Bool = false
     
     
     var body: some View {
@@ -33,13 +37,13 @@ struct ReservationView_Content: View {
                     }
                     .modifier(contentModifier())
                 }
-       
+                
                 // MARK: - 픽업 안내
                 VStack(alignment: .leading, spacing: 5) {
                     Text("픽업 안내")
                         .modifier(titleModifier())
                         .padding(.bottom, 4)
-                        
+                    
                     Group {
                         Text("예약 후 예약 확정 알림이 올 때까지 기다려주세요.")
                         Text("예약 확정 알림을 받은 뒤 3일 이내에 픽업해주세요.")
@@ -55,7 +59,16 @@ struct ReservationView_Content: View {
             HStack {
                 // MARK: - 장바구니 담기 버튼
                 Button(action: {
-                    isShowingAlert.toggle()
+                    
+                    if (cartStore.shopName == bottleData.shopName) || (cartStore.shopName == "")  {
+                        isShowingAlert.toggle()
+                        cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                        
+                    }
+                    else {
+                        anotherShopInCart.toggle()
+                    }
+                    
                 }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
@@ -66,68 +79,76 @@ struct ReservationView_Content: View {
                             .fontWeight(.medium)
                     }
                 }
+                
                 // 장바구니 담기 버튼 클릭 시 Alert창 present
                 .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
                     Button("OK", role: .destructive) { isShowingCart.toggle() }
                     Button("cancel", role: .cancel) { }
                 }
-                // Alert창에서 OK 버튼 클릭 시 장바구니 뷰로 이동
-                .navigationDestination(isPresented: $isShowingCart) {
-                    CartView()
-                }
-             
-                // MARK: - 바로 예약하기 버튼
-//                NavigationLink(value: "") {
-//                    ZStack {
-//                        RoundedRectangle(cornerRadius: 12)
-//                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
-//                        Text("바로 예약하기")
-//                            .modifier(AccentColorButtonModifier())
-//                    }
-//                }
-//                .navigationDestination(for: String.self) { _ in
-//                    ReservationPageView()
-//                        .environmentObject(path)
-//                }
-                
-                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleId: ""))) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 12)
-                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
-                        Text("바로 예약하기")
-                            .modifier(AccentColorButtonModifier())
+                    
+                        .alert(
+                            "장바구니에는 같은 가게의 바틀만 담을 수 있습니다.",
+                            isPresented: $anotherShopInCart
+                        ) {
+                            Button("OK", role: .destructive) {
+//                                cartStore.deleteAllCart(userEmail: userStore.user.email)
+//                                cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                            }
+                            Button("cancel", role: .cancel) {}
+                        
+                        } message: {
+                            Text("선택하신 바틀을 장바구니에 담을 경우 이전에 담은 바틀은 삭제 됩니다.")
+                        }
+                    
+                    // Alert창에서 OK 버튼 클릭 시 장바구니 뷰로 이동
+                        .navigationDestination(isPresented: $isShowingCart) {
+                            CartView()
+                        }
+                    
+                    // MARK: - 바로 예약하기 버튼
+                    //                NavigationLink(value: "") {
+                    //                    ZStack {
+                    //                        RoundedRectangle(cornerRadius: 12)
+                    //                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
+                    //                        Text("바로 예약하기")
+                    //                            .modifier(AccentColorButtonModifier())
+                    //                    }
+                    //                }
+                    //                .navigationDestination(for: String.self) { _ in
+                    //                    ReservationPageView()
+                    //                        .environmentObject(path)
+                    //                }
+                    
+                    NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleData: bottleData))) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
+                            Text("바로 예약하기")
+                                .modifier(AccentColorButtonModifier())
+                        }
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.top, 10)
             }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.top, 10)
-        }
-        .padding(.top)
-        .padding(.horizontal)
-    }
-    
-    func getBottleModel(bottleId: String) -> BottleModel {
-        let matchedBottleData = bottleDataStore.bottleData.filter {
-            $0.id == bottleId
+            .padding(.top)
+            .padding(.horizontal)
+            
         }
         
-        return matchedBottleData[0]
+        func getBottleReservation(bottleData: BottleModel) -> [BottleReservation] {
+            var matchedBottleReservation: [BottleReservation] = []
+            
+            matchedBottleReservation.append(BottleReservation(image: bottleData.itemImage, title: bottleData.itemName, price: bottleData.itemPrice * count, count: count, shop: bottleData.shopName))
+            
+            return matchedBottleReservation
+        }
     }
     
-    func getBottleReservation(bottleId: String) -> [BottleReservation] {
-        var matchedBottleReservation: [BottleReservation] = []
-        var bottleModel: BottleModel
-        
-            bottleModel = getBottleModel(bottleId: bottleId)
-        matchedBottleReservation.append(BottleReservation(image: bottleModel.itemImage, title: bottleModel.itemName, price: bottleModel.itemPrice * count, count: count, shop: bottleModel.shopName))
-        
-        return matchedBottleReservation
-    }
-}
-
-
-//struct ReservationView_Content_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ReservationView(isShowingReservationView: <#Binding<Bool>#>)
-//    }
-//}
+    
+    //struct ReservationView_Content_Previews: PreviewProvider {
+    //    static var previews: some View {
+    //        ReservationView(isShowingReservationView: <#Binding<Bool>#>)
+    //    }
+    //}
+    
