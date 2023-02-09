@@ -18,6 +18,7 @@ struct Bottles_V2App: App {
     @ObservedObject var userDataStore = UserStore()
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
+    @ObservedObject var shopNoticeDataStore = ShopNoticeDataStore()
     @ObservedObject var reservationDataStore = ResevationDataStore()
     @ObservedObject var mapViewModel = MapViewModel()
     // coreData
@@ -52,16 +53,17 @@ struct Bottles_V2App: App {
                 .environment(\.managedObjectContext, dataController.container.viewContext)
                 .environmentObject(bottleDataStore)
                 .environmentObject(shopDataStore)
+                .environmentObject(shopNoticeDataStore)
                 .environmentObject(reservationDataStore)
                 .environmentObject(mapViewModel)
                 .environmentObject(userDataStore)
                 .task {
                     userDataStore.readUser(userId: "test@naver.com")
                     await shopDataStore.getAllShopData()
+                    await shopNoticeDataStore.getAllShopNoticeData()
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.getAllResevationData()
                 }
-
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))

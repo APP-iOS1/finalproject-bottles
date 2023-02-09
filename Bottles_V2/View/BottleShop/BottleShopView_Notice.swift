@@ -25,19 +25,28 @@ var noticeItems: [Notice22] = [
 
 // 바틀샵뷰 내 "사장님의 공지" 뷰
 struct BottleShopView_Notice: View {
+    var shopData: ShopModel
+    
+    @EnvironmentObject var shopNoticeDataStore: ShopNoticeDataStore
+    
     var body: some View {
         VStack{
             // 데이터 연동 시 "해당 샵의 공지 리스트" 연동
             // 공지 셀 반복문
-            ForEach(noticeItems, id: \.self) { item in
-                BottleShopView_NoticeCell(selectedItem: Notice22(id: UUID(), category: item.category, contents: item.contents, time: item.time))
+            ForEach(filterShopNotice(), id: \.self) { item in
+                BottleShopView_NoticeCell(
+                    selectedItem: ShopNotice(id: item.id, category: item.category, shopName: item.shopName, date: item.date, title: item.title, body: item.body))
             }
         }
     }
-}
-
-struct BottleShopView_Notice_Previews: PreviewProvider {
-    static var previews: some View {
-        BottleShopView_Notice()
+    
+    func filterShopNotice() -> [ShopNotice] {
+        return shopNoticeDataStore.shopNoticeData.filter { $0.shopName == shopData.shopName }
     }
 }
+
+//struct BottleShopView_Notice_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BottleShopView_Notice()
+//    }
+//}

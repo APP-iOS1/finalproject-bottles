@@ -14,6 +14,7 @@ struct BookMarkShopList: View {
     @State private var selection = "이름순"
     // 북마크 알림 Test
     @State var bookMarkAlarm: Bool = false
+    @State var resetDeletedShopId: String = ""
     
     // Server Data Test
     @EnvironmentObject var userDataStore: UserStore
@@ -85,6 +86,7 @@ struct BookMarkShopList: View {
                                 userStore: userDataStore,
                                 shopInfo: shop,
                                 bookMarkAlarm: $bookMarkAlarm,
+                                resetDeletedShopId: $resetDeletedShopId,
                                 distance: distance(
                                     shop.location.latitude,
                                     shop.location.longitude))
@@ -110,7 +112,12 @@ struct BookMarkShopList: View {
                     Text("북마크가 해제되었습니다.")
                         .foregroundColor(.black)
                         .font(.bottles11)
-                    
+                    Button {
+                        userDataStore.addFollowShopId(resetDeletedShopId)
+                    } label: {
+                        Text("실행취소")
+                            .font(.bottles11)
+                    }
                 }
                 .zIndex(1)
                 .transition(.opacity.animation(.easeIn))
@@ -130,6 +137,7 @@ struct BookMarkShopListCell: View {
     var userStore: UserStore
     var shopInfo: ShopModel
     @Binding var bookMarkAlarm: Bool
+    @Binding var resetDeletedShopId: String
     var distance: Double
     
     var body: some View {
@@ -183,6 +191,7 @@ struct BookMarkShopListCell: View {
             VStack {
                 // TODO: 즐겨찾기 기능 추가해야함
                 Button {
+                    resetDeletedShopId = shopInfo.id
                     userStore.deleteFollowShopId(shopInfo.id)
                     withAnimation(.easeIn(duration: 1)) {
                         bookMarkAlarm.toggle()
