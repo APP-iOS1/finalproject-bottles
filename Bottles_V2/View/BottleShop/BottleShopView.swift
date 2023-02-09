@@ -37,9 +37,7 @@ struct BottleShopView: View {
     // 검색 결과를 필터링해주는 연산 프로퍼티
     var filteredResult: [BottleModel] {
         let bottles = bottleDataStore.bottleData
-        let test = bottles.filter{ $0.shopID == bottleShop.id }
-        
-        return test.filter {
+        return bottles.filter {
             $0.itemName.contains(testSearchText)
         }
     }
