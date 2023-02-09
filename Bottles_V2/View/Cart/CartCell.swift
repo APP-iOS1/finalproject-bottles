@@ -19,12 +19,14 @@ struct CartCell: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
+            
+            
             // MARK: - 바틀 이미지
             AsyncImage(url: URL(string: bottle.itemImage)) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 128, height: 128)
+                    .frame(width: 130, height: 130)
                     .cornerRadius(12)
             } placeholder: {
                 Image("ready_image")
@@ -32,12 +34,13 @@ struct CartCell: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 128, height: 128)
                     .cornerRadius(12)
-
+                
             }
             .background(Color.gray_f7)
             .cornerRadius(12)
             .frame(height: 128)
             .padding(.horizontal)
+            .padding(.top, 5)
             
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 10) {
@@ -53,12 +56,15 @@ struct CartCell: View {
                     }
                     
                     // MARK: - 바틀 가격
-                    Text("\(cart.eachPrice * cart.itemCount)")
+                    Text("\(cart.eachPrice * cart.itemCount)원")
                         .font(.bottles18)
                         .fontWeight(.bold)
+                    Text("개당 \(cart.eachPrice)원")
+                        .font(.bottles12)
+                        .foregroundColor(.gray)
                     
                     increaseButtonView
-                        .padding(.top)
+                        .padding(.bottom, 7)
                 }
                 .foregroundColor(.black)
                 
@@ -123,9 +129,9 @@ struct CartCell: View {
             }
             .frame(width: 110, height: 30)
         }
-
+        
     }
-
+    
 }
 
 //struct CartCell_Previews: PreviewProvider {
