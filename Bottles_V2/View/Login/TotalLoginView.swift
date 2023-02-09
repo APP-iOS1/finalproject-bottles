@@ -10,6 +10,7 @@ import SwiftUI
 struct TotalLoginView: View {
     @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
     @StateObject var kakaoLoginViewModel: KakaoLoginViewModel = KakaoLoginViewModel()
+    @Binding var isSignIn: Bool
     var body: some View {
         NavigationStack {
             Spacer()
@@ -89,7 +90,7 @@ struct TotalLoginView: View {
                 .foregroundColor(.gray)
             }
             .padding(.vertical, 40)
-            NavigationLink(destination: EmailLoginView()) {
+            NavigationLink(destination: EmailLoginView(isSignIn: $isSignIn)) {
                 Text("이메일로 로그인")
                     .font(.bottles12)
                     .foregroundColor(.gray)
@@ -104,6 +105,6 @@ struct TotalLoginView: View {
 
 struct TotalLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        TotalLoginView()
+        TotalLoginView(isSignIn: .constant(false))
     }
 }

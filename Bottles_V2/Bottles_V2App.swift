@@ -61,6 +61,7 @@ struct Bottles_V2App: App {
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.getAllResevationData()
                 }
+                .environmentObject(AuthStore())
 
             
             // MARK: - AccentColor 적용

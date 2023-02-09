@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct SettingView: View {
+    @EnvironmentObject var authStore: AuthStore
     /// 로그아웃 Alert창을 띄웁니다.
     @State private var logoutAlert: Bool = false
     /// 회원 탈퇴 Alert창을 띄웁니다.
     @State private var unregisterAlert: Bool = false
+    
+    @Binding var isSignIn: Bool
     var body: some View {
         VStack {
             // MARK: - 휴대폰 번호 변경, 알림 설정
@@ -55,7 +58,11 @@ struct SettingView: View {
                 
                 // MARK: - 로그아웃 버튼
                 Button(action:{
-                    logoutAlert.toggle()
+                    if isSignIn {
+                        authStore.logout()
+                        isSignIn = false
+                    }
+//                    logoutAlert.toggle()
                 }){
                     Text("로그아웃")
                         .font(.bottles12)
@@ -101,6 +108,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView(isSignIn: .constant(true))
     }
 }

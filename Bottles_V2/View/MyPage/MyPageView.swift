@@ -10,6 +10,8 @@ import SwiftUI
 
 struct MyPageView: View {
     
+    @Binding var isSignIn: Bool
+    
     var myPageList: [String] = ["바틀스 소개", "공지사항", "자주 묻는 질문",
                                 "1:1 문의하기", "서비스 이용약관", "개인정보 처리방침", "위치정보 이용약관", "버전 정보"]
     
@@ -44,7 +46,7 @@ struct MyPageView: View {
                         .font(.bottles18)
                         .bold()
                     Spacer()
-                    NavigationLink(destination: SettingView()){
+                    NavigationLink(destination: SettingView(isSignIn: $isSignIn)){
                         Image(systemName: "gearshape.fill")
                         //                            .foregroundColor(.accentColor)
                             .font(.title2)
@@ -99,6 +101,6 @@ struct MyPageView: View {
 
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPageView()
+        MyPageView(isSignIn: .constant(true))
     }
 }
