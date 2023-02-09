@@ -69,6 +69,8 @@ struct Bottles_V2App: App {
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.getAllReservationData()
                 }
+                .environmentObject(AuthStore())
+                .environmentObject(KakaoLoginViewModel())
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))

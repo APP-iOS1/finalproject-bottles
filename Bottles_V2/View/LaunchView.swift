@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct LaunchView: View {
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor(Color.white)
+    }
+    
+    @EnvironmentObject var authStore: AuthStore
+    
+    @AppStorage("login") var isSignIn: Bool = false
     @State private var isActive = false
     @State private var isloading = true
     var body: some View {
         if isActive {
-            MainTabView()
+            if isSignIn{
+                MainTabView(isSignIn: $isSignIn)
+            } else {
+                TotalLoginView(isSignIn: $isSignIn)
+            }
         } else {
             if isloading {
                 ZStack {

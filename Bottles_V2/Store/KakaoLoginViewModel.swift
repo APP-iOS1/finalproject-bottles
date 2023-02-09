@@ -22,62 +22,94 @@ class KakaoLoginViewModel: ObservableObject {
     /// 데이터 베이스 안에 같은 이메일이 있으면 customAlert의 내용에 사용자가 어떤 종류의 소셜 로그인으로 회원 가입했는지 보여줌
     var errorSocialType: String = ""
     
+    @Published var currentUser: Firebase.User?
     
-    func handleKakaoLogin() {
+    
+    @Published var kakaoLogin: Bool = false
+    
+    init() {
+        currentUser = Auth.auth().currentUser
+    }
+    
+    @MainActor
+    func handleKakaoLogin() async {
         // 카카오톡 설치 여부 확인 - 카카오톡이 설치가 되어있을 때
-        Task {
+        
             if (UserApi.isKakaoTalkLoginAvailable()) {
-                await loginWithKakaoApp()
+                kakaoLogin = await loginWithKakaoApp()
             } else {
                 // 카카톡이 설치가 되어 있지않을 때 카카오 웹뷰로 로그인
-                await loginWithKakaoAccount()
+                kakaoLogin = await loginWithKakaoAccount()
             }
-        }
+        
     }
     
     /// 카카오 앱을 통해 로그인
-    private func loginWithKakaoApp() async {
-        UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
-            if let error = error {
-                print(error)
-            }
-            else {
-                print("loginWithKakaoTalk() success.")
-                //TODO: FirebaseAuth에 심어야 함
-                //do something
-                if let oauthToken = oauthToken {
-                    print("카카오톡: \(oauthToken)")
-                    self.signUpInFirebase()
+    private func loginWithKakaoApp() async -> Bool{
+    
+        await withCheckedContinuation{ continuation in
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                    continuation.resume(returning: false)
+                }
+                else {
+                    print("loginWithKakaoTalk() success.")
+                    //TODO: FirebaseAuth에 심어야 함
+                    //do something
+                    if let oauthToken = oauthToken {
+                        print("카카오톡: \(oauthToken)")
+                        self.signUpInFirebase()
+                        continuation.resume(returning: true)
+                    }
                 }
             }
         }
     }
     
     /// 카카오 앱이 없을 시 웹으로 띄워서 로그인
-    private func loginWithKakaoAccount() async {
-        UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
-            if let error = error {
-                print(error)
-            }
-            else {
-                print("loginWithKakaoAccount() success.")
-                //TODO: FirebaseAuth에 심어야 함
-                //do something
-                if let oauthToken = oauthToken {
-                    print("카카오톡: \(oauthToken)")
-                    self.signUpInFirebase()
+    private func loginWithKakaoAccount() async -> Bool{
+        
+        await withCheckedContinuation { continuation in
+            UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                    continuation.resume(returning: false)
+                }
+                else {
+                    print("loginWithKakaoAccount() success.")
+                    //TODO: FirebaseAuth에 심어야 함
+                    //do something
+                    if let oauthToken = oauthToken {
+                        print("카카오톡: \(oauthToken)")
+                        self.signUpInFirebase()
+                        continuation.resume(returning: true)
+                    }
                 }
             }
         }
     }
     
-    func handleKakaoLogout() async {
-        UserApi.shared.logout {(error) in
-            if let error = error {
-                print(error)
+    func kakaoLogout() {
+        Task {
+            if await handleKakaoLogout() {
+                kakaoLogin = false
             }
-            else {
-                print("logout() success.")
+        }
+    }
+    
+    func handleKakaoLogout() async -> Bool{
+        await withCheckedContinuation{ continuation in
+            UserApi.shared.logout { [self](error) in
+                if let error = error {
+                    print(error)
+                    continuation.resume(returning: false)
+                }
+                else {
+                    self.currentUser = nil
+                    print("logout() success.")
+                    continuation.resume(returning: true)
+                }
             }
         }
     }
@@ -107,6 +139,7 @@ class KakaoLoginViewModel: ObservableObject {
                                     print("에러 발생")
                                     
                                 } else {
+                                    self.currentUser = result?.user
                                     self.userStore.createUser(user: User(id: (user?.kakaoAccount?.email)!, email: (user?.kakaoAccount?.email)!, followItemList: [], followShopList: [], nickname: (user?.kakaoAccount?.profile?.nickname)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
                                     print("파이어베이스 사용자 생성 성공")
                                     
@@ -124,16 +157,19 @@ class KakaoLoginViewModel: ObservableObject {
                                 let socialLoginType: String = currentData!["socialLoginType"] as? String ?? ""
                                 
                                 if socialLoginType == type {
-                                    // 로그인 처리 (auth에 로그인 -> 뷰를 넘겨줌)
+                                     //로그인 처리 (auth에 로그인 -> 뷰를 넘겨줌)
                                     Auth.auth().signIn(withEmail: (user?.kakaoAccount?.email)!, password: "\(String(describing: user?.id))") { result, error in
                                         if let error = error {
                                             print("로그인 에러: \(error.localizedDescription)")
                                             return
                                         } else {
+
+                                            self.currentUser = result?.user
+                                            self.kakaoLogin = true
                                             print("카카오 파이어베이스 어스 로그인 성공")
                                             //  뷰 전환
                                         }
-                                        
+
                                     }
                                     
                                 } else {
@@ -160,4 +196,6 @@ class KakaoLoginViewModel: ObservableObject {
             }
         }
     }
+    
+    
 }

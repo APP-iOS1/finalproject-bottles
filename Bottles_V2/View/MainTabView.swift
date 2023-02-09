@@ -16,12 +16,10 @@ struct MainTabView: View {
     @EnvironmentObject var mapViewModel: MapViewModel
 
     //    let user: AuthUser
-    
+    @Binding var isSignIn: Bool
     @State private var selection: Int = 1
     //     TabBar 백그라운드 컬러 지정
-    init() {
-        UITabBar.appearance().backgroundColor = UIColor(Color.white)
-    }
+    
     
     var body: some View {
         TabView(selection: $selection) {
@@ -37,7 +35,7 @@ struct MainTabView: View {
                 Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
                 Text("알림")
             }.tag(3)
-            MyPageView().tabItem {
+            MyPageView(isSignIn: $isSignIn).tabItem {
                 Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                 Text("MY")
             }.tag(4)
