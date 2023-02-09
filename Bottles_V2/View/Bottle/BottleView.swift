@@ -15,16 +15,29 @@ struct BottleView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @State private var isShowingSheet: Bool = false
+    var bottleData: BottleModel
+    
+    func filteredBottleItem() -> [BottleModel] {
+        return bottleDataStore.bottleData.filter { $0.id != bottleData.id && $0.itemName == bottleData.itemName }
+    }
+//
+    func filteredShopItem(_ shopID: String) -> ShopModel {
+        // 다른 바틀샵의 이 상품
+        // 1. 현재 바틀이랑 동일한 이름을 filter한다.
+        // 2. 그리고 바틀 데이터 안에서 bottleData에서 받은 shopName과 다른 shopName 사용하기
+        return shopDataStore.shopData.filter { $0.id == shopID }[0]
+    }
     
     var body: some View {
+
         NavigationStack {
             ZStack {
                 ScrollView {
                     // 바틀 기본 정보 (바틀 이미지, 바틀 이름, 북마크, 바틀 가격, 바틀샵 이름)
-                    BottleView_Info()
+                    BottleView_Info(bottleData: bottleData)
                     
                     // Tasting Notes, Information, Pairing
-                    BottleView_Detail()
+                    BottleView_Detail(bottleData: bottleData)
                     
                     // 해당 바틀을 판매하는 바틀샵 리스트
                     VStack(alignment: .leading) {
@@ -32,13 +45,13 @@ struct BottleView: View {
                             .font(.bottles18)
                             .fontWeight(.medium)
                             
-                        ForEach(bottleDataStore.bottleData) {bottleShop in
+                        ForEach(filteredBottleItem()) { bottle in
                             NavigationLink {
                                 // 바틀 뷰로 이동
-                                //BottleShopView(bottleShop: <#ShopModel#>)
+                                BottleShopView(bottleShop: filteredShopItem(bottle.shopID))
                             } label: {
                                 // 바틀 셀
-                                BottleView_BottleCell()
+                                BottleView_BottleCell(bottleData: bottle)
                             }
                         }
                     }
@@ -69,10 +82,10 @@ struct BottleView: View {
             // 네비게이션 장바구니 아이콘
             ToolbarItem(placement: .principal) {
                 HStack {
-                    Image("Map_tab_fill")
+                    Image("Maptabfill")
                         .resizable()
                         .frame(width: 11, height: 16)
-                    Text("미들바틀")
+                    Text(bottleData.shopName)
                         .font(.bottles18)
                         .fontWeight(.medium)
                 }

@@ -112,5 +112,33 @@ class UserStore: ObservableObject {
         
         
     }
+    
+    func addFollowItemId(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["followItemList": FieldValue.arrayUnion([id])])
+        readUser(userId: user.id)
+    }
+    
+    func deleteFollowItemId(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["followItemList": FieldValue.arrayRemove([id])])
+        readUser(userId: user.id)
+    }
+    
+    func addFollowShopId(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["followShopList": FieldValue.arrayUnion([id])])
+        readUser(userId: user.id)
+    }
+    
+    func deleteFollowShopId(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["followShopList": FieldValue.arrayRemove([id])])
+        readUser(userId: user.id)
+    }
 }
 
