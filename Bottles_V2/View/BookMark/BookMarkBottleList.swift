@@ -43,7 +43,7 @@ struct BookMarkBottleList: View {
     func sortBottleData(_ filterBottleData: [BottleModel]) -> [BottleModel] {
         switch selection {
         case "거리순":
-            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {distance(getMattchedShopData(bottleData: $0).location.latitude, getMattchedShopData(bottleData: $0).location.longitude) < distance(getMattchedShopData(bottleData: $1).location.latitude, getMattchedShopData(bottleData: $1).location.longitude)})
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {distance(getMatchedShopData(bottleData: $0).location.latitude, getMatchedShopData(bottleData: $0).location.longitude) < distance(getMatchedShopData(bottleData: $1).location.latitude, getMatchedShopData(bottleData: $1).location.longitude)})
         case "낮은 가격순":
             return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
@@ -85,7 +85,7 @@ struct BookMarkBottleList: View {
                     ForEach(filterUserBottleData()) { bottle in
                         // 테스트용
 //                        if bottle.bookMark == true {
-                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMattchedShopData(bottleData: bottle), userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm)
+                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle), userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm)
 //                        }
                     }
                 }

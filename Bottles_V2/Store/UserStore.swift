@@ -13,7 +13,9 @@ import SwiftUI
 
 
 class UserStore: ObservableObject {
-    
+    //fcmToken을 외부 extension AppDelegate의 application 함수에서 저장해주기 위함
+    static let shared = UserStore()
+    var fcmToken: String?
     @Published var user: User
     
     //let database = Firestore.firestore()
@@ -24,7 +26,7 @@ class UserStore: ObservableObject {
     @Published var isShowingVerification: Bool = false
     
     init() {
-        user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "")
+        user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: "")
     }
     
     func createUser(user: User) {
@@ -37,7 +39,8 @@ class UserStore: ObservableObject {
                       "nickname" : user.nickname,
                       "pickupItemList" : user.pickupItemList,
                       "recentlyItem" : user.recentlyItem,
-                      "userPhoneNumber" : user.userPhoneNumber])
+                      "userPhoneNumber" : user.userPhoneNumber,
+                      "deviceToken" : user.deviceToken])
         readUser(userId: user.email)
     }
     
@@ -52,7 +55,8 @@ class UserStore: ObservableObject {
                 let pickupItemList: [String] = currentData!["pickupItemList"] as? [String] ?? []
                 let recentlyItem: [String] = currentData!["recentlyItem"] as? [String] ?? []
                 let userPhoneNumber: String = currentData!["userPhoneNumber"] as? String ?? ""
-                self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber)
+                let deviceToken: String = currentData!["deviceToken"] as? String ?? ""
+            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken)
             }
         }
     
@@ -85,7 +89,8 @@ class UserStore: ObservableObject {
                          "nickname" : user.nickname,
                          "pickupItemList" : user.pickupItemList,
                          "recentlyItem" : user.recentlyItem,
-                         "userPhoneNumber" : user.userPhoneNumber])
+                         "userPhoneNumber" : user.userPhoneNumber,
+                         "deviceToken" : user.deviceToken])
         readUser(userId: user.email)
     }
     

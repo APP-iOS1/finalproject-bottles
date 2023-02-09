@@ -107,7 +107,7 @@ class KakaoLoginViewModel: ObservableObject {
                                     print("에러 발생")
                                     
                                 } else {
-                                    self.userStore.createUser(user: User(id: (user?.kakaoAccount?.email)!, email: (user?.kakaoAccount?.email)!, followItemList: [], followShopList: [], nickname: (user?.kakaoAccount?.profile?.nickname)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: ""))
+                                    self.userStore.createUser(user: User(id: (user?.kakaoAccount?.email)!, email: (user?.kakaoAccount?.email)!, followItemList: [], followShopList: [], nickname: (user?.kakaoAccount?.profile?.nickname)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
                                     print("파이어베이스 사용자 생성 성공")
                                     
                                 }

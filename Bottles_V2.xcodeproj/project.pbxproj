@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A23D0297A58BF00E7D602 /* BottleDataStore.swift */; };
 		02ABC40C2990BA4B00768078 /* NearBySheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABC40B2990BA4B00768078 /* NearBySheetCell.swift */; };
+		04116D3529948A170052063E /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 04116D3429948A170052063E /* FirebaseMessaging */; };
 		0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F564297677E60023E745 /* Bottles_V2App.swift */; };
 		0427F569297677E80023E745 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0427F568297677E80023E745 /* Assets.xcassets */; };
 		0427F56C297677E80023E745 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0427F56B297677E80023E745 /* Preview Assets.xcassets */; };
@@ -255,6 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04116D3529948A170052063E /* FirebaseMessaging in Frameworks */,
 				FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */,
 				D746C977298A426200E27E16 /* FirebaseAuth in Frameworks */,
 				7FB1207A299223990071AB3F /* GoogleSignInSwift in Frameworks */,
@@ -616,6 +618,7 @@
 				7FB12080299226EE0071AB3F /* KakaoSDKCommon */,
 				7FB12082299226EE0071AB3F /* KakaoSDKUser */,
 				27951FD329937B2A00690ADD /* SkeletonUI */,
+				04116D3429948A170052063E /* FirebaseMessaging */,
 			);
 			productName = Bottles_V2;
 			productReference = 0427F561297677E60023E745 /* Bottles_V2.app */;
@@ -1318,6 +1321,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		04116D3429948A170052063E /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D746C975298A426200E27E16 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		27951FD329937B2A00690ADD /* SkeletonUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 27951FD229937B2900690ADD /* XCRemoteSwiftPackageReference "SkeletonUI" */;

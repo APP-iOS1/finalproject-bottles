@@ -36,5 +36,9 @@
 		<string>SpoqaHanSansNeo-Light.otf</string>
 		<string>SpoqaHanSansNeo-Thin.otf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>
