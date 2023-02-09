@@ -83,7 +83,9 @@ struct BottleShopDetailView: View {
                         HStack{
                             VStack{
                                 VStack{
-                                    Image("Phone.bottleshop")
+                                    Image(systemName: "phone.fill")
+                                        .foregroundColor(.purple_2)
+                                        .font(.bottles16)
                                 }
                                 Spacer()
                             }
@@ -135,6 +137,7 @@ struct BottleShopDetailView: View {
                                             if dayOpenCloseTime[0] == self.today {
                                                 Text("\(dayOpenCloseTime[0])")
                                                     .fontWeight(.bold)
+                                                    .foregroundColor(.accentColor)
                                                 
                                                 Text("휴무일")
                                                     .foregroundColor(.red)
@@ -152,8 +155,10 @@ struct BottleShopDetailView: View {
                                             if dayOpenCloseTime[0] == self.today {
                                                 Text("\(dayOpenCloseTime[0])")
                                                     .fontWeight(.bold)
+                                                    .foregroundColor(.accentColor)
                                                 Text("\(dayOpenCloseTime[1]) ~ \(dayOpenCloseTime[2])")
                                                     .fontWeight(.bold)
+                                                    .foregroundColor(.accentColor)
                                             } else{
                                                 Text("\(dayOpenCloseTime[0])")
                                                 Text("\(dayOpenCloseTime[1]) ~ \(dayOpenCloseTime[2])")
@@ -206,7 +211,10 @@ struct BottleShopDetailView: View {
         //MARK: - 연락처 복사 버튼 눌렀을 시 뜨는 알림
         if isShowingPasted_PhoneNumber{
             HStack{
-                Image("Phone.bottleshop")
+                Image(systemName: "phone.fill")
+                    .foregroundColor(.purple_2)
+                    .padding(.trailing, -4)
+                
                 Text("연락처 복사가 완료되었습니다.")
                     .foregroundColor(.black)
                     .font(.caption)
