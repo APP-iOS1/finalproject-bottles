@@ -1,10 +1,3 @@
-//
-//  SearchBottleList.swift
-//  Bottles_V2
-//
-//  Created by 서찬호 on 2023/01/18.
-//
-
 import SwiftUI
 import CoreLocation
 
@@ -201,7 +194,6 @@ struct SearchBottleListCell: View {
             
             Spacer()
             VStack {
-                // TODO: 즐겨찾기 기능 추가해야함
                 Button(action: {
                     withAnimation(.easeIn(duration: 1)) {
                         bookMark.toggle()

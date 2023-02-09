@@ -15,6 +15,7 @@ struct BookMarkBottleList: View {
     
     // 북마크 알림 Test
     @State var bookMarkAlarm: Bool = false
+    @State var resetDeletedBottleId: String = ""
     
     // MARK: Server Data Test
     @EnvironmentObject var userDataStore: UserStore
@@ -115,6 +116,13 @@ struct BookMarkBottleList: View {
                         .foregroundColor(.black)
                         .font(.bottles11)
                     
+                    Button {
+                        userDataStore.addFollowItemId(resetDeletedBottleId)
+                    } label: {
+                        Text("실행취소")
+                            .font(.bottles11)
+                    }
+                    
                 }
                 .zIndex(1)
                 .transition(.opacity.animation(.easeIn))
@@ -137,6 +145,7 @@ struct BookMarkBottleListCell: View {
     var userStore: UserStore
     // Test
     @Binding var bookMarkAlarm: Bool
+    @Binding var deletedBottleId: String
     
     var body: some View {
         HStack(alignment: .top) {
@@ -195,13 +204,13 @@ struct BookMarkBottleListCell: View {
             
             Spacer()
             VStack {
-                // TODO: 즐겨찾기 기능 추가해야함
                 Button {
+                    deletedBottleId = bottleInfo.id
                     userStore.deleteFollowItemId(bottleInfo.id)
                     withAnimation(.easeIn(duration: 1)) {
                         bookMarkAlarm.toggle()
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
                         withAnimation(.easeIn(duration: 1)) {
                             bookMarkAlarm.toggle()
                         }
