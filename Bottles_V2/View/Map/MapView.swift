@@ -17,6 +17,7 @@ struct MapView: View {
     
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
+    
     @State var coord: (Double, Double) = (37.56668, 126.978419)
     @State var userLocation: (Double, Double) = (37.56668, 126.978419)
     @State var mapSearchBarText: String = ""
@@ -105,6 +106,7 @@ struct MapView: View {
                 MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
                     NavigationLink{
                         BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
+                        
                     } label: {
                         MarkerDetailView(
                             shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
