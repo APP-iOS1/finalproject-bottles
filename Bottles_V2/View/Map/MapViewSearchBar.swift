@@ -15,7 +15,7 @@ struct MapViewSearchBar: View {
     
     var body: some View {
         HStack {
-            TextField("바틀샵/상품을 입력해주세요", text: $mapSearchBarText)
+            TextField("", text: $mapSearchBarText)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.gray)
                 .font(.bottles15)
