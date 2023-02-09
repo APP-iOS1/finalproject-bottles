@@ -23,11 +23,10 @@ struct BookMarkBottleList: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
     
-    //
-    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
-        let mattchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
-        return mattchedShopData[0]
-    }
+//    func getMattchedShopData(bottleData: BottleModel) -> ShopModel {
+//        let mattchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
+//        return mattchedShopData[0]
+//    }
     
     func filterUserBottleData() -> [BottleModel] {
         var resultData: [BottleModel] = []
@@ -41,9 +40,12 @@ struct BookMarkBottleList: View {
     }
     
     func sortBottleData(_ filterBottleData: [BottleModel]) -> [BottleModel] {
+        print("userdata is \(userDataStore.user)")
+        let bookMarkBottles: [BottleModel] = bottleDataStore.bottleData
         switch selection {
         case "거리순":
-            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {distance(getMatchedShopData(bottleData: $0).location.latitude, getMatchedShopData(bottleData: $0).location.longitude) < distance(getMatchedShopData(bottleData: $1).location.latitude, getMatchedShopData(bottleData: $1).location.longitude)})
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
+//                .sorted(by: {distance(getMattchedShopData(bottleData: $0).location.latitude, getMattchedShopData(bottleData: $0).location.longitude) < distance(getMattchedShopData(bottleData: $1).location.latitude, getMattchedShopData(bottleData: $1).location.longitude)})
         case "낮은 가격순":
             return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
@@ -52,7 +54,7 @@ struct BookMarkBottleList: View {
             return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
         }
     }
-
+    
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
         let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
@@ -85,7 +87,7 @@ struct BookMarkBottleList: View {
                     ForEach(filterUserBottleData()) { bottle in
                         // 테스트용
 //                        if bottle.bookMark == true {
-                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle), userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm)
+                        BookMarkBottleListCell(bottleInfo: bottle, userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm)
 //                        }
                     }
                 }
@@ -136,7 +138,7 @@ struct BookMarkBottleListCell: View {
     // Bottle의 정보를 저장하는 변수
     var bottleInfo: BottleModel
     // Shop의 정보를 저장하는 변수
-    var shopInfo: ShopModel
+//    var shopInfo: ShopModel
     var userStore: UserStore
     // Test
     @Binding var bookMarkAlarm: Bool
@@ -177,8 +179,8 @@ struct BookMarkBottleListCell: View {
                     .font(.bottles18)
                     .bold()
                 // Test용 Shop 정보
-                Text("\(shopInfo.shopIntroduction)")
-                    .font(.footnote)
+//                Text("\(shopInfo.shopIntroduction)")
+//                    .font(.footnote)
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
 //                    BottleShopView(bottleShop: <#ShopModel#>)
@@ -189,7 +191,7 @@ struct BookMarkBottleListCell: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 20)
                         // Shop 이름
-                        Text(shopInfo.shopName)
+                        Text(bottleInfo.shopName)
                             .font(.bottles14)
                             .foregroundColor(.black)
                     }
