@@ -13,11 +13,11 @@ struct BookMarkBottleList: View {
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
     
-    // 북마크 알림 Test
+    // 북마크 알림
     @State var bookMarkAlarm: Bool = false
     @State var resetDeletedBottleId: String = ""
     
-    // MARK: Server Data Test
+    // MARK: Server Data
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
@@ -147,7 +147,7 @@ struct BookMarkBottleListCell: View {
     // Shop의 정보를 저장하는 변수
     var shopInfo: ShopModel
     var userStore: UserStore
-    // Test
+    // 북마크 알림
     @Binding var bookMarkAlarm: Bool
     @Binding var deletedBottleId: String
     

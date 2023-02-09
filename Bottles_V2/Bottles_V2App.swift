@@ -67,7 +67,7 @@ struct Bottles_V2App: App {
                     await shopDataStore.getAllShopData()
                     await shopNoticeDataStore.getAllShopNoticeData()
                     await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllReservationData()
+//                    await reservationDataStore.getAllReservationData()
                 }
                 .environmentObject(AuthStore())
                 .environmentObject(KakaoLoginViewModel())

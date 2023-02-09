@@ -12,11 +12,11 @@ struct BookMarkShopList: View {
     // ActionSheet
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
-    // 북마크 알림 Test
+    // 북마크 알림
     @State var bookMarkAlarm: Bool = false
     @State var resetDeletedShopId: String = ""
     
-    // Server Data Test
+    // Server Data
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
@@ -128,6 +128,7 @@ struct BookMarkShopListCell: View {
     // Shop의 정보를 저장하는 변수
     var userStore: UserStore
     var shopInfo: ShopModel
+    // 북마크 알림
     @Binding var bookMarkAlarm: Bool
     @Binding var resetDeletedShopId: String
     var distance: Double
@@ -188,7 +189,7 @@ struct BookMarkShopListCell: View {
                     withAnimation(.easeIn(duration: 1)) {
                         bookMarkAlarm.toggle()
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
                         withAnimation(.easeIn(duration: 1)) {
                             bookMarkAlarm.toggle()
                         }

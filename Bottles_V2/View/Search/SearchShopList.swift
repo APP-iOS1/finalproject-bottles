@@ -14,11 +14,11 @@ struct SearchShopList: View {
     // ActionSheet
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
-    // 북마크 알림 Test
+    // 북마크 알림
     @State var bookMarkAlarm: Bool = false
     @State var bookMark: Bool = false
     
-    // Server Data Test
+    // Server Data
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
     
@@ -123,7 +123,7 @@ struct SearchShopListCell: View {
     @EnvironmentObject var userStore: UserStore
     var shopInfo: ShopModel
     var distance: Double
-    // 북마크 알림 Test
+    // 북마크 알림
     @Binding var bookMark: Bool
     @Binding var bookMarkAlarm: Bool
     

@@ -7,11 +7,11 @@ struct SearchBottleList: View {
     // ActionSheet
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
-    // 북마크 알림 Test
+    // 북마크 알림
     @State var bookMarkAlarm: Bool = false
     @State var bookMark: Bool = false
     
-    // Server Data Test
+    // Server Data
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
@@ -24,7 +24,7 @@ struct SearchBottleList: View {
     }
     
     func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
-        let matchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
+        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
         return matchedShopData[0]
     }
     
@@ -132,8 +132,7 @@ struct SearchBottleListCell: View {
     var bottleInfo: BottleModel
     // Shop의 정보를 저장하는 변수
     var shopInfo: ShopModel
-    
-    // 북마크 알림 Test
+    // 북마크 알림
     @Binding var bookMark: Bool
     @Binding var bookMarkAlarm: Bool
     

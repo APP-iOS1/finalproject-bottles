@@ -13,7 +13,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 class ResevationDataStore : ObservableObject {
-    
+    /*
     @Published var reservationData: [ReservationModel] = []
     @Published var reservedBottles: [ReservedBottles] = []
     
@@ -121,5 +121,5 @@ class ResevationDataStore : ObservableObject {
 //            .document(reservedBottles.bottleId).delete()
 //        getAllReservationData(userEmail: userEmail)
 //    }
-    
+    */
 }
