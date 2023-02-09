@@ -37,92 +37,97 @@ struct MapView: View {
         
         NavigationStack {
             ZStack {
-// ZStack 추가    
-                VStack {
+                ZStack {
+                    VStack {
+                        HStack {
+                            // 검색 바
+                            MapViewSearchBar(showMarkerDetailView: $showMarkerDetailView, mapSearchBarText: $mapSearchBarText, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
+                            
+                            NavigationLink {
+                                CartView()
+                            } label: {
+                                Image("cart")
+                                    .foregroundColor(.accentColor)
+                                    .bold()
+                                    .padding(10)
+                                    .frame(width: 40)
+                                    .background{
+                                        Color.white
+                                    }
+                                    .cornerRadius(10)
+                            }
+                        }
+                        .padding(.bottom, 10)
+                        
+                        if tapSearchButton {
+                            HStack{
+                                Image("xmark")
+                                Text("검색 결과가 없습니다.")
+                                    .shakeEffect(trigger: tapSearchButton)
+                                    .foregroundColor(.black)
+                                    .font(.bottles11)
+                            }
+                            .zIndex(2)
+                            
+                            //                        .transition(.opacity.animation(.easeIn))
+                            
+                            .background{
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: 300, height: 30)
+                                    .foregroundColor(.gray_f7)
+                            }
+                        }
+                        Spacer()
+                    }
+                    .zIndex(1)
+                    
+                    /// 네이버 지도 뷰
+                    NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopId, $mapViewModel.userLocation)
+                        .ignoresSafeArea(.all, edges: .top)
+                    
+                    /// 북마크 & 현재 위치 버튼
                     HStack {
-                        // 검색 바
-                        MapViewSearchBar(showMarkerDetailView: $showMarkerDetailView, mapSearchBarText: $mapSearchBarText, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
+                        Spacer()
                         
-                        NavigationLink {
-                            CartView()
-                        } label: {
-                            Image("cart")
-                                .foregroundColor(.accentColor)
-                                .bold()
-                                .padding(10)
-                                .frame(width: 40)
-                                .background{
-                                    Color.white
-                                }
-                                .cornerRadius(10)
-//                                .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
-                        }
+                        SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation)
                     }
-                    .padding(.bottom, 10)
                     
-                    if tapSearchButton {
-                        HStack{
-                            Image("xmark")
-                            Text("검색 결과가 없습니다.")
-                                .shakeEffect(trigger: tapSearchButton)
-                                .foregroundColor(.black)
-                                .font(.bottles11)
-                        }
-                        .zIndex(2)
-                        
-//                        .transition(.opacity.animation(.easeIn))
-                        
-                        .background{
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 300, height: 30)
-                                .foregroundColor(.gray_f7)
-                        }
-                    }
-                    .ignoresSafeArea(.all, edges: .top)
-                    .zIndex(2)
-                    
-                    SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation)
-                }
-                
-                /// 둘러보기 뷰
-                BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
-                    NearBySheetView(
-                        mapViewModel: mapViewModel,
-                        isOpen: $isShowingSheet,
-                        showMarkerDetailView: $showMarkerDetailView,
-                        currentShopId: $currentShopId
-                        //                        currentShopIndex: $currentShopIndex,
-                        //                        shopModel: $shopModel
-                    )
-                }
-                .ignoresSafeArea(.all, edges: .top)
-                .zIndex(2)
-                
-                MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
-                    NavigationLink{
-                        BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
-                        
-                    } label: {
-                        MarkerDetailView(
-                            shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
+                    /// 둘러보기 뷰
+                    BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
+                        NearBySheetView(
+                            mapViewModel: mapViewModel,
+                            isOpen: $isShowingSheet,
                             showMarkerDetailView: $showMarkerDetailView,
                             currentShopId: $currentShopId
                         )
                     }
+                    .ignoresSafeArea(.all, edges: .top)
+                    .zIndex(2)
+                    
+                    MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
+                        NavigationLink{
+                            BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
+                            
+                        } label: {
+                            MarkerDetailView(
+                                shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
+                                showMarkerDetailView: $showMarkerDetailView,
+                                currentShopId: $currentShopId
+                            )
+                        }
+                    }
+                    .zIndex(3)
+                    
+                    // TODO: - 보라색 에러 async/await로 해결해보기
+                    //            .task {
+                    //                if await mapViewModel.locationServicesEnabled() {
+                    //                    // Do something
+                    //                    let locationManager = CLLocationManager()
+                    //                    locationManager.delegate = mapViewModel
+                    //                    mapViewModel.checkLocationAuthorization()
+                    //                }
+                    //            }
                 }
-                .zIndex(3)
-                
-                // TODO: - 보라색 에러 async/await로 해결해보기
-                //            .task {
-                //                if await mapViewModel.locationServicesEnabled() {
-                //                    // Do something
-                //                    let locationManager = CLLocationManager()
-                //                    locationManager.delegate = mapViewModel
-                //                    mapViewModel.checkLocationAuthorization()
-                //                }
-                //            }
-                
-                
                 if tapped {
                     ZStack {
                         MapSearchView(tapped: $tapped)
@@ -143,7 +148,6 @@ struct MapView: View {
                             .font(.callout)
                             .foregroundColor(Color(UIColor.systemGray3))
                     }
-                     
                 } else {
                     MapSearchView(tapped: $tapped)
                         .scaleEffect(tapped ? 0 : 1.2, anchor: .center)
@@ -151,7 +155,6 @@ struct MapView: View {
                         .opacity(1)
                         .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
                         .ignoresSafeArea()
-                    
                 }
                 
             }
@@ -159,7 +162,6 @@ struct MapView: View {
                 mapViewModel.checkIfLocationServicesIsEnabled()
                 coord = mapViewModel.coord
             }
-            
         }
     }
 }
