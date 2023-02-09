@@ -24,15 +24,19 @@ struct BottleShopCurationView: View {
     
     func sortBottleData() -> [BottleModel] {
         let bottleItems: [BottleModel] = bottleDataStore.bottleData
-        let test = bottleItems.filter{ $0.shopID == bottleShop.id }
+        var resultData: [BottleModel] = []
+        for item in bottleShop.shopCurationBottleID {
+            let result = bottleItems.filter{ $0.id == item }
+            resultData.append(contentsOf: result)
+        }
         
         switch selection {
         case "낮은 가격순":
-            return test.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {$0.itemPrice < $1.itemPrice})
+            return resultData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
-            return test.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {$0.itemPrice > $1.itemPrice})
+            return resultData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice > $1.itemPrice})
         default:
-            return test.sorted(by: {$0.shopName < $1.shopName})
+            return resultData.sorted(by: {$0.itemName < $1.itemName})
         }
     }
     
@@ -146,7 +150,6 @@ struct BottleShopCurationView: View {
                     // 데이터 연동 시 "큐레이션 추천 바틀" 연동
                     // 바틀 셀(정렬 후) 반복문
                     ForEach(sortBottleData(), id: \.self) { item in
-                        
                         // 바틀셀 누를 시 바틀뷰로 이동
                         NavigationLink(destination: BottleView(bottleData: item), label:{
                             BottleShopView_BottleList(selectedItem: item)
