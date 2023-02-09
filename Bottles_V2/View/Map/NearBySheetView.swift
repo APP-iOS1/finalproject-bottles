@@ -18,7 +18,6 @@ struct NearBySheetView: View {
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopId: String
     //    @Binding var shopModel: ShopModel
-    @State var colors = [SkeletonColor]()
     
     var body: some View {
         NavigationStack {
@@ -32,7 +31,7 @@ struct NearBySheetView: View {
             
             // 현재 위치 mapViewModel.userLocation
             ScrollView {
-                LazyVStack {
+                VStack {
                     ForEach(Array(sortShopData().enumerated()), id: \.offset) { (index, shop) in
                         let distance = distance(shop.location.latitude, shop.location.longitude)
                         if distance <= 5000 {
@@ -43,21 +42,13 @@ struct NearBySheetView: View {
                                 mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
                             } label: {
                                 NearBySheetCell(shopModel: shop, distance: distance)
+                                    
                             }
                         }
                     }
                 }
             }
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-                    self.colors = [
-                        SkeletonColor(name: "GREEN"),
-                        SkeletonColor(name: "RED"),
-                        SkeletonColor(name: "BLUE"),
-                        SkeletonColor(name: "BLACK")
-                    ]
-                }
-            }
+            
         }
         
         .background {
