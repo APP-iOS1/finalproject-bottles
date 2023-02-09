@@ -55,8 +55,9 @@ class GoogleLoginViewModel: ObservableObject {
         Auth.auth().signIn(with: credential) { [unowned self] (_, error) in
             if let error = error {
                 print(error.localizedDescription)
+                print("로그인 실패")
             } else {
-                
+                print("로그인 성공")
             }
         }
     }
