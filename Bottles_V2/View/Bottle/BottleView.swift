@@ -74,7 +74,7 @@ struct BottleView: View {
             }
             
             // 예약하기 버튼 클릭 시 예약하기 뷰 present
-            ReservationView(isShowing: $isShowingSheet)
+            ReservationView(bottleData: bottleData, isShowing: $isShowingSheet)
                 //.environmentObject(path)
         }
         // MARK: - 바틀샵 이름

@@ -20,6 +20,7 @@ struct Bottles_V2App: App {
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var reservationDataStore = ResevationDataStore()
     @ObservedObject var mapViewModel = MapViewModel()
+    @ObservedObject var cartStore = CartStore()
     // coreData
     @StateObject var dataController = DataController()
     
@@ -55,8 +56,10 @@ struct Bottles_V2App: App {
                 .environmentObject(reservationDataStore)
                 .environmentObject(mapViewModel)
                 .environmentObject(userDataStore)
+                .environmentObject(cartStore)
                 .task {
                     userDataStore.readUser(userId: "test@naver.com")
+                    cartStore.readCart(userEmail: "test@naver.com")
                     await shopDataStore.getAllShopData()
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.getAllResevationData()

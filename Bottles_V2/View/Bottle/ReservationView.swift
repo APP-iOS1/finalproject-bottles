@@ -14,6 +14,7 @@ import Combine
 struct ReservationView: View {
     //@EnvironmentObject var path: Path
     @EnvironmentObject var bottleDataStore: BottleDataStore
+    var bottleData: BottleModel
     @Binding var isShowing: Bool
     @State var offset = UIScreen.main.bounds.height
     @State private var isDragging = false
@@ -82,7 +83,7 @@ struct ReservationView: View {
     
     var sheetView: some View {
         VStack {
-            ReservationView_Content(bottleDataStore: _bottleDataStore, bottleId: "")
+            ReservationView_Content(bottleData: bottleData)
                 .background(.white)
                 .cornerRadius(15)
                 //.cornerRadius(12, corners: [.topLeft, .topRight])

@@ -16,7 +16,9 @@ struct ReservationView_Content: View {
     @State private var isShowingCart: Bool = false
     @State private var isShowingReservationPage: Bool = false
     @EnvironmentObject var bottleDataStore: BottleDataStore
-    var bottleId: String
+    @EnvironmentObject var cartStore: CartStore
+    @EnvironmentObject var userStore: UserStore
+    var bottleData: BottleModel
     
     
     var body: some View {
@@ -56,6 +58,7 @@ struct ReservationView_Content: View {
                 // MARK: - 장바구니 담기 버튼
                 Button(action: {
                     isShowingAlert.toggle()
+                    cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
                 }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
@@ -90,7 +93,7 @@ struct ReservationView_Content: View {
 //                        .environmentObject(path)
 //                }
                 
-                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleId: ""))) {
+                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleData: bottleData))) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
                             .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
@@ -106,20 +109,10 @@ struct ReservationView_Content: View {
         .padding(.horizontal)
     }
     
-    func getBottleModel(bottleId: String) -> BottleModel {
-        let matchedBottleData = bottleDataStore.bottleData.filter {
-            $0.id == bottleId
-        }
-        
-        return matchedBottleData[0]
-    }
-    
-    func getBottleReservation(bottleId: String) -> [BottleReservation] {
+    func getBottleReservation(bottleData: BottleModel) -> [BottleReservation] {
         var matchedBottleReservation: [BottleReservation] = []
-        var bottleModel: BottleModel
         
-            bottleModel = getBottleModel(bottleId: bottleId)
-        matchedBottleReservation.append(BottleReservation(image: bottleModel.itemImage, title: bottleModel.itemName, price: bottleModel.itemPrice * count, count: count, shop: bottleModel.shopName))
+        matchedBottleReservation.append(BottleReservation(image: bottleData.itemImage, title: bottleData.itemName, price: bottleData.itemPrice * count, count: count, shop: bottleData.shopName))
         
         return matchedBottleReservation
     }
