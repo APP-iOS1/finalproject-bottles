@@ -24,11 +24,11 @@ class ResevationDataStore : ObservableObject {
         database.collection("Reservation")
             .document(userEmail)
             .collection("ReservedBottles")
-            .document(reservedBottles.bottleId)
+            .document(reservedBottles.BottleID)
             .setData(["reservedTime" : reservationData.reservedTime,
                       "state" : reservationData.state,
-                      "shopId" : reservationData.shopId,
-                      "userId" : reservationData.userId])
+                      "shopId" : reservationData.shopID,
+                      "userId" : reservationData.userID])
 //        getAllReservationData(userId: userId)
     }
     
@@ -76,7 +76,7 @@ class ResevationDataStore : ObservableObject {
         database.collection("Reservation")
             .document(userEmail)
             .collection("ReservedBottles")
-            .document(reservedBottles.bottleId).delete()
+            .document(reservedBottles.BottleID).delete()
 //        getAllReservationData(userEmail: userEmail)
     }
     
@@ -102,7 +102,7 @@ class ResevationDataStore : ObservableObject {
             for document in documents.documents {
                 resultData.append(ReservedBottles(
                     id: document.documentID,
-                    bottleId: document["bottleId"] as? String ?? "",
+                    BottleID: document["bottleId"] as? String ?? "",
                     itemCount: document["itemCount"] as? Int ?? 0
                 ))
             }

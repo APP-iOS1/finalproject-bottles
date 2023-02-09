@@ -45,7 +45,7 @@ struct MyPageView: View {
                         .font(.bottles18)
                         .bold()
                     Spacer()
-                    NavigationLink(destination: SettingView(isSignIn: $isSignIn){
+                    NavigationLink(destination: SettingView(isSignIn: $isSignIn)){
                         Image(systemName: "gearshape.fill")
                         //                            .foregroundColor(.accentColor)
                             .font(.title2)

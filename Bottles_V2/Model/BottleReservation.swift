@@ -7,11 +7,12 @@
 
 import Foundation
 
-struct ResevationModel : Codable, Identifiable {
+struct ReservationModel : Codable, Identifiable {
     var id : String
     var shopID : String
     var userID : String      // 이메일 형식으로 들어옴
     var reservedTime : String
+    var state : String
     var reservedBottles : [ReservedBottles]
 }
 

@@ -87,7 +87,7 @@ struct BookMarkBottleList: View {
                 ScrollView {
                     ForEach(filterUserBottleData()) { bottle in
 
-                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle),   userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm)
+                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle),   userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm, deletedBottleId: $resetDeletedBottleId)
 
                     }
                 }

@@ -32,7 +32,7 @@ struct Bottles_V2App: App {
 
 
     init() {
-        //FirebaseApp.configure()
+//        FirebaseApp.configure()
         KakaoSDK.initSDK(appKey: "f2abf38572d20d5dde71ea5c33a02c07")
     }
     
