@@ -23,19 +23,16 @@ struct RecentlyItemList: View {
     @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)]) var searchHistory: FetchedResults<SearchHistory>
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {            
+        VStack(alignment: .leading, spacing: 10) {
+            if !searchHistory.isEmpty {
             Text("최근 검색어")
                 .font(.bottles18)
                 .bold()
                 .padding([.leading, .top], 15)
             
-            // 최근 검색어 나열
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    if searchHistory.isEmpty {
-                        Text("최근 검색어가 없습니다.")
-                            .padding(.vertical)
-                    } else {
+                // 최근 검색어 나열
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
                         ForEach(searchHistory, id: \.self) { search in
                             HStack {
                                 // 최근 검색어를 누르면 해당 검색어로 검색이 진행된다
@@ -62,14 +59,17 @@ struct RecentlyItemList: View {
                             .padding(.vertical)
                             .padding(.leading, 5)
                         }
+                        
                     }
                 }
+                .padding(.leading, 10)
+                .padding(.bottom, -5)
             }
-            .padding(.leading, 10)
+        
             Text("최근 본 상품")
                 .font(.bottles18)
                 .bold()
-                .padding(.leading, 15)
+                .padding([.leading, .top], 15)
             // TODO: 서버 최근 본 상품(Bottle) 데이터 연결
             ScrollView {
                 ForEach(bookMarkTestStore.BookMarkBottles, id: \.self) { bottle in
@@ -107,7 +107,7 @@ struct RecentlyItemListCell: View {
         HStack(alignment: .top) {
             // 이미지를 누르면 Bottle Detail View로 이동
             NavigationLink {
-//                BottleView(bottleData: bottleInfo)
+                //                BottleView(bottleData: bottleInfo)
             } label: {
                 // Bottle 이미지
                 RoundedRectangle(cornerRadius: 10)
@@ -143,7 +143,7 @@ struct RecentlyItemListCell: View {
                     .bold()
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
-//                    BottleShopView(bottleShop: <#ShopModel#>)
+                    //                    BottleShopView(bottleShop: <#ShopModel#>)
                 } label: {
                     HStack {
                         Image("Map_tab_fill")
@@ -174,7 +174,7 @@ struct RecentlyItemListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(height: 130)
+        .frame(minHeight: 130, maxHeight: 200)
         .padding(.vertical, 5)
     }
 }
