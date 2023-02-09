@@ -59,7 +59,7 @@ struct Bottles_V2App: App {
                     userDataStore.readUser(userId: "test@naver.com")
                     await shopDataStore.getAllShopData()
                     await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllResevationData()
+                    await reservationDataStore.getAllReservationData()
                 }
 
             
