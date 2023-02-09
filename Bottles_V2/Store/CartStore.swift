@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class CartStore: ObservableObject {
     
@@ -14,10 +17,10 @@ class CartStore: ObservableObject {
     @Published var totalPrice: Int = 0
     @Published var shopName: String = ""
     
-    let database = Firestore.firestore()
     
     // MARK: - 장바구니 담기
     func createCart(cart: Cart, userEmail: String) {
+        let database = Firestore.firestore()
         database.collection("User")
             .document(userEmail)
             .collection("Cart")
@@ -32,6 +35,7 @@ class CartStore: ObservableObject {
     
     // MARK: - 장바구니 데이터 불러오기
     func readCart(userEmail: String) {
+        let database = Firestore.firestore()
         database.collection("User")
             .document(userEmail)
             .collection("Cart")
@@ -54,13 +58,20 @@ class CartStore: ObservableObject {
                         self.totalPrice += cart.eachPrice * cart.itemCount
                         self.carts.append(cart)
                     }
-                    self.shopName = self.carts[0].shopName
+                    if self.carts.isEmpty {
+                        self.shopName = ""
+                    }
+                    else {
+                        self.shopName = self.carts[0].shopName
+                    }
+                    
                 }
             }
     }
     
     // MARK: - 장바구니 업데이트
     func updateCart(cart: Cart, userEmail: String) {
+        let database = Firestore.firestore()
         database.collection("User")
             .document(userEmail)
             .collection("Cart")
@@ -75,6 +86,7 @@ class CartStore: ObservableObject {
     
     // MARK: - 장바구니 바틀 삭제
     func deleteCart(cart: Cart, userEmail: String) {
+        let database = Firestore.firestore()
                 database.collection("User")
                     .document(userEmail)
                     .collection("Cart")
@@ -82,34 +94,39 @@ class CartStore: ObservableObject {
         readCart(userEmail: userEmail)
     }
     
-//    // MARK: - 장바구니 전체 삭제
-//    func deleteAllCart(userEmail: String) {
-//        database.collection("User")
-//            .document(userEmail)
-//            .collection("Cart")
-//            .getDocuments { (snapshot, error) in
-//                if let error = error {
-//                    print("Error getting documents: \(error)")
-//                    return
-//                }
-//
-//                guard let snapshot = snapshot else { return }
-//
-//                for document in snapshot.documents {
-//                    document.reference.delete { (error) in
-//                        if let error = error {
-//                            print("Error deleting document: \(error)")
-//                            return
-//                        }
-//
-//                        print("Document successfully deleted")
-//                    }
-//                }
-//            }
-//    }
+    // MARK: - 장바구니 전체 삭제 후 다른 bottleShop 제품 담기
+    func deleteAllCart(userEmail: String) {
+        let database = Firestore.firestore()
+        database.collection("User")
+            .document(userEmail)
+            .collection("Cart")
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    return
+                }
+
+                guard let snapshot = snapshot else { return }
+
+                for document in snapshot.documents {
+                    document.reference.delete { (error) in
+                        if let error = error {
+                            print("Error deleting document: \(error)")
+                            return
+                        }
+
+                        print("Document successfully deleted")
+                    }
+                }
+                
+            }
+        self.carts = []
+        
+    }
     
     // MARK: - 장바구니 수량 관리
     func manageItemCount(cart: Cart, userEmail: String, op: String) {
+        let database = Firestore.firestore()
         if op == "+" {
             database.collection("User")
                 .document(userEmail)

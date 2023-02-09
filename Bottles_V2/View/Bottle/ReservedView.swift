@@ -68,10 +68,10 @@ struct ReservedView: View {
             ReservedView_BottleShop()
                 .presentationDetents([.height(210)])
         }
-        .fullScreenCover(isPresented: $isShowingBookmarkView, content: {
-            MainTabView()
-                .accentColor(Color("AccentColor"))
-        })
+//        .fullScreenCover(isPresented: $isShowingBookmarkView, content: {
+//            MainTabView()
+//                .accentColor(Color("AccentColor"))
+//        })
         .navigationBarBackButtonHidden(true)
     }
 }

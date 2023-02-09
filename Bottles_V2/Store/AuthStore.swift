@@ -12,8 +12,10 @@ import SwiftUI
 
 class AuthStore: ObservableObject {
     
+    
     @Published var currentUser: Firebase.User?
     @Published var isLogin = false
+    
     @Published var loginError: Bool = false
     @Published var resetPassword: Bool = false
     @Published var emailVerification: Bool = false
@@ -25,34 +27,47 @@ class AuthStore: ObservableObject {
         currentUser = Auth.auth().currentUser
     }
     
-    func login(email: String, password: String) {
-        
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if let error = error {
-                print("Error : \(error.localizedDescription)")
-                self.loginError = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.loginError = false
-                }
-                return
-            } else {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.currentUser = result?.user
-                    self.loginError = false
-                    self.isLogin = true
-                    print("로그인 성공")
-                }
+//    func login(email: String, password: String) {
+//
+//        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+//            if let error = error {
+//                print("Error : \(error.localizedDescription)")
+//                self.loginError = true
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//                    self.loginError = false
+//                }
+//                return
+//            } else {
+//                DispatchQueue.main.async { [weak self] in
+//                    guard let self = self else { return }
+//                    self.currentUser = result?.user
+//                    self.loginError = false
+//
+//                    print("로그인 성공")
+//                }
+//                UserDefaults.standard.set(true, forKey: "Login")
+//            }
+//
+//        }
+//
+//    }
+    func login(email: String, password: String) async throws {
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.currentUser = result.user
+            self.isLogin = true
+        } catch {
+            self.loginError = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.loginError = false
             }
-            
         }
-        
     }
     
     func logout() {
         currentUser = nil
-        self.isLogin = false
         try? Auth.auth().signOut()
+        self.isLogin = false
     }
     
     // MARK: - 계정 생성
@@ -181,3 +196,5 @@ extension AuthStore {
         return dateFormatter.string(from: date)
     }
 }
+
+

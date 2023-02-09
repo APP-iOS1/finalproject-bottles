@@ -44,7 +44,7 @@ struct SearchView: View {
             } else {
                 // 검색어를 입력 중이고 검색을 완료하지 않았으면 검색어를 포함한 Bottle, Shop 들을 보여준다
                 if !doneTextFieldEdit {
-                    SearchResultList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
+                    SearchResultList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus, selectedPicker: $selectedPicker)
                 } else {
                     // 검색을 완료하면 검색어에 해당하는 검색 결과 탭뷰를 보여준다
                     animate()

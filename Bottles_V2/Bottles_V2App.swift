@@ -20,16 +20,19 @@ struct Bottles_V2App: App {
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var shopNoticeDataStore = ShopNoticeDataStore()
     @ObservedObject var reservationDataStore = ResevationDataStore()
+    @ObservedObject var cartStore = CartStore()
     @ObservedObject var mapViewModel = MapViewModel()
+    
     // coreData
     @StateObject var dataController = DataController()
+    
     
 
     @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
 
 
     init() {
-        //FirebaseApp.configure()
+//        FirebaseApp.configure()
         KakaoSDK.initSDK(appKey: "f2abf38572d20d5dde71ea5c33a02c07")
     }
     
@@ -57,13 +60,17 @@ struct Bottles_V2App: App {
                 .environmentObject(reservationDataStore)
                 .environmentObject(mapViewModel)
                 .environmentObject(userDataStore)
+                .environmentObject(cartStore)
                 .task {
                     userDataStore.readUser(userId: "test@naver.com")
+                    cartStore.readCart(userEmail: "test@naver.com")
                     await shopDataStore.getAllShopData()
                     await shopNoticeDataStore.getAllShopNoticeData()
                     await bottleDataStore.getAllBottleData()
-                    await reservationDataStore.getAllResevationData()
+//                    await reservationDataStore.getAllReservationData()
                 }
+                .environmentObject(AuthStore())
+                .environmentObject(KakaoLoginViewModel())
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))

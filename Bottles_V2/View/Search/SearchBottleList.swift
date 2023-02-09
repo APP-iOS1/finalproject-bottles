@@ -7,11 +7,11 @@ struct SearchBottleList: View {
     // ActionSheet
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
-    // 북마크 알림 Test
+    // 북마크 알림
     @State var bookMarkAlarm: Bool = false
     @State var bookMark: Bool = false
     
-    // Server Data Test
+    // Server Data
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
@@ -23,9 +23,9 @@ struct SearchBottleList: View {
         }
     }
     
-    func getMattchedShopData(bottleData: BottleModel) -> ShopModel {
-        let mattchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
-        return mattchedShopData[0]
+    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
+        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
+        return matchedShopData[0]
     }
     
     func sortBottleData() -> [BottleModel] {
@@ -33,7 +33,7 @@ struct SearchBottleList: View {
         switch selection {
         case "거리순":
             return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
-                .sorted(by: {distance(getMattchedShopData(bottleData: $0).location.latitude, getMattchedShopData(bottleData: $0).location.longitude) < distance(getMattchedShopData(bottleData: $1).location.latitude, getMattchedShopData(bottleData: $1).location.longitude)})
+                .sorted(by: {distance(getMatchedShopData(bottleData: $0).location.latitude, getMatchedShopData(bottleData: $0).location.longitude) < distance(getMatchedShopData(bottleData: $1).location.latitude, getMatchedShopData(bottleData: $1).location.longitude)})
         case "낮은 가격순":
             return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
@@ -80,7 +80,7 @@ struct SearchBottleList: View {
                     // TODO: 서버 Bottle 데이터 연결
                     ScrollView {
                         ForEach(sortBottleData()) { bottle in
-                            SearchBottleListCell(bottleInfo: bottle, shopInfo: getMattchedShopData(bottleData: bottle), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                            SearchBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
                         }
                     }
                 }
@@ -132,8 +132,7 @@ struct SearchBottleListCell: View {
     var bottleInfo: BottleModel
     // Shop의 정보를 저장하는 변수
     var shopInfo: ShopModel
-    
-    // 북마크 알림 Test
+    // 북마크 알림
     @Binding var bookMark: Bool
     @Binding var bookMarkAlarm: Bool
     
@@ -222,14 +221,13 @@ struct SearchBottleListCell: View {
                         .frame(width: 15, height: 18)
                         .padding(.horizontal, 10)
                 }
-                
                 Spacer()
             }
             .font(.title2)
             .padding()
             .padding(.top, -5)
         }
-        .frame(height: 130)
+        .frame(minHeight: 130, maxHeight: 200)
         .padding(.vertical, 5)
     }
     

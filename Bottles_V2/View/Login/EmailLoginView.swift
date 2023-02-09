@@ -25,6 +25,8 @@ struct EmailLoginView: View {
     private var loginResult: String {
         authStore.loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
     }
+    
+    @Binding var isSignIn: Bool
     var body: some View {
         ScrollView {
             
@@ -48,10 +50,14 @@ struct EmailLoginView: View {
                 Task{
                     await authStore.currentUserReload()
                     if authStore.isEmailVerified(){
-                        authStore.login(email: email, password: password)
+                        try await authStore.login(email: email, password: password)
+                        if authStore.isLogin {
+                            isSignIn = true
+                        }
                     } else {
                         print("로그인 실패")
                     }
+                    print("\(UserDefaults.standard.bool(forKey: "Login"))")
                 }
                 
             }){
@@ -153,6 +159,6 @@ struct LoginTextFieldModifier: ViewModifier {
 }
 struct EmailLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailLoginView()
+        EmailLoginView(isSignIn: .constant(false))
     }
 }

@@ -12,22 +12,14 @@ struct BookMarkShopList: View {
     // ActionSheet
     @State private var showingActionSheet: Bool = false
     @State private var selection = "이름순"
-    // 북마크 알림 Test
+    // 북마크 알림
     @State var bookMarkAlarm: Bool = false
     @State var resetDeletedShopId: String = ""
     
-    // Server Data Test
+    // Server Data
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
-    
-    var testShopData: [ShopModel] {
-        var test: [ShopModel] = []
-        for i in 0...9 {
-            test.append( shopDataStore.shopData[i])
-        }
-        return test
-    }
     
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
@@ -136,6 +128,7 @@ struct BookMarkShopListCell: View {
     // Shop의 정보를 저장하는 변수
     var userStore: UserStore
     var shopInfo: ShopModel
+    // 북마크 알림
     @Binding var bookMarkAlarm: Bool
     @Binding var resetDeletedShopId: String
     var distance: Double
@@ -196,13 +189,17 @@ struct BookMarkShopListCell: View {
                     withAnimation(.easeIn(duration: 1)) {
                         bookMarkAlarm.toggle()
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3){
                         withAnimation(.easeIn(duration: 1)) {
                             bookMarkAlarm.toggle()
                         }
                     }
                 } label: {
-                    Image(systemName: "bookmark.fill")
+                    Image("BookMark.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 15, height: 18)
+                        .padding(.trailing, 10)
                 }
                 Spacer()
             }
@@ -210,7 +207,7 @@ struct BookMarkShopListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(height: 130)
+        .frame(minHeight: 130, maxHeight: 200)
         .padding(.vertical, 5)
     }
 }
@@ -222,4 +219,3 @@ struct BookMarkShopListCell: View {
 //        }
 //    }
 //}
-//"https://wine21.speedgabia.com/NEWS_MST/froala/202007/20200716101122567972.jpg"
