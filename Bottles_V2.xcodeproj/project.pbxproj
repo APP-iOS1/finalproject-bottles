@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A23D0297A58BF00E7D602 /* BottleDataStore.swift */; };
 		02ABC40C2990BA4B00768078 /* NearBySheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABC40B2990BA4B00768078 /* NearBySheetCell.swift */; };
+		02ABC41A2994CA8900768078 /* ShopNoticeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ABC4192994CA8900768078 /* ShopNoticeDataStore.swift */; };
 		04116D3529948A170052063E /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 04116D3429948A170052063E /* FirebaseMessaging */; };
 		0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0427F564297677E60023E745 /* Bottles_V2App.swift */; };
 		0427F569297677E80023E745 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0427F568297677E80023E745 /* Assets.xcassets */; };
@@ -142,6 +143,7 @@
 /* Begin PBXFileReference section */
 		029A23D0297A58BF00E7D602 /* BottleDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleDataStore.swift; sourceTree = "<group>"; };
 		02ABC40B2990BA4B00768078 /* NearBySheetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearBySheetCell.swift; sourceTree = "<group>"; };
+		02ABC4192994CA8900768078 /* ShopNoticeDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopNoticeDataStore.swift; sourceTree = "<group>"; };
 		0427F561297677E60023E745 /* Bottles_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bottles_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0427F564297677E60023E745 /* Bottles_V2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottles_V2App.swift; sourceTree = "<group>"; };
 		0427F568297677E80023E745 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				26A66486298CC865004E15EA /* UserStore.swift */,
 				27D82C3E297A6F29004F3D94 /* MapViewModel.swift */,
 				D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */,
+				02ABC4192994CA8900768078 /* ShopNoticeDataStore.swift */,
 				029A23D0297A58BF00E7D602 /* BottleDataStore.swift */,
 				D7B5EA56298CA54400DC648A /* ReservationDataStore.swift */,
 				26BA41C72991389D00419584 /* CartStore.swift */,
@@ -862,6 +865,7 @@
 				D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */,
 				02ABC40C2990BA4B00768078 /* NearBySheetCell.swift in Sources */,
 				27A0268C298B51AC00F71705 /* SearchShopList.swift in Sources */,
+				02ABC41A2994CA8900768078 /* ShopNoticeDataStore.swift in Sources */,
 				7F76AAF6298780B100AAEBCA /* View+.swift in Sources */,
 				AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */,
 				92158B56299099FA00FCB475 /* ReservationView_OutOfFocus.swift in Sources */,
