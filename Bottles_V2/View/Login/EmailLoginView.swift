@@ -26,7 +26,7 @@ struct EmailLoginView: View {
         authStore.loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
     }
     var body: some View {
-        VStack {
+        ScrollView {
             
             Spacer()
             TextField("이메일", text: $email)
@@ -80,6 +80,10 @@ struct EmailLoginView: View {
             Spacer()
                 .frame(height: 400)
             
+        }
+        .scrollDisabled(true)
+        .onTapGesture{
+            endTextEditing()
         }
         .navigationTitle("로그인")
         .navigationBarBackButtonHidden(true)
