@@ -16,8 +16,9 @@ struct ReservationView_Content: View {
     @State private var isShowingCart: Bool = false
     @State private var isShowingReservationPage: Bool = false
     @EnvironmentObject var bottleDataStore: BottleDataStore
-    @EnvironmentObject var cartStore: CartStore
     @EnvironmentObject var userStore: UserStore
+    @ObservedObject var cartStore: CartStore = CartStore()
+
     var bottleData: BottleModel
     
     
