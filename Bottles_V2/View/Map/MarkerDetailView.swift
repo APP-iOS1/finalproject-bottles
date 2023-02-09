@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import SkeletonUI
 
 // MARK: - 마커 클릭 시 모달 뷰
 struct MarkerDetailView: View {
-    
+    @EnvironmentObject var userStore: UserStore
     var shopData: ShopModel
     @State private var checkBookmark: Bool = true
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopId: String
+    @State var colors = [String]()
+
 //    @Binding var shopModel: ShopModel
 
     var body: some View {
@@ -49,11 +52,26 @@ struct MarkerDetailView: View {
                         
                         // 북마크 버튼
                         Button(action: {
-                            checkBookmark.toggle()
+                            withAnimation(.easeOut(duration: 0.5)) {
+                                checkBookmark.toggle()
+                            }
+                            
+                            if compareMyFollowShopID(shopData.id) == true {
+                                checkBookmark = false
+                                userStore.deleteFollowShopId(shopData.id)
+                            }
+                            
+                            if compareMyFollowShopID(shopData.id) == false {
+                                checkBookmark = true
+                                userStore.addFollowShopId(shopData.id)
+                            }
+                            
                         }) {
-                            Image(checkBookmark ? "BookMark.fill" : "BookMark")
+                            Image(compareMyFollowShopID(shopData.id) ? "BookMark.fill" : "BookMark")
                                 .resizable()
-                                .frame(width: 15, height: 19)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15)
+                                .padding(.trailing, 5)
                         }
                     }
                 }
@@ -76,18 +94,25 @@ struct MarkerDetailView: View {
                         AsyncImage(url: URL(string: imageLink)) { image in
                             image.resizable()
                         } placeholder: {
-                            // FIXME: - 무한로딩 이슈
-                            // ProgressView()
-                            Image("oakDrum_Image")
-                                .resizable()
+                            ProgressView()
                         }
                         .frame(width: 126, height: 126)
                     }
                 }
             }
+            .skeleton(with: colors.isEmpty)
             .scrollIndicators(.hidden)
         }
         .foregroundColor(.black)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.colors = ["GREEN", "RED", "BLUE", "YELLOW", "BLACK"]
+                  }
+        }
+    }
+    
+    func compareMyFollowShopID(_ shopId: String) -> Bool {
+        return (userStore.user.followShopList.filter { $0 == shopId }.count != 0) ? true : false
     }
 }
 

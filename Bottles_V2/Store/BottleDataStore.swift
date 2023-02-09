@@ -31,6 +31,10 @@ struct BottleModel : Codable, Identifiable, Hashable {
     var itemDegree : Float
     var itemAroma : String
     var itemAdv : Float
+    
+    var stringItemDegree: String {
+        return String(format: "%.1f", itemDegree)
+    }
 }
 
 class BottleDataStore : ObservableObject {

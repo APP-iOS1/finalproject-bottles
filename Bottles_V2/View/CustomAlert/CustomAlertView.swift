@@ -29,7 +29,7 @@ struct CustomAlertView: View {
             Text("\(message)")
                 .font(.bottles14)
                 .padding(.leading)
-                .frame(height:41)
+                .frame(height: 41)
                 .multilineTextAlignment(.leading)
             HStack{
                 Spacer()
@@ -66,6 +66,6 @@ struct CustomAlertView: View {
 
 struct CustomAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomAlertView(isPresented: .constant(true), message: "사용할 수 있는 이메일 입니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: true)
+        CustomAlertView(isPresented: .constant(true), message: "가입한 이메일의 인증 메일을 확인하면 회원 가입이 완료 됩니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: true)
     }
 }

@@ -17,30 +17,44 @@ struct BookMarkBottleList: View {
     @State var bookMarkAlarm: Bool = false
     
     // MARK: Server Data Test
+//    @StateObject var userDataStore: UserStore = UserStore()
+    @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
     
-    //
-    func getMattchedShopData(bottleData: BottleModel) -> ShopModel {
-        let mattchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
-        return mattchedShopData[0]
+//    func getMattchedShopData(bottleData: BottleModel) -> ShopModel {
+//        let mattchedShopData = shopDataStore.shopData.filter {$0.shopName == bottleData.shopName}
+//        return mattchedShopData[0]
+//    }
+    
+    func filterUserBottleData() -> [BottleModel] {
+        var resultData: [BottleModel] = []
+        
+        for itemList in userDataStore.user.followItemList {
+            let filterData = bottleDataStore.bottleData.filter {$0.id == itemList}[0]
+            resultData.append(filterData)
+        }
+        
+        return sortBottleData(resultData)
     }
     
-    func sortBottleData() -> [BottleModel] {
+    func sortBottleData(_ filterBottleData: [BottleModel]) -> [BottleModel] {
+        print("userdata is \(userDataStore.user)")
         let bookMarkBottles: [BottleModel] = bottleDataStore.bottleData
         switch selection {
         case "거리순":
-            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
-                .sorted(by: {distance(getMattchedShopData(bottleData: $0).location.latitude, getMattchedShopData(bottleData: $0).location.longitude) < distance(getMattchedShopData(bottleData: $1).location.latitude, getMattchedShopData(bottleData: $1).location.longitude)})
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
+//                .sorted(by: {distance(getMattchedShopData(bottleData: $0).location.latitude, getMattchedShopData(bottleData: $0).location.longitude) < distance(getMattchedShopData(bottleData: $1).location.latitude, getMattchedShopData(bottleData: $1).location.longitude)})
         case "낮은 가격순":
-            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
-            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice > $1.itemPrice})
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice > $1.itemPrice})
         default:
-            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
         }
     }
+    
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
         let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
@@ -70,10 +84,10 @@ struct BookMarkBottleList: View {
                 
                 // TODO: 서버 Bottle 데이터 연결
                 ScrollView {
-                    ForEach(sortBottleData()) { bottle in
+                    ForEach(filterUserBottleData()) { bottle in
                         // 테스트용
 //                        if bottle.bookMark == true {
-                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMattchedShopData(bottleData: bottle), bookMarkAlarm: $bookMarkAlarm)
+                        BookMarkBottleListCell(bottleInfo: bottle, userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm)
 //                        }
                     }
                 }
@@ -124,8 +138,8 @@ struct BookMarkBottleListCell: View {
     // Bottle의 정보를 저장하는 변수
     var bottleInfo: BottleModel
     // Shop의 정보를 저장하는 변수
-    var shopInfo: ShopModel
-    
+//    var shopInfo: ShopModel
+    var userStore: UserStore
     // Test
     @Binding var bookMarkAlarm: Bool
     
@@ -133,10 +147,9 @@ struct BookMarkBottleListCell: View {
         HStack(alignment: .top) {
             // 이미지를 누르면 Bottle Detail View로 이동
             NavigationLink {
-                BottleView()
+                BottleView(bottleData: bottleInfo)
             } label: {
                 // Bottle 이미지
-
                 AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
                     image
                         .resizable()
@@ -149,7 +162,6 @@ struct BookMarkBottleListCell: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 128, height: 128)
                         .cornerRadius(12)
-
                 }
                 .background(Color.gray_f7)
                 .cornerRadius(12)
@@ -162,23 +174,25 @@ struct BookMarkBottleListCell: View {
                 // Bottle 이름
                 Text(bottleInfo.itemName)
                     .font(.bottles14)
-                    .fontWeight(.medium)
                 // Bottle 가격
                 Text("\(bottleInfo.itemPrice)원")
                     .font(.bottles18)
                     .bold()
+                // Test용 Shop 정보
+//                Text("\(shopInfo.shopIntroduction)")
+//                    .font(.footnote)
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 NavigationLink {
-                    BottleShopView(bottleShop: shopInfo)
+//                    BottleShopView(bottleShop: <#ShopModel#>)
                 } label: {
                     HStack {
-                        Image("Map_tab_fill")
+                        Image("MapMarker")
                             .resizable()
-                            .frame(width: 14, height: 17)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 20)
                         // Shop 이름
-                        Text(shopInfo.shopName)
+                        Text(bottleInfo.shopName)
                             .font(.bottles14)
-                            .fontWeight(.medium)
                             .foregroundColor(.black)
                     }
                 }
@@ -190,6 +204,7 @@ struct BookMarkBottleListCell: View {
             VStack {
                 // TODO: 즐겨찾기 기능 추가해야함
                 Button {
+                    userStore.deleteFollowItemId(bottleInfo.id)
                     withAnimation(.easeIn(duration: 1)) {
                         bookMarkAlarm.toggle()
                     }

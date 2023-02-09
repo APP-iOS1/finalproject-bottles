@@ -13,7 +13,9 @@ import SwiftUI
 
 
 class UserStore: ObservableObject {
-    
+    //fcmToken을 외부 extension AppDelegate의 application 함수에서 저장해주기 위함
+    static let shared = UserStore()
+    var fcmToken: String?
     @Published var user: User
     
     //let database = Firestore.firestore()
@@ -21,10 +23,10 @@ class UserStore: ObservableObject {
     /// 이메일 중복확인 결과에 따른 EmailRegisterView에서 CustomAlert의 String
     @Published var emailCheckStr: String = ""
     
-    
+    @Published var isShowingVerification: Bool = false
     
     init() {
-        user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "")
+        user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: "")
     }
     
     func createUser(user: User) {
@@ -37,7 +39,8 @@ class UserStore: ObservableObject {
                       "nickname" : user.nickname,
                       "pickupItemList" : user.pickupItemList,
                       "recentlyItem" : user.recentlyItem,
-                      "userPhoneNumber" : user.userPhoneNumber])
+                      "userPhoneNumber" : user.userPhoneNumber,
+                      "deviceToken" : user.deviceToken])
         readUser(userId: user.email)
     }
     
@@ -52,7 +55,8 @@ class UserStore: ObservableObject {
                 let pickupItemList: [String] = currentData!["pickupItemList"] as? [String] ?? []
                 let recentlyItem: [String] = currentData!["recentlyItem"] as? [String] ?? []
                 let userPhoneNumber: String = currentData!["userPhoneNumber"] as? String ?? ""
-                self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber)
+                let deviceToken: String = currentData!["deviceToken"] as? String ?? ""
+            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken)
             }
         }
     
@@ -85,7 +89,8 @@ class UserStore: ObservableObject {
                          "nickname" : user.nickname,
                          "pickupItemList" : user.pickupItemList,
                          "recentlyItem" : user.recentlyItem,
-                         "userPhoneNumber" : user.userPhoneNumber])
+                         "userPhoneNumber" : user.userPhoneNumber,
+                         "deviceToken" : user.deviceToken])
         readUser(userId: user.email)
     }
     
@@ -102,7 +107,7 @@ class UserStore: ObservableObject {
                 if snapshot!.documents.isEmpty {
                     print("사용 가능한 이메일입니다.")
                     self.emailCheckStr = "사용 가능한 이메일입니다."
-                    
+                    self.isShowingVerification = true
                 } else {
                     print("중복된 이메일 입니다. 다른 이메일을 사용해주세요")
                     self.emailCheckStr = "중복된 이메일 입니다. 다른 이메일을 사용해주세요"
@@ -111,6 +116,34 @@ class UserStore: ObservableObject {
             }
         
         
+    }
+
+    func addFollowItemId(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["followItemList": FieldValue.arrayUnion([id])])
+        readUser(userId: user.id)
+    }
+    
+    func deleteFollowItemId(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["followItemList": FieldValue.arrayRemove([id])])
+        readUser(userId: user.id)
+    }
+    
+    func addFollowShopId(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["followShopList": FieldValue.arrayUnion([id])])
+        readUser(userId: user.id)
+    }
+    
+    func deleteFollowShopId(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["followShopList": FieldValue.arrayRemove([id])])
+        readUser(userId: user.id)
     }
 }
 

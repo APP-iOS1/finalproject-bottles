@@ -17,6 +17,7 @@ struct MapView: View {
     
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
+    
     @State var coord: (Double, Double) = (37.56668, 126.978419)
     @State var userLocation: (Double, Double) = (37.56668, 126.978419)
     @State var mapSearchBarText: String = ""
@@ -24,93 +25,92 @@ struct MapView: View {
     @State var showMarkerDetailView: Bool = false
     @State var currentShopId: String = "보리마루"
     @State var searchResult: [ShopModel] = []
-//    @State var searchBarLocation: (CGFloat, CGFloat) = (x: 0, y: 0)
-//    @State var searchBarFrame: (CGFloat, CGFloat) = (w: 0, h: 0)
     @State var tapped: Bool = true
-    @Namespace var morphSeamlessly
+    
     @State var transition: Bool = false
-    @State var isShowing: Bool = false
+    @State var tapSearchButton: Bool = false
+    
+    @Namespace var morphSeamlessly
+    @Namespace private var animation
     
     var body: some View {
         
         NavigationStack {
             ZStack {
-                ZStack {
-                    VStack {
-                        HStack {
-                            
-                            // 검색 바
-                            MapViewSearchBar(mapSearchBarText: $mapSearchBarText, searchResult: $searchResult)
-                            
-                            NavigationLink {
-                                CartView()
-                            } label: {
-                                Image("cart")
-                                    .foregroundColor(.accentColor)
-                                    .bold()
-                                    .padding(10)
-                                    .frame(width: 40)
-                                    .background{
-                                        Color.white
-                                    }
-                                    .cornerRadius(10)
-                                    .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
-                            }
-                        }
-                        Spacer()
-                    }
-                    .zIndex(1)
-                    
-                    /// 네이버 지도 뷰
-                    NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopId, $mapViewModel.userLocation)
-                        .ignoresSafeArea(.all, edges: .top)
-                    
-                    /// 북마크 & 현재 위치 버튼
+// ZStack 추가    
+                VStack {
                     HStack {
-                        Spacer()
+                        // 검색 바
+                        MapViewSearchBar(showMarkerDetailView: $showMarkerDetailView, mapSearchBarText: $mapSearchBarText, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
                         
-                        SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation)
+                        NavigationLink {
+                            CartView()
+                        } label: {
+                            Image("cart")
+                                .foregroundColor(.accentColor)
+                                .bold()
+                                .padding(10)
+                                .frame(width: 40)
+                                .background{
+                                    Color.white
+                                }
+                                .cornerRadius(10)
+//                                .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
+                        }
                     }
+                    .padding(.bottom, 10)
                     
-                    /// 둘러보기 뷰
-                    BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
-                        NearBySheetView(
-                            mapViewModel: mapViewModel,
-                            isOpen: $isShowingSheet,
-                            showMarkerDetailView: $showMarkerDetailView,
-                            currentShopId: $currentShopId
-                            //                        currentShopIndex: $currentShopIndex,
-                            //                        shopModel: $shopModel
-                        )
+                    if tapSearchButton {
+                        HStack{
+                            Image("xmark")
+                            Text("검색 결과가 없습니다.")
+                                .shakeEffect(trigger: tapSearchButton)
+                                .foregroundColor(.black)
+                                .font(.bottles11)
+                        }
+                        .zIndex(2)
+                        
+//                        .transition(.opacity.animation(.easeIn))
+                        
+                        .background{
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(width: 300, height: 30)
+                                .foregroundColor(.gray_f7)
+                        }
                     }
                     .ignoresSafeArea(.all, edges: .top)
                     .zIndex(2)
                     
-                    MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
-                        NavigationLink{
-                            BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
-                        } label: {
-                            MarkerDetailView(
-                                shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
-                                showMarkerDetailView: $showMarkerDetailView,
-                                currentShopId: $currentShopId
-                            )
-                        }
-                    }
-                    .zIndex(3)
-                    
-                    // MARK: - 현재 위치 이동 버튼(커스텀)
-                    //                Button {
-                    //                    //
-                    //                } label: {
-                    //                    Text("현재 위치로 이동")
-                    //                }
+                    SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation)
                 }
-                //            .sheet(isPresented: $showMarkerDetailView, content: {
-                //                MarkerDetailView()
-                //                    .presentationDetents([.height(250)])
-                //                    .presentationDragIndicator(.visible)
-                //            })
+                
+                /// 둘러보기 뷰
+                BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
+                    NearBySheetView(
+                        mapViewModel: mapViewModel,
+                        isOpen: $isShowingSheet,
+                        showMarkerDetailView: $showMarkerDetailView,
+                        currentShopId: $currentShopId
+                        //                        currentShopIndex: $currentShopIndex,
+                        //                        shopModel: $shopModel
+                    )
+                }
+                .ignoresSafeArea(.all, edges: .top)
+                .zIndex(2)
+                
+                MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
+                    NavigationLink{
+                        BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
+                        
+                    } label: {
+                        MarkerDetailView(
+                            shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
+                            showMarkerDetailView: $showMarkerDetailView,
+                            currentShopId: $currentShopId
+                        )
+                    }
+                }
+                .zIndex(3)
                 
                 // TODO: - 보라색 에러 async/await로 해결해보기
                 //            .task {

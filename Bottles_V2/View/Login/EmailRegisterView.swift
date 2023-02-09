@@ -21,6 +21,7 @@ struct EmailRegisterView: View {
     /// 비밀번호 확인 정규식 (영어, 숫자, 특수문자 8~18자리)
     let passwordExpression: String = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=-]).{8,15}$"
     
+    
     @State var registerEmail: String = ""
     @State var verificationCode: String = ""
     @State var registerPassword: String = ""
@@ -127,7 +128,6 @@ struct EmailRegisterView: View {
                 
                 }
             }
-            
             
             
             // MARK: - 비밀번호 입력창
@@ -344,25 +344,28 @@ struct EmailRegisterView: View {
             // MARK: - 회원가입 버튼
             Button(action: {
                 // TODO: 이메일로 회원가입 로직 넣기
-                /*
-                if emailNotFitFormat || passwordNotFitFormat || passwordCheckFail || !authStore.isEmailVerified() || nickname == "" || !firstAgreement || !secondAgreement || !thirdAgreement {
+                
+                if emailNotFitFormat || passwordNotFitFormat || passwordCheckFail || nickname == "" || !firstAgreement || !secondAgreement || !thirdAgreement {
                     registerFailed = true
                 } else {
                     authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
                     registerSuccessed = true
                 }
-                 */
-                authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
-                registerSuccessed = true
+                 
+//                authStore.registerUser(email: registerEmail, password: registerPassword, nickname: nickname, userPhoneNumber: phoneNumber)
+//                registerSuccessed = true
             }){
                 Text("회원가입하기")
                     .modifier(EmailViewButtonModifier(width: 358, height: 56))
             }
             
         }
+        .onTapGesture{
+            endTextEditing()
+        }
         .customAlert(isPresented: $dupilicateCheck, message: userStore.emailCheckStr, primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false) // 이메일 중복확인 customAlert
         .customAlert(isPresented: $registerFailed, message: "입력하신 정보를 다시 확인해주세요.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false) // 회원가입 조건에 맞지 않을 때 띄워주는 customAlert
-        .customAlert(isPresented: $registerSuccessed, message: "회원가입이 완료 됐습니다.", primaryButtonTitle: "확인", primaryAction: {self.presentationMode.wrappedValue.dismiss()}, withCancelButton: false) // 회원가입이 완료 되었을 때 띄워주는 customAlert
+        .customAlert(isPresented: $registerSuccessed, message: "가입한 이메일의 인증 메일을 확인하면 회원 가입이 완료 됩니다", primaryButtonTitle: "확인", primaryAction: {self.presentationMode.wrappedValue.dismiss()}, withCancelButton: false) // 회원가입이 완료 되었을 때 띄워주는 customAlert
         .navigationBarTitle("회원가입")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)

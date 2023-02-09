@@ -9,6 +9,7 @@ import SwiftUI
 
 // 바틀샵뷰 내 "상품 검색" 뷰 - "바틀 셀"
 struct BottleShopView_BottleList: View {
+    @EnvironmentObject var userStore: UserStore
     @State private var bookmarkToggle: Bool = false
     @State private var bookmarkToggle_fill: Bool = false
     @State private var bookmarkToggle_empty: Bool = false
@@ -62,36 +63,58 @@ struct BottleShopView_BottleList: View {
                                     withAnimation(.easeOut(duration: 0.5)) {
                                         bookmarkToggle.toggle()
                                     }
-                                    
-                                    if bookmarkToggle == true{
-                                        withAnimation(.easeOut(duration: 1.5)) {
-                                            bookmarkToggle_fill.toggle()
-                                            print("북마크 완료")
-                                        }
-                                        
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-                                            bookmarkToggle_fill.toggle()
-                                        }
+                                    if compareMyFollowBottleID(selectedItem.id) == true {
+                                        bookmarkToggle = false
+                                        userStore.deleteFollowItemId(selectedItem.id)
                                     }
-                                    
-                                    if bookmarkToggle == false{
-                                        withAnimation(.easeOut(duration: 1.5)) {
-                                            bookmarkToggle_empty.toggle()
-                                            print("북마크 해제")
-                                        }
-                                        
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-                                            bookmarkToggle_empty.toggle()
-                                        }
+
+                                    if compareMyFollowBottleID(selectedItem.id) == false {
+                                        bookmarkToggle = true
+                                        userStore.addFollowItemId(selectedItem.id)
                                     }
                                     
                                 }) {
-                                    Image(bookmarkToggle ? "BookMark.fill" : "BookMark")
+                                    Image(compareMyFollowBottleID(selectedItem.id) ? "BookMark.fill" : "BookMark")
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(width: 15)
-                                        .padding(.trailing, 5)
+                                        .frame(width: 15, height: 18)
+                                        .padding(.horizontal, 10)
                                 }
+                                
+//                                Button(action: {
+//                                    withAnimation(.easeOut(duration: 0.5)) {
+//                                        bookmarkToggle.toggle()
+//                                    }
+//                                    
+//                                    if bookmarkToggle == true{
+//                                        withAnimation(.easeOut(duration: 1.5)) {
+//                                            bookmarkToggle_fill.toggle()
+//                                            print("북마크 완료")
+//                                        }
+//                                        
+//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+//                                            bookmarkToggle_fill.toggle()
+//                                        }
+//                                    }
+//                                    
+//                                    if bookmarkToggle == false{
+//                                        withAnimation(.easeOut(duration: 1.5)) {
+//                                            bookmarkToggle_empty.toggle()
+//                                            print("북마크 해제")
+//                                        }
+//                                        
+//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+//                                            bookmarkToggle_empty.toggle()
+//                                        }
+//                                    }
+//                                    
+//                                }) {
+//                                    Image(bookmarkToggle ? "BookMark.fill" : "BookMark")
+//                                        .resizable()
+//                                        .aspectRatio(contentMode: .fit)
+//                                        .frame(width: 15)
+//                                        .padding(.trailing, 5)
+//                                }
                             }
                         }
                         
@@ -110,7 +133,7 @@ struct BottleShopView_BottleList: View {
                         
                         HStack{
                             // 데이터 연동 시 "바틀 카테고리" 연동
-                            Text(selectedItem.itemType ?? "")
+                            Text(selectedItem.itemType)
                                 .lineLimit(1)
                                 .padding(.horizontal)
                                 .padding(.vertical, 3)
@@ -120,7 +143,7 @@ struct BottleShopView_BottleList: View {
                                 )
                             
                             // 데이터 연동 시 "itemTaste" 연동
-                            Text(selectedItem.itemTaste ?? "")
+                            Text(selectedItem.itemTaste)
                                 .lineLimit(1)
                                 .padding(.horizontal)
                                 .padding(.vertical, 3)
@@ -187,6 +210,10 @@ struct BottleShopView_BottleList: View {
 //            }
             
         }
+    }
+    
+    func compareMyFollowBottleID(_ bottleId: String) -> Bool {
+        return (userStore.user.followItemList.filter { $0 == bottleId }.count != 0) ? true : false
     }
 }
 

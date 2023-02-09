@@ -9,9 +9,13 @@ import SwiftUI
 
 struct MapViewSearchBar: View {
     
+    @EnvironmentObject var mapViewModel: MapViewModel
     @EnvironmentObject var shopDataStore: ShopDataStore
+    @Binding var showMarkerDetailView: Bool
     @Binding var mapSearchBarText: String
     @Binding var searchResult: [ShopModel]
+    @Binding var currentShopId: String
+    @Binding var tapSearchButton: Bool
     
     var body: some View {
         HStack {
@@ -32,8 +36,27 @@ struct MapViewSearchBar: View {
             }
             
             Button {
+                
                 searchResult = getSearchResult(searchText: mapSearchBarText)
                 print("====\(mapSearchBarText) 검색 결과 : \(searchResult)")
+                
+                if searchResult.isEmpty || mapSearchBarText.isEmpty {
+                    //                    withAnimation(.easeIn(duration: 2)) {
+                    tapSearchButton.toggle()
+                    //                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                        //                        withAnimation(.easeIn(duration: 2)) {
+                        tapSearchButton.toggle()
+                        //                        }
+                    }
+                } else {
+                    for result in searchResult {
+                        print(result.id)
+                        currentShopId = result.id
+                        mapViewModel.coord = (result.location.latitude, result.location.longitude)
+                        showMarkerDetailView = true
+                    }
+                }
             } label: {
                 Image("magnifyingglass")
                     .foregroundColor(.accentColor)
@@ -46,7 +69,7 @@ struct MapViewSearchBar: View {
             Color.white
         }
         .cornerRadius(10)
-        .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)    
+        //        .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
     }
     // 검색 기능
     func getSearchResult(searchText: String) -> [ShopModel] {
