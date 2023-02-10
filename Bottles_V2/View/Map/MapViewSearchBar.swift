@@ -12,22 +12,24 @@ struct MapViewSearchBar: View {
     @EnvironmentObject var mapViewModel: MapViewModel
     @EnvironmentObject var shopDataStore: ShopDataStore
     @Binding var showMarkerDetailView: Bool
-    @Binding var mapSearchBarText: String
+    @Binding var searchBarText: String
     @Binding var searchResult: [ShopModel]
     @Binding var currentShopId: String
     @Binding var tapSearchButton: Bool
+    @FocusState var focus: Bool  // 포커스된 텍스트필드
+
     
     var body: some View {
         HStack {
-            TextField("", text: $mapSearchBarText)
+            TextField("", text: $searchBarText)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.gray)
                 .font(.bottles15)
-            
-            if !mapSearchBarText.isEmpty {
+                .focused($focus)
+            if !searchBarText.isEmpty {
                 Button(action: {
                     searchResult = shopDataStore.shopData
-                    self.mapSearchBarText = ""
+                    self.searchBarText = ""
                 }) {
                     Image("xmark")
                 }
@@ -37,10 +39,10 @@ struct MapViewSearchBar: View {
             
             Button {
                 
-                searchResult = getSearchResult(searchText: mapSearchBarText)
-                print("====\(mapSearchBarText) 검색 결과 : \(searchResult)")
+                searchResult = getSearchResult(searchText: searchBarText)
+                print("====\(searchBarText) 검색 결과 : \(searchResult)")
                 
-                if searchResult.isEmpty || mapSearchBarText.isEmpty {
+                if searchResult.isEmpty || searchBarText.isEmpty {
                     //                    withAnimation(.easeIn(duration: 2)) {
                     tapSearchButton.toggle()
                     //                    }
@@ -64,9 +66,9 @@ struct MapViewSearchBar: View {
             }
         }
         .padding(10)
-        .frame(width: 300)
-        .background{
-            Color.white
+        .frame(width: 250)
+        .background {
+            Color.gray_f7
         }
         .cornerRadius(10)
         //        .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
