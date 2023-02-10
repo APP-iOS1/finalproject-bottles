@@ -37,6 +37,7 @@
 		27281CFD2977B851003BE8B4 /* NearBySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CFC2977B851003BE8B4 /* NearBySheetView.swift */; };
 		2754C28B2994DA5900EC10AF /* BottleShopDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2754C28A2994DA5900EC10AF /* BottleShopDetailMapView.swift */; };
 		276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276367E1298A584300C04CFA /* MarkerDetailSheet.swift */; };
+		2781FABE299623B0005A047F /* MapSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781FABD299623B0005A047F /* MapSearchBar.swift */; };
 		27951FD429937B2A00690ADD /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 27951FD329937B2A00690ADD /* SkeletonUI */; };
 		27A02689298B51AC00F71705 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02682298B51AC00F71705 /* SearchView.swift */; };
 		27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02683298B51AC00F71705 /* RecentlyItemList.swift */; };
@@ -181,6 +182,7 @@
 		27281CFC2977B851003BE8B4 /* NearBySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearBySheetView.swift; sourceTree = "<group>"; };
 		2754C28A2994DA5900EC10AF /* BottleShopDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopDetailMapView.swift; sourceTree = "<group>"; };
 		276367E1298A584300C04CFA /* MarkerDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDetailSheet.swift; sourceTree = "<group>"; };
+		2781FABD299623B0005A047F /* MapSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchBar.swift; sourceTree = "<group>"; };
 		27A02682298B51AC00F71705 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		27A02683298B51AC00F71705 /* RecentlyItemList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
 		27A02684298B51AC00F71705 /* SearchBottleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBottleList.swift; sourceTree = "<group>"; };
@@ -414,15 +416,16 @@
 			isa = PBXGroup;
 			children = (
 				27281CE22977854D003BE8B4 /* MapView.swift */,
+				92FBAD3B29933DE500DC4669 /* MapSearchView.swift */,
 				27D82C4B297A875F004F3D94 /* BottomSheet.swift */,
 				27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */,
+				2781FABD299623B0005A047F /* MapSearchBar.swift */,
 				27281CFC2977B851003BE8B4 /* NearBySheetView.swift */,
 				02ABC40B2990BA4B00768078 /* NearBySheetCell.swift */,
 				27A026A0298C11A300F71705 /* NaverMap.swift */,
 				27D82C57298780D8004F3D94 /* MarkerDetailView.swift */,
 				276367E1298A584300C04CFA /* MarkerDetailSheet.swift */,
 				27A0269E298C064F00F71705 /* SideButtonCell.swift */,
-				92FBAD3B29933DE500DC4669 /* MapSearchView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -953,6 +956,7 @@
 				7F0C61FD2990C30C00B4CE4D /* SentEmailView.swift in Sources */,
 				27A0269F298C064F00F71705 /* SideButtonCell.swift in Sources */,
 				7FB1207C299223EA0071AB3F /* GoogleLoginViewModel.swift in Sources */,
+				2781FABE299623B0005A047F /* MapSearchBar.swift in Sources */,
 				9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,

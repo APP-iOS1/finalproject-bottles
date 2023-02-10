@@ -9,7 +9,22 @@ import SwiftUI
 
 struct MapSearchBar: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text("바틀샵/상품을 입력해주세요")
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.gray)
+            Spacer()
+            Image("magnifyingglass")
+        }
+        .padding(10)
+        .frame(width: 300)
+        
+        
+        .background{
+            Color.white
+        }
+        .cornerRadius(10)
+        .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
     }
 }
 
