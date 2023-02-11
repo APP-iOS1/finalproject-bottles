@@ -45,7 +45,7 @@ struct BottleView: View {
                         Text("다른 바틀샵의 이 상품")
                             .font(.bottles18)
                             .fontWeight(.medium)
-                            
+                        
                         ForEach(filteredBottleItem()) { bottle in
                             NavigationLink {
                                 // 바틀 뷰로 이동
@@ -75,11 +75,10 @@ struct BottleView: View {
                 .onAppear {
                     userStore.addRecentlyItem(bottleData.id)
                 }
+                // 예약하기 버튼 클릭 시 예약하기 뷰 present
+                ReservationView(bottleData: bottleData, isShowing: $isShowingSheet)
+                    //.environmentObject(path)
             }
-            
-            // 예약하기 버튼 클릭 시 예약하기 뷰 present
-            ReservationView(bottleData: bottleData, isShowing: $isShowingSheet)
-                //.environmentObject(path)
         }
         // MARK: - 바틀샵 이름
         .toolbar(content: {
