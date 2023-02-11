@@ -22,7 +22,6 @@ struct ReservationView_Content: View {
     @State private var anotherShopInCart: Bool = false
     //@State private var isShowingAnotherShopAlert: Bool = false
     
-    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 25) {
