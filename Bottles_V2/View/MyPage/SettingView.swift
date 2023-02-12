@@ -61,7 +61,7 @@ struct SettingView: View {
                     authStore.logout()
                     authStore.kakaoLogout()
                     authStore.googleSignOut()
-                    
+                    authStore.facebookLogout()
                 }){
                     Text("로그아웃")
                         .font(.bottles12)

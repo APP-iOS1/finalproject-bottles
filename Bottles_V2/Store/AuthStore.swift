@@ -13,6 +13,7 @@ import GoogleSignIn
 import Combine
 import KakaoSDKAuth
 import KakaoSDKUser
+import FBSDKLoginKit
 
 class AuthStore: ObservableObject {
     
@@ -34,6 +35,7 @@ class AuthStore: ObservableObject {
     
     
     @Published var googleLoginError: Bool = false
+    @Published var facebookLoginError: Bool = false
     
     init() {
         currentUser = Auth.auth().currentUser
@@ -62,7 +64,7 @@ class AuthStore: ObservableObject {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.currentUser = result.user
-            self.isLogin = true
+            
         } catch {
             self.loginError = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -436,6 +438,80 @@ class AuthStore: ObservableObject {
     func googleSignOut() {
         GIDSignIn.sharedInstance.signOut()
         
+        do {
+            try Auth.auth().signOut()
+            currentUser = nil
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    // MARK: - FacebookLogin
+    var manager = LoginManager()
+    
+    func facebookLogin() {
+        let type = "페이스북"
+        manager.logIn(permissions: ["public_profile", "email"], from: nil) { result, error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+            }
+            if !result!.isCancelled {
+                let request = GraphRequest(graphPath: "me", parameters: ["fields": "id, name, email"])
+                request.start{ _, res, _ in
+                    guard let profileData = res as? [String: Any] else { return }
+                    
+                    let userName = profileData["name"] as! String
+                    let userEmail = profileData["email"] as! String
+                    
+                    let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+                    Firestore.firestore().collection("User").whereField("email", isEqualTo: userEmail)
+                        .getDocuments { snapshot, error in
+                            if snapshot!.documents.isEmpty {
+                                if let error = error {
+                                    print("\(error.localizedDescription)")
+                                } else {
+                                    Auth.auth().signIn(with: credential){[unowned self] (result, error) in
+                                        if let error = error {
+                                            print(error.localizedDescription)
+                                            print("로그인 실패")
+                                        } else {
+                                            self.currentUser = result?.user
+                                            self.userStore.createUser(user: User(id: userEmail, email: userEmail, followItemList: [], followShopList: [], nickname: userName, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
+                                            
+                                            print("로그인 성공")
+                                        }
+                                    }
+                                }
+                            } else {
+                                Firestore.firestore().collection("User").document(userEmail)
+                                    .getDocument { snapshot, error in
+                                        let currentData = snapshot!.data()
+                                        let email: String = currentData!["email"] as? String ?? ""
+                                        let socialLoginType: String = currentData!["socialLoginType"] as? String ?? ""
+                                        if socialLoginType == type {
+                                            Auth.auth().signIn(with: credential){ result, error in
+                                                if let error = error {
+                                                    print("페이스북 로그인 에러: \(error.localizedDescription)")
+                                                } else {
+                                                    self.currentUser = result?.user
+                                                }
+                                        
+                                            }
+                                        } else {
+                                            self.manager.logOut()
+                                            self.errorSocialType = socialLoginType
+                                            self.facebookLoginError = true
+                                        }
+                                    }
+                            }
+                        }
+                }
+            }
+        }
+    }
+    
+    func facebookLogout() {
+        manager.logOut()
         do {
             try Auth.auth().signOut()
             currentUser = nil

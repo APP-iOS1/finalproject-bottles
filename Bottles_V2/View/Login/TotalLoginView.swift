@@ -68,7 +68,7 @@ struct TotalLoginView: View {
                     Button(action: {
                         // TODO: 페이스북 로그인 로직
 //                        kakaoViewRouter()
-                        
+                        authStore.facebookLogin()
                     }){
                         VStack {
                             Image("FacebookLogin")
@@ -104,6 +104,7 @@ struct TotalLoginView: View {
         }
         .customAlert(isPresented: $authStore.kakaoLoginError, message: "\(authStore.errorSocialType)계정으로 이미 가입 된 계정이 있습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
         .customAlert(isPresented: $authStore.googleLoginError, message: "\(authStore.errorSocialType)계정으로 이미 가입 된 계정이 있습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        .customAlert(isPresented: $authStore.facebookLoginError, message: "\(authStore.errorSocialType)계정으로 이미 가입 된 계정이 있습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
         
     }
     
