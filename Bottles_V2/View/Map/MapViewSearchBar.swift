@@ -38,7 +38,6 @@ struct MapViewSearchBar: View {
             }
             
             Button {
-                
                 searchResult = getSearchResult(searchText: searchBarText)
                 print("====\(searchBarText) 검색 결과 : \(searchResult)")
                 
@@ -51,22 +50,23 @@ struct MapViewSearchBar: View {
                         tapSearchButton.toggle()
                         //                        }
                     }
-                } else {
+                }
+                else {
                     for result in searchResult {
                         print(result.id)
                         currentShopId = result.id
                         mapViewModel.coord = (result.location.latitude, result.location.longitude)
-                        showMarkerDetailView = true
+//                        showMarkerDetailView = true
                     }
                 }
             } label: {
                 Image("magnifyingglass")
                     .foregroundColor(.accentColor)
-                    .bold()
+//                    .bold()
             }
         }
         .padding(10)
-        .frame(width: 250)
+        .frame(width: 280, height: 34)
         .background {
             Color.gray_f7
         }

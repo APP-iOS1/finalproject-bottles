@@ -29,9 +29,9 @@ struct MapView: View {
     
     @State var transition: Bool = false
     @State var tapSearchButton: Bool = false
-
+    
     @FocusState var focus: Bool
-
+    
     @Namespace var morphSeamlessly
     @Namespace private var animation
     
@@ -46,7 +46,7 @@ struct MapView: View {
                                 MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, mapViewModel: _mapViewModel, shopDataStore: _shopDataStore, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
                                     .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
                                     .frame(maxWidth: 293, maxHeight: 35)
-                                                            .offset(x: -22, y: -300)
+                                    .offset(x: -22, y: -300)
                                 //                                    .onTapGesture(count: 1, perform: {
                                 //                                        withAnimation (
                                 //                                            Animation.easeInOut(duration: 0.3)
@@ -59,7 +59,9 @@ struct MapView: View {
                                     //                                        .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
                                         .onTapGesture(count: 1, perform: {
                                             withAnimation (
-                                                Animation.easeInOut(duration: 0.3)
+                                                Animation.easeInOut(duration: 0.5)
+//                                                Animation.linear(duration: 0.5)
+//                                                Animation.easeIn(duration: 0.5)
                                             ) {
                                                 tapped.toggle()
                                                 focus = true
@@ -81,8 +83,8 @@ struct MapView: View {
                                 }
                                 .padding(.bottom, 10)
                             }
-
-
+                            
+                            
                             //                            .zIndex(4)
                         } else {
                             MapSearchView(searchBarText: $searchBarText, tapped: $tapped, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
@@ -92,7 +94,6 @@ struct MapView: View {
                                 .opacity(1)
                                 .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
                             //                                .ignoresSafeArea()
-                            
                         }
                         
                         if tapSearchButton {

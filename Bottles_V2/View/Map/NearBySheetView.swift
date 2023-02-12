@@ -9,6 +9,12 @@ import SwiftUI
 import SkeletonUI
 import CoreLocation
 
+// MARK: - SkeletonUI
+struct SkeletonColor: Identifiable {
+    let id = UUID()
+    let name: String
+}
+
 // MARK: - 둘러보기 디테일 뷰
 struct NearBySheetView: View {
     @EnvironmentObject var userStore: UserStore
@@ -19,6 +25,20 @@ struct NearBySheetView: View {
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopId: String
     //    @Binding var shopModel: ShopModel
+    
+    // MARK: - 현재 위치 좌표 거리 계산 함수
+    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
+        let from = CLLocation(latitude: lat, longitude: log)
+        let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
+        //        print("\(from.distance(from: to))")
+        return from.distance(from: to)
+    }
+    
+    // MARK: - 둘러보기 뷰 거리 순 오름차순 정렬 함수
+    func sortShopData() -> [ShopModel] {
+        let shopModel: [ShopModel] = shopDataStore.shopData
+        return shopModel.sorted(by: {$0.shopName < $1.shopName }).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
+    }
     
     var body: some View {
         NavigationStack {
@@ -42,8 +62,7 @@ struct NearBySheetView: View {
                                 currentShopId = shop.id
                                 mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
                             } label: {
-                                NearBySheetCell(shopModel: shop, distance: distance)
-                                    
+                                NearBySheetCell(shopModel: shop, distance: distance) 
                             }
                         }
                     }
@@ -56,23 +75,6 @@ struct NearBySheetView: View {
             Color.white
         }
     }
-    // MARK: - 현재 위치 좌표 거리 계산 함수
-    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
-        let from = CLLocation(latitude: lat, longitude: log)
-        let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
-        //        print("\(from.distance(from: to))")
-        return from.distance(from: to)
-    }
-    // MARK: - 둘러보기 뷰 거리 순 오름차순 정렬 함수
-    func sortShopData() -> [ShopModel] {
-        let shopModel: [ShopModel] = shopDataStore.shopData
-        return shopModel.sorted(by: {$0.shopName < $1.shopName }).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
-    }
-}
-
-struct SkeletonColor: Identifiable {
-    let id = UUID()
-    let name: String
 }
 
 //struct NearBySheetView_Previews: PreviewProvider {

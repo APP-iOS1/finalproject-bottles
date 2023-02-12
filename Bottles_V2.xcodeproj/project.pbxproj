@@ -417,8 +417,8 @@
 			children = (
 				27281CE22977854D003BE8B4 /* MapView.swift */,
 				92FBAD3B29933DE500DC4669 /* MapSearchView.swift */,
-				27D82C4B297A875F004F3D94 /* BottomSheet.swift */,
 				27281CFA2977AD3B003BE8B4 /* MapViewSearchBar.swift */,
+				27D82C4B297A875F004F3D94 /* BottomSheet.swift */,
 				2781FABD299623B0005A047F /* MapSearchBar.swift */,
 				27281CFC2977B851003BE8B4 /* NearBySheetView.swift */,
 				02ABC40B2990BA4B00768078 /* NearBySheetCell.swift */,
