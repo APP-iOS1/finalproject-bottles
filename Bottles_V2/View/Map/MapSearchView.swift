@@ -67,7 +67,7 @@ struct MapSearchView: View {
                                 })
                             //                                .padding(5)
                             
-                            MapViewSearchBar(showMarkerDetailView: $showMarkerDetailView, searchBarText: $searchBarText, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
+                            MapViewSearchBar(showMarkerDetailView: $showMarkerDetailView, searchBarText: $searchBarText, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton, focus: _focus)
                         }
                         //                        .frame(width: 300)
                         //                        .padding(10)
