@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MapSearchBar: View {
+    
     var body: some View {
         HStack {
             Text("바틀샵/상품을 입력해주세요")
