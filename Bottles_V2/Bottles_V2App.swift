@@ -28,7 +28,7 @@ struct Bottles_V2App: App {
     
     
 
-    @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
+    
 
 
     init() {
@@ -70,7 +70,7 @@ struct Bottles_V2App: App {
 //                    await reservationDataStore.getAllReservationData()
                 }
                 .environmentObject(AuthStore())
-                .environmentObject(KakaoLoginViewModel())
+                
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))
