@@ -29,13 +29,11 @@ class AuthStore: ObservableObject {
     let userStore: UserStore = UserStore()
     
     
-    @Published var kakaoLoginError: Bool = false
     var errorSocialType: String = ""
     @Published var kakaoLogin: Bool = false
     
     
-    @Published var googleLoginError: Bool = false
-    @Published var facebookLoginError: Bool = false
+    
     
     init() {
         currentUser = Auth.auth().currentUser
@@ -328,7 +326,7 @@ class AuthStore: ObservableObject {
                                             print("unlink() success.")
                                             // MARK: 사용자에게 무언가 알려줘야 함
                                             self.errorSocialType = socialLoginType
-                                            self.kakaoLoginError = true
+                                            self.loginError = true
                                         }
                                     }
                                     // 뷰를 login뷰로 다시 넘겨주기 (따로 없어도 됨)
@@ -427,7 +425,7 @@ class AuthStore: ObservableObject {
                             } else {
                                 GIDSignIn.sharedInstance.signOut()
                                 self.errorSocialType = socialLoginType
-                                self.googleLoginError = true
+                                self.loginError = true
                             }
                         }
                 }
@@ -500,7 +498,7 @@ class AuthStore: ObservableObject {
                                         } else {
                                             self.manager.logOut()
                                             self.errorSocialType = socialLoginType
-                                            self.facebookLoginError = true
+                                            self.loginError = true
                                         }
                                     }
                             }
