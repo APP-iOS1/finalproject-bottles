@@ -35,6 +35,9 @@ struct MapView: View {
     @Namespace var morphSeamlessly
     @Namespace private var animation
     
+    //
+    @State var isBookMarkTapped: Bool = false
+    
     var body: some View {
         
         NavigationStack {
@@ -64,6 +67,9 @@ struct MapView: View {
 //                                                Animation.easeIn(duration: 0.5)
                                             ) {
                                                 tapped.toggle()
+                                            }
+                                            // 화면이 전환된 후에 키보드가 올라오도록 딜레이 줬음
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                                 focus = true
                                             }
                                         })
@@ -87,7 +93,7 @@ struct MapView: View {
                             
                             //                            .zIndex(4)
                         } else {
-                            MapSearchView(searchBarText: $searchBarText, tapped: $tapped, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
+                            MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
                             //                            MapSearchView(tapped: $tapped)
                                 .scaleEffect(tapped ? 0 : 1.2, anchor: .top)
                                 .offset(x: tapped ? -22 : 0, y: tapped ? -333 : 0)
@@ -116,7 +122,8 @@ struct MapView: View {
                         }
                         Spacer()
                     }
-                    .zIndex(3)
+                    // 2로 하면 둘러보기 시트를 올렸을때 검색바가 위로 보여지고, 4로 하면 키보드 올라올때 시트가 올라오는게 보여서 이렇게 수정
+                    .zIndex(tapped ? 2 : 4)
                     
                     /// 네이버 지도 뷰
                     NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopId, $mapViewModel.userLocation)
