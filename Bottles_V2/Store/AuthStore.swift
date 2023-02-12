@@ -39,7 +39,25 @@ class AuthStore: ObservableObject {
         currentUser = Auth.auth().currentUser
     }
     
-
+    func authLogin(email: String, password: String) {
+        
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print("Error : \(error.localizedDescription)")
+                self.loginError = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.loginError = false
+                }
+                return
+            } else {
+                self.currentUser = result?.user
+                self.loginError = false
+                self.isLogin = true
+               
+            }
+            
+        }
+    }
     func login(email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -354,7 +372,7 @@ class AuthStore: ObservableObject {
     
     }
     
-    
+    //MARK: - 구글 로그인 시 firebase Auth에 추가 및 데이터 베이스 추가
     private func authenticateUser(for user: GIDGoogleUser?, with error: Error?) {
         let type = "구글"
         if let error = error {

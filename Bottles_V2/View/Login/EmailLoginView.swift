@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmailLoginView: View {
-    @StateObject var authStore: AuthStore = AuthStore()
+    @EnvironmentObject var authStore: AuthStore
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -26,7 +26,7 @@ struct EmailLoginView: View {
         authStore.loginError ? "이메일 또는 비밀번호가 일치하지 않습니다." : ""
     }
     
-
+    
     var body: some View {
         ScrollView {
             
@@ -54,7 +54,7 @@ struct EmailLoginView: View {
                     } else {
                         print("로그인 실패")
                     }
-                    print("\(UserDefaults.standard.bool(forKey: "Login"))")
+                   
                 }
                 
             }){
