@@ -16,14 +16,14 @@ struct MyPageView: View {
                                 "1:1 문의하기", "서비스 이용약관", "개인정보 처리방침", "위치정보 이용약관", "버전 정보"]
     
     var myPageListWebLink: [String] = [
-        "https://www.apple.com/kr/", //바틀스 소개링크 링크
-        "https://www.google.com/", // 공지사항 링크
-        "https://www.naver.com/", // 자주 묻는 질문 링크
-        "https://github.com/", // 1:1 문의하기 링크
-        "https://developer.apple.com/", // 서비스 이용약관 링크
-        "https://portal.korea.ac.kr/front/Intro.kpd", // 개인정보 처리방침 링크
-        "https://console.firebase.google.com/", // 위치정보 이용약관 링크
-        "https://techit.education/" // 버전정보 링크
+        "https://wheat-freedom-6f8.notion.site/Bottles-ed9da0c0329241baab298888c379c5c5", //바틀스 소개링크
+        "https://meadow-vinca-bdb.notion.site/Bottles-fb02726a48a64794a9d4a525928ef88a", // 공지사항 링크
+        "https://www.notion.so/Bottles-7ebcada52db04721be6234012fa74fa9", // 자주 묻는 질문 링크
+        "http://pf.kakao.com/_acUxexj/chat", // 1:1 문의하기 링크
+        "https://buttercup-blue-7c3.notion.site/Bottles-2e87d483ef024a13941c31d6ddeccd1f", // 서비스 이용약관 링크
+        "https://buttercup-blue-7c3.notion.site/Bottles-7a8ac8ff1a5141ddb73f7eb808689f48", // 개인정보 처리방침 링크
+        "https://buttercup-blue-7c3.notion.site/Bottles-5301836bf4c046419ee6379dd261be37", // 위치정보 이용약관 링크
+        "https://www.notion.so/Bottles-9e25937e44f643848a721229fd4dc295" // 버전정보 링크
     ]
     @State private var isShowingSheet: Bool = false
     

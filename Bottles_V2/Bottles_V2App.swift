@@ -12,9 +12,11 @@ import KakaoSDKCommon
 import KakaoSDKAuth
 import FirebaseFirestore
 import FirebaseMessaging
+
 @main
 struct Bottles_V2App: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     @ObservedObject var userDataStore = UserStore()
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
@@ -27,30 +29,30 @@ struct Bottles_V2App: App {
     @StateObject var dataController = DataController()
     
     
-
+    
     @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
-
-
+    
+    
     init() {
-//        FirebaseApp.configure()
+        //        FirebaseApp.configure()
         KakaoSDK.initSDK(appKey: "f2abf38572d20d5dde71ea5c33a02c07")
     }
     
     var body: some Scene {
         
         WindowGroup {
-//            TotalLoginView()
-//               .environmentObject(UserStore()).environmentObject(googleLoginViewModel)
-//                .onOpenURL(perform: { url in
-//                    if AuthApi.isKakaoTalkLoginUrl(url) {
-//                        AuthController.handleOpenUrl(url: url)
-//                   }
-//                })
-//            MainTabView()
+            //            TotalLoginView()
+            //               .environmentObject(UserStore()).environmentObject(googleLoginViewModel)
+            //                .onOpenURL(perform: { url in
+            //                    if AuthApi.isKakaoTalkLoginUrl(url) {
+            //                        AuthController.handleOpenUrl(url: url)
+            //                   }
+            //                })
+            //            MainTabView()
             // coreData
-//                .environment(\.managedObjectContext, dataController.container.viewContext)
-         
-
+            //                .environment(\.managedObjectContext, dataController.container.viewContext)
+            
+            
             LaunchView()
             // coreData
                 .environment(\.managedObjectContext, dataController.container.viewContext)
@@ -61,13 +63,14 @@ struct Bottles_V2App: App {
                 .environmentObject(mapViewModel)
                 .environmentObject(userDataStore)
                 .environmentObject(cartStore)
+                .environmentObject(appDelegate)
                 .task {
-                    userDataStore.readUser(userId: "test@naver.com")
-                    cartStore.readCart(userEmail: "test@naver.com")
+                    userDataStore.readUser(userId: "dksdmssh1212@naver.com")
+                    cartStore.readCart(userEmail: "dksdmssh1212@naver.com")
                     await shopDataStore.getAllShopData()
                     await shopNoticeDataStore.getAllShopNoticeData()
                     await bottleDataStore.getAllBottleData()
-//                    await reservationDataStore.getAllReservationData()
+                    //                    await reservationDataStore.getAllReservationData()
                 }
                 .environmentObject(AuthStore())
                 .environmentObject(KakaoLoginViewModel())
@@ -77,8 +80,11 @@ struct Bottles_V2App: App {
         }
     }
 }
-class AppDelegate: NSObject, UIApplicationDelegate {
-    
+
+
+class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
+    //published property: 노티피케이션을 눌렀을 때 Data-driven으로 처리해주기 위함.
+    @Published var openedFromNotification: Bool = false
     // 앱이 켜졌을때
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -120,6 +126,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("푸시메시지를 받았을 때: \(userInfo)")
+        
+        if let viewType = userInfo["viewType"] as? String {
+            
+        }
+    }
+    
+    
 }
 
 extension AppDelegate : MessagingDelegate {
@@ -136,24 +151,43 @@ extension AppDelegate : MessagingDelegate {
 
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
-    // 푸시메세지가 앱이 켜져 있을때 나올때
+    // MARK: 앱이 active일 때 notification이 오면 동작 ( willPresent )
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         let userInfo = notification.request.content.userInfo
-        
-        print("willPresent: userInfo: ", userInfo)
-        
+        //openedFromNotification = true
+        print("푸시메시지가 앱이 켜져 있을때 오면 : \(userInfo)")
         completionHandler([.banner, .sound, .badge])
     }
     
-    // 푸시메세지를 받았을 때
+    // MARK: push notification click하면 동작( didReceive )
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        print("didReceive: userInfo: ", userInfo)
+        
+        if UIApplication.shared.applicationState == .active {
+                // 앱이 foreground에 있을 때의 처리
+            sleep(1);
+            openedFromNotification = true;
+        } else {
+               
+            //이렇게 하면 앱이 백엔드에 있을 때, 스플래쉬 뷰 3초가 지난 후 1초 뒤에 예약 알람이 보여지게 된다.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                withAnimation {
+                    self.openedFromNotification = true
+                }
+            }
+        }
+        
+        print("푸시메시지를 받았을 떄 : \(userInfo)")
+        guard let viewType = userInfo["viewType"] as? String else {
+            print("viewType에는 아무것도 없네..")
+            return
+        }
+        
         completionHandler()
     }
     
