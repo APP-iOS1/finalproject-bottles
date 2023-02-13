@@ -13,47 +13,74 @@ struct MakeCallOrAddToCallBook: View {
     
     @State private var isSuccess: Bool = false
     @State private var showCallAction: Bool = false
+    @Binding var calling: Bool
     
     var bottleShop: ShopModel
     
     var body: some View {
-//                Button(action: {
-//                    self.addPhoneNumber()
-//        //            print(bottleShop.shopPhoneNumber)
-//                }) {
-//                    Image("Phone.fill")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 15)
-//                        .padding(.trailing, 5)
-//                }
-//                .alert(isPresented: $showCallAction) {
-//                    Alert(title: Text(bottleShop.shopPhoneNumber), message: nil, primaryButton: .default(Text("바로 연결"), action: {
-//                        self.makeCall()
-//                    }), secondaryButton: .cancel(Text("닫기")))
-//                }
-        
-        Button(action: {
-            self.showCallAction = true
-            print(bottleShop.shopPhoneNumber)
-        }) {
-            Image("Phone.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 15)
-                .padding(.trailing, 5)
-            
-        }
-        .alert(isPresented: $showCallAction) {
-            Alert(title: Text("\(bottleShop.shopName) \n\(bottleShop.shopPhoneNumber)"), message: nil, primaryButton: .default(Text("전화 걸기"), action: {
-                self.makeCall()
-            }), secondaryButton: .default(Text("번호 저장"), action: {
-                self.addPhoneNumber()
-                self.showCallAction = false
-            }))
-        }
+        // MARK: - "전화기 image 눌렀을 때" custom alert (시뮬레이터 x, 실기기에서만 작동)
+        if calling {
+            ZStack{
+                ZStack{
+                    Color.black.opacity(0.2)
+                }
+                .ignoresSafeArea()
+                
+                VStack(alignment: .center){
+                    
+                    VStack{
+                        Text(bottleShop.shopName)
+                        
+                        Spacer()
+                            .frame(height: 2)
+                        
+                        Text(bottleShop.shopPhoneNumber)
+                    }
+                    .font(.bottles16)
+                    .padding(.top, 15)
+                    
+                    Divider()
+                    
+                    // 1. 전화 걸기 버튼
+                    Button(action: {
+                        self.makeCall()
+                    }, label: {
+                        Text("전화 걸기")
+                    })
+                    
+                    Divider()
+                    
+                    // 2. 번호 저장 버튼
+                    Button(action: {
+                        self.addPhoneNumber()
+                        self.showCallAction = false
+                    }, label: {
+                        Text("번호 저장")
+                    })
+                    
+                    Divider()
+                    
+                    // 3. 창 닫기 버튼
+                    Button(action: {
+                        calling = false
+                    }, label: {
+                        Text("취소")
+                            .foregroundColor(.gray)
+                        
+                    })
+                }
+                .padding(.bottom, 10)
+                .frame(width: 240)
+                .fontWeight(.semibold)
+                .background(Color.white)
+                .cornerRadius(12)
+                .font(.bottles14)
+                
+            }
+        } // if calling 문 끝
     }
     
+    // MARK: - calling 번호 저장 함수
     func addPhoneNumber() {
         let store = CNContactStore()
         let contact = CNMutableContact()
@@ -70,12 +97,15 @@ struct MakeCallOrAddToCallBook: View {
         }
     }
     
+    // MARK: - calling 전화 걸기 함수
     func makeCall() {
         if let url = URL(string: "tel://\(bottleShop.shopPhoneNumber)"), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
         }
     }
 }
+
+
 
 
 //struct AddToCallBook_Previews: PreviewProvider {
