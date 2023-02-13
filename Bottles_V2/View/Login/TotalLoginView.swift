@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TotalLoginView: View {
+    @EnvironmentObject var authStore: AuthStore
     
-    @EnvironmentObject var kakaoLoginViewModel: KakaoLoginViewModel
-    @Binding var isSignIn: Bool
+    
     var body: some View {
         NavigationStack {
             Spacer()
@@ -42,10 +42,7 @@ struct TotalLoginView: View {
                     Button(action: {
                         // TODO: 카카오 로그인 로직
                         Task{
-                         await kakaoLoginViewModel.handleKakaoLogin()
-                            print("\(kakaoLoginViewModel.kakaoLogin)")
-                            kakaoViewRouter()
-                           
+                            await authStore.handleKakaoLogin()
                         }
                     }){
                         VStack {
@@ -57,6 +54,7 @@ struct TotalLoginView: View {
                     
                     Button(action: {
                         // TODO: 구글 로그인 로직
+                        authStore.googleSignIn()
                         
                     }){
                         VStack {
@@ -70,7 +68,7 @@ struct TotalLoginView: View {
                     Button(action: {
                         // TODO: 페이스북 로그인 로직
 //                        kakaoViewRouter()
-                        
+                        authStore.facebookLogin()
                     }){
                         VStack {
                             Image("FacebookLogin")
@@ -94,7 +92,7 @@ struct TotalLoginView: View {
                 .foregroundColor(.gray)
             }
             .padding(.vertical, 40)
-            NavigationLink(destination: EmailLoginView(isSignIn: $isSignIn)) {
+            NavigationLink(destination: EmailLoginView()) {
                 Text("이메일로 로그인")
                     .font(.bottles12)
                     .foregroundColor(.gray)
@@ -103,18 +101,17 @@ struct TotalLoginView: View {
             .padding(.top, 10)
             .padding(.bottom, 40)
             
-        }.customAlert(isPresented: $kakaoLoginViewModel.kakaoLoginError, message: "\(kakaoLoginViewModel.errorSocialType)계정으로 이미 가입 된 계정이 있습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        }
+        .customAlert(isPresented: $authStore.loginError, message: "\(authStore.errorSocialType)계정으로 이미 가입 된 계정이 있습니다.", primaryButtonTitle: "확인", primaryAction: {}, withCancelButton: false)
+        
+        
     }
     
-    func kakaoViewRouter() {
-        if kakaoLoginViewModel.kakaoLogin {
-            isSignIn = true
-        }
-    }
+    
 }
 
 struct TotalLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        TotalLoginView(isSignIn: .constant(false))
+        TotalLoginView()
     }
 }

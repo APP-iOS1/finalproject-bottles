@@ -14,15 +14,15 @@ struct LaunchView: View {
     
     @EnvironmentObject var authStore: AuthStore
     
-    @AppStorage("login") var isSignIn: Bool = false
+    
     @State private var isActive = false
     @State private var isloading = true
     var body: some View {
         if isActive {
-            if isSignIn{
-                MainTabView(isSignIn: $isSignIn)
+            if authStore.currentUser != nil{
+                MainTabView()
             } else {
-                TotalLoginView(isSignIn: $isSignIn)
+                TotalLoginView()
             }
         } else {
             if isloading {
