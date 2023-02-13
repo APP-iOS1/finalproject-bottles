@@ -59,10 +59,10 @@ struct BottleShopView_Search: View {
             } label: {
                 ZStack{
                     
-                    Rectangle()
-                        .frame(width: 358)
-                        .foregroundColor(Color.gray_f7)
-                        .cornerRadius(12)
+//                    Rectangle()
+//                        .frame(width: 358)
+//                        .foregroundColor(Color.gray_f7)
+//                        .cornerRadius(12)
                     
                     HStack {
                         
@@ -80,6 +80,8 @@ struct BottleShopView_Search: View {
                         
                         Spacer()
                     }
+                    .background(Color.gray_f7)
+                    .cornerRadius(12)
                 }
                 .padding(.bottom, 10)
             }

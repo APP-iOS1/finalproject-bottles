@@ -42,7 +42,7 @@ struct BottleShopCurationView: View {
     
     var body: some View {
         ScrollView{
-            VStack{
+            VStack(alignment: .leading){
                 VStack{
                     ZStack{
                         
@@ -51,10 +51,10 @@ struct BottleShopCurationView: View {
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 370)
+//                                .frame(width: 370)
                         }, placeholder: {
                             Rectangle()
-                                .frame(width: 370, height: 370)
+//                                .frame(width: 370, height: 370)
                         })
                         //                    .cornerRadius(12, corners: [.topLeft, .topRight])
                         .foregroundColor(.white)
@@ -98,15 +98,16 @@ struct BottleShopCurationView: View {
                         .padding(.bottom, 25)
                         //                        .padding(.leading, -24)
                         .shadow(radius: 20)
-                        .background{
-                            Rectangle()
-                                .frame(width: 370)
-                                .foregroundColor(.purple_3)
-                            //                                    .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
-                        }
                         .frame(alignment: .leading)
                     }.padding(.top, -16)
                 }
+                .background(
+//                            Rectangle()
+//                                .frame(width: 370)
+                        Color.purple_3
+                    //                                    .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+)
+                .frame(alignment: .leading)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 
                 VStack(alignment: .leading){
