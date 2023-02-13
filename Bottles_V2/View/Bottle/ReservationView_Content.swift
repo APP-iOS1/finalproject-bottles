@@ -62,7 +62,7 @@ struct ReservationView_Content: View {
                     
                     if (cartStore.shopName == bottleData.shopName) || (cartStore.shopName == "")  {
                         isShowingAlert.toggle()
-                        cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                        cartStore.addCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
                         
                     }
                     else {
@@ -91,8 +91,9 @@ struct ReservationView_Content: View {
                             isPresented: $anotherShopInCart
                         ) {
                             Button("OK", role: .destructive) {
-//                                cartStore.deleteAllCart(userEmail: userStore.user.email)
-//                                cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                                cartStore.deleteAndAdd(userEmail: userStore.user.email, cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName))
+                                isShowingAlert.toggle()
+
                             }
                             Button("cancel", role: .cancel) {}
                         
