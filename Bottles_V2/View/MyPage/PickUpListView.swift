@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct PickUpListView: View {
+    
+    @EnvironmentObject var reservationDataStore: ReservationDataStore
+    
     var body: some View {
         VStack{
             ScrollView{
                 // TODO: 예약 리스트 배열을 넣어 순회해줘야 함
-                ForEach(1..<4, id:\.self){ _ in
+                ForEach(reservationDataStore.reservationData) { reservationData in
                     NavigationLink(destination: PickUpDetailView()){
                         PickUpListCell()
                     }

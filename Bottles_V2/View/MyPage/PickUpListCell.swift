@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PickUpListCell: View {
+    
+    let reservationData: ReservationModel
+    
     var body: some View {
         VStack{
             // MARK: - 예약 일자, 예약 상태 HStack
@@ -17,7 +20,7 @@ struct PickUpListCell: View {
                     .bold()
                 Spacer()
                 
-                Text("예약 확정")
+                Text("\(reservationData.state)")
                     .font(.bottles12)
                     .overlay{
                         RoundedRectangle(cornerRadius: 15)
@@ -37,7 +40,7 @@ struct PickUpListCell: View {
                     Text("상품 명")
                 }
                 VStack(alignment:.leading){
-                    Text("은노샵")
+                    Text("\(reservationData.shopID)")
                         .padding(.bottom, -3)
                     Text("디 오리지널 골드바 위스키")
                 }
