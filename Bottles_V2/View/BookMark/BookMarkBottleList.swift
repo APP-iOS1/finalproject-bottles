@@ -82,13 +82,19 @@ struct BookMarkBottleList: View {
                     }
                     .padding(.trailing, 20)
                 }
-                
-                // TODO: 서버 Bottle 데이터 연결
-                ScrollView {
-                    ForEach(filterUserBottleData()) { bottle in
+                if userDataStore.user.followItemList.isEmpty {
+                    Text("저장된 상품이 없습니다.")
+                        .font(.bottles14)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 10)
+                    Spacer()
+                } else {
+                    ScrollView {
+                        ForEach(filterUserBottleData()) { bottle in
 
-                        BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle),   userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm, deletedBottleId: $resetDeletedBottleId)
+                            BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle),   userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm, deletedBottleId: $resetDeletedBottleId)
 
+                        }
                     }
                 }
             }
