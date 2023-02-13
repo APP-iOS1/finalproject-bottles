@@ -17,8 +17,19 @@ import FBSDKLoginKit
 import AuthenticationServices
 import CryptoKit
 
+
+enum LoginPlatform {
+    case email
+    case google
+    case kakao
+    case apple
+    case facebook
+    case none
+}
+
 class AuthStore: ObservableObject {
     
+    @Published var loginPlatform: LoginPlatform = .none
     
     @Published var currentUser: Firebase.User?
     @Published var isLogin = false
@@ -36,6 +47,7 @@ class AuthStore: ObservableObject {
     
     @Published var nonce: String = ""
     
+    @Published var appleEmail: String = ""
     
     init() {
         currentUser = Auth.auth().currentUser
@@ -64,7 +76,7 @@ class AuthStore: ObservableObject {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.currentUser = result.user
-            
+            self.loginPlatform = .email
         } catch {
             self.loginError = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -287,6 +299,7 @@ class AuthStore: ObservableObject {
                                 } else {
                                     self.currentUser = result?.user
                                     self.userStore.createUser(user: User(id: (user?.kakaoAccount?.email)!, email: (user?.kakaoAccount?.email)!, followItemList: [], followShopList: [], nickname: (user?.kakaoAccount?.profile?.nickname)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
+                                    self.loginPlatform = .kakao
                                     print("파이어베이스 사용자 생성 성공")
                                     
                                 }
@@ -309,8 +322,8 @@ class AuthStore: ObservableObject {
                                             print("로그인 에러: \(error.localizedDescription)")
                                             return
                                         } else {
-
                                             self.currentUser = result?.user
+                                            self.loginPlatform = .kakao
                                             print("카카오 파이어베이스 어스 로그인 성공")
                                             //  뷰 전환
                                         }
@@ -398,6 +411,7 @@ class AuthStore: ObservableObject {
                                 print(error.localizedDescription)
                                 print("로그인 실패")
                             } else {
+                                self.loginPlatform = .google
                                 self.currentUser = result?.user
                                 self.userStore.createUser(user: User(id: (user?.profile?.email)!, email: (user?.profile?.email)!, followItemList: [], followShopList: [], nickname: (user?.profile?.name)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
                                 
@@ -420,7 +434,7 @@ class AuthStore: ObservableObject {
                                         return
                                     } else {
                                         self.currentUser = result?.user
-                                       
+                                        self.loginPlatform = .google
                                     }
                                     
                                 }
@@ -441,6 +455,7 @@ class AuthStore: ObservableObject {
         do {
             try Auth.auth().signOut()
             currentUser = nil
+            self.loginPlatform = .none
         } catch {
             print(error.localizedDescription)
         }
@@ -477,7 +492,7 @@ class AuthStore: ObservableObject {
                                         } else {
                                             self.currentUser = result?.user
                                             self.userStore.createUser(user: User(id: userEmail, email: userEmail, followItemList: [], followShopList: [], nickname: userName, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
-                                            
+                                            self.loginPlatform = .facebook
                                             print("로그인 성공")
                                         }
                                     }
@@ -494,6 +509,7 @@ class AuthStore: ObservableObject {
                                                     print("페이스북 로그인 에러: \(error.localizedDescription)")
                                                 } else {
                                                     self.currentUser = result?.user
+                                                    self.loginPlatform = .facebook
                                                 }
                                         
                                             }
@@ -515,6 +531,7 @@ class AuthStore: ObservableObject {
         do {
             try Auth.auth().signOut()
             currentUser = nil
+            self.loginPlatform = .none
         } catch {
             print(error.localizedDescription)
         }
@@ -534,57 +551,117 @@ class AuthStore: ObservableObject {
         
         let type = "애플"
         
-        Firestore.firestore().collection("User").whereField("email", isEqualTo: credential.email!)
-            .getDocuments { snapshot, error in
-                if snapshot!.documents.isEmpty {
-                    if let error = error {
-                        print("\(error.localizedDescription)")
-                    } else {
-                        Auth.auth().signIn(with: firebaseCredential) { result, error in
-                            if let error = error {
-                                print("애플 파이어베이스 로그인 에러 \(error.localizedDescription)")
-                            } else {
-                                self.currentUser = result?.user
-                                self.userStore.createUser(user: User(id: credential.email!, email: credential.email!, followItemList: [], followShopList: [], nickname: credential.email!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
-                            }
-                            
-                        }
-                    }
-                } else {
-                    Firestore.firestore().collection("User").document(credential.email!)
-                        .getDocument { snapshot, error in
-                            let currentData = snapshot!.data()
-                            let email: String = currentData!["email"] as? String ?? ""
-                            let socialLoginType: String = currentData!["socialLoginType"] as? String ?? ""
-                            
-                            if socialLoginType == type {
-                                Auth.auth().signIn(with: firebaseCredential) { result, error in
-                                    if let error = error {
-                                        print("애플 파이어베이스 로그인 에러 \(error.localizedDescription)")
-                                    } else {
-                                        self.currentUser = result?.user
-                                    }
-                                }
-                            } else {
-                                self.appleLogout()
-                                self.errorSocialType = socialLoginType
-                                self.loginError = true
-                            }//TODO: 로그아웃 처리
-                        }
-                }
+        
+        Auth.auth().signIn(with: firebaseCredential){[unowned self] result, error in
+            if let error {
+                print("\(error.localizedDescription)")
             }
+            Firestore.firestore().collection("User").whereField("email", isEqualTo: result?.user.email)
+                .getDocuments { snapshot, error in
+                    if snapshot!.documents.isEmpty{
+                        if let error = error {
+                            print("\(error.localizedDescription)")
+                        } else {
+                            self.currentUser = result?.user
+                            self.userStore.createUser(user: User(id: credential.email!, email: credential.email!, followItemList: [], followShopList: [], nickname: credential.email!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
+                            self.loginPlatform = .apple
+                        }
+                    } else {
+                        Firestore.firestore().collection("User").document((result?.user.email)!)
+                            .getDocument { snapshot, error in
+                                let currentData = snapshot!.data()
+                                let email: String = currentData!["email"] as? String ?? ""
+                                let socialLoginType: String = currentData!["socialLoginType"] as? String ?? ""
+                                
+                                
+                                print("socialLoginType: \(socialLoginType)")
+                                if socialLoginType == type {
+                                    self.currentUser = result?.user
+                                    self.loginPlatform = .apple
+                                    print("애플 로그인 currentUser: \(self.currentUser)")
+                                } else {
+                                    self.appleLogout()
+                                    self.errorSocialType = socialLoginType
+                                    self.loginError = true
+                                }
+                            }
+                    }
+                }
+            
+            
+        }
+        
+//        Firestore.firestore().collection("User").whereField("email", isEqualTo: credential.email!)
+//            .getDocuments { snapshot, error in
+//                if snapshot!.documents.isEmpty {
+//                    if let error = error {
+//                        print("\(error.localizedDescription)")
+//                    } else {
+//                        Auth.auth().signIn(with: firebaseCredential) { result, error in
+//                            if let error = error {
+//                                print("애플 파이어베이스 로그인 에러 \(error.localizedDescription)")
+//                            } else {
+//                                self.currentUser = result?.user
+//                                self.userStore.createUser(user: User(id: credential.email!, email: credential.email!, followItemList: [], followShopList: [], nickname: credential.email!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
+//                            }
+//                            
+//                        }
+//                    }
+//                } else {
+//                    Firestore.firestore().collection("User").document(credential.email!)
+//                        .getDocument { snapshot, error in
+//                            let currentData = snapshot!.data()
+//                            let email: String = currentData!["email"] as? String ?? ""
+//                            let socialLoginType: String = currentData!["socialLoginType"] as? String ?? ""
+//                            
+//                            if socialLoginType == type {
+//                                Auth.auth().signIn(with: firebaseCredential) { result, error in
+//                                    if let error = error {
+//                                        print("애플 파이어베이스 로그인 에러 \(error.localizedDescription)")
+//                                    } else {
+//                                        self.currentUser = result?.user
+//                                    }
+//                                }
+//                            } else {
+//                                self.appleLogout()
+//                                self.errorSocialType = socialLoginType
+//                                self.loginError = true
+//                            }//TODO: 로그아웃 처리
+//                        }
+//                }
+//            }
+        
     }
     
     func appleLogout() {
         do{
             try Auth.auth().signOut()
             currentUser = nil
+//            print("애플 로그인 currentUser: \(currentUser)")
         } catch {
             print("\(error.localizedDescription)")
         }
     }
+    func allLogout() {
+        switch loginPlatform {
+        case .email:
+            self.logout()
+        case .kakao:
+            self.kakaoLogout()
+        case .facebook:
+            self.facebookLogout()
+        case .google:
+            self.googleSignOut()
+        case .apple:
+            self.appleLogout()
+        case .none:
+            self.appleLogout()
+            print("로그아웃 실패")
+        }
+    }
 }
 
+//MARK: - 애플로그인시 뷰에서 필요한 메소드
 func randomNonceString(length: Int = 32) -> String {
     precondition(length > 0)
     let charset: Array<Character> =

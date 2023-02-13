@@ -8,6 +8,7 @@
 import SwiftUI
 import AuthenticationServices
 
+
 struct TotalLoginView: View {
     @EnvironmentObject var authStore: AuthStore
     
@@ -98,6 +99,7 @@ struct TotalLoginView: View {
                                     print("error with firebase")
                                     return
                                 }
+                                
                                 authStore.appleLogin(credential: credential)
                             case .failure(let error):
                                 print(error.localizedDescription)

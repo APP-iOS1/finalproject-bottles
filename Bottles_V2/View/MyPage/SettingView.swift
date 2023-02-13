@@ -58,10 +58,10 @@ struct SettingView: View {
                 
                 // MARK: - 로그아웃 버튼
                 Button(action:{
-                    authStore.logout()
-                    authStore.kakaoLogout()
-                    authStore.googleSignOut()
-                    authStore.facebookLogout()
+                    
+                    authStore.allLogout()
+                    
+                    
                 }){
                     Text("로그아웃")
                         .font(.bottles12)
