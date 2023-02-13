@@ -14,8 +14,8 @@ import FirebaseFirestoreSwift
 class ShopNoticeDataStore : ObservableObject {
     // 전체 샵 데이터 저장 변수
     @Published var shopNoticeData : [ShopNotice] = []
-    
-    @EnvironmentObject var userStore : UserStore
+    var userStore: UserStore = UserStore()
+//    @EnvironmentObject var userStore : UserStore
     
     // 로그인 시 전체 패치 실행
     @MainActor
@@ -60,16 +60,18 @@ class ShopNoticeDataStore : ObservableObject {
               }
             
             document.documentChanges.forEach { diff in
-                        if (diff.type == .added) {
-                            print("새로운 데이터 들어옴? : \(diff.document.data())")
-                        }
-//                        if (diff.type == .modified) {
-//                            print("Modified city: \(diff.document.data())")
-//                        }
-//                        if (diff.type == .removed) {
-//                            print("Removed city: \(diff.document.data())")
-//                        }
-                    }
+                if (diff.type == .added) {
+                    print("notice id: \(diff.document.documentID)")
+                    print("새로운 데이터 들어옴? : \(diff.document.data())")
+                   
+                }
+                //                        if (diff.type == .modified) {
+                //                            print("Modified city: \(diff.document.data())")
+                //                        }
+                //                        if (diff.type == .removed) {
+                //                            print("Removed city: \(diff.document.data())")
+                //                        }
+            }
               
 //            for document in document.documents {
 //                let docData = document.data()

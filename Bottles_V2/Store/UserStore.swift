@@ -59,7 +59,7 @@ class UserStore: ObservableObject {
             let recentlyItem: [String] = currentData!["recentlyItem"] as? [String] ?? []
             let userPhoneNumber: String = currentData!["userPhoneNumber"] as? String ?? ""
             let deviceToken: String = currentData!["deviceToken"] as? String ?? ""
-            let noticeList: [String] = currentData!["v"] as? [String] ?? []
+            let noticeList: [String] = currentData!["noticeList"] as? [String] ?? []
             self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList)
         }
     }
@@ -170,19 +170,24 @@ class UserStore: ObservableObject {
                 return
             }
             
-//            for document in document.documents {
-                let currentData = document.data()
-            let email: String = currentData!["email"] as? String ?? ""
-                let followItemList: [String] = currentData["followItemList"] as? [String] ?? []
-                let followShopList: [String] = currentData["followShopList"] as? [String] ?? []
-                let nickname: String = currentData["nickname"] as? String ?? ""
-                let pickupItemList: [String] = currentData["pickupItemList"] as? [String] ?? []
-                let recentlyItem: [String] = currentData["recentlyItem"] as? [String] ?? []
-                let userPhoneNumber: String = currentData["userPhoneNumber"] as? String ?? ""
-                let deviceToken: String = currentData["deviceToken"] as? String ?? ""
-                let noticeList: [String] = currentData["v"] as? [String] ?? []
-                self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList)
-//            }
+            guard let currentData = document.data() else {
+                   print("Document data was empty.")
+                   return
+                 }
+            
+            //            for document in document.documents {
+            //                let currentData = document.data()
+            let email: String = currentData["email"] as? String ?? ""
+            let followItemList: [String] = currentData["followItemList"] as? [String] ?? []
+            let followShopList: [String] = currentData["followShopList"] as? [String] ?? []
+            let nickname: String = currentData["nickname"] as? String ?? ""
+            let pickupItemList: [String] = currentData["pickupItemList"] as? [String] ?? []
+            let recentlyItem: [String] = currentData["recentlyItem"] as? [String] ?? []
+            let userPhoneNumber: String = currentData["userPhoneNumber"] as? String ?? ""
+            let deviceToken: String = currentData["deviceToken"] as? String ?? ""
+            let noticeList: [String] = currentData["noticeList"] as? [String] ?? []
+            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList)
+            //            }
             
 //            print("Current data: \(data)")
         }
