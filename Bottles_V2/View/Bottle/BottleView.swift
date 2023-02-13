@@ -63,7 +63,11 @@ struct BottleView: View {
                                     BottleShopView(bottleShop: filteredShopItem(bottle.shopID))
                                 } label: {
                                     // 바틀 셀
-                                    BottleView_BottleCell(bottleData: bottle)
+                                    BottleView_BottleCell(
+                                        bottleData: bottleData,
+                                        isShowingFillBookmarkMessage: $isShowingFillBookmarkMessage,
+                                        isShowingEmptyBookmarkMessage: $isShowingEmptyBookmarkMessage
+                                    )
                                 }
                             }
                         }
@@ -89,10 +93,10 @@ struct BottleView: View {
                     .padding(.bottom, 30)
                 }
                 
-                // MARK: - "BookMark 완료"시 애니메이션
+                // MARK: - Bookmark 추가 시 표시되는 팝업창
                 CustomFillBookmarkView(isShowing: $isShowingFillBookmarkMessage)
                 
-                // MARK: - "BookMark 해제"시 애니메이션
+                // MARK: - Bookmark 해제 시 표시되는 팝업창
                 CustomEmptyBookmarkView(isShowing: $isShowingEmptyBookmarkMessage)
                 
                 // 예약하기 버튼 클릭 시 예약하기 뷰 present
