@@ -13,14 +13,8 @@ struct ReservedView_BottleShop: View {
     
     var body: some View {
         ZStack {
-            Color("AccentColor").opacity(0.1).edgesIgnoringSafeArea(.bottom)
-            VStack(spacing: 3) {
-                Capsule()
-                    .frame(width: 40, height: 5)
-                    .foregroundColor(Color.black)
-                    .opacity(0.2)
-                    .offset(y: -8)
-                
+            Color("AccentColor").opacity(0.1).edgesIgnoringSafeArea([.top, .bottom])
+            VStack(spacing: 3) {                
                 Text("픽업 바틀샵 저장하기")
                     .font(.bottles14)
                     .fontWeight(.bold)
@@ -30,6 +24,7 @@ struct ReservedView_BottleShop: View {
                 // MARK: - 픽업한 바틀샵
                 ReservedView_ShopCell()
             }
+            .padding(.top, 10)
         }
     }
 }

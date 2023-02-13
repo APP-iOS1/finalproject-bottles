@@ -61,17 +61,16 @@ struct ReservedView: View {
             }
             .padding(.bottom)
         }
-        // TabView hidden
-        .toolbar(.hidden, for: .tabBar)
-        
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop()
                 .presentationDetents([.height(210)])
+                .presentationDragIndicator(.visible)
         }
 //        .fullScreenCover(isPresented: $isShowingBookmarkView, content: {
 //            MainTabView()
 //                .accentColor(Color("AccentColor"))
 //        })
+      
         .navigationBarBackButtonHidden(true)
     }
 }

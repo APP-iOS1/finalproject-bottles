@@ -46,7 +46,7 @@ struct BottleView_BottleCell: View {
                 
                     // MARK: - 바틀샵 이름
                     HStack {
-                        Image("Map_tab_fill")
+                        Image("Maptabfill")
                             .resizable()
                             .frame(width: 14, height: 17)
                         // MARK: - 바틀샵 이름
