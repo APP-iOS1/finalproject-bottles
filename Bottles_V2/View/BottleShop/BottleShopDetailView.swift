@@ -68,21 +68,19 @@ struct BottleShopDetailView: View {
                         
                         HStack{
                             VStack{
-                                VStack{
                                     Image("House.bottleshop")
-                                }
-                                Spacer()
                             }
                             // 데이터 연동 시 "바틀샵 sns" 연동
-                            Text(bottleShop.shopSNS)
+                            Link("SNS 바로가기", destination: URL(string: bottleShop.shopSNS)!)
+//                            Text("\(bottleShop.shopSNS)")
+//                            Text("www.instagram.com/thousand_coffee_")
                         }
                         
                         HStack{
                             VStack{
-                                VStack{
-                                    Image("Phone.bottleshop")
-                                }
-                                Spacer()
+                                    Image(systemName: "phone.fill")
+                                        .foregroundColor(.purple_2)
+                                        .font(.system(size: 16))
                             }
                             // 데이터 연동 시 "바틀샵 연락처" 연동
                             Text(bottleShop.shopPhoneNumber)
@@ -132,6 +130,7 @@ struct BottleShopDetailView: View {
                                             if dayOpenCloseTime[0] == self.today {
                                                 Text("\(dayOpenCloseTime[0])")
                                                     .fontWeight(.bold)
+                                                    .foregroundColor(.accentColor)
                                                 
                                                 Text("휴무일")
                                                     .foregroundColor(.red)
@@ -149,8 +148,10 @@ struct BottleShopDetailView: View {
                                             if dayOpenCloseTime[0] == self.today {
                                                 Text("\(dayOpenCloseTime[0])")
                                                     .fontWeight(.bold)
+                                                    .foregroundColor(.accentColor)
                                                 Text("\(dayOpenCloseTime[1]) ~ \(dayOpenCloseTime[2])")
                                                     .fontWeight(.bold)
+                                                    .foregroundColor(.accentColor)
                                             } else{
                                                 Text("\(dayOpenCloseTime[0])")
                                                 Text("\(dayOpenCloseTime[1]) ~ \(dayOpenCloseTime[2])")
@@ -203,7 +204,10 @@ struct BottleShopDetailView: View {
         //MARK: - 연락처 복사 버튼 눌렀을 시 뜨는 알림
         if isShowingPasted_PhoneNumber{
             HStack{
-                Image("Phone.bottleshop")
+                Image(systemName: "phone.fill")
+                    .foregroundColor(.purple_2)
+                    .font(.system(size: 16))
+                
                 Text("연락처 복사가 완료되었습니다.")
                     .foregroundColor(.black)
                     .font(.caption)

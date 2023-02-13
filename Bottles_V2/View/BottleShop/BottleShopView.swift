@@ -37,7 +37,8 @@ struct BottleShopView: View {
     // 검색 결과를 필터링해주는 연산 프로퍼티
     var filteredResult: [BottleModel] {
         let bottles = bottleDataStore.bottleData
-        return bottles.filter {
+        let test = bottles.filter{ $0.shopID == bottleShop.id }
+        return test.filter {
             $0.itemName.contains(testSearchText)
         }
     }
@@ -84,12 +85,10 @@ struct BottleShopView: View {
                             Spacer()
                             
                             // 전화 아이콘 버튼
-                            Button(action: {
+//                            Button(action: {
                                 
-                                if let url = URL(string: "tel://\(bottleShop.shopPhoneNumber)"), UIApplication.shared.canOpenURL(url) {
-                                    UIApplication.shared.open(url)
-                                    
-                                }
+                            MakeCallOrAddToCallBook(bottleShop: bottleShop)
+
                                 //                                let phone = "tel://"
                                 //
                                 //                                // 데이터 연동 시 "shopPhoneNumber" 연동 (phoneNumber 자리에)
@@ -97,14 +96,14 @@ struct BottleShopView: View {
                                 //                                guard let url = URL(string: phoneNumberformatted) else { return }
                                 //                                UIApplication.shared.open(url)
                                 
-                                print(bottleShop.shopPhoneNumber)
-                            }){
-                                Image("Phone.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 15)
-                                    .padding(.trailing, 5)
-                            }
+//                                print(bottleShop.shopPhoneNumber)
+//                            }){
+//                                Image("Phone.fill")
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fit)
+//                                    .frame(width: 15)
+//                                    .padding(.trailing, 5)
+//                            }
                             
                             Spacer()
                                 .frame(width: 15)
@@ -256,20 +255,29 @@ struct BottleShopView: View {
                         .background(.white)
                         .padding(.bottom, -10)
                         
-                        // 검색결과 필터링 후 바틀셀 반복문
-                        ScrollView {
-                            ForEach(filteredResult, id: \.self) { item in
-                                NavigationLink(destination: BottleView(bottleData: item), label:{
-                                    BottleShopView_BottleList(selectedItem: item)
-                                        .padding()
-                                })
-                                .simultaneousGesture(TapGesture().onEnded {
-                                    focus = false
-                                })
+                        ZStack {
+                            ZStack{
+                                Color.black.opacity(0.3)
                             }
+                            .ignoresSafeArea()
+                            
+                            // 검색결과 필터링 후 바틀셀 반복문
+                            ScrollView {
+                                ForEach(filteredResult, id: \.self) { item in
+                                    NavigationLink(destination: BottleView(bottleData: item), label:{
+                                        BottleShopView_BottleList(selectedItem: item)
+                                            .padding()
+                                    })
+                                    .simultaneousGesture(TapGesture().onEnded {
+                                        focus = false
+                                    })
+                                }
+                            }
+                            .background(Color.white)
+                            .zIndex(1)
+                            
                         }
-                        .background(Color.white)
-                        .zIndex(1)
+                        
                     }
                     .transition(.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
                                             removal: AnyTransition.opacity.animation(.easeInOut))

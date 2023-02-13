@@ -31,9 +31,25 @@ struct BottleShopView_BottleList: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 100, height: 128)
                     }, placeholder: {
+                        ZStack{
                             Rectangle()
-                            .frame(width: 100, height: 128)
+                                .frame(width: 100, height: 128)
                                 .foregroundColor(.gray_f7)
+                            
+                            VStack{
+                                Image(systemName: "wineglass")
+                                    .font(.system(size: 25))
+                                
+                                Spacer()
+                                    .frame(height: 5)
+                                
+                                Text("사진 준비 중이에요!")
+                                    .font(.bottles11)
+                                    .fontWeight(.semibold)
+//                                Spacer()
+                            }
+                            .foregroundColor(.gray)
+                        }
                     })
                     .padding(5)
                     .background{Color.gray_f7}

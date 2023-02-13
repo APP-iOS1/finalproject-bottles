@@ -66,6 +66,7 @@
 		3A306746297A82BE0085CC6A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A306745297A82BE0085CC6A /* Color.swift */; };
 		3A47F3892990E7D700F8D603 /* BottleShopTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47F3882990E7D700F8D603 /* BottleShopTestModel.swift */; };
 		3A47F38F2992368700F8D603 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47F38E2992368700F8D603 /* String.swift */; };
+		3A47F391299A122C00F8D603 /* MakeCallOrAddToCallBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47F390299A122C00F8D603 /* MakeCallOrAddToCallBook.swift */; };
 		3AA43A5529778EE400EB8551 /* BottleShopView_Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5429778EE400EB8551 /* BottleShopView_Search.swift */; };
 		3AA43A5729778EFB00EB8551 /* BottleShopView_Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5629778EFB00EB8551 /* BottleShopView_Notice.swift */; };
 		3AA43A5929778F2D00EB8551 /* BottleShopDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5829778F2C00EB8551 /* BottleShopDetailView.swift */; };
@@ -206,6 +207,7 @@
 		3A306745297A82BE0085CC6A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3A47F3882990E7D700F8D603 /* BottleShopTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopTestModel.swift; sourceTree = "<group>"; };
 		3A47F38E2992368700F8D603 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		3A47F390299A122C00F8D603 /* MakeCallOrAddToCallBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCallOrAddToCallBook.swift; sourceTree = "<group>"; };
 		3AA43A5429778EE400EB8551 /* BottleShopView_Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_Search.swift; sourceTree = "<group>"; };
 		3AA43A5629778EFB00EB8551 /* BottleShopView_Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_Notice.swift; sourceTree = "<group>"; };
 		3AA43A5829778F2C00EB8551 /* BottleShopDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopDetailView.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				3AA43A5829778F2C00EB8551 /* BottleShopDetailView.swift */,
 				3AA43A5A29778F7200EB8551 /* BottleShopCurationView.swift */,
 				3A47F3882990E7D700F8D603 /* BottleShopTestModel.swift */,
+				3A47F390299A122C00F8D603 /* MakeCallOrAddToCallBook.swift */,
 			);
 			path = BottleShop;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */,
 				AE10700D2977DB2700AF9D1B /* CartViewNavigationLink.swift in Sources */,
 				3AA43A612977E0AB00EB8551 /* BottleShopView_NoticeCell.swift in Sources */,
+				3A47F391299A122C00F8D603 /* MakeCallOrAddToCallBook.swift in Sources */,
 				3AA43A5529778EE400EB8551 /* BottleShopView_Search.swift in Sources */,
 				27A02689298B51AC00F71705 /* SearchView.swift in Sources */,
 				27D82C58298780D8004F3D94 /* MarkerDetailView.swift in Sources */,
@@ -1134,6 +1138,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bottles-V2-Info.plist";
+				INFOPLIST_KEY_NSContactsUsageDescription = "This app needs access to your Contacts to add phone numbers to your call.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "해당 앱은 플레이스 정보 조회를 위해 사용자의 현위치를 제공 받습니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1170,6 +1175,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Bottles-V2-Info.plist";
+				INFOPLIST_KEY_NSContactsUsageDescription = "This app needs access to your Contacts to add phone numbers to your call.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "해당 앱은 플레이스 정보 조회를 위해 사용자의 현위치를 제공 받습니다.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
