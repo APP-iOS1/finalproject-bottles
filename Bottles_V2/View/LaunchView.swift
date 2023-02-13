@@ -19,11 +19,11 @@ struct LaunchView: View {
     @State private var isloading = true
     var body: some View {
         if isActive {
-//            if authStore.currentUser != nil{
+            if authStore.currentUser != nil{
                 MainTabView()
-//            } else {
-//                TotalLoginView()
-//            }
+            } else {
+                TotalLoginView()
+            }
         } else {
             if isloading {
                 ZStack {

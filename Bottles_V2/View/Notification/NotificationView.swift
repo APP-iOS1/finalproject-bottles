@@ -17,8 +17,9 @@ struct NotificationView: View {
     
     func filteredMyFollowShop() -> [ShopNotice] {
         var shopNotice: [ShopNotice] = []
-        for noticeId in userStore.user.noticeList {
-            let filtered = shopNoticeDataStore.shopNoticeData.filter { $0.id == noticeId }
+        for followShopId in userStore.user.followShopList {
+            print(userStore.user.followShopList)
+            let filtered = shopNoticeDataStore.shopNoticeData.filter { $0.shopName == followShopId }
             shopNotice.append(contentsOf: filtered)
             shopNotice.sort { $0.date > $1.date }
         }
@@ -45,18 +46,16 @@ struct NotificationView: View {
                         } label: {
                             NotificationCell(imgName: "shopNotification", title: item.title, description: item.body, storeName: item.shopName, time: "\(item.calculateTime())")
                         }
-
+                        
                     }
-//                    NavigationLink(destination: PickUpListView()){
-//                        NotificationCell(imgName: "checkNotification", title: "예약이 확정되었습니다.", description: "샤도네이 2017", storeName: "와인앤모어 군자점", time: "2시간 전")
-//
-//                    }
+                    
+                    //                    NavigationLink(destination: PickUpListView()){
+                    //                        NotificationCell(imgName: "checkNotification", title: "예약이 확정되었습니다.", description: "샤도네이 2017", storeName: "와인앤모어 군자점", time: "2시간 전")
+                    //
+                    //                    }
                 }
             }
             .navigationBarTitle("알림", displayMode: .inline)
-//            .onAppear {
-//                shopNoticeDataStore.getAllShopNoticeDataRealTime(<#UserStore#>)
-//            }
         }
     }
     
@@ -73,7 +72,7 @@ struct NotificationView: View {
                 Image(systemName: "circle")
                     .foregroundColor(.gray)
             }
-
+            
         }
         .padding([.leading, .top, .bottom])
     }
