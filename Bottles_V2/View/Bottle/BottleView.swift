@@ -90,42 +90,10 @@ struct BottleView: View {
                 }
                 
                 // MARK: - "BookMark 완료"시 애니메이션
-                if isShowingFillBookmarkMessage {
-                    HStack{
-                        Image("BookMark.fill")
-                        Text("북마크가 완료되었습니다.")
-                            .foregroundColor(.black)
-                            .font(.bottles11)
-                        
-                    }
-                    .zIndex(1)
-                    .transition(.opacity.animation(.easeIn))
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 300, height: 30)
-                            .foregroundColor(.gray_f7)
-                    }
-                    .offset(y: 300)
-                }
+                CustomFillBookmarkView(isShowing: $isShowingFillBookmarkMessage)
                 
                 // MARK: - "BookMark 해제"시 애니메이션
-                if isShowingEmptyBookmarkMessage {
-                    HStack{
-                        Image("BookMark")
-                        Text("북마크가 해제되었습니다.")
-                            .foregroundColor(.black)
-                            .font(.bottles11)
-                        
-                    }
-                    .zIndex(1)
-                    .transition(.opacity.animation(.easeIn))
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 300, height: 30)
-                            .foregroundColor(.gray_f7)
-                    }
-                    .offset(y: 300)
-                }
+                CustomEmptyBookmarkView(isShowing: $isShowingEmptyBookmarkMessage)
                 
                 // 예약하기 버튼 클릭 시 예약하기 뷰 present
                 ReservationView(bottleData: bottleData, isShowing: $isShowingSheet)
