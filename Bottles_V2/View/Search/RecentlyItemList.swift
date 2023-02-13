@@ -78,13 +78,21 @@ struct RecentlyItemList: View {
                     .font(.bottles18)
                     .bold()
                     .padding([.leading, .top], 15)
-                // TODO: 서버 최근 본 상품(Bottle) 데이터 연결
-                ScrollView {
-                    ForEach(filterRecentlyBottle(), id: \.self) { bottle in
-                        RecentlyItemListCell(
-                            bottleInfo: bottle,
-                            shopInfo: getMatchedShopData(bottleData: bottle),
-                            bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                
+                if userStore.user.recentlyItem.isEmpty {
+                    Text("최근 본 상품이 없습니다.")
+                        .font(.bottles14)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 10)
+                    Spacer()
+                } else {
+                    ScrollView {
+                        ForEach(filterRecentlyBottle(), id: \.self) { bottle in
+                            RecentlyItemListCell(
+                                bottleInfo: bottle,
+                                shopInfo: getMatchedShopData(bottleData: bottle),
+                                bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                        }
                     }
                 }
             }
