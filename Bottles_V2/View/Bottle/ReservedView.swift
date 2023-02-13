@@ -75,6 +75,10 @@ struct ReservedView: View {
     }
 }
 
+class Path: ObservableObject {
+    @Published var path: NavigationPath = NavigationPath()
+}
+
 struct ReservedView_Previews: PreviewProvider {
     static var previews: some View {
         ReservedView()

@@ -56,7 +56,7 @@ struct ReservationPageView_BottleCell: View {
                     .fontWeight(.medium)
                 
                 HStack {
-                    Image("Map_tab_fill")
+                    Image("Maptabfill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 14, height: 17)

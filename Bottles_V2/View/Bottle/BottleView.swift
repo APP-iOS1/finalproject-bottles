@@ -161,10 +161,6 @@ struct BottleView: View {
     }
 }
 
-class Path: ObservableObject {
-    @Published var path: NavigationPath = NavigationPath()
-}
-
 //struct BottleView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        BottleView()
