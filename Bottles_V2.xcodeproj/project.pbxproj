@@ -106,6 +106,8 @@
 		92906F9D297E3EB600580EC2 /* BottleView_Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */; };
 		9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */; };
 		9293B9DB297A544E00E1EB34 /* ReservedView_ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */; };
+		9295D075299A7A140038267E /* CustomFillBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9295D074299A7A140038267E /* CustomFillBookmarkView.swift */; };
+		9295D079299A7C5A0038267E /* CustomEmptyBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9295D078299A7C5A0038267E /* CustomEmptyBookmarkView.swift */; };
 		92FBAD3C29933DE500DC4669 /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBAD3B29933DE500DC4669 /* MapSearchView.swift */; };
 		ABE1CA6E6BE31F60C644A53F /* Pods_Bottles_V2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */; };
 		AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */; };
@@ -242,6 +244,8 @@
 		92906F9C297E3EB600580EC2 /* BottleView_Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Detail.swift; sourceTree = "<group>"; };
 		9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView_Content_Amount.swift; sourceTree = "<group>"; };
 		9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView_ShopCell.swift; sourceTree = "<group>"; };
+		9295D074299A7A140038267E /* CustomFillBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFillBookmarkView.swift; sourceTree = "<group>"; };
+		9295D078299A7C5A0038267E /* CustomEmptyBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmptyBookmarkView.swift; sourceTree = "<group>"; };
 		92D45CA42988B35300DB4D11 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView_Info.swift; sourceTree = "<group>"; };
 		92D45CAA2988FC2B00DB4D11 /* BottleView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Info.swift; sourceTree = "<group>"; };
@@ -409,6 +413,7 @@
 				27281CE829778583003BE8B4 /* Bottle */,
 				27281CE429778551003BE8B4 /* Cart */,
 				27281CF3297785FE003BE8B4 /* Notification */,
+				9295D073299A79B20038267E /* CustomBookmarkPopUp */,
 				7FB3D69A298CAAF800EA8884 /* CustomAlert */,
 			);
 			path = View;
@@ -594,6 +599,15 @@
 				7FB3D69F298CB97B00EA8884 /* CustomAlertModifier.swift */,
 			);
 			path = CustomAlert;
+			sourceTree = "<group>";
+		};
+		9295D073299A79B20038267E /* CustomBookmarkPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				9295D074299A7A140038267E /* CustomFillBookmarkView.swift */,
+				9295D078299A7C5A0038267E /* CustomEmptyBookmarkView.swift */,
+			);
+			path = CustomBookmarkPopUp;
 			sourceTree = "<group>";
 		};
 		D70CE4F82976823500DFC8CE /* Store */ = {
@@ -895,6 +909,7 @@
 				AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */,
 				92158B56299099FA00FCB475 /* ReservationView_OutOfFocus.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
+				9295D075299A7A140038267E /* CustomFillBookmarkView.swift in Sources */,
 				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
 				7F76AAF429876D0E00AAEBCA /* EmailRegisterView.swift in Sources */,
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
@@ -917,6 +932,7 @@
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				02ABC41E2994D05D00768078 /* Shop.swift in Sources */,
 				7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */,
+				9295D079299A7C5A0038267E /* CustomEmptyBookmarkView.swift in Sources */,
 				92FBAD3C29933DE500DC4669 /* MapSearchView.swift in Sources */,
 				7F2142C02977AF5E0046D420 /* PickUpListCell.swift in Sources */,
 				27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */,

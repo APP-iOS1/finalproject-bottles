@@ -63,7 +63,11 @@ struct BottleView: View {
                                     BottleShopView(bottleShop: filteredShopItem(bottle.shopID))
                                 } label: {
                                     // 바틀 셀
-                                    BottleView_BottleCell(bottleData: bottle)
+                                    BottleView_BottleCell(
+                                        bottleData: bottleData,
+                                        isShowingFillBookmarkMessage: $isShowingFillBookmarkMessage,
+                                        isShowingEmptyBookmarkMessage: $isShowingEmptyBookmarkMessage
+                                    )
                                 }
                             }
                         }
@@ -89,43 +93,11 @@ struct BottleView: View {
                     .padding(.bottom, 30)
                 }
                 
-                // MARK: - "BookMark 완료"시 애니메이션
-                if isShowingFillBookmarkMessage {
-                    HStack{
-                        Image("BookMark.fill")
-                        Text("북마크가 완료되었습니다.")
-                            .foregroundColor(.black)
-                            .font(.bottles11)
-                        
-                    }
-                    .zIndex(1)
-                    .transition(.opacity.animation(.easeIn))
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 300, height: 30)
-                            .foregroundColor(.gray_f7)
-                    }
-                    .offset(y: 300)
-                }
+                // MARK: - Bookmark 추가 시 표시되는 팝업창
+                CustomFillBookmarkView(isShowing: $isShowingFillBookmarkMessage)
                 
-                // MARK: - "BookMark 해제"시 애니메이션
-                if isShowingEmptyBookmarkMessage {
-                    HStack{
-                        Image("BookMark")
-                        Text("북마크가 해제되었습니다.")
-                            .foregroundColor(.black)
-                            .font(.bottles11)
-                        
-                    }
-                    .zIndex(1)
-                    .transition(.opacity.animation(.easeIn))
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 300, height: 30)
-                            .foregroundColor(.gray_f7)
-                    }
-                    .offset(y: 300)
-                }
+                // MARK: - Bookmark 해제 시 표시되는 팝업창
+                CustomEmptyBookmarkView(isShowing: $isShowingEmptyBookmarkMessage)
                 
                 // 예약하기 버튼 클릭 시 예약하기 뷰 present
                 ReservationView(bottleData: bottleData, isShowing: $isShowingSheet)
@@ -159,10 +131,6 @@ struct BottleView: View {
         .toolbar(.hidden, for: .tabBar)
         .edgesIgnoringSafeArea([.bottom])
     }
-}
-
-class Path: ObservableObject {
-    @Published var path: NavigationPath = NavigationPath()
 }
 
 //struct BottleView_Previews: PreviewProvider {

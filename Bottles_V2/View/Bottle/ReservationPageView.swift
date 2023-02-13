@@ -59,13 +59,6 @@ struct ReservationPageView: View {
                 
                 Divider()
                 
-                // MARK: - 예약자 정보
-                ReservationPageView_Info()
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                
-                Divider()
-                
                 // MARK: - 예약 체크 버튼
                 Button(action: {
                     check.toggle()
@@ -103,13 +96,13 @@ struct ReservationPageView: View {
                 }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
-                            .opacity(check ? 1 : 0.5)
                             .frame(width: 358, height: 56)
                         Text("예약하기")
                             .modifier(AccentColorButtonModifier())
                     }
                 }
                 .padding(.horizontal)
+                .disabled(!check)
             }
             .frame(alignment: .bottom)
             
