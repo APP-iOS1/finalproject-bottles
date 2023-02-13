@@ -10,13 +10,16 @@ import SwiftUI
 struct PickUpListView: View {
     
     @EnvironmentObject var reservationDataStore: ReservationDataStore
+    @EnvironmentObject var userStore: UserStore
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack{
             ScrollView{
                 // TODO: 예약 리스트 배열을 넣어 순회해줘야 함
-                ForEach(reservationDataStore.reservationData) { reservationData in
+                ForEach(reservationDataStore.reservationData.filter {
+                    $0.userID == userStore.user.email
+                }) { reservationData in
                     NavigationLink(destination: PickUpDetailView()){
                         PickUpListCell(reservationData: reservationData)
                     }

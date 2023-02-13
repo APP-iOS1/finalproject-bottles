@@ -81,7 +81,7 @@ struct ReservationView_Content: View {
                 
                 // 장바구니 담기 버튼 클릭 시 Alert창 present
                 .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
-                    Button("OK", role: .destructive) { isShowingCart.toggle() }
+                    Button("OK", role: .destructive) { isShowingCart.toggle()}
                     Button("cancel", role: .cancel) { }
                 }
                 

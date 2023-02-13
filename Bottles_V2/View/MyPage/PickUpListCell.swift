@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PickUpListCell: View {
     
+    @EnvironmentObject var bottleDataStore: BottleDataStore
     let reservationData: ReservationModel
     
     var body: some View {
@@ -20,8 +21,8 @@ struct PickUpListCell: View {
                     //.bold()
                 Spacer()
                 
-                Text("예약접수")
-                //Text("\(reservationData.state)")
+                //Text("예약접수")
+                Text("\(reservationData.state)")
                     .font(.bottles12)
                     .overlay{
                         RoundedRectangle(cornerRadius: 15)
@@ -42,10 +43,17 @@ struct PickUpListCell: View {
                 }
                 .padding(.trailing)
                 VStack(alignment:.leading){
-                    Text("test")
-                    //Text("\(reservationData.shopID)")
+                    //Text("test")
+                    Text("\(reservationData.shopID)")
                         .padding(.bottom, -3)
-                    Text("디 오리지널 골드바 위스키")
+                    
+                    if reservationData.reservedBottles.count > 1 {
+                        Text("\(getMatchedbottleName(bottleId: reservationData.reservedBottles[0].BottleID)) 외 \(reservationData.reservedBottles.count-1)병")
+                    }
+                    else {
+                        Text("\(getMatchedbottleName(bottleId: reservationData.reservedBottles[0].BottleID))")
+                    }
+                    
                 }
                 Spacer()
             }
@@ -55,6 +63,15 @@ struct PickUpListCell: View {
         .padding(.horizontal)
         .padding(.bottom, 5)
         .padding(.top, 5)
+
+    }
+    
+    func getMatchedbottleName(bottleId: String) -> String {
+        print("bottleId \(bottleId)")
+        let matchedBottleName = bottleDataStore.bottleData.filter {
+            $0.id == bottleId
+        }
+        return matchedBottleName[0].itemName
     }
 }
 
