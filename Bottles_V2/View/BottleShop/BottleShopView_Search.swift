@@ -50,37 +50,37 @@ struct BottleShopView_Search: View {
     
     
     var body: some View {
-        VStack(alignment: .leading){
+        VStack(){
             // 검색창 버튼
-                Button {
-                    search = true
-                    focus = true
-                    isNavigationBarHidden = true
-                } label: {
-                    ZStack{
+            Button {
+                search = true
+                focus = true
+                isNavigationBarHidden = true
+            } label: {
+                ZStack{
+                    
+                    Rectangle()
+                        .frame(width: 358)
+                        .foregroundColor(Color.gray_f7)
+                        .cornerRadius(12)
+                    
+                    HStack {
                         
-                        Rectangle()
-                            .frame(width: 358)
-                            .foregroundColor(Color.gray_f7)
-                            .cornerRadius(12)
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.black)
+                            .font(.system(size: 18))
+                            .padding(.leading, 8)
                         
-                        HStack {
-                            
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.black)
-                                .font(.system(size: 18))
-                                .padding(.leading, 8)
-                            
-                            Text("이 바틀샵의 상품 검색")
-                                .font(.bottles16)
-                                .foregroundColor(.gray)
-                                .padding(.leading, -8)
-                                .padding(7)
-                            
-
-                            Spacer()
-                        }
+                        Text("이 바틀샵의 상품 검색")
+                            .font(.bottles16)
+                            .foregroundColor(.gray)
+                            .padding(.leading, -8)
+                            .padding(7)
+                        
+                        
+                        Spacer()
                     }
+                }
                 .padding(.bottom, 10)
             }
             
@@ -120,16 +120,37 @@ struct BottleShopView_Search: View {
                 }
             }
             
-            // 검색 결과에 따라 정렬함(검색하지 않는 경우 모든 바틀 보여주고, 검색 텍스트 입력시 텍스트가 포함되어있는 해당 바틀만 보여줌)
-            // 데이터 연동 시 "해당 샵의 바틀 리스트" 연동
-            // 바틀 셀(정렬 후) 반복문
-            ForEach(sortBottleData(), id: \.self) { item in
-                // 바틀셀 누를 시 바틀뷰로 이동
-                NavigationLink(destination: BottleView(bottleData: item), label:{
-                    BottleShopView_BottleList(selectedItem: item)
-                })
+            if sortBottleData().count == 0 {
+                VStack{
+                    Spacer()
+                        .frame(height: 100)
+                    
+                    Image(systemName: "wineglass")
+                        .font(.system(size: 50))
+                    
+                    Spacer()
+                        .frame(height: 20)
+                    
+                    Text("상품 준비 중이에요!")
+                        .font(.bottles18)
+                        .fontWeight(.semibold)
+                    
+                    Spacer()
+                        .frame(height: 100)
+                }
+                .foregroundColor(.gray)
+                
+            } else {
+                // 검색 결과에 따라 정렬함(검색하지 않는 경우 모든 바틀 보여주고, 검색 텍스트 입력시 텍스트가 포함되어있는 해당 바틀만 보여줌)
+                // 데이터 연동 시 "해당 샵의 바틀 리스트" 연동
+                // 바틀 셀(정렬 후) 반복문
+                ForEach(sortBottleData(), id: \.self) { item in
+                    // 바틀셀 누를 시 바틀뷰로 이동
+                    NavigationLink(destination: BottleView(bottleData: item), label:{
+                        BottleShopView_BottleList(selectedItem: item)
+                    })
+                }
             }
-            
         }
         .padding()
     }

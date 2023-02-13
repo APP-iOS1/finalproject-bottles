@@ -29,12 +29,12 @@
 			</array>
 		</dict>
 	</array>
-    <key>FacebookAppID</key>
-    <string>987610285547791</string>
-    <key>FacebookClientToken</key>
-    <string>2c3b35841beeecd18a389ac4cf06fb83</string>
-    <key>FacebookDisplayName</key>
-    <string>Bottles</string>
+	<key>FacebookAppID</key>
+	<string>987610285547791</string>
+	<key>FacebookClientToken</key>
+	<string>2c3b35841beeecd18a389ac4cf06fb83</string>
+	<key>FacebookDisplayName</key>
+	<string>Bottles</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>kakaokompassauth</string>
