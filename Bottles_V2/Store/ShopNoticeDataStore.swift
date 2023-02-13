@@ -85,8 +85,9 @@ class ShopNoticeDataStore : ObservableObject {
                             title: title,
                             body: body)
                         
-                        print("shopNotice 하나하나 불러오기 \(shopNotice)")
-                        self.shopNoticeData.append(shopNotice)
+                        if !self.shopNoticeData.contains(shopNotice) {
+                            self.shopNoticeData.append(shopNotice)
+                        }
                     }
                     
                     
