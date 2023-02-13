@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AuthenticationServices
 
 struct TotalLoginView: View {
     @EnvironmentObject var authStore: AuthStore
@@ -77,16 +78,35 @@ struct TotalLoginView: View {
                         }
                     }
                     .padding(.trailing)
-                    Button(action: {
-                        // TODO: 애플 로그인 로직
-                        
-                    }){
-                        VStack {
-                            Image("AppleLogin")
-                                .socialLoginImageModifier()
-                            Text("애플")
-                        }
+                    VStack {
+                        Image("AppleLogin")
+                            .socialLoginImageModifier()
+                        Text("애플")
                     }
+                    .overlay {
+                        SignInWithAppleButton { (request) in
+                            // requesting paramertes from apple login...
+                            authStore.nonce = randomNonceString()
+                            request.requestedScopes = [.email, .fullName]
+                            request.nonce = sha256(authStore.nonce)
+                        } onCompletion: { (result) in
+                            switch result {
+                            case .success(let user):
+                                print("success")
+                                // do login with firebase...
+                                guard let credential = user.credential as? ASAuthorizationAppleIDCredential else {
+                                    print("error with firebase")
+                                    return
+                                }
+                                authStore.appleLogin(credential: credential)
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                            }
+                        }
+                        .frame(width: 48)
+                        .blendMode(.overlay)
+                    }
+                    .clipped()
                 }
                 .font(.bottles12)
                 .foregroundColor(.gray)
@@ -112,6 +132,6 @@ struct TotalLoginView: View {
 
 struct TotalLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        TotalLoginView()
+        TotalLoginView().environmentObject(AuthStore())
     }
 }

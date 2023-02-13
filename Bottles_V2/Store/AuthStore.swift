@@ -14,6 +14,8 @@ import Combine
 import KakaoSDKAuth
 import KakaoSDKUser
 import FBSDKLoginKit
+import AuthenticationServices
+import CryptoKit
 
 class AuthStore: ObservableObject {
     
@@ -32,7 +34,7 @@ class AuthStore: ObservableObject {
     var errorSocialType: String = ""
     @Published var kakaoLogin: Bool = false
     
-    
+    @Published var nonce: String = ""
     
     
     init() {
@@ -517,6 +519,112 @@ class AuthStore: ObservableObject {
             print(error.localizedDescription)
         }
     }
+    
+    //MARK: - 애플로그인
+    
+    
+    
+    func appleLogin(credential: ASAuthorizationAppleIDCredential) {
+        
+        guard let token = credential.identityToken else { return }
+        
+        guard let tokenString = String(data: token, encoding: .utf8) else { return }
+        
+        let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com", idToken: tokenString, rawNonce: nonce)
+        
+        let type = "애플"
+        
+        Firestore.firestore().collection("User").whereField("email", isEqualTo: credential.email!)
+            .getDocuments { snapshot, error in
+                if snapshot!.documents.isEmpty {
+                    if let error = error {
+                        print("\(error.localizedDescription)")
+                    } else {
+                        Auth.auth().signIn(with: firebaseCredential) { result, error in
+                            if let error = error {
+                                print("애플 파이어베이스 로그인 에러 \(error.localizedDescription)")
+                            } else {
+                                self.currentUser = result?.user
+                                self.userStore.createUser(user: User(id: credential.email!, email: credential.email!, followItemList: [], followShopList: [], nickname: credential.email!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
+                            }
+                            
+                        }
+                    }
+                } else {
+                    Firestore.firestore().collection("User").document(credential.email!)
+                        .getDocument { snapshot, error in
+                            let currentData = snapshot!.data()
+                            let email: String = currentData!["email"] as? String ?? ""
+                            let socialLoginType: String = currentData!["socialLoginType"] as? String ?? ""
+                            
+                            if socialLoginType == type {
+                                Auth.auth().signIn(with: firebaseCredential) { result, error in
+                                    if let error = error {
+                                        print("애플 파이어베이스 로그인 에러 \(error.localizedDescription)")
+                                    } else {
+                                        self.currentUser = result?.user
+                                    }
+                                }
+                            } else {
+                                self.appleLogout()
+                                self.errorSocialType = socialLoginType
+                                self.loginError = true
+                            }//TODO: 로그아웃 처리
+                        }
+                }
+            }
+    }
+    
+    func appleLogout() {
+        do{
+            try Auth.auth().signOut()
+            currentUser = nil
+        } catch {
+            print("\(error.localizedDescription)")
+        }
+    }
+}
+
+func randomNonceString(length: Int = 32) -> String {
+    precondition(length > 0)
+    let charset: Array<Character> =
+    Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+    var result = ""
+    var remainingLength = length
+    
+    while remainingLength > 0 {
+        let randoms: [UInt8] = (0 ..< 16).map { _ in
+            var random: UInt8 = 0
+            let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+            if errorCode != errSecSuccess {
+                fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+            }
+            return random
+        }
+        
+        randoms.forEach { random in
+            if remainingLength == 0 {
+                return
+            }
+            
+            if random < charset.count {
+                result.append(charset[Int(random)])
+                remainingLength -= 1
+            }
+        }
+    }
+    
+    return result
+}
+
+func sha256(_ input: String) -> String {
+    let inputData = Data(input.utf8)
+    let hashedData = SHA256.hash(data: inputData)
+    let hashString = hashedData.compactMap {
+        return String(format: "%02x", $0)
+    }.joined()
+    
+    return hashString
 }
 
 extension AuthStore {
