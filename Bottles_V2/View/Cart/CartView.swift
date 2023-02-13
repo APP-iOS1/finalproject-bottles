@@ -112,7 +112,7 @@ struct CartView: View {
         
         for cart in carts {
             bottleModel = getBottleModel(bottleId: cart.bottleId)
-            matchedBottleReservation.append(BottleReservation(image: bottleModel.itemImage, title: bottleModel.itemName, price: cart.eachPrice * cart.itemCount, count: cart.itemCount, shop: cart.shopName))
+            matchedBottleReservation.append(BottleReservation(id: cart.bottleId, image: bottleModel.itemImage, title: bottleModel.itemName, price: cart.eachPrice * cart.itemCount, count: cart.itemCount, shop: cart.shopName))
         }
         
         return matchedBottleReservation

@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import Firebase
 
 struct ReservationModel : Codable, Identifiable {
     var id : String
     var shopID : String
     var userID : String      // 이메일 형식으로 들어옴
-    var reservedTime : String
+    var reservedTime : Date
     var state : String
     var reservedBottles : [ReservedBottles]
 }
@@ -24,6 +25,7 @@ struct ReservedBottles : Codable {
 
 // 예약 상품 샘플 구조체
 struct BottleReservation: Hashable {
+    var id: String
     var image: String
     var title: String
     var price: Int
