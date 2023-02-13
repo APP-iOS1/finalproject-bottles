@@ -49,7 +49,7 @@ struct MapView: View {
                                 MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, mapViewModel: _mapViewModel, shopDataStore: _shopDataStore, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
                                     .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
                                     .frame(maxWidth: 293, maxHeight: 35)
-                                    .offset(x: -22, y: -300)
+                                    .offset(x: -22, y: 0)
                                 //                                    .onTapGesture(count: 1, perform: {
                                 //                                        withAnimation (
                                 //                                            Animation.easeInOut(duration: 0.3)
@@ -96,7 +96,7 @@ struct MapView: View {
                             MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
                             //                            MapSearchView(tapped: $tapped)
                                 .scaleEffect(tapped ? 0 : 1.2, anchor: .top)
-                                .offset(x: tapped ? -22 : 0, y: tapped ? -333 : 0)
+                                .offset(x: tapped ? -22 : 0, y: tapped ? 0 : 0)
                                 .opacity(1)
                                 .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
                             //                                .ignoresSafeArea()
