@@ -45,6 +45,7 @@ struct BottleShopView_Notice: View {
                 }
             }
         }
+//        .padding(.horizontal, 15)
     }
     
     func filterShopNotice() -> [ShopNotice] {
