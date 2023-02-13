@@ -20,7 +20,7 @@ struct MapView: View {
     
     @State var coord: (Double, Double) = (37.56668, 126.978419)
     @State var userLocation: (Double, Double) = (37.56668, 126.978419)
-    @State var mapSearchBarText: String = ""
+    @State var searchBarText: String = ""
     @State var isShowingSheet: Bool = false
     @State var showMarkerDetailView: Bool = false
     @State var currentShopId: String = "보리마루"
@@ -30,8 +30,13 @@ struct MapView: View {
     @State var transition: Bool = false
     @State var tapSearchButton: Bool = false
     
+    @FocusState var focus: Bool
+    
     @Namespace var morphSeamlessly
     @Namespace private var animation
+    
+    //
+    @State var isBookMarkTapped: Bool = false
     
     var body: some View {
         
@@ -39,25 +44,63 @@ struct MapView: View {
             ZStack {
                 ZStack {
                     VStack {
-                        HStack {
-                            // 검색 바
-                            MapViewSearchBar(showMarkerDetailView: $showMarkerDetailView, mapSearchBarText: $mapSearchBarText, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
-                            
-                            NavigationLink {
-                                CartView()
-                            } label: {
-                                Image("cart")
-                                    .foregroundColor(.accentColor)
-                                    .bold()
-                                    .padding(10)
-                                    .frame(width: 40)
-                                    .background{
-                                        Color.white
+                        if tapped {
+                            ZStack {
+                                MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, mapViewModel: _mapViewModel, shopDataStore: _shopDataStore, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
+                                    .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
+                                    .frame(maxWidth: 293, maxHeight: 35)
+                                    .offset(x: -22, y: 0)
+                                //                                    .onTapGesture(count: 1, perform: {
+                                //                                        withAnimation (
+                                //                                            Animation.easeInOut(duration: 0.3)
+                                //                                        ) {
+                                //                                            tapped.toggle()
+                                //                                        }
+                                //                                    })
+                                HStack {
+                                    MapSearchBar()
+                                    //                                        .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
+                                        .onTapGesture(count: 1, perform: {
+                                            withAnimation (
+                                                Animation.easeInOut(duration: 0.5)
+//                                                Animation.linear(duration: 0.5)
+//                                                Animation.easeIn(duration: 0.5)
+                                            ) {
+                                                tapped.toggle()
+                                            }
+                                            // 화면이 전환된 후에 키보드가 올라오도록 딜레이 줬음
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                focus = true
+                                            }
+                                        })
+                                    NavigationLink {
+                                        CartView()
+                                    } label: {
+                                        Image("cart")
+                                            .foregroundColor(.accentColor)
+                                            .bold()
+                                            .padding(10)
+                                            .frame(width: 40)
+                                            .background{
+                                                Color.white
+                                            }
+                                            .cornerRadius(10)
                                     }
-                                    .cornerRadius(10)
+                                }
+                                .padding(.bottom, 10)
                             }
+                            
+                            
+                            //                            .zIndex(4)
+                        } else {
+                            MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
+                            //                            MapSearchView(tapped: $tapped)
+                                .scaleEffect(tapped ? 0 : 1.2, anchor: .top)
+                                .offset(x: tapped ? -22 : 0, y: tapped ? 0 : 0)
+                                .opacity(1)
+                                .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
+                            //                                .ignoresSafeArea()
                         }
-                        .padding(.bottom, 10)
                         
                         if tapSearchButton {
                             HStack{
@@ -79,7 +122,8 @@ struct MapView: View {
                         }
                         Spacer()
                     }
-                    .zIndex(1)
+                    // 2로 하면 둘러보기 시트를 올렸을때 검색바가 위로 보여지고, 4로 하면 키보드 올라올때 시트가 올라오는게 보여서 이렇게 수정
+                    .zIndex(tapped ? 2 : 4)
                     
                     /// 네이버 지도 뷰
                     NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopId, $mapViewModel.userLocation)
@@ -127,36 +171,9 @@ struct MapView: View {
                     //                    mapViewModel.checkLocationAuthorization()
                     //                }
                     //            }
+                    //                }
+                    
                 }
-                if tapped {
-                    ZStack {
-                        MapSearchView(tapped: $tapped)
-                            .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
-                            .offset(x: -22, y: -333)
-                        
-                            .frame(maxWidth: 293, maxHeight: 35)
-                        
-                            .onTapGesture(count: 1, perform: {
-                                withAnimation (
-                                    Animation.easeInOut(duration: 0.3)
-                                ) {
-                                    tapped.toggle()
-                                }
-                            })
-                        Text("바틀샵/상품을 입력해주세요")
-                            .offset(x: -68, y: -333)
-                            .font(.callout)
-                            .foregroundColor(Color(UIColor.systemGray3))
-                    }
-                } else {
-                    MapSearchView(tapped: $tapped)
-                        .scaleEffect(tapped ? 0 : 1.2, anchor: .center)
-                        .offset(x: tapped ? -22 : 0, y: tapped ? -333 : 0)
-                        .opacity(1)
-                        .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
-                        .ignoresSafeArea()
-                }
-                
             }
             .onAppear {
                 mapViewModel.checkIfLocationServicesIsEnabled()

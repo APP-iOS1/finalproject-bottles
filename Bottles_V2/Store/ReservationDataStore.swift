@@ -12,88 +12,95 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
-class ResevationDataStore : ObservableObject {
-    /*
+class ReservationDataStore : ObservableObject {
+    
     @Published var reservationData: [ReservationModel] = []
     @Published var reservedBottles: [ReservedBottles] = []
     
-    let database = Firestore.firestore()
-
-    //MARK: - 예약 등록
-    func createReservation(reservationData: ReservationModel, reservedBottles: ReservedBottles, userEmail: String) {
-        database.collection("Reservation")
-            .document(userEmail)
-            .collection("ReservedBottles")
-            .document(reservedBottles.BottleID)
-            .setData(["reservedTime" : reservationData.reservedTime,
-                      "state" : reservationData.state,
-                      "shopId" : reservationData.shopID,
-                      "userId" : reservationData.userID])
-//        getAllReservationData(userId: userId)
+    // MARK: - 예약 등록
+    func createReservation(reservationData: ReservationModel, reservedBottles: [BottleReservation]) async {
+        do {
+            let documents = Firestore.firestore().collection("Reservation")
+            try await documents.document(reservationData.id)
+                .setData(["reservedTime" : Date.now,
+                          "state" : reservationData.state,
+                          "shopID" : reservationData.shopID,
+                          "userID" : reservationData.userID])
+            
+            await self.createReservedBottles(reservedBottles: reservedBottles, reservationId: reservationData.id)
+            await readReservation()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     // MARK: - 예약 불러오기
-    func getAllReservationData() async {
+    @MainActor
+    func readReservation() async {
         
         do{
             let documents = try await Firestore.firestore().collection("Reservation").getDocuments()
             for document in documents.documents {
-//                let reservedBottles = await self.getReservedBottls(snapshot: document)
-                
+                let reservedBottles = await self.readReservedBottles(snapshot: document)
                 
                 let id : String = document.documentID
-                let shopID : String = document["shopName"] as? String ?? ""
+                let shopID : String = document["shopID"] as? String ?? ""
                 let userID : String = document["userID"] as? String ?? ""
+                let state : String = document["state"] as? String ?? ""
                 // 데이터 포멧을 위한 준비
-                let timeStampData : Timestamp = document["TimeStampData"] as? Timestamp ?? Timestamp()
+                let timeStampData : Timestamp = document["reservedTime"] as? Timestamp ?? Timestamp()
                 let timeStampToDate : Date = timeStampData.dateValue()
                 // 여기까지 사용 안함
                 var reservedTime : String {
                     let dateFormatter = DateFormatter()
                     dateFormatter.locale = Locale(identifier: "ko_kr")
                     dateFormatter.timeZone = TimeZone(abbreviation: "KST")
-                    dateFormatter.dateFormat = "yyyy년 MM월 dd일" // "yyyy-MM-dd HH:mm:ss"
+                    dateFormatter.dateFormat = "yyyy.MM.dd" // "yyyy-MM-dd HH:mm:ss"
                     let dateCreatedAt = timeStampToDate
                     return dateFormatter.string(from: dateCreatedAt)
                 }
                 
-//                self.resevationData.append(
-//                    ReservationModel(
-//                        id: id, shopId: shopId, userId: userId, reservedTime: reservedTime, reservedBottles: reservedBottles
-//                    )
-//                )
+                self.reservationData.append(
+                    ReservationModel(
+                        id: id, shopID: shopID, userID: userID, reservedTime: reservedTime, state: state, reservedBottles: reservedBottles)
+                )
                 
             }
-            
+            print(reservationData)
         } catch {
             print(error.localizedDescription)
         }
         
     }
     
-    //MARK: - 예약 삭제
-    func deleteReservation(reservationData: ReservationModel, reservedBottles: ReservedBottles, userEmail: String) {
-        database.collection("Reservation")
-            .document(userEmail)
-            .collection("ReservedBottles")
-            .document(reservedBottles.BottleID).delete()
-//        getAllReservationData(userEmail: userEmail)
-    }
-    
-    //MARK: - 예약한 바틀 등록
-//    func createReservation(reservationData: ReservationModel, reservedBottles: ReservedBottles, userEmail: String) {
-//        database.collection("Reservation")
-//            .document(userEmail)
-//            .collection("ReservedBottles")
-//            .document(reservedBottles.bottleId)
-//            .setData(["id" : reservedBottles.id,
-//                      "bottleId" : reservedBottles.bottleId,
-//                      "itemCount" : reservedBottles.itemCount])
-//        getReservedBottls(userEmail: userEmail)
+//    // MARK: - 예약 삭제
+//    func deleteReservation(reservationData: ReservationModel) async {
+//        do {
+//            let documents = Firestore.firestore().collection("Reservation")
+//            try await documents.document(reservationData.id).delete()
+//            await readReservation()
+//        } catch {
+//            print(error.localizedDescription)
+//        }
 //    }
     
-    //MARK: - 예약한 바틀 불러오기
-    func getReservedBottls(snapshot: DocumentSnapshot) async -> [ReservedBottles] {
+    // MARK: - 예약한 바틀 등록
+    func createReservedBottles(reservedBottles: [BottleReservation], reservationId: String) async {
+        do {
+            let documents = Firestore.firestore().collection("Reservation")
+            for reservedBottle in reservedBottles {
+                try await documents.document(reservationId).collection("ReservedBottles").document(UUID().uuidString)
+                    .setData(["bottleId" : reservedBottle.id,
+                              "itemCount" : reservedBottle.count])
+            }
+//            await readReservation()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    // MARK: - 예약한 바틀 불러오기
+    func readReservedBottles(snapshot: DocumentSnapshot) async -> [ReservedBottles] {
         var resultData: [ReservedBottles] = []
         
         do {
@@ -113,13 +120,4 @@ class ResevationDataStore : ObservableObject {
         return []
     }
     
-    //MARK: - 예약한 바틀 삭제
-//    func deleteReservation(reservationData: ReservationModel, reservedBottles: ReservedBottles, userEmail: String) {
-//        database.collection("Reservation")
-//            .document(userEmail)
-//            .collection("ReservedBottles")
-//            .document(reservedBottles.bottleId).delete()
-//        getAllReservationData(userEmail: userEmail)
-//    }
-    */
 }

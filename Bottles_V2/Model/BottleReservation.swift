@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct ReservationModel : Codable, Identifiable {
     var id : String
@@ -24,6 +25,7 @@ struct ReservedBottles : Codable {
 
 // 예약 상품 샘플 구조체
 struct BottleReservation: Hashable {
+    var id: String
     var image: String
     var title: String
     var price: Int

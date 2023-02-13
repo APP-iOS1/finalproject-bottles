@@ -12,8 +12,12 @@ import SwiftUI
 struct ReservationPageView: View {
     //@EnvironmentObject var path: Path
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var reservationDataStore: ReservationDataStore
+    @EnvironmentObject var userStore: UserStore
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
+    @State private var hiddenBottle: Bool = false
+    
     let bottleReservations: [BottleReservation]
     
     var body: some View {
@@ -33,16 +37,22 @@ struct ReservationPageView: View {
                                 .font(.bottles16)
                                 .fontWeight(.medium)
                             
-                            Image("arrowBottom")
-                                .resizable()
-                                .frame(width: 10, height: 6)
+                            Button(action: {
+                                hiddenBottle.toggle()
+                            }) {
+                                Image("arrowBottom")
+                                    .resizable()
+                                    .frame(width: 10, height: 6)
+                            }
                         }
                     }
                     
-                    // MARK: - 예약 바틀 리스트
-                    ForEach(bottleReservations, id: \.self) { bottleReservation in
-                        // 예약 바틀 셀
-                        ReservationPageView_BottleCell(bottleReservation: bottleReservation)
+                    if !hiddenBottle {
+                        // MARK: - 예약 바틀 리스트
+                        ForEach(bottleReservations, id: \.self) { bottleReservation in
+                            // 예약 바틀 셀
+                            ReservationPageView_BottleCell(bottleReservation: bottleReservation)
+                        }
                     }
                 }
                 .padding()
@@ -86,6 +96,9 @@ struct ReservationPageView: View {
                     // 예약확정 체크 시
                     if check {
                         isShowing.toggle()
+                        Task{
+                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopID: bottleReservations[0].shop, userID: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+                        }
                     }
                 }) {
                     ZStack {
@@ -99,11 +112,11 @@ struct ReservationPageView: View {
                 .padding(.horizontal)
             }
             .frame(alignment: .bottom)
-      
+            
             // 예약 완료 뷰로 이동
             .navigationDestination(isPresented: $isShowing) {
                 ReservedView()
-                    //.environmentObject(path)
+                //.environmentObject(path)
             }
             .toolbar(content: {
                 ToolbarItem(placement: .principal) {

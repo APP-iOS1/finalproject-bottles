@@ -22,7 +22,6 @@ struct ReservationView_Content: View {
     @State private var anotherShopInCart: Bool = false
     //@State private var isShowingAnotherShopAlert: Bool = false
     
-    
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 25) {
@@ -82,9 +81,19 @@ struct ReservationView_Content: View {
                 
                 // 장바구니 담기 버튼 클릭 시 Alert창 present
                 .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
-                    Button("OK", role: .destructive) { isShowingCart.toggle() }
+                    Button("OK", role: .destructive) { isShowingCart.toggle()}
                     Button("cancel", role: .cancel) { }
                 }
+                
+                .alert(
+                    "장바구니에는 같은 가게의 바틀만 담을 수 있습니다.",
+                    isPresented: $anotherShopInCart
+                ) {
+                    Button("OK", role: .destructive) {
+                        //                                cartStore.deleteAllCart(userEmail: userStore.user.email)
+                        //                                cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                    }
+                    Button("cancel", role: .cancel) {}
                     
                         .alert(
                             "장바구니에는 같은 가게의 바틀만 담을 수 있습니다.",
@@ -127,25 +136,28 @@ struct ReservationView_Content: View {
                             Text("바로 예약하기")
                                 .modifier(AccentColorButtonModifier())
                         }
+
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 10)
             }
-            .padding(.top)
-            .padding(.horizontal)
-            
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.top, 10)
+            .padding(.bottom, 33)
         }
+        .padding(.top)
+        .padding(.horizontal)
         
-        func getBottleReservation(bottleData: BottleModel) -> [BottleReservation] {
-            var matchedBottleReservation: [BottleReservation] = []
-            
-            matchedBottleReservation.append(BottleReservation(image: bottleData.itemImage, title: bottleData.itemName, price: bottleData.itemPrice * count, count: count, shop: bottleData.shopName))
-            
-            return matchedBottleReservation
-        }
     }
     
+    func getBottleReservation(bottleData: BottleModel) -> [BottleReservation] {
+        var matchedBottleReservation: [BottleReservation] = []
+        
+        matchedBottleReservation.append(BottleReservation(id: bottleData.id, image: bottleData.itemImage, title: bottleData.itemName, price: bottleData.itemPrice * count, count: count, shop: bottleData.shopName))
+        
+        return matchedBottleReservation
+    }
+}
+
     
     //struct ReservationView_Content_Previews: PreviewProvider {
     //    static var previews: some View {
