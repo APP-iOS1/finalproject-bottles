@@ -16,6 +16,9 @@ struct BottleView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @State private var isShowingSheet: Bool = false
+    @State private var isShowingFillBookmarkMessage: Bool = false
+    @State private var isShowingEmptyBookmarkMessage: Bool = false
+    
     var bottleData: BottleModel
     
     func filteredBottleItem() -> [BottleModel] {
@@ -33,33 +36,44 @@ struct BottleView: View {
 
         NavigationStack {
             ZStack {
-                ScrollView {
-                    // 바틀 기본 정보 (바틀 이미지, 바틀 이름, 북마크, 바틀 가격, 바틀샵 이름)
-                    BottleView_Info(bottleData: bottleData)
-                    
-                    // Tasting Notes, Information, Pairing
-                    BottleView_Detail(bottleData: bottleData)
-                    
-                    // 해당 바틀을 판매하는 바틀샵 리스트
-                    VStack(alignment: .leading) {
-                        Text("다른 바틀샵의 이 상품")
-                            .font(.bottles18)
-                            .fontWeight(.medium)
+                VStack {
+                    ScrollView {
+                        // 바틀 기본 정보 (바틀 이미지, 바틀 이름, 북마크, 바틀 가격, 바틀샵 이름)
+                        BottleView_Info(
+                            isShowingFillBookmarkMessage: $isShowingFillBookmarkMessage,
+                            isShowingEmptyBookmarkMessage: $isShowingEmptyBookmarkMessage,
+                            bottleData: bottleData
+                        )
                         
-                        ForEach(filteredBottleItem()) { bottle in
-                            NavigationLink {
-                                // 바틀 뷰로 이동
-                                BottleShopView(bottleShop: filteredShopItem(bottle.shopID))
-                            } label: {
-                                // 바틀 셀
-                                BottleView_BottleCell(bottleData: bottle)
+                        // Tasting Notes, Information, Pairing
+                        BottleView_Detail(bottleData: bottleData)
+                        
+                        // 해당 바틀을 판매하는 바틀샵 리스트
+                        VStack(alignment: .leading) {
+                            if filteredBottleItem().count > 0 {
+                                Text("다른 바틀샵의 이 상품")
+                                    .font(.bottles18)
+                                    .fontWeight(.medium)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            
+                            ForEach(filteredBottleItem()) { bottle in
+                                NavigationLink {
+                                    // 바틀 뷰로 이동
+                                    BottleShopView(bottleShop: filteredShopItem(bottle.shopID))
+                                } label: {
+                                    // 바틀 셀
+                                    BottleView_BottleCell(bottleData: bottle)
+                                }
                             }
                         }
+                        .padding()
+                        
+                        // MARK: - 예약하기 버튼
                     }
-                    .padding()
-                    
-                    // MARK: - 예약하기 버튼
-                    
+                    .onAppear {
+                        userStore.addRecentlyItem(bottleData.id)
+                    }
                     Button(action: {
                         isShowingSheet.toggle()
                     }) {
@@ -71,10 +85,48 @@ struct BottleView: View {
                         }
                     }
                     .padding(.horizontal)
+                    .padding(.top, 5)
+                    .padding(.bottom, 30)
                 }
-                .onAppear {
-                    userStore.addRecentlyItem(bottleData.id)
+                
+                // MARK: - "BookMark 완료"시 애니메이션
+                if isShowingFillBookmarkMessage {
+                    HStack{
+                        Image("BookMark.fill")
+                        Text("북마크가 완료되었습니다.")
+                            .foregroundColor(.black)
+                            .font(.bottles11)
+                        
+                    }
+                    .zIndex(1)
+                    .transition(.opacity.animation(.easeIn))
+                    .background{
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: 300, height: 30)
+                            .foregroundColor(.gray_f7)
+                    }
+                    .offset(y: 300)
                 }
+                
+                // MARK: - "BookMark 해제"시 애니메이션
+                if isShowingEmptyBookmarkMessage {
+                    HStack{
+                        Image("BookMark")
+                        Text("북마크가 해제되었습니다.")
+                            .foregroundColor(.black)
+                            .font(.bottles11)
+                        
+                    }
+                    .zIndex(1)
+                    .transition(.opacity.animation(.easeIn))
+                    .background{
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: 300, height: 30)
+                            .foregroundColor(.gray_f7)
+                    }
+                    .offset(y: 300)
+                }
+                
                 // 예약하기 버튼 클릭 시 예약하기 뷰 present
                 ReservationView(bottleData: bottleData, isShowing: $isShowingSheet)
                     //.environmentObject(path)
@@ -105,6 +157,7 @@ struct BottleView: View {
         })
         // TabView hidden
         .toolbar(.hidden, for: .tabBar)
+        .edgesIgnoringSafeArea([.bottom])
     }
 }
 

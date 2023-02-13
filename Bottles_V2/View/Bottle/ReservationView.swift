@@ -27,8 +27,10 @@ struct ReservationView: View {
         Group {
             if isShowing {
                 ZStack {
-//                    TestGrayView()
                     ReservationView_OutOfFocus()
+                        .onTapGesture {
+                            hide()
+                        }
                     sheetView
                  
                 }
@@ -50,7 +52,7 @@ struct ReservationView: View {
         if value.translation.height > 0 {
             offset = value.location.y
             let diff = abs(value.location.y - value.startLocation.y)
-
+    
             let conditionOne = diff > minimumDragDistanceToHide
             let conditionTwo = value.location.y >= 200
 
@@ -71,16 +73,6 @@ struct ReservationView: View {
             })
     }
     
-//    var outOfFocusArea: some View {
-////        Group {
-////            if isShowing {
-////                ReservationView_OutOfFocus()
-////                self.isShowing = false
-////
-////            }
-////        }
-//    }
-    
     var sheetView: some View {
         VStack {
             Spacer()
@@ -91,9 +83,6 @@ struct ReservationView: View {
                 .offset(y: offset)
                 .gesture(interactiveGesture)
                 //.environmentObject(path)
-                .onTapGesture {
-                    hide()
-                }
         }
         .edgesIgnoringSafeArea(.bottom)
         
