@@ -13,6 +13,7 @@ import SwiftUI
 struct NotificationView: View {
     
     @State private var onlyReservation : Bool = false
+    @EnvironmentObject var shopNoticeDataStore : ShopNoticeDataStore
     
     var body: some View {
         NavigationStack {
@@ -48,6 +49,8 @@ struct NotificationView: View {
                     Divider()
                 }
             }.navigationBarTitle("알림", displayMode: .inline)
+        }.onAppear {
+            shopNoticeDataStore.getAllShopNoticeDataRealTime()
         }
         
         

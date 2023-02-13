@@ -26,7 +26,7 @@ class UserStore: ObservableObject {
     @Published var isShowingVerification: Bool = false
     
     init() {
-        user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: "")
+        user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: "", noticeList: [])
     }
     
     func createUser(user: User) {
@@ -40,46 +40,50 @@ class UserStore: ObservableObject {
                       "pickupItemList" : user.pickupItemList,
                       "recentlyItem" : user.recentlyItem,
                       "userPhoneNumber" : user.userPhoneNumber,
-                      "deviceToken" : user.deviceToken])
+                      "deviceToken" : user.deviceToken,
+                      "noticeList" : user.noticeList
+                     ]
+            )
         readUser(userId: user.email)
     }
     
     func readUser(userId: String) {
         Firestore.firestore().collection("User").document(userId).getDocument { (snapshot, error) in
-                
-                let currentData = snapshot!.data()
-                let email: String = currentData!["email"] as? String ?? ""
-                let followItemList: [String] = currentData!["followItemList"] as? [String] ?? []
-                let followShopList: [String] = currentData!["followShopList"] as? [String] ?? []
-                let nickname: String = currentData!["nickname"] as? String ?? ""
-                let pickupItemList: [String] = currentData!["pickupItemList"] as? [String] ?? []
-                let recentlyItem: [String] = currentData!["recentlyItem"] as? [String] ?? []
-                let userPhoneNumber: String = currentData!["userPhoneNumber"] as? String ?? ""
-                let deviceToken: String = currentData!["deviceToken"] as? String ?? ""
-            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken)
-            }
+            
+            let currentData = snapshot!.data()
+            let email: String = currentData!["email"] as? String ?? ""
+            let followItemList: [String] = currentData!["followItemList"] as? [String] ?? []
+            let followShopList: [String] = currentData!["followShopList"] as? [String] ?? []
+            let nickname: String = currentData!["nickname"] as? String ?? ""
+            let pickupItemList: [String] = currentData!["pickupItemList"] as? [String] ?? []
+            let recentlyItem: [String] = currentData!["recentlyItem"] as? [String] ?? []
+            let userPhoneNumber: String = currentData!["userPhoneNumber"] as? String ?? ""
+            let deviceToken: String = currentData!["deviceToken"] as? String ?? ""
+            let noticeList: [String] = currentData!["v"] as? [String] ?? []
+            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList)
         }
+    }
     
-//    func readUserOnly(userId: String) async {
-//
-//        do {
-//            let documents = try await Firestore.firestore().collection("User").document("test@naver.com").getDocument()
-//            if let docData = documents.data(){
-//                // 있는지를 따져서 있으면 데이터 넣어주고, 없으면 옵셔널 처리
-//
-//                let email: String = docData["email"] as? String ?? ""
-//                let followItemList: [String] = docData["followItemList"] as? [String] ?? []
-//                let followShopList: [String] = docData["followShopList"] as? [String] ?? []
-//                let nickname: String = docData["nickname"] as? String ?? ""
-//                let pickupItemList: [String] = docData["pickupItemList"] as? [String] ?? []
-//                let recentlyItem: [String] = docData["recentlyItem"] as? [String] ?? []
-//                let userPhoneNumber: String = docData["userPhoneNumber"] as? String ?? ""
-//                self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber)
-//            }
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//    }
+    //    func readUserOnly(userId: String) async {
+    //
+    //        do {
+    //            let documents = try await Firestore.firestore().collection("User").document("test@naver.com").getDocument()
+    //            if let docData = documents.data(){
+    //                // 있는지를 따져서 있으면 데이터 넣어주고, 없으면 옵셔널 처리
+    //
+    //                let email: String = docData["email"] as? String ?? ""
+    //                let followItemList: [String] = docData["followItemList"] as? [String] ?? []
+    //                let followShopList: [String] = docData["followShopList"] as? [String] ?? []
+    //                let nickname: String = docData["nickname"] as? String ?? ""
+    //                let pickupItemList: [String] = docData["pickupItemList"] as? [String] ?? []
+    //                let recentlyItem: [String] = docData["recentlyItem"] as? [String] ?? []
+    //                let userPhoneNumber: String = docData["userPhoneNumber"] as? String ?? ""
+    //                self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber)
+    //            }
+    //        } catch {
+    //            print(error.localizedDescription)
+    //        }
+    //    }
     
     func updateUser(user: User) {
         Firestore.firestore().collection("User").document(user.id)
@@ -117,7 +121,7 @@ class UserStore: ObservableObject {
         
         
     }
-
+    
     // 북마크: 내가 저장한 바틀 추가하기
     func addFollowItemId(_ id: String) {
         Firestore.firestore().collection("User")
@@ -155,6 +159,40 @@ class UserStore: ObservableObject {
         Firestore.firestore().collection("User")
             .document(user.id)
             .updateData(["recentlyItem": FieldValue.arrayUnion([id])])
+        readUser(userId: user.id)
+    }
+    
+    func getUserDataRealTime(userId: String) {
+        
+        Firestore.firestore().collection("User").document(userId).addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error!)")
+                return
+            }
+            
+//            for document in document.documents {
+                let currentData = document.data()
+            let email: String = currentData!["email"] as? String ?? ""
+                let followItemList: [String] = currentData["followItemList"] as? [String] ?? []
+                let followShopList: [String] = currentData["followShopList"] as? [String] ?? []
+                let nickname: String = currentData["nickname"] as? String ?? ""
+                let pickupItemList: [String] = currentData["pickupItemList"] as? [String] ?? []
+                let recentlyItem: [String] = currentData["recentlyItem"] as? [String] ?? []
+                let userPhoneNumber: String = currentData["userPhoneNumber"] as? String ?? ""
+                let deviceToken: String = currentData["deviceToken"] as? String ?? ""
+                let noticeList: [String] = currentData["v"] as? [String] ?? []
+                self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList)
+//            }
+            
+//            print("Current data: \(data)")
+        }
+        
+    }
+    
+    func addUserNoticeData(_ id: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["noticeList": FieldValue.arrayUnion([id])])
         readUser(userId: user.id)
     }
 }
