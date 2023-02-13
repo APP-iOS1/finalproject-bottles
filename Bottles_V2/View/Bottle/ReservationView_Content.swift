@@ -139,7 +139,7 @@ struct ReservationView_Content: View {
     func getBottleReservation(bottleData: BottleModel) -> [BottleReservation] {
         var matchedBottleReservation: [BottleReservation] = []
         
-        matchedBottleReservation.append(BottleReservation(image: bottleData.itemImage, title: bottleData.itemName, price: bottleData.itemPrice * count, count: count, shop: bottleData.shopName))
+        matchedBottleReservation.append(BottleReservation(id: bottleData.id, image: bottleData.itemImage, title: bottleData.itemName, price: bottleData.itemPrice * count, count: count, shop: bottleData.shopName))
         
         return matchedBottleReservation
     }

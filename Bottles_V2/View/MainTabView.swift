@@ -12,7 +12,7 @@ struct MainTabView: View {
     //    @EnvironmentObject var sessionManager : SessionManager
     @EnvironmentObject var shopDataStore : ShopDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
-    @EnvironmentObject var reservationDataStore : ResevationDataStore
+    @EnvironmentObject var reservationDataStore : ReservationDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
 
     //    let user: AuthUser

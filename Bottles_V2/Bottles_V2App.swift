@@ -20,18 +20,13 @@ struct Bottles_V2App: App {
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var shopNoticeDataStore = ShopNoticeDataStore()
-    @ObservedObject var reservationDataStore = ResevationDataStore()
+    @ObservedObject var reservationDataStore = ReservationDataStore()
     @ObservedObject var cartStore = CartStore()
     @ObservedObject var mapViewModel = MapViewModel()
     
     // coreData
     @StateObject var dataController = DataController()
     
-    
-
-    
-
-
     init() {
 //        FirebaseApp.configure()
         KakaoSDK.initSDK(appKey: "f2abf38572d20d5dde71ea5c33a02c07")
@@ -68,7 +63,7 @@ struct Bottles_V2App: App {
                     await shopDataStore.getAllShopData()
                     await shopNoticeDataStore.getAllShopNoticeData()
                     await bottleDataStore.getAllBottleData()
-//                    await reservationDataStore.getAllReservationData()
+                    await reservationDataStore.readReservation()
                 }
                 .environmentObject(AuthStore())
                 
