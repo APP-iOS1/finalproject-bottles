@@ -90,55 +90,45 @@ struct ReservationView_Content: View {
                     isPresented: $anotherShopInCart
                 ) {
                     Button("OK", role: .destructive) {
-                        //                                cartStore.deleteAllCart(userEmail: userStore.user.email)
-                        //                                cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                        cartStore.deleteAndAdd(userEmail: userStore.user.email, cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName))
+                        isShowingAlert.toggle()
+                        
                     }
                     Button("cancel", role: .cancel) {}
                     
-                        .alert(
-                            "장바구니에는 같은 가게의 바틀만 담을 수 있습니다.",
-                            isPresented: $anotherShopInCart
-                        ) {
-                            Button("OK", role: .destructive) {
-                                cartStore.deleteAndAdd(userEmail: userStore.user.email, cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName))
-                                isShowingAlert.toggle()
-
-                            }
-                            Button("cancel", role: .cancel) {}
-                        
-                        } message: {
-                            Text("선택하신 바틀을 장바구니에 담을 경우 이전에 담은 바틀은 삭제 됩니다.")
-                        }
-                    
-                    // Alert창에서 OK 버튼 클릭 시 장바구니 뷰로 이동
-                        .navigationDestination(isPresented: $isShowingCart) {
-                            CartView()
-                        }
-                    
-                    // MARK: - 바로 예약하기 버튼
-                    //                NavigationLink(value: "") {
-                    //                    ZStack {
-                    //                        RoundedRectangle(cornerRadius: 12)
-                    //                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
-                    //                        Text("바로 예약하기")
-                    //                            .modifier(AccentColorButtonModifier())
-                    //                    }
-                    //                }
-                    //                .navigationDestination(for: String.self) { _ in
-                    //                    ReservationPageView()
-                    //                        .environmentObject(path)
-                    //                }
-                    
-                    NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleData: bottleData))) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
-                            Text("바로 예약하기")
-                                .modifier(AccentColorButtonModifier())
-                        }
-
-                    }
+                } message: {
+                    Text("선택하신 바틀을 장바구니에 담을 경우 이전에 담은 바틀은 삭제 됩니다.")
                 }
+                
+                // Alert창에서 OK 버튼 클릭 시 장바구니 뷰로 이동
+                .navigationDestination(isPresented: $isShowingCart) {
+                    CartView()
+                }
+                
+                // MARK: - 바로 예약하기 버튼
+                //                NavigationLink(value: "") {
+                //                    ZStack {
+                //                        RoundedRectangle(cornerRadius: 12)
+                //                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
+                //                        Text("바로 예약하기")
+                //                            .modifier(AccentColorButtonModifier())
+                //                    }
+                //                }
+                //                .navigationDestination(for: String.self) { _ in
+                //                    ReservationPageView()
+                //                        .environmentObject(path)
+                //                }
+                
+                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleData: bottleData))) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
+                        Text("바로 예약하기")
+                            .modifier(AccentColorButtonModifier())
+                    }
+                    
+                }
+                
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.top, 10)
@@ -155,13 +145,13 @@ struct ReservationView_Content: View {
         matchedBottleReservation.append(BottleReservation(id: bottleData.id, image: bottleData.itemImage, title: bottleData.itemName, price: bottleData.itemPrice * count, count: count, shop: bottleData.shopName))
         
         return matchedBottleReservation
+        
     }
+    
 }
+//struct ReservationView_Content_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReservationView(isShowingReservationView: <#Binding<Bool>#>)
+//    }
+//}
 
-    
-    //struct ReservationView_Content_Previews: PreviewProvider {
-    //    static var previews: some View {
-    //        ReservationView(isShowingReservationView: <#Binding<Bool>#>)
-    //    }
-    //}
-    
