@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MyPageView: View {
     
-    
+    @EnvironmentObject var userStore: UserStore
     var myPageList: [String] = ["바틀스 소개", "공지사항", "자주 묻는 질문",
                                 "1:1 문의하기", "서비스 이용약관", "개인정보 처리방침", "위치정보 이용약관", "버전 정보"]
     
@@ -40,7 +40,7 @@ struct MyPageView: View {
                         .frame(width: 65, height: 65)
                     
                     // TODO: 닉네임 들어갈 곳
-                    Text("밤삭님")
+                    Text(userStore.user.nickname)
                         .font(.bottles18)
                         .bold()
                     Spacer()

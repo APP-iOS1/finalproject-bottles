@@ -17,8 +17,8 @@ struct NotificationView: View {
     
     func filteredMyFollowShop() -> [ShopNotice] {
         var shopNotice: [ShopNotice] = []
-        for myShop in userStore.user.followShopList {
-            let filtered = shopNoticeDataStore.shopNoticeData.filter { $0.shopName == myShop }
+        for noticeId in userStore.user.noticeList {
+            let filtered = shopNoticeDataStore.shopNoticeData.filter { $0.id == noticeId }
             shopNotice.append(contentsOf: filtered)
             shopNotice.sort { $0.date > $1.date }
         }
@@ -54,9 +54,9 @@ struct NotificationView: View {
                 }
             }
             .navigationBarTitle("알림", displayMode: .inline)
-            .onAppear {
-                shopNoticeDataStore.getAllShopNoticeDataRealTime()
-            }
+//            .onAppear {
+//                shopNoticeDataStore.getAllShopNoticeDataRealTime(<#UserStore#>)
+//            }
         }
     }
     

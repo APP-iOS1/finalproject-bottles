@@ -14,8 +14,8 @@ import FirebaseFirestoreSwift
 class ShopNoticeDataStore : ObservableObject {
     // 전체 샵 데이터 저장 변수
     @Published var shopNoticeData : [ShopNotice] = []
-    var userStore: UserStore = UserStore()
-    //    @EnvironmentObject var userStore : UserStore
+//    var userStore: UserStore = UserStore()
+//        @EnvironmentObject var userStore : UserStore
     
     // 로그인 시 전체 패치 실행
 //    @MainActor
@@ -51,7 +51,7 @@ class ShopNoticeDataStore : ObservableObject {
 //        }
 //    }
     
-    func getAllShopNoticeDataRealTime() {
+    func getAllShopNoticeDataRealTime(_ userStore: UserStore) {
         self.shopNoticeData = []
         Firestore.firestore().collection("shopNotice")
             .order(by: "date", descending: false)
@@ -87,6 +87,7 @@ class ShopNoticeDataStore : ObservableObject {
                         
                         if !self.shopNoticeData.contains(shopNotice) {
                             self.shopNoticeData.append(shopNotice)
+                            userStore.addUserNoticeData(id)
                         }
                     }
                     
@@ -99,7 +100,9 @@ class ShopNoticeDataStore : ObservableObject {
                     //                        }
                 }
             }
+    }
+    
+    func getReservation() {
         
-//        self.shopNoticeData.sort(by: $0.date > $1.date)
     }
 }
