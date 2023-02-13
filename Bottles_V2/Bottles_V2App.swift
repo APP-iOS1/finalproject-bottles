@@ -13,6 +13,7 @@ import KakaoSDKAuth
 import FirebaseFirestore
 import FirebaseMessaging
 
+import FBSDKCoreKit
 @main
 struct Bottles_V2App: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -32,8 +33,7 @@ struct Bottles_V2App: App {
     
     @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
     
-    
-    init() {
+        init() {
         //        FirebaseApp.configure()
         KakaoSDK.initSDK(appKey: "f2abf38572d20d5dde71ea5c33a02c07")
     }
@@ -73,7 +73,7 @@ struct Bottles_V2App: App {
                     //                    await reservationDataStore.getAllReservationData()
                 }
                 .environmentObject(AuthStore())
-                .environmentObject(KakaoLoginViewModel())
+                
             
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))
@@ -91,7 +91,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
         // Use Firebase library to configure APIs
         // 파이어베이스 설정
         FirebaseApp.configure()
-        
+        FBSDKCoreKit.ApplicationDelegate.shared.application(
+                   application,
+                   didFinishLaunchingWithOptions: launchOptions
+               )
         // 원격 알림 등록
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -134,6 +137,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
         }
     }
     
+    
+    func application( app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
+    }
     
 }
 

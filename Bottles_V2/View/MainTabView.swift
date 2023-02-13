@@ -16,7 +16,7 @@ struct MainTabView: View {
     @EnvironmentObject var mapViewModel: MapViewModel
 
     //    let user: AuthUser
-    @Binding var isSignIn: Bool
+    
     @State private var selection: Int = 1
     //     TabBar 백그라운드 컬러 지정
     

@@ -9,13 +9,12 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var authStore: AuthStore
-    @EnvironmentObject var kakaoLoginViewModel: KakaoLoginViewModel
+    
     /// 로그아웃 Alert창을 띄웁니다.
     @State private var logoutAlert: Bool = false
     /// 회원 탈퇴 Alert창을 띄웁니다.
     @State private var unregisterAlert: Bool = false
     
-    @Binding var isSignIn: Bool
     var body: some View {
         VStack {
             // MARK: - 휴대폰 번호 변경, 알림 설정
@@ -59,15 +58,10 @@ struct SettingView: View {
                 
                 // MARK: - 로그아웃 버튼
                 Button(action:{
-                    
-                        
-                        if isSignIn {
-                            authStore.logout()
-                            kakaoLoginViewModel.kakaoLogout()
-                            isSignIn = false
-                        }
-                    
-//                    logoutAlert.toggle()
+                    authStore.logout()
+                    authStore.kakaoLogout()
+                    authStore.googleSignOut()
+                    authStore.facebookLogout()
                 }){
                     Text("로그아웃")
                         .font(.bottles12)
@@ -113,6 +107,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(isSignIn: .constant(true))
+        SettingView()
     }
 }

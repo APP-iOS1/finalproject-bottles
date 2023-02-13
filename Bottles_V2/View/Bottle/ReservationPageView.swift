@@ -14,6 +14,8 @@ struct ReservationPageView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
+    @State private var hiddenBottle: Bool = false
+    
     let bottleReservations: [BottleReservation]
     
     var body: some View {
@@ -33,16 +35,22 @@ struct ReservationPageView: View {
                                 .font(.bottles16)
                                 .fontWeight(.medium)
                             
-                            Image("arrowBottom")
-                                .resizable()
-                                .frame(width: 10, height: 6)
+                            Button(action: {
+                                hiddenBottle.toggle()
+                            }) {
+                                Image("arrowBottom")
+                                    .resizable()
+                                    .frame(width: 10, height: 6)
+                            }
                         }
                     }
                     
-                    // MARK: - 예약 바틀 리스트
-                    ForEach(bottleReservations, id: \.self) { bottleReservation in
-                        // 예약 바틀 셀
-                        ReservationPageView_BottleCell(bottleReservation: bottleReservation)
+                    if !hiddenBottle {
+                        // MARK: - 예약 바틀 리스트
+                        ForEach(bottleReservations, id: \.self) { bottleReservation in
+                            // 예약 바틀 셀
+                            ReservationPageView_BottleCell(bottleReservation: bottleReservation)
+                        }
                     }
                 }
                 .padding()

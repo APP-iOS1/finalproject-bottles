@@ -19,19 +19,19 @@ struct ReservationView: View {
     @State var offset = UIScreen.main.bounds.height
     @State private var isDragging = false
     
-    
     let heightToDisappear = UIScreen.main.bounds.height
-    let outOfFocusOpacity: CGFloat = 0.7
+    let outOfFocusOpacity: CGFloat = 0.2
     let minimumDragDistanceToHide: CGFloat = 150
     
     var body: some View {
         Group {
             if isShowing {
                 ZStack {
-                    //outOfFocusArea
+//                    TestGrayView()
+                    ReservationView_OutOfFocus()
                     sheetView
+                 
                 }
-                
             }
         }
         .onReceive(Just(isShowing), perform: { isShowing in
@@ -71,18 +71,19 @@ struct ReservationView: View {
             })
     }
     
-    var outOfFocusArea: some View {
-        Group {
-            if isShowing {
-                ReservationView_OutOfFocus(opacity: outOfFocusOpacity) {
-                    self.isShowing = false
-                }
-            }
-        }
-    }
+//    var outOfFocusArea: some View {
+////        Group {
+////            if isShowing {
+////                ReservationView_OutOfFocus()
+////                self.isShowing = false
+////
+////            }
+////        }
+//    }
     
     var sheetView: some View {
         VStack {
+            Spacer()
             ReservationView_Content(bottleData: bottleData)
                 .background(.white)
                 .cornerRadius(15)
@@ -94,6 +95,8 @@ struct ReservationView: View {
                     hide()
                 }
         }
+        .edgesIgnoringSafeArea(.bottom)
+        
     }
     
     
