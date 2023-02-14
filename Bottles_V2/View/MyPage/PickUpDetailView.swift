@@ -22,7 +22,7 @@ struct PickUpDetailView: View {
             VStack{
                 HStack {
                     Text("예약 번호")
-                        //.font(.bottles14)
+                    //.font(.bottles14)
                         .bold()
                         .padding(.trailing)
                     Text(textLimit(str: reservationData.id))
@@ -88,7 +88,7 @@ struct PickUpDetailView: View {
                     Text("\(reservationData.state)")
                         .font(.bottles15)
                     
-                    if reservationData.state == "예약 완료" {
+                    if reservationData.state == "예약완료" {
                         Text("\(reservationData.reservedTime)까지 방문해주세요")
                             .font(.bottles12)
                             .foregroundColor(.gray)
@@ -126,15 +126,19 @@ struct PickUpDetailView: View {
                 
             }
         }
+        .customAlert(isPresented: $isShowingCancelAlert, message: "예약을 취소하시겠습니까?", primaryButtonTitle: "확인", primaryAction: {
+            Task {
+                await reservationDataStore.cancelReservation(reservationId: reservationData.id)
+            }
+            self.reservationData.state = "예약취소"
+//            self.presentationMode.wrappedValue.dismiss()
+        }, withCancelButton: true)
         
     }
     
     private var cancelButton : some View {
         Button {
-            Task {
-                await reservationDataStore.cancelReservation(reservationId: reservationData.id)
-            }
-            
+            isShowingCancelAlert.toggle()
         } label : {
             Text("예약 취소")
                 .font(.bottles18)
@@ -193,9 +197,9 @@ struct PickUpDetailView: View {
     }
     
     func getMatchedShopData(shopId: String) -> ShopModel {
-            let matchedShopData = shopDataStore.shopData.filter {$0.id == shopId}
-            return matchedShopData[0]
-        }
+        let matchedShopData = shopDataStore.shopData.filter {$0.id == shopId}
+        return matchedShopData[0]
+    }
     
     func textLimit(str: String) -> String {
         let startIndex = str.index(str.startIndex, offsetBy: 0)
