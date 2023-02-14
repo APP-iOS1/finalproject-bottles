@@ -12,7 +12,7 @@ struct ReservationPageView_BottleCell: View {
     var bottleReservation: BottleReservation
     
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .top, spacing: 8) {
             // MARK: - 상품 이미지
             AsyncImage(url: URL(string: bottleReservation.image)) { image in
                 image
@@ -31,9 +31,9 @@ struct ReservationPageView_BottleCell: View {
             .background(Color.gray_f7)
             .cornerRadius(12)
             .frame(height: 128)
-            .padding(.horizontal)
+            //.padding(.horizontal)
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 9) {
                 // MARK: - 상품 이름
                 Text(bottleReservation.title)
                     .font(.bottles14)
@@ -49,7 +49,7 @@ struct ReservationPageView_BottleCell: View {
                     .font(.bottles15)
                     .fontWeight(.medium)
             }
-            .padding(10)
+            .padding(16)
         }
         .frame(height: 129)
     }

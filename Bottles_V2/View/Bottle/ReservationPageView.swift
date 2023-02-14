@@ -64,7 +64,7 @@ struct ReservationPageView: View {
                             }
                             
                             HStack {
-                                Text("예약 날짜")
+                                Text("픽업 날짜")
                                     .font(.bottles14)
                                     .fontWeight(.medium)
                                 
@@ -81,7 +81,7 @@ struct ReservationPageView: View {
                     .padding(.top)
                     
                     Divider()
-                        .padding(.vertical, 3)
+                        .padding(.vertical, 5)
                     
                     VStack(alignment: .leading) {
                         HStack {
@@ -114,7 +114,20 @@ struct ReservationPageView: View {
                                 // 예약 바틀 셀
                                 ReservationPageView_BottleCell(bottleReservation: bottleReservation)
                             }
+                            .padding(.bottom, 5)
                         }
+                        
+                        HStack {
+                            Text("총 금액")
+                                .font(.bottles18)
+                                .fontWeight(.medium)
+                            Spacer()
+                            Text("\(bottleReservations.map{$0.price}.reduce(0, +))원")
+                                .font(.bottles18)
+                                .bold()
+                        }
+                        .padding(.top)
+                        .padding(.bottom, 10)
                     }
                     .padding(.horizontal)
                 }
@@ -146,14 +159,10 @@ struct ReservationPageView: View {
                     }
                 }
                 .padding()
+                .padding(.bottom, 50)
             }
             
-            VStack(spacing: 8) {
-                Text("이용정책 및 개인정보 제공에 동의합니다.")
-                    .foregroundColor(.black.opacity(0.5))
-                    .font(.bottles12)
-                    .fontWeight(.medium)
-                
+            VStack {
                 // MARK: - 예약하기 버튼
                 Button(action: {
                     // 예약확정 체크 시
@@ -179,8 +188,6 @@ struct ReservationPageView: View {
                 .padding(.bottom, 30)
                 .disabled(!check)
             }
-            .frame(alignment: .bottom)
-            
             // 예약 완료 뷰로 이동
             .navigationDestination(isPresented: $isShowing) {
                 ReservedView(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수중", reservedBottles: getReservedBottlesArray(bottleReservations: bottleReservations)))
@@ -194,6 +201,7 @@ struct ReservationPageView: View {
                 }
             })
         }
+        .toolbar(.hidden, for: .tabBar)
         .edgesIgnoringSafeArea([.bottom])
     }
     
