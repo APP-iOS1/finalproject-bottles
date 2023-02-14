@@ -19,6 +19,7 @@ struct ReservationPageView: View {
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
     @State private var hiddenBottle: Bool = false
+    @State private var hiddenInfo: Bool = false
     var tempId: String = UUID().uuidString
     let bottleReservations: [BottleReservation]
     
@@ -26,58 +27,125 @@ struct ReservationPageView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 15) {
-                    HStack {
-                        Text("예약 상품")
-                            .font(.bottles16)
-                            .fontWeight(.medium)
-                        
-                        Spacer()
-                        
-                        HStack {
-                            // MARK: - 예약 바틀 총 개수
-                            Text("\(bottleReservations.count)건")
+                    VStack(alignment: .leading, spacing: 13) {
+                        HStack(alignment: .top) {
+                            Text("예약 정보")
                                 .font(.bottles16)
                                 .fontWeight(.medium)
                             
+                            Spacer()
+                            
                             Button(action: {
-                                hiddenBottle.toggle()
+                                hiddenInfo.toggle()
                             }) {
-                                Image("arrowBottom")
+                                Image(hiddenBottle ? "arrowTop" : "arrowBottom")
                                     .resizable()
                                     .frame(width: 10, height: 6)
                             }
                         }
-                    }
-                    
-                    if !hiddenBottle {
-                        // MARK: - 예약 바틀 리스트
-                        ForEach(bottleReservations, id: \.self) { bottleReservation in
-                            // 예약 바틀 셀
-                            ReservationPageView_BottleCell(bottleReservation: bottleReservation)
+                        
+                        if !hiddenInfo {
+                            HStack {
+                                Text("픽업 매장")
+                                    .font(.bottles14)
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
+                                
+                                Image("Maptabfill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 14, height: 17)
+                                
+                                // MARK: - 바틀샵 이름
+                                Text(bottleReservations.first!.shop)
+                                    .font(.bottles14)
+                                    .fontWeight(.regular)
+                            }
+                            
+                            HStack {
+                                Text("예약 날짜")
+                                    .font(.bottles14)
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
+                                
+                                // MARK: - 예약 날짜
+                                Text("\(setDateFormat())까지 방문")
+                                    .font(.bottles14)
+                                    .fontWeight(.regular)
+                            }
                         }
                     }
+                    .padding(.horizontal)
+                    .padding(.top)
+                    
+                    Divider()
+                        .padding(.vertical, 3)
+                    
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("예약 상품")
+                                .font(.bottles16)
+                                .fontWeight(.medium)
+                            
+                            Spacer()
+                            
+                            HStack {
+                                // MARK: - 예약 바틀 총 개수
+                                Text("\(bottleReservations.count)건")
+                                    .font(.bottles16)
+                                    .fontWeight(.medium)
+                                
+                                Button(action: {
+                                    hiddenBottle.toggle()
+                                }) {
+                                    Image(hiddenBottle ? "arrowTop" : "arrowBottom")
+                                        .resizable()
+                                        .frame(width: 10, height: 6)
+                                }
+                            }
+                        }
+                        .padding(.bottom, 5)
+                        
+                        if !hiddenBottle {
+                            // MARK: - 예약 바틀 리스트
+                            ForEach(bottleReservations, id: \.self) { bottleReservation in
+                                // 예약 바틀 셀
+                                ReservationPageView_BottleCell(bottleReservation: bottleReservation)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
                 }
-                .padding()
+               
                 
                 Divider()
                 
                 // MARK: - 예약 체크 버튼
-                Button(action: {
-                    check.toggle()
-                }) {
-                    HStack {
-                        Image(systemName: check ? "checkmark.circle.fill" : "circle")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(check ? Color("AccentColor") : Color("AccentColor").opacity(0.1))
-                        Text("예약 확정 후 3일 이내 미방문시 예약이 취소됩니다.")
+                HStack {
+                    VStack(alignment: .leading, spacing: 7) {
+                        Text("예약 정책에 대해 확인하였습니다.")
                             .font(.bottles14)
                             .fontWeight(.medium)
+                        Text("예약 확정 후 3일 이내 미방문시 예약이 취소됩니다.")
+                            .font(.bottles13)
+                            .fontWeight(.regular)
+                            .foregroundColor(.gray)
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        check.toggle()
+                    }) {
+                        Image(systemName: check ? "checkmark.square.fill" : "checkmark.square")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(check ? Color("AccentColor") : .gray)
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                .padding(.vertical, 10)
+                .padding()
             }
             
             VStack(spacing: 8) {
@@ -156,14 +224,21 @@ struct ReservationPageView: View {
         }
         return reservedBottles
     }
+    
+    func setDateFormat() -> String {
+        let curDate = Date()
+        let calender = Calendar.current
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M월 d일"
+        
+        var day3 = DateComponents()
+        day3.day = 3
+        
+        let curDayPlusDay3 = calender.date(byAdding: day3, to: curDate)
+        let convertDate = formatter.string(from: curDayPlusDay3!)
+        return convertDate
+    }
 }
-
-//// 예약 상품 더미데이터
-//var bottleReservationData = [
-//    BottleReservation(image: "bottle", title: "프로메샤 모스카토", price: 110000, count: 1, shop: "와인앤모어 군자점"),
-//    BottleReservation(image: "bottle2", title: "샤도네이 화이트 와인", price: 58000, count: 1, shop: "와인앤모어 군자점")
-//]
-
 
 //struct ReservationPageView_Previews: PreviewProvider {
 //    static var previews: some View {
