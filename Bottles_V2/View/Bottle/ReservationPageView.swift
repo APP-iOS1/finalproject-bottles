@@ -148,6 +148,14 @@ struct ReservationPageView: View {
         
         return matchedBottleReservation
     }
+    
+    func getReservedBottlesArray(bottleReservations: [BottleReservation]) -> [ReservedBottles] {
+        var reservedBottles: [ReservedBottles] = []
+        for bottleReservation in bottleReservations {
+            reservedBottles.append(ReservedBottles(id: UUID().uuidString, BottleId: bottleReservation.id, itemCount: bottleReservation.count))
+        }
+        return reservedBottles
+    }
 }
 
 //// 예약 상품 더미데이터

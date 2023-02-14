@@ -66,7 +66,6 @@ struct Bottles_V2App: App {
                 .environmentObject(appDelegate)
                 .task {
                     await shopDataStore.getAllShopData()
-                    
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.readReservation()
                 }

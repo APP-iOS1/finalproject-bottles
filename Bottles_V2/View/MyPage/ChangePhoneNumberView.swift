@@ -13,6 +13,7 @@ struct ChangePhoneNumberView: View {
     @State var phoneNumber: String = ""
     
     @State var isShowingAlert: Bool = false
+    @EnvironmentObject var userStore: UserStore
     var body: some View {
         VStack {
             HStack{
@@ -38,7 +39,10 @@ struct ChangePhoneNumberView: View {
         .navigationBarTitle("휴대폰 번호 변경")
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
-        .customAlert(isPresented: $isShowingAlert, message: "입력하신 번호로 휴대폰 번호를 변경합니다.", primaryButtonTitle: "확인", primaryAction: {self.presentationMode.wrappedValue.dismiss()}, withCancelButton: true)
+        .customAlert(isPresented: $isShowingAlert, message: "입력하신 번호로 휴대폰 번호를 변경합니다.", primaryButtonTitle: "확인", primaryAction: {
+            userStore.updateUserPhoneNumber(phoneNumber: phoneNumber)
+            self.presentationMode.wrappedValue.dismiss()
+        }, withCancelButton: true)
     }
     
     private var phoneNumberNotFitFormat: Bool {
@@ -59,6 +63,6 @@ struct ChangePhoneNumberView: View {
 
 struct ChangePhoneNumberView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangePhoneNumberView()
+        ChangePhoneNumberView().environmentObject(UserStore())
     }
 }

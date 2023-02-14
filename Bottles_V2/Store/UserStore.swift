@@ -211,5 +211,12 @@ class UserStore: ObservableObject {
             .updateData(["noticeList": FieldValue.arrayUnion([id])])
         readUser(userId: user.id)
     }
+    
+    func updateUserPhoneNumber(phoneNumber: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["userPhoneNumber": phoneNumber])
+        readUser(userId: user.id)
+    }
 }
 

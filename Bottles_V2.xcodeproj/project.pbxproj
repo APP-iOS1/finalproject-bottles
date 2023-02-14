@@ -74,6 +74,15 @@
 		3AA43A5B29778F7200EB8551 /* BottleShopCurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5A29778F7200EB8551 /* BottleShopCurationView.swift */; };
 		3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A5C2977C8BD00EB8551 /* BottleShopView_BottleList.swift */; };
 		3AA43A612977E0AB00EB8551 /* BottleShopView_NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA43A602977E0AB00EB8551 /* BottleShopView_NoticeCell.swift */; };
+		3AFA0431299B2D9B0068BB09 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0430299B2D9B0068BB09 /* OnboardingView.swift */; };
+		3AFA0433299B2F490068BB09 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0432299B2F490068BB09 /* OnboardingPageView.swift */; };
+		3AFA0435299B2F600068BB09 /* OnboardingLastPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0434299B2F600068BB09 /* OnboardingLastPageView.swift */; };
+		3AFA043A299B43D00068BB09 /* wine.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA0439299B43D00068BB09 /* wine.json */; };
+		3AFA043C299B44C70068BB09 /* map.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA043B299B44C70068BB09 /* map.json */; };
+		3AFA043E299B45BA0068BB09 /* shakehands.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA043D299B45BA0068BB09 /* shakehands.json */; };
+		3AFA0440299B46580068BB09 /* reserve.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA043F299B46580068BB09 /* reserve.json */; };
+		3AFA0448299B50610068BB09 /* winecheers.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA0447299B50610068BB09 /* winecheers.json */; };
+		3AFA044A299B7E0F0068BB09 /* OnboardingFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0449299B7E0F0068BB09 /* OnboardingFirstView.swift */; };
 		59883C3FF144E2CA845F4DE6 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */; };
 		7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */; };
 		7F0C61FD2990C30C00B4CE4D /* SentEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */; };
@@ -223,6 +232,15 @@
 		3AA43A5A29778F7200EB8551 /* BottleShopCurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopCurationView.swift; sourceTree = "<group>"; };
 		3AA43A5C2977C8BD00EB8551 /* BottleShopView_BottleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_BottleList.swift; sourceTree = "<group>"; };
 		3AA43A602977E0AB00EB8551 /* BottleShopView_NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView_NoticeCell.swift; sourceTree = "<group>"; };
+		3AFA0430299B2D9B0068BB09 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		3AFA0432299B2F490068BB09 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
+		3AFA0434299B2F600068BB09 /* OnboardingLastPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLastPageView.swift; sourceTree = "<group>"; };
+		3AFA0439299B43D00068BB09 /* wine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = wine.json; sourceTree = "<group>"; };
+		3AFA043B299B44C70068BB09 /* map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map.json; sourceTree = "<group>"; };
+		3AFA043D299B45BA0068BB09 /* shakehands.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shakehands.json; sourceTree = "<group>"; };
+		3AFA043F299B46580068BB09 /* reserve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reserve.json; sourceTree = "<group>"; };
+		3AFA0447299B50610068BB09 /* winecheers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = winecheers.json; sourceTree = "<group>"; };
+		3AFA0449299B7E0F0068BB09 /* OnboardingFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstView.swift; sourceTree = "<group>"; };
 		4F05C0664583932B22FDC119 /* Pods-Bottles_V2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F497AFA31D64A6C7C8D5DAB /* Pods-Bottles_V2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.debug.xcconfig"; sourceTree = "<group>"; };
 		534C0901FECD300F1E9C28B3 /* Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -416,6 +434,7 @@
 			children = (
 				D7B5EA58298CFEBB00DC648A /* LaunchView.swift */,
 				AE9E77072978179200A6B9D4 /* MainTabView.swift */,
+				3AFA042F299B2D790068BB09 /* Onboarding */,
 				7F76AAF02987659300AAEBCA /* Login */,
 				27281CE1297784F6003BE8B4 /* Map */,
 				27281CEE297785BC003BE8B4 /* BookMark */,
@@ -578,9 +597,25 @@
 		27D82C3B297A5C0A004F3D94 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3AFA043B299B44C70068BB09 /* map.json */,
+				3AFA0439299B43D00068BB09 /* wine.json */,
+				3AFA043D299B45BA0068BB09 /* shakehands.json */,
+				3AFA043F299B46580068BB09 /* reserve.json */,
+				3AFA0447299B50610068BB09 /* winecheers.json */,
 				27D82C30297A5AC0004F3D94 /* SpoqaHanSansNeo_OTF_original */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		3AFA042F299B2D790068BB09 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3AFA0430299B2D9B0068BB09 /* OnboardingView.swift */,
+				3AFA0449299B7E0F0068BB09 /* OnboardingFirstView.swift */,
+				3AFA0432299B2F490068BB09 /* OnboardingPageView.swift */,
+				3AFA0434299B2F600068BB09 /* OnboardingLastPageView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		4F68E6EA943499F3BCE118BF /* Pods */ = {
@@ -776,12 +811,17 @@
 			files = (
 				27A02693298BAAF500F71705 /* Bottles-V2-Info.plist in Resources */,
 				0427F56C297677E80023E745 /* Preview Assets.xcassets in Resources */,
+				3AFA043A299B43D00068BB09 /* wine.json in Resources */,
 				27A0269B298BAC6500F71705 /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				D746C974298A41F400E27E16 /* GoogleService-Info.plist in Resources */,
+				3AFA0440299B46580068BB09 /* reserve.json in Resources */,
 				27D82C3A297A5AC1004F3D94 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				0427F569297677E80023E745 /* Assets.xcassets in Resources */,
 				27A0269D298BAC6500F71705 /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				3AFA043C299B44C70068BB09 /* map.json in Resources */,
+				3AFA043E299B45BA0068BB09 /* shakehands.json in Resources */,
 				27A0269A298BAC6500F71705 /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				3AFA0448299B50610068BB09 /* winecheers.json in Resources */,
 				27A0269C298BAC6500F71705 /* SpoqaHanSansNeo-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -943,10 +983,13 @@
 				27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				9216C1B92977AF1D00217C7F /* ReservationView_Content.swift in Sources */,
+				3AFA0433299B2F490068BB09 /* OnboardingPageView.swift in Sources */,
 				D5769B31298C8E73005528DB /* AuthStore.swift in Sources */,
 				27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */,
 				3A306746297A82BE0085CC6A /* Color.swift in Sources */,
 				3A47F3892990E7D700F8D603 /* BottleShopTestModel.swift in Sources */,
+				3AFA044A299B7E0F0068BB09 /* OnboardingFirstView.swift in Sources */,
+				3AFA0435299B2F600068BB09 /* OnboardingLastPageView.swift in Sources */,
 				26A66485298CC6F1004E15EA /* User.swift in Sources */,
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
@@ -1013,6 +1056,7 @@
 				27281CF52977860B003BE8B4 /* NotificationView.swift in Sources */,
 				26BA41CA2993869D00419584 /* BottleReservation.swift in Sources */,
 				27A0268D298B51AC00F71705 /* SearchViewNavigationLabel.swift in Sources */,
+				3AFA0431299B2D9B0068BB09 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

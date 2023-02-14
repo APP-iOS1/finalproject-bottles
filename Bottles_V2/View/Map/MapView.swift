@@ -41,6 +41,11 @@ struct MapView: View {
     // 북마크한 바틀샵 표시 버튼
     @State var isBookMarkTapped: Bool = false
     
+    // 사용자 안내 온보딩 페이지를 앱 설치 후 최초 실행할 때만 띄우도록 하는 변수.
+    // @AppStorage에 저장되어 앱 종료 후에도 유지됨.
+    @AppStorage("isFirstLaunching") var isFirstLaunching: Bool = true
+    
+    
     var body: some View {
         
         NavigationStack {
@@ -152,6 +157,10 @@ struct MapView: View {
                     .zIndex(3)
                 }
             }
+            .sheet(isPresented: $isFirstLaunching) {
+                OnboardingView(isFirstLaunching: $isFirstLaunching)
+                        }
+            
             .onAppear {
                 Coordinator.shared.checkIfLocationServicesIsEnabled()
                 Coordinator.shared.shopDataStore.shopData = shopDataStore.shopData

@@ -15,7 +15,7 @@ struct PickUpListView: View {
     
     func filterAndSortReservationData() -> [ReservationModel] {
         let filiteredData = reservationDataStore.reservationData.filter {
-            $0.userID == userStore.user.email
+            $0.userId == userStore.user.email
         }
         let sortedData = filiteredData.sorted(by: {$0.reservedTime > $1.reservedTime})
         return sortedData
