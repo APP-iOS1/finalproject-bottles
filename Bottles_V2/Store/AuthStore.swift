@@ -32,7 +32,7 @@ class AuthStore: ObservableObject {
     @Published var loginPlatform: LoginPlatform = .none
     
     @Published var currentUser: Firebase.User?
-    @Published var isLogin = false
+//    @Published var isLogin = false
     
     @Published var loginError: Bool = false
     @Published var resetPassword: Bool = false
@@ -67,7 +67,8 @@ class AuthStore: ObservableObject {
             } else {
                 self.currentUser = result?.user
                 self.loginError = false
-                self.isLogin = true
+//                self.isLogin = true
+                self.loginPlatform = .email
                
             }
             
@@ -89,7 +90,8 @@ class AuthStore: ObservableObject {
     func logout() {
         currentUser = nil
         try? Auth.auth().signOut()
-        self.isLogin = false
+        self.loginPlatform = .none
+//        self.isLogin = false
     }
     
     // MARK: - 계정 생성
@@ -110,7 +112,7 @@ class AuthStore: ObservableObject {
                     print("이메일 전송 완료")
                 }
             }
-            userStore.createUser(user: User(id: UUID().uuidString, email: email, followItemList: [], followShopList: [], nickname: nickname, pickupItemList: [], recentlyItem: [], userPhoneNumber: userPhoneNumber, deviceToken:UserStore.shared.fcmToken ?? "", noticeList: []))
+            userStore.createUser(user: User(id: email, email: email, followItemList: [], followShopList: [], nickname: nickname, pickupItemList: [], recentlyItem: [], userPhoneNumber: userPhoneNumber, deviceToken:UserStore.shared.fcmToken ?? "", noticeList: []))
             print("회원가입 완료")
             //let user: User = User(id: authUser.uid, name: name, email: email, temperature: 36.5, registDate: getStringDate(date: Date()),chatIDList: [])
             //FIXME: 여기에 addUser 함수 호출
@@ -194,12 +196,13 @@ class AuthStore: ObservableObject {
     }
     
     //MARK: - 카카오 로그인
-    @MainActor
+    
     func handleKakaoLogin() async {
         // 카카오톡 설치 여부 확인 - 카카오톡이 설치가 되어있을 때
         
             if (UserApi.isKakaoTalkLoginAvailable()) {
                 kakaoLogin = await loginWithKakaoApp()
+                
             } else {
                 // 카카톡이 설치가 되어 있지않을 때 카카오 웹뷰로 로그인
                 kakaoLogin = await loginWithKakaoAccount()
