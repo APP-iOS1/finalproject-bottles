@@ -18,5 +18,6 @@ struct User: Identifiable {
     let recentlyItem: [String]
     let userPhoneNumber: String
     let deviceToken: String
+    let noticeList: [String]
 
 }

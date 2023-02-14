@@ -19,7 +19,7 @@ struct LaunchView: View {
     @State private var isloading = true
     var body: some View {
         if isActive {
-            if authStore.currentUser != nil{
+            if let _ = authStore.currentUser {
                 MainTabView()
             } else {
                 TotalLoginView()

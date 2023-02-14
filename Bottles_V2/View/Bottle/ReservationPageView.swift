@@ -59,13 +59,6 @@ struct ReservationPageView: View {
                 
                 Divider()
                 
-                // MARK: - 예약자 정보
-                ReservationPageView_Info()
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                
-                Divider()
-                
                 // MARK: - 예약 체크 버튼
                 Button(action: {
                     check.toggle()
@@ -97,19 +90,19 @@ struct ReservationPageView: View {
                     if check {
                         isShowing.toggle()
                         Task{
-                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopID: bottleReservations[0].shop, userID: userStore.user.email, reservedTime: Date.now, state: "예약중", reservedBottles: []), reservedBottles: bottleReservations)
+                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopID: bottleReservations[0].shop, userID: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
                         }
                     }
                 }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 12)
-                            .opacity(check ? 1 : 0.5)
                             .frame(width: 358, height: 56)
                         Text("예약하기")
                             .modifier(AccentColorButtonModifier())
                     }
                 }
                 .padding(.horizontal)
+                .disabled(!check)
             }
             .frame(alignment: .bottom)
             

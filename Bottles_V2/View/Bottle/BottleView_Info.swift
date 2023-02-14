@@ -62,6 +62,7 @@ struct BottleView_Info: View {
                             userStore.deleteFollowItemId(bottleData.id)
                             withAnimation(.easeOut(duration: 1.5)) {
                                 isShowingEmptyBookmarkMessage = true
+                                print("북마크 해제")
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
@@ -74,6 +75,7 @@ struct BottleView_Info: View {
                             userStore.addFollowItemId(bottleData.id)
                             withAnimation(.easeOut(duration: 1.5)) {
                                 isShowingFillBookmarkMessage = true
+                                print("북마크 완료")
                             }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
