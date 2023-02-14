@@ -22,6 +22,7 @@ struct BottleView: View {
     var bottleData: BottleModel
     
     func filteredBottleItem() -> [BottleModel] {
+        print("필터링된 바틀 아이템 \(bottleDataStore.bottleData.filter { $0.id != bottleData.id && $0.itemName == bottleData.itemName })")
         return bottleDataStore.bottleData.filter { $0.id != bottleData.id && $0.itemName == bottleData.itemName }
     }
 //
@@ -64,7 +65,7 @@ struct BottleView: View {
                                 } label: {
                                     // 바틀 셀
                                     BottleView_BottleCell(
-                                        bottleData: bottleData,
+                                        bottleData: bottle,
                                         isShowingFillBookmarkMessage: $isShowingFillBookmarkMessage,
                                         isShowingEmptyBookmarkMessage: $isShowingEmptyBookmarkMessage
                                     )
