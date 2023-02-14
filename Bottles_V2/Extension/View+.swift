@@ -20,7 +20,32 @@ extension View {
         primaryAction: @escaping () -> Void,
         withCancelButton: Bool) -> some View
     {
-        modifier(CustomAlertModifier(isPresented: isPresented, message: message, primaryButtonTitle: primaryButtonTitle, primaryAction: primaryAction, withCancelButton: withCancelButton))
+        modifier(CustomAlertModifier(
+            isPresented: isPresented,
+            message: message,
+            primaryButtonTitle: primaryButtonTitle,
+            primaryAction: primaryAction,
+            withCancelButton: withCancelButton
+        ))
+    }
+    
+    /// title이 포함된 .customAlert입니다.
+    func cartCustomAlert(
+        isPresented: Binding<Bool>,
+        title: String,
+        message: String,
+        primaryButtonTitle: String,
+        primaryAction: @escaping () -> Void,
+        withCancelButton: Bool) -> some View
+    {
+        modifier(CartCustomAlertModifier(
+            isPresented: isPresented,
+            title: title,
+            message: message,
+            primaryButtonTitle: primaryButtonTitle,
+            primaryAction: primaryAction,
+            withCancelButton: withCancelButton
+        ))
     }
     
 }

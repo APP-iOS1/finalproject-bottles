@@ -15,9 +15,12 @@ struct BottleView: View {
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
+    @EnvironmentObject var cartStore: CartStore
+    @State private var count: Int = 1
     @State private var isShowingSheet: Bool = false
     @State private var isShowingFillBookmarkMessage: Bool = false
     @State private var isShowingEmptyBookmarkMessage: Bool = false
+    @State private var isShowingAnotherShopAlert: Bool = false
     
     var bottleData: BottleModel
     
@@ -100,10 +103,29 @@ struct BottleView: View {
                 CustomEmptyBookmarkView(isShowing: $isShowingEmptyBookmarkMessage)
                 
                 // 예약하기 버튼 클릭 시 예약하기 뷰 present
-                ReservationView(bottleData: bottleData, isShowing: $isShowingSheet)
+                ReservationView(count: $count,
+                                isShowing: $isShowingSheet,
+                                isShowingAnotherShopAlert: $isShowingAnotherShopAlert,
+                                bottleData: bottleData
+                )
                     //.environmentObject(path)
             }
         }
+        .cartCustomAlert(isPresented:  $isShowingAnotherShopAlert,
+                         title: "장바구니에는 같은 가게의 바틀만 담을 수 있습니다.",
+                         message: "선택하신 바틀을 장바구니에 담을 경우 이전에 담은 바틀은 삭제 됩니다.",
+                         primaryButtonTitle: "담기",
+                         primaryAction: { cartStore.deleteAndAdd(
+                            userEmail: userStore.user.email,
+                            cart: Cart(id: UUID().uuidString,
+                                       bottleId: bottleData.id,
+                                       eachPrice: bottleData.itemPrice,
+                                       itemCount: count,
+                                       shopId: bottleData.shopID,
+                                       shopName: bottleData.shopName
+                                      )) },
+                         withCancelButton: true)
+        
         // MARK: - 바틀샵 이름
         .toolbar(content: {
             // 네비게이션 장바구니 아이콘
