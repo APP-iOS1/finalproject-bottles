@@ -20,7 +20,7 @@ struct PickUpListView: View {
                 ForEach(reservationDataStore.reservationData.filter {
                     $0.userID == userStore.user.email
                 }) { reservationData in
-                    NavigationLink(destination: PickUpDetailView()){
+                    NavigationLink(destination: PickUpDetailView(reservationData: reservationData)){
                         PickUpListCell(reservationData: reservationData)
                     }
                     Divider()

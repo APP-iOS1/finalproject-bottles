@@ -115,6 +115,7 @@
 		AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6E0AC0298110960002183B /* BookMarkTestModel.swift */; };
 		AE9E77082978179200A6B9D4 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E77072978179200A6B9D4 /* MainTabView.swift */; };
 		AECF7F4A298D0211002593C3 /* Text+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECF7F49298D0211002593C3 /* Text+.swift */; };
+		D5125F63299B0A1B00AEE0BB /* PickUpDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5125F62299B0A1B00AEE0BB /* PickUpDetailCell.swift */; };
 		D5769B31298C8E73005528DB /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5769B30298C8E73005528DB /* AuthStore.swift */; };
 		D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */; };
 		D5DCFE9F2977B18900BAF7BE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */; };
@@ -252,6 +253,7 @@
 		AE6E0AC0298110960002183B /* BookMarkTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkTestModel.swift; sourceTree = "<group>"; };
 		AE9E77072978179200A6B9D4 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		AECF7F49298D0211002593C3 /* Text+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+.swift"; sourceTree = "<group>"; };
+		D5125F62299B0A1B00AEE0BB /* PickUpDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpDetailCell.swift; sourceTree = "<group>"; };
 		D5769B30298C8E73005528DB /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		D5DCFE9C29778B5A00BAF7BE /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		D5DCFE9E2977B18900BAF7BE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */,
 				7F2142C12977B43B0046D420 /* PickUpDetailView.swift */,
 				7F647DC22988B69D0022590A /* SafariWebView.swift */,
+				D5125F62299B0A1B00AEE0BB /* PickUpDetailCell.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -940,6 +943,7 @@
 				26BA41C6299136F100419584 /* Cart.swift in Sources */,
 				27A026A1298C11A300F71705 /* NaverMap.swift in Sources */,
 				D7B5EA59298CFEBB00DC648A /* LaunchView.swift in Sources */,
+				D5125F63299B0A1B00AEE0BB /* PickUpDetailCell.swift in Sources */,
 				3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
 				7FB3D69E298CAB5300EA8884 /* CustomAlertView.swift in Sources */,

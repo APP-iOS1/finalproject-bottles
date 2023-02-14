@@ -15,7 +15,7 @@ import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 class ReservationDataStore : ObservableObject {
     
     @Published var reservationData: [ReservationModel] = []
-    @Published var reservedBottles: [ReservedBottles] = []
+    var reservedBottles: [ReservedBottles] = []
     
     // MARK: - 예약 등록
     func createReservation(reservationData: ReservationModel, reservedBottles: [BottleReservation]) async {

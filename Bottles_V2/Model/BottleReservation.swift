@@ -17,7 +17,7 @@ struct ReservationModel : Codable, Identifiable {
     var reservedBottles : [ReservedBottles]
 }
 
-struct ReservedBottles : Codable {
+struct ReservedBottles : Codable, Identifiable {
     var id : String
     var BottleID : String
     var itemCount : Int

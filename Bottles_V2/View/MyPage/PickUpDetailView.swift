@@ -11,6 +11,8 @@ struct PickUpDetailView: View {
     /// 주소 복사를 했을 때 주소 복사 알림을 띄워줌
     @State private var isShowingPasted: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    var reservationData: ReservationModel
     
     var body: some View {
         ZStack{
@@ -69,39 +71,9 @@ struct PickUpDetailView: View {
                             .font(.bottles14)
                         Spacer()
                     }
-                    // MARK: - 예약 세부 상품 HStack
-                    HStack (alignment: .top){
-                        
-                        // TODO: 예약 상품에 대한 이미지
-                        AsyncImage(url: URL(string: "https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/e8e8b60a-770c-4f67-ba67-ee3300ce0a5d.webp")) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 130, height: 130)
-                            
-                        } placeholder: {
-                            Image("ready_image")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 130, height: 130)
-                        }
-                        .background(Color.gray_f7)
-                        .cornerRadius(12)
-                        .frame(height: 130)
-
-                        VStack(alignment: .leading){
-                            Text("디 오리지널 골드바 위스키")
-                                .font(.bottles14)
-                                .bold()
-                            Text("109,000원")
-                                .font(.bottles18)
-                                .padding(.vertical, 1)
-                                .bold()
-                            Text("1개")
-                                .font(.bottles14)
-                        }
-                        Spacer()
-                    }
+//                    ForEach (reservationData.reservedBottles, id: \.self) { bottle in
+//                        PickUpDetailCell(bottleModel: getBottleModel(bottleId: bottle.BottleID), count: bottle.count)
+//                    }
                 }
                 .padding(.bottom, 5)
                 // MARK: - 예약상태 HStack
@@ -160,6 +132,14 @@ struct PickUpDetailView: View {
         
     }
     
+    func getBottleModel(bottleId: String) -> BottleModel {
+        let matchedBottleData = bottleDataStore.bottleData.filter {
+            $0.id == bottleId
+        }
+        
+        return matchedBottleData[0]
+    }
+    
     var backButton : some View {
         Button(
             action: {
@@ -177,8 +157,8 @@ struct PickUpDetailView: View {
     }
 }
 
-struct PickUpDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        PickUpDetailView()
-    }
-}
+//struct PickUpDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PickUpDetailView()
+//    }
+//}
