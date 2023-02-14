@@ -14,15 +14,24 @@ struct LaunchView: View {
     
     @EnvironmentObject var authStore: AuthStore
     
-    
     @State private var isActive = false
     @State private var isloading = true
+    
+    // 사용자 안내 온보딩 페이지를 앱 설치 후 최초 실행할 때만 띄우도록 하는 변수.
+    // @AppStorage에 저장되어 앱 종료 후에도 유지됨.
+    @AppStorage("isFirstLaunching") var isFirstLaunching: Bool = true
+    
     var body: some View {
         if isActive {
-            if let _ = authStore.currentUser {
-                MainTabView()
-            } else {
-                TotalLoginView()
+            if isFirstLaunching {
+                OnboardingView(isFirstLaunching: $isFirstLaunching)
+            }
+            else {
+                if let _ = authStore.currentUser {
+                    MainTabView()
+                } else {
+                    TotalLoginView()
+                }
             }
         } else {
             if isloading {
