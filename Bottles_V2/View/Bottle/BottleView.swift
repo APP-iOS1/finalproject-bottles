@@ -36,7 +36,6 @@ struct BottleView: View {
     }
     
     var body: some View {
-
         NavigationStack {
             ZStack {
                 VStack {
@@ -96,10 +95,10 @@ struct BottleView: View {
                     .padding(.bottom, 30)
                 }
                 
-                // MARK: - Bookmark 추가 시 표시되는 팝업창
+                // MARK: - Bookmark 추가 시 표시되는 토스트 메세지
                 CustomFillBookmarkView(isShowing: $isShowingFillBookmarkMessage)
                 
-                // MARK: - Bookmark 해제 시 표시되는 팝업창
+                // MARK: - Bookmark 해제 시 표시되는 토스트 메세지
                 CustomEmptyBookmarkView(isShowing: $isShowingEmptyBookmarkMessage)
                 
                 // 예약하기 버튼 클릭 시 예약하기 뷰 present

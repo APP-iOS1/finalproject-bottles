@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - 북마크 해제 버튼 클릭 시 표시되는 팝업 창
+// MARK: - 북마크 해제 버튼 클릭 시 표시되는 토스트 메세지
 struct CustomEmptyBookmarkView: View {
     @Binding var isShowing: Bool
     

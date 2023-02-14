@@ -486,12 +486,12 @@
 				9216C1B82977AF1D00217C7F /* ReservationView_Content.swift */,
 				9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */,
 				92BB7619299B72C50045CDE0 /* CartToastMessage.swift */,
-				9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */,
 				9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */,
 				923D1D3F297E783D00988EE3 /* ReservationPageView_BottleCell.swift */,
 				92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */,
 				9216C1BC2977B4BF00217C7F /* ReservedView.swift */,
 				9216C1BE2977B5E100217C7F /* ReservedView_BottleShop.swift */,
+				9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */,
 			);
 			path = Bottle;
 			sourceTree = "<group>";
