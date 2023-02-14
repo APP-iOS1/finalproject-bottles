@@ -61,7 +61,7 @@ struct ReservationView_Content: View {
                     
                     if (cartStore.shopName == bottleData.shopName) || (cartStore.shopName == "")  {
                         isShowingAlert.toggle()
-                        cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                        cartStore.addCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
                         
                     }
                     else {
@@ -81,7 +81,7 @@ struct ReservationView_Content: View {
                 
                 // 장바구니 담기 버튼 클릭 시 Alert창 present
                 .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
-                    Button("OK", role: .destructive) { isShowingCart.toggle() }
+                    Button("OK", role: .destructive) { isShowingCart.toggle()}
                     Button("cancel", role: .cancel) { }
                 }
                 
@@ -90,8 +90,9 @@ struct ReservationView_Content: View {
                     isPresented: $anotherShopInCart
                 ) {
                     Button("OK", role: .destructive) {
-                        //                                cartStore.deleteAllCart(userEmail: userStore.user.email)
-                        //                                cartStore.createCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                        cartStore.deleteAndAdd(userEmail: userStore.user.email, cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName))
+                        isShowingAlert.toggle()
+                        
                     }
                     Button("cancel", role: .cancel) {}
                     
@@ -125,7 +126,9 @@ struct ReservationView_Content: View {
                         Text("바로 예약하기")
                             .modifier(AccentColorButtonModifier())
                     }
+                    
                 }
+                
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.top, 10)
@@ -142,13 +145,13 @@ struct ReservationView_Content: View {
         matchedBottleReservation.append(BottleReservation(id: bottleData.id, image: bottleData.itemImage, title: bottleData.itemName, price: bottleData.itemPrice * count, count: count, shop: bottleData.shopName))
         
         return matchedBottleReservation
+        
     }
+    
 }
+//struct ReservationView_Content_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReservationView(isShowingReservationView: <#Binding<Bool>#>)
+//    }
+//}
 
-    
-    //struct ReservationView_Content_Previews: PreviewProvider {
-    //    static var previews: some View {
-    //        ReservationView(isShowingReservationView: <#Binding<Bool>#>)
-    //    }
-    //}
-    

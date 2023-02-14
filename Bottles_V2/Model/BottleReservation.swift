@@ -12,12 +12,12 @@ struct ReservationModel : Codable, Identifiable {
     var id : String
     var shopID : String
     var userID : String      // 이메일 형식으로 들어옴
-    var reservedTime : Date
+    var reservedTime : String
     var state : String
     var reservedBottles : [ReservedBottles]
 }
 
-struct ReservedBottles : Codable {
+struct ReservedBottles : Codable, Identifiable {
     var id : String
     var BottleID : String
     var itemCount : Int

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MyPageView: View {
     
+    @EnvironmentObject var userStore: UserStore
     
     var myPageList: [String] = ["바틀스 소개", "공지사항", "자주 묻는 질문",
                                 "1:1 문의하기", "서비스 이용약관", "개인정보 처리방침", "위치정보 이용약관", "버전 정보"]
@@ -36,13 +37,14 @@ struct MyPageView: View {
                 HStack {
                     
                     // TODO: 프로필 이미지 들어갈 곳
-                    Circle()
-                        .frame(width: 65, height: 65)
+                    Image("profile")
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.width/7, height: UIScreen.main.bounds.width/7)
                     
                     // TODO: 닉네임 들어갈 곳
-                    Text("밤삭님")
+                    Text("\(userStore.user.nickname) 님")
                         .font(.bottles18)
-                        .bold()
+
                     Spacer()
                     NavigationLink(destination: SettingView()){
                         Image(systemName: "gearshape.fill")
@@ -57,15 +59,15 @@ struct MyPageView: View {
                     NavigationLink(destination: PickUpListView()){
                         Text("예약 내역")
                             .font(.bottles15)
+                            .foregroundColor(.accentColor)
                     }
                 }
                 .listStyle(.plain)
                 .scrollDisabled(true)
                 .frame(height: 40)
                 
-                Rectangle()
-                    .frame(height: 7)
-                    .foregroundColor(Color("lightGray"))
+                Divider()
+
                 
                 // MARK: - 두번째 리스트 ( 바틀스 소개, 공지사항, 자주묻는 질문...)
                 
@@ -93,7 +95,11 @@ struct MyPageView: View {
                 
             }
         }
+        .navigationBarTitle("MY", displayMode: .inline)
+        
     }
+    
+
 }
 
 

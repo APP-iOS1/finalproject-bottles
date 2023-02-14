@@ -15,17 +15,17 @@ import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 class ReservationDataStore : ObservableObject {
     
     @Published var reservationData: [ReservationModel] = []
-    @Published var reservedBottles: [ReservedBottles] = []
+    var reservedBottles: [ReservedBottles] = []
     
     // MARK: - 예약 등록
     func createReservation(reservationData: ReservationModel, reservedBottles: [BottleReservation]) async {
         do {
             let documents = Firestore.firestore().collection("Reservation")
             try await documents.document(reservationData.id)
-                .setData(["reservedTime" : reservationData.reservedTime,
+                .setData(["reservedTime" : Date.now,
                           "state" : reservationData.state,
-                          "shopId" : reservationData.shopID,
-                          "userId" : reservationData.userID])
+                          "shopID" : reservationData.shopID,
+                          "userID" : reservationData.userID])
             
             await self.createReservedBottles(reservedBottles: reservedBottles, reservationId: reservationData.id)
             await readReservation()
@@ -44,25 +44,25 @@ class ReservationDataStore : ObservableObject {
                 let reservedBottles = await self.readReservedBottles(snapshot: document)
                 
                 let id : String = document.documentID
-                let shopID : String = document["shopName"] as? String ?? ""
+                let shopID : String = document["shopID"] as? String ?? ""
                 let userID : String = document["userID"] as? String ?? ""
                 let state : String = document["state"] as? String ?? ""
                 // 데이터 포멧을 위한 준비
-                let timeStampData : Timestamp = document["TimeStampData"] as? Timestamp ?? Timestamp()
+                let timeStampData : Timestamp = document["reservedTime"] as? Timestamp ?? Timestamp()
                 let timeStampToDate : Date = timeStampData.dateValue()
                 // 여기까지 사용 안함
                 var reservedTime : String {
                     let dateFormatter = DateFormatter()
                     dateFormatter.locale = Locale(identifier: "ko_kr")
                     dateFormatter.timeZone = TimeZone(abbreviation: "KST")
-                    dateFormatter.dateFormat = "yyyy년 MM월 dd일" // "yyyy-MM-dd HH:mm:ss"
+                    dateFormatter.dateFormat = "yyyy.MM.dd" // "yyyy-MM-dd HH:mm:ss"
                     let dateCreatedAt = timeStampToDate
                     return dateFormatter.string(from: dateCreatedAt)
                 }
                 
                 self.reservationData.append(
                     ReservationModel(
-                        id: id, shopID: shopID, userID: userID, reservedTime: Date.now, state: "", reservedBottles: reservedBottles)
+                        id: id, shopID: shopID, userID: userID, reservedTime: reservedTime, state: state, reservedBottles: reservedBottles)
                 )
                 
             }
@@ -90,8 +90,7 @@ class ReservationDataStore : ObservableObject {
             let documents = Firestore.firestore().collection("Reservation")
             for reservedBottle in reservedBottles {
                 try await documents.document(reservationId).collection("ReservedBottles").document(UUID().uuidString)
-                    .setData(["id" : UUID().uuidString,
-                              "bottleId" : reservedBottle.id,
+                    .setData(["bottleId" : reservedBottle.id,
                               "itemCount" : reservedBottle.count])
             }
 //            await readReservation()
