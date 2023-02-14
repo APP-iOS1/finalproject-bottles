@@ -49,7 +49,7 @@ struct ReservedView: View {
                     .lineSpacing(5)
                     .padding()
             }
-            .offset(y: -110)
+            .offset(y: -80)
             
             Spacer()
        
@@ -62,7 +62,7 @@ struct ReservedView: View {
                         .modifier(AccentColorButtonModifier())
                 }
             }
-            .padding(.bottom)
+            .padding(.bottom, 20)
         }
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop(
@@ -78,6 +78,7 @@ struct ReservedView: View {
 //        })
       
         .navigationBarBackButtonHidden(true)
+        .toolbar(.visible, for: .tabBar)
     }
 }
 
