@@ -17,7 +17,7 @@ struct MarkerDetailView: View {
     @Binding var currentShopId: String
     @State var colors = [String]()
     @StateObject var coordinator: Coordinator = Coordinator.shared
-
+    @State var calling: Bool = false
 //    @Binding var shopModel: ShopModel
 
     var body: some View {
@@ -43,9 +43,11 @@ struct MarkerDetailView: View {
                     
                     HStack(spacing: 25) {
                         // 전화 버튼
-                        // 전화 아이콘 버튼
-                        MakeCallOrAddToCallBook(bottleShop: shopData)
-                        
+                        Button {
+                            calling = true
+                        } label: {
+                            MakeCallOrAddToCallBook(calling: $calling, bottleShop: shopData)
+                        }
                         // 북마크 버튼
                         Button(action: {
                             withAnimation(.easeOut(duration: 0.5)) {
