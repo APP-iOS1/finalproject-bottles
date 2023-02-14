@@ -102,6 +102,7 @@ struct ReservationPageView: View {
                     }
                 }
                 .padding(.horizontal)
+                .padding(.bottom, 30)
                 .disabled(!check)
             }
             .frame(alignment: .bottom)
@@ -119,6 +120,7 @@ struct ReservationPageView: View {
                 }
             })
         }
+        .edgesIgnoringSafeArea([.bottom])
     }
 }
 
