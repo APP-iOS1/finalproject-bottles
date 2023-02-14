@@ -19,12 +19,14 @@ struct MapSearchView: View {
     @State var doneTextFieldEdit: Bool = false
     @FocusState var focus: Bool  // 포커스된 텍스트필드
     @Binding var tapped: Bool // MapView에서의 텍스트 필드의 tap여부를 바인딩으로 넘김
-    @EnvironmentObject var mapViewModel: MapViewModel
+//    @EnvironmentObject var mapViewModel: MapViewModel
     @EnvironmentObject var shopDataStore: ShopDataStore
     @Binding var showMarkerDetailView: Bool
     @Binding var searchResult: [ShopModel]
     @Binding var currentShopId: String
     @Binding var tapSearchButton: Bool
+    @Binding var coord: (Double, Double)
+    @StateObject var coordinator: Coordinator = Coordinator.shared
 
     // MARK: - 검색 로직 및 거리 순 오름차순 정렬 함수
     func getSearchResult(searchText: String) -> [ShopModel] {
@@ -40,7 +42,7 @@ struct MapSearchView: View {
     // MARK: - 현재 위치 좌표 거리 계산 함수
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
-        let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
+        let to = CLLocation(latitude: coordinator.userLocation.0, longitude: coordinator.userLocation.1)
         //        print("\(from.distance(from: to))")
         return from.distance(from: to)
     }
@@ -65,24 +67,18 @@ struct MapSearchView: View {
                                         tapped.toggle()
                                     }
                                 })
-                            //                                .padding(5)
-                            
                             MapViewSearchBar(showMarkerDetailView: $showMarkerDetailView, searchBarText: $searchBarText, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton, focus: _focus)
                         }
-                        //                        .frame(width: 300)
-                        //                        .padding(10)
                         .offset(y: 50)
-                        //                        Spacer()
-                        // 여기서 검색 리스트 구현
+                        
+                        // MARK: - 검색 리스트
                         List {
                             if getSearchResult(searchText: searchBarText).isEmpty {
                                 HStack(alignment: .center) {
-//                                    Spacer()
                                     Image("xmark")
                                     Text("검색 결과가 없습니다.")
                                         .foregroundColor(.black)
                                         .font(.bottles11)
-//                                    Spacer()
                                 }
                             } else {
                                 ForEach (getSearchResult(searchText: searchBarText), id: \.self) { item in
@@ -97,17 +93,15 @@ struct MapSearchView: View {
                                             // 사용자가 리스트에서 찾고자하는 단어가 있어 터치 시, 해당 단어를 검색창의 텍스트로 전환
                                             searchBarText = item.shopName
                                             tapped = true
-                                            currentShopId = item.shopName
-                                            mapViewModel.coord = (item.location.latitude, item.location.longitude)
-                                            showMarkerDetailView = true
+                                            coordinator.currentShopId = item.shopName
+                                            coordinator.coord = (item.location.latitude, item.location.longitude)
+                                            coordinator.showMarkerDetailView = true
                                             
-                                            
-                                            print("currentShopId : \(currentShopId)")
+                                            print("currentShopId : \(coordinator.currentShopId)")
                                         } label: {
                                             HStack {
                                                 Image(systemName: "magnifyingglass")
                                                     .foregroundColor(.gray)
-//                                                    .padding([.leading, .trailing])
                                                 
                                                 // 검색어와 겹치는 단어가 있는 bottleName의 경우, 검색어와 겹치는 단어들만 accentColor
                                                 // 현재는 shop을 제외한 bottleName만 리스트에 보임
@@ -128,12 +122,6 @@ struct MapSearchView: View {
                                                         .font(.bottles14)
                                                         .foregroundColor(.gray)
                                                 }
-                                                
-//                                                Image("Map_tab_fill")
-//                                                    .resizable()
-//                                                    .aspectRatio(contentMode: .fit)
-//                                                    .frame(width: 16, height: 16)
-//
                                             }
                                         }
                                     }
@@ -141,6 +129,7 @@ struct MapSearchView: View {
                             }
                         }
                         .padding(.top, 50)
+                        .padding(.bottom, 100)
 //                        .padding(.leading, 10)
                         .padding(.horizontal, 30)
                         .listStyle(.plain)
