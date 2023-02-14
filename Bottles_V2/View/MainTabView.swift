@@ -46,6 +46,9 @@ struct MainTabView: View {
                     Text("MY")
                 }.tag(4)
             }
+                    .task {
+            mapViewModel.checkIfLocationServicesIsEnabled()
+        }
             .toolbarBackground(Color.white, for: .tabBar)
             .sheet(isPresented: $delegate.openedFromNotification, onDismiss: didDismiss){
                 NotificationView()

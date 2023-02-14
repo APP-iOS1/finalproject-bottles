@@ -19,17 +19,21 @@ struct SkeletonColor: Identifiable {
 struct NearBySheetView: View {
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-    @StateObject var mapViewModel: MapViewModel
+//    @StateObject var mapViewModel: MapViewModel
     //    @State private var checkBookmark: Bool = false
     @Binding var isOpen: Bool
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopId: String
     //    @Binding var shopModel: ShopModel
+
+    @StateObject var coordinator: Coordinator = Coordinator.shared
+
+    
     
     // MARK: - 현재 위치 좌표 거리 계산 함수
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
-        let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
+        let to = CLLocation(latitude: coordinator.userLocation.0, longitude: coordinator.userLocation.1)
         //        print("\(from.distance(from: to))")
         return from.distance(from: to)
     }
@@ -58,9 +62,9 @@ struct NearBySheetView: View {
                         if distance <= 5000 {
                             Button {
                                 isOpen = false
-                                showMarkerDetailView = true
-                                currentShopId = shop.id
-                                mapViewModel.coord = (shop.location.latitude, shop.location.longitude)
+                                coordinator.showMarkerDetailView = true
+                                coordinator.currentShopId = shop.id
+                                coordinator.coord = (shop.location.latitude, shop.location.longitude)
                             } label: {
                                 NearBySheetCell(shopModel: shop, distance: distance) 
                             }
