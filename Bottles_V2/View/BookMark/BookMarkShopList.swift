@@ -114,6 +114,7 @@ struct BookMarkShopList: View {
                         .font(.bottles11)
                     Button {
                         userDataStore.addFollowShopId(resetDeletedShopId)
+                        shopDataStore.addFollowUserList(userDataStore.user.email, resetDeletedShopId)
                     } label: {
                         Text("실행취소")
                             .font(.bottles11)
