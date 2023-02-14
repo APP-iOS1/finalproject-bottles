@@ -17,6 +17,7 @@ struct CartView: View {
     @EnvironmentObject var cartStore: CartStore
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
+    @EnvironmentObject var shopDataStore: ShopDataStore
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
 //    // 각각의 항목을 선택하였는지, 전체 선택을 사용하여 선택하였는지를 판별하기 위한 변수
@@ -34,15 +35,20 @@ struct CartView: View {
             else {
                 ScrollView {
                     
-                    HStack {
-                        Image("Map_tab_fill")
-                            .padding(.leading)
-                        Text("\(cartStore.shopName)")
-                            .font(.bottles20)
-                            .bold()
-                            
-                        Spacer()
+                    NavigationLink(destination: BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == cartStore.shopName }[0])) {
+                        HStack {
+                            Image("Map_tab_fill")
+                                .padding(.leading)
+                            Text("\(cartStore.shopName)")
+                                .foregroundColor(.black)
+                                .font(.bottles20)
+                                .bold()
+                                
+                            Spacer()
+                        }
                     }
+                    
+                    
                     .padding(.top)
                     Divider()
                     
@@ -112,7 +118,7 @@ struct CartView: View {
         
         for cart in carts {
             bottleModel = getBottleModel(bottleId: cart.bottleId)
-            matchedBottleReservation.append(BottleReservation(image: bottleModel.itemImage, title: bottleModel.itemName, price: cart.eachPrice * cart.itemCount, count: cart.itemCount, shop: cart.shopName))
+            matchedBottleReservation.append(BottleReservation(id: cart.bottleId, image: bottleModel.itemImage, title: bottleModel.itemName, price: cart.eachPrice * cart.itemCount, count: cart.itemCount, shop: cart.shopName))
         }
         
         return matchedBottleReservation

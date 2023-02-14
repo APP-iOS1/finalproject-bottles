@@ -42,12 +42,17 @@ struct MarkerDetailView: View {
                     
                     HStack(spacing: 25) {
                         // 전화 버튼
+                        // 전화 아이콘 버튼
                         Button(action: {
-                            
-                        }) {
+                            if let url = URL(string: "tel://\(shopData.shopPhoneNumber)"), UIApplication.shared.canOpenURL(url) {
+                                UIApplication.shared.open(url)
+                            }
+                        }){
                             Image("Phone.fill")
                                 .resizable()
-                                .frame(width: 19.5, height: 19.5)
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15)
+                                .padding(.trailing, 5)
                         }
                         
                         // 북마크 버튼

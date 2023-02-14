@@ -13,6 +13,8 @@ struct ReservedView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowing: Bool = true
     @State private var isShowingBookmarkView: Bool = false
+    @State private var isShowingFillBookmarkMessage: Bool = false
+    @State private var isShowingEmptyBookmarkMessage: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -61,19 +63,25 @@ struct ReservedView: View {
             }
             .padding(.bottom)
         }
-        // TabView hidden
-        .toolbar(.hidden, for: .tabBar)
-        
         .sheet(isPresented: $isShowing) {
-            ReservedView_BottleShop()
+            ReservedView_BottleShop(
+                isShowingFillBookmarkMessage: $isShowingFillBookmarkMessage,
+                isShowingEmptyBookmarkMessage: $isShowingEmptyBookmarkMessage
+            )
                 .presentationDetents([.height(210)])
+                .presentationDragIndicator(.visible)
         }
 //        .fullScreenCover(isPresented: $isShowingBookmarkView, content: {
 //            MainTabView()
 //                .accentColor(Color("AccentColor"))
 //        })
+      
         .navigationBarBackButtonHidden(true)
     }
+}
+
+class Path: ObservableObject {
+    @Published var path: NavigationPath = NavigationPath()
 }
 
 struct ReservedView_Previews: PreviewProvider {

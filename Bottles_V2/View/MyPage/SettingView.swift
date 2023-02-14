@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var authStore: AuthStore
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     /// 로그아웃 Alert창을 띄웁니다.
     @State private var logoutAlert: Bool = false
@@ -22,6 +23,7 @@ struct SettingView: View {
             List {
                 NavigationLink(destination: Text("휴대폰 번호 변경")) {
                     Text("휴대폰 번호 변경")
+
                 }
                 .listRowSeparator(.hidden)
                 Button(action: {
@@ -34,7 +36,8 @@ struct SettingView: View {
                             }
                 }){
                     HStack {
-                        Text("알림설정")
+                        Text("알림 설정")
+
                         Spacer()
                         Image(systemName: "chevron.forward")
                     }
@@ -47,7 +50,7 @@ struct SettingView: View {
 //                    .listRowSeparator(.hidden)
 //                }
             }
-            .font(.bottles15)
+            .font(.bottles16)
             .listStyle(.plain)
             .frame(height: 80)
             .scrollDisabled(true)
@@ -65,6 +68,7 @@ struct SettingView: View {
                 }){
                     Text("로그아웃")
                         .font(.bottles12)
+                        .foregroundColor(.black)
                 }
                 .padding(.horizontal)
                 
@@ -76,6 +80,7 @@ struct SettingView: View {
                 }){
                     Text("회원탈퇴")
                         .font(.bottles12)
+                        .foregroundColor(.black)
                 }
                 .alert(isPresented: $unregisterAlert) {
                     Alert(title: Text("회원 탈퇴를 하시겠습니까?"),
@@ -101,6 +106,20 @@ struct SettingView: View {
             selection = 1 },
             withCancelButton: true)
         
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: backButton)
+    }
+    
+    var backButton : some View {
+        Button(
+            action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "chevron.backward")    // back button 이미지
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundColor(Color.black)
+            }
+
     }
     
 }
