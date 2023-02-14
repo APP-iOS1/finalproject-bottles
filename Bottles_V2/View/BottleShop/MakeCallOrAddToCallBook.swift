@@ -25,6 +25,9 @@ struct MakeCallOrAddToCallBook: View {
                     Color.black.opacity(0.2)
                 }
                 .ignoresSafeArea()
+                .onTapGesture {
+                    calling = false
+                }
                 
                 VStack(alignment: .center){
                     
