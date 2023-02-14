@@ -11,6 +11,9 @@ import SwiftUI
 struct BottleView_Info: View {
     @EnvironmentObject var userStore: UserStore
     @State private var checkBookmark: Bool = false
+    @Binding var isShowingFillBookmarkMessage: Bool
+    @Binding var isShowingEmptyBookmarkMessage: Bool
+    
     var tagList: [String] = ["위스키", "한정판", "스모키"]
     var bottleData: BottleModel
     
@@ -57,11 +60,27 @@ struct BottleView_Info: View {
                         if compareMyFollowBottleID(bottleData.id) == true {
                             checkBookmark = false
                             userStore.deleteFollowItemId(bottleData.id)
+                            withAnimation(.easeOut(duration: 1.5)) {
+                                isShowingEmptyBookmarkMessage = true
+                                print("북마크 해제")
+                            }
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                                isShowingEmptyBookmarkMessage = false
+                            }
                         }
 
                         if compareMyFollowBottleID(bottleData.id) == false {
                             checkBookmark = true
                             userStore.addFollowItemId(bottleData.id)
+                            withAnimation(.easeOut(duration: 1.5)) {
+                                isShowingFillBookmarkMessage = true
+                                print("북마크 완료")
+                            }
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                                isShowingFillBookmarkMessage = false
+                            }
                         }
                         
                     }) {

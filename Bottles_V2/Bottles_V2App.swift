@@ -22,19 +22,18 @@ struct Bottles_V2App: App {
     @ObservedObject var bottleDataStore = BottleDataStore()
     @ObservedObject var shopDataStore = ShopDataStore()
     @ObservedObject var shopNoticeDataStore = ShopNoticeDataStore()
-    @ObservedObject var reservationDataStore = ResevationDataStore()
+    @ObservedObject var reservationDataStore = ReservationDataStore()
     @ObservedObject var cartStore = CartStore()
     @ObservedObject var mapViewModel = MapViewModel()
-    
+    @StateObject var authStore = AuthStore()
     // coreData
     @StateObject var dataController = DataController()
     
-    
-    
-    @StateObject var googleLoginViewModel: GoogleLoginViewModel = GoogleLoginViewModel()
-    
-        init() {
-        //        FirebaseApp.configure()
+
+    init() {
+//        FirebaseApp.configure()
+
+
         KakaoSDK.initSDK(appKey: "f2abf38572d20d5dde71ea5c33a02c07")
     }
     
@@ -56,6 +55,7 @@ struct Bottles_V2App: App {
             LaunchView()
             // coreData
                 .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(authStore)
                 .environmentObject(bottleDataStore)
                 .environmentObject(shopDataStore)
                 .environmentObject(shopNoticeDataStore)
@@ -70,9 +70,9 @@ struct Bottles_V2App: App {
                     await shopDataStore.getAllShopData()
                     shopNoticeDataStore.getAllShopNoticeDataRealTime(userDataStore)
                     await bottleDataStore.getAllBottleData()
-                    //                    await reservationDataStore.getAllReservationData()
+                    await reservationDataStore.readReservation()
                 }
-                .environmentObject(AuthStore())
+                
                 
             
             // MARK: - AccentColor 적용
@@ -80,6 +80,7 @@ struct Bottles_V2App: App {
         }
     }
 }
+
 
 
 class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
@@ -148,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, ObservableObject {
     }
     
 }
+
 
 extension AppDelegate : MessagingDelegate {
     

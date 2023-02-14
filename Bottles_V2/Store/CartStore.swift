@@ -17,10 +17,10 @@ class CartStore: ObservableObject {
     @Published var totalPrice: Int = 0
     @Published var shopName: String = ""
     
-    
-    // MARK: - 장바구니 담기
+    // MARK: - 장바구니 데이터 생성
     func createCart(cart: Cart, userEmail: String) {
         let database = Firestore.firestore()
+        
         database.collection("User")
             .document(userEmail)
             .collection("Cart")
@@ -30,6 +30,7 @@ class CartStore: ObservableObject {
                       "itemCount" : cart.itemCount,
                       "shopId" : cart.shopId,
                       "shopName" : cart.shopName])
+        
         readCart(userEmail: userEmail)
     }
     
@@ -87,16 +88,18 @@ class CartStore: ObservableObject {
     // MARK: - 장바구니 바틀 삭제
     func deleteCart(cart: Cart, userEmail: String) {
         let database = Firestore.firestore()
-                database.collection("User")
-                    .document(userEmail)
-                    .collection("Cart")
-                    .document(cart.id).delete()
+        database.collection("User")
+            .document(userEmail)
+            .collection("Cart")
+            .document(cart.id).delete()
         readCart(userEmail: userEmail)
     }
     
-    // MARK: - 장바구니 전체 삭제 후 다른 bottleShop 제품 담기
+    // MARK: - 장바구니 전체 삭제
     func deleteAllCart(userEmail: String) {
+        
         let database = Firestore.firestore()
+        
         database.collection("User")
             .document(userEmail)
             .collection("Cart")
@@ -105,23 +108,78 @@ class CartStore: ObservableObject {
                     print("Error getting documents: \(error)")
                     return
                 }
-
+                
                 guard let snapshot = snapshot else { return }
-
+                
                 for document in snapshot.documents {
                     document.reference.delete { (error) in
                         if let error = error {
                             print("Error deleting document: \(error)")
                             return
                         }
-
+                        
                         print("Document successfully deleted")
+                        
                     }
                 }
                 
             }
+        
         self.carts = []
         
+        readCart(userEmail: userEmail)
+        
+    }
+    
+    // MARK: - 장바구니 전체 삭제 후 다른 bottleShop 제품 담기
+    func deleteAndAdd(userEmail: String, cart: Cart) {
+        
+        let database = Firestore.firestore()
+        
+        database.collection("User")
+            .document(userEmail)
+            .collection("Cart")
+            .getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    return
+                }
+                
+                guard let snapshot = snapshot else { return }
+                
+                for document in snapshot.documents {
+                    document.reference.delete { (error) in
+                        if let error = error {
+                            print("Error deleting document: \(error)")
+                            return
+                        }
+                        
+                        print("Document successfully deleted")
+                        
+                        self.createCart(cart: cart, userEmail: userEmail)
+                    }
+                }
+                
+            }
+        
+        self.carts = []
+        
+        
+        readCart(userEmail: userEmail)
+        
+    }
+    
+    // MARK: - 장바구니 담기(새로운 제품과 이미 장바구니에 담겨있는 제품 분기 처리)
+    func addCart(cart: Cart, userEmail: String) {
+        let matchedBottleData = carts.filter {$0.bottleId == cart.bottleId}
+        let temp: Cart
+        if matchedBottleData.count > 0 {
+            temp = Cart(id: matchedBottleData[0].id, bottleId: cart.bottleId, eachPrice: cart.eachPrice, itemCount: (matchedBottleData[0].itemCount + cart.itemCount), shopId: cart.shopId, shopName: cart.shopName)
+            self.updateCart(cart: temp, userEmail: userEmail)
+        }
+        else {
+            self.createCart(cart: cart, userEmail: userEmail)
+        }
     }
     
     // MARK: - 장바구니 수량 관리

@@ -67,23 +67,30 @@ struct BookMarkShopList: View {
                     }
                     .padding(.trailing, 20)
                 }
-
-                // TODO: 서버 Shop 데이터 연결
-                ScrollView {
-                    ForEach(filterUserShopData()) { shop in
-                        NavigationLink {
-                            BottleShopView(bottleShop: shop)
-                        } label: {
-                            BookMarkShopListCell(
-                                userStore: userDataStore,
-                                shopInfo: shop,
-                                bookMarkAlarm: $bookMarkAlarm,
-                                resetDeletedShopId: $resetDeletedShopId,
-                                distance: distance(
-                                    shop.location.latitude,
-                                    shop.location.longitude))
+                
+                if userDataStore.user.followShopList.isEmpty {
+                    Text("저장된 바틀샵이 없습니다.")
+                        .font(.bottles14)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.top, 10)
+                    Spacer()
+                } else {
+                    ScrollView {
+                        ForEach(filterUserShopData()) { shop in
+                            NavigationLink {
+                                BottleShopView(bottleShop: shop)
+                            } label: {
+                                BookMarkShopListCell(
+                                    userStore: userDataStore,
+                                    shopInfo: shop,
+                                    bookMarkAlarm: $bookMarkAlarm,
+                                    resetDeletedShopId: $resetDeletedShopId,
+                                    distance: distance(
+                                        shop.location.latitude,
+                                        shop.location.longitude))
+                            }
+                            
                         }
-
                     }
                 }
             }

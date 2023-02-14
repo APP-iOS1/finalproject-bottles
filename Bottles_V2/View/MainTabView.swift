@@ -12,12 +12,12 @@ struct MainTabView: View {
     //    @EnvironmentObject var sessionManager : SessionManager
     @EnvironmentObject var shopDataStore : ShopDataStore
     @EnvironmentObject var bottleDataStore : BottleDataStore
-    @EnvironmentObject var reservationDataStore : ResevationDataStore
+    @EnvironmentObject var reservationDataStore : ReservationDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
 
     //    let user: AuthUser
     
-    @State private var selection: Int = 1
+    @State var selection: Int = 1
     //     TabBar 백그라운드 컬러 지정
     
     @State private var isActive = false

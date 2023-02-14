@@ -10,6 +10,8 @@ import SwiftUI
 // MARK: - 바틀샵 셀(바틀샵 이미지, 바틀샵 이름, 바틀샵 소개, 북마크)
 struct ReservedView_ShopCell: View {
     @State private var checkBookmark: Bool = false
+    @Binding var isShowingFillBookmarkMessage: Bool
+    @Binding var isShowingEmptyBookmarkMessage: Bool
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -45,7 +47,27 @@ struct ReservedView_ShopCell: View {
                 
                 // MARK: - 북마크
                 Button(action: {
-                    checkBookmark.toggle()
+                    if checkBookmark {
+                        checkBookmark = false
+                        withAnimation(.easeOut(duration: 1.5)) {
+                            isShowingEmptyBookmarkMessage = true
+                            print("북마크 해제")
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                            isShowingEmptyBookmarkMessage = false
+                        }
+                    } else {
+                        checkBookmark = true
+                        withAnimation(.easeOut(duration: 1.5)) {
+                            isShowingFillBookmarkMessage = true
+                            print("북마크 완료")
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                            isShowingFillBookmarkMessage = false
+                        }
+                    }
                 }) {
                     Image(checkBookmark ? "bookmark_fill" : "bookmark")
                         .resizable()
@@ -59,8 +81,8 @@ struct ReservedView_ShopCell: View {
     }
 }
 
-struct ReservedView_ShopCell_Previews: PreviewProvider {
-    static var previews: some View {
-        ReservedView_ShopCell()
-    }
-}
+//struct ReservedView_ShopCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReservedView_ShopCell()
+//    }
+//}

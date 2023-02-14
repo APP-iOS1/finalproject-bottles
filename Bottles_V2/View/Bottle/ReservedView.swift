@@ -13,6 +13,8 @@ struct ReservedView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isShowing: Bool = true
     @State private var isShowingBookmarkView: Bool = false
+    @State private var isShowingFillBookmarkMessage: Bool = false
+    @State private var isShowingEmptyBookmarkMessage: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -51,29 +53,35 @@ struct ReservedView: View {
             Spacer()
        
             // MARK: - 예약 확인 버튼
-            NavigationLink(destination: PickUpDetailView()) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 358, height: 56)
-                    Text("예약 확인하기")
-                        .modifier(AccentColorButtonModifier())
-                }
-            }
+//            NavigationLink(destination: PickUpDetailView()) {
+//                ZStack {
+//                    RoundedRectangle(cornerRadius: 10)
+//                        .frame(width: 358, height: 56)
+//                    Text("예약 확인하기")
+//                        .modifier(AccentColorButtonModifier())
+//                }
+//            }
             .padding(.bottom)
         }
-        // TabView hidden
-        .toolbar(.hidden, for: .tabBar)
-        
         .sheet(isPresented: $isShowing) {
-            ReservedView_BottleShop()
+            ReservedView_BottleShop(
+                isShowingFillBookmarkMessage: $isShowingFillBookmarkMessage,
+                isShowingEmptyBookmarkMessage: $isShowingEmptyBookmarkMessage
+            )
                 .presentationDetents([.height(210)])
+                .presentationDragIndicator(.visible)
         }
 //        .fullScreenCover(isPresented: $isShowingBookmarkView, content: {
 //            MainTabView()
 //                .accentColor(Color("AccentColor"))
 //        })
+      
         .navigationBarBackButtonHidden(true)
     }
+}
+
+class Path: ObservableObject {
+    @Published var path: NavigationPath = NavigationPath()
 }
 
 struct ReservedView_Previews: PreviewProvider {

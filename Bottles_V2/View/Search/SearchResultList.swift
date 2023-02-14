@@ -55,7 +55,7 @@ struct SearchResultList: View {
             ForEach (bottleAndShop, id: \.self) { item in
                 
                 // 검색어와 겹치는 단어가 있는지 없는지 확인
-                if item.name.replacingOccurrences(of: " ", with: "").contains(searchBarText.replacingOccurrences(of: " ", with: "")) {
+                if item.name.replacingOccurrences(of: " ", with: "").localizedCaseInsensitiveContains(searchBarText.replacingOccurrences(of: " ", with: "")) {
                     Button {
                         doneTextFieldEdit = true
                         
@@ -81,7 +81,10 @@ struct SearchResultList: View {
                             // 검색어와 겹치는 단어가 있는 bottleName의 경우, 검색어와 겹치는 단어들만 accentColor
                             // 현재는 shop을 제외한 bottleName만 리스트에 보임
                             Text(item.name) { string in
-                                if let range = string.range(of: searchBarText.trimmingCharacters(in: .whitespaces)) {
+//                                let attString = AttributedString(item.name.replacingOccurrences(of: " ", with: ""))
+//                                let spaceCount = item.name.components(separatedBy: " ").count - 1
+                              
+                                if let range = string.range(of: searchBarText.trimmingCharacters(in: .whitespaces), options: .caseInsensitive) {
                                     string[range].foregroundColor = Color("AccentColor")
                                 }
                             }
@@ -104,6 +107,7 @@ struct SearchResultList: View {
         }
         .listStyle(.plain)
     }
+    
     func addSearchHistory() {
         var check: Bool = true
         // 중복 검사 (중복시 삭제)

@@ -35,7 +35,7 @@ struct MapView: View {
     @Namespace var morphSeamlessly
     @Namespace private var animation
     
-    //
+    // 북마크한 바틀샵 표시 버튼
     @State var isBookMarkTapped: Bool = false
     
     var body: some View {
@@ -126,14 +126,14 @@ struct MapView: View {
                     .zIndex(tapped ? 2 : 4)
                     
                     /// 네이버 지도 뷰
-                    NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopId, $mapViewModel.userLocation)
+                    NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopId, $mapViewModel.userLocation, $isBookMarkTapped)
                         .ignoresSafeArea(.all, edges: .top)
                     
                     /// 북마크 & 현재 위치 버튼
                     HStack {
                         Spacer()
                         
-                        SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation)
+                        SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation, isBookMarkTapped: $isBookMarkTapped)
                     }
                     
                     /// 둘러보기 뷰
@@ -177,7 +177,7 @@ struct MapView: View {
             }
             .onAppear {
                 mapViewModel.checkIfLocationServicesIsEnabled()
-                coord = mapViewModel.coord
+//                coord = mapViewModel.coord
             }
         }
     }

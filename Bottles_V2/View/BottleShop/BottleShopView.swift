@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Contacts
 
 // 바틀샵 뷰 내에서 [1. "상품 검색"과 2. "사장님의 공지" 뷰 이동]시 사용할 enum
 enum bottleShopInfo : String, CaseIterable {
@@ -27,6 +28,10 @@ struct BottleShopView: View {
     @State var search: Bool = false
     @State var testSearchText: String = ""
     
+    @State var calling: Bool = false
+    @State private var isSuccess: Bool = false
+    @State private var showCallAction: Bool = false
+    
     @Namespace private var animation
     
     @EnvironmentObject var shopDataStore: ShopDataStore
@@ -37,7 +42,8 @@ struct BottleShopView: View {
     // 검색 결과를 필터링해주는 연산 프로퍼티
     var filteredResult: [BottleModel] {
         let bottles = bottleDataStore.bottleData
-        return bottles.filter {
+        let test = bottles.filter{ $0.shopID == bottleShop.id }
+        return test.filter {
             $0.itemName.contains(testSearchText)
         }
     }
@@ -85,25 +91,16 @@ struct BottleShopView: View {
                             
                             // 전화 아이콘 버튼
                             Button(action: {
-                                
-                                if let url = URL(string: "tel://\(bottleShop.shopPhoneNumber)"), UIApplication.shared.canOpenURL(url) {
-                                    UIApplication.shared.open(url)
-                                    
-                                }
-                                //                                let phone = "tel://"
-                                //
-                                //                                // 데이터 연동 시 "shopPhoneNumber" 연동 (phoneNumber 자리에)
-                                //                                let phoneNumberformatted = phone + bottleShop.shopPhoneNumber
-                                //                                guard let url = URL(string: phoneNumberformatted) else { return }
-                                //                                UIApplication.shared.open(url)
-                                
+                                calling = true
+                                self.showCallAction = true
                                 print(bottleShop.shopPhoneNumber)
-                            }){
+                            }) {
                                 Image("Phone.fill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 15)
                                     .padding(.trailing, 5)
+                                
                             }
                             
                             Spacer()
@@ -256,20 +253,29 @@ struct BottleShopView: View {
                         .background(.white)
                         .padding(.bottom, -10)
                         
-                        // 검색결과 필터링 후 바틀셀 반복문
-                        ScrollView {
-                            ForEach(filteredResult, id: \.self) { item in
-                                NavigationLink(destination: BottleView(bottleData: item), label:{
-                                    BottleShopView_BottleList(selectedItem: item)
-                                        .padding()
-                                })
-                                .simultaneousGesture(TapGesture().onEnded {
-                                    focus = false
-                                })
+                        ZStack {
+                            ZStack{
+                                Color.black.opacity(0.3)
                             }
+                            .ignoresSafeArea()
+                            
+                            // 검색결과 필터링 후 바틀셀 반복문
+                            ScrollView {
+                                ForEach(filteredResult, id: \.self) { item in
+                                    NavigationLink(destination: BottleView(bottleData: item), label:{
+                                        BottleShopView_BottleList(selectedItem: item)
+                                            .padding()
+                                    })
+                                    .simultaneousGesture(TapGesture().onEnded {
+                                        focus = false
+                                    })
+                                }
+                            }
+                            .background(Color.white)
+                            .zIndex(1)
+                            
                         }
-                        .background(Color.white)
-                        .zIndex(1)
+                        
                     }
                     .transition(.asymmetric(insertion: AnyTransition.opacity.animation(.easeInOut),
                                             removal: AnyTransition.opacity.animation(.easeInOut))
@@ -277,44 +283,10 @@ struct BottleShopView: View {
                     //                    .animation(.easeOut)
                 }
                 
-                // MARK: - "BookMark 완료"시 애니메이션
-                if bookmarkToggle_fill{
-                    HStack{
-                        Image("BookMark.fill")
-                        Text("북마크가 완료되었습니다.")
-                            .foregroundColor(.black)
-                            .font(.bottles11)
-                        
-                    }
-                    .zIndex(1)
-                    .transition(.opacity.animation(.easeIn))
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 300, height: 30)
-                            .foregroundColor(.gray_f7)
-                    }
-                    .offset(y: 300)
-                }
+                BookMarkToggle(bookmarkToggle_fill: $bookmarkToggle_fill, bookmarkToggle_empty: $bookmarkToggle_empty)
                 
-                // MARK: - "BookMark 해제"시 애니메이션
-                if bookmarkToggle_empty{
-                    HStack{
-                        Image("BookMark")
-                        Text("북마크가 해제되었습니다.")
-                            .foregroundColor(.black)
-                            .font(.bottles11)
-                        
-                    }
-                    .zIndex(1)
-                    .transition(.opacity.animation(.easeIn))
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 300, height: 30)
-                            .foregroundColor(.gray_f7)
-                    }
-                    .offset(y: 300)
-                }
-                
+                // MARK: - "전화기 image 눌렀을 때" custom alert (시뮬레이터 x, 실기기에서만 작동)
+                MakeCallOrAddToCallBook(calling: $calling, bottleShop: bottleShop)
             }
             .navigationBarHidden(isNavigationBarHidden)
             .toolbar { // <-
@@ -366,9 +338,12 @@ struct BottleShopView: View {
     func compareMyFollowShopID(_ shopId: String) -> Bool {
         return (userStore.user.followShopList.filter { $0 == shopId }.count != 0) ? true : false
     }
+    
+    
+    
 }
 
-// 바틀샵 메인 뷰 내 [1. "상품 검색"과 2. "사장님의 공지" 뷰] 탭
+// MARK: 바틀샵 메인 뷰 내 [1. "상품 검색"과 2. "사장님의 공지" 뷰] 탭
 struct BottleShopInfoView: View {
     var bottleShopInfo: bottleShopInfo
     

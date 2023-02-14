@@ -12,6 +12,8 @@ struct BottleView_BottleCell: View {
     @EnvironmentObject var userStore: UserStore
     var bottleData: BottleModel
     @State private var checkBookmark: Bool = false
+    @Binding var isShowingFillBookmarkMessage: Bool
+    @Binding var isShowingEmptyBookmarkMessage: Bool
     
     var body: some View {
         HStack(alignment: .top, spacing: 15) {
@@ -46,7 +48,7 @@ struct BottleView_BottleCell: View {
                 
                     // MARK: - 바틀샵 이름
                     HStack {
-                        Image("Map_tab_fill")
+                        Image("Maptabfill")
                             .resizable()
                             .frame(width: 14, height: 17)
                         // MARK: - 바틀샵 이름
@@ -68,11 +70,27 @@ struct BottleView_BottleCell: View {
                     if compareMyFollowBottleID(bottleData.id) == true {
                         checkBookmark = false
                         userStore.deleteFollowItemId(bottleData.id)
+                        withAnimation(.easeOut(duration: 1.5)) {
+                            isShowingEmptyBookmarkMessage = true
+                            print("북마크 해제")
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                            isShowingEmptyBookmarkMessage = false
+                        }
                     }
 
                     if compareMyFollowBottleID(bottleData.id) == false {
                         checkBookmark = true
                         userStore.addFollowItemId(bottleData.id)
+                        withAnimation(.easeOut(duration: 1.5)) {
+                            isShowingFillBookmarkMessage = true
+                            print("북마크 완료")
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                            isShowingFillBookmarkMessage = false
+                        }
                     }
                     
                 }) {

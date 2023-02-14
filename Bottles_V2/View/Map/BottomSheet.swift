@@ -44,7 +44,7 @@ struct BottomSheetView<Content: View>: View {
         // 둘러보기 Sheet 최소 창 크기
         self.minHeight = 50
         // 둘러보기 Sheet 최대 창 크기
-        self.maxHeight = 700
+        self.maxHeight = UIScreen.main.bounds.height - 150
         self.content = content()
         self._isOpen = isOpen
     }
