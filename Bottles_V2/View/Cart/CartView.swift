@@ -29,9 +29,22 @@ struct CartView: View {
             /// 장바구니에 들어있는 품목 목록
             
             if cartStore.carts.count == 0 {
-                Text("장바구니가 비었습니다.")
+                VStack{
+//                    Spacer()
+                    Image(systemName: "cart")
+                        .font(.system(size: 60))
+                    Spacer()
+                        .frame(height: 20)
+                    
+                    Text("장바구니에\n담긴 상품이 없습니다.")
+                        .multilineTextAlignment(.center)
+                        .font(.bottles20)
+                        .fontWeight(.semibold)
+//                    Spacer()
+                }
+                .foregroundColor(.gray)
+                .padding(.top, -100)
             }
-            
             else {
                 ScrollView {
                     

@@ -14,6 +14,8 @@ struct ReservationPageView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var reservationDataStore: ReservationDataStore
     @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var cartStore: CartStore
+    @EnvironmentObject var bottleDataStore: BottleDataStore
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
     @State private var hiddenBottle: Bool = false
@@ -91,6 +93,9 @@ struct ReservationPageView: View {
                         isShowing.toggle()
                         Task{
                             await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopID: bottleReservations[0].shop, userID: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+                            if getBottleReservation(carts: cartStore.carts) == bottleReservations {
+                                cartStore.deleteAllCart(userEmail: userStore.user.email)
+                            }
                         }
                     }
                 }) {
@@ -119,6 +124,26 @@ struct ReservationPageView: View {
                 }
             })
         }
+    }
+    
+    func getBottleModel(bottleId: String) -> BottleModel {
+        let matchedBottleData = bottleDataStore.bottleData.filter {
+            $0.id == bottleId
+        }
+        
+        return matchedBottleData[0]
+    }
+    
+    func getBottleReservation(carts: [Cart]) -> [BottleReservation] {
+        var matchedBottleReservation: [BottleReservation] = []
+        var bottleModel: BottleModel
+        
+        for cart in carts {
+            bottleModel = getBottleModel(bottleId: cart.bottleId)
+            matchedBottleReservation.append(BottleReservation(id: cart.bottleId, image: bottleModel.itemImage, title: bottleModel.itemName, price: cart.eachPrice * cart.itemCount, count: cart.itemCount, shop: cart.shopName))
+        }
+        
+        return matchedBottleReservation
     }
 }
 
