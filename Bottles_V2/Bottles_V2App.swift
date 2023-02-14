@@ -65,10 +65,8 @@ struct Bottles_V2App: App {
                 .environmentObject(cartStore)
                 .environmentObject(appDelegate)
                 .task {
-                    userDataStore.readUser(userId: "test@naver.com")
-                    cartStore.readCart(userEmail: "test@naver.com")
                     await shopDataStore.getAllShopData()
-                    shopNoticeDataStore.getAllShopNoticeDataRealTime(userDataStore)
+                    
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.readReservation()
                 }

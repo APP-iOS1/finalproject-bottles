@@ -10,10 +10,14 @@ import SwiftUI
 struct MainTabView: View {
     @EnvironmentObject private var delegate: AppDelegate
     //    @EnvironmentObject var sessionManager : SessionManager
-    @EnvironmentObject var shopDataStore : ShopDataStore
-    @EnvironmentObject var bottleDataStore : BottleDataStore
-    @EnvironmentObject var reservationDataStore : ReservationDataStore
+    @EnvironmentObject var shopDataStore: ShopDataStore
+    @EnvironmentObject var bottleDataStore: BottleDataStore
+    @EnvironmentObject var reservationDataStore: ReservationDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
+    @EnvironmentObject var userDataStore: UserStore
+    @EnvironmentObject var cartStore: CartStore
+    @EnvironmentObject var authStore: AuthStore
+    @EnvironmentObject var shopNoticeDataStore: ShopNoticeDataStore
 
     //    let user: AuthUser
     
@@ -45,6 +49,11 @@ struct MainTabView: View {
             .toolbarBackground(Color.white, for: .tabBar)
             .sheet(isPresented: $delegate.openedFromNotification, onDismiss: didDismiss){
                 NotificationView()
+            }
+            .task {
+                userDataStore.readUser(userId: authStore.currentUser?.email ?? "")
+                cartStore.readCart(userEmail: authStore.currentUser?.email ?? "")
+                shopNoticeDataStore.getAllShopNoticeDataRealTime(userDataStore)
             }
     }
     func didDismiss(){

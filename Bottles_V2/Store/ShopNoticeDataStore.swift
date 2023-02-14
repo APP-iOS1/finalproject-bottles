@@ -87,7 +87,7 @@ class ShopNoticeDataStore : ObservableObject {
                         
                         if !self.shopNoticeData.contains(shopNotice) {
                             self.shopNoticeData.append(shopNotice)
-                            userStore.addUserNoticeData(id)
+                            //userStore.addUserNoticeData(id)
                         }
                     }
                     

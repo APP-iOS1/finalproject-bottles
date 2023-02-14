@@ -45,7 +45,7 @@ struct PickUpListView: View {
                             PickUpListCell(reservationData: reservationData)
                         }
                         Divider()
-                        
+                      
                     }
                 }
             }

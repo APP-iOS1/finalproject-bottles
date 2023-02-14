@@ -19,7 +19,7 @@ struct ReservationPageView: View {
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
     @State private var hiddenBottle: Bool = false
-    
+    var tempId: String = UUID().uuidString
     let bottleReservations: [BottleReservation]
     
     var body: some View {
@@ -97,6 +97,7 @@ struct ReservationPageView: View {
                                 cartStore.deleteAllCart(userEmail: userStore.user.email)
                             }
                         }
+                        userStore.addUserReservation(reservationId: tempId)
                     }
                 }) {
                     ZStack {
@@ -107,13 +108,14 @@ struct ReservationPageView: View {
                     }
                 }
                 .padding(.horizontal)
+                .padding(.bottom, 30)
                 .disabled(!check)
             }
             .frame(alignment: .bottom)
             
             // 예약 완료 뷰로 이동
             .navigationDestination(isPresented: $isShowing) {
-                ReservedView()
+                ReservedView(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수중", reservedBottles: getReservedBottlesArray(bottleReservations: bottleReservations)))
                 //.environmentObject(path)
             }
             .toolbar(content: {
@@ -124,6 +126,7 @@ struct ReservationPageView: View {
                 }
             })
         }
+        .edgesIgnoringSafeArea([.bottom])
     }
     
     func getBottleModel(bottleId: String) -> BottleModel {
