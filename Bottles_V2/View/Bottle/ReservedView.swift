@@ -69,14 +69,13 @@ struct ReservedView: View {
                 isShowingFillBookmarkMessage: $isShowingFillBookmarkMessage,
                 isShowingEmptyBookmarkMessage: $isShowingEmptyBookmarkMessage
             )
-                .presentationDetents([.height(210)])
-                .presentationDragIndicator(.visible)
+            .presentationDetents([.height(210)])
+            .presentationDragIndicator(.visible)
         }
-//        .fullScreenCover(isPresented: $isShowingBookmarkView, content: {
-//            MainTabView()
-//                .accentColor(Color("AccentColor"))
-//        })
-      
+        .fullScreenCover(isPresented: $isShowingBookmarkView, content: {
+            MainTabView()
+                .accentColor(Color("AccentColor"))
+        })
         .navigationBarBackButtonHidden(true)
         .toolbar(.visible, for: .tabBar)
     }
