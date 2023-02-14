@@ -9,22 +9,20 @@ import SwiftUI
 
 struct OnboardingPageView: View {
     let imageName: String
-    let title: String
-    let subtitle: String
+    let title: String?
     
     var body: some View {
-        VStack {
-            Image(systemName: imageName)
-                .font(.system(size: 100))
-                .padding()
+        VStack(alignment: .center) {
             
             Text(title)
-                .font(.largeTitle)
+                .font(.bottles24)
                 .fontWeight(.bold)
-                .padding()
+                .frame(alignment: .center)
             
-            Text(subtitle)
-                .font(.title2)
+            Image(imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+
         }
         .padding()
         

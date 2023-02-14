@@ -77,12 +77,12 @@
 		3AFA0431299B2D9B0068BB09 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0430299B2D9B0068BB09 /* OnboardingView.swift */; };
 		3AFA0433299B2F490068BB09 /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0432299B2F490068BB09 /* OnboardingPageView.swift */; };
 		3AFA0435299B2F600068BB09 /* OnboardingLastPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0434299B2F600068BB09 /* OnboardingLastPageView.swift */; };
-		3AFA0438299B41180068BB09 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3AFA0437299B41180068BB09 /* Lottie */; };
 		3AFA043A299B43D00068BB09 /* wine.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA0439299B43D00068BB09 /* wine.json */; };
 		3AFA043C299B44C70068BB09 /* map.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA043B299B44C70068BB09 /* map.json */; };
 		3AFA043E299B45BA0068BB09 /* shakehands.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA043D299B45BA0068BB09 /* shakehands.json */; };
 		3AFA0440299B46580068BB09 /* reserve.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA043F299B46580068BB09 /* reserve.json */; };
-		3AFA0444299B48780068BB09 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0443299B48780068BB09 /* LottieView.swift */; };
+		3AFA0448299B50610068BB09 /* winecheers.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA0447299B50610068BB09 /* winecheers.json */; };
+		3AFA044A299B7E0F0068BB09 /* OnboardingFirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA0449299B7E0F0068BB09 /* OnboardingFirstView.swift */; };
 		59883C3FF144E2CA845F4DE6 /* Pods_Bottles_V2_Bottles_V2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */; };
 		7F0C61FB2990B3BB00B4CE4D /* FindPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FA2990B3BB00B4CE4D /* FindPasswordView.swift */; };
 		7F0C61FD2990C30C00B4CE4D /* SentEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0C61FC2990C30C00B4CE4D /* SentEmailView.swift */; };
@@ -235,7 +235,8 @@
 		3AFA043B299B44C70068BB09 /* map.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = map.json; sourceTree = "<group>"; };
 		3AFA043D299B45BA0068BB09 /* shakehands.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = shakehands.json; sourceTree = "<group>"; };
 		3AFA043F299B46580068BB09 /* reserve.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = reserve.json; sourceTree = "<group>"; };
-		3AFA0443299B48780068BB09 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		3AFA0447299B50610068BB09 /* winecheers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = winecheers.json; sourceTree = "<group>"; };
+		3AFA0449299B7E0F0068BB09 /* OnboardingFirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstView.swift; sourceTree = "<group>"; };
 		4F05C0664583932B22FDC119 /* Pods-Bottles_V2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2Tests.release.xcconfig"; path = "Target Support Files/Pods-Bottles_V2Tests/Pods-Bottles_V2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4F497AFA31D64A6C7C8D5DAB /* Pods-Bottles_V2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2/Pods-Bottles_V2.debug.xcconfig"; sourceTree = "<group>"; };
 		534C0901FECD300F1E9C28B3 /* Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Bottles_V2-Bottles_V2UITests/Pods-Bottles_V2-Bottles_V2UITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -300,7 +301,6 @@
 				FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */,
 				D746C977298A426200E27E16 /* FirebaseAuth in Frameworks */,
 				7FB1207A299223990071AB3F /* GoogleSignInSwift in Frameworks */,
-				3AFA0438299B41180068BB09 /* Lottie in Frameworks */,
 				D746C979298A426200E27E16 /* FirebaseFirestore in Frameworks */,
 				7FB12081299226EE0071AB3F /* KakaoSDKCommon in Frameworks */,
 				D746C97D298A426200E27E16 /* FirebaseStorage in Frameworks */,
@@ -591,6 +591,7 @@
 				3AFA0439299B43D00068BB09 /* wine.json */,
 				3AFA043D299B45BA0068BB09 /* shakehands.json */,
 				3AFA043F299B46580068BB09 /* reserve.json */,
+				3AFA0447299B50610068BB09 /* winecheers.json */,
 				27D82C30297A5AC0004F3D94 /* SpoqaHanSansNeo_OTF_original */,
 			);
 			path = Resource;
@@ -600,9 +601,9 @@
 			isa = PBXGroup;
 			children = (
 				3AFA0430299B2D9B0068BB09 /* OnboardingView.swift */,
+				3AFA0449299B7E0F0068BB09 /* OnboardingFirstView.swift */,
 				3AFA0432299B2F490068BB09 /* OnboardingPageView.swift */,
 				3AFA0434299B2F600068BB09 /* OnboardingLastPageView.swift */,
-				3AFA0443299B48780068BB09 /* LottieView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -697,7 +698,6 @@
 				04116D3429948A170052063E /* FirebaseMessaging */,
 				7F714E1129991AE4008FD61D /* FacebookCore */,
 				7F714E1329991AE4008FD61D /* FacebookLogin */,
-				3AFA0437299B41180068BB09 /* Lottie */,
 			);
 			productName = Bottles_V2;
 			productReference = 0427F561297677E60023E745 /* Bottles_V2.app */;
@@ -780,7 +780,6 @@
 				7FB1207D299226EE0071AB3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				27951FD229937B2900690ADD /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 				7F714E1029991AE4008FD61D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
-				3AFA0436299B41170068BB09 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 0427F562297677E60023E745 /* Products */;
 			projectDirPath = "";
@@ -810,6 +809,7 @@
 				3AFA043C299B44C70068BB09 /* map.json in Resources */,
 				3AFA043E299B45BA0068BB09 /* shakehands.json in Resources */,
 				27A0269A298BAC6500F71705 /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				3AFA0448299B50610068BB09 /* winecheers.json in Resources */,
 				27A0269C298BAC6500F71705 /* SpoqaHanSansNeo-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -974,6 +974,7 @@
 				27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */,
 				3A306746297A82BE0085CC6A /* Color.swift in Sources */,
 				3A47F3892990E7D700F8D603 /* BottleShopTestModel.swift in Sources */,
+				3AFA044A299B7E0F0068BB09 /* OnboardingFirstView.swift in Sources */,
 				3AFA0435299B2F600068BB09 /* OnboardingLastPageView.swift in Sources */,
 				26A66485298CC6F1004E15EA /* User.swift in Sources */,
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
@@ -1009,7 +1010,6 @@
 				27A026A1298C11A300F71705 /* NaverMap.swift in Sources */,
 				D7B5EA59298CFEBB00DC648A /* LaunchView.swift in Sources */,
 				D5125F63299B0A1B00AEE0BB /* PickUpDetailCell.swift in Sources */,
-				3AFA0444299B48780068BB09 /* LottieView.swift in Sources */,
 				3AA43A5D2977C8BD00EB8551 /* BottleShopView_BottleList.swift in Sources */,
 				27281CE62977856A003BE8B4 /* CartView.swift in Sources */,
 				7FB3D69E298CAB5300EA8884 /* CustomAlertView.swift in Sources */,
@@ -1395,14 +1395,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		3AFA0436299B41170068BB09 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
 		7F714E1029991AE4008FD61D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
@@ -1447,11 +1439,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 27951FD229937B2900690ADD /* XCRemoteSwiftPackageReference "SkeletonUI" */;
 			productName = SkeletonUI;
-		};
-		3AFA0437299B41180068BB09 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3AFA0436299B41170068BB09 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		7F714E1129991AE4008FD61D /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
