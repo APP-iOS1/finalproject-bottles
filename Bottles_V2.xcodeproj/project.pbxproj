@@ -110,6 +110,9 @@
 		9293B9DB297A544E00E1EB34 /* ReservedView_ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */; };
 		9295D075299A7A140038267E /* CustomFillBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9295D074299A7A140038267E /* CustomFillBookmarkView.swift */; };
 		9295D079299A7C5A0038267E /* CustomEmptyBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9295D078299A7C5A0038267E /* CustomEmptyBookmarkView.swift */; };
+		92BB7616299B53E40045CDE0 /* CartCustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB7615299B53E40045CDE0 /* CartCustomAlertView.swift */; };
+		92BB7618299B54590045CDE0 /* CartCustomAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB7617299B54580045CDE0 /* CartCustomAlertModifier.swift */; };
+		92BB761A299B72C50045CDE0 /* CartToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BB7619299B72C50045CDE0 /* CartToastMessage.swift */; };
 		92FBAD3C29933DE500DC4669 /* MapSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBAD3B29933DE500DC4669 /* MapSearchView.swift */; };
 		ABE1CA6E6BE31F60C644A53F /* Pods_Bottles_V2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBE1B82F061C370C4C230905 /* Pods_Bottles_V2Tests.framework */; };
 		AE106FFF2977B19B00AF9D1B /* BookMarkBottleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE106FFE2977B19B00AF9D1B /* BookMarkBottleList.swift */; };
@@ -251,6 +254,9 @@
 		9293B9DA297A544E00E1EB34 /* ReservedView_ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservedView_ShopCell.swift; sourceTree = "<group>"; };
 		9295D074299A7A140038267E /* CustomFillBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFillBookmarkView.swift; sourceTree = "<group>"; };
 		9295D078299A7C5A0038267E /* CustomEmptyBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmptyBookmarkView.swift; sourceTree = "<group>"; };
+		92BB7615299B53E40045CDE0 /* CartCustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCustomAlertView.swift; sourceTree = "<group>"; };
+		92BB7617299B54580045CDE0 /* CartCustomAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCustomAlertModifier.swift; sourceTree = "<group>"; };
+		92BB7619299B72C50045CDE0 /* CartToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartToastMessage.swift; sourceTree = "<group>"; };
 		92D45CA42988B35300DB4D11 /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPageView_Info.swift; sourceTree = "<group>"; };
 		92D45CAA2988FC2B00DB4D11 /* BottleView_Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_Info.swift; sourceTree = "<group>"; };
@@ -419,7 +425,7 @@
 				27281CE829778583003BE8B4 /* Bottle */,
 				27281CE429778551003BE8B4 /* Cart */,
 				27281CF3297785FE003BE8B4 /* Notification */,
-				9295D073299A79B20038267E /* CustomBookmarkPopUp */,
+				9295D073299A79B20038267E /* BookmarkCustomToastMessage */,
 				7FB3D69A298CAAF800EA8884 /* CustomAlert */,
 			);
 			path = View;
@@ -481,6 +487,7 @@
 				92158B55299099FA00FCB475 /* ReservationView_OutOfFocus.swift */,
 				9216C1B82977AF1D00217C7F /* ReservationView_Content.swift */,
 				9291DEB72990D41B00CF5626 /* ReservationView_Content_Amount.swift */,
+				92BB7619299B72C50045CDE0 /* CartToastMessage.swift */,
 				9216C1BA2977B0DB00217C7F /* ReservationPageView.swift */,
 				923D1D3F297E783D00988EE3 /* ReservationPageView_BottleCell.swift */,
 				92D45CA62988F73700DB4D11 /* ReservationPageView_Info.swift */,
@@ -606,17 +613,19 @@
 			children = (
 				7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */,
 				7FB3D69F298CB97B00EA8884 /* CustomAlertModifier.swift */,
+				92BB7615299B53E40045CDE0 /* CartCustomAlertView.swift */,
+				92BB7617299B54580045CDE0 /* CartCustomAlertModifier.swift */,
 			);
 			path = CustomAlert;
 			sourceTree = "<group>";
 		};
-		9295D073299A79B20038267E /* CustomBookmarkPopUp */ = {
+		9295D073299A79B20038267E /* BookmarkCustomToastMessage */ = {
 			isa = PBXGroup;
 			children = (
 				9295D074299A7A140038267E /* CustomFillBookmarkView.swift */,
 				9295D078299A7C5A0038267E /* CustomEmptyBookmarkView.swift */,
 			);
-			path = CustomBookmarkPopUp;
+			path = BookmarkCustomToastMessage;
 			sourceTree = "<group>";
 		};
 		D70CE4F82976823500DFC8CE /* Store */ = {
@@ -923,6 +932,7 @@
 				7F2142C22977B43B0046D420 /* PickUpDetailView.swift in Sources */,
 				7F76AAF429876D0E00AAEBCA /* EmailRegisterView.swift in Sources */,
 				27281CF82977862F003BE8B4 /* MyPageView.swift in Sources */,
+				92BB761A299B72C50045CDE0 /* CartToastMessage.swift in Sources */,
 				7F5857B6298A35FB003402B0 /* TotalLoginView.swift in Sources */,
 				7F2142BC2977956D0046D420 /* SettingView.swift in Sources */,
 				26BA41C82991389D00419584 /* CartStore.swift in Sources */,
@@ -960,6 +970,7 @@
 				276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */,
 				029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */,
 				7F647DC32988B69D0022590A /* SafariWebView.swift in Sources */,
+				92BB7616299B53E40045CDE0 /* CartCustomAlertView.swift in Sources */,
 				27A02690298B572100F71705 /* BottleView_Info.swift in Sources */,
 				029A23D1297A58BF00E7D602 /* BottleDataStore.swift in Sources */,
 				9216C1BD2977B4BF00217C7F /* ReservedView.swift in Sources */,
@@ -991,6 +1002,7 @@
 				9291DEB82990D41B00CF5626 /* ReservationView_Content_Amount.swift in Sources */,
 				923D1D40297E783D00988EE3 /* ReservationPageView_BottleCell.swift in Sources */,
 				7F5857B8298A37E3003402B0 /* EmailLoginView.swift in Sources */,
+				92BB7618299B54590045CDE0 /* CartCustomAlertModifier.swift in Sources */,
 				AE6E0AC1298110970002183B /* BookMarkTestModel.swift in Sources */,
 				26A66487298CC865004E15EA /* UserStore.swift in Sources */,
 				AE2AD6DD298BF9EE00C40EE8 /* SearchModel.xcdatamodeld in Sources */,

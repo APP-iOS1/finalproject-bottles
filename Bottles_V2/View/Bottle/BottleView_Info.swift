@@ -82,7 +82,6 @@ struct BottleView_Info: View {
                                 isShowingFillBookmarkMessage = false
                             }
                         }
-                        
                     }) {
                         Image(compareMyFollowBottleID(bottleData.id) ? "BookMark.fill" : "BookMark")
                             .resizable()
