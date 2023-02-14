@@ -9,41 +9,46 @@ import SwiftUI
 
 struct PickUpDetailCell: View {
 
-    let bottleModel: BottleModel
-    let count: Int
+    var bottleModel: BottleModel
+    var count: Int
     
     var body: some View {
         // MARK: - 예약 세부 상품 HStack
         HStack (alignment: .top){
             
             // TODO: 예약 상품에 대한 이미지
-            AsyncImage(url: URL(string: "https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/e8e8b60a-770c-4f67-ba67-ee3300ce0a5d.webp")) { image in
+            AsyncImage(url: URL(string: bottleModel.itemImage)) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 130, height: 130)
+                    .frame(width: 125, height: 125)
                 
             } placeholder: {
                 Image("ready_image")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 130, height: 130)
+                    .frame(width: 125, height: 125)
             }
             .background(Color.gray_f7)
             .cornerRadius(12)
             .frame(height: 130)
 
             VStack(alignment: .leading){
-                Text("디 오리지널 골드바 위스키")
+                Text("\(bottleModel.itemName)")
                     .font(.bottles14)
                     .bold()
-                Text("109,000원")
+                Text("\(bottleModel.itemPrice * count)원")
                     .font(.bottles18)
-                    .padding(.vertical, 1)
+                    .padding(.vertical, -5)
                     .bold()
+                Text("개당 \(bottleModel.itemPrice)원")
+                    .font(.bottles12)
+                    .foregroundColor(.gray)
+                    .padding(3)
                 Text("\(count)개")
                     .font(.bottles14)
             }
+            .padding(.top)
             Spacer()
         }
     }

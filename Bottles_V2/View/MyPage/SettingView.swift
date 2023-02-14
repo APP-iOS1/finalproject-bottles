@@ -21,7 +21,7 @@ struct SettingView: View {
         VStack {
             // MARK: - 휴대폰 번호 변경, 알림 설정
             List {
-                NavigationLink(destination: Text("휴대폰 번호 변경")) {
+                NavigationLink(destination: ChangePhoneNumberView()) {
                     Text("휴대폰 번호 변경")
 
                 }
@@ -40,6 +40,11 @@ struct SettingView: View {
 
                         Spacer()
                         Image(systemName: "chevron.forward")
+                            .font(.footnote)
+                            .bold()
+                            .foregroundColor(.secondary)
+                            .opacity(0.6)
+                            
                     }
                 }
 //                ForEach(settingViewList, id: \.self) { item in
@@ -89,7 +94,8 @@ struct SettingView: View {
                           primaryButton: .destructive(Text("회원 탈퇴"),
                                                       action: {
                         // TODO: 회원 탈퇴 로직
-                        
+                        authStore.deleteUser(userEmail: authStore.currentUser?.email ?? "")
+                        selection = 1
                     }), secondaryButton: .cancel(Text("취소")))
                 }
             }
@@ -126,6 +132,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView(selection: .constant(1))
+        SettingView(selection: .constant(1)).environmentObject(AuthStore())
     }
 }
