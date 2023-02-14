@@ -48,7 +48,7 @@ struct ReservedView: View {
                     .lineSpacing(5)
                     .padding()
             }
-            .offset(y: -85)
+            .offset(y: -110)
             
             Spacer()
        
@@ -61,7 +61,7 @@ struct ReservedView: View {
 //                        .modifier(AccentColorButtonModifier())
 //                }
 //            }
-            .padding(.bottom)
+//            .padding(.bottom)
         }
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop(
