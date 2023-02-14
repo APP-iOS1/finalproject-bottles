@@ -26,7 +26,7 @@ struct ShopNotice : Codable, Identifiable, Hashable {
         let result = time / 60
         switch result {
         case 0:
-            return "now"
+            return "방금"
         case 1 ... 59:
             return "\(result)분 전"
         case 60 ... 1439:

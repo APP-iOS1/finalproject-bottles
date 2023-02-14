@@ -11,6 +11,7 @@ import SkeletonUI
 // MARK: - 마커 클릭 시 모달 뷰
 struct MarkerDetailView: View {
     @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var shopDataStore: ShopDataStore
     var shopData: ShopModel
     @State private var checkBookmark: Bool = true
     @Binding var showMarkerDetailView: Bool
@@ -64,12 +65,23 @@ struct MarkerDetailView: View {
                             if compareMyFollowShopID(shopData.id) == true {
                                 checkBookmark = false
                                 userStore.deleteFollowShopId(shopData.id)
+                                shopDataStore.deleteFollowUserList(userStore.user.email, shopData.id)
                             }
                             
                             if compareMyFollowShopID(shopData.id) == false {
                                 checkBookmark = true
                                 userStore.addFollowShopId(shopData.id)
+                                shopDataStore.addFollowUserList(userStore.user.email, shopData.id)
                             }
+//                            if compareMyFollowShopID(shopData.id) == true {
+//                                checkBookmark = false
+//                                userStore.deleteFollowShopId(shopData.id)
+//                            }
+//
+//                            if compareMyFollowShopID(shopData.id) == false {
+//                                checkBookmark = true
+//                                userStore.addFollowShopId(shopData.id)
+//                            }
                             
                         }) {
                             Image(compareMyFollowShopID(shopData.id) ? "BookMark.fill" : "BookMark")
