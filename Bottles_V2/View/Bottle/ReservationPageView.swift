@@ -92,7 +92,7 @@ struct ReservationPageView: View {
                     if check {
                         isShowing.toggle()
                         Task{
-                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
                             if getBottleReservation(carts: cartStore.carts) == bottleReservations {
                                 cartStore.deleteAllCart(userEmail: userStore.user.email)
                             }
@@ -115,7 +115,7 @@ struct ReservationPageView: View {
             
             // 예약 완료 뷰로 이동
             .navigationDestination(isPresented: $isShowing) {
-                ReservedView(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수중", reservedBottles: getReservedBottlesArray(bottleReservations: bottleReservations)))
+                ReservedView(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: getReservedBottlesArray(bottleReservations: bottleReservations)))
                 //.environmentObject(path)
             }
             .toolbar(content: {
