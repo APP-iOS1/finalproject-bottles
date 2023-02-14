@@ -92,7 +92,7 @@ struct ReservationPageView: View {
                     if check {
                         isShowing.toggle()
                         Task{
-                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopID: bottleReservations[0].shop, userID: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
                             if getBottleReservation(carts: cartStore.carts) == bottleReservations {
                                 cartStore.deleteAllCart(userEmail: userStore.user.email)
                             }
@@ -147,6 +147,14 @@ struct ReservationPageView: View {
         }
         
         return matchedBottleReservation
+    }
+    
+    func getReservedBottlesArray(bottleReservations: [BottleReservation]) -> [ReservedBottles] {
+        var reservedBottles: [ReservedBottles] = []
+        for bottleReservation in bottleReservations {
+            reservedBottles.append(ReservedBottles(id: UUID().uuidString, BottleId: bottleReservation.id, itemCount: bottleReservation.count))
+        }
+        return reservedBottles
     }
 }
 
