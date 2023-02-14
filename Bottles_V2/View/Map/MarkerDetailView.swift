@@ -16,6 +16,7 @@ struct MarkerDetailView: View {
     @Binding var showMarkerDetailView: Bool
     @Binding var currentShopId: String
     @State var colors = [String]()
+    @StateObject var coordinator: Coordinator = Coordinator.shared
 
 //    @Binding var shopModel: ShopModel
 
@@ -43,17 +44,7 @@ struct MarkerDetailView: View {
                     HStack(spacing: 25) {
                         // 전화 버튼
                         // 전화 아이콘 버튼
-                        Button(action: {
-                            if let url = URL(string: "tel://\(shopData.shopPhoneNumber)"), UIApplication.shared.canOpenURL(url) {
-                                UIApplication.shared.open(url)
-                            }
-                        }){
-                            Image("Phone.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 15)
-                                .padding(.trailing, 5)
-                        }
+                        MakeCallOrAddToCallBook(bottleShop: shopData)
                         
                         // 북마크 버튼
                         Button(action: {

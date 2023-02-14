@@ -17,13 +17,16 @@ struct MapView: View {
     
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
+    @EnvironmentObject var userDataStore: UserStore
+    
+    @StateObject var coordinator: Coordinator = Coordinator.shared
     
     @State var coord: (Double, Double) = (37.56668, 126.978419)
     @State var userLocation: (Double, Double) = (37.56668, 126.978419)
     @State var searchBarText: String = ""
     @State var isShowingSheet: Bool = false
-    @State var showMarkerDetailView: Bool = false
-    @State var currentShopId: String = "보리마루"
+    //    @State var showMarkerDetailView: Bool = false
+    //    @State var currentShopId: String = "보리마루"
     @State var searchResult: [ShopModel] = []
     @State var tapped: Bool = true
     
@@ -46,25 +49,16 @@ struct MapView: View {
                     VStack {
                         if tapped {
                             ZStack {
-                                MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, mapViewModel: _mapViewModel, shopDataStore: _shopDataStore, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
+                                MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, shopDataStore: _shopDataStore, showMarkerDetailView: $coordinator.showMarkerDetailView, searchResult: $searchResult, currentShopId: $coordinator.currentShopId, tapSearchButton: $tapSearchButton, coord: $coordinator.coord)
                                     .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
-                                    .frame(maxWidth: 293, maxHeight: 35)
+                                    .frame(maxWidth: 290, maxHeight: 35)
+                                    .cornerRadius(10)
                                     .offset(x: -22, y: 0)
-                                //                                    .onTapGesture(count: 1, perform: {
-                                //                                        withAnimation (
-                                //                                            Animation.easeInOut(duration: 0.3)
-                                //                                        ) {
-                                //                                            tapped.toggle()
-                                //                                        }
-                                //                                    })
                                 HStack {
                                     MapSearchBar()
-                                    //                                        .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
                                         .onTapGesture(count: 1, perform: {
                                             withAnimation (
                                                 Animation.easeInOut(duration: 0.5)
-//                                                Animation.linear(duration: 0.5)
-//                                                Animation.easeIn(duration: 0.5)
                                             ) {
                                                 tapped.toggle()
                                             }
@@ -87,32 +81,27 @@ struct MapView: View {
                                             .cornerRadius(10)
                                     }
                                 }
-                                .padding(.bottom, 10)
+                                .padding(.vertical, 10)
                             }
-                            
-                            
-                            //                            .zIndex(4)
                         } else {
-                            MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, showMarkerDetailView: $showMarkerDetailView, searchResult: $searchResult, currentShopId: $currentShopId, tapSearchButton: $tapSearchButton)
-                            //                            MapSearchView(tapped: $tapped)
+                            MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, showMarkerDetailView: $coordinator.showMarkerDetailView, searchResult: $searchResult, currentShopId: $coordinator.currentShopId, tapSearchButton: $tapSearchButton, coord: $coordinator.coord)
                                 .scaleEffect(tapped ? 0 : 1.2, anchor: .top)
                                 .offset(x: tapped ? -22 : 0, y: tapped ? 0 : 0)
                                 .opacity(1)
                                 .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
-                            //                                .ignoresSafeArea()
                         }
                         
                         if tapSearchButton {
                             HStack{
                                 Image("xmark")
-                                Text("검색 결과가 없습니다.")
+                                Text("저장한 바틀샵이 없습니다.")
                                     .shakeEffect(trigger: tapSearchButton)
                                     .foregroundColor(.black)
                                     .font(.bottles11)
                             }
                             .zIndex(2)
                             
-                            //                        .transition(.opacity.animation(.easeIn))
+                            .transition(.opacity.animation(.easeIn))
                             
                             .background{
                                 RoundedRectangle(cornerRadius: 10)
@@ -126,58 +115,48 @@ struct MapView: View {
                     .zIndex(tapped ? 2 : 4)
                     
                     /// 네이버 지도 뷰
-                    NaverMap($mapViewModel.coord, $showMarkerDetailView, $currentShopId, $mapViewModel.userLocation, $isBookMarkTapped)
+                    NaverMap(currentShopId: $coordinator.currentShopId, showMarkerDetailView: $coordinator.showMarkerDetailView, isBookMarkTapped: $coordinator.isBookMarkTapped)
                         .ignoresSafeArea(.all, edges: .top)
                     
                     /// 북마크 & 현재 위치 버튼
                     HStack {
                         Spacer()
                         
-                        SideButtonCell(mapViewModel: mapViewModel, userLocation: $mapViewModel.userLocation, isBookMarkTapped: $isBookMarkTapped)
+                        SideButtonCell(tapSearchButton: $tapSearchButton, userLocation: $coordinator.userLocation, isBookMarkTapped: $coordinator.isBookMarkTapped)
                     }
                     
                     /// 둘러보기 뷰
                     BottomSheetView(isOpen: $isShowingSheet, maxHeight: 200) {
                         NearBySheetView(
-                            mapViewModel: mapViewModel,
                             isOpen: $isShowingSheet,
-                            showMarkerDetailView: $showMarkerDetailView,
-                            currentShopId: $currentShopId
+                            showMarkerDetailView: $coordinator.showMarkerDetailView,
+                            currentShopId: $coordinator.currentShopId
                         )
                     }
                     .ignoresSafeArea(.all, edges: .top)
                     .zIndex(2)
                     
-                    MarkerDetailSheet(isOpen: $showMarkerDetailView, maxHeight: 200) {
+                    MarkerDetailSheet(isOpen: $coordinator.showMarkerDetailView, maxHeight: 200) {
                         NavigationLink{
-                            BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == currentShopId }[0])
+                            BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == coordinator.currentShopId }[0])
                             
                         } label: {
                             MarkerDetailView(
-                                shopData: shopDataStore.shopData.filter { $0.id == currentShopId }[0],
-                                showMarkerDetailView: $showMarkerDetailView,
-                                currentShopId: $currentShopId
+                                shopData: shopDataStore.shopData.filter { $0.id == coordinator.currentShopId }[0],
+                                showMarkerDetailView: $coordinator.showMarkerDetailView,
+                                currentShopId: $coordinator.currentShopId
                             )
                         }
                     }
                     .zIndex(3)
-                    
-                    // TODO: - 보라색 에러 async/await로 해결해보기
-                    //            .task {
-                    //                if await mapViewModel.locationServicesEnabled() {
-                    //                    // Do something
-                    //                    let locationManager = CLLocationManager()
-                    //                    locationManager.delegate = mapViewModel
-                    //                    mapViewModel.checkLocationAuthorization()
-                    //                }
-                    //            }
-                    //                }
-                    
                 }
             }
             .onAppear {
-                mapViewModel.checkIfLocationServicesIsEnabled()
-//                coord = mapViewModel.coord
+                Coordinator.shared.checkIfLocationServicesIsEnabled()
+                Coordinator.shared.shopDataStore.shopData = shopDataStore.shopData
+                Coordinator.shared.userDataStore.user = userDataStore.user
+                //                Coordinator.shared.fetchUserLocation()
+                coordinator.makeMarkers()
             }
         }
     }
