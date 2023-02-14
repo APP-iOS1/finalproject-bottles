@@ -49,7 +49,7 @@ struct ReservedView: View {
                     .lineSpacing(5)
                     .padding()
             }
-            .offset(y: -85)
+            .offset(y: -110)
             
             Spacer()
        

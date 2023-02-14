@@ -42,6 +42,7 @@ struct BookMarkView: View {
                             CartViewNavigationLink()
                                 .padding(.leading, 5)
                         }
+                        .padding(.top)
                         // tab picker 애니메이션 함수 및 탭뷰
                         animate()
                         BookMarkTabView(bookMarkTab: selectedPicker)

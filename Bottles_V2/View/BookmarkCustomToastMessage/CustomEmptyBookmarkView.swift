@@ -1,5 +1,5 @@
 //
-//  CustomFillBookmarkView.swift
+//  CustomEmptyBookmarkView.swift
 //  Bottles_V2
 //
 //  Created by hyemi on 2023/02/13.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-// MARK: - 북마크 추가 버튼 클릭 시 표시되는 팝업 창
-struct CustomFillBookmarkView: View {
+// MARK: - 북마크 해제 버튼 클릭 시 표시되는 토스트 메세지
+struct CustomEmptyBookmarkView: View {
     @Binding var isShowing: Bool
     
     var body: some View {
         if isShowing {
             HStack{
-                Image("BookMark.fill")
-                Text("북마크가 완료되었습니다.")
+                Image("BookMark")
+                Text("북마크가 해제되었습니다.")
                     .foregroundColor(.black)
                     .font(.bottles11)
                 
@@ -32,8 +32,8 @@ struct CustomFillBookmarkView: View {
     }
 }
 
-struct CustomFillBookmarkView_Previews: PreviewProvider {
+struct CustomEmptyBookmarkView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomFillBookmarkView(isShowing: .constant(true))
+        CustomEmptyBookmarkView(isShowing: .constant(true))
     }
 }

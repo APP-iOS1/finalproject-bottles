@@ -11,132 +11,115 @@ import SwiftUI
 /// 픽업 안내 사항을 확인하고 바틀의 수량을 선택하는 뷰 입니다.
 struct ReservationView_Content: View {
     //@EnvironmentObject var path: Path
-    @State private var count: Int = 1
-    @State private var isShowingAlert: Bool = false
+    @State private var isShowingMessage: Bool = false
     @State private var isShowingCart: Bool = false
     @State private var isShowingReservationPage: Bool = false
+    @Binding var count: Int
+    @Binding var isShowingAnotherShopAlert: Bool
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var cartStore: CartStore
     @EnvironmentObject var userStore: UserStore
+    
     var bottleData: BottleModel
-    @State private var anotherShopInCart: Bool = false
-    //@State private var isShowingAnotherShopAlert: Bool = false
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 25) {
-                // MARK: - 픽업 매장 이름, 주소
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("픽업 매장")
-                        .modifier(titleModifier())
-                        .padding(.bottom, 4)
-                    Group {
-                        Text("미들바틀")
-                        Text("서울 광진구 면목로7길 8 1층")
+            ZStack {
+                VStack(alignment: .leading, spacing: 25) {
+                    // MARK: - 픽업 매장 이름, 주소
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("픽업 매장")
+                            .modifier(titleModifier())
+                            .padding(.bottom, 4)
+                        Group {
+                            Text("미들바틀")
+                            Text("서울 광진구 면목로7길 8 1층")
+                        }
+                        .modifier(contentModifier())
                     }
-                    .modifier(contentModifier())
-                }
-                
-                // MARK: - 픽업 안내
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("픽업 안내")
-                        .modifier(titleModifier())
-                        .padding(.bottom, 4)
                     
-                    Group {
-                        Text("예약 후 예약 확정 알림이 올 때까지 기다려주세요.")
-                        Text("예약 확정 알림을 받은 뒤 3일 이내에 픽업해주세요.")
-                    }
-                    .modifier(contentModifier())
-                }
-                
-                // 바틀 예약 수량
-                ReservationView_Content_Amount(count: $count)
-                
-            }
-            // MARK: 장바구니 담기 버튼 및 바로 예약하기 버튼
-            HStack {
-                // MARK: - 장바구니 담기 버튼
-                Button(action: {
-                    
-                    if (cartStore.shopName == bottleData.shopName) || (cartStore.shopName == "")  {
-                        isShowingAlert.toggle()
-                        cartStore.addCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                    // MARK: - 픽업 안내
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("픽업 안내")
+                            .modifier(titleModifier())
+                            .padding(.bottom, 4)
                         
-                    }
-                    else {
-                        anotherShopInCart.toggle()
+                        Group {
+                            Text("예약 후 예약 확정 알림이 올 때까지 기다려주세요.")
+                            Text("예약 확정 알림을 받은 뒤 3일 이내에 픽업해주세요.")
+                        }
+                        .modifier(contentModifier())
                     }
                     
-                }) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color("AccentColor").opacity(0.1))
-                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
-                        Text("장바구니 담기")
-                            .font(.bottles20)
-                            .fontWeight(.medium)
-                    }
-                }
-                
-                // 장바구니 담기 버튼 클릭 시 Alert창 present
-                .alert("상품이 장바구니에 담겼습니다.\n지금 확인하시겠습니까?" ,isPresented: $isShowingAlert) {
-                    Button("OK", role: .destructive) { isShowingCart.toggle()}
-                    Button("cancel", role: .cancel) { }
-                }
-                
-                .alert(
-                    "장바구니에는 같은 가게의 바틀만 담을 수 있습니다.",
-                    isPresented: $anotherShopInCart
-                ) {
-                    Button("OK", role: .destructive) {
-                        cartStore.deleteAndAdd(userEmail: userStore.user.email, cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName))
-                        isShowingAlert.toggle()
+                    // 바틀 예약 수량
+                    ReservationView_Content_Amount(count: $count)
+                    
+                    // MARK: 장바구니 담기 버튼 및 바로 예약하기 버튼
+                    HStack {
+                        // MARK: - 장바구니 담기 버튼
+                        Button(action: {
+                            if (cartStore.shopName == bottleData.shopName) || (cartStore.shopName == "")  {
+                                cartStore.addCart(cart: Cart(id: UUID().uuidString, bottleId: bottleData.id, eachPrice: bottleData.itemPrice, itemCount: count, shopId: bottleData.shopID, shopName: bottleData.shopName), userEmail: userStore.user.email)
+                                withAnimation(.easeOut(duration: 1.5)) {
+                                    isShowingMessage = true
+                                    print("장바구니 추가")
+                                }
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    isShowingMessage = false
+                                }
+                            }
+                            else {
+                                isShowingAnotherShopAlert.toggle()
+                            }
+                        }) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color("AccentColor").opacity(0.1))
+                                    .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
+                                Text("장바구니 담기")
+                                    .font(.bottles20)
+                                    .fontWeight(.medium)
+                            }
+                        }
                         
+                        // MARK: - 바로 예약하기 버튼
+                        //                NavigationLink(value: "") {
+                        //                    ZStack {
+                        //                        RoundedRectangle(cornerRadius: 12)
+                        //                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
+                        //                        Text("바로 예약하기")
+                        //                            .modifier(AccentColorButtonModifier())
+                        //                    }
+                        //                }
+                        //                .navigationDestination(for: String.self) { _ in
+                        //                    ReservationPageView()
+                        //                        .environmentObject(path)
+                        //                }
+                        
+                        NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleData: bottleData))) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
+                                Text("바로 예약하기")
+                                    .modifier(AccentColorButtonModifier())
+                            }
+                        }
                     }
-                    Button("cancel", role: .cancel) {}
-                    
-                } message: {
-                    Text("선택하신 바틀을 장바구니에 담을 경우 이전에 담은 바틀은 삭제 됩니다.")
                 }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.top, 10)
+                .padding(.bottom, 33)
                 
-                // Alert창에서 OK 버튼 클릭 시 장바구니 뷰로 이동
-                .navigationDestination(isPresented: $isShowingCart) {
-                    CartView()
-                }
-                
-                // MARK: - 바로 예약하기 버튼
-                //                NavigationLink(value: "") {
-                //                    ZStack {
-                //                        RoundedRectangle(cornerRadius: 12)
-                //                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
-                //                        Text("바로 예약하기")
-                //                            .modifier(AccentColorButtonModifier())
-                //                    }
-                //                }
-                //                .navigationDestination(for: String.self) { _ in
-                //                    ReservationPageView()
-                //                        .environmentObject(path)
-                //                }
-                
-                NavigationLink(destination: ReservationPageView(bottleReservations: getBottleReservation(bottleData: bottleData))) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 12)
-                            .frame(width: UIScreen.main.bounds.width/2-20, height: 57)
-                        Text("바로 예약하기")
-                            .modifier(AccentColorButtonModifier())
-                    }
-                    
-                }
-                
+                // MARK: - 장바구니에 상품 추가 시 표시되는 토스트 메세지
+                CartToastMessage(isShowingMessage: $isShowingMessage, isShowingCart: $isShowingCart)
             }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.top, 10)
-            .padding(.bottom, 33)
         }
         .padding(.top)
         .padding(.horizontal)
-        
+        .navigationDestination(isPresented: $isShowingCart) {
+            CartView()
+        }
     }
     
     func getBottleReservation(bottleData: BottleModel) -> [BottleReservation] {

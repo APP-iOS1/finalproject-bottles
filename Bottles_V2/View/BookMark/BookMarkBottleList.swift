@@ -83,10 +83,22 @@ struct BookMarkBottleList: View {
                     .padding(.trailing, 20)
                 }
                 if userDataStore.user.followItemList.isEmpty {
-                    Text("저장된 상품이 없습니다.")
-                        .font(.bottles14)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, 10)
+                    
+                    VStack{
+                        Spacer()
+                            .frame(height: 100)
+                        
+                        Image(systemName: "wineglass")
+                            .font(.system(size: 50))
+                        
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        Text("저장된 상품이 없습니다.")
+                            .font(.bottles18)
+                            .fontWeight(.semibold)
+                    }
+                    .foregroundColor(.gray)
                     Spacer()
                 } else {
                     ScrollView {
