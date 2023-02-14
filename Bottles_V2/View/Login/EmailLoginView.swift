@@ -50,7 +50,8 @@ struct EmailLoginView: View {
                 Task{
                     await authStore.currentUserReload()
                     if authStore.isEmailVerified(){
-                        try await authStore.login(email: email, password: password)
+                        authStore.authLogin(email: email, password: password)
+                        
                     } else {
                         print("로그인 실패")
                     }
