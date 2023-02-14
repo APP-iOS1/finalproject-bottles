@@ -38,7 +38,7 @@ class AuthStore: ObservableObject {
     @Published var resetPassword: Bool = false
     @Published var emailVerification: Bool = false
     
-    let database = Firestore.firestore()
+//    let database = Firestore.firestore()
     let userStore: UserStore = UserStore()
     
     
@@ -50,6 +50,7 @@ class AuthStore: ObservableObject {
     @Published var appleEmail: String = ""
     
     init() {
+//        FirebaseApp.configure()
         currentUser = Auth.auth().currentUser
     }
     

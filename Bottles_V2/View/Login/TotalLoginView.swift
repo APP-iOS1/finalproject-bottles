@@ -105,10 +105,12 @@ struct TotalLoginView: View {
                                 print(error.localizedDescription)
                             }
                         }
+                        .padding(.leading, 40)
                         .frame(width: 48)
+                        .clipped()
                         .blendMode(.overlay)
                     }
-                    .clipped()
+                    
                 }
                 .font(.bottles12)
                 .foregroundColor(.gray)

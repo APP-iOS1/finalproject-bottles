@@ -29,6 +29,7 @@ struct MyPageView: View {
     /// SafariWebView에 바인딩으로 링크 자체를 넘겨준다.
     @State var selectedUrl: URL = URL(string: "https://www.naver.com")!
     
+    @Binding var selection: Int
     var body: some View {
         NavigationStack {
             VStack {
@@ -44,7 +45,7 @@ struct MyPageView: View {
                         .font(.bottles18)
                         .bold()
                     Spacer()
-                    NavigationLink(destination: SettingView()){
+                    NavigationLink(destination: SettingView(selection: $selection)){
                         Image(systemName: "gearshape.fill")
                         //                            .foregroundColor(.accentColor)
                             .font(.title2)
@@ -99,6 +100,6 @@ struct MyPageView: View {
 
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPageView()
+        MyPageView(selection: .constant(1))
     }
 }

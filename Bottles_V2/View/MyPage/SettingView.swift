@@ -15,6 +15,7 @@ struct SettingView: View {
     /// 회원 탈퇴 Alert창을 띄웁니다.
     @State private var unregisterAlert: Bool = false
     
+    @Binding var selection: Int
     var body: some View {
         VStack {
             // MARK: - 휴대폰 번호 변경, 알림 설정
@@ -58,25 +59,15 @@ struct SettingView: View {
                 
                 // MARK: - 로그아웃 버튼
                 Button(action:{
-                    
-                    authStore.allLogout()
-                    
+                    logoutAlert = true
+                   
                     
                 }){
                     Text("로그아웃")
                         .font(.bottles12)
                 }
                 .padding(.horizontal)
-                .alert(isPresented: $logoutAlert) {
-                    Alert(title: Text("로그아웃 하시겠습니까?"),
-                          message:
-                            Text("로그아웃하고 메인 화면으로 돌아갑니다."),
-                          primaryButton: .destructive(Text("예"),
-                                                      action: {
-                        // TODO: 계정 삭제 로직
-                        
-                    }), secondaryButton: .cancel(Text("아니오")))
-                }
+                
                 
                 // MARK: - 회원탈퇴 버튼
                 Button(action:{
@@ -101,12 +92,21 @@ struct SettingView: View {
             Spacer()
         }
         .navigationTitle("설정")
+        .customAlert(
+            isPresented: $logoutAlert,
+            message: "로그아웃 하시겠습니까?",
+            primaryButtonTitle: "확인",
+            primaryAction: {
+            authStore.allLogout()
+            selection = 1 },
+            withCancelButton: true)
+        
     }
     
 }
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView(selection: .constant(1))
     }
 }
