@@ -110,7 +110,7 @@ class AuthStore: ObservableObject {
                     print("이메일 전송 완료")
                 }
             }
-            userStore.createUser(user: User(id: UUID().uuidString, email: email, followItemList: [], followShopList: [], nickname: nickname, pickupItemList: [], recentlyItem: [], userPhoneNumber: userPhoneNumber, deviceToken:UserStore.shared.fcmToken ?? "", noticeList: [], socialLoginType: "이메일"))
+            userStore.createUser(user: User(id: email, email: email, followItemList: [], followShopList: [], nickname: nickname, pickupItemList: [], recentlyItem: [], userPhoneNumber: userPhoneNumber, deviceToken:UserStore.shared.fcmToken ?? "", noticeList: [], socialLoginType: "이메일"))
             print("회원가입 완료")
             //let user: User = User(id: authUser.uid, name: name, email: email, temperature: 36.5, registDate: getStringDate(date: Date()),chatIDList: [])
             //FIXME: 여기에 addUser 함수 호출

@@ -21,7 +21,7 @@ struct PickUpListCell: View {
                     //.bold()
                 Spacer()
                 
-                //Text("예약접수")
+                //Text("예약접수중")
                 Text("\(reservationData.state)")
                     .font(.bottles12)
                     .overlay{
@@ -39,7 +39,7 @@ struct PickUpListCell: View {
                 VStack(alignment:.leading){
                     Text("픽업 매장")
                         .padding(.bottom, -3)
-                    Text("상품 명")
+                    Text("상품명")
                 }
                 .padding(.trailing)
                 VStack(alignment:.leading){

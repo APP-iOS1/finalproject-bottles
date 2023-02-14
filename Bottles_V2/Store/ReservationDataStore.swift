@@ -37,7 +37,7 @@ class ReservationDataStore : ObservableObject {
     // MARK: - 예약 불러오기
     @MainActor
     func readReservation() async {
-        
+        reservationData.removeAll()
         do{
             let documents = try await Firestore.firestore().collection("Reservation").getDocuments()
             for document in documents.documents {
