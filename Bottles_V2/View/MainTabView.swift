@@ -37,7 +37,7 @@ struct MainTabView: View {
                     Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
                     Text("알림")
                 }.tag(3)
-                MyPageView(isSignIn: $isSignIn).tabItem {
+                MyPageView(selection: $selection).tabItem {
                     Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                     Text("MY")
                 }.tag(4)

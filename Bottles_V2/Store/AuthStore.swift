@@ -299,7 +299,7 @@ class AuthStore: ObservableObject {
                                     
                                 } else {
                                     self.currentUser = result?.user
-                                    self.userStore.createUser(user: User(id: (user?.kakaoAccount?.email)!, email: (user?.kakaoAccount?.email)!, followItemList: [], followShopList: [], nickname: (user?.kakaoAccount?.profile?.nickname)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
+                                    self.userStore.createUser(user: User(id: (user?.kakaoAccount?.email)!, email: (user?.kakaoAccount?.email)!, followItemList: [], followShopList: [], nickname: (user?.kakaoAccount?.profile?.nickname)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? "", noticeList: []))
                                     self.loginPlatform = .kakao
                                     print("파이어베이스 사용자 생성 성공")
                                     
@@ -492,7 +492,7 @@ class AuthStore: ObservableObject {
                                             print("로그인 실패")
                                         } else {
                                             self.currentUser = result?.user
-                                            self.userStore.createUser(user: User(id: userEmail, email: userEmail, followItemList: [], followShopList: [], nickname: userName, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
+                                            self.userStore.createUser(user: User(id: userEmail, email: userEmail, followItemList: [], followShopList: [], nickname: userName, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? "", noticeList: []))
                                             self.loginPlatform = .facebook
                                             print("로그인 성공")
                                         }
@@ -564,7 +564,7 @@ class AuthStore: ObservableObject {
                             print("\(error.localizedDescription)")
                         } else {
                             self.currentUser = result?.user
-                            self.userStore.createUser(user: User(id: credential.email!, email: credential.email!, followItemList: [], followShopList: [], nickname: credential.email!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? ""))
+                            self.userStore.createUser(user: User(id: credential.email!, email: credential.email!, followItemList: [], followShopList: [], nickname: credential.email!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? "", noticeList: []))
                             self.loginPlatform = .apple
                         }
                     } else {
