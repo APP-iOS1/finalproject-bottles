@@ -52,7 +52,7 @@ struct CartCustomAlertView: View {
                         Text("취소")
                             .font(.bottles14)
                             .fontWeight(.medium)
-                            .foregroundColor(Color(UIColor(red: 182/255, green: 166/255, blue: 255/255, alpha: 1.0)))
+                            .foregroundColor(Color.purple_2)
                     }
                 }
                 
@@ -66,7 +66,7 @@ struct CartCustomAlertView: View {
                     Text("\(primaryButtonTitle)")
                         .font(.bottles14)
                         .fontWeight(.medium)
-                        .foregroundColor(Color(UIColor(red: 68/255, green: 36/255, blue: 207/255, alpha: 1.0)))
+                        .foregroundColor(Color("AccentColor"))
                 }
                 
                 Spacer()
