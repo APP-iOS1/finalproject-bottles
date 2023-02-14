@@ -53,7 +53,7 @@ struct MapView: View {
                                     .matchedGeometryEffect(id: "scale", in: morphSeamlessly)
                                     .frame(maxWidth: 290, maxHeight: 35)
                                     .cornerRadius(10)
-                                    .offset(x: -22, y: 0)
+                                    .offset(x: -20, y: 0)
                                 HStack {
                                     MapSearchBar()
                                         .onTapGesture(count: 1, perform: {
@@ -81,7 +81,8 @@ struct MapView: View {
                                             .cornerRadius(10)
                                     }
                                 }
-                                .padding(.vertical, 10)
+                                .padding(.top, 5)
+                                .padding(.bottom, 10)
                             }
                         } else {
                             MapSearchView(searchBarText: $searchBarText, focus: _focus, tapped: $tapped, showMarkerDetailView: $coordinator.showMarkerDetailView, searchResult: $searchResult, currentShopId: $coordinator.currentShopId, tapSearchButton: $tapSearchButton, coord: $coordinator.coord)
