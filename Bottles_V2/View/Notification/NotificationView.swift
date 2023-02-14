@@ -11,8 +11,20 @@ import SwiftUI
 /// 현재 로그인한 사용자의 알림을 보여주는 View
 
 struct NotificationView: View {
-    
+    @EnvironmentObject var userStore: UserStore
     @State private var onlyReservation : Bool = false
+    @EnvironmentObject var shopNoticeDataStore : ShopNoticeDataStore
+    
+    func filteredMyFollowShop() -> [ShopNotice] {
+        var shopNotice: [ShopNotice] = []
+        for followShopId in userStore.user.followShopList {
+            print(userStore.user.followShopList)
+            let filtered = shopNoticeDataStore.shopNoticeData.filter { $0.shopName == followShopId }
+            shopNotice.append(contentsOf: filtered)
+            shopNotice.sort { $0.date > $1.date }
+        }
+        return shopNotice
+    }
     
     var body: some View {
         NavigationStack {
@@ -28,29 +40,23 @@ struct NotificationView: View {
                 // MARK: - 알림 Cell
                 /// 예약내역, 새로운 소식,
                 ScrollView {
-                    NavigationLink(destination: PickUpListView()){
-                        NotificationCell(imgName: "checkNotification", title: "예약이 확정되었습니다.", description: "샤도네이 2017", storeName: "와인앤모어 군자점", time: "2시간 전")
+                    ForEach(filteredMyFollowShop()) { item in
+                        NavigationLink {
+                            PickUpListView()
+                        } label: {
+                            NotificationCell(imgName: "shopNotification", title: item.title, description: item.body, storeName: item.shopName, time: "\(item.calculateTime())")
+                        }
                         
                     }
-                    Divider()
-
-//                    NavigationLink(destination: BottleShopCurationView()){
-                        NotificationCell(imgName: "shopNotification", title: "저장한 바틀샵의 새 소식", description: "연말에 어울리는 스파클링 와인 10종", storeName: "어썸와인", time: "4시간 전")
-
-//                    }
-
-                    Divider()
                     
-//                    NavigationLink(destination: BottleShopCurationView()){
-                        NotificationCell(imgName: "shopNotification", title: "저장한 바틀샵의 새 소식", description: "깔끔한 화이트와인 10종 추천", storeName: "미들바틀", time: "7일 전")
-//                    }
-                    
-                    Divider()
+                    //                    NavigationLink(destination: PickUpListView()){
+                    //                        NotificationCell(imgName: "checkNotification", title: "예약이 확정되었습니다.", description: "샤도네이 2017", storeName: "와인앤모어 군자점", time: "2시간 전")
+                    //
+                    //                    }
                 }
-            }.navigationBarTitle("알림", displayMode: .inline)
+            }
+            .navigationBarTitle("알림", displayMode: .inline)
         }
-        
-        
     }
     
     // MARK: - 예약알림만 보기 버튼
@@ -66,7 +72,7 @@ struct NotificationView: View {
                 Image(systemName: "circle")
                     .foregroundColor(.gray)
             }
-
+            
         }
         .padding([.leading, .top, .bottom])
     }
