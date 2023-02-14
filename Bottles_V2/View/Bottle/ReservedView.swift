@@ -53,14 +53,14 @@ struct ReservedView: View {
             Spacer()
        
             // MARK: - 예약 확인 버튼
-            NavigationLink(destination: PickUpDetailView()) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 358, height: 56)
-                    Text("예약 확인하기")
-                        .modifier(AccentColorButtonModifier())
-                }
-            }
+//            NavigationLink(destination: PickUpDetailView()) {
+//                ZStack {
+//                    RoundedRectangle(cornerRadius: 10)
+//                        .frame(width: 358, height: 56)
+//                    Text("예약 확인하기")
+//                        .modifier(AccentColorButtonModifier())
+//                }
+//            }
             .padding(.bottom)
         }
         .sheet(isPresented: $isShowing) {
