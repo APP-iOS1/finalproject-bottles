@@ -44,14 +44,14 @@ struct PickUpListCell: View {
                 .padding(.trailing)
                 VStack(alignment:.leading){
                     //Text("test")
-                    Text("\(reservationData.shopID)")
+                    Text("\(reservationData.shopId)")
                         .padding(.bottom, -3)
                     
                     if reservationData.reservedBottles.count > 1 {
-                        Text("\(getMatchedbottleName(bottleId: reservationData.reservedBottles[0].BottleID)) 외 \(reservationData.reservedBottles.count-1)병")
+                        Text("\(getMatchedbottleName(bottleId: reservationData.reservedBottles[0].BottleId)) 외 \(reservationData.reservedBottles.count-1)병")
                     }
                     else {
-                        Text("\(getMatchedbottleName(bottleId: reservationData.reservedBottles[0].BottleID))")
+                        Text("\(getMatchedbottleName(bottleId: reservationData.reservedBottles[0].BottleId))")
                     }
                     
                 }

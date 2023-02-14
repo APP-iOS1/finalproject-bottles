@@ -90,7 +90,7 @@ struct ReservationPageView: View {
                     if check {
                         isShowing.toggle()
                         Task{
-                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopID: bottleReservations[0].shop, userID: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
                         }
                     }
                 }) {

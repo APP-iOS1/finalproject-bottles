@@ -12,7 +12,7 @@ struct PickUpDetailView: View {
     @State private var isShowingPasted: Bool = false
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var bottleDataStore: BottleDataStore
-    var reservationData: ReservationModel
+    @State var reservationData: ReservationModel
     
     var body: some View {
         ZStack{
@@ -22,7 +22,7 @@ struct PickUpDetailView: View {
                         //.font(.bottles14)
                         .bold()
                         .padding(.trailing)
-                    Text("12345678")
+                    Text("\(reservationData.id)")
                     Spacer()
                 }
                 .font(.bottles14)
@@ -71,9 +71,9 @@ struct PickUpDetailView: View {
                             .font(.bottles14)
                         Spacer()
                     }
-//                    ForEach (reservationData.reservedBottles, id: \.self) { bottle in
-//                        PickUpDetailCell(bottleModel: getBottleModel(bottleId: bottle.BottleID), count: bottle.count)
-//                    }
+                    ForEach ($reservationData.reservedBottles, id: \.BottleId) { $bottle in
+                        PickUpDetailCell(bottleModel: getBottleModel(bottleId: bottle.BottleId), count: bottle.itemCount)
+                    }
                 }
                 .padding(.bottom, 5)
                 // MARK: - 예약상태 HStack

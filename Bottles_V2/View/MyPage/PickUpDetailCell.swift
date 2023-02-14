@@ -9,8 +9,8 @@ import SwiftUI
 
 struct PickUpDetailCell: View {
 
-    let bottleModel: BottleModel
-    let count: Int
+    var bottleModel: BottleModel
+    var count: Int
     
     var body: some View {
         // MARK: - 예약 세부 상품 HStack
