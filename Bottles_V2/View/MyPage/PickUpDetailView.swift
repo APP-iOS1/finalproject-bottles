@@ -15,6 +15,7 @@ struct PickUpDetailView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var reservationDataStore: ReservationDataStore
     @State var reservationData: ReservationModel
+    @State var isShowingCancelAlert: Bool = false
     
     var body: some View {
         ZStack{
@@ -84,11 +85,15 @@ struct PickUpDetailView: View {
                         .font(.bottles15)
                         .bold()
                         .padding(.trailing)
-                    Text("예약 완료")
+                    Text("\(reservationData.state)")
                         .font(.bottles15)
-                    Text("1월 21일까지 방문해주세요")
-                        .font(.bottles12)
-                        .foregroundColor(.gray)
+                    
+                    if reservationData.state == "예약 완료" {
+                        Text("\(reservationData.reservedTime)까지 방문해주세요")
+                            .font(.bottles12)
+                            .foregroundColor(.gray)
+                    }
+                    
                     Spacer()
                 }
                 //.padding(.top)
@@ -160,6 +165,7 @@ struct PickUpDetailView: View {
                         .frame(width: 360, height: 50)
                 }
         }
+        
     }
     
     func getBottleModel(bottleId: String) -> BottleModel {
