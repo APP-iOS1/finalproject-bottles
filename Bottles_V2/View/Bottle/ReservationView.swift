@@ -14,10 +14,13 @@ import Combine
 struct ReservationView: View {
     //@EnvironmentObject var path: Path
     @EnvironmentObject var bottleDataStore: BottleDataStore
-    var bottleData: BottleModel
-    @Binding var isShowing: Bool
     @State var offset = UIScreen.main.bounds.height
     @State private var isDragging = false
+    @Binding var count: Int
+    @Binding var isShowing: Bool
+    @Binding var isShowingAnotherShopAlert: Bool
+    
+    var bottleData: BottleModel
     
     let heightToDisappear = UIScreen.main.bounds.height
     let outOfFocusOpacity: CGFloat = 0.2
@@ -76,7 +79,7 @@ struct ReservationView: View {
     var sheetView: some View {
         VStack {
             Spacer()
-            ReservationView_Content(bottleData: bottleData)
+            ReservationView_Content(count: $count, isShowingAnotherShopAlert: $isShowingAnotherShopAlert, bottleData: bottleData)
                 .background(.white)
                 .cornerRadius(15)
                 //.cornerRadius(12, corners: [.topLeft, .topRight])

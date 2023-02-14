@@ -17,7 +17,7 @@ struct ReservationPageView: View {
     @State private var check: Bool = false
     @State private var isShowing: Bool = false
     @State private var hiddenBottle: Bool = false
-    
+    var tempId: String = UUID().uuidString
     let bottleReservations: [BottleReservation]
     
     var body: some View {
@@ -90,8 +90,9 @@ struct ReservationPageView: View {
                     if check {
                         isShowing.toggle()
                         Task{
-                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: UUID().uuidString, shopID: bottleReservations[0].shop, userID: userStore.user.email, reservedTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수중", reservedBottles: []), reservedBottles: bottleReservations)
                         }
+                        userStore.addUserReservation(reservationId: tempId)
                     }
                 }) {
                     ZStack {
@@ -102,13 +103,14 @@ struct ReservationPageView: View {
                     }
                 }
                 .padding(.horizontal)
+                .padding(.bottom, 30)
                 .disabled(!check)
             }
             .frame(alignment: .bottom)
             
             // 예약 완료 뷰로 이동
             .navigationDestination(isPresented: $isShowing) {
-                ReservedView()
+                ReservedView(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: "", state: "예약접수중", reservedBottles: getReservedBottlesArray(bottleReservations: bottleReservations)))
                 //.environmentObject(path)
             }
             .toolbar(content: {
@@ -119,7 +121,17 @@ struct ReservationPageView: View {
                 }
             })
         }
+        .edgesIgnoringSafeArea([.bottom])
     }
+    
+    func getReservedBottlesArray(bottleReservations: [BottleReservation]) -> [ReservedBottles] {
+        var reservedBottles: [ReservedBottles] = []
+        for bottleReservation in bottleReservations {
+            reservedBottles.append(ReservedBottles(id: UUID().uuidString, BottleId: bottleReservation.id, itemCount: bottleReservation.count))
+        }
+        return reservedBottles
+    }
+    
 }
 
 //// 예약 상품 더미데이터
