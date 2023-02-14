@@ -421,7 +421,7 @@
 				27281CE829778583003BE8B4 /* Bottle */,
 				27281CE429778551003BE8B4 /* Cart */,
 				27281CF3297785FE003BE8B4 /* Notification */,
-				9295D073299A79B20038267E /* CustomBookmarkPopUp */,
+				9295D073299A79B20038267E /* BookmarkCustomToastMessage */,
 				7FB3D69A298CAAF800EA8884 /* CustomAlert */,
 			);
 			path = View;
@@ -613,13 +613,13 @@
 			path = CustomAlert;
 			sourceTree = "<group>";
 		};
-		9295D073299A79B20038267E /* CustomBookmarkPopUp */ = {
+		9295D073299A79B20038267E /* BookmarkCustomToastMessage */ = {
 			isa = PBXGroup;
 			children = (
 				9295D074299A7A140038267E /* CustomFillBookmarkView.swift */,
 				9295D078299A7C5A0038267E /* CustomEmptyBookmarkView.swift */,
 			);
-			path = CustomBookmarkPopUp;
+			path = BookmarkCustomToastMessage;
 			sourceTree = "<group>";
 		};
 		D70CE4F82976823500DFC8CE /* Store */ = {
