@@ -37,7 +37,7 @@ struct SearchView: View {
                 SearchViewSearchBar(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus, transitionView: $transitionView)
                 CartViewNavigationLink()
             }
-            
+            .padding(.top)
             // 검색어를 입력하지 않았을 시에 최근 검색어 및 최근 본 상품을 보여준다
             if searchBarText == "" {
                 RecentlyItemList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
