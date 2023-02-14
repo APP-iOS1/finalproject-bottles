@@ -120,4 +120,18 @@ class ReservationDataStore : ObservableObject {
         return []
     }
     
+    func cancelReservation (reservationId: String) async {
+        
+        do {
+            let documents = Firestore.firestore().collection("Reservation")
+            try await documents
+                .document(reservationId)
+                .updateData(["state": "예약취소"])
+            await readReservation()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
+    
 }

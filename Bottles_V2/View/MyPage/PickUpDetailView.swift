@@ -13,6 +13,7 @@ struct PickUpDetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
+    @EnvironmentObject var reservationDataStore: ReservationDataStore
     @State var reservationData: ReservationModel
     
     var body: some View {
@@ -93,20 +94,11 @@ struct PickUpDetailView: View {
                 //.padding(.top)
                 .padding(.bottom, 40)
                 
-                //MARK: - 다른 샵 보러가기 버튼
-                // BottleShopView()로 변경해야 함
-                NavigationLink(destination:
-                                BottleShopView(bottleShop: getMatchedShopData(shopId: reservationData.shopId))
-                ){
-                    Text("이 바틀샵의 다른 상품 보러가기")
-                        .font(.bottles18)
-                        .bold()
-                        .foregroundColor(.white)
-                        .background{
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.accentColor)
-                                .frame(width: 360, height: 50)
-                        }
+                if reservationData.state == "예약접수" {
+                    cancelButton
+                }
+                else {
+                    anotherShopButton
                 }
                 Spacer()
             }
@@ -130,6 +122,44 @@ struct PickUpDetailView: View {
             }
         }
         
+    }
+    
+    private var cancelButton : some View {
+        Button {
+            Task {
+                await reservationDataStore.cancelReservation(reservationId: reservationData.id)
+            }
+            
+        } label : {
+            Text("예약 취소")
+                .font(.bottles18)
+                .bold()
+                .foregroundColor(.white)
+                .background{
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(.accentColor)
+                        .frame(width: 360, height: 50)
+                }
+            //.padding(.bottom, 20)
+        }
+    }
+    
+    private var anotherShopButton : some View {
+        //MARK: - 다른 샵 보러가기 버튼
+        // BottleShopView()로 변경해야 함
+        NavigationLink(destination:
+                        BottleShopView(bottleShop: getMatchedShopData(shopId: reservationData.shopId))
+        ){
+            Text("이 바틀샵의 다른 상품 보러가기")
+                .font(.bottles18)
+                .bold()
+                .foregroundColor(.white)
+                .background{
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(.accentColor)
+                        .frame(width: 360, height: 50)
+                }
+        }
     }
     
     func getBottleModel(bottleId: String) -> BottleModel {
