@@ -15,6 +15,7 @@ struct ReservedView: View {
     @State private var isShowingBookmarkView: Bool = false
     @State private var isShowingFillBookmarkMessage: Bool = false
     @State private var isShowingEmptyBookmarkMessage: Bool = false
+    var reservationData: ReservationModel
     
     var body: some View {
         NavigationStack {
@@ -53,15 +54,15 @@ struct ReservedView: View {
             Spacer()
        
             // MARK: - 예약 확인 버튼
-//            NavigationLink(destination: PickUpDetailView()) {
-//                ZStack {
-//                    RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 358, height: 56)
-//                    Text("예약 확인하기")
-//                        .modifier(AccentColorButtonModifier())
-//                }
-//            }
-//            .padding(.bottom)
+            NavigationLink(destination: PickUpDetailView(reservationData: reservationData)) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 358, height: 56)
+                    Text("예약 확인하기")
+                        .modifier(AccentColorButtonModifier())
+                }
+            }
+            .padding(.bottom)
         }
         .sheet(isPresented: $isShowing) {
             ReservedView_BottleShop(
@@ -84,8 +85,8 @@ class Path: ObservableObject {
     @Published var path: NavigationPath = NavigationPath()
 }
 
-struct ReservedView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReservedView()
-    }
-}
+//struct ReservedView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReservedView()
+//    }
+//}
