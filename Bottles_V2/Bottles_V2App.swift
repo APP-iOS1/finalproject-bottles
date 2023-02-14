@@ -23,7 +23,7 @@ struct Bottles_V2App: App {
     @ObservedObject var reservationDataStore = ReservationDataStore()
     @ObservedObject var cartStore = CartStore()
     @ObservedObject var mapViewModel = MapViewModel()
-    
+    @StateObject var authStore = AuthStore()
     // coreData
     @StateObject var dataController = DataController()
     
@@ -50,6 +50,7 @@ struct Bottles_V2App: App {
             LaunchView()
             // coreData
                 .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(authStore)
                 .environmentObject(bottleDataStore)
                 .environmentObject(shopDataStore)
                 .environmentObject(shopNoticeDataStore)
@@ -65,7 +66,7 @@ struct Bottles_V2App: App {
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.readReservation()
                 }
-                .environmentObject(AuthStore())
+                
                 
             
             // MARK: - AccentColor 적용
@@ -73,6 +74,7 @@ struct Bottles_V2App: App {
         }
     }
 }
+
 class AppDelegate: NSObject, UIApplicationDelegate {
     
     // 앱이 켜졌을때
@@ -129,6 +131,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
 }
+
 
 extension AppDelegate : MessagingDelegate {
     

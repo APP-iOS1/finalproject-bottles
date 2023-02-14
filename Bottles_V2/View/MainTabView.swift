@@ -17,7 +17,7 @@ struct MainTabView: View {
 
     //    let user: AuthUser
     
-    @State private var selection: Int = 1
+    @State var selection: Int = 1
     //     TabBar 백그라운드 컬러 지정
     
     
@@ -35,7 +35,7 @@ struct MainTabView: View {
                 Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
                 Text("알림")
             }.tag(3)
-            MyPageView().tabItem {
+            MyPageView(selection: $selection).tabItem {
                 Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                 Text("MY")
             }.tag(4)

@@ -62,12 +62,12 @@ struct EmailLoginView: View {
                     .modifier(EmailViewButtonModifier(width: 280, height: 48))
             }
             
-            Button(action: {
-                authStore.logout()
-                print("\(authStore.isEmailVerified())")
-            }) {
-                Text("로그아웃")
-            }
+//            Button(action: {
+//                authStore.logout()
+//                print("\(authStore.isEmailVerified())")
+//            }) {
+//                Text("로그아웃")
+//            }
             
             NavigationLink(destination: EmailRegisterView(authStore: authStore)) {
                 Text("회원가입하기")
