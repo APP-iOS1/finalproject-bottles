@@ -106,6 +106,6 @@ struct MyPageView: View {
 
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPageView(selection: .constant(1))
+        MyPageView(selection: .constant(1)).environmentObject(UserStore())
     }
 }

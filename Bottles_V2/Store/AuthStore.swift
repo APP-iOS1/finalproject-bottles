@@ -171,6 +171,8 @@ class AuthStore: ObservableObject {
                 print("계정 삭제 실패: \(error.localizedDescription)")
             } else {
                 self.userStore.deleteUser(userId: userEmail)
+                self.currentUser = nil
+                self.loginPlatform = .none
             }
         }
     }

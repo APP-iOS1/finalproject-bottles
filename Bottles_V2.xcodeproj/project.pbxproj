@@ -89,6 +89,7 @@
 		7F714E1429991AE4008FD61D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 7F714E1329991AE4008FD61D /* FacebookLogin */; };
 		7F76AAF429876D0E00AAEBCA /* EmailRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */; };
 		7F76AAF6298780B100AAEBCA /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F76AAF5298780B100AAEBCA /* View+.swift */; };
+		7FA5D2B0299B790E00F7FF91 /* ChangePhoneNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA5D2AF299B790E00F7FF91 /* ChangePhoneNumberView.swift */; };
 		7FB12078299223990071AB3F /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 7FB12077299223990071AB3F /* GoogleSignIn */; };
 		7FB1207A299223990071AB3F /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7FB12079299223990071AB3F /* GoogleSignInSwift */; };
 		7FB1207F299226EE0071AB3F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FB1207E299226EE0071AB3F /* KakaoSDKAuth */; };
@@ -234,6 +235,7 @@
 		7F647DC22988B69D0022590A /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		7F76AAF329876D0E00AAEBCA /* EmailRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterView.swift; sourceTree = "<group>"; };
 		7F76AAF5298780B100AAEBCA /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		7FA5D2AF299B790E00F7FF91 /* ChangePhoneNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneNumberView.swift; sourceTree = "<group>"; };
 		7FB3D69D298CAB5300EA8884 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		7FB3D69F298CB97B00EA8884 /* CustomAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertModifier.swift; sourceTree = "<group>"; };
 		92158B5329908DD100FCB475 /* BottleView_BottleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleView_BottleCell.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 			children = (
 				27281CF72977862F003BE8B4 /* MyPageView.swift */,
 				7F2142BB2977956D0046D420 /* SettingView.swift */,
+				7FA5D2AF299B790E00F7FF91 /* ChangePhoneNumberView.swift */,
 				7F2142BD2977AF290046D420 /* PickUpListView.swift */,
 				7F2142BF2977AF5E0046D420 /* PickUpListCell.swift */,
 				7F2142C12977B43B0046D420 /* PickUpDetailView.swift */,
@@ -912,6 +915,7 @@
 				02ABC41A2994CA8900768078 /* ShopNoticeDataStore.swift in Sources */,
 				7F76AAF6298780B100AAEBCA /* View+.swift in Sources */,
 				2754C28B2994DA5900EC10AF /* BottleShopDetailMapView.swift in Sources */,
+				7FA5D2B0299B790E00F7FF91 /* ChangePhoneNumberView.swift in Sources */,
 				AE2AD6DF298BFAB000C40EE8 /* DataController.swift in Sources */,
 				92158B56299099FA00FCB475 /* ReservationView_OutOfFocus.swift in Sources */,
 				27281CE32977854D003BE8B4 /* MapView.swift in Sources */,
