@@ -14,6 +14,7 @@ struct MainTabView: View {
     @EnvironmentObject var bottleDataStore : BottleDataStore
     @EnvironmentObject var reservationDataStore : ReservationDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
+    @EnvironmentObject var userDataStore: UserStore
 
     //    let user: AuthUser
     
@@ -39,6 +40,10 @@ struct MainTabView: View {
                 Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                 Text("MY")
             }.tag(4)
+        }
+        .task {
+            mapViewModel.checkIfLocationServicesIsEnabled()
+//            mapSearchViewModel.cameraPosition = locationManager.coord
         }
         .toolbarBackground(Color.white, for: .tabBar)
 
