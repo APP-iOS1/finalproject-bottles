@@ -19,13 +19,10 @@ struct MapSearchBar: View {
         }
         .padding(10)
         .frame(width: 300)
-        
-        
         .background{
             Color.white
         }
         .cornerRadius(10)
-        .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
     }
 }
 
