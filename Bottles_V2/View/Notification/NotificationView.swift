@@ -132,6 +132,24 @@ struct NotificationView: View {
         return resultData
     }
     
+    struct MergedType: Hashable {
+        let shopNotice: ShopNotice?
+        let reservation: ReservationModel?
+        let type: String
+        let date: Date
+    }
+    
+    func mergedArray() -> [MergedType] {
+        var result: [MergedType] = []
+        for notice in filteredMyNotice() {
+            result.append(MergedType(shopNotice: notice, reservation: nil, type: "notice", date: notice.date))
+        }
+        for reservation in filteredMyReservation() {
+            result.append(MergedType(shopNotice: nil, reservation: reservation, type: "reservation", date: reservation.reservedTime))
+        }
+        return result.sorted(by: {$0.date > $1.date} )
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -146,17 +164,21 @@ struct NotificationView: View {
                 // MARK: - 알림 Cell
                 /// 예약내역, 새로운 소식,
                 ScrollView {
-                    ForEach(mappingMyInfo(), id: \.id) { item in
+                    ForEach(mergedArray(), id: \.self) { item in
 //                        if item.classification == "예약" {
                         NavigationLink {
                             PickUpListView()
                         } label: {
-                            if item.classification == "공지사항" {
-                                NotificationCell(imgName: "shopNotification", title: item.title, description: item.body, storeName: item.shopName, time: "\(item.calculateTime(item.date))")
-                            } else {
-                                NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.state)", description: "test", storeName: item.shopId, time: "\(item.calculateTime(item.reservedTime))")
+                            if item.shopNotice != nil {
+                                NotificationCell(imgName: "shopNotification", title: item.shopNotice?.title ?? "", description: item.shopNotice?.body ?? "", storeName: item.shopNotice?.shopName ?? "", time: "\(item.date)")
+                            } else if item.reservation != nil {
+                                NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.reservation?.state ?? "")", description: "test", storeName: item.reservation?.shopId ?? "", time: "\(item.date)")
                             }
-//
+//                            if item.classification == "공지사항" {
+//                                NotificationCell(imgName: "shopNotification", title: item.title, description: item.body, storeName: item.shopName, time: "\(item.calculateTime(item.date))")
+//                            } else {
+//                                NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.state)", description: "test", storeName: item.shopId, time: "\(item.calculateTime(item.reservedTime))")
+//                            }
                         }
 //
 //                        if item.classification == "공지" || item.classification == "이벤트" {
