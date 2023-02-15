@@ -42,7 +42,7 @@ struct OnboardingLastPageView: View {
             .foregroundColor(.accentColor)
             .padding()
         }
-        .scaledToFit()
+        .scaledToFit() // 기기별 호환 위해 적용
     }
 }
 

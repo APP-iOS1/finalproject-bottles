@@ -24,7 +24,7 @@ struct OnboardingPageView: View {
                 .aspectRatio(contentMode: .fit)
 
         }
-        .scaledToFit()
+        .scaledToFit() // 기기별 호환 위해 적용
     }
 }
 
