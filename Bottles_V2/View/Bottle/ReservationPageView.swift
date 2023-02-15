@@ -36,7 +36,7 @@ struct ReservationPageView: View {
                             Spacer()
                             
                             Button(action: {
-                                hiddenInfo.toggle()
+                                hiddenBottle.toggle()
                             }) {
                                 Image(hiddenBottle ? "arrowTop" : "arrowBottom")
                                     .resizable()
