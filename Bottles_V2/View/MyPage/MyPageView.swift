@@ -118,13 +118,6 @@ struct MyPageView: View {
     }
 }
 
-extension MyPageView {
-    enum Destination: Hashable {
-        case setting
-        case pickUpList
-    }
-}
-
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
         MyPageView(root: .constant(false), selection: .constant(1)).environmentObject(UserStore())

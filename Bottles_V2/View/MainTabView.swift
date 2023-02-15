@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+enum Destination: Hashable {
+    case bottleShop
+    case cart
+    case pickUpList
+    case setting
+}
+
 struct MainTabView: View {
     @EnvironmentObject private var delegate: AppDelegate
     //    @EnvironmentObject var sessionManager : SessionManager
@@ -42,7 +49,7 @@ struct MainTabView: View {
     
     var body: some View {
             TabView(selection: selectionBinding) {
-                MapView().tabItem {
+                MapView(root: $root).tabItem {
                     Image(selection == 1 ? "Maptabfill" : "Map_tab")
                     Text("주변")
                 }.tag(1)
@@ -50,7 +57,7 @@ struct MainTabView: View {
                     Image(selection == 2 ? "BookMark_tab_fill" : "BookMark_tab")
                     Text("저장")
                 }.tag(2)
-                NotificationView().tabItem {
+                NotificationView(root: $root).tabItem {
                     Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
                     Text("알림")
                 }.tag(3)
@@ -64,7 +71,7 @@ struct MainTabView: View {
         }
             .toolbarBackground(Color.white, for: .tabBar)
             .sheet(isPresented: $delegate.openedFromNotification, onDismiss: didDismiss){
-                NotificationView()
+                NotificationView(root: $root)
             }
             .task {
                 userDataStore.readUser(userId: authStore.currentUser?.email ?? "")
@@ -77,6 +84,8 @@ struct MainTabView: View {
         delegate.openedFromNotification = false
     }
 }
+
+
 //
 //struct TabButtonModifier: ViewModifier {
 //    func body(image: Image) -> some View {
