@@ -32,76 +32,76 @@ struct RecentlyItemList: View {
     var body: some View {
         ZStack {
             ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
-                if !searchHistory.isEmpty {
-                    Text("최근 검색어")
+                VStack(alignment: .leading, spacing: 10) {
+                    if !searchHistory.isEmpty {
+                        Text("최근 검색어")
+                            .font(.bottles18)
+                            .bold()
+                            .padding([.leading, .top], 15)
+                        
+                        // 최근 검색어 나열
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(searchHistory, id: \.self) { search in
+                                    HStack {
+                                        // 최근 검색어를 누르면 해당 검색어로 검색이 진행된다
+                                        Button  {
+                                            searchBarText = search.text!
+                                            doneTextFieldEdit = true
+                                            focus = false
+                                            searchAgain(search: search)
+                                        } label: {
+                                            Text(search.text!)
+                                        }
+                                        
+                                        Button {
+                                            if let index = searchHistory.firstIndex(of: search) {
+                                                deleteSearchHistory(offsets: IndexSet(integer: index))
+                                            }
+                                        } label: {
+                                            Image(systemName: "xmark")
+                                        }
+                                    }
+                                    .font(.bottles16)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 10)
+                                    .background(RoundedRectangle(cornerRadius: 20).stroke(.gray, lineWidth: 1))
+                                    .padding(.top, 8)
+                                    .padding(.bottom, 10)
+                                    .padding(.leading, 5)
+                                }
+                                
+                            }
+                        }
+                        .padding(.leading, 10)
+                        .padding(.bottom, -5)
+                    }
+                    
+                    Text("최근 본 상품")
                         .font(.bottles18)
                         .bold()
                         .padding([.leading, .top], 15)
                     
-                    // 최근 검색어 나열
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(searchHistory, id: \.self) { search in
-                                HStack {
-                                    // 최근 검색어를 누르면 해당 검색어로 검색이 진행된다
-                                    Button  {
-                                        searchBarText = search.text!
-                                        doneTextFieldEdit = true
-                                        focus = false
-                                        searchAgain(search: search)
-                                    } label: {
-                                        Text(search.text!)
-                                    }
-                                    
-                                    Button {
-                                        if let index = searchHistory.firstIndex(of: search) {
-                                            deleteSearchHistory(offsets: IndexSet(integer: index))
-                                        }
-                                    } label: {
-                                        Image(systemName: "xmark")
-                                    }
-                                }
-                                .font(.bottles16)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 10)
-                                .background(RoundedRectangle(cornerRadius: 20).stroke(.gray, lineWidth: 1))
-                                .padding(.top, 8)
-                                .padding(.bottom, 10)
-                                .padding(.leading, 5)
-                            }
+                    if userStore.user.recentlyItem.isEmpty {
+                        VStack{
+                            Spacer()
+                                .frame(height: 100)
                             
+                            Image(systemName: "wineglass")
+                                .font(.system(size: 50))
+                            
+                            Spacer()
+                                .frame(height: 20)
+                            
+                            Text("최근 본 상품이 없습니다.")
+                                .font(.bottles18)
+                                .fontWeight(.semibold)
                         }
-                    }
-                    .padding(.leading, 10)
-                    .padding(.bottom, -5)
-                }
-                
-                Text("최근 본 상품")
-                    .font(.bottles18)
-                    .bold()
-                    .padding([.leading, .top], 15)
-                
-                if userStore.user.recentlyItem.isEmpty {
-                    VStack{
+                        .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, alignment: .center)
                         Spacer()
-                            .frame(height: 100)
-                        
-                        Image(systemName: "wineglass")
-                            .font(.system(size: 50))
-                        
-                        Spacer()
-                            .frame(height: 20)
-                        
-                        Text("최근 본 상품이 없습니다.")
-                            .font(.bottles18)
-                            .fontWeight(.semibold)
-                    }
-                    .foregroundColor(.gray)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    Spacer()
-                } else {
-                    ScrollView {
+                    } else {
+                        //                    ScrollView {
                         ForEach(filterRecentlyBottle(), id: \.self) { bottle in
                             RecentlyItemListCell(
                                 bottleInfo: bottle,
@@ -110,11 +110,12 @@ struct RecentlyItemList: View {
                             Divider()
                                 .padding(.horizontal, 10)
                         }
+                        //                    }
                     }
                 }
-            }
-            .onTapGesture {
-                endTextEditing()
+                .onTapGesture {
+                    endTextEditing()
+                }
             }
             if bookMarkAlarm {
                 HStack{
@@ -122,7 +123,6 @@ struct RecentlyItemList: View {
                     Text(bookMark ? "북마크가 완료되었습니다." : "북마크가 해제되었습니다.")
                         .foregroundColor(.black)
                         .font(.bottles11)
-                    
                 }
                 .zIndex(1)
                 .transition(.opacity.animation(.easeIn))
@@ -134,7 +134,6 @@ struct RecentlyItemList: View {
                 .offset(y: (UIScreen.main.bounds.height/4))
             }
         }
-    }
     }
     
     func filterRecentlyBottle() -> [BottleModel] {
@@ -245,10 +244,12 @@ struct RecentlyItemListCell: View {
                     }
                     
                     if compareMyFollowBottleID(bottleInfo.id) == true {
+                        bookMark = false
                         userStore.deleteFollowItemId(bottleInfo.id)
                     }
 
                     if compareMyFollowBottleID(bottleInfo.id) == false {
+                        bookMark = true
                         userStore.addFollowItemId(bottleInfo.id)
                     }
                     
