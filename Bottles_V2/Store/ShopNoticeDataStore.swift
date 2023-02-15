@@ -62,8 +62,6 @@ class ShopNoticeDataStore : ObservableObject {
                    }
                    document.documentChanges.forEach { diff in
                        if (diff.type == .added) {
-   //                        print("notice id: \(diff.document.documentID)")
-   //                        print("새로운 데이터 들어옴? : \(diff.document.data())")
                            let docData = diff.document.data()
                            // 있는지를 따져서 있으면 데이터 넣어주고, 없으면 옵셔널 처리
                            let id : String = diff.document.documentID

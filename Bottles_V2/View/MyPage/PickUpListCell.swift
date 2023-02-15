@@ -16,12 +16,12 @@ struct PickUpListCell: View {
         VStack{
             // MARK: - 예약 일자, 예약 상태 HStack
             HStack {
-                Text("\(reservationData.reservedTime)")
+                Text(setDateFormat(reservedTime: reservationData.reservedTime))
                     .font(.bottles16)
                     //.bold()
                 Spacer()
                 
-                //Text("예약접수중")
+                //Text("예약접수")
                 Text("\(reservationData.state)")
                     .font(.bottles12)
                     .overlay{
@@ -72,6 +72,15 @@ struct PickUpListCell: View {
             $0.id == bottleId
         }
         return matchedBottleName[0].itemName
+    }
+    
+    func setDateFormat(reservedTime: Date) -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = Locale(identifier: "ko_kr")
+            dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+            dateFormatter.dateFormat = "yyyy.MM.dd" // "yyyy-MM-dd HH:mm:ss"
+            let dateCreatedAt = reservedTime
+            return dateFormatter.string(from: dateCreatedAt)
     }
 }
 

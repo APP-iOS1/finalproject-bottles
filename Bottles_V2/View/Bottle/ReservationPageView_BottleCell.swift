@@ -40,10 +40,16 @@ struct ReservationPageView_BottleCell: View {
                     .fontWeight(.medium)
                     
                 // MARK: - 상품 가격
-                Text("\(bottleReservation.price)원")
+                Text("\(bottleReservation.price * bottleReservation.count)원")
                     .font(.bottles18)
                     .fontWeight(.bold)
-                    
+                
+                // MARK: - 개당 가격
+                Text("개당 \(bottleReservation.price)원")
+                    .font(.bottles12)
+                    .foregroundColor(.gray)
+                    .padding(3)
+                
                 // MARK: - 상품 개수
                 Text("\(bottleReservation.count)개")
                     .font(.bottles15)
