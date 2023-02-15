@@ -126,22 +126,19 @@ struct BottleView: View {
                                        shopName: bottleData.shopName
                                       )) },
                          withCancelButton: true)
-        
-        // MARK: - 바틀샵 이름
         .toolbar(content: {
-            // 네비게이션 장바구니 아이콘
             ToolbarItem(placement: .principal) {
                 HStack {
                     Image("Maptabfill")
                         .resizable()
                         .frame(width: 14, height: 17)
+                    // MARK: - 바틀샵 이름
                     Text(bottleData.shopName)
                         .font(.bottles18)
                         .fontWeight(.medium)
-                        .position()
-                    
                 }
             }
+            // 네비게이션 장바구니 아이콘
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: {
                     CartView()
