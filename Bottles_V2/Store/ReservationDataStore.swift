@@ -60,9 +60,23 @@ class ReservationDataStore : ObservableObject {
                     return dateFormatter.string(from: dateCreatedAt)
                 }
                 
+                var pickUpTime : String {
+                    let reservedTime = Date()
+                    let calender = Calendar.current
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "M월 d일"
+                    
+                    var day3 = DateComponents()
+                    day3.day = 3
+                    
+                    let reservedTimePlusDay3 = calender.date(byAdding: day3, to: reservedTime)
+                    let convertDate = formatter.string(from: reservedTimePlusDay3!)
+                    return convertDate
+                }
+                
                 self.reservationData.append(
                     ReservationModel(
-                        id: id, shopId: shopId, userId: userId, reservedTime: reservedTime, state: state, reservedBottles: reservedBottles)
+                        id: id, shopId: shopId, userId: userId, reservedTime: reservedTime, pickUpTime: pickUpTime, state: state, reservedBottles: reservedBottles)
                 )
                 
             }

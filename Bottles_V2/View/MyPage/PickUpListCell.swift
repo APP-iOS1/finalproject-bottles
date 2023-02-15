@@ -21,7 +21,7 @@ struct PickUpListCell: View {
                     //.bold()
                 Spacer()
                 
-                //Text("예약접수중")
+                //Text("예약접수")
                 Text("\(reservationData.state)")
                     .font(.bottles12)
                     .overlay{
