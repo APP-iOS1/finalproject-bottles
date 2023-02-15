@@ -26,8 +26,7 @@ struct OnboardingView: View {
             // 페이지 3
             OnboardingPageView(
                 
-                imageName: "Onboarding2", title: "즐겨찾기 좋다!"
-                
+                imageName: "Onboarding2", title: "내가 북마크 한 상품과 바틀샵을\n북마크 탭에서 확인하세요!"
             )
             
             // 페이지 4

@@ -74,7 +74,6 @@ struct MainTabView: View {
                 userDataStore.readUser(userId: authStore.currentUser?.email ?? "")
                 cartStore.readCart(userEmail: authStore.currentUser?.email ?? "")
                 shopNoticeDataStore.getAllShopNoticeDataRealTime()
-
             }
     }
     

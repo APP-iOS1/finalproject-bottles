@@ -65,7 +65,7 @@ struct BottleShopView_BottleList: View {
                             // 데이터 연동 시 "바틀 이름" 연동
                             Text(selectedItem.itemName)
                                 .font(.bottles14)
-                                .fontWeight(.semibold)
+                                .fontWeight(.medium)
                                 .multilineTextAlignment(.leading)
                                 .padding(.bottom, -7)
                             

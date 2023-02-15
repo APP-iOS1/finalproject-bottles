@@ -15,17 +15,15 @@ struct OnboardingLastPageView: View {
     @Binding var isFirstLaunching: Bool
     
     var body: some View {
-        VStack(alignment: .center) {
-            
+        VStack(alignment: .center, spacing: 0) {
             Text(title)
                 .font(.bottles24)
                 .fontWeight(.bold)
-                .frame(alignment: .center)
+                .multilineTextAlignment(.center)
             
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 350)
                         
             // 온보딩 완료 버튼.
             // AppStorage의 isFirstLaunching 값을 false로 바꾸기 때문에, 다음번에 앱을 실행할 때는 OnboardingTabView를 띄우지 않음.
@@ -36,13 +34,13 @@ struct OnboardingLastPageView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .frame(width: 200, height: 50)
-                    .background(Color.blue)
-                    .cornerRadius(6)
+                    .background(Color("AccentColor"))
+                    .cornerRadius(12)
             }
             .foregroundColor(.accentColor)
             .padding()
         }
-        .padding()
+        .scaledToFit() // 기기별 호환 위해 적용
     }
 }
 
