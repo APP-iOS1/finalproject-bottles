@@ -24,6 +24,7 @@ struct OnboardingPageView: View {
                 .aspectRatio(contentMode: .fit)
 
         }
+        .scaledToFit()
     }
 }
 

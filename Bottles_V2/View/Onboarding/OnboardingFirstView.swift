@@ -34,6 +34,7 @@ struct OnboardingFirstView: View {
                 .aspectRatio(contentMode: .fit)
 //                .padding(.top, -10)
         }
+        .scaledToFit()
     }
 }
 

@@ -42,7 +42,7 @@ struct OnboardingLastPageView: View {
             .foregroundColor(.accentColor)
             .padding()
         }
-
+        .scaledToFit()
     }
 }
 
