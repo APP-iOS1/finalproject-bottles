@@ -72,9 +72,6 @@ struct Bottles_V2App: App {
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.readReservation()
                 }
-            
-            
-            
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))
         }

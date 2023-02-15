@@ -105,13 +105,11 @@ struct CartView: View {
                     .padding(.bottom, 20)
                 }
             }
-            
-            
-            
         }
         .navigationBarTitle("장바구니", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .toolbar(.visible, for: .tabBar)
         .onAppear {
             cartStore.readCart(userEmail: userStore.user.email)
         }

@@ -36,7 +36,7 @@ struct ReservationPageView: View {
                             Spacer()
                             
                             Button(action: {
-                                hiddenInfo.toggle()
+                                hiddenBottle.toggle()
                             }) {
                                 Image(hiddenBottle ? "arrowTop" : "arrowBottom")
                                     .resizable()
@@ -152,7 +152,7 @@ struct ReservationPageView: View {
                     Button(action: {
                         check.toggle()
                     }) {
-                        Image(systemName: check ? "checkmark.square.fill" : "checkmark.square")
+                        Image(systemName: check ? "checkmark.circle.fill" : "checkmark.circle")
                             .resizable()
                             .frame(width: 20, height: 20)
                             .foregroundColor(check ? Color("AccentColor") : .gray)
@@ -169,7 +169,11 @@ struct ReservationPageView: View {
                     if check {
                         isShowing.toggle()
                         Task{
-                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: Date(), state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+                            // FIXME: - main-Front 병합과정 충돌이슈
+                            await reservationDataStore.createReservation(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: Date.now, pickUpTime: "", state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+
+                            //await reservationDataStore.createReservation(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: Date(), state: "예약접수", reservedBottles: []), reservedBottles: bottleReservations)
+
                             if getBottleReservation(carts: cartStore.carts) == bottleReservations {
                                 cartStore.deleteAllCart(userEmail: userStore.user.email)
                             }
@@ -190,7 +194,11 @@ struct ReservationPageView: View {
             }
             // 예약 완료 뷰로 이동
             .navigationDestination(isPresented: $isShowing) {
-                ReservedView(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: Date(), state: "예약접수", reservedBottles: getReservedBottlesArray(bottleReservations: bottleReservations)))
+                // FIXME: - main-Front 병합과정 충돌이슈                
+                ReservedView(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: Date.now, pickUpTime: "", state: "예약접수", reservedBottles: getReservedBottlesArray(bottleReservations: bottleReservations)))
+
+                // ReservedView(reservationData: ReservationModel(id: tempId, shopId: bottleReservations[0].shop, userId: userStore.user.email, reservedTime: Date(), state: "예약접수", reservedBottles: getReservedBottlesArray(bottleReservations: bottleReservations)))
+
                 //.environmentObject(path)
             }
             .toolbar(content: {

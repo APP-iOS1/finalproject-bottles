@@ -83,6 +83,8 @@ struct SearchShopList: View {
                             } label: {
                                 SearchShopListCell(shopDataStore: shopDataStore, shopInfo: shop, distance: distance(shop.location.latitude, shop.location.longitude), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
                             }
+                            Divider()
+                                .padding(.horizontal, 10)
                         }
                     }
                 }
@@ -112,7 +114,7 @@ struct SearchShopList: View {
                         .frame(width: 300, height: 30)
                         .foregroundColor(.gray_f7)
                 }
-                .offset(y: 250)
+                .offset(y: (UIScreen.main.bounds.height/4))
             }
         }
     }
@@ -215,10 +217,10 @@ struct SearchShopListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(minHeight: 130, maxHeight: 200)
+        .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
+        
     }
-    
     func compareMyFollowShopID(_ shopId: String) -> Bool {
         return (userStore.user.followShopList.filter { $0 == shopId }.count != 0) ? true : false
     }

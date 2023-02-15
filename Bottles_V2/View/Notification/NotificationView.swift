@@ -72,6 +72,9 @@ struct NotificationView: View {
     
     @State private var selected: (any TestProtocol)?
     
+    @State var destination: Destination?
+    @Binding var root: Bool
+    
     func filteredMyNotice() -> [ShopNotice] {
         var resultData: [ShopNotice] = []
         for item in userStore.user.noticeList {
@@ -152,6 +155,7 @@ struct NotificationView: View {
                 // MARK: - 알림 Cell
                 /// 예약내역, 새로운 소식,
                 ScrollView {
+
                     if onlyReservation {
                         ForEach(filteredMyReservation()) { item in
                             NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.state)", description: "예약 현황이 업데이트되면 다시 알려드릴게요!", storeName: item.shopId, time: "\(item.calculateTime(item.reservedTime))")
@@ -180,6 +184,14 @@ struct NotificationView: View {
                 }
             }
             .navigationBarTitle("알림", displayMode: .inline)
+            .navigationDestination(isPresented: $root) {
+                switch self.destination {
+                case .pickUpList:
+                    PickUpListView()
+                default:
+                    EmptyView()
+                }
+            }
         }
     }
     

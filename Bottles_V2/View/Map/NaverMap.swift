@@ -43,30 +43,11 @@ struct NaverMap: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        let coord = NMGLatLng(lat: Coordinator.shared.coord.0, lng: Coordinator.shared.coord.1)
-        let cameraUpdate = NMFCameraUpdate(scrollTo: coord)
-        cameraUpdate.animation = .fly
-        cameraUpdate.animationDuration = 1
-        uiView.mapView.moveCamera(cameraUpdate)
-//        if !Coordinator.shared.markers.isEmpty {
-//            for shop in shopDataStore.shopData {
-//                if Coordinator.shared.currentShopId == shop.id {
-//                    let lat = shop.location.latitude
-//                    let lng = shop.location.longitude
-//
-//                    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
-//                    cameraUpdate.animation = .easeIn
-//                    cameraUpdate.animationDuration = 0.3
-//                    Coordinator.shared.view.mapView.moveCamera(cameraUpdate)
-//                }
-//            }
-//        }
-//        let cameraPosition = uiView.mapView.cameraPosition
-//        let coord = NMGLatLng(lat: cameraPosition.target.lat, lng: cameraPosition.target.lng)
-//        let cameraUpdate = NMFCameraUpdate(scrollTo: coord)
-//        cameraUpdate.animation = .easeIn
-//        cameraUpdate.animationDuration = 0.3
-//        Coordinator.shared.view.mapView.moveCamera(cameraUpdate)
+        //        let coord = NMGLatLng(lat: Coordinator.shared.coord.0, lng: Coordinator.shared.coord.1)
+        //        let cameraUpdate = NMFCameraUpdate(scrollTo: coord)
+        //        cameraUpdate.animation = .fly
+        //        cameraUpdate.animationDuration = 1
+        //        uiView.mapView.moveCamera(cameraUpdate)
     }
 }
 
@@ -233,7 +214,7 @@ final class Coordinator: NSObject, ObservableObject,NMFMapViewCameraDelegate, NM
         if let locationManager = locationManager {
             let lat = locationManager.location?.coordinate.latitude
             let lng = locationManager.location?.coordinate.longitude
-            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: userLocation.0, lng: userLocation.1))
+            let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat ?? 0.0, lng: lng ?? 0.0))
             cameraUpdate.animation = .fly
             cameraUpdate.animationDuration = 1
             
@@ -248,8 +229,7 @@ final class Coordinator: NSObject, ObservableObject,NMFMapViewCameraDelegate, NM
             circle.radius = 5000
             circle.mapView = nil
             
-//            view.mapView.moveCamera(cameraUpdate)
-            Coordinator.shared.view.mapView.moveCamera(cameraUpdate)
+            view.mapView.moveCamera(cameraUpdate)
         }
     }
     
@@ -259,12 +239,10 @@ final class Coordinator: NSObject, ObservableObject,NMFMapViewCameraDelegate, NM
             print(markers)
             for marker in markers {
                 marker.touchHandler = { [self] (overlay) -> Bool in
-//                    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: marker.position.lat, lng: marker.position.lng))
-//                    cameraUpdate.animation = .fly
-//                    cameraUpdate.animationDuration = 1
-                    coord = (marker.position.lat,marker.position.lng)
-
-//                    self.view.mapView.moveCamera(cameraUpdate)
+                    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: marker.position.lat, lng: marker.position.lng))
+                    cameraUpdate.animation = .fly
+                    cameraUpdate.animationDuration = 1
+                    self.view.mapView.moveCamera(cameraUpdate)
                     self.showMarkerDetailView = true
                     self.currentShopId = marker.captionText
                     print("showMarkerDetailView : \(self.showMarkerDetailView)")
@@ -278,12 +256,11 @@ final class Coordinator: NSObject, ObservableObject,NMFMapViewCameraDelegate, NM
             print(bookMarkedMarkers)
             for marker in bookMarkedMarkers {
                 marker.touchHandler = { [self] (overlay) -> Bool in
-//                    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: marker.position.lat, lng: marker.position.lng))
-//                    cameraUpdate.animation = .fly
-//                    cameraUpdate.animationDuration = 1
-//                    self.view.mapView.moveCamera(cameraUpdate)
-                    coord = (marker.position.lat,marker.position.lng)
-
+                    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: marker.position.lat, lng: marker.position.lng))
+                    cameraUpdate.animation = .fly
+                    cameraUpdate.animationDuration = 1
+                    self.view.mapView.moveCamera(cameraUpdate)
+                    
                     self.showMarkerDetailView = true
                     self.currentShopId = marker.captionText
                     print("showMarkerDetailView : \(self.showMarkerDetailView)")

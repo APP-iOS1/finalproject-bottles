@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+enum Destination: Hashable {
+    case bottleShop
+    case cart
+    case pickUpList
+    case setting
+}
+
 struct MainTabView: View {
     @EnvironmentObject private var delegate: AppDelegate
     //    @EnvironmentObject var sessionManager : SessionManager
@@ -22,14 +29,27 @@ struct MainTabView: View {
     //    let user: AuthUser
     
     @State var selection: Int = 1
-    //     TabBar 백그라운드 컬러 지정
+    @State private var root: Bool = false
     
     @State private var isActive = false
     @State private var isloading = true
     
+    var selectionBinding: Binding<Int> { Binding (
+        get: {
+            self.selection
+        },
+        set: {
+            if $0 == self.selection && root {
+                print("root view 이동")
+                root = false
+            }
+            self.selection = $0
+        }
+    )}
+    
     var body: some View {
-            TabView(selection: $selection) {
-                MapView().tabItem {
+            TabView(selection: selectionBinding) {
+                MapView(root: $root).tabItem {
                     Image(selection == 1 ? "Maptabfill" : "Map_tab")
                     Text("주변")
                 }.tag(1)
@@ -37,32 +57,33 @@ struct MainTabView: View {
                     Image(selection == 2 ? "BookMark_tab_fill" : "BookMark_tab")
                     Text("저장")
                 }.tag(2)
-                NotificationView().tabItem {
+                NotificationView(root: $root).tabItem {
                     Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
                     Text("알림")
                 }.tag(3)
-                MyPageView(selection: $selection).tabItem {
+                MyPageView(root: $root, selection: $selection).tabItem {
                     Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                     Text("MY")
                 }.tag(4)
             }
-                    .task {
-            mapViewModel.checkIfLocationServicesIsEnabled()
-        }
             .toolbarBackground(Color.white, for: .tabBar)
             .sheet(isPresented: $delegate.openedFromNotification, onDismiss: didDismiss){
-                NotificationView()
+                NotificationView(root: $root)
             }
             .task {
                 userDataStore.readUser(userId: authStore.currentUser?.email ?? "")
                 cartStore.readCart(userEmail: authStore.currentUser?.email ?? "")
                 shopNoticeDataStore.getAllShopNoticeDataRealTime()
+
             }
     }
+    
     func didDismiss(){
         delegate.openedFromNotification = false
     }
 }
+
+
 //
 //struct TabButtonModifier: ViewModifier {
 //    func body(image: Image) -> some View {

@@ -86,7 +86,7 @@ struct MapSearchView: View {
                                     let distance = distance(item.location.latitude, item.location.longitude)
                                     
                                     // 검색어와 겹치는 단어가 있는지 없는지 확인
-                                    if item.shopName.replacingOccurrences(of: " ", with: "").contains(searchBarText.replacingOccurrences(of: " ", with: "")) {
+                                    if item.shopName.replacingOccurrences(of: " ", with: "").localizedCaseInsensitiveContains(searchBarText.replacingOccurrences(of: " ", with: "")) {
                                         Button {
                                             doneTextFieldEdit = true
                                             
@@ -95,6 +95,7 @@ struct MapSearchView: View {
                                             tapped = true
                                             coordinator.currentShopId = item.shopName
                                             coordinator.coord = (item.location.latitude, item.location.longitude)
+                                            Coordinator.shared.moveCameraPosition()
                                             coordinator.showMarkerDetailView = true
                                             
                                             print("currentShopId : \(coordinator.currentShopId)")

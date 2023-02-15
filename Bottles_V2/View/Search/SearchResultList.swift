@@ -81,9 +81,6 @@ struct SearchResultList: View {
                             // 검색어와 겹치는 단어가 있는 bottleName의 경우, 검색어와 겹치는 단어들만 accentColor
                             // 현재는 shop을 제외한 bottleName만 리스트에 보임
                             Text(item.name) { string in
-//                                let attString = AttributedString(item.name.replacingOccurrences(of: " ", with: ""))
-//                                let spaceCount = item.name.components(separatedBy: " ").count - 1
-                              
                                 if let range = string.range(of: searchBarText.trimmingCharacters(in: .whitespaces), options: .caseInsensitive) {
                                     string[range].foregroundColor = Color("AccentColor")
                                 }
