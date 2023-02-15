@@ -18,6 +18,7 @@ struct NotificationView: View {
     func filteredMyNotice() -> [ShopNotice] {
         var resultData: [ShopNotice] = []
         for item in userStore.user.noticeList {
+            print("내 노티스 리스트 \(item)")
             let filteredData = shopNoticeDataStore.shopNoticeData.filter {$0.id == item }
            
             resultData.append(contentsOf: filteredData)
@@ -56,8 +57,7 @@ struct NotificationView: View {
                 }
             }
             .task {
-                shopNoticeDataStore.getAllShopNoticeDataRealTime()
-//                await shopNoticeDataStore.getAllShopNoticeData()
+//                shopNoticeDataStore.getAllShopNoticeDataRealTime()
             }
             .navigationBarTitle("알림", displayMode: .inline)
         }

@@ -178,6 +178,7 @@ class UserStore: ObservableObject {
                    return
                  }
             
+            
             //            for document in document.documents {
             //                let currentData = document.data()
             let email: String = currentData["email"] as? String ?? ""
@@ -193,7 +194,7 @@ class UserStore: ObservableObject {
             self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList, socialLoginType: socialLoginType)
             //            }
             
-//            print("Current data: \(data)")
+            print("Current data: \(self.user)")
         }
         
     }
@@ -209,7 +210,8 @@ class UserStore: ObservableObject {
         Firestore.firestore().collection("User")
             .document(user.id)
             .updateData(["noticeList": FieldValue.arrayUnion([id])])
-        readUser(userId: user.id)
+        getUserDataRealTime(userId: user.id)
+//        readUser(userId: user.id)
     }
     
     func updateUserPhoneNumber(phoneNumber: String) {
