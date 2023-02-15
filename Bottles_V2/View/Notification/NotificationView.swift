@@ -152,24 +152,31 @@ struct NotificationView: View {
                 // MARK: - 알림 Cell
                 /// 예약내역, 새로운 소식,
                 ScrollView {
-                    ForEach(mergedArray(), id: \.self) { item in
-                        if item.shopNotice != nil {
-                            NotificationCell(imgName: "shopNotification", title: item.shopNotice?.title ?? "", description: item.shopNotice?.body ?? "", storeName: item.shopNotice?.shopName ?? "", time: "\(item.calculateTime(item.date))")
-//                            NavigationLink {
-////                                BottleShopView(userStore: UserStore(), focus: false, animation: , shopDataStore: ShopDataStore(), bottleDataStore: BottleDataStore(), bottleShop:  filterShop(item.shopNotice?.shopName))
-//                            } label: {
-//                                NotificationCell(imgName: "shopNotification", title: item.shopNotice?.title ?? "", description: item.shopNotice?.body ?? "", storeName: item.shopNotice?.shopName ?? "", time: "\(item.calculateTime(item.date))")
-//                            }
+                    if onlyReservation {
+                        ForEach(filteredMyReservation()) { item in
+                            NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.state)", description: "예약 현황이 업데이트되면 다시 알려드릴게요!", storeName: item.shopId, time: "\(item.calculateTime(item.reservedTime))")
+                        }
+                    } else {
+                        ForEach(mergedArray(), id: \.self) { item in
+                            if item.shopNotice != nil {
+                                NotificationCell(imgName: "shopNotification", title: item.shopNotice?.title ?? "", description: item.shopNotice?.body ?? "", storeName: item.shopNotice?.shopName ?? "", time: "\(item.calculateTime(item.date))")
+    //                            NavigationLink {
+    ////                                BottleShopView(userStore: UserStore(), focus: false, animation: , shopDataStore: ShopDataStore(), bottleDataStore: BottleDataStore(), bottleShop:  filterShop(item.shopNotice?.shopName))
+    //                            } label: {
+    //                                NotificationCell(imgName: "shopNotification", title: item.shopNotice?.title ?? "", description: item.shopNotice?.body ?? "", storeName: item.shopNotice?.shopName ?? "", time: "\(item.calculateTime(item.date))")
+    //                            }
 
-                        }  else if item.reservation != nil {
-                            NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.reservation?.state ?? "")", description: "예약 현황이 업데이트되면 다시 알려드릴게요!", storeName: item.reservation?.shopId ?? "", time: "\(item.calculateTime(item.date))")
-//                            NavigationLink {
-////                                PickUpListView()
-//                            } label: {
-//                                NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.reservation?.state ?? "")", description: "예약을 확인해보세요!", storeName: item.reservation?.shopId ?? "", time: "\(item.calculateTime(item.date))")
-//                            }
+                            }  else if item.reservation != nil {
+                                NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.reservation?.state ?? "")", description: "예약 현황이 업데이트되면 다시 알려드릴게요!", storeName: item.reservation?.shopId ?? "", time: "\(item.calculateTime(item.date))")
+    //                            NavigationLink {
+    ////                                PickUpListView()
+    //                            } label: {
+    //                                NotificationCell(imgName: "checkNotification", title: "예약 현황: \(item.reservation?.state ?? "")", description: "예약을 확인해보세요!", storeName: item.reservation?.shopId ?? "", time: "\(item.calculateTime(item.date))")
+    //                            }
+                            }
                         }
                     }
+                    
                 }
             }
             .navigationBarTitle("알림", displayMode: .inline)
