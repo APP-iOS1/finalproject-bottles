@@ -79,7 +79,7 @@ struct BookMarkShopList: View {
                         Spacer()
                             .frame(height: 20)
                         
-                        Text("저장된 바틀샵이 없습니다.")
+                        Text("북마크된 바틀샵이 없습니다.")
                             .font(.bottles18)
                             .fontWeight(.semibold)
                     }
@@ -101,7 +101,8 @@ struct BookMarkShopList: View {
                                         shop.location.latitude,
                                         shop.location.longitude))
                             }
-                            
+                            Divider()
+                                .padding(.horizontal, 10)
                         }
                     }
                 }
@@ -138,7 +139,7 @@ struct BookMarkShopList: View {
                         .frame(width: 300, height: 30)
                         .foregroundColor(.gray_f7)
                 }
-                .offset(y: 250)
+                .offset(y: (UIScreen.main.bounds.height/4))
             }
         }
     }
@@ -229,7 +230,7 @@ struct BookMarkShopListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(minHeight: 130, maxHeight: 200)
+        .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
     }
 }

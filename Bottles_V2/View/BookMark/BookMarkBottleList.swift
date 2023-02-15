@@ -94,7 +94,7 @@ struct BookMarkBottleList: View {
                         Spacer()
                             .frame(height: 20)
                         
-                        Text("저장된 상품이 없습니다.")
+                        Text("북마크된 상품이 없습니다.")
                             .font(.bottles18)
                             .fontWeight(.semibold)
                     }
@@ -103,9 +103,9 @@ struct BookMarkBottleList: View {
                 } else {
                     ScrollView {
                         ForEach(filterUserBottleData()) { bottle in
-
                             BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle),   userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm, deletedBottleId: $resetDeletedBottleId)
-
+                            Divider()
+                                .padding(.horizontal, 10)
                         }
                     }
                 }
@@ -153,7 +153,7 @@ struct BookMarkBottleList: View {
                         .frame(width: 300, height: 30)
                         .foregroundColor(.gray_f7)
                 }
-                .offset(y: 250)
+                .offset(y: (UIScreen.main.bounds.height/4))
             }
         }
     }
@@ -250,7 +250,7 @@ struct BookMarkBottleListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(minHeight: 130, maxHeight: 200)
+        .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
     }
 }
