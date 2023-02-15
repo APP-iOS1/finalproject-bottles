@@ -36,7 +36,7 @@ struct ReservationPageView: View {
                             Spacer()
                             
                             Button(action: {
-                                hiddenInfo.toggle()
+                                hiddenBottle.toggle()
                             }) {
                                 Image(hiddenBottle ? "arrowTop" : "arrowBottom")
                                     .resizable()
@@ -152,7 +152,7 @@ struct ReservationPageView: View {
                     Button(action: {
                         check.toggle()
                     }) {
-                        Image(systemName: check ? "checkmark.square.fill" : "checkmark.square")
+                        Image(systemName: check ? "checkmark.circle.fill" : "checkmark.circle")
                             .resizable()
                             .frame(width: 20, height: 20)
                             .foregroundColor(check ? Color("AccentColor") : .gray)

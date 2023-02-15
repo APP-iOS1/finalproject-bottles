@@ -14,7 +14,6 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 struct MapView: View {
-    
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var mapViewModel: MapViewModel
     @EnvironmentObject var userDataStore: UserStore
@@ -45,6 +44,8 @@ struct MapView: View {
     // @AppStorage에 저장되어 앱 종료 후에도 유지됨.
     @AppStorage("isFirstLaunching") var isFirstLaunching: Bool = true
     
+    @State var destination: Destination?
+    @Binding var root: Bool
     
     var body: some View {
         
@@ -72,9 +73,10 @@ struct MapView: View {
                                                 focus = true
                                             }
                                         })
-                                    NavigationLink {
-                                        CartView()
-                                    } label: {
+                                    Button(action: {
+                                        destination = .cart
+                                        root.toggle()
+                                    }) {
                                         Image("cart")
                                             .foregroundColor(.accentColor)
                                             .bold()
@@ -143,10 +145,10 @@ struct MapView: View {
                     .zIndex(2)
                     
                     MarkerDetailSheet(isOpen: $coordinator.showMarkerDetailView, maxHeight: 200) {
-                        NavigationLink{
-                            BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == coordinator.currentShopId }[0])
-                            
-                        } label: {
+                        Button(action: {
+                            destination = .bottleShop
+                            root.toggle()
+                        }) {
                             MarkerDetailView(
                                 shopData: shopDataStore.shopData.filter { $0.id == coordinator.currentShopId }[0],
                                 showMarkerDetailView: $coordinator.showMarkerDetailView,
@@ -159,7 +161,17 @@ struct MapView: View {
             }
             .sheet(isPresented: $isFirstLaunching) {
                 OnboardingView(isFirstLaunching: $isFirstLaunching)
-                        }
+            }
+            .navigationDestination(isPresented: $root) {
+                switch self.destination {
+                case .cart:
+                    CartView()
+                case .bottleShop:
+                    BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == coordinator.currentShopId }[0])
+                default:
+                    EmptyView()
+                }
+            }
             
             .onAppear {
                 Coordinator.shared.checkIfLocationServicesIsEnabled()
