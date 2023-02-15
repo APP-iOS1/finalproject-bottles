@@ -66,12 +66,10 @@ struct PickUpDetailCell: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 128, height: 128)
                     .cornerRadius(12)
-
             }
             .background(Color.gray_f7)
             .cornerRadius(12)
             .frame(height: 128)
-            //.padding(.horizontal)
             
             VStack(alignment: .leading, spacing: 9) {
                 // MARK: - 상품 이름
