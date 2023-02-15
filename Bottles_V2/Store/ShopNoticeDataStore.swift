@@ -60,6 +60,7 @@ class ShopNoticeDataStore : ObservableObject {
                     print("Error fetching document: \(error!)")
                     return
                 }
+                
                 document.documentChanges.forEach { diff in
                     if (diff.type == .added) {
                         //                        print("notice id: \(diff.document.documentID)")
@@ -85,13 +86,58 @@ class ShopNoticeDataStore : ObservableObject {
                             //                            userStore.addUserNoticeData(id)
                         }
                     }
-                    //                    print("샵 리스너 후 샵 노티스 데이터 \(self.shopNoticeData)")
-                    //                        if (diff.type == .modified) {
-                    //                            print("Modified city: \(diff.document.data())")
-                    //                        }
-                    //                        if (diff.type == .removed) {
-                    //                            print("Removed city: \(diff.document.data())")
-                    //                        }
+                    
+                    if (diff.type == .removed) {
+                        print("Removed city: \(diff.document.data())")
+                        let docData = diff.document.data()
+                        // 있는지를 따져서 있으면 데이터 넣어주고, 없으면 옵셔널 처리
+                        let id : String = diff.document.documentID
+                        let category : String = docData["category"] as? String ?? ""
+                        let shopName : String = docData["shopName"] as? String ?? ""
+                        let createdAtTimeStamp: Timestamp = docData["date"] as? Timestamp ?? Timestamp()
+                        let title : String = docData["title"] as? String ?? ""
+                        let body : String = docData["body"] as? String ?? ""
+                        let date: Date = createdAtTimeStamp.dateValue()
+                        let shopNotice: ShopNotice = ShopNotice(
+                            id: id,
+                            category: category,
+                            shopName: shopName,
+                            date: date,
+                            title: title,
+                            body: body)
+                        
+                        for (index, item) in self.shopNoticeData.enumerated() {
+                            if item.id == shopNotice.id {
+                                self.shopNoticeData.remove(at: index)
+                            }
+                        }
+                    }
+                    
+                    
+                    if (diff.type == .modified) {
+                        let docData = diff.document.data()
+                        // 있는지를 따져서 있으면 데이터 넣어주고, 없으면 옵셔널 처리
+                        let id : String = diff.document.documentID
+                        let category : String = docData["category"] as? String ?? ""
+                        let shopName : String = docData["shopName"] as? String ?? ""
+                        let createdAtTimeStamp: Timestamp = docData["date"] as? Timestamp ?? Timestamp()
+                        let title : String = docData["title"] as? String ?? ""
+                        let body : String = docData["body"] as? String ?? ""
+                        let date: Date = createdAtTimeStamp.dateValue()
+                        let shopNotice: ShopNotice = ShopNotice(
+                            id: id,
+                            category: category,
+                            shopName: shopName,
+                            date: date,
+                            title: title,
+                            body: body)
+                        
+                        for (index, item) in self.shopNoticeData.enumerated() {
+                            if item.id == shopNotice.id {
+                                self.shopNoticeData[index] = shopNotice
+                            }
+                        }
+                    }
                 }
             }
     }
