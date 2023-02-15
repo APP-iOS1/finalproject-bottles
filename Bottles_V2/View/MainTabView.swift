@@ -56,7 +56,7 @@ struct MainTabView: View {
             .task {
                 userDataStore.readUser(userId: authStore.currentUser?.email ?? "")
                 cartStore.readCart(userEmail: authStore.currentUser?.email ?? "")
-                shopNoticeDataStore.getAllShopNoticeDataRealTime(userDataStore)
+                shopNoticeDataStore.getAllShopNoticeDataRealTime()
             }
     }
     func didDismiss(){
