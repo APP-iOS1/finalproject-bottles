@@ -65,16 +65,13 @@ struct Bottles_V2App: App {
                 .environmentObject(cartStore)
                 .environmentObject(appDelegate)
                 .task {
-                    userDataStore.readUser(userId: "test12@naver.com")
-                    userDataStore.getUserDataRealTime(userId: "test12@naver.com")
-                    cartStore.readCart(userEmail: "test12@naver.com")
+                    userDataStore.readUser(userId: authStore.currentUser?.email ?? "")
+                    userDataStore.getUserDataRealTime(userId: authStore.currentUser?.email ?? "")
+                    cartStore.readCart(userEmail: authStore.currentUser?.email ?? "")
                     await shopDataStore.getAllShopData()
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.readReservation()
                 }
-                
-                
-            
             // MARK: - AccentColor 적용
                 .accentColor(Color("AccentColor"))
         }
