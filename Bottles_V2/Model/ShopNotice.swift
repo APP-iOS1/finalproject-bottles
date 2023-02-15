@@ -20,26 +20,4 @@ struct ShopNotice : Codable, Identifiable, Hashable, TestProtocol {
     var date : Date
     var title : String
     var body: String
-    
-    func calculateTime() -> String {
-        let format = DateFormatter()
-        format.locale = Locale(identifier: "ko_KR")
-        format.dateFormat = "M월 d일"
-        return getTimeName(Int(Date().timeIntervalSince(date)), format.string(from: date))
-    }
-    
-    func getTimeName(_ time: Int, _ date: String) -> String {
-        let result = time / 60
-        switch result {
-        case 0:
-            return "방금"
-        case 1 ... 59:
-            return "\(result)분 전"
-        case 60 ... 1439:
-            return "\(result / 60)시간 전"
-        default:
-            return date
-        }
-    }
-    
 }
