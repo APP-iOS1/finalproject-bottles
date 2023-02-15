@@ -70,6 +70,7 @@ struct NearBySheetView: View {
                             }
                         }
                     }
+                    .setSkeletonView(opacity: 0.3, shouldShow: showMarkerDetailView)
                 }
             }
             
