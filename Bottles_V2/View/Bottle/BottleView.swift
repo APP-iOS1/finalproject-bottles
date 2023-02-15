@@ -35,6 +35,7 @@ struct BottleView: View {
         // 2. 그리고 바틀 데이터 안에서 bottleData에서 받은 shopName과 다른 shopName 사용하기
         return shopDataStore.shopData.filter { $0.id == shopID }[0]
     }
+        
     
     var body: some View {
         NavigationStack {
@@ -133,10 +134,12 @@ struct BottleView: View {
                 HStack {
                     Image("Maptabfill")
                         .resizable()
-                        .frame(width: 11, height: 16)
+                        .frame(width: 14, height: 17)
                     Text(bottleData.shopName)
                         .font(.bottles18)
                         .fontWeight(.medium)
+                        .position()
+                    
                 }
             }
             ToolbarItem(placement: .navigationBarTrailing) {

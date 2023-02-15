@@ -22,13 +22,26 @@ struct MainTabView: View {
     //    let user: AuthUser
     
     @State var selection: Int = 1
-    //     TabBar 백그라운드 컬러 지정
+    @State private var root: Bool = false
     
     @State private var isActive = false
     @State private var isloading = true
     
+    var selectionBinding: Binding<Int> { Binding (
+        get: {
+            self.selection
+        },
+        set: {
+            if $0 == self.selection && root {
+                print("root view 이동")
+                root = false
+            }
+            self.selection = $0
+        }
+    )}
+    
     var body: some View {
-            TabView(selection: $selection) {
+            TabView(selection: selectionBinding) {
                 MapView().tabItem {
                     Image(selection == 1 ? "Maptabfill" : "Map_tab")
                     Text("주변")
@@ -41,7 +54,7 @@ struct MainTabView: View {
                     Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
                     Text("알림")
                 }.tag(3)
-                MyPageView(selection: $selection).tabItem {
+                MyPageView(root: $root, selection: $selection).tabItem {
                     Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                     Text("MY")
                 }.tag(4)
@@ -59,6 +72,7 @@ struct MainTabView: View {
                 shopNoticeDataStore.getAllShopNoticeDataRealTime()
             }
     }
+    
     func didDismiss(){
         delegate.openedFromNotification = false
     }

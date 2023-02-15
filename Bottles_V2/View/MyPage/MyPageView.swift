@@ -30,7 +30,10 @@ struct MyPageView: View {
     /// SafariWebView에 바인딩으로 링크 자체를 넘겨준다.
     @State var selectedUrl: URL = URL(string: "https://www.naver.com")!
     
+    @State var destination: Destination?
+    @Binding var root: Bool
     @Binding var selection: Int
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -47,7 +50,11 @@ struct MyPageView: View {
                         .font(.bottles18)
 
                     Spacer()
-                    NavigationLink(destination: SettingView(selection: $selection)){
+                    
+                    Button(action: {
+                        destination = .setting
+                        root.toggle()
+                    }) {
                         Image(systemName: "gearshape.fill")
                         //                            .foregroundColor(.accentColor)
                             .font(.title2)
@@ -57,7 +64,10 @@ struct MyPageView: View {
                 
                 //MARK: - 예약 내역
                 List{
-                    NavigationLink(destination: PickUpListView()){
+                    Button(action: {
+                        destination = .pickUpList
+                        root.toggle()
+                    }) {
                         Text("예약 내역")
                             .font(.bottles15)
                             .foregroundColor(.accentColor)
@@ -92,20 +102,31 @@ struct MyPageView: View {
                 }
                 .listStyle(.plain)
                 .scrollDisabled(true)
-                
-                
+            }
+            .navigationDestination(isPresented: $root) {
+                switch self.destination {
+                case .setting:
+                    SettingView(selection: $selection)
+                case .pickUpList:
+                    PickUpListView()
+                default:
+                    EmptyView()
+                }
             }
         }
         .navigationBarTitle("MY", displayMode: .inline)
-        
     }
-    
-
 }
 
+extension MyPageView {
+    enum Destination: Hashable {
+        case setting
+        case pickUpList
+    }
+}
 
 struct MyPageView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPageView(selection: .constant(1)).environmentObject(UserStore())
+        MyPageView(root: .constant(false), selection: .constant(1)).environmentObject(UserStore())
     }
 }
