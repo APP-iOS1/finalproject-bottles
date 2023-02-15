@@ -9,29 +9,32 @@ import SwiftUI
 
 struct OnboardingFirstView: View {
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .center, spacing: 0) {
             Text("바틀 예약 및 픽업은 등록된\n바틀샵에서만 진행할 수 있어요!")
-                .frame(alignment: .center)
                 .font(.bottles24)
                 .fontWeight(.bold)
+                .multilineTextAlignment(.center)
+                .padding(.vertical)
             
-            VStack{
-                HStack {
-                    Image("MapMarker")
-                    Text("등록된 바틀샵")
-                }
+            HStack {
+                Image("MapMarker.fill")
+                Text("등록된 바틀샵")
                 
-                HStack {
-                    Image("MapMarker.fill")
-                    Text("미등록된 바틀샵")
-                }
-                .padding()
-            }.font(.bottles14)
+                Divider()
+                    .frame(width: 20, height: 20)
+                
+                Image("MapMarker")
+                Text("미등록된 바틀샵")
+            }
+            .font(.bottles14)
+            //                .fontWeight(.medium)
             
             Image("Onboarding0")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+//                .padding(.top, -10)
         }
+        .scaledToFit() // 기기별 호환 위해 적용
     }
 }
 
