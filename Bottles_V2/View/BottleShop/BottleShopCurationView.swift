@@ -94,7 +94,8 @@ struct BottleShopCurationView: View {
                                     .padding(.bottom, -6)
                             }
                         }
-                        .padding(.horizontal, 1)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, -5)
                         .padding(.bottom, 25)
                         //                        .padding(.leading, -24)
                         .shadow(radius: 20)

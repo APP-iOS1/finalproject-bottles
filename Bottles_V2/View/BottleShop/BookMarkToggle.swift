@@ -29,7 +29,7 @@ struct BookMarkToggle: View {
                     .frame(width: 300, height: 30)
                     .foregroundColor(.gray_f7)
             }
-            .offset(y: 300)
+            .offset(y: (UIScreen.main.bounds.height/2.7))
         }
         
         // MARK: - "BookMark 해제"시 애니메이션
@@ -48,7 +48,7 @@ struct BookMarkToggle: View {
                     .frame(width: 300, height: 30)
                     .foregroundColor(.gray_f7)
             }
-            .offset(y: 300)
+            .offset(y: (UIScreen.main.bounds.height/2.7))
         }
     }
 }

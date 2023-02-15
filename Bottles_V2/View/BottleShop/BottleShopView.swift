@@ -216,6 +216,7 @@ struct BottleShopView: View {
                                 .font(.bottles16)
                                 .padding(7)
                                 .padding(.horizontal, 25)
+                                .padding(.vertical, 7)
                                 .cornerRadius(8)
                                 .overlay(
                                     HStack {
@@ -271,7 +272,7 @@ struct BottleShopView: View {
                                 ForEach(filteredResult, id: \.self) { item in
                                     NavigationLink(destination: BottleView(bottleData: item), label:{
                                         BottleShopView_BottleList(selectedItem: item)
-                                            .padding()
+                                            .padding(.horizontal)
                                     })
                                     .simultaneousGesture(TapGesture().onEnded {
                                         focus = false
