@@ -9,6 +9,7 @@ import SwiftUI
 import SkeletonUI
 struct NearBySheetCell: View {
     @EnvironmentObject var userStore: UserStore
+    @EnvironmentObject var shopDataStore: ShopDataStore
 //    var userStore: UserStore
     // Shop의 정보를 저장하는 변수
     @State private var checkBookmark: Bool = false
@@ -86,12 +87,13 @@ struct NearBySheetCell: View {
                     if compareMyFollowShopID(shopModel.id) == true {
                         checkBookmark = false
                         userStore.deleteFollowShopId(shopModel.id)
+                        shopDataStore.deleteFollowUserList(userStore.user.email, shopModel.id)
                     }
                     
                     if compareMyFollowShopID(shopModel.id) == false {
                         checkBookmark = true
                         userStore.addFollowShopId(shopModel.id)
-                        
+                        shopDataStore.addFollowUserList(userStore.user.email, shopModel.id)
                     }
                     
                 }) {

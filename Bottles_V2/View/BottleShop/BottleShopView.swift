@@ -116,6 +116,7 @@ struct BottleShopView: View {
                                 if compareMyFollowShopID(bottleShop.id) == true {
                                     bookmarkToggle = false
                                     userStore.deleteFollowShopId(bottleShop.id)
+                                    shopDataStore.deleteFollowUserList(userStore.user.email, bottleShop.id)
                                     withAnimation(.easeOut(duration: 1.5)) {
                                         bookmarkToggle_empty.toggle()
                                         print("북마크 해제")
@@ -129,6 +130,7 @@ struct BottleShopView: View {
                                 if compareMyFollowShopID(bottleShop.id) == false {
                                     bookmarkToggle = true
                                     userStore.addFollowShopId(bottleShop.id)
+                                    shopDataStore.addFollowUserList(userStore.user.id, bottleShop.id)
                                     withAnimation(.easeOut(duration: 1.5)) {
                                         bookmarkToggle_fill.toggle()
                                         print("북마크 완료")

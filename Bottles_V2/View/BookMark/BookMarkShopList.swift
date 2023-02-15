@@ -93,6 +93,7 @@ struct BookMarkShopList: View {
                             } label: {
                                 BookMarkShopListCell(
                                     userStore: userDataStore,
+                                    shopDataStore: shopDataStore,
                                     shopInfo: shop,
                                     bookMarkAlarm: $bookMarkAlarm,
                                     resetDeletedShopId: $resetDeletedShopId,
@@ -124,6 +125,7 @@ struct BookMarkShopList: View {
                         .font(.bottles11)
                     Button {
                         userDataStore.addFollowShopId(resetDeletedShopId)
+                        shopDataStore.addFollowUserList(userDataStore.user.email, resetDeletedShopId)
                     } label: {
                         Text("실행취소")
                             .font(.bottles11)
@@ -145,6 +147,7 @@ struct BookMarkShopList: View {
 struct BookMarkShopListCell: View {
     // Shop의 정보를 저장하는 변수
     var userStore: UserStore
+    var shopDataStore: ShopDataStore
     var shopInfo: ShopModel
     // 북마크 알림
     @Binding var bookMarkAlarm: Bool
@@ -204,6 +207,7 @@ struct BookMarkShopListCell: View {
                 Button {
                     resetDeletedShopId = shopInfo.id
                     userStore.deleteFollowShopId(shopInfo.id)
+                    shopDataStore.deleteFollowUserList(userStore.user.id, shopInfo.id)
                     withAnimation(.easeIn(duration: 1)) {
                         bookMarkAlarm.toggle()
                     }

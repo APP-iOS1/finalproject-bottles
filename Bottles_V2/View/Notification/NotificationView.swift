@@ -15,15 +15,15 @@ struct NotificationView: View {
     @State private var onlyReservation : Bool = false
     @EnvironmentObject var shopNoticeDataStore : ShopNoticeDataStore
     
-    func filteredMyFollowShop() -> [ShopNotice] {
-        var shopNotice: [ShopNotice] = []
-        for followShopId in userStore.user.followShopList {
-            print(userStore.user.followShopList)
-            let filtered = shopNoticeDataStore.shopNoticeData.filter { $0.shopName == followShopId }
-            shopNotice.append(contentsOf: filtered)
-            shopNotice.sort { $0.date > $1.date }
+    func filteredMyNotice() -> [ShopNotice] {
+        var resultData: [ShopNotice] = []
+        for item in userStore.user.noticeList {
+            let filteredData = shopNoticeDataStore.shopNoticeData.filter {$0.id == item }
+           
+            resultData.append(contentsOf: filteredData)
+            resultData.sort { $0.date > $1.date }
         }
-        return shopNotice
+        return resultData
     }
     
     var body: some View {
@@ -40,7 +40,7 @@ struct NotificationView: View {
                 // MARK: - 알림 Cell
                 /// 예약내역, 새로운 소식,
                 ScrollView {
-                    ForEach(filteredMyFollowShop()) { item in
+                    ForEach(filteredMyNotice()) { item in
                         NavigationLink {
                             PickUpListView()
                         } label: {
@@ -54,6 +54,10 @@ struct NotificationView: View {
                     //
                     //                    }
                 }
+            }
+            .task {
+                shopNoticeDataStore.getAllShopNoticeDataRealTime()
+//                await shopNoticeDataStore.getAllShopNoticeData()
             }
             .navigationBarTitle("알림", displayMode: .inline)
         }
@@ -78,8 +82,8 @@ struct NotificationView: View {
     }
 }
 
-struct NotificationView_Previews: PreviewProvider {
-    static var previews: some View {
-        NotificationView()
-    }
-}
+//struct NotificationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NotificationView()
+//    }
+//}

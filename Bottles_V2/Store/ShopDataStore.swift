@@ -57,4 +57,16 @@ class ShopDataStore : ObservableObject {
             print(error.localizedDescription)
         }
     }
+    
+    func addFollowUserList(_ userId: String, _ shopName: String) {
+        Firestore.firestore().collection("Shop")
+            .document(shopName)
+            .updateData(["followerUserList": FieldValue.arrayUnion([userId])])
+    }
+    
+    func deleteFollowUserList(_ userId: String, _ shopName: String) {
+        Firestore.firestore().collection("Shop")
+            .document(shopName)
+            .updateData(["followerUserList": FieldValue.arrayRemove([userId])])
+    }
 }

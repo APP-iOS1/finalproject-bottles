@@ -81,7 +81,7 @@ struct SearchShopList: View {
                             NavigationLink {
                                 BottleShopView(bottleShop: shop)
                             } label: {
-                                SearchShopListCell(shopInfo: shop, distance: distance(shop.location.latitude, shop.location.longitude), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                                SearchShopListCell(shopDataStore: shopDataStore, shopInfo: shop, distance: distance(shop.location.latitude, shop.location.longitude), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
                             }
                         }
                     }
@@ -121,6 +121,7 @@ struct SearchShopList: View {
 struct SearchShopListCell: View {
     // 필터링된 Shop의 정보를 저장하는 변수
     @EnvironmentObject var userStore: UserStore
+    var shopDataStore: ShopDataStore
     var shopInfo: ShopModel
     var distance: Double
     // 북마크 알림
@@ -192,11 +193,13 @@ struct SearchShopListCell: View {
                     if compareMyFollowShopID(shopInfo.id) == true {
                         bookMark = false
                         userStore.deleteFollowShopId(shopInfo.id)
+                        shopDataStore.deleteFollowUserList(userStore.user.email, shopInfo.id)
                     }
                     
                     if compareMyFollowShopID(shopInfo.id) == false {
                         bookMark = true
                         userStore.addFollowShopId(shopInfo.id)
+                        shopDataStore.addFollowUserList(userStore.user.id, shopInfo.id)
                     }
                     
                 }) {
