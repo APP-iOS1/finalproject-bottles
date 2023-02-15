@@ -66,9 +66,6 @@ struct MainTabView: View {
                     Text("MY")
                 }.tag(4)
             }
-                    .task {
-            mapViewModel.checkIfLocationServicesIsEnabled()
-        }
             .toolbarBackground(Color.white, for: .tabBar)
             .sheet(isPresented: $delegate.openedFromNotification, onDismiss: didDismiss){
                 NotificationView(root: $root)
@@ -77,6 +74,7 @@ struct MainTabView: View {
                 userDataStore.readUser(userId: authStore.currentUser?.email ?? "")
                 cartStore.readCart(userEmail: authStore.currentUser?.email ?? "")
                 shopNoticeDataStore.getAllShopNoticeDataRealTime()
+
             }
     }
     

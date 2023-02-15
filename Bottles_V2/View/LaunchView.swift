@@ -19,15 +19,22 @@ struct LaunchView: View {
     
     var body: some View {
         if isActive {
-                if let _ = authStore.currentUser {
-                        MainTabView()
-                } else {
-                    TotalLoginView()
-                }
+            if let _ = authStore.currentUser {
+                MainTabView()
+            } else {
+                TotalLoginView()
+            }
         } else {
             if isloading {
                 ZStack {
-                    Image("AppLogo_Final").transition(.opacity).zIndex(1)
+                    Image("AppLogo_Final")
+                        .resizable()
+                        .frame(width: 300, height: 60)
+                        .aspectRatio(contentMode: .fit)
+                        .transition(.opacity)
+                        .offset(y: -20)
+                    LottieView(jsonName: "loading")
+                        .offset(y: 100)
                 }
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {

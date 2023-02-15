@@ -95,6 +95,7 @@ struct MapSearchView: View {
                                             tapped = true
                                             coordinator.currentShopId = item.shopName
                                             coordinator.coord = (item.location.latitude, item.location.longitude)
+                                            Coordinator.shared.moveCameraPosition()
                                             coordinator.showMarkerDetailView = true
                                             
                                             print("currentShopId : \(coordinator.currentShopId)")

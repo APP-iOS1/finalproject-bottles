@@ -172,7 +172,6 @@ struct MapView: View {
                     EmptyView()
                 }
             }
-            
             .onAppear {
                 Coordinator.shared.checkIfLocationServicesIsEnabled()
                 Coordinator.shared.shopDataStore.shopData = shopDataStore.shopData
