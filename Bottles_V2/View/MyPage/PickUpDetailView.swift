@@ -36,7 +36,7 @@ struct PickUpDetailView: View {
 //                        }
 //                        .font(.bottles14)
 //                        .padding(.bottom, 5)
-//        
+//
 //                        // MARK: - 픽업 매장 HStack
 //                        HStack(alignment: .bottom) {
 //                            Text("픽업 매장")
@@ -48,21 +48,20 @@ struct PickUpDetailView: View {
 //                                .aspectRatio(contentMode: .fit)
 //                                .frame(width:15,height: 20)
 //                                .padding(.trailing, -2)
-//        
+//
 //                            Text("\(reservationData.shopId)")
 //                                .font(.bottles14)
-//        
 //                            // MARK: - 픽업 매장 HStack내의 주소복사 버튼
 //                            Button(action: {
-//        
+//
 //                                // TODO: 주소를 copyToClipboard에 매개변수로 넘겨준다.
 //                                copyToClipboard()
 //                                isShowingPasted.toggle()
-//        
+//
 //                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
 //                                    isShowingPasted.toggle()
 //                                }
-//        
+//
 //                            }){
 //                                Text("주소 복사")
 //                                    .font(.bottles12)
@@ -93,18 +92,18 @@ struct PickUpDetailView: View {
 //                                .padding(.trailing)
 //                            Text("\(reservationData.state)")
 //                                .font(.bottles15)
-//        
+//
 //                            if reservationData.state == "예약완료" {
 //                                Text("\(reservationData.reservedTime)까지 방문해주세요")
 //                                    .font(.bottles12)
 //                                    .foregroundColor(.gray)
 //                            }
-//        
+//
 //                            Spacer()
 //                        }
 //                        //.padding(.top)
 //                        .padding(.bottom, 40)
-//        
+//
 //                        if reservationData.state == "예약접수" {
 //                            cancelButton
 //                        }
@@ -117,7 +116,7 @@ struct PickUpDetailView: View {
 //                    .navigationTitle("예약 내역 상세")
 //                    .navigationBarBackButtonHidden(true)
 //                    .navigationBarItems(leading: backButton)
-//        
+//
 //                }
         
         NavigationStack {
@@ -157,6 +156,22 @@ struct PickUpDetailView: View {
                                 Text("\(reservationData.shopId)")
                                     .font(.bottles14)
                                     .fontWeight(.regular)
+                                
+                                Button(action: {
+            
+                                    // TODO: 주소를 copyToClipboard에 매개변수로 넘겨준다.
+                                    copyToClipboard()
+                                    isShowingPasted.toggle()
+            
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
+                                        isShowingPasted.toggle()
+                                    }
+            
+                                }){
+                                    Text("주소 복사")
+                                        .font(.bottles12)
+                                        .foregroundColor(.gray)
+                                }
                             }
                             
                             HStack {
