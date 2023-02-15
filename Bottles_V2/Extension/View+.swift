@@ -48,6 +48,11 @@ extension View {
         ))
     }
     
+    /// SkeletonUI .setSkeletonView
+    func setSkeletonView(opacity: Double, shouldShow: Bool) -> some View {
+        self.modifier(BlinkingAnimatinoModifier(shouldShow: shouldShow, opacity: opacity))
+    }
+    
 }
 
 // MARK: - 빈 공간 터치로 키보드를 내리기 위한 View Extension

@@ -105,7 +105,6 @@ struct NearBySheetCell: View {
                         .foregroundColor(.accentColor)
                         .skeleton(with: colors.isEmpty)
                 }
-                
                 Spacer()
             }
             .font(.title2)
