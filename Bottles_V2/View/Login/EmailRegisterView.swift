@@ -62,16 +62,14 @@ struct EmailRegisterView: View {
     
     /// 이용약관 버튼 눌렀을 때 이동하는 웹링크 배열
     let agreementURLs: [String] = [
-        "https://www.youtube.com/", // 이용약관 동의 링크
-        "https://line.me/ko/", // 개인정보 수집·이용 동의 링크
-        "https://www.kakaocorp.com/page/" // 만 19세 이상 동의 링크
+        "https://buttercup-blue-7c3.notion.site/Bottles-2e87d483ef024a13941c31d6ddeccd1f", // 이용약관 동의 링크
+        "https://buttercup-blue-7c3.notion.site/Bottles-7a8ac8ff1a5141ddb73f7eb808689f48", // 개인정보 수집·이용 동의 링크
     ]
     
     /// 이용약관 동의 필드의 텍스트 배열
     let agreementTitles: [String] = [
         "이용약관 동의",
         "개인정보 수집·이용 동의",
-        "본인은 만 19세 이상입니다."
     ]
     
     /// SafariWebView에 바인딩으로 넘겨줄 웹 링크 각 버튼마다 눌렀을 때 링크가 변경된다.
@@ -335,6 +333,11 @@ struct EmailRegisterView: View {
                                 SafariWebView(selectedUrl: $selectedAgreementWebLink)
                             }
                         }
+                        Text("만 19세 이상입니다. ")
+                            .font(.bottles12)
+                        + Text("(필수)")
+                            .font(.bottles12)
+                            .foregroundColor(.secondary)
                     }
                 }
                 .padding(.horizontal, 20)
