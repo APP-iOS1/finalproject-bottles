@@ -12,7 +12,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class ShopNoticeDataStore : ObservableObject {
-    // 전체 샵 데이터 저장 변수
+      // 전체 샵 데이터 저장 변수
     @Published var shopNoticeData : [ShopNotice] = []
 //    var userStore: UserStore = UserStore()
 //        @EnvironmentObject var userStore : UserStore

@@ -26,7 +26,7 @@ class UserStore: ObservableObject {
     @Published var isShowingVerification: Bool = false
     
     init() {
-        user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: "", noticeList: [])
+        user = User(id: "", email: "", followItemList: [], followShopList: [], nickname: "", pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: "", noticeList: [], socialLoginType: "")
     }
     
     func createUser(user: User) {
@@ -41,7 +41,8 @@ class UserStore: ObservableObject {
                       "recentlyItem" : user.recentlyItem,
                       "userPhoneNumber" : user.userPhoneNumber,
                       "deviceToken" : user.deviceToken,
-                      "noticeList" : user.noticeList
+                      "noticeList" : user.noticeList,
+                      "socialLoginType" : user.socialLoginType
                      ]
             )
         readUser(userId: user.email)
@@ -60,7 +61,8 @@ class UserStore: ObservableObject {
             let userPhoneNumber: String = currentData!["userPhoneNumber"] as? String ?? ""
             let deviceToken: String = currentData!["deviceToken"] as? String ?? ""
             let noticeList: [String] = currentData!["noticeList"] as? [String] ?? []
-            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList)
+            let socialLoginType: String = currentData!["socialLoginType"] as? String ?? ""
+            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList, socialLoginType: socialLoginType)
         }
     }
     
@@ -94,7 +96,8 @@ class UserStore: ObservableObject {
                          "pickupItemList" : user.pickupItemList,
                          "recentlyItem" : user.recentlyItem,
                          "userPhoneNumber" : user.userPhoneNumber,
-                         "deviceToken" : user.deviceToken])
+                         "deviceToken" : user.deviceToken,
+                         "socialLoginType" : user.socialLoginType])
         readUser(userId: user.email)
     }
     
@@ -186,7 +189,8 @@ class UserStore: ObservableObject {
             let userPhoneNumber: String = currentData["userPhoneNumber"] as? String ?? ""
             let deviceToken: String = currentData["deviceToken"] as? String ?? ""
             let noticeList: [String] = currentData["noticeList"] as? [String] ?? []
-            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList)
+            let socialLoginType: String = currentData["socialLoginType"] as? String ?? ""
+            self.user = User(id: userId, email: email, followItemList: followItemList, followShopList: followShopList, nickname: nickname, pickupItemList: pickupItemList, recentlyItem: recentlyItem, userPhoneNumber: userPhoneNumber, deviceToken: deviceToken, noticeList: noticeList, socialLoginType: socialLoginType)
             //            }
             
 //            print("Current data: \(data)")
@@ -194,10 +198,24 @@ class UserStore: ObservableObject {
         
     }
     
+    func addUserReservation(reservationId: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["pickupItemList": FieldValue.arrayUnion([reservationId])])
+        readUser(userId: user.id)
+    }
+    
     func addUserNoticeData(_ id: String) {
         Firestore.firestore().collection("User")
             .document(user.id)
             .updateData(["noticeList": FieldValue.arrayUnion([id])])
+        readUser(userId: user.id)
+    }
+    
+    func updateUserPhoneNumber(phoneNumber: String) {
+        Firestore.firestore().collection("User")
+            .document(user.id)
+            .updateData(["userPhoneNumber": phoneNumber])
         readUser(userId: user.id)
     }
 }

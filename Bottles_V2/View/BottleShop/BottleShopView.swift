@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Contacts
+//import Contacts
 
 // 바틀샵 뷰 내에서 [1. "상품 검색"과 2. "사장님의 공지" 뷰 이동]시 사용할 enum
 enum bottleShopInfo : String, CaseIterable {
@@ -260,6 +260,11 @@ struct BottleShopView: View {
                                 Color.black.opacity(0.3)
                             }
                             .ignoresSafeArea()
+                            .onTapGesture {
+                                search = false
+                                focus = false
+                                isNavigationBarHidden = false
+                            }
                             
                             // 검색결과 필터링 후 바틀셀 반복문
                             ScrollView {

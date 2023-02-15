@@ -31,11 +31,11 @@ struct ReservedView_BottleShop: View {
             }
             .padding(.top, 10)
             
-            // MARK: - Bookmark 추가 시 표시되는 팝업창
+            // MARK: - Bookmark 추가 시 표시되는 토스트 메세지
             CustomFillBookmarkView(isShowing: $isShowingFillBookmarkMessage)
                 .offset(y: -230)
             
-            // MARK: - Bookmark 해제 시 표시되는 팝업창
+            // MARK: - Bookmark 해제 시 표시되는 토스트 메세지
             CustomEmptyBookmarkView(isShowing: $isShowingEmptyBookmarkMessage)
                 .offset(y: -230)
         }

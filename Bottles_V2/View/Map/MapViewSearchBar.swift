@@ -17,6 +17,7 @@ struct MapViewSearchBar: View {
     @Binding var currentShopId: String
     @Binding var tapSearchButton: Bool
     @FocusState var focus: Bool  // 포커스된 텍스트필드
+    @StateObject var coordinator: Coordinator = Coordinator.shared
 
     
     var body: some View {
@@ -54,8 +55,11 @@ struct MapViewSearchBar: View {
                 else {
                     for result in searchResult {
                         print(result.id)
-                        currentShopId = result.id
-                        mapViewModel.coord = (result.location.latitude, result.location.longitude)
+                        coordinator.currentShopId = result.id
+                        print("coordinator.currentShopId: \(coordinator.currentShopId)")
+                        coordinator.coord = (result.location.latitude, result.location.longitude)
+                        print("coordinator.coord: \(coordinator.coord)")
+//                        coordinator.moveCameraPosition()
 //                        showMarkerDetailView = true
                     }
                 }

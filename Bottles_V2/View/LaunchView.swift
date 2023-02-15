@@ -14,16 +14,16 @@ struct LaunchView: View {
     
     @EnvironmentObject var authStore: AuthStore
     
-    
     @State private var isActive = false
     @State private var isloading = true
+    
     var body: some View {
         if isActive {
-            if let _ = authStore.currentUser {
-                MainTabView()
-            } else {
-                TotalLoginView()
-            }
+                if let _ = authStore.currentUser {
+                        MainTabView()
+                } else {
+                    TotalLoginView()
+                }
         } else {
             if isloading {
                 ZStack {

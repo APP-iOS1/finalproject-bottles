@@ -12,7 +12,7 @@ struct ReservationPageView_BottleCell: View {
     var bottleReservation: BottleReservation
     
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .top, spacing: 8) {
             // MARK: - 상품 이미지
             AsyncImage(url: URL(string: bottleReservation.image)) { image in
                 image
@@ -31,15 +31,9 @@ struct ReservationPageView_BottleCell: View {
             .background(Color.gray_f7)
             .cornerRadius(12)
             .frame(height: 128)
-            .padding(.horizontal)
-//            Image(bottleReservation.image)
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 129, height: 129)
-//                .background(Color(UIColor(red: 246/255, green: 243/255, blue: 238/255, alpha: 1.0)))
-//                .clipShape(RoundedRectangle(cornerRadius: 10))
+            //.padding(.horizontal)
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 9) {
                 // MARK: - 상품 이름
                 Text(bottleReservation.title)
                     .font(.bottles14)
@@ -54,20 +48,8 @@ struct ReservationPageView_BottleCell: View {
                 Text("\(bottleReservation.count)개")
                     .font(.bottles15)
                     .fontWeight(.medium)
-                
-                HStack {
-                    Image("Maptabfill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 14, height: 17)
-                    // MARK: - 바틀샵 이름
-                    Text(bottleReservation.shop)
-                        .font(.bottles14)
-                        .fontWeight(.medium)
-                }
-                .padding(.top, 5)
             }
-            .padding(10)
+            .padding(16)
         }
         .frame(height: 129)
     }

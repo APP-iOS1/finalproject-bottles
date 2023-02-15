@@ -31,6 +31,7 @@ struct EmailLoginView: View {
         ScrollView {
             
             Spacer()
+                .frame(height: 190)
             TextField("이메일", text: $email)
                 .modifier(LoginTextFieldModifier(width: 280, height: 48))
                 .padding(.bottom, -4)
@@ -50,7 +51,8 @@ struct EmailLoginView: View {
                 Task{
                     await authStore.currentUserReload()
                     if authStore.isEmailVerified(){
-                        try await authStore.login(email: email, password: password)
+                        authStore.authLogin(email: email, password: password)
+                        
                     } else {
                         print("로그인 실패")
                     }
@@ -81,7 +83,7 @@ struct EmailLoginView: View {
             }
             
             Spacer()
-                .frame(height: 400)
+                
             
         }
         .scrollDisabled(true)
@@ -156,6 +158,6 @@ struct LoginTextFieldModifier: ViewModifier {
 }
 struct EmailLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailLoginView()
+        EmailLoginView().environmentObject(AuthStore())
     }
 }

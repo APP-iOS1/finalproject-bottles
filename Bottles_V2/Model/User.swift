@@ -19,5 +19,6 @@ struct User: Identifiable {
     let userPhoneNumber: String
     let deviceToken: String
     let noticeList: [String]
+    let socialLoginType: String
 
 }

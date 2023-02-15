@@ -24,8 +24,8 @@ class ReservationDataStore : ObservableObject {
             try await documents.document(reservationData.id)
                 .setData(["reservedTime" : Date.now,
                           "state" : reservationData.state,
-                          "shopID" : reservationData.shopID,
-                          "userID" : reservationData.userID])
+                          "shopId" : reservationData.shopId,
+                          "userId" : reservationData.userId])
             
             await self.createReservedBottles(reservedBottles: reservedBottles, reservationId: reservationData.id)
             await readReservation()
@@ -37,15 +37,15 @@ class ReservationDataStore : ObservableObject {
     // MARK: - 예약 불러오기
     @MainActor
     func readReservation() async {
-        
+        reservationData.removeAll()
         do{
             let documents = try await Firestore.firestore().collection("Reservation").getDocuments()
             for document in documents.documents {
                 let reservedBottles = await self.readReservedBottles(snapshot: document)
                 
                 let id : String = document.documentID
-                let shopID : String = document["shopID"] as? String ?? ""
-                let userID : String = document["userID"] as? String ?? ""
+                let shopId : String = document["shopId"] as? String ?? ""
+                let userId : String = document["userId"] as? String ?? ""
                 let state : String = document["state"] as? String ?? ""
                 // 데이터 포멧을 위한 준비
                 let timeStampData : Timestamp = document["reservedTime"] as? Timestamp ?? Timestamp()
@@ -62,7 +62,7 @@ class ReservationDataStore : ObservableObject {
                 
                 self.reservationData.append(
                     ReservationModel(
-                        id: id, shopID: shopID, userID: userID, reservedTime: reservedTime, state: state, reservedBottles: reservedBottles)
+                        id: id, shopId: shopId, userId: userId, reservedTime: reservedTime, state: state, reservedBottles: reservedBottles)
                 )
                 
             }
@@ -109,7 +109,7 @@ class ReservationDataStore : ObservableObject {
             for document in documents.documents {
                 resultData.append(ReservedBottles(
                     id: document.documentID,
-                    BottleID: document["bottleId"] as? String ?? "",
+                    BottleId: document["bottleId"] as? String ?? "",
                     itemCount: document["itemCount"] as? Int ?? 0
                 ))
             }
@@ -118,6 +118,20 @@ class ReservationDataStore : ObservableObject {
             print(error.localizedDescription)
         }
         return []
+    }
+    
+    func cancelReservation (reservationId: String) async {
+        
+        do {
+            let documents = Firestore.firestore().collection("Reservation")
+            try await documents
+                .document(reservationId)
+                .updateData(["state": "예약취소"])
+            await readReservation()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
     }
     
 }

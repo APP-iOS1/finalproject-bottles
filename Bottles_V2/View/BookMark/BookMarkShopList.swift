@@ -69,10 +69,21 @@ struct BookMarkShopList: View {
                 }
                 
                 if userDataStore.user.followShopList.isEmpty {
-                    Text("저장된 바틀샵이 없습니다.")
-                        .font(.bottles14)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, 10)
+                    VStack{
+                        Spacer()
+                            .frame(height: 100)
+                        
+                        Image(systemName: "house")
+                            .font(.system(size: 50))
+                        
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        Text("저장된 바틀샵이 없습니다.")
+                            .font(.bottles18)
+                            .fontWeight(.semibold)
+                    }
+                    .foregroundColor(.gray)
                     Spacer()
                 } else {
                     ScrollView {
