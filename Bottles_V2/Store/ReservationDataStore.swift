@@ -51,18 +51,18 @@ class ReservationDataStore : ObservableObject {
                 let timeStampData : Timestamp = document["reservedTime"] as? Timestamp ?? Timestamp()
                 let timeStampToDate : Date = timeStampData.dateValue()
                 // 여기까지 사용 안함
-                var reservedTime : String {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.locale = Locale(identifier: "ko_kr")
-                    dateFormatter.timeZone = TimeZone(abbreviation: "KST")
-                    dateFormatter.dateFormat = "yyyy.MM.dd" // "yyyy-MM-dd HH:mm:ss"
-                    let dateCreatedAt = timeStampToDate
-                    return dateFormatter.string(from: dateCreatedAt)
-                }
+//                var reservedTime : String {
+//                    let dateFormatter = DateFormatter()
+//                    dateFormatter.locale = Locale(identifier: "ko_kr")
+//                    dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+//                    dateFormatter.dateFormat = "yyyy.MM.dd" // "yyyy-MM-dd HH:mm:ss"
+//                    let dateCreatedAt = timeStampToDate
+//                    return dateFormatter.string(from: dateCreatedAt)
+//                }
                 
                 self.reservationData.append(
                     ReservationModel(
-                        id: id, shopId: shopId, userId: userId, reservedTime: reservedTime, state: state, reservedBottles: reservedBottles)
+                        id: id, shopId: shopId, userId: userId, reservedTime: timeStampToDate, state: state, reservedBottles: reservedBottles)
                 )
                 
             }

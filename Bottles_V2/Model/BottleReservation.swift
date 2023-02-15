@@ -8,16 +8,23 @@
 import Foundation
 import Firebase
 
-struct ReservationModel : Codable, Identifiable {
+struct ReservationModel : Codable, Identifiable, TestProtocol {
+    var classification: String = "예약"
+    var category: String = ""
+    var shopName: String = ""
+    var date: Date = Date()
+    var title: String = ""
+    var body: String = ""
+    
     var id : String
     var shopId : String
     var userId : String      // 이메일 형식으로 들어옴
-    var reservedTime : String
+    var reservedTime : Date
     var state : String
     var reservedBottles : [ReservedBottles]
 }
 
-struct ReservedBottles : Codable, Identifiable {
+struct ReservedBottles : Codable, Identifiable, Hashable {
     var id : String
     var BottleId : String
     var itemCount : Int

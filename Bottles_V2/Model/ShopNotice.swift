@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct ShopNotice : Codable, Identifiable, Hashable {
+struct ShopNotice : Codable, Identifiable, Hashable, TestProtocol {
+    var classification: String = "공지사항"
+    var shopId: String = ""
+    var userId: String = ""
+    var reservedTime: Date = Date()
+    var state: String = ""
+    
     var id : String
     var category : String
     var shopName : String
