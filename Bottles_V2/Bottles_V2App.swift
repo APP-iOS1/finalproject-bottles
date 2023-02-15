@@ -69,7 +69,6 @@ struct Bottles_V2App: App {
                     userDataStore.getUserDataRealTime(userId: "test12@naver.com")
                     cartStore.readCart(userEmail: "test12@naver.com")
                     await shopDataStore.getAllShopData()
-//                    shopNoticeDataStore.getAllShopNoticeDataRealTime(userDataStore)
                     await bottleDataStore.getAllBottleData()
                     await reservationDataStore.readReservation()
                 }
