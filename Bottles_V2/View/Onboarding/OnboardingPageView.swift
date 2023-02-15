@@ -12,20 +12,18 @@ struct OnboardingPageView: View {
     let title: String?
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .center, spacing: 0) {
             
             Text(title)
                 .font(.bottles24)
                 .fontWeight(.bold)
-                .frame(alignment: .center)
+                .multilineTextAlignment(.center)
             
             Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
 
         }
-        .padding()
-        
     }
 }
 
