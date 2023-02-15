@@ -574,7 +574,7 @@ class AuthStore: ObservableObject {
                             print("\(error.localizedDescription)")
                         } else {
                             self.currentUser = result?.user
-                            self.userStore.createUser(user: User(id: credential.email!, email: credential.email!, followItemList: [], followShopList: [], nickname: credential.email!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? "", noticeList: [], socialLoginType: type))
+                            self.userStore.createUser(user: User(id: (result?.user.email)!, email: (result?.user.email)!, followItemList: [], followShopList: [], nickname: (result?.user.email)!, pickupItemList: [], recentlyItem: [], userPhoneNumber: "", deviceToken: UserStore.shared.fcmToken ?? "", noticeList: [], socialLoginType: type))
 
                             self.loginPlatform = .apple
                         }
@@ -668,6 +668,9 @@ class AuthStore: ObservableObject {
             self.appleLogout()
         case .none:
             self.appleLogout()
+            self.facebookLogout()
+            self.googleSignOut()
+            self.kakaoLogout()
             print("로그아웃 실패")
         }
     }
