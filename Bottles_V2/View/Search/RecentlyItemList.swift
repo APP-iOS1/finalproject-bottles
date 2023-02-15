@@ -113,9 +113,6 @@ struct RecentlyItemList: View {
                         //                    }
                     }
                 }
-                .onTapGesture {
-                    endTextEditing()
-                }
             }
             if bookMarkAlarm {
                 HStack{
@@ -133,6 +130,9 @@ struct RecentlyItemList: View {
                 }
                 .offset(y: (UIScreen.main.bounds.height/4))
             }
+        }
+        .onTapGesture {
+            endTextEditing()
         }
     }
     
