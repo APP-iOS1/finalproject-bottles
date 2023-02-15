@@ -15,6 +15,9 @@ struct NotificationView: View {
     @State private var onlyReservation : Bool = false
     @EnvironmentObject var shopNoticeDataStore : ShopNoticeDataStore
     
+    @State var destination: Destination?
+    @Binding var root: Bool
+    
     func filteredMyNotice() -> [ShopNotice] {
         var resultData: [ShopNotice] = []
         for item in userStore.user.noticeList {
@@ -41,12 +44,12 @@ struct NotificationView: View {
                 /// 예약내역, 새로운 소식,
                 ScrollView {
                     ForEach(filteredMyNotice()) { item in
-                        NavigationLink {
-                            PickUpListView()
-                        } label: {
+                        Button(action: {
+                            destination = .pickUpList
+                            root.toggle()
+                        }) {
                             NotificationCell(imgName: "shopNotification", title: item.title, description: item.body, storeName: item.shopName, time: "\(item.calculateTime())")
                         }
-                        
                     }
                     
                     //                    NavigationLink(destination: PickUpListView()){
@@ -60,6 +63,14 @@ struct NotificationView: View {
 //                await shopNoticeDataStore.getAllShopNoticeData()
             }
             .navigationBarTitle("알림", displayMode: .inline)
+            .navigationDestination(isPresented: $root) {
+                switch self.destination {
+                case .pickUpList:
+                    PickUpListView()
+                default:
+                    EmptyView()
+                }
+            }
         }
     }
     

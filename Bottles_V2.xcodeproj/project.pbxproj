@@ -26,6 +26,9 @@
 		26BA41C82991389D00419584 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C72991389D00419584 /* CartStore.swift */; };
 		26BA41CA2993869D00419584 /* BottleReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BA41C92993869D00419584 /* BottleReservation.swift */; };
 		26D0E4382979164400524943 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		270C8BBC299CC51000908938 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270C8BBB299CC51000908938 /* LottieView.swift */; };
+		270C8BBE299CC57F00908938 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 270C8BBD299CC57D00908938 /* loading.json */; };
+		270C8BC1299CC61C00908938 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 270C8BC0299CC61C00908938 /* Lottie */; };
 		27281CE32977854D003BE8B4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE22977854D003BE8B4 /* MapView.swift */; };
 		27281CE62977856A003BE8B4 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CE52977856A003BE8B4 /* CartView.swift */; };
 		27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27281CEA297785AA003BE8B4 /* BottleShopView.swift */; };
@@ -188,6 +191,8 @@
 		26BA41C5299136F100419584 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		26BA41C72991389D00419584 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
 		26BA41C92993869D00419584 /* BottleReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleReservation.swift; sourceTree = "<group>"; };
+		270C8BBB299CC51000908938 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		270C8BBD299CC57D00908938 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		27281CE22977854D003BE8B4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		27281CE52977856A003BE8B4 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27281CEA297785AA003BE8B4 /* BottleShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopView.swift; sourceTree = "<group>"; };
@@ -309,6 +314,7 @@
 				FA5F9154FC7F0EBC00575DE8 /* Pods_Bottles_V2.framework in Frameworks */,
 				D746C977298A426200E27E16 /* FirebaseAuth in Frameworks */,
 				7FB1207A299223990071AB3F /* GoogleSignInSwift in Frameworks */,
+				270C8BC1299CC61C00908938 /* Lottie in Frameworks */,
 				D746C979298A426200E27E16 /* FirebaseFirestore in Frameworks */,
 				7FB12081299226EE0071AB3F /* KakaoSDKCommon in Frameworks */,
 				D746C97D298A426200E27E16 /* FirebaseStorage in Frameworks */,
@@ -433,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				D7B5EA58298CFEBB00DC648A /* LaunchView.swift */,
+				270C8BBB299CC51000908938 /* LottieView.swift */,
 				AE9E77072978179200A6B9D4 /* MainTabView.swift */,
 				3AFA042F299B2D790068BB09 /* Onboarding */,
 				7F76AAF02987659300AAEBCA /* Login */,
@@ -597,6 +604,7 @@
 		27D82C3B297A5C0A004F3D94 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				270C8BBD299CC57D00908938 /* loading.json */,
 				3AFA043B299B44C70068BB09 /* map.json */,
 				3AFA0439299B43D00068BB09 /* wine.json */,
 				3AFA043D299B45BA0068BB09 /* shakehands.json */,
@@ -710,6 +718,7 @@
 				04116D3429948A170052063E /* FirebaseMessaging */,
 				7F714E1129991AE4008FD61D /* FacebookCore */,
 				7F714E1329991AE4008FD61D /* FacebookLogin */,
+				270C8BC0299CC61C00908938 /* Lottie */,
 			);
 			productName = Bottles_V2;
 			productReference = 0427F561297677E60023E745 /* Bottles_V2.app */;
@@ -792,6 +801,7 @@
 				7FB1207D299226EE0071AB3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				27951FD229937B2900690ADD /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 				7F714E1029991AE4008FD61D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				270C8BBF299CC61B00908938 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 0427F562297677E60023E745 /* Products */;
 			projectDirPath = "";
@@ -812,6 +822,7 @@
 				27A02693298BAAF500F71705 /* Bottles-V2-Info.plist in Resources */,
 				0427F56C297677E80023E745 /* Preview Assets.xcassets in Resources */,
 				3AFA043A299B43D00068BB09 /* wine.json in Resources */,
+				270C8BBE299CC57F00908938 /* loading.json in Resources */,
 				27A0269B298BAC6500F71705 /* SpoqaHanSansNeo-Medium.otf in Resources */,
 				D746C974298A41F400E27E16 /* GoogleService-Info.plist in Resources */,
 				3AFA0440299B46580068BB09 /* reserve.json in Resources */,
@@ -961,6 +972,7 @@
 				D5DCFE9D29778B5A00BAF7BE /* CartCell.swift in Sources */,
 				02ABC40C2990BA4B00768078 /* NearBySheetCell.swift in Sources */,
 				27A0268C298B51AC00F71705 /* SearchShopList.swift in Sources */,
+				270C8BBC299CC51000908938 /* LottieView.swift in Sources */,
 				02ABC41A2994CA8900768078 /* ShopNoticeDataStore.swift in Sources */,
 				7F76AAF6298780B100AAEBCA /* View+.swift in Sources */,
 				2754C28B2994DA5900EC10AF /* BottleShopDetailMapView.swift in Sources */,
@@ -1403,6 +1415,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		270C8BBF299CC61B00908938 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		27951FD229937B2900690ADD /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CSolanaM/SkeletonUI.git";
@@ -1450,6 +1470,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D746C975298A426200E27E16 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		270C8BC0299CC61C00908938 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 270C8BBF299CC61B00908938 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		27951FD329937B2A00690ADD /* SkeletonUI */ = {
 			isa = XCSwiftPackageProductDependency;
