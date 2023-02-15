@@ -9,8 +9,8 @@ import SwiftUI
 
 // BookMark Tab의 종류를 담은 열거형
 enum tabInfo : String, CaseIterable {
-    case bottle = "저장한 상품"
-    case shop = "저장한 바틀샵"
+    case bottle = "북마크한 상품"
+    case shop = "북마크한 바틀샵"
 }
 
 struct BookMarkView: View {
@@ -20,9 +20,8 @@ struct BookMarkView: View {
     @Namespace private var animation
     
     
-    // Test
+    // Search View 연결 관련
     @State var transitionView: Bool = false
-    @Namespace var transition
     @FocusState var focus: Bool
     
     var body: some View {

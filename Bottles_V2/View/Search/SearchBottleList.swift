@@ -81,6 +81,8 @@ struct SearchBottleList: View {
                     ScrollView {
                         ForEach(sortBottleData()) { bottle in
                             SearchBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                            Divider()
+                                .padding(.horizontal, 10)
                         }
                     }
                 }
@@ -120,7 +122,7 @@ struct SearchBottleList: View {
                         .frame(width: 300, height: 30)
                         .foregroundColor(.gray_f7)
                 }
-                .offset(y: 250)
+                .offset(y: (UIScreen.main.bounds.height/4))
             }
         }
     }
@@ -227,7 +229,7 @@ struct SearchBottleListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(minHeight: 130, maxHeight: 200)
+        .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
     }
     

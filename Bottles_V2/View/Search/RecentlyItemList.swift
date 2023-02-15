@@ -31,6 +31,7 @@ struct RecentlyItemList: View {
     
     var body: some View {
         ZStack {
+            ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 if !searchHistory.isEmpty {
                     Text("최근 검색어")
@@ -62,9 +63,11 @@ struct RecentlyItemList: View {
                                     }
                                 }
                                 .font(.bottles16)
-                                .padding(12)
-                                .background(RoundedRectangle(cornerRadius: 20).stroke(.black, lineWidth: 1))
-                                .padding(.vertical)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 10)
+                                .background(RoundedRectangle(cornerRadius: 20).stroke(.gray, lineWidth: 1))
+                                .padding(.top, 8)
+                                .padding(.bottom, 10)
                                 .padding(.leading, 5)
                             }
                             
@@ -80,10 +83,22 @@ struct RecentlyItemList: View {
                     .padding([.leading, .top], 15)
                 
                 if userStore.user.recentlyItem.isEmpty {
-                    Text("최근 본 상품이 없습니다.")
-                        .font(.bottles14)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, 10)
+                    VStack{
+                        Spacer()
+                            .frame(height: 100)
+                        
+                        Image(systemName: "wineglass")
+                            .font(.system(size: 50))
+                        
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        Text("최근 본 상품이 없습니다.")
+                            .font(.bottles18)
+                            .fontWeight(.semibold)
+                    }
+                    .foregroundColor(.gray)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     Spacer()
                 } else {
                     ScrollView {
@@ -92,6 +107,8 @@ struct RecentlyItemList: View {
                                 bottleInfo: bottle,
                                 shopInfo: getMatchedShopData(bottleData: bottle),
                                 bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                            Divider()
+                                .padding(.horizontal, 10)
                         }
                     }
                 }
@@ -114,9 +131,10 @@ struct RecentlyItemList: View {
                         .frame(width: 300, height: 30)
                         .foregroundColor(.gray_f7)
                 }
-                .offset(y: 250)
+                .offset(y: (UIScreen.main.bounds.height/4))
             }
         }
+    }
     }
     
     func filterRecentlyBottle() -> [BottleModel] {
@@ -166,25 +184,23 @@ struct RecentlyItemListCell: View {
                 BottleView(bottleData: bottleInfo)
             } label: {
                 // Bottle 이미지
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(.black)
-                    .frame(width: 120, height: 120)
-                    .overlay {
-                        AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 120, height: 120)
-                                .cornerRadius(10)
-                        } placeholder: {
-                            Image("ready_image")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 120, height: 120)
-                                .cornerRadius(10)
-                        }
-                    }
-                    .padding(.horizontal)
+                AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 128, height: 128)
+                        .cornerRadius(12)
+                } placeholder: {
+                    Image("ready_image")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 128, height: 128)
+                        .cornerRadius(12)
+                }
+                .background(Color.gray_f7)
+                .cornerRadius(12)
+                .frame(height: 128)
+                .padding(.horizontal)
             }
             
             VStack(alignment: .leading, spacing: 10) {
@@ -249,7 +265,7 @@ struct RecentlyItemListCell: View {
             .padding()
             .padding(.top, -5)
         }
-        .frame(minHeight: 130, maxHeight: 200)
+        .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
     }
     
