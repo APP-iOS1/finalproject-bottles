@@ -69,7 +69,7 @@ struct SettingView: View {
                 Button(action:{
                     logoutAlert = true
                    
-                    
+                    print("\(authStore.loginPlatform)")
                 }){
                     Text("로그아웃")
                         .font(.bottles12)
