@@ -28,7 +28,7 @@ struct MarkerDetailView: View {
                     Text("\(shopData.shopName)")
                         .font(.bottles20)
                         .fontWeight(.bold)
-                    
+                        .multilineTextAlignment(.leading)
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(.black, lineWidth: 1)

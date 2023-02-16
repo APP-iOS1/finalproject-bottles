@@ -48,6 +48,7 @@ struct NearBySheetCell: View {
                 Text(shopModel.shopName)
                     .font(.bottles18)
                     .bold()
+                    .multilineTextAlignment(.leading)
                     .skeleton(with: colors.isEmpty)
                     .animation(type: .pulse())
                 // Shop 소개글
