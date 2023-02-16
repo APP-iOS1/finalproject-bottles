@@ -207,6 +207,7 @@ struct RecentlyItemListCell: View {
                 Text(bottleInfo.itemName)
                     .font(.bottles14)
                     .fontWeight(.medium)
+                    .multilineTextAlignment(.leading)
                 // Bottle 가격
                 Text("\(bottleInfo.itemPrice)원")
                     .font(.bottles18)
@@ -224,6 +225,7 @@ struct RecentlyItemListCell: View {
                             .font(.bottles14)
                             .fontWeight(.medium)
                             .foregroundColor(.black)
+                            .multilineTextAlignment(.leading)
                     }
                 }
                 Spacer()
