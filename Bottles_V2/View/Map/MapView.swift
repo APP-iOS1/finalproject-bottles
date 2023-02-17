@@ -24,8 +24,6 @@ struct MapView: View {
     @State var userLocation: (Double, Double) = (37.56668, 126.978419)
     @State var searchBarText: String = ""
     @State var isShowingSheet: Bool = false
-    //    @State var showMarkerDetailView: Bool = false
-    //    @State var currentShopId: String = "보리마루"
     @State var searchResult: [ShopModel] = []
     @State var tapped: Bool = true
     
@@ -176,7 +174,6 @@ struct MapView: View {
                 Coordinator.shared.checkIfLocationServicesIsEnabled()
                 Coordinator.shared.shopDataStore.shopData = shopDataStore.shopData
                 Coordinator.shared.userDataStore.user = userDataStore.user
-                //                Coordinator.shared.fetchUserLocation()
                 coordinator.makeMarkers()
             }
         }
