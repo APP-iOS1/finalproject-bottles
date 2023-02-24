@@ -50,7 +50,7 @@ struct BookMarkView: View {
                     }
                 } else {
                     VStack {
-                        SearchView(focus: _focus, transitionView: $transitionView)
+                        SearchView(focus: _focus, transitionView: $transitionView, root: $root)
                     }
                 }
             }
