@@ -24,6 +24,8 @@ struct RecentlyItemList: View {
     @State var bookMarkAlarm: Bool = false
     @State var bookMark: Bool = false
     
+    @Binding var root: Bool
+    
     func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
         let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
         return matchedShopData[0]
@@ -106,7 +108,7 @@ struct RecentlyItemList: View {
                             RecentlyItemListCell(
                                 bottleInfo: bottle,
                                 shopInfo: getMatchedShopData(bottleData: bottle),
-                                bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                                bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm, root: $root)
                             Divider()
                                 .padding(.horizontal, 10)
                         }
@@ -176,12 +178,16 @@ struct RecentlyItemListCell: View {
     @Binding var bookMark: Bool
     @Binding var bookMarkAlarm: Bool
     
+    @State var destination: Destination?
+    @Binding var root: Bool
+    
     var body: some View {
         HStack(alignment: .top) {
             // 이미지를 누르면 Bottle Detail View로 이동
-            NavigationLink {
-                BottleView(bottleData: bottleInfo)
-            } label: {
+            Button(action: {
+                destination = .bottle
+                root.toggle()
+            }) {
                 // Bottle 이미지
                 AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
                     image
@@ -213,9 +219,10 @@ struct RecentlyItemListCell: View {
                     .font(.bottles18)
                     .bold()
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
-                NavigationLink {
-                    BottleShopView(bottleShop: shopInfo)
-                } label: {
+                Button(action: {
+                    destination = .bottleShop
+                    root.toggle()
+                }) {
                     HStack {
                         Image("Map_tab_fill")
                             .resizable()
@@ -270,6 +277,16 @@ struct RecentlyItemListCell: View {
         }
         .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
+        .navigationDestination(isPresented: $root) {
+            switch self.destination {
+            case .bottle:
+                BottleView(bottleData: bottleInfo)
+            case .bottleShop:
+                BottleShopView(bottleShop: shopInfo)
+            default:
+                EmptyView()
+            }
+        }
     }
     
     func compareMyFollowBottleID(_ bottleId: String) -> Bool {
