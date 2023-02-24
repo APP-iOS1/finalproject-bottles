@@ -24,6 +24,8 @@ struct BookMarkView: View {
     @State var transitionView: Bool = false
     @FocusState var focus: Bool
     
+    @Binding var root: Bool
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -44,7 +46,7 @@ struct BookMarkView: View {
                         .padding(.top)
                         // tab picker 애니메이션 함수 및 탭뷰
                         animate()
-                        BookMarkTabView(bookMarkTab: selectedPicker)
+                        BookMarkTabView(bookMarkTab: selectedPicker, root: $root)
                     }
                 } else {
                     VStack {
@@ -96,13 +98,15 @@ struct BookMarkView: View {
 
 struct BookMarkTabView: View {
     var bookMarkTab: tabInfo
+    @Binding var root: Bool
+    
     var body: some View {
         VStack {
             switch bookMarkTab {
             case .bottle:
-                BookMarkBottleList()
+                BookMarkBottleList(root: $root)
             case .shop:
-                BookMarkShopList()
+                BookMarkShopList(root: $root)
             }
         }
     }
@@ -110,6 +114,6 @@ struct BookMarkTabView: View {
 
 struct BookMarkView_Previews: PreviewProvider {
     static var previews: some View {
-        BookMarkView()
+        BookMarkView(root: .constant(false))
     }
 }

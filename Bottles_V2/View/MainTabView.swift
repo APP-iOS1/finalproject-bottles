@@ -9,6 +9,7 @@ import SwiftUI
 
 enum Destination: Hashable {
     case bottleShop
+    case bottle
     case cart
     case pickUpList
     case setting
@@ -53,7 +54,7 @@ struct MainTabView: View {
                     Image(selection == 1 ? "Maptabfill" : "Map_tab")
                     Text("주변")
                 }.tag(1)
-                BookMarkView().tabItem {
+                BookMarkView(root: $root).tabItem {
                     Image(selection == 2 ? "BookMark_tab_fill" : "BookMark_tab")
                     Text("저장")
                 }.tag(2)
