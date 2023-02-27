@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
+import CoreLocation
 
 class ShopDataStore : ObservableObject {
     
@@ -68,5 +69,35 @@ class ShopDataStore : ObservableObject {
         Firestore.firestore().collection("Shop")
             .document(shopName)
             .updateData(["followerUserList": FieldValue.arrayRemove([userId])])
+    }
+    
+//    func getSearchResult(searchText: String) -> [ShopModel] {
+//        let filteredData = self.shopDataStore.shopData
+//
+//        if !searchText.isEmpty {
+//            return filteredData.filter {
+//                $0.shopName.contains(searchText)
+//            }
+//        }
+//        return filteredData
+//    }
+    
+    // MARK: - 검색 로직 및 거리 순 오름차순 정렬 함수
+    func getSearchResult(searchText: String) -> [ShopModel] {
+        let filteredData = self.shopData
+        if !searchText.isEmpty {
+            return filteredData.filter {
+                $0.shopName.contains(searchText)
+            }.sorted(by: {$0.shopName < $1.shopName }).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
+        }
+        return filteredData
+    }
+    
+    // MARK: - 현재 위치 좌표 거리 계산 함수
+    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
+        let from = CLLocation(latitude: lat, longitude: log)
+        let to = CLLocation(latitude: Coordinator.shared.userLocation.0, longitude: Coordinator.shared.userLocation.1)
+        //        print("\(from.distance(from: to))")
+        return from.distance(from: to)
     }
 }
