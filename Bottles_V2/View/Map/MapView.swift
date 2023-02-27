@@ -15,7 +15,6 @@ import FirebaseFirestoreSwift   //GeoPoint 사용을 위한 프레임워크
 
 struct MapView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
-    @EnvironmentObject var mapViewModel: MapViewModel
     @EnvironmentObject var userDataStore: UserStore
     
     @StateObject var coordinator: Coordinator = Coordinator.shared

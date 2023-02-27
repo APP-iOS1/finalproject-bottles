@@ -19,7 +19,6 @@ struct BookMarkShopList: View {
     // Server Data
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-    @EnvironmentObject var mapViewModel: MapViewModel
     
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)

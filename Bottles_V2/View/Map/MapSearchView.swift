@@ -19,7 +19,6 @@ struct MapSearchView: View {
     @State var doneTextFieldEdit: Bool = false
     @FocusState var focus: Bool  // 포커스된 텍스트필드
     @Binding var tapped: Bool // MapView에서의 텍스트 필드의 tap여부를 바인딩으로 넘김
-//    @EnvironmentObject var mapViewModel: MapViewModel
     @EnvironmentObject var shopDataStore: ShopDataStore
     @Binding var showMarkerDetailView: Bool
     @Binding var searchResult: [ShopModel]
@@ -27,25 +26,6 @@ struct MapSearchView: View {
     @Binding var tapSearchButton: Bool
     @Binding var coord: (Double, Double)
     @StateObject var coordinator: Coordinator = Coordinator.shared
-
-    // MARK: - 검색 로직 및 거리 순 오름차순 정렬 함수
-    func getSearchResult(searchText: String) -> [ShopModel] {
-        let filteredData = self.shopDataStore.shopData
-        if !searchText.isEmpty {
-            return filteredData.filter {
-                $0.shopName.contains(searchText)
-            }.sorted(by: {$0.shopName < $1.shopName }).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
-        }
-        return filteredData
-    }
-    
-    // MARK: - 현재 위치 좌표 거리 계산 함수
-    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
-        let from = CLLocation(latitude: lat, longitude: log)
-        let to = CLLocation(latitude: coordinator.userLocation.0, longitude: coordinator.userLocation.1)
-        //        print("\(from.distance(from: to))")
-        return from.distance(from: to)
-    }
     
     var body: some View {
         NavigationStack {
@@ -73,7 +53,7 @@ struct MapSearchView: View {
                         
                         // MARK: - 검색 리스트
                         List {
-                            if getSearchResult(searchText: searchBarText).isEmpty {
+                            if shopDataStore.getSearchResult(searchText: searchBarText).isEmpty {
                                 HStack(alignment: .center) {
                                     Image("xmark")
                                     Text("검색 결과가 없습니다.")
@@ -81,9 +61,9 @@ struct MapSearchView: View {
                                         .font(.bottles11)
                                 }
                             } else {
-                                ForEach (getSearchResult(searchText: searchBarText), id: \.self) { item in
+                                ForEach (shopDataStore.getSearchResult(searchText: searchBarText), id: \.self) { item in
                                     
-                                    let distance = distance(item.location.latitude, item.location.longitude)
+                                    let distance = shopDataStore.distance(item.location.latitude, item.location.longitude)
                                     
                                     // 검색어와 겹치는 단어가 있는지 없는지 확인
                                     if item.shopName.replacingOccurrences(of: " ", with: "").localizedCaseInsensitiveContains(searchBarText.replacingOccurrences(of: " ", with: "")) {

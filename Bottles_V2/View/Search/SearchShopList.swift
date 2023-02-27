@@ -20,7 +20,6 @@ struct SearchShopList: View {
     
     // Server Data
     @EnvironmentObject var shopDataStore: ShopDataStore
-    @EnvironmentObject var mapViewModel: MapViewModel
     
     // 검색 결과를 필터링해주는 연산 프로퍼티
     var filteredResult: [ShopModel] {

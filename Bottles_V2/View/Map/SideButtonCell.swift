@@ -10,12 +10,10 @@ import SwiftUI
 struct SideButtonCell: View {
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-//    @StateObject var mapViewModel: MapViewModel
-//    @StateObject var coordinator: Coordinator = Coordinator.shared
     @Binding var tapSearchButton: Bool
     @Binding var userLocation: (Double, Double)
     @Binding var isBookMarkTapped: Bool
-//    @Binding var coordinator: Coordinator
+
     var body: some View {
         VStack(spacing: -20) {
             
@@ -47,7 +45,6 @@ struct SideButtonCell: View {
             
             // MARK: - 현 위치 버튼
             Button {
-//                mapViewModel.coord = mapViewModel.userLocation
                 Coordinator.shared.fetchUserLocation()
                 // current Coordinate -> mapViewModel 설정
                 print("userLocation : \(userLocation)")

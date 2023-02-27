@@ -21,7 +21,6 @@ struct BookMarkBottleList: View {
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-    @EnvironmentObject var mapViewModel: MapViewModel
     
     func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
         let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}

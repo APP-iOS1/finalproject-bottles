@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MapViewSearchBar: View {
     
-    @EnvironmentObject var mapViewModel: MapViewModel
     @EnvironmentObject var shopDataStore: ShopDataStore
     @Binding var showMarkerDetailView: Bool
     @Binding var searchBarText: String
@@ -39,7 +38,7 @@ struct MapViewSearchBar: View {
             }
             
             Button {
-                searchResult = getSearchResult(searchText: searchBarText)
+                searchResult = shopDataStore.getSearchResult(searchText: searchBarText)
                 print("====\(searchBarText) 검색 결과 : \(searchResult)")
                 
                 if searchResult.isEmpty || searchBarText.isEmpty {
@@ -76,17 +75,6 @@ struct MapViewSearchBar: View {
         }
         .cornerRadius(10)
         //        .shadow(color: Color("BottleShopDetailBGShadowColor"), radius: 3, x: 0, y: 4)
-    }
-    // 검색 기능
-    func getSearchResult(searchText: String) -> [ShopModel] {
-        let filteredData = self.shopDataStore.shopData
-        
-        if !searchText.isEmpty {
-            return filteredData.filter {
-                $0.shopName.contains(searchText)
-            }
-        }
-        return filteredData
     }
 }
 

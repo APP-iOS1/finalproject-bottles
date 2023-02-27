@@ -20,7 +20,6 @@ struct MainTabView: View {
     @EnvironmentObject var shopDataStore: ShopDataStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var reservationDataStore: ReservationDataStore
-    @EnvironmentObject var mapViewModel: MapViewModel
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var cartStore: CartStore
     @EnvironmentObject var authStore: AuthStore
