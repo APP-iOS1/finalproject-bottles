@@ -96,7 +96,6 @@ struct NearBySheetView: View {
                 }
             }
         }
-        
         .background {
             Color.white
         }

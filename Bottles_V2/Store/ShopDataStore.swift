@@ -71,17 +71,6 @@ class ShopDataStore : ObservableObject {
             .updateData(["followerUserList": FieldValue.arrayRemove([userId])])
     }
     
-//    func getSearchResult(searchText: String) -> [ShopModel] {
-//        let filteredData = self.shopDataStore.shopData
-//
-//        if !searchText.isEmpty {
-//            return filteredData.filter {
-//                $0.shopName.contains(searchText)
-//            }
-//        }
-//        return filteredData
-//    }
-    
     // MARK: - 검색 로직 및 거리 순 오름차순 정렬 함수
     func getSearchResult(searchText: String) -> [ShopModel] {
         let filteredData = self.shopData
@@ -100,4 +89,11 @@ class ShopDataStore : ObservableObject {
         //        print("\(from.distance(from: to))")
         return from.distance(from: to)
     }
+    
+    // MARK: - 특정 바틀에 대한 바틀샵 매칭 함수
+    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
+        let matchedShopData = self.shopData.filter {$0.id == bottleData.shopID}
+        return matchedShopData[0]
+    }
 }
+

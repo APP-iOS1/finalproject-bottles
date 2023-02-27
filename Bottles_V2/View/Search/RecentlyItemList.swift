@@ -26,10 +26,10 @@ struct RecentlyItemList: View {
     
     @Binding var root: Bool
     
-    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
-        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
-        return matchedShopData[0]
-    }
+//    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
+//        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
+//        return matchedShopData[0]
+//    }
     
     var body: some View {
         ZStack {
@@ -107,7 +107,7 @@ struct RecentlyItemList: View {
                         ForEach(filterRecentlyBottle(), id: \.self) { bottle in
                             RecentlyItemListCell(
                                 bottleInfo: bottle,
-                                shopInfo: getMatchedShopData(bottleData: bottle),
+                                shopInfo: shopDataStore.getMatchedShopData(bottleData: bottle),
                                 bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm, root: $root)
                             Divider()
                                 .padding(.horizontal, 10)

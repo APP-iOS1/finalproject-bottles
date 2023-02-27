@@ -25,17 +25,17 @@ struct SearchBottleList: View {
         }
     }
     
-    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
-        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
-        return matchedShopData[0]
-    }
-    
+//    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
+//        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
+//        return matchedShopData[0]
+//    }
+//
     func sortBottleData() -> [BottleModel] {
         let bookMarkBottles: [BottleModel] = filteredResult
         switch selection {
         case "거리순":
             return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
-                .sorted(by: {distance(getMatchedShopData(bottleData: $0).location.latitude, getMatchedShopData(bottleData: $0).location.longitude) < distance(getMatchedShopData(bottleData: $1).location.latitude, getMatchedShopData(bottleData: $1).location.longitude)})
+                .sorted(by: {distance(shopDataStore.getMatchedShopData(bottleData: $0).location.latitude, shopDataStore.getMatchedShopData(bottleData: $0).location.longitude) < distance(shopDataStore.getMatchedShopData(bottleData: $1).location.latitude, shopDataStore.getMatchedShopData(bottleData: $1).location.longitude)})
         case "낮은 가격순":
             return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
         case "높은 가격순":
@@ -82,7 +82,7 @@ struct SearchBottleList: View {
                     // TODO: 서버 Bottle 데이터 연결
                     ScrollView {
                         ForEach(sortBottleData()) { bottle in
-                            SearchBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm, root: $root)
+                            SearchBottleListCell(bottleInfo: bottle, shopInfo: shopDataStore.getMatchedShopData(bottleData: bottle), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm, root: $root)
                             Divider()
                                 .padding(.horizontal, 10)
                         }
