@@ -41,7 +41,14 @@ struct NearBySheetView: View {
     // MARK: - 둘러보기 뷰 거리 순 오름차순 정렬 함수
     func sortShopData() -> [ShopModel] {
         let shopModel: [ShopModel] = shopDataStore.shopData
-        return shopModel.sorted(by: {$0.shopName < $1.shopName }).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
+        var distanceSortedShops : [ShopModel] = []
+        for shop in shopModel {
+            let distance = distance(shop.location.latitude, shop.location.longitude)
+            if distance <= 5000 {
+                distanceSortedShops.append(shop)
+            }
+        }
+        return distanceSortedShops.sorted(by: {$0.shopName < $1.shopName }).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
     }
     
     var body: some View {
@@ -54,26 +61,40 @@ struct NearBySheetView: View {
                 Spacer()
             }
             
-            // 현재 위치 mapViewModel.userLocation
-            ScrollView {
+            if sortShopData().isEmpty {
                 VStack {
-                    ForEach(Array(sortShopData().enumerated()), id: \.offset) { (index, shop) in
-                        let distance = distance(shop.location.latitude, shop.location.longitude)
-                        if distance <= 5000 {
-                            Button {
-                                isOpen = false
-                                coordinator.showMarkerDetailView = true
-                                coordinator.currentShopId = shop.id
-                                coordinator.coord = (shop.location.latitude, shop.location.longitude)
-                            } label: {
-                                NearBySheetCell(shopModel: shop, distance: distance) 
-                            }
+                        Spacer()
+                            .frame(height: 100)
+                        
+                        Image(systemName: "house")
+                            .font(.system(size: 50))
+                        
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        Text("내 주변 5km 반경 이내에 바틀샵이 없습니다.")
+                            .font(.bottles18)
+                            .fontWeight(.semibold)
+                }
+                .foregroundColor(.gray)
+                Spacer()
+            } else {
+                ScrollView {
+                    VStack {
+                        ForEach(sortShopData(), id: \.self) { shop in
+                                Button {
+                                    isOpen = false
+                                    coordinator.showMarkerDetailView = true
+                                    coordinator.currentShopId = shop.id
+                                    coordinator.coord = (shop.location.latitude, shop.location.longitude)
+                                } label: {
+                                    NearBySheetCell(shopModel: shop, distance: shopDataStore.distance(shop.location.latitude, shop.location.longitude))
+                                }
                         }
+                        .setSkeletonView(opacity: 0.3, shouldShow: showMarkerDetailView)
                     }
-                    .setSkeletonView(opacity: 0.3, shouldShow: showMarkerDetailView)
                 }
             }
-            
         }
         
         .background {

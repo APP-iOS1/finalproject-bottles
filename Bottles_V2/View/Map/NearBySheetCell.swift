@@ -10,7 +10,7 @@ import SkeletonUI
 struct NearBySheetCell: View {
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-//    var userStore: UserStore
+
     // Shop의 정보를 저장하는 변수
     @State private var checkBookmark: Bool = false
     var shopModel: ShopModel
