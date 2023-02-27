@@ -30,6 +30,8 @@ struct SearchView: View {
     // transition Test
     @Binding var transitionView: Bool
     
+    @Binding var root: Bool
+    
     var body: some View {
         VStack {
             HStack{
@@ -40,7 +42,7 @@ struct SearchView: View {
             .padding(.top)
             // 검색어를 입력하지 않았을 시에 최근 검색어 및 최근 본 상품을 보여준다
             if searchBarText == "" {
-                RecentlyItemList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus)
+                RecentlyItemList(searchBarText: $searchBarText, doneTextFieldEdit: $doneTextFieldEdit, focus: _focus, root: $root)
             } else {
                 // 검색어를 입력 중이고 검색을 완료하지 않았으면 검색어를 포함한 Bottle, Shop 들을 보여준다
                 if !doneTextFieldEdit {
@@ -49,7 +51,7 @@ struct SearchView: View {
                     // 검색을 완료하면 검색어에 해당하는 검색 결과 탭뷰를 보여준다
                     animate()
                         .padding(.top, 10)
-                    SearchTabView(searchTab: selectedPicker, bottleName: searchBarText)
+                    SearchTabView(searchTab: selectedPicker, bottleName: searchBarText, root: $root)
                 }
             }
         }
@@ -96,13 +98,15 @@ struct SearchTabView: View {
     // 검색어를 bottleName 변수로 받는다
     var bottleName: String
     
+    @Binding var root: Bool
+    
     var body: some View {
         VStack {
             switch searchTab {
             case .bottle:
-                SearchBottleList(bottleName: bottleName)
+                SearchBottleList(bottleName: bottleName, root: $root)
             case .shop:
-                SearchShopList(shopName: bottleName)
+                SearchShopList(shopName: bottleName, root: $root)
             }
         }
     }

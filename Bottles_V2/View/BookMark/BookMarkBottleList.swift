@@ -22,6 +22,8 @@ struct BookMarkBottleList: View {
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     
+    @Binding var root: Bool
+    
     func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
         let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
         return matchedShopData[0]
@@ -102,7 +104,7 @@ struct BookMarkBottleList: View {
                 } else {
                     ScrollView {
                         ForEach(filterUserBottleData()) { bottle in
-                            BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle),   userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm, deletedBottleId: $resetDeletedBottleId)
+                            BookMarkBottleListCell(bottleInfo: bottle, shopInfo: getMatchedShopData(bottleData: bottle),   userStore: userDataStore, bookMarkAlarm: $bookMarkAlarm, deletedBottleId: $resetDeletedBottleId, root: $root)
                             Divider()
                                 .padding(.horizontal, 10)
                         }
@@ -168,12 +170,16 @@ struct BookMarkBottleListCell: View {
     @Binding var bookMarkAlarm: Bool
     @Binding var deletedBottleId: String
     
+    @State var destination: Destination?
+    @Binding var root: Bool
+    
     var body: some View {
         HStack(alignment: .top) {
             // 이미지를 누르면 Bottle Detail View로 이동
-            NavigationLink {
-                BottleView(bottleData: bottleInfo)
-            } label: {
+            Button(action: {
+                destination = .bottle
+                root.toggle()
+            }) {
                 // Bottle 이미지
                 AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
                     image
@@ -206,9 +212,10 @@ struct BookMarkBottleListCell: View {
                     .font(.bottles18)
                     .bold()
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
-                NavigationLink {
-                    BottleShopView(bottleShop: shopInfo)
-                } label: {
+                Button(action: {
+                    destination = .bottleShop
+                    root.toggle()
+                }) {
                     HStack {
                         Image("Map_tab_fill")
                             .resizable()
@@ -253,13 +260,23 @@ struct BookMarkBottleListCell: View {
         }
         .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
+        .navigationDestination(isPresented: $root) {
+            switch self.destination {
+            case .bottle:
+                BottleView(bottleData: bottleInfo)
+            case .bottleShop:
+                BottleShopView(bottleShop: shopInfo)
+            default:
+                EmptyView()
+            }
+        }
     }
 }
 
 struct BookMarkBottleList_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            BookMarkBottleList()
+            BookMarkBottleList(root: .constant(false))
         }
     }
 }

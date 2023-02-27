@@ -20,6 +20,9 @@ struct BookMarkShopList: View {
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
     
+    @State var destination: Destination?
+    @Binding var root: Bool
+    
     func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
         let from = CLLocation(latitude: lat, longitude: log)
 //        let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
@@ -88,9 +91,10 @@ struct BookMarkShopList: View {
                 } else {
                     ScrollView {
                         ForEach(filterUserShopData()) { shop in
-                            NavigationLink {
-                                BottleShopView(bottleShop: shop)
-                            } label: {
+                            Button(action: {
+                                destination = .bottleShop
+                                root.toggle()
+                            }) {
                                 BookMarkShopListCell(
                                     userStore: userDataStore,
                                     shopDataStore: shopDataStore,
@@ -100,6 +104,14 @@ struct BookMarkShopList: View {
                                     distance: distance(
                                         shop.location.latitude,
                                         shop.location.longitude))
+                            }
+                            .navigationDestination(isPresented: $root) {
+                                switch self.destination {
+                                case .bottleShop:
+                                    BottleShopView(bottleShop: shop)
+                                default:
+                                    EmptyView()
+                                }
                             }
                             Divider()
                                 .padding(.horizontal, 10)
