@@ -21,7 +21,6 @@ struct BookMarkBottleList: View {
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-    @EnvironmentObject var mapViewModel: MapViewModel
     
     @Binding var root: Bool
     

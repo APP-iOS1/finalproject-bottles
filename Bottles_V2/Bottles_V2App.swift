@@ -24,7 +24,6 @@ struct Bottles_V2App: App {
     @ObservedObject var shopNoticeDataStore = ShopNoticeDataStore()
     @ObservedObject var reservationDataStore = ReservationDataStore()
     @ObservedObject var cartStore = CartStore()
-    @ObservedObject var mapViewModel = MapViewModel()
     @StateObject var authStore = AuthStore()
     // coreData
     @StateObject var dataController = DataController()
@@ -60,7 +59,6 @@ struct Bottles_V2App: App {
                 .environmentObject(shopDataStore)
                 .environmentObject(shopNoticeDataStore)
                 .environmentObject(reservationDataStore)
-                .environmentObject(mapViewModel)
                 .environmentObject(userDataStore)
                 .environmentObject(cartStore)
                 .environmentObject(appDelegate)

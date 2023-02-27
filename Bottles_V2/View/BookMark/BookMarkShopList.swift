@@ -19,7 +19,6 @@ struct BookMarkShopList: View {
     // Server Data
     @EnvironmentObject var userDataStore: UserStore
     @EnvironmentObject var shopDataStore: ShopDataStore
-    @EnvironmentObject var mapViewModel: MapViewModel
     
     @State var destination: Destination?
     @Binding var root: Bool

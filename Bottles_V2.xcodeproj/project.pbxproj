@@ -41,6 +41,7 @@
 		2754C28B2994DA5900EC10AF /* BottleShopDetailMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2754C28A2994DA5900EC10AF /* BottleShopDetailMapView.swift */; };
 		276367E2298A584300C04CFA /* MarkerDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276367E1298A584300C04CFA /* MarkerDetailSheet.swift */; };
 		2781FABE299623B0005A047F /* MapSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2781FABD299623B0005A047F /* MapSearchBar.swift */; };
+		27856C5529ACDA76002D9853 /* MapStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27856C5429ACDA76002D9853 /* MapStore.swift */; };
 		27951FD429937B2A00690ADD /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 27951FD329937B2A00690ADD /* SkeletonUI */; };
 		27A02689298B51AC00F71705 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02682298B51AC00F71705 /* SearchView.swift */; };
 		27A0268A298B51AC00F71705 /* RecentlyItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A02683298B51AC00F71705 /* RecentlyItemList.swift */; };
@@ -63,7 +64,6 @@
 		27A026A1298C11A300F71705 /* NaverMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A026A0298C11A300F71705 /* NaverMap.swift */; };
 		27D82C2F297A58EA004F3D94 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C2E297A58E9004F3D94 /* Font+.swift */; };
 		27D82C3A297A5AC1004F3D94 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */; };
-		27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C3E297A6F29004F3D94 /* MapViewModel.swift */; };
 		27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C4B297A875F004F3D94 /* BottomSheet.swift */; };
 		27D82C58298780D8004F3D94 /* MarkerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C57298780D8004F3D94 /* MarkerDetailView.swift */; };
 		3A306746297A82BE0085CC6A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A306745297A82BE0085CC6A /* Color.swift */; };
@@ -206,6 +206,7 @@
 		2754C28A2994DA5900EC10AF /* BottleShopDetailMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopDetailMapView.swift; sourceTree = "<group>"; };
 		276367E1298A584300C04CFA /* MarkerDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDetailSheet.swift; sourceTree = "<group>"; };
 		2781FABD299623B0005A047F /* MapSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchBar.swift; sourceTree = "<group>"; };
+		27856C5429ACDA76002D9853 /* MapStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStore.swift; sourceTree = "<group>"; };
 		27A02682298B51AC00F71705 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		27A02683298B51AC00F71705 /* RecentlyItemList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentlyItemList.swift; sourceTree = "<group>"; };
 		27A02684298B51AC00F71705 /* SearchBottleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBottleList.swift; sourceTree = "<group>"; };
@@ -221,7 +222,6 @@
 		27A026A0298C11A300F71705 /* NaverMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NaverMap.swift; sourceTree = "<group>"; };
 		27D82C2E297A58E9004F3D94 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 		27D82C35297A5AC0004F3D94 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
-		27D82C3E297A6F29004F3D94 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		27D82C4B297A875F004F3D94 /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		27D82C57298780D8004F3D94 /* MarkerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerDetailView.swift; sourceTree = "<group>"; };
 		2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2_Bottles_V2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -676,7 +676,7 @@
 			children = (
 				D5769B30298C8E73005528DB /* AuthStore.swift */,
 				26A66486298CC865004E15EA /* UserStore.swift */,
-				27D82C3E297A6F29004F3D94 /* MapViewModel.swift */,
+				27856C5429ACDA76002D9853 /* MapStore.swift */,
 				D7DBD7EC2988EA52002684DC /* ShopDataStore.swift */,
 				02ABC4192994CA8900768078 /* ShopNoticeDataStore.swift */,
 				029A23D0297A58BF00E7D602 /* BottleDataStore.swift */,
@@ -1004,6 +1004,7 @@
 				3AFA044A299B7E0F0068BB09 /* OnboardingFirstView.swift in Sources */,
 				3AFA0435299B2F600068BB09 /* OnboardingLastPageView.swift in Sources */,
 				26A66485298CC6F1004E15EA /* User.swift in Sources */,
+				27856C5529ACDA76002D9853 /* MapStore.swift in Sources */,
 				92906F9B297E3B7C00580EC2 /* ReservationView.swift in Sources */,
 				0427F565297677E60023E745 /* Bottles_V2App.swift in Sources */,
 				02ABC41E2994D05D00768078 /* Shop.swift in Sources */,
@@ -1045,7 +1046,6 @@
 				27281CFD2977B851003BE8B4 /* NearBySheetView.swift in Sources */,
 				27281CF0297785DC003BE8B4 /* BookMarkView.swift in Sources */,
 				27281CEB297785AA003BE8B4 /* BottleShopView.swift in Sources */,
-				27D82C3F297A6F29004F3D94 /* MapViewModel.swift in Sources */,
 				27281CFB2977AD3C003BE8B4 /* MapViewSearchBar.swift in Sources */,
 				27A02692298B5CE800F71705 /* ReservationPageView_Info.swift in Sources */,
 				7F2142BE2977AF290046D420 /* PickUpListView.swift in Sources */,
