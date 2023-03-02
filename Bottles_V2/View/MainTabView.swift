@@ -29,7 +29,10 @@ struct MainTabView: View {
     //    let user: AuthUser
     
     @State var selection: Int = 1
-    @State private var root: Bool = false
+    @State private var rootSection1: Bool = false
+    @State private var rootSection2: Bool = false
+    @State private var rootSection3: Bool = false
+    @State private var rootSection4: Bool = false
     
     @State private var isActive = false
     @State private var isloading = true
@@ -39,9 +42,21 @@ struct MainTabView: View {
             self.selection
         },
         set: {
-            if $0 == self.selection && root {
-                print("root view 이동")
-                root = false
+            if $0 == self.selection && rootSection1 {
+                print("root1 view 이동")
+                rootSection1 = false
+            }
+            if $0 == self.selection && rootSection2 {
+                print("root2 view 이동")
+                rootSection2 = false
+            }
+            if $0 == self.selection && rootSection3 {
+                print("root3 view 이동")
+                rootSection3 = false
+            }
+            if $0 == self.selection && rootSection4 {
+                print("root4 view 이동")
+                rootSection4 = false
             }
             self.selection = $0
         }
@@ -49,26 +64,26 @@ struct MainTabView: View {
     
     var body: some View {
             TabView(selection: selectionBinding) {
-                MapView(root: $root).tabItem {
+                MapView(root: $rootSection1).tabItem {
                     Image(selection == 1 ? "Maptabfill" : "Map_tab")
                     Text("주변")
                 }.tag(1)
-                BookMarkView(root: $root).tabItem {
+                BookMarkView(root: $rootSection2).tabItem {
                     Image(selection == 2 ? "BookMark_tab_fill" : "BookMark_tab")
                     Text("저장")
                 }.tag(2)
-                NotificationView(root: $root).tabItem {
+                NotificationView(root: $rootSection3).tabItem {
                     Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
                     Text("알림")
                 }.tag(3)
-                MyPageView(root: $root, selection: $selection).tabItem {
+                MyPageView(root: $rootSection4, selection: $selection).tabItem {
                     Image(selection == 4 ? "MyPage_tab_fill" : "MyPage_tab")
                     Text("MY")
                 }.tag(4)
             }
             .toolbarBackground(Color.white, for: .tabBar)
-            .sheet(isPresented: $delegate.openedFromNotification, onDismiss: didDismiss){
-                NotificationView(root: $root)
+            .sheet(isPresented: $delegate.openedFromNotification, onDismiss: didDismiss) {
+                NotificationView(root: $rootSection3)
             }
             .task {
                 userDataStore.readUser(userId: authStore.currentUser?.email ?? "")
