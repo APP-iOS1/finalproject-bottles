@@ -24,30 +24,30 @@ struct SearchShopList: View {
     @State var destination: Destination?
     @Binding var root: Bool
     
-    // 검색 결과를 필터링해주는 연산 프로퍼티
-    var filteredResult: [ShopModel] {
-        let shops = shopDataStore.shopData
-        return shops.filter {
-            $0.shopName.contains(shopName)
-        }
-    }
+//    // 검색 결과를 필터링해주는 연산 프로퍼티
+//    var filteredResult: [ShopModel] {
+//        let shops = shopDataStore.shopData
+//        return shops.filter {
+//            $0.shopName.contains(shopName)
+//        }
+//    }
     
-    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
-        let from = CLLocation(latitude: lat, longitude: log)
-        let to = CLLocation(latitude: Coordinator.shared.userLocation.0, longitude: Coordinator.shared.userLocation.1)
-        print("\(from.distance(from: to))")
-        return from.distance(from: to)
-    }
-    
-    func sortShopData() -> [ShopModel] {
-        let bookMarkShops: [ShopModel] = filteredResult
-        switch selection {
-        case "거리순":
-            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
-        default:
-            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName})
-        }
-    }
+//    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
+//        let from = CLLocation(latitude: lat, longitude: log)
+//        let to = CLLocation(latitude: Coordinator.shared.userLocation.0, longitude: Coordinator.shared.userLocation.1)
+//        print("\(from.distance(from: to))")
+//        return from.distance(from: to)
+//    }
+//
+//    func sortShopData() -> [ShopModel] {
+//        let bookMarkShops: [ShopModel] = filteredResult
+//        switch selection {
+//        case "거리순":
+//            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
+//        default:
+//            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName})
+//        }
+//    }
     
     var body: some View {
         ZStack {
@@ -70,7 +70,7 @@ struct SearchShopList: View {
                 }
 
                 // 검색어를 포함하는 Data가 없을 경우
-                if filteredResult.isEmpty {
+                if shopDataStore.shopSearchResult(shopName: shopName).isEmpty {
                     Text("검색 결과가 없습니다.")
                         .font(.bottles14)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -79,12 +79,12 @@ struct SearchShopList: View {
                 } else {
                     // TODO: 서버 Shop 데이터 연결
                     ScrollView {
-                        ForEach(sortShopData()) { shop in
+                        ForEach(shopDataStore.sortShopData(shopDataStore.shopSearchResult(shopName: shopName), selection: selection)) { shop in
                             Button(action: {
                                 destination = .bottleShop
                                 root.toggle()
                             }) {
-                                SearchShopListCell(shopDataStore: shopDataStore, shopInfo: shop, distance: distance(shop.location.latitude, shop.location.longitude), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
+                                SearchShopListCell(shopDataStore: shopDataStore, shopInfo: shop, distance: shopDataStore.distance(shop.location.latitude, shop.location.longitude), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
                             }
                             .navigationDestination(isPresented: $root) {
                                 switch self.destination {

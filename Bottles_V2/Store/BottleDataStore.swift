@@ -56,4 +56,23 @@ class BottleDataStore : ObservableObject {
                 }
             }
     }
+    
+    // MARK: - 북마크된 Bottle들을 가져오는 함수
+    func filterUserBottleData(followItemList: [String]) -> [BottleModel] {
+        var resultData: [BottleModel] = []
+        
+        for itemList in followItemList {
+            let filterData = self.bottleData.filter {$0.id == itemList}[0]
+            resultData.append(filterData)
+        }
+        
+        return resultData
+    }
+    
+    // MARK: - 검색 결과를 필터링해주는 함수
+    func bottleSearchResult(bottleName: String) -> [BottleModel] {
+        return self.bottleData.filter {
+            $0.itemName.contains(bottleName)
+        }
+    }
 }

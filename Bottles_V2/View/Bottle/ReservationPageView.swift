@@ -217,7 +217,6 @@ struct ReservationPageView: View {
         let matchedBottleData = bottleDataStore.bottleData.filter {
             $0.id == bottleId
         }
-        
         return matchedBottleData[0]
     }
     
