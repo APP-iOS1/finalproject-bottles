@@ -90,10 +90,54 @@ class ShopDataStore : ObservableObject {
         return from.distance(from: to)
     }
     
+    
     // MARK: - 특정 바틀에 대한 바틀샵 매칭 함수
-    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
-        let matchedShopData = self.shopData.filter {$0.id == bottleData.shopID}
+    func getMatchedShopData(shopID: String) -> ShopModel {
+        let matchedShopData = shopData.filter {$0.id == shopID}
         return matchedShopData[0]
+    }
+    
+    // MARK: - 바틀데이터 정렬
+    func sortBottleData(_ filterBottleData: [BottleModel], selection: String) -> [BottleModel] {
+        switch selection {
+        case "거리순":
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
+                .sorted(by: {distance(getMatchedShopData(shopID: $0.shopID).location.latitude, getMatchedShopData(shopID: $0.shopID).location.longitude) < distance(getMatchedShopData(shopID: $1.shopID).location.latitude, getMatchedShopData(shopID: $1.shopID).location.longitude)})
+        case "낮은 가격순":
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
+        case "높은 가격순":
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice > $1.itemPrice})
+        default:
+            return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
+        }
+    }
+    
+    // MARK: - Shop데이터 정렬
+    func sortShopData(_ bookMarkShops: [ShopModel], selection: String) -> [ShopModel] {
+        switch selection {
+        case "거리순":
+            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
+        default:
+            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName})
+        }
+    }
+    
+    // MARK: - 북마크된 Shop들을 가져오는 함수
+    func filterUserShopData(followShopList: [String]) -> [ShopModel] {
+        var resultData: [ShopModel] = []
+        
+        for itemList in followShopList {
+            let filterData = self.shopData.filter {$0.id == itemList}[0]
+            resultData.append(filterData)
+        }
+        return resultData
+    }
+    
+    // MARK: - 검색 결과를 필터링해주는 함수
+    func shopSearchResult(shopName: String) -> [ShopModel] {
+        return self.shopData.filter {
+            $0.shopName.contains(shopName)
+        }
     }
 }
 

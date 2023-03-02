@@ -107,7 +107,7 @@ struct RecentlyItemList: View {
                         ForEach(filterRecentlyBottle(), id: \.self) { bottle in
                             RecentlyItemListCell(
                                 bottleInfo: bottle,
-                                shopInfo: shopDataStore.getMatchedShopData(bottleData: bottle),
+                                shopInfo: shopDataStore.getMatchedShopData(shopID: bottle.shopID),
                                 bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm, root: $root)
                             Divider()
                                 .padding(.horizontal, 10)
