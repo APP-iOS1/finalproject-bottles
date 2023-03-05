@@ -75,4 +75,25 @@ class BottleDataStore : ObservableObject {
             $0.itemName.contains(bottleName)
         }
     }
+    
+    // MARK: - 바틀 아이디와 동일한 바틀의 데이터 가져오는 함수
+    func getMatchedBottleModel(bottleId: String) -> BottleModel {
+        let matchedBottleData = self.bottleData.filter {
+            $0.id == bottleId
+        }
+        
+        return matchedBottleData[0]
+    }
+    
+    // MARK: - 예약내역의 바틀의 총 금액을 구하는 함수
+    func getTotalPrice(reservedBottles: [ReservedBottles]) -> Int {
+        var totalPrice: Int = 0
+        
+        for bottle in reservedBottles {
+            let filterData = bottleData.filter {$0.id == bottle.BottleId}[0]
+            totalPrice += filterData.itemPrice * bottle.itemCount
+        }
+        
+        return totalPrice
+    }
 }

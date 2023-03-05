@@ -70,7 +70,7 @@ struct PickUpDetailView: View {
                                 Button(action: {
                                     
                                     // TODO: 주소를 copyToClipboard에 매개변수로 넘겨준다.
-                                    copyToClipboard(shopAddress: getMatchedShopData(shopId: reservationData.shopId).shopAddress)
+                                    copyToClipboard(shopAddress: shopDataStore.getMatchedShopData(shopID: reservationData.shopId).shopAddress)
                                     isShowingPasted.toggle()
                                     
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
@@ -123,7 +123,7 @@ struct PickUpDetailView: View {
                             
                             // MARK: - 예약 바틀 리스트
                             ForEach ($reservationData.reservedBottles, id: \.BottleId) { $bottle in
-                                PickUpDetailCell(bottleModel: getBottleModel(bottleId: bottle.BottleId), count: bottle.itemCount)
+                                PickUpDetailCell(bottleModel: bottleDataStore.getMatchedBottleModel(bottleId: bottle.BottleId), count: bottle.itemCount)
                             }
                             .padding(.bottom, 5)
                             
@@ -133,7 +133,7 @@ struct PickUpDetailView: View {
                                     .font(.bottles16)
                                     .fontWeight(.medium)
                                 Spacer()
-                                Text("\(getTotalPrice(reservedBottles: reservationData.reservedBottles))원")
+                                Text("\(bottleDataStore.getTotalPrice(reservedBottles: reservationData.reservedBottles))원")
                                     .font(.bottles16)
                                     .fontWeight(.regular)
                             }
@@ -233,7 +233,7 @@ struct PickUpDetailView: View {
         //MARK: - 다른 샵 보러가기 버튼
         // BottleShopView()로 변경해야 함
         NavigationLink(destination:
-                        BottleShopView(bottleShop: getMatchedShopData(shopId: reservationData.shopId))
+                        BottleShopView(bottleShop: shopDataStore.getMatchedShopData(shopID: reservationData.shopId))
         ){
             Text("이 바틀샵의 다른 상품 보러가기")
                 .font(.bottles18)
@@ -248,13 +248,7 @@ struct PickUpDetailView: View {
         
     }
     
-    func getBottleModel(bottleId: String) -> BottleModel {
-        let matchedBottleData = bottleDataStore.bottleData.filter {
-            $0.id == bottleId
-        }
-        
-        return matchedBottleData[0]
-    }
+    
     
     var backButton : some View {
         Button(
@@ -270,11 +264,6 @@ struct PickUpDetailView: View {
     // Todo: 데이터가 구성된 뒤 복사할 텍스트를 매개변수로 받아서 처리하기
     func copyToClipboard(shopAddress: String) {
         UIPasteboard.general.string = shopAddress
-    }
-    
-    func getMatchedShopData(shopId: String) -> ShopModel {
-        let matchedShopData = shopDataStore.shopData.filter {$0.id == shopId}
-        return matchedShopData[0]
     }
     
     func textLimit(str: String) -> String {
@@ -297,17 +286,7 @@ struct PickUpDetailView: View {
         return convertDate
     }
     
-    func getTotalPrice(reservedBottles: [ReservedBottles]) -> Int {
-        var resultData: [ReservedBottles] = []
-        var totalPrice: Int = 0
-        
-        for bottle in reservedBottles {
-            let filterData = bottleDataStore.bottleData.filter {$0.id == bottle.BottleId}[0]
-            totalPrice += filterData.itemPrice * bottle.itemCount
-        }
-        
-        return totalPrice
-    }
+    
     
 }
 

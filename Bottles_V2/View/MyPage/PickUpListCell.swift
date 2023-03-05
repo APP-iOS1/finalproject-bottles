@@ -48,10 +48,11 @@ struct PickUpListCell: View {
                         .padding(.bottom, -3)
                     
                     if reservationData.reservedBottles.count > 1 {
-                        Text("\(getMatchedbottleName(bottleId: reservationData.reservedBottles[0].BottleId)) 외 \(reservationData.reservedBottles.count-1)병")
+                        
+                        Text("\(bottleDataStore.getMatchedBottleModel(bottleId: reservationData.reservedBottles[0].BottleId).itemName) 외 \(reservationData.reservedBottles.count-1)병")
                     }
                     else {
-                        Text("\(getMatchedbottleName(bottleId: reservationData.reservedBottles[0].BottleId))")
+                        Text("\(bottleDataStore.getMatchedBottleModel(bottleId: reservationData.reservedBottles[0].BottleId).itemName)")
                     }
                     
                 }
@@ -65,15 +66,7 @@ struct PickUpListCell: View {
         .padding(.top, 5)
 
     }
-    
-    func getMatchedbottleName(bottleId: String) -> String {
-        print("bottleId \(bottleId)")
-        let matchedBottleName = bottleDataStore.bottleData.filter {
-            $0.id == bottleId
-        }
-        return matchedBottleName[0].itemName
-    }
-    
+
     func setDateFormat(reservedTime: Date) -> String {
             let dateFormatter = DateFormatter()
             dateFormatter.locale = Locale(identifier: "ko_kr")
