@@ -146,9 +146,8 @@ struct SearchBottleListCell: View {
     var body: some View {
         HStack(alignment: .top) {
             // 이미지를 누르면 Bottle Detail View로 이동
-            Button(action: {
-                destination = .bottle
-                root.toggle()
+            NavigationLink(destination: {
+                BottleView(bottleData: bottleInfo)
             }) {
                 // Bottle 이미지
                 AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
@@ -170,7 +169,6 @@ struct SearchBottleListCell: View {
                 .padding(.horizontal)
             }
             
-            
             VStack(alignment: .leading, spacing: 10) {
                 // Bottle 이름
                 Text(bottleInfo.itemName)
@@ -183,9 +181,8 @@ struct SearchBottleListCell: View {
                     .bold()
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
                 
-                Button(action: {
-                    destination = .bottleShop
-                    root.toggle()
+                NavigationLink(destination: {
+                    BottleShopView(bottleShop: shopInfo)
                 }) {
                     HStack {
                         Image("Map_tab_fill")
@@ -242,16 +239,6 @@ struct SearchBottleListCell: View {
         }
         .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
-        .navigationDestination(isPresented: $root) {
-            switch self.destination {
-            case .bottle:
-                BottleView(bottleData: bottleInfo)
-            case .bottleShop:
-                BottleShopView(bottleShop: shopInfo)
-            default:
-                EmptyView()
-            }
-        }
     }
     
     func compareMyFollowBottleID(_ bottleId: String) -> Bool {

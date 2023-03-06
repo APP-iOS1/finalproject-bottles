@@ -43,19 +43,15 @@ struct MainTabView: View {
         },
         set: {
             if $0 == self.selection && rootSection1 {
-                print("root1 view 이동")
                 rootSection1 = false
             }
             if $0 == self.selection && rootSection2 {
-                print("root2 view 이동")
                 rootSection2 = false
             }
             if $0 == self.selection && rootSection3 {
-                print("root3 view 이동")
                 rootSection3 = false
             }
             if $0 == self.selection && rootSection4 {
-                print("root4 view 이동")
                 rootSection4 = false
             }
             self.selection = $0

@@ -91,9 +91,8 @@ struct BookMarkShopList: View {
                 } else {
                     ScrollView {
                         ForEach(shopDataStore.sortShopData(shopDataStore.filterUserShopData(followShopList: userDataStore.user.followShopList), selection: selection)) { shop in
-                            Button(action: {
-                                destination = .bottleShop
-                                root.toggle()
+                            NavigationLink(destination: {
+                                BottleShopView(bottleShop: shop)
                             }) {
                                 BookMarkShopListCell(
                                     userStore: userDataStore,
@@ -105,14 +104,7 @@ struct BookMarkShopList: View {
                                         shop.location.latitude,
                                         shop.location.longitude))
                             }
-                            .navigationDestination(isPresented: $root) {
-                                switch self.destination {
-                                case .bottleShop:
-                                    BottleShopView(bottleShop: shop)
-                                default:
-                                    EmptyView()
-                                }
-                            }
+
                             Divider()
                                 .padding(.horizontal, 10)
                         }

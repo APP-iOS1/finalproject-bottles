@@ -70,10 +70,7 @@ struct MapView: View {
                                                 focus = true
                                             }
                                         })
-                                    Button(action: {
-                                        destination = .cart
-                                        root.toggle()
-                                    }) {
+                                    NavigationLink(destination: {CartView()}) {
                                         Image("cart")
                                             .foregroundColor(.accentColor)
                                             .bold()
@@ -141,10 +138,10 @@ struct MapView: View {
                     .ignoresSafeArea(.all, edges: .top)
                     .zIndex(2)
                     
+                    
                     MarkerDetailSheet(isOpen: $coordinator.showMarkerDetailView, maxHeight: 200) {
-                        Button(action: {
-                            destination = .bottleShop
-                            root.toggle()
+                        NavigationLink(destination: {
+                            BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == coordinator.currentShopId }[0])
                         }) {
                             MarkerDetailView(
                                 shopData: shopDataStore.shopData.filter { $0.id == coordinator.currentShopId }[0],
@@ -159,16 +156,7 @@ struct MapView: View {
             .sheet(isPresented: $isFirstLaunching) {
                 OnboardingView(isFirstLaunching: $isFirstLaunching)
             }
-            .navigationDestination(isPresented: $root) {
-                switch self.destination {
-                case .cart:
-                    CartView()
-                case .bottleShop:
-                    BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == coordinator.currentShopId }[0])
-                default:
-                    EmptyView()
-                }
-            }
+            
             .onAppear {
                 Coordinator.shared.checkIfLocationServicesIsEnabled()
                 Coordinator.shared.shopDataStore.shopData = shopDataStore.shopData
