@@ -29,11 +29,12 @@ struct LaunchView: View {
                 ZStack {
                     Image("AppLogo_Final")
                         .resizable()
-                        .frame(width: 300, height: 60)
                         .aspectRatio(contentMode: .fit)
+                        .frame(height: 50)
                         .transition(.opacity)
                         .offset(y: -20)
                     LottieView(jsonName: "loading")
+                        .frame(width: 150)
                         .offset(y: 100)
                 }
                 .onAppear {
