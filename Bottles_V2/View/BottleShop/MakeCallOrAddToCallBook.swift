@@ -129,23 +129,6 @@ struct MakeCallOrAddToCallBook: View {
                             }
                         }
                     }
-                    
-                    
-                    
-                    //                    let alert = UIAlertController(title: "알림", message: "전화번호부 접근 권한을 허용해주세요.", preferredStyle: .alert)
-                    //                    let okBtn = UIAlertAction(title: "확인", style: .default) { (action) in
-                    //                        alert.dismiss(animated: true, completion: nil)
-                    //                        // [사용자 앱 설정창 이동 수행 실시]
-                    //                        let settingsURL = NSURL(string: UIApplication.openSettingsURLString)! as URL
-                    //                        UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
-                    //                    }
-                    //                    let noBtn = UIAlertAction(title: "취소", style: .cancel) { (action) in
-                    //                        // [팝업창 닫기]
-                    //                        alert.dismiss(animated: true, completion: nil)
-                    //                    }
-                    //                    alert.addAction(okBtn)
-                    //                    alert.addAction(noBtn)
-                    ////                    self.present(alert, animated: true, completion: nil)
                 }
                 return
             }

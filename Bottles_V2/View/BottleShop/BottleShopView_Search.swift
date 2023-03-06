@@ -59,11 +59,6 @@ struct BottleShopView_Search: View {
             } label: {
                 ZStack{
                     
-//                    Rectangle()
-//                        .frame(width: 358)
-//                        .foregroundColor(Color.gray_f7)
-//                        .cornerRadius(12)
-                    
                     HStack {
                         
                         Image(systemName: "magnifyingglass")

@@ -67,7 +67,6 @@
 		27D82C4C297A875F004F3D94 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C4B297A875F004F3D94 /* BottomSheet.swift */; };
 		27D82C58298780D8004F3D94 /* MarkerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D82C57298780D8004F3D94 /* MarkerDetailView.swift */; };
 		3A306746297A82BE0085CC6A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A306745297A82BE0085CC6A /* Color.swift */; };
-		3A47F3892990E7D700F8D603 /* BottleShopTestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47F3882990E7D700F8D603 /* BottleShopTestModel.swift */; };
 		3A47F38F2992368700F8D603 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47F38E2992368700F8D603 /* String.swift */; };
 		3A47F391299A122C00F8D603 /* MakeCallOrAddToCallBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47F390299A122C00F8D603 /* MakeCallOrAddToCallBook.swift */; };
 		3A47F395299AA11500F8D603 /* BookMarkToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A47F394299AA11500F8D603 /* BookMarkToggle.swift */; };
@@ -227,7 +226,6 @@
 		2F7212C83841D45D9D79A471 /* Pods_Bottles_V2_Bottles_V2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2_Bottles_V2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3277F429A194BD1A1F31FB58 /* Pods_Bottles_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bottles_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A306745297A82BE0085CC6A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		3A47F3882990E7D700F8D603 /* BottleShopTestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleShopTestModel.swift; sourceTree = "<group>"; };
 		3A47F38E2992368700F8D603 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3A47F390299A122C00F8D603 /* MakeCallOrAddToCallBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeCallOrAddToCallBook.swift; sourceTree = "<group>"; };
 		3A47F394299AA11500F8D603 /* BookMarkToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkToggle.swift; sourceTree = "<group>"; };
@@ -495,7 +493,6 @@
 				3AA43A602977E0AB00EB8551 /* BottleShopView_NoticeCell.swift */,
 				3AA43A5829778F2C00EB8551 /* BottleShopDetailView.swift */,
 				3AA43A5A29778F7200EB8551 /* BottleShopCurationView.swift */,
-				3A47F3882990E7D700F8D603 /* BottleShopTestModel.swift */,
 				3A47F390299A122C00F8D603 /* MakeCallOrAddToCallBook.swift */,
 				3A47F394299AA11500F8D603 /* BookMarkToggle.swift */,
 			);
@@ -1000,7 +997,6 @@
 				D5769B31298C8E73005528DB /* AuthStore.swift in Sources */,
 				27A0268B298B51AC00F71705 /* SearchBottleList.swift in Sources */,
 				3A306746297A82BE0085CC6A /* Color.swift in Sources */,
-				3A47F3892990E7D700F8D603 /* BottleShopTestModel.swift in Sources */,
 				3AFA044A299B7E0F0068BB09 /* OnboardingFirstView.swift in Sources */,
 				3AFA0435299B2F600068BB09 /* OnboardingLastPageView.swift in Sources */,
 				26A66485298CC6F1004E15EA /* User.swift in Sources */,

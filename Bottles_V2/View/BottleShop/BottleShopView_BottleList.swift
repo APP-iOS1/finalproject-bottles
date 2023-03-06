@@ -46,7 +46,7 @@ struct BottleShopView_BottleList: View {
                                 Text("사진 준비 중이에요!")
                                     .font(.bottles11)
                                     .fontWeight(.semibold)
-//                                Spacer()
+
                             }
                             .foregroundColor(.gray)
                         }
@@ -96,47 +96,8 @@ struct BottleShopView_BottleList: View {
                                         .frame(width: 15, height: 18)
                                         .padding(.horizontal, 10)
                                 }
-                                
-//                                Button(action: {
-//                                    withAnimation(.easeOut(duration: 0.5)) {
-//                                        bookmarkToggle.toggle()
-//                                    }
-//                                    
-//                                    if bookmarkToggle == true{
-//                                        withAnimation(.easeOut(duration: 1.5)) {
-//                                            bookmarkToggle_fill.toggle()
-//                                            print("북마크 완료")
-//                                        }
-//                                        
-//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-//                                            bookmarkToggle_fill.toggle()
-//                                        }
-//                                    }
-//                                    
-//                                    if bookmarkToggle == false{
-//                                        withAnimation(.easeOut(duration: 1.5)) {
-//                                            bookmarkToggle_empty.toggle()
-//                                            print("북마크 해제")
-//                                        }
-//                                        
-//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5){
-//                                            bookmarkToggle_empty.toggle()
-//                                        }
-//                                    }
-//                                    
-//                                }) {
-//                                    Image(bookmarkToggle ? "BookMark.fill" : "BookMark")
-//                                        .resizable()
-//                                        .aspectRatio(contentMode: .fit)
-//                                        .frame(width: 15)
-//                                        .padding(.trailing, 5)
-//                                }
                             }
                         }
-                        
-                        //                    Spacer()
-                        //                        .frame(height: 10)
-                        //
                         
                         // 데이터 연동 시 "바틀 가격" 연동
                         HStack{
@@ -185,46 +146,6 @@ struct BottleShopView_BottleList: View {
                 
             }
             .foregroundColor(.black)
-            //                    .frame(height: 400)
-            
-            // MARK: - "BookMark 완료"시 애니메이션
-//            if bookmarkToggle_fill{
-//                HStack{
-//                    Image("BookMark.fill")
-//                    Text("북마크가 완료되었습니다.")
-//                        .foregroundColor(.gray)
-//                        .font(.bottles11)
-//
-//                }
-//                .zIndex(1)
-//                .transition(.opacity.animation(.easeIn))
-//                .background{
-//                    RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 300, height: 30)
-//                        .foregroundColor(.gray_f7)
-//                }
-//                .offset(y: 300)
-//            }
-//
-//            // MARK: - "BookMark 해제"시 애니메이션
-//            if bookmarkToggle_empty{
-//                HStack{
-//                    Image("BookMark")
-//                    Text("북마크가 해제되었습니다.")
-//                        .foregroundColor(.gray)
-//                        .font(.bottles11)
-//
-//                }
-//                .zIndex(1)
-//                .transition(.opacity.animation(.easeIn))
-//                .background{
-//                    RoundedRectangle(cornerRadius: 10)
-//                        .frame(width: 300, height: 30)
-//                        .foregroundColor(.gray_f7)
-//                }
-//                .offset(y: 300)
-//            }
-            
         }
     }
     

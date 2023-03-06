@@ -22,15 +22,12 @@ struct BottleShopView_NoticeCell: View {
                         Text(selectedItem.category)
                             .fontWeight(.semibold)
                         Spacer()
-                        
-                        //                        Text(selectedItem.time)
-                        //                            .foregroundColor(.gray)
+
                     }
                     .padding(.bottom, 1)
                     
                     // 데이터 연동 시 "공지 내용" 연동
                     Text(selectedItem.body)
-                    //                        .fontWeight(.medium)
                         .frame(alignment: .center)
                     
                 }
