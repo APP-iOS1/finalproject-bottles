@@ -158,6 +158,7 @@ struct MapView: View {
             }
             
             .onAppear {
+                coordinator.removeMarkers()
                 Coordinator.shared.checkIfLocationServicesIsEnabled()
                 Coordinator.shared.shopDataStore.shopData = shopDataStore.shopData
                 Coordinator.shared.userDataStore.user = userDataStore.user
@@ -166,8 +167,6 @@ struct MapView: View {
         }
     }
 }
-
-
 
 //struct MapView_Previews: PreviewProvider {
 //    static var previews: some View {
