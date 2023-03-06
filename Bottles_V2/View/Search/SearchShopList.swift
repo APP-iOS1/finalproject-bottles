@@ -80,21 +80,12 @@ struct SearchShopList: View {
                     // TODO: 서버 Shop 데이터 연결
                     ScrollView {
                         ForEach(shopDataStore.sortShopData(shopDataStore.shopSearchResult(shopName: shopName), selection: selection)) { shop in
-                            Button(action: {
-                                destination = .bottleShop
-                                root.toggle()
+                            NavigationLink(destination: {
+                                BottleShopView(bottleShop: shop)
                             }) {
                                 SearchShopListCell(shopDataStore: shopDataStore, shopInfo: shop, distance: shopDataStore.distance(shop.location.latitude, shop.location.longitude), bookMark: $bookMark, bookMarkAlarm: $bookMarkAlarm)
                             }
-                            .navigationDestination(isPresented: $root) {
-                                switch self.destination {
-                                case .bottleShop:
-                                    BottleShopView(bottleShop: shop)
-                                default:
-                                    EmptyView()
-                                }
-                            }
-                           
+                
                             Divider()
                                 .padding(.horizontal, 10)
                         }

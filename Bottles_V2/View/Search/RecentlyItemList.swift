@@ -184,10 +184,7 @@ struct RecentlyItemListCell: View {
     var body: some View {
         HStack(alignment: .top) {
             // 이미지를 누르면 Bottle Detail View로 이동
-            Button(action: {
-                destination = .bottle
-                root.toggle()
-            }) {
+            NavigationLink(destination: {BottleView(bottleData: bottleInfo)}) {
                 // Bottle 이미지
                 AsyncImage(url: URL(string: bottleInfo.itemImage)) { image in
                     image
@@ -219,9 +216,8 @@ struct RecentlyItemListCell: View {
                     .font(.bottles18)
                     .bold()
                 // 해당 Bottle을 판매하는 Shop으로 이동하는 버튼
-                Button(action: {
-                    destination = .bottleShop
-                    root.toggle()
+                NavigationLink(destination: {
+                    BottleShopView(bottleShop: shopInfo)
                 }) {
                     HStack {
                         Image("Map_tab_fill")
@@ -235,6 +231,7 @@ struct RecentlyItemListCell: View {
                             .multilineTextAlignment(.leading)
                     }
                 }
+                
                 Spacer()
             }
             .padding(.top, 5)
@@ -277,16 +274,16 @@ struct RecentlyItemListCell: View {
         }
         .frame(minHeight: 130, maxHeight: 300)
         .padding(.vertical, 5)
-        .navigationDestination(isPresented: $root) {
-            switch self.destination {
-            case .bottle:
-                BottleView(bottleData: bottleInfo)
-            case .bottleShop:
-                BottleShopView(bottleShop: shopInfo)
-            default:
-                EmptyView()
-            }
-        }
+//        .navigationDestination(isPresented: $root) {
+//            switch self.destination {
+//            case .bottle:
+//                BottleView(bottleData: bottleInfo)
+//            case .bottleShop:
+//                BottleShopView(bottleShop: shopInfo)
+//            default:
+//                EmptyView()
+//            }
+//        }
     }
     
     func compareMyFollowBottleID(_ bottleId: String) -> Bool {
