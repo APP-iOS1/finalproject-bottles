@@ -16,7 +16,7 @@ struct FindPasswordView: View {
     @State private var email = ""
     
     private var findResultText: String {
-        authStore.loginError ? "이메일을 다시 한번 확인해주세요." : ""
+        authStore.emailError ? "이메일을 다시 한번 확인해주세요." : ""
     }
     var body: some View {
         
@@ -37,9 +37,9 @@ struct FindPasswordView: View {
                     .modifier(LoginTextFieldModifier(width: 357, height: 48))
                 Text("\(findResultText)")
                     .frame(height: 10)
-                    .foregroundColor(authStore.loginError ? .red : .primary)
+                    .foregroundColor(authStore.emailError ? .red : .primary)
                     .font(.bottles12)
-                    .shakeEffect(trigger: authStore.loginError)
+                    .shakeEffect(trigger: authStore.emailError)
                 Button(action: {
                     authStore.sendPasswordReset(email: email)
                     print("\(authStore.resetPassword)")
