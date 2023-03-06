@@ -158,6 +158,7 @@ struct MapView: View {
             }
             
             .onAppear {
+                coordinator.removeMarkers()
                 Coordinator.shared.checkIfLocationServicesIsEnabled()
                 Coordinator.shared.shopDataStore.shopData = shopDataStore.shopData
                 Coordinator.shared.userDataStore.user = userDataStore.user
