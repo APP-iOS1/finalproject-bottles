@@ -161,7 +161,7 @@ struct BottleShopCurationView: View {
                 }
             }
             .padding()
-            .navigationBarTitle("바틀샵 이름")
+            .navigationBarTitle(bottleShop.shopName)
         }
     }
 }

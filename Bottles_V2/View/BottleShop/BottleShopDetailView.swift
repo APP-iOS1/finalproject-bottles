@@ -179,7 +179,7 @@ struct BottleShopDetailView: View {
         }
         
         // 데이터 연동 시 "바틀샵 이름" 연동
-        .navigationBarTitle("바틀샵 이름")
+        .navigationBarTitle(bottleShop.shopName)
         
         //MARK: - 주소복사 버튼 눌렀을 시 뜨는 알림
         
