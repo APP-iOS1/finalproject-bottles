@@ -98,4 +98,7 @@ $ pod install
 |<img src = "https://avatars.githubusercontent.com/u/98953443?v=4">|<img src = "https://avatars.githubusercontent.com/u/62836016?v=4">|<img src = "https://avatars.githubusercontent.com/u/55937627?v=4">|<img src = "https://avatars.githubusercontent.com/u/80445363?s=120&v=4">|<img src = "https://avatars.githubusercontent.com/u/108848166?v=4">|  
 |[@hyemib](https://github.com/hyemib)|[@SMizzz](https://github.com/SMizzz)|[@l1004ga](https://github.com/l1004ga)|[@Da01002](https://github.com/Da01002)|[@EthanColdChoi](https://github.com/EthanColdChoi)|
 
+---
+
 ## 📝 라이센스
+### "Bottles" is available under the MIT license. See the [LICENSE](https://github.com/APPSCHOOL1-REPO/finalproject-bottles/blob/main/License) file for more info.
