@@ -80,13 +80,12 @@ $ pod install
 ## 👨‍👩‍👦‍👦 참여자
 |안은노|강창현|고범석|김영서|서찬호|
 |:----:|:----:|:-----:|:----:|:-----:|
-|<img src = "https://avatars.githubusercontent.com/u/33450365?v=4">|<img src = "https://avatars.githubusercontent.com/u/101093592?v=4">|<img src = "https://avatars.githubusercontent.com/u/114239407?v=4">|<img width = 500 src = "https://avatars.githubusercontent.com/u/114224237?s=120&v=4">|<img src = "https://avatars.githubusercontent.com/u/102764542?s=120&v=4">|
+|<img src = "https://avatars.githubusercontent.com/u/33450365?v=4">|<img src = "https://avatars.githubusercontent.com/u/101093592?v=4">|<img src = "https://avatars.githubusercontent.com/u/114239407?v=4">|<img src = "https://avatars.githubusercontent.com/u/114224237?s=120&v=4">|<img src = "https://avatars.githubusercontent.com/u/102764542?s=120&v=4">|
 |[@Eunno-An](https://github.com/Eunno-An)|[@Changhyun-Kyle](https://github.com/Changhyun-Kyle)|[@bamsak](https://github.com/bamsak)|[@yngddo](https://github.com/yngddo)|[@SeoChanHo](https://github.com/SeoChanHo)|
 
 |봉혜미|신미지|이진아|장다영|최현종|
 |:----:|:----:|:-----:|:----:|:-----:|
-|<img width = 475 src = "https://avatars.githubusercontent.com/u/98953443?v=4">|<img src = "https://avatars.githubusercontent.com/u/62836016?v=4">|<img src = "https://avatars.githubusercontent.com/u/55937627?v=4">|<img width = 400 src = "https://avatars.githubusercontent.com/u/80445363?s=120&v=4">|<img width = 400 src = "https://avatars.githubusercontent.com/u/108848166?v=4">|  
+|<img src = "https://avatars.githubusercontent.com/u/98953443?v=4">|<img src = "https://avatars.githubusercontent.com/u/62836016?v=4">|<img src = "https://avatars.githubusercontent.com/u/55937627?v=4">|<img src = "https://avatars.githubusercontent.com/u/80445363?s=120&v=4">|<img src = "https://avatars.githubusercontent.com/u/108848166?v=4">|  
 |[@hyemib](https://github.com/hyemib)|[@SMizzz](https://github.com/SMizzz)|[@l1004ga](https://github.com/l1004ga)|[@Da01002](https://github.com/Da01002)|[@EthanColdChoi](https://github.com/EthanColdChoi)|
 
 ## 라이센스
-
