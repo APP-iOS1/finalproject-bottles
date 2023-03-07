@@ -220,7 +220,7 @@ struct RecentlyItemListCell: View {
                     BottleShopView(bottleShop: shopInfo)
                 }) {
                     HStack {
-                        Image("Map_tab_fill")
+                        Image("Maptabfill")
                             .resizable()
                             .frame(width: 14, height: 17)
                         // Shop 이름

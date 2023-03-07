@@ -92,7 +92,7 @@ struct SearchResultList: View {
                                     .foregroundColor(.accentColor)
                                     .font(.bottles16)
                             } else {
-                                Image("Map_tab_fill")
+                                Image("Maptabfill")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 16, height: 16)

@@ -50,7 +50,7 @@ struct CartView: View {
                     
                     NavigationLink(destination: BottleShopView(bottleShop: shopDataStore.shopData.filter { $0.id == cartStore.shopName }[0])) {
                         HStack {
-                            Image("Map_tab_fill")
+                            Image("Maptabfill")
                                 .padding(.leading)
                             Text("\(cartStore.shopName)")
                                 .foregroundColor(.black)
