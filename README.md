@@ -2,8 +2,16 @@
 <img src = "https://user-images.githubusercontent.com/101093592/223049709-5b6e61a2-bfd3-4285-a7e5-8124b6663010.png">
 
 > 내 주변 바틀샵에 대한 정보를 지도를 통해 제공 <br>
-
 > 바틀샵 정보와 합리적인 구매를 위한 가격 비교 및 앱 내 바틀 픽업예약을 통한 편리한 예약시스템
+
+---
+
+## 🏅 수상내역
+|<img width = 500 src = "https://media.discordapp.net/attachments/1013994100246192248/1082577506995023872/image.png">|<img width = 500 src = "https://user-images.githubusercontent.com/101093592/223365235-da8b4ee6-fb8c-4cf0-b2cb-13a87fffab34.png">|
+|:---:|:---:|
+|`멋쟁이사자처럼 앱스쿨 최종프로젝트 최우수상`|`멋쟁이사자처럼 앱스쿨 해커톤 대상`|
+
+---
 
 ## 🛠️ 기술스택
 <p align="leading">
@@ -12,6 +20,8 @@
   <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white"/>
     <img src="https://img.shields.io/badge/UIKit-2396F3?style=for-the-badge&logo=uikit&logoColor=white"/>
 </p>
+
+---
 
 ## 📱 주요기능과 스크린샷
 - ### 주요기능
@@ -88,4 +98,4 @@ $ pod install
 |<img src = "https://avatars.githubusercontent.com/u/98953443?v=4">|<img src = "https://avatars.githubusercontent.com/u/62836016?v=4">|<img src = "https://avatars.githubusercontent.com/u/55937627?v=4">|<img src = "https://avatars.githubusercontent.com/u/80445363?s=120&v=4">|<img src = "https://avatars.githubusercontent.com/u/108848166?v=4">|  
 |[@hyemib](https://github.com/hyemib)|[@SMizzz](https://github.com/SMizzz)|[@l1004ga](https://github.com/l1004ga)|[@Da01002](https://github.com/Da01002)|[@EthanColdChoi](https://github.com/EthanColdChoi)|
 
-## 라이센스
+## 📝 라이센스
