@@ -248,8 +248,6 @@ struct PickUpDetailView: View {
         
     }
     
-    
-    
     var backButton : some View {
         Button(
             action: {

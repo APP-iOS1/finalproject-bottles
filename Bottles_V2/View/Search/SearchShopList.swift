@@ -24,31 +24,6 @@ struct SearchShopList: View {
     @State var destination: Destination?
     @Binding var root: Bool
     
-//    // 검색 결과를 필터링해주는 연산 프로퍼티
-//    var filteredResult: [ShopModel] {
-//        let shops = shopDataStore.shopData
-//        return shops.filter {
-//            $0.shopName.contains(shopName)
-//        }
-//    }
-    
-//    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
-//        let from = CLLocation(latitude: lat, longitude: log)
-//        let to = CLLocation(latitude: Coordinator.shared.userLocation.0, longitude: Coordinator.shared.userLocation.1)
-//        print("\(from.distance(from: to))")
-//        return from.distance(from: to)
-//    }
-//
-//    func sortShopData() -> [ShopModel] {
-//        let bookMarkShops: [ShopModel] = filteredResult
-//        switch selection {
-//        case "거리순":
-//            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
-//        default:
-//            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName})
-//        }
-//    }
-    
     var body: some View {
         ZStack {
             VStack {

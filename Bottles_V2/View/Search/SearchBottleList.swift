@@ -17,41 +17,6 @@ struct SearchBottleList: View {
     @EnvironmentObject var bottleDataStore: BottleDataStore
     @EnvironmentObject var shopDataStore: ShopDataStore
 
-//    // 검색 결과를 필터링해주는 연산 프로퍼티
-//    var filteredResult: [BottleModel] {
-//        let bottles = bottleDataStore.bottleData
-//        return bottles.filter {
-//            $0.itemName.contains(bottleName)
-//        }
-//    }
-    
-//    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
-//        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
-//        return matchedShopData[0]
-//    }
-//
-//    func sortBottleData() -> [BottleModel] {
-//        let bookMarkBottles: [BottleModel] = filteredResult
-//        switch selection {
-//        case "거리순":
-//            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
-//                .sorted(by: {distance(shopDataStore.getMatchedShopData(shopID: $0.shopID).location.latitude, shopDataStore.getMatchedShopData(shopID: $0.shopID).location.longitude) < distance(shopDataStore.getMatchedShopData(shopID: $1.shopID).location.latitude, shopDataStore.getMatchedShopData(shopID: $1.shopID).location.longitude)})
-//        case "낮은 가격순":
-//            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
-//        case "높은 가격순":
-//            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice > $1.itemPrice})
-//        default:
-//            return bookMarkBottles.sorted(by: {$0.itemName < $1.itemName})
-//        }
-//    }
-    
-//    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
-//        let from = CLLocation(latitude: lat, longitude: log)
-//        let to = CLLocation(latitude: Coordinator.shared.userLocation.0, longitude: Coordinator.shared.userLocation.1)
-//        print("\(from.distance(from: to))")
-//        return from.distance(from: to)
-//    }
-
     var body: some View {
         ZStack {
             VStack {

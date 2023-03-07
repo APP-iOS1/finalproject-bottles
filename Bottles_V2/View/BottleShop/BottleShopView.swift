@@ -346,9 +346,6 @@ struct BottleShopView: View {
     func compareMyFollowShopID(_ shopId: String) -> Bool {
         return (userStore.user.followShopList.filter { $0 == shopId }.count != 0) ? true : false
     }
-    
-    
-    
 }
 
 // MARK: 바틀샵 메인 뷰 내 [1. "상품 검색"과 2. "사장님의 공지" 뷰] 탭

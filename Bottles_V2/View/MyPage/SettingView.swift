@@ -47,13 +47,6 @@ struct SettingView: View {
                             
                     }
                 }
-//                ForEach(settingViewList, id: \.self) { item in
-//                    NavigationLink(destination: Text("\(item)")) {
-//                        Text("\(item)")
-//                            .font(.bottles15)
-//                    }
-//                    .listRowSeparator(.hidden)
-//                }
             }
             .font(.bottles16)
             .listStyle(.plain)

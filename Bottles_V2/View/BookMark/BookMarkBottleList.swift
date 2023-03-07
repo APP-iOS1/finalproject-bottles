@@ -24,44 +24,6 @@ struct BookMarkBottleList: View {
     
     @Binding var root: Bool
     
-    //    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
-    //        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
-    //        return matchedShopData[0]
-    //    }
-    
-//    func filterUserBottleData() -> [BottleModel] {
-//        var resultData: [BottleModel] = []
-//
-//        for itemList in userDataStore.user.followItemList {
-//            let filterData = bottleDataStore.bottleData.filter {$0.id == itemList}[0]
-//            resultData.append(filterData)
-//        }
-//
-//        return sortBottleData(resultData)
-//    }
-    
-//    func sortBottleData(_ filterBottleData: [BottleModel]) -> [BottleModel] {
-//        print("userdata is \(userDataStore.user)")
-//        switch selection {
-//        case "거리순":
-//            return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
-//                .sorted(by: {distance(shopDataStore.getMatchedShopData(shopID: $0.shopID).location.latitude, shopDataStore.getMatchedShopData(shopID: $0.shopID)).location.longitude) < distance(shopDataStore.getMatchedShopData(shopID: $1.shopID)).location.latitude, shopDataStore.getMatchedShopData(shopID: $1.shopID)).location.longitude)})
-//        case "낮은 가격순":
-//            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice < $1.itemPrice})
-//        case "높은 가격순":
-//            return filterBottleData.sorted(by: {$0.itemName < $1.itemName}).sorted(by: {$0.itemPrice > $1.itemPrice})
-//        default:
-//            return filterBottleData.sorted(by: {$0.itemName < $1.itemName})
-//        }
-//    }
-//    
-//    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
-//        let from = CLLocation(latitude: lat, longitude: log)
-//        let to = CLLocation(latitude: Coordinator.shared.userLocation.0, longitude: Coordinator.shared.userLocation.1)
-//        print("\(from.distance(from: to))")
-//        return from.distance(from: to)
-//    }
-    
     var body: some View {
         ZStack {
             VStack {

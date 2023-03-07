@@ -26,11 +26,6 @@ struct RecentlyItemList: View {
     
     @Binding var root: Bool
     
-//    func getMatchedShopData(bottleData: BottleModel) -> ShopModel {
-//        let matchedShopData = shopDataStore.shopData.filter {$0.id == bottleData.shopID}
-//        return matchedShopData[0]
-//    }
-    
     var body: some View {
         ZStack {
             ScrollView {

@@ -22,7 +22,7 @@ struct OnboardingView: View {
                 imageName: "Onboarding1", title: "내 주변 5km 반경에 있는\n바틀샵을 확인하세요!"
                 
             )
-            
+
             // 페이지 3
             OnboardingPageView(
                 

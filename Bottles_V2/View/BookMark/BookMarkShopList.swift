@@ -23,34 +23,6 @@ struct BookMarkShopList: View {
     @State var destination: Destination?
     @Binding var root: Bool
     
-//    func distance(_ lat: Double, _ log: Double) -> CLLocationDistance {
-//        let from = CLLocation(latitude: lat, longitude: log)
-////        let to = CLLocation(latitude: mapViewModel.userLocation.0, longitude: mapViewModel.userLocation.1)
-//        let to = CLLocation(latitude: Coordinator.shared.userLocation.0, longitude: Coordinator.shared.userLocation.1)
-//        print("\(from.distance(from: to))")
-//        return from.distance(from: to)
-//    }
-    
-//    func filterUserShopData() -> [ShopModel] {
-//        var resultData: [ShopModel] = []
-//
-//        for itemList in userDataStore.user.followShopList {
-//            let filterData = shopDataStore.shopData.filter {$0.id == itemList}[0]
-//            resultData.append(filterData)
-//        }
-//
-//        return sortShopData(resultData)
-//    }
-
-//    func sortShopData(_ bookMarkShops: [ShopModel]) -> [ShopModel] {
-//        switch selection {
-//        case "거리순":
-//            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName}).sorted(by: {distance($0.location.latitude, $0.location.longitude) < distance($1.location.latitude, $1.location.longitude)})
-//        default:
-//            return bookMarkShops.sorted(by: {$0.shopName < $1.shopName})
-//        }
-//    }
-    
     var body: some View {
         ZStack {
             VStack {
