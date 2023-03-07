@@ -37,9 +37,9 @@
 |:----:|:----:|:-----:|:----:|:-----:|
 |`예약진행 뷰`|`장바구니 뷰`|`예약화면`|`예약확정 뷰`|`알림 탭`|
 
-|<img width=108 src = "https://media.discordapp.net/attachments/1013994100246192248/1082563867995025428/simulator_screenshot_E1C10623-8371-4616-9C43-46B55EA75944.png?">|<img width=108 src = "https://media.discordapp.net/attachments/1013994100246192248/1082563868255068210/simulator_screenshot_39672B26-2F88-4DBE-A3A7-12C7A8697FF4.png?">|<img width=108 src = "https://media.discordapp.net/attachments/1013994100246192248/1082571285583900682/simulator_screenshot_78912670-900E-4B3E-BAB9-C8AD32D88535.png?">|
-|:----:|:----:|:-----:|
-|`마이페이지 뷰`|`설정 뷰`|`예약내역`|
+|<img width=324 src = "https://media.discordapp.net/attachments/1013994100246192248/1082563867995025428/simulator_screenshot_E1C10623-8371-4616-9C43-46B55EA75944.png?">|<img width=324 src = "https://media.discordapp.net/attachments/1013994100246192248/1082563868255068210/simulator_screenshot_39672B26-2F88-4DBE-A3A7-12C7A8697FF4.png?">|<img width=324 src = "https://media.discordapp.net/attachments/1013994100246192248/1082571285583900682/simulator_screenshot_78912670-900E-4B3E-BAB9-C8AD32D88535.png?">|<img width=324 src = "https://media.discordapp.net/attachments/1013994100246192248/1082574317788860436/image.png">|<img width=324 src = "https://media.discordapp.net/attachments/1013994100246192248/1082574402748682261/image.png">|
+|:----:|:----:|:-----:|:----:|:-----:|
+|`마이페이지 뷰`|`설정 뷰`|`예약내역`|`푸시알림`|`푸시알림 탭`|
 
 ---
 
@@ -80,7 +80,7 @@ $ pod install
 ## 👨‍👩‍👦‍👦 참여자
 |안은노|강창현|고범석|김영서|서찬호|
 |:----:|:----:|:-----:|:----:|:-----:|
-|<img width = 500 src = "https://avatars.githubusercontent.com/u/33450365?v=4">|<img src = "https://avatars.githubusercontent.com/u/101093592?v=4">|<img width = 500 src = "https://avatars.githubusercontent.com/u/114239407?v=4">|<img width = 500 src = "https://avatars.githubusercontent.com/u/114224237?s=120&v=4">|<img src = "https://avatars.githubusercontent.com/u/102764542?s=120&v=4">|
+|<img src = "https://avatars.githubusercontent.com/u/33450365?v=4">|<img src = "https://avatars.githubusercontent.com/u/101093592?v=4">|<img src = "https://avatars.githubusercontent.com/u/114239407?v=4">|<img width = 500 src = "https://avatars.githubusercontent.com/u/114224237?s=120&v=4">|<img src = "https://avatars.githubusercontent.com/u/102764542?s=120&v=4">|
 |[@Eunno-An](https://github.com/Eunno-An)|[@Changhyun-Kyle](https://github.com/Changhyun-Kyle)|[@bamsak](https://github.com/bamsak)|[@yngddo](https://github.com/yngddo)|[@SeoChanHo](https://github.com/SeoChanHo)|
 
 |봉혜미|신미지|이진아|장다영|최현종|
