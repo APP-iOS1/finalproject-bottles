@@ -96,3 +96,6 @@ iOSInjectionProject/
 **/.DS_Store
 amplify/.config/local-env-info.json
 amplify/cli.json
+
+# Public 전환 시 Private 데이터를 포함하지 않도록 함
+/**/*.plist
