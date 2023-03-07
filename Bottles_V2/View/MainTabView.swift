@@ -66,7 +66,7 @@ struct MainTabView: View {
                 }.tag(1)
                 BookMarkView(root: $rootSection2).tabItem {
                     Image(selection == 2 ? "BookMark_tab_fill" : "BookMark_tab")
-                    Text("저장")
+                    Text("북마크")
                 }.tag(2)
                 NotificationView(root: $rootSection3).tabItem {
                     Image(selection == 3 ? "Notification_tab_fill" : "Notification_tab")
