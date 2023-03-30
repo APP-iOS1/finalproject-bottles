@@ -23,6 +23,10 @@
 
 ---
 
+## 🚀트러블 슈팅
+
+---
+
 ## 📱 주요기능과 스크린샷
 - ### 주요기능
 <img src = "https://cdn.discordapp.com/attachments/1013994100246192248/1082557421173624852/image.png">
